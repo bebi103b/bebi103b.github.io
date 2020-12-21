@@ -1,0 +1,114 @@
+BE/Bi 103 b: Statistical Inference in the Biological Sciences
+=============================================================
+
+In the `prequel to this course <https://bebi103a.github.io/>`_, we developed tools to build data analysis pieplines, including the organization, preservation, sharing, and display quantitative data. We also learned basic techniques in statistical inference using resampling methods taking a frequentist approach.
+
+In this class, we go deeper into statistical modeling and inference, mostly taking a Bayesian approach. We discuss generative modeling, parameter estimation, model comparison, hierarchical modeling, Markov chain Monte Carlo, graphical display of inference results, and principled workflows. All of these topics are explored through analysis of real biological data sets.
+
+If you are enrolled in the course, please read the :ref:`Course policies<Policies>` below. We will not go over them in detail in class, and it is your responsibility to understand them.
+
+
+Useful links
+-------------
+
+- `Ed <https://us.edstem.org/courses/3198/>`_ (used for course communications)
+- `Course Zoom link <http://bebi103.caltech.edu/2021/b/zoom_links/bebi103_main>`_ (password protected)
+- `Video recordings <http://bebi103.caltech.edu/2021/b/recordings/google_drive/>`_ (password protected)
+- `Google doc for help queue <http://bebi103.caltech.edu/2021/b/help_queue/google_drive/>`_ (password protected)
+- `Homework solutions <http://bebi103.caltech.edu/2021b_hw_solutions/hw_solutions.html>`_ (password protected)
+
+During lab and homework help sessions, we will break out into different Zoom sessions headed by various course staff members. Their individual Zoom links are accessible below.
+
+
+People
+------
+
+- Instructor
+
+   + `Justin Bois <http://bois.caltech.edu/>`_ (`bois at caltech dot edu`)
+
+- TAs
+
+   + Rosita Fu (`rfu at caltech dot edu`)
+   + Tom Röschinger (`troeschi at caltech dot edu`)
+   + Ariana Tribby (`atribby at caltech dot edu`)
+   + Julian Wagner (`jwagner2 at caltech dot edu`)
+
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Lessons
+
+   lessons/00/setup.ipynb
+   .. lessons/01/cycle_of_science
+   .. lessons/02/index
+   .. lessons/03/index
+   .. lessons/04/style.ipynb
+   .. lessons/05/index
+   .. lessons/06/index
+   .. lessons/07/data_storage_and_sharing
+   .. lessons/08/index
+   .. lessons/09/index
+   .. lessons/10/overplotting.ipynb
+   .. lessons/11/index
+   .. lessons/12/index
+   .. lessons/13/random_number_generation.ipynb
+   .. lessons/14/index
+   .. lessons/15/index
+   .. lessons/16/index
+   .. lessons/17/index
+   .. lessons/18/index
+   .. lessons/19/index
+   .. lessons/20/index
+   .. lessons/21/reproducible_workflows.rst
+   .. lessons/22/paper_of_the_future.rst
+   .. lessons/23/mixture_models.ipynb
+   .. lessons/24/index
+   .. lessons/25/index
+
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Recitations
+
+   .. recitations/01/index
+   .. recitations/02/git_and_github_tips.ipynb
+   .. recitations/03/time_series.ipynb
+   .. recitations/04/manipuluating_dfs.ipynb
+   .. recitations/05/index
+   .. recitations/06/probability_review.ipynb
+   .. recitations/07/topics_in_bootstrapping.ipynb
+   .. recitations/08/index
+   .. recitations/09/index
+
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Homework
+
+   homework/00/index
+   homework/01/index
+   .. homework/02/index
+   .. homework/03/index
+   .. homework/04/index
+   .. homework/05/index
+   .. homework/06/index
+   .. homework/07/index
+   .. homework/08/index
+   .. homework/09/index
+   .. 10. Course feedback <homework/10/hw10.ipynb>
+
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Schedule
+
+   schedule
+
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Policies
+
+   policies
+
