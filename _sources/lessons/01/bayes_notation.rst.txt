@@ -1,0 +1,35 @@
+Notation of parts of Bayes’s Theorem
+====================================
+
+The symbol :math:`P` to denote probability is a bit overloaded. To help aid in notation, we will use the following conventions going forward in the class.
+
+-  Probabilities or probability densities describing measured data are denoted with
+   :math:`f`.
+
+-  Probabilities or probability densities describing parameter values, hypotheses, or
+   other non-measured quantities, are denoted with :math:`g`.
+
+-  A set of parameters for a given model are denoted :math:`\theta`.
+
+So, if we were to write down Bayes’s theorem for a parameter estimation
+problem, it would be
+
+.. math::
+
+  \begin{aligned}
+  g(\theta \mid y) = \frac{f(y\mid \theta)\,g(\theta)}{f(y)}.
+  \end{aligned}
+
+Probabilities or probability densities written with a :math:`g` denote the prior or
+posterior, and those with an :math:`f` denote the likelihood or
+evidence.
+
+We can also define a **joint probability**, :math:`\pi(y, \theta) = f(y\mid \theta)\,g(\theta)`, such that
+
+.. math::
+
+  \begin{aligned}
+  g(\theta \mid y) = \frac{\pi(y,\theta)}{f(y)}.
+  \end{aligned}
+
+Note that we will use this notation *in the context of Bayesian inference*, and we may generally speak about joint probability density functions, for example, using :math:`f(x, y)`. The use of :math:`f` for likelihoods and evidence, :math:`g` for priors and posteriors, and :math:`\pi` for joint probabilities in the context of Bayesian modeling helps us keep track of what is what conceptually.

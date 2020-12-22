@@ -1,0 +1,12 @@
+****************************************************
+1. Probability and the logic of scientific reasoning
+****************************************************
+
+.. toctree::
+   :maxdepth: 1
+
+   bayes_logic
+   bayes_notation
+   marginalization
+   bayes_model_for_learning
+   probability_distributions

@@ -1,0 +1,55 @@
+***************************************
+Bayes's theorem as a model for learning
+***************************************
+
+Let's say we did an experiment and got data set
+:math:`y_1` as an investigation of hypothesis :math:`\theta`. Then, our
+posterior distribution is
+
+.. math::
+
+   \begin{aligned}
+   g(\theta\mid y_1) = \frac{f(y_1 \mid \theta)\, g(\theta )}{f(y_1)}.
+   \end{aligned}
+
+Now, let’s say we did another experiment and got data :math:`y_2`. We
+already know :math:`y_1` ahead of this experiment, so our prior is
+:math:`g(\theta\mid y_1)`, which is the posterior from the first
+experiment. So, we have
+
+.. math::
+
+  \begin{aligned}
+  g(\theta\mid y_1, y_2) = \frac{f(y_2 \mid y_1, \theta)\, g(\theta \mid y_1)}{f(y_2 \mid y_1)}.
+  \end{aligned}
+
+Now, we plug in Bayes’s theorem applied to our first data set, giving
+
+.. math::
+
+   \begin{aligned}
+   g(\theta\mid y_1, y_2) = \frac{f(y_2 \mid y_1, \theta)\,f(y_1 \mid \theta)\, g(\theta )}{f(y_2 \mid y_1)\, f(y_1 )}.
+   \end{aligned}
+
+By the product rule, the denominator is :math:`f(y_1, y_2 )`. Also by the product rule,
+
+.. math::
+
+   \begin{aligned}
+   f(y_2 \mid y_1, \theta)\,f(y_1 \mid \theta) = f(y_1, y_2 \mid \theta).
+   \end{aligned}
+
+Inserting these expressions into equation the above expression for :math:`g(\theta\mid y_1, y_2)` yields
+
+.. math::
+
+  \begin{aligned}
+  g(\theta\mid y_1, y_2) = \frac{f(y_1, y_2 \mid \theta)\,g(\theta)}{f(y_1, y_2)}.
+  \end{aligned}
+
+So, acquiring more data gave us more information about our hypothesis
+in that same way as if we just combined :math:`y_1` and :math:`y_2` into
+a single data set. So, acquisition of more and more data serves to help
+us learn more and more about our hypothesis or parameter value.
+
+Bayes theorem thus describes how we learn from data. We acquire data, and that **updates** our posterior distribution. That posterior distribution then becomes the prior distribution for interpreting the next data set we acquire, and so on. Data constantly update our knowledge.

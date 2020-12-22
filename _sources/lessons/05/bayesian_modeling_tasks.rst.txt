@@ -1,0 +1,94 @@
+===========================
+Tasks of Bayesian modeling
+===========================
+
+We have learned about Bayes’s theorem as a way to update
+a hypothesis in light of new data. We use the word “hypothesis” very
+loosely here. Remember, in the Bayesian view, probability can describe
+the plausibility of any proposition. The value of a parameter is such a
+proposition, and we will apply the term “hypothesis” to parameter values as well. Again for concreteness, we will consider the problem of parameter estimation here, where :math:`\theta` will denote a set of parameter values, our “hypothesis” in this context.
+
+As we have seen, our goal is to obtain updated knowledge about :math:`\theta` as codified in the posterior distribution, :math:`g(\theta \mid y)`, where :math:`y` is the data we measured. Bayes's theorem gives us access to this distribution.
+
+.. math::
+
+    \begin{align}
+    g(\theta \mid y) = \frac{f(y\mid\theta)\,g(\theta)}{f(y)}.
+    \end{align}
+
+Note, though, that the split between the likelihood and prior need not be explicit. In fact, when we study hierarchical models, we will see that it is not obvious how to unambiguously define the likelihood and prior. In order to do Bayesian inference, we really only need to specify the joint distribution, :math:`\pi(y,\theta) = f(y\mid\theta)\,g(\theta)`, which is the product of the likelihood and prior. The posterior can also be written as
+
+.. math::
+
+    \begin{align}
+    g(\theta \mid y) = \frac{\pi(y,\theta)}{f(y)}.
+    \end{align}
+
+Because the evidence, :math:`f(y)`, is computed from the likelihood and prior (or more generally from the joint distribution) as
+
+.. math::
+
+    \begin{align}
+    f(y) = \int\mathrm{d}\theta\,\pi(y,\theta) = \int\mathrm{d}\theta\,f(y\mid\theta)\,g(\theta),
+    \end{align}
+
+the posterior is fully specified by the joint distribution. In light of this, there are two broad tasks in Bayesian modeling.
+
+1. Define the joint distribution :math:`\pi(y,\theta)`, most commonly specified as a likelihood and prior.
+2. Make sense of the resulting posterior.
+
+
+Model building
+--------------
+
+Step (1) is the task of **model building**, or modeling. This is typically done by first specifying a likelihood, :math:`f(y\mid \theta)`. This is a generative distribution in that it gives the full description of how data :math:`y` are generated given parameters :math:`\theta`. Importantly, included in the likelihood is a theoretical model. 
+
+.. For example, if we did an experiment where we dropped balls from different heights in a vacuum and measured how long it took them to hit the floor, we could use the theoretical result that the time to hit the floor from height :math:`h` is :math:`\sqrt{2 g h}`, where :math:`g` is the gravitational constant. We know that this relation holds from classical physics. The likelihood distribution takes this into account and additionally any measurement noise of experimental aberrations (like imperfect vacuum, etc.).
+
+After the likelihood is constructed we need to specify prior distributions for the parameters of the likelihood. That is, the likelihood, as a model of the generative process, prescribes what the parameters :math:`\theta` of the model are. Knowing what parameters we need to write priors for, we go about codifying what we know about the parameters before we do the experiment as prior probabilities. 
+
+So, the process of model building involves prescribing a likelihood that describes the process of data generation. The parameters to be estimated are defined in the likelihood, and from these we construct priors. We will discuss *how* we go about building likelihoods and priors in this lecture and subsequently in the course.
+
+The role of the prior
+~~~~~~~~~~~~~~~~~~~~~
+
+As an aside, I pause to note that there may be some philosophical issues with this approach. I think Gelman, Simpson, and Betancourt clearly stated the dilemma in `their 2017 paper <https://doi.org/10.3390/e19100555>`_ with the apt title, "The Prior Can Often Only Be Understood in the Context of the Likelihood" (emphasis added by me).
+
+    One can roughly speak of two sorts of Bayesian analyses. In the first sort, the Bayesian formalism can be taken literally: a researcher starts with a prior distribution about some externally defined quantity, perhaps some physical parameter or the effect of some social intervention, and then he or she analyzes data, leading to an updated posterior distribution. Here, the prior can be clearly defined, not just before the data are observed but *before the experiment has even been considered*. ...[W]e are concerned with a second sort of analysis, what might be patterned Bayesian analysis using default priors, in which a researcher gathers data and forms a model that includes various unknown parameters and then needs to set up a prior distribution to continue with Bayesian inference. This latter approach is standard in Bayesian workflow...
+
+    One might say that what makes a prior a prior, rather than simply a probability distribution, is that it is destined to be paired with a likelihood. That is, the Bayesian formalism requires that a prior distribution be updated into a posterior distribution based on new data.
+
+We are taking the second approach the Gelman, Simpson, and Betancourt laid out; the approach where the prior is in service to a likelihood. We are trying to model a data generation process, which requires a likelihood to even identify what the parameters are that require priors.
+
+
+Making sense of the posterior
+-----------------------------
+
+If we can write down the likelihood and prior, or more generally the joint distribution :math:`\pi(y,\theta)`, we theoretically have the full posterior distribution. We have seen in our previous lessons that for simple models involving one parameter, we can often plot the posterior distribution in order to interpret it. When we have two parameters, it becomes more challenging to make plots, but it can be done. Things get more and more complicated as the number of parameters grow, a manifestation of the curse of dimensionality.
+
+At the heart of the technical challenges of Bayesian inference is how to make sense of the posterior. Plotting it is useful, but in almost all cases, we wish to compute **expectations** of the posterior. An expectation computed from the posterior is of the form
+
+.. math::
+
+    \begin{align}
+    \langle \xi \rangle = \int \mathrm{d}\theta'\, \xi(\theta')\,g(\theta'\mid y),
+    \end{align}
+
+with the integral replaced by a sum for discrete :math:`\theta`. As an example, we may have :math:`\theta = (\theta_1, \theta_2)` and we wish to compute a marginal posterior :math:`g(\theta_2 \mid y)`. In this case, :math:`\xi(\theta') = \delta(\theta_2' - \theta_2)`, a Dirac delta function, and 
+
+.. math::
+
+    \begin{align}
+    g(\theta_2 \mid y) = \int \mathrm{d}\theta_1 \, g(\theta_1, \theta_2 \mid y).
+    \end{align}
+
+So, making sense of the posterior typically involves computing integrals (or sums).
+
+In addition to using conjagacy, which we have already discussed, in coming lessons, we will explore a few ways to do this.
+
+1. Finding the values of the parameters :math:`\theta` that maximize the posterior and then approximating the posterior as locally Normal. This involves a numerical optimization calculation to find the maximizing parameters, and then uses known analytical results about multivariate Normal distributions to automatically compute the integrals (without actually having to do integration!).
+2. *Sampling* out of the posterior. As you saw in an earlier homework, we can perform marginalization, and indeed most other integrals, by sampling. The trick is sampling out of the posterior, which is not as easy as the sampling you have done so far. We resort to using the sampling method called **Markov chain Monte Carlo** (MCMC) to do it.
+3. Performing and optimization to find which distribution in a family of distributions most closely approximates the posterior, and then use this approximate distribution as a substitute for the posterior. We choose the family of candidate distributions have nice properties, known analytical results, ease of sampling, etc., thereby making exploration of the posterior much easier than by full MCMC. This is called **variational inference**.
+
+For the rest of this lecture, though, we will focus on model building.
+

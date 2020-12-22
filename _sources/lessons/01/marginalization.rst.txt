@@ -1,0 +1,41 @@
+Marginalization
+===============
+
+I mentioned that the evidence can be computed from the
+likelihood and the prior. To see this, we apply the sum rule to the
+posterior probability. Let :math:`\theta_i` be a particular possible value of a parameter or hypothesis. Then,
+
+.. math::
+
+  \begin{aligned}
+  1 = g(\theta_j\mid y) + g(\theta^c_j | y) \nonumber = g(\theta_j\mid y) + \sum_{i\ne j}g(\theta_i\mid y) = \sum_i g(\theta_i\mid y),
+  \end{aligned}
+
+Now, Bayes’s theorem gives us an expression for :math:`g(\theta_i\mid y)`, so we can compute the sum.
+
+.. math::
+
+  \begin{aligned}
+  \sum_i g(\theta_i\mid y) = \sum_i\frac{f(y \mid \theta_i)\, g(\theta_i)}{f(y)} = \frac{1}{f(y)}\sum_i f(y \mid \theta_i)\, g(\theta_i) = 1.
+  \end{aligned}
+
+Therefore, we can compute the evidence by summing over the priors and
+likelihoods of all possible hypotheses or parameter values.
+
+.. math::
+
+  \begin{aligned}
+  f(y) = \sum_i f(y \mid \theta_i)\, g(\theta_i).
+  \end{aligned}
+
+Using the joint probability, we also have
+
+.. math::
+
+  \begin{aligned}
+  f(y) = \sum_i \pi(y, \theta_i).
+  \end{aligned}
+
+
+This process of eliminating a variable (in this case :math:`\theta_i`)
+from a probability by summing is called **marginalization**. This will prove useful in finding the probability distribution of a single parameter among many.

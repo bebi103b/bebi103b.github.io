@@ -1,0 +1,201 @@
+========================
+Choosing priors
+========================
+
+While choosing likelihoods often amounts to story matching, choosing priors can be more subtle and challenging. In our example of model building for measurements of *C. elegans* egg lengths, we assumed Normal priors for the two parameters :math:`\mu` and :math:`\sigma`. We did that because we felt that it best codified in probabilistic terms our knowledge of those parameters before seeing the data. That is one of many ways we can go about choosing priors. In fact, choice of prior is a major topic of (often heated) discussion about how best to go about Bayesian modeling. Some believe that the fact you have to specify a prior in the Bayesian framework invalidates Bayesian inference entirely because it necessarily introduces a modeler's bias into the analysis.
+
+Among the many approaches to choose priors are choices of uniform priors, Jeffreys priors, weakly informative priors, conjugate priors, maximum entropy priors, Bernardo's reference priors, and others. We will discuss the first four of these, eventually advocating for weakly informative priors.
+
+
+Uniform priors
+--------------
+
+The `principle of insufficient reason <https://en.wikipedia.org/wiki/Principle_of_indifference>`_ is an old rule for assigning probability to events or outcomes. It simply says that if we do not know anything about a set of outcomes, then every possible outcome should be assigned equal probability. Thus, we assume that the prior is flat, or uniform.
+
+This notion is quite widely used. In fact, if we attempt to summarize the posterior by a single point in parameter space, namely where the posterior is maximal, and we chose uniform priors for all parameters, we get estimates for the parameters that are the same as if we performed a maximum likelihood estimate in a frequentist approach.
+
+However, using uniform priors has a great many problems. I discuss but a few of them here.
+
+1. If a parameter may take any value along the number line, or any positive value, then a uniform prior is not normalizable. This is because :math:`\int_0^\infty \mathrm{d}\theta\,(\text{constant})` diverges. Such a prior is said to be an **improper prior**, since it is not a true probability distribution (nor probability in the discrete case). This means that they cannot actually describe prior knowledge of a parameter value as encoded by the machinery of probability.
+2. We can remedy point (1) by specifying bounds on the prior. This is no longer a uniform prior, though, since we are saying that parameter values between the bounds are infinitely more likely than those outside of the bounds. At a small distance :math:`\epsilon` from an upper bound, for example, we have :math:`\theta - \epsilon` being infinitely more likely than :math:`\theta + \epsilon`, which does not make intuitive sense.
+3. Surely priors cannot be uniform. For example, if we were trying to measure the speed of a kinesin motor, we know that it does not go faster than the speed of light (because nothing goes faster than the speed of light). With an improper uniform prior, we are saying that before we see and experiment, we believe that kinesin is more likely to go faster than the speed of light than it is to move at a micron per second. This is absurd. We will deal with this issue when discussing weakly informative priors.
+4. A primary criticism from Fisher and his contemporaries was that the way you choose to parametrize a model can affect how a uniform prior transforms. We illustrate this problem and its resolution when we talk about Jeffreys priors next.
+
+In summary, uniform priors, while widely used, and in fact used in the early homeworks of this course, are a pathologically bad idea. (Note, though, that this is still subject to debate, and many respected researchers do not agree with this assessment.)
+
+
+Jeffreys priors
+---------------
+
+Fisher and others complained that application of the principle of insufficient reason to choose uniform priors resulted in different effects based on parametrization of a model. To make this more concrete consider the example of a one-dimensional Normal likelihood. The probability density function is
+
+.. math::
+
+    \begin{align}
+    f(y\mid\mu,\sigma) = \frac{1}{\sqrt{2\pi\sigma^2}}\,\mathrm{e}^{-(y-\mu)^2/2\sigma^2}.
+    \end{align}
+
+Instead of parametrizing by :math:`\sigma`, we could have instead chosen to parametrize with :math:`\tau \equiv 1/\sigma`, giving a PDF of
+
+.. math::
+
+    \begin{align}
+    f(y\mid\mu,\tau) = \frac{\tau}{\sqrt{2\pi}}\,\mathrm{e}^{-\tau^2(y-\mu)^2/2}.
+    \end{align}
+
+Now, if we choose a uniform prior for :math:`\sigma`, we should also expect a uniform prior for :math:`\tau`. But this is not the case. Recall the change of of variables formula.
+
+.. math::
+
+    \begin{align}
+    g(\tau) = \left|\frac{\mathrm{d}\sigma}{\mathrm{d}\tau}\right|g(\sigma) = \frac{\text{constant}}{\tau^2},
+    \end{align}
+
+since :math:`g(\sigma) = \text{constant}` for a uniform prior and :math:`|\mathrm{d}\sigma/\mathrm{d}\tau| = 1/\tau^2`. So, if we parametrize the likelihood with :math:`\tau` instead of :math:`\sigma`, the priors are inconsistent. That is, the prior distribution is not invariant to change of variables.
+
+If, however, we chose an improper prior of :math:`g(\sigma) = 1/\sigma = \tau`, then we end up with :math:`g(\tau) = 1/\tau`, so the priors are consistent. It does not matter which parametrization we choose, :math:`\sigma` or :math:`\tau = 1/\sigma`, so long as the prior is :math:`1/\sigma` or :math:`1/\tau`, we get the same effect of the prior.
+
+`Harold Jeffreys <https://en.wikipedia.org/wiki/Harold_Jeffreys>`_ noticed this and discovered a way to make the priors invariant to change of coordinates. He developed what is now known as the **Jeffreys prior**, which is given by the square root of the determinant of the **Fisher information matrix**. If :math:`f(y\mid\theta)` is the likelihood (where :math:`\theta` here is a set of parameters), the Fisher information matrix is the negative expectation value of the matrix of second derivatives of the log-likelihood. That is, entry :math:`i, j` in the Fisher information matrix :math:`\mathcal{I}` is
+
+.. math::
+
+    \begin{align}
+    \mathcal{I}_{ij}(\theta) = -\int\mathrm{d}y \,\frac{\partial^2 f(y\mid \theta)}{\partial \theta_i\partial \theta_j} \, f(y\mid \theta) \equiv -\mathrm{E}\left[\frac{\partial^2 \ln f(y\mid \theta)}{\partial \theta_i\partial \theta_j}\right],
+    \end{align}
+
+where :math:`\mathrm{E}[\cdot]` denotes the expectation value over the likelihood. For ease of calculation later, it is useful to know that this is equivalent to
+
+.. math::
+
+    \begin{align}
+    \mathcal{I}_{ij}(\theta) = \mathrm{E}\left[\left(\frac{\partial \ln f(y\mid \theta)}{\partial \theta_i}\right)\left(\frac{\partial \ln f(y\mid \theta)}{\partial \theta_j}\right)\right].
+    \end{align}
+
+Written more succinctly, let :math:`\mathsf{B}_\theta` be the Hessian matrix, that is the matrix of partial derivatives of the the log likelihood.
+
+.. math::
+
+    \begin{align}
+    \mathsf{B}_\theta = \begin{pmatrix}
+    \frac{\partial^2 \ln f}{\partial \theta_1^2} &  \frac{\partial^2 \ln f}{\partial \theta_1 \partial \theta_2} & \cdots \\
+    \frac{\partial^2 \ln f}{\partial \theta_2 \partial \theta_1} &  \frac{\partial^2 \ln f}{\partial \theta_2^2} & \cdots \\
+    \vdots & \vdots & \ddots
+    \end{pmatrix}
+    \end{align}.
+
+Then,
+
+.. math::
+
+    \begin{align}
+    \mathcal{I}(\theta) = -\mathrm{E}\left[\mathsf{B}_\theta\right],
+    \end{align}
+
+Due to its relation to the second derivatives of the likelihood function, the Fisher information matrix is related to the sharpness of a peak in the likelihood.
+
+The Jeffreys prior is then
+
+.. math::
+
+    \begin{align}
+    g(\theta) \propto \sqrt{\mathrm{det}\, \mathcal{I}(\theta)}.
+    \end{align}
+
+It can be shown that the determinant of the Fisher information matrix is strictly nonnegative, so that :math:`g(\theta)` as defined above is always real valued. To demonstrate that this choice of prior works to maintain the same functional form of priors under reparametrization, consider a reparametrization from :math:`\theta` to :math:`\phi`. By the multivariate change of variables formula,
+
+.. math::
+
+    \begin{align}
+    g(\phi) \propto \left|\mathrm{det}\,\mathsf{J}\right|g(\theta),
+    \end{align}
+
+where
+
+.. math::
+
+    \begin{align}
+    \mathsf{J} = \begin{pmatrix}
+    \frac{\partial \theta_1}{\partial \phi_1} &  \frac{\partial \theta_1}{\partial \phi_2} & \cdots \\
+    \frac{\partial \theta_2}{\partial \phi_1} &  \frac{\partial \theta_2}{\partial \phi_2} & \cdots \\
+    \vdots & \vdots & \ddots
+    \end{pmatrix}
+    \end{align}
+
+is a matrix of derivatives, called the `Jacobi matrix <https://en.wikipedia.org/wiki/Jacobian_matrix_and_determinant>`_. Using the fact that :math:`g(\theta) \propto \sqrt{\mathrm{det}\,\mathcal{I}(\theta)}` for a Jeffreys prior, we have
+
+.. math::
+
+    \begin{align}
+    g(\phi) \propto \left|\mathrm{det}\,\mathsf{J}\right|\,\sqrt{\mathrm{det}\,\mathcal{I}(\theta)}
+    = \sqrt{\left(\mathrm{det}\,\mathsf{J}\right)^2\,\mathrm{det}\,\mathcal{I}(\theta)}.
+    \end{align}
+
+Because the product of determinants of a set of matrices is equal to the determinant of the product of the matrices, we can write this as
+
+.. math::
+
+    \begin{align}
+    g(\phi) \propto \sqrt{\mathrm{det}\left(\mathsf{J}\cdot \mathcal{I}(\theta)\cdot \mathsf{J}\right)} = \sqrt{\mathrm{det}\left(\mathsf{J}\cdot \mathrm{E}[\mathsf{B}_\theta] \cdot \mathsf{J}\right)}.
+    \end{align}
+
+Because :math:`\theta` and :math:`\phi` are not functions of :math:`y`, and therefore :math:`\mathsf{J}` is also not a function of :math:`y` we may bring the Jacobi matrices into the expectation operation.
+
+.. math::
+
+    \begin{align}
+    g(\phi) \propto \sqrt{\mathrm{det}\,\mathrm{E}\left[\mathsf{J}\cdot \mathsf{B}_\theta \cdot \mathsf{J}\right]}.
+    \end{align}
+
+We recognize the quantity :math:`\mathsf{J}\cdot \mathsf{B}_\theta \cdot \mathsf{J}` as having the same form as the multivariable chain rule for second derivatives. Thus, we are converting :math:`\mathsf{B}_\theta` from being a matrix of second derivatives with respect to :math:`\theta` to being a matrix of second derivatives with respect to :math:`\phi`. Thus,
+
+.. math::
+
+    \begin{align}
+    g(\phi) \propto \sqrt{\mathrm{det}\,\mathrm{E}\left[\mathsf{B}_\phi\right]} = \sqrt{\mathcal{I}(\phi)},
+    \end{align}
+
+thereby demonstrating that a Jeffreys prior is invariant to change of parametrizations.
+
+
+Example Jeffreys priors
+-----------------------
+
+Computing a Jeffreys prior can be difficult. It involves computing derivatives of the likelihood and then computing expectations by performing integrals. As models become more complicated, analytical results for Jeffreys priors become intractable, which is one of the arguments against using them. Nonetheless, for two common likelihoods, we can compute the Jeffreys priors. We will not show the calculations (they involve the tedious calculations I just mentioned), but will state the results.
+
+- For a Normal likelihood, the Jeffreys prior is :math:`g(\sigma) \propto 1/\sigma`. That means that the priors for parameters :math:`\mu` and :math:`\sigma` are independent and that parameter :math:`\mu` should have a uniform prior and that :math:`\sigma` has a prior that goes like the inverse of :math:`\sigma`. This is an example of a Jeffreys prior that is improper.
+- For a Binomial or Bernoulli likelihood, the Jeffreys prior for the parameter :math:`\theta`, which is the probability of success of a Bernoulli trial, is :math:`g(\theta) = 1/\pi\sqrt{\theta(1-\theta)}`, defined on the interval [0, 1]. This is a proper prior. Note that it is highly peaked at zero and at one. This suggests that the probability of success for a Bernoulli trial, *a priori*, is most likely very close to zero or one.
+
+
+Why not use Jeffreys priors?
+----------------------------
+
+Jeffreys priors are pleasing in that they deal with Fisher's criticisms. They guarantee that we get the same results, regardless of choice of parametrization of the likelihood. They are also not very **informative**, meaning that the prior has little influence over the posterior, leaving almost all of the influence to the likelihood. This is also pleasing because it gives a sense of a lack of bias. However, there are still several reasons why not to use Jeffreys priors.
+
+1. They can be very difficult or impossible to derive for more complicated models.
+2. They can be improper. When they are improper, the prior is not encoding prior knowledge using probability, since an improper prior cannot be a probability or probability density.
+3. In the case of hierarchical models, which we will get to later in the term, use of Jeffreys priors can nefariously lead to improper *posteriors*! It is often difficult to discover that this is the case for a particular model without doing a very careful analysis.
+4. They still do not really encode prior knowledge anyway. We still have the problem of a kinesin motor traveling at faster than the speed of light.
+
+
+Weakly informative priors
+-------------------------
+
+Remember, the prior probability distribution captures what we know about the parameter before we measure data. When coming up with a prior, I often like to sketch how I think the probability density or mass function of a parameter will
+look. This is directly encoding my prior knowledge using probability, which is what a prior is supposed to do by definition. When sketching the probability density function, though, I make sure that I draw the distribution broad enough that it covers all parameter values that are even somewhat reasonable. I limit its breadth to rule out absurd values, such as kinesis traveling faster than the speed of light. Such a prior is called a **weakly informative prior**. 
+
+To come up with the functional form, or better yet the name, of the prior distribution, I use the `Distribution Explorer <https://distribution-explorer.github.io/>`_ to find a distribution and parameter set that matches my sketch. If I have to choose between making the prior more peaked or broader, I opt for being broader. This is well-described in the useful `Stan wiki on
+priors <https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations>`__,
+which says, “the loss in precision by making the prior a bit too weak (compared to the true population distribution of parameters or the current expert state of knowledge) is less serious than the gain in robustness by including parts of parameter space that might be relevant.”
+
+I generally prefer to use weakly informative priors, mostly because they actually encode prior knowledge, separating the sublime from the ridiculous. In fact, we used weakly informative priors in the example of *C. elegans* egg lengths in the first part of this lecture. As we will see when we perform MCMC calculations, there are also practical advantages to using weakly informative priors. In general, prior choice that can affect second main task of Bayesian inference: making sense of the posterior. We will discuss these practical considerations when we start summarizing posteriors using Markov chain Monte Carlo.
+
+
+Conjugate priors
+----------------
+
+We have :ref:`discussed conjugate priors<4. Conjugacy>` in the context of plotting posteriors. Conjugate priors are useful because we can make sense of the posterior analytically; the posterior and prior are the same distribution, differing by the updated parametrization in the posterior. If it is convenient to use a conjugate prior to encode prior information as we have described in our discussion of weakly informative priors, you can do so. There are two difficulties that make this convenience rare in practice.
+
+1. Only a few likelihoods have known conjugate priors. Even in cases where the conjugate is known, its probability density function can be a complicated function.
+2. As soon as a model grows in complexity beyond one or two parameters, and certainly into hierarchy, conjugate priors are simply not available.
+
+Thus, conjugate priors, while conceptually pleasing and parametrizable into weakly informative priors, have limited practice use.

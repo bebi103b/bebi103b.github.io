@@ -1,0 +1,12 @@
+****************************************************
+5. Introduction to Bayesian modeling
+****************************************************
+
+.. toctree::
+   :maxdepth: 1
+
+   bayesian_modeling_tasks
+   bayesian_modeling_example
+   choice_of_likelihood
+   choice_of_prior
+   .. parametric_vs_nonparametric

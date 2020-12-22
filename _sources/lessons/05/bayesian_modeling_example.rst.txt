@@ -1,0 +1,304 @@
+============================================================================
+Bayesian modeling example: parameter estimation from repeated measurements
+============================================================================
+
+We will consider one of the simplest examples of parameter estimation, and one that comes up often in research applications.
+Let’s say we repeat a measurement many times. This could be beak depths of finches, fluorescence intensity in a cell, etc. The possibilities abound. To have a concrete example in mind for this example, let’s assume we are measuring the length of *C. elegans* eggs.
+
+Our measurements of *C. elegans* egg length are :math:`y \equiv\{y_1, y_2, \ldots y_n\}`. We will ambiguously define a parameter of interest to be :math:`\mu`, the typical egg length. We will sharpen our definition of this parameter through specification of the likelihood. 
+
+We wish to calculate :math:`g(\mu  \mid y)`, the posterior probability distribution for the parameter :math:`\mu`, given the data. Values of :math:`\mu` for
+which the posterior probability is high are more probable (that is, more
+plausible) than those for which is it low. The posterior
+:math:`g(\mu \mid y)` codifies our knowledge about :math:`\mu` in
+light of our data :math:`y`.
+
+To compute the posterior probability, we use Bayes’s theorem.
+
+.. math::
+
+   \begin{aligned}
+   g(\mu \mid y) = \frac{f(y\mid \mu)\,g(\mu)}{f(y)}.
+   \end{aligned}
+
+Since the evidence, :math:`f(y)` does not depend on the parameter of
+interest, :math:`\mu`, it is really just a normalization constant, so
+we do not need to consider it explicitly at this stage. Specification of the
+likelihood and prior is sufficient for the posterior, since we must have
+
+.. math::
+
+   \begin{aligned}
+   f(y) = \int \mathrm{d}\mu \,f(y\mid \mu)\,g(\mu)
+   \end{aligned}
+
+to ensure normalization of the posterior :math:`g(\mu \mid y)`. So,
+we have just to specify the likelihood :math:`f(y\mid \mu)` and the
+prior :math:`g(\mu)`. We begin with the likelihood.
+
+The likelihood
+==============
+
+To specify the likelihood, we have to ask what we expect from the data,
+given a value of :math:`\mu`. If every egg has exactly the same length and there are no errors or confounding
+factors at all in our measurements, we expect :math:`y_i = \mu` for
+all :math:`i`. In this case
+
+.. math::
+
+   \begin{aligned}
+   g(y\mid \mu) = \prod_{i=1}^n\delta(y_i - \mu),
+   \end{aligned}
+
+the product of Dirac delta functions. Of course, this is really never
+the case. There will be natural variation in egg length and some errors in measurement and/or the system has
+variables that confound the measurement. What, then should we choose for
+our likelihood?
+
+That choice is of course dependent the story/theoretical modeling behind
+data generation. For our purposes here, we shall assume our data are
+generated from a Normal likelihood. Since this distribution gets heavy
+use, I will pause here to talk a bit more about it.
+
+
+The Normal distribution
+=========================
+
+A univariate Normal (also known as Gaussian), probability distribution has a
+probability density function (PDF) of
+
+.. math::
+
+    \begin{aligned}
+    f(y \mid \mu, \sigma) = \frac{1}{\sqrt{2\pi\sigma^2}}\,
+    \exp\left[-\frac{(y - \mu)^2}{2\sigma^2}\right].
+    \end{aligned}
+
+The parameter :math:`\mu` is a location parameter and in the case of the Normal distribution is called the mean and
+:math:`\sigma` is a scale parameter and is called the standard deviation in this case. The square of this scale parameter is referred to as the variance. Importantly (and confusingly), the terms "mean," "standard
+deviation," and "variance" in this context are *names of parameters* of the distribution;
+they are not what you compute directly from data as plug-in estimates. We will therefore use the terms location parameter and scale parameter, though the terms mean and standard deviation are used very widely in the literature.
+
+The **central limit theorem** says that any quantity that emerges from a
+large number of subprocesses tends to be Normally distributed, provided
+none of the subprocesses is very broadly distributed. We will not prove
+this important theorem, but we make use of it when choosing likelihood
+distributions based on the stories behind the generative process.
+Indeed, in the simple case of estimating a single parameter where many
+processes may contribute to noise in the measurement, the Normal
+distribution is a good choice for a likelihood.
+
+More generally, the **multivariate Normal distribution** for
+:math:`y = (y_1, y_2, \cdots, y_n)` is
+
+.. math::
+
+    \begin{aligned}
+    f(y \mid \boldsymbol{\mu}, \boldsymbol{\sigma}) = (2\pi)^{-\frac{n}{2}} \left(\det \mathsf{\Sigma}\right)^{-\frac{1}{2}}\,
+    \exp\left[-\frac{1}{2}(y - \boldsymbol{\mu})^\mathsf{T}\cdot \mathsf{\Sigma}^{-1}\cdot(y - \boldsymbol{\mu})\right],
+    \end{aligned}
+
+where :math:`\boldsymbol{\mu} = \{\mu_1, \mu_2,\ldots, \mu_n\}` is an
+array of location parameters. The parameter
+:math:`\mathsf{\Sigma}` is a symmetric positive definite matrix called
+the **covariance matrix**. If off-diagonal entry
+:math:`\Sigma_{ij}` is nonzero, then :math:`y_i` and
+:math:`y_j` are correlated. In the case where all :math:`y_i` are
+independent, all off-diagonal terms in the covariance matrix are zero,
+and the multivariate Normal distribution reduces to
+
+.. math::
+
+    \begin{aligned}
+    f(y \mid \boldsymbol{\mu}, \boldsymbol{\sigma}) = \prod_{i=1}^n \frac{1}{\sqrt{2\pi \sigma_i^2}}\,
+    \exp\left[-\frac{(y_i - \mu_i)^2}{2\sigma_i^2}\right],
+    \end{aligned}
+
+where :math:`\sigma^2_i` is the :math:`i`th entry along the diagonal
+of the covariance matrix. This is the variance associated with
+measurement :math:`i`. So, if all independent measurements :math:`y_i` have the same
+location and scale parameters, which is to say that the measurements are
+**independent and identically distributed** (i.i.d.), the
+multi-dimensional Gaussian reduces to
+
+.. math::
+
+    \begin{aligned}
+    f(y \mid \mu, \sigma) = \left(\frac{1}{2\pi \sigma^2} \right)^{-\frac{n}{2}}\,
+    \exp\left[-\frac{1}{2\sigma^2}\,\sum_{i=1}^n (y_i - \mu)^2\right].
+    \end{aligned}
+
+
+The likelihood revisited: and another parameter
+===============================================
+
+For the purposes of this demonstration of parameter estimation, we
+assume the Normal distribution is a good choice for our likelihood for
+repeated measurements (as it often is). We have to decide how the measurements are
+related to specify how many entries in the covariance matrix we need to
+specify as parameters. It is often the case that the measurements are i.i.d,
+so that only a single mean and variance are specified. So, we choose our
+likelihood to be
+
+.. math::
+
+    \begin{aligned}
+    f(y\mid \mu, \sigma) = \left(\frac{1}{2\pi \sigma^2} \right)^{\frac{n}{2}}\,
+    \exp\left[-\frac{1}{2\sigma^2}\,\sum_{i=1}^n (y_i - \mu)^2\right].
+    \end{aligned}
+
+By choosing this as our likelihood, we are saying that we expect our
+measurements to have a well-defined mean :math:`\mu` with a spread
+described by the variance, :math:`\sigma^2`.
+
+But wait a minute; we had a single parameter, :math:`\mu`, that we
+sought to estimate, and now we now have another parameter,
+:math:`\sigma`, beyond the one we’re trying to measure. So, our statistical model has *two* parameters, and
+Bayes’s theorem now reads
+
+.. math::
+
+    \begin{aligned}
+    g(\mu, \sigma \mid y) = \frac{f(y\mid \mu, \sigma)\,g(\mu, \sigma)}
+    {f(y)}.
+    \end{aligned}
+
+After we compute the posterior, we can still find the posterior probability distribution we are after by marginalizing.
+
+.. math::
+
+    \begin{aligned}
+    g(\mu\mid y) = \int_0^\infty \mathrm{d}\sigma\,g(\mu, \sigma \mid y).
+    \end{aligned}
+
+
+Choice of prior
+===============
+
+Now that we have defined a likelihood, we know what the parameters are
+and we can define a prior, :math:`g(\mu, \sigma)`. As is often the case,
+we assume :math:`\mu` and :math:`\sigma` are independent of each other,
+so that
+
+.. math::
+
+    \begin{aligned}
+    g(\mu, \sigma) = g(\mu)\,g(\sigma).
+    \end{aligned}
+
+How might we choose prior distributions for :math:`\mu` and
+:math:`\sigma`? Remember, the prior probability distribution captures
+what we know about the parameter before we measure data. For the current example of *C. elegans* eggs, we can guess that the egg length should be about 50 µm, but we are not too sure about
+this. So, we will make the prior distribution broad; we take :math:`g(\mu)` to be Normal with a location parameter of 50 µm, but
+a scale parameter of 20 µm. That is,
+
+.. math::
+
+   \begin{aligned}
+   g(\mu) = \frac{1}{\sqrt{2\pi \sigma_\mu^2}}\,\exp\left[-\frac{(\mu-\mu_\mu)^2}{2\sigma^2}\right],
+   \end{aligned}
+
+with :math:`\mu_\mu = 50` µm and :math:`\sigma_\mu = 20` µm. This means
+that getting a very tiny egg length of, say, 10 µm is unlikely, as is a
+very large egg of 90 µm.
+
+
+For :math:`g(\sigma)`, we might think that the egg length may vary about
+five or ten microns (approximately 10-20% of our guessed egg size), but not much more than that. We could again choose
+a Normal prior, with
+
+.. math::
+
+   \begin{aligned}
+   g(\sigma) = \frac{1}{\sqrt{2\pi \sigma_\sigma^2}}\,\exp\left[-\frac{(\mu-\mu_\sigma)^2}{2\sigma_\sigma^2}\right],\end{aligned}
+
+with :math:`\mu_\sigma = 5` µm and :math:`\sigma_\sigma = 2` µm.
+
+
+In this
+case, we have the obvious issue that there is nonzero probability that
+:math:`\mu` or :math:`\sigma` could be negative, which we know is respectively
+unphysical or mathematically disallowed. We could refine our prior distribution to make sure this
+does not happen. With any approach we choose, the prior should roughly
+match what we would sketch on a piece of paper and cover any reasonable
+parameter values and exclude any that are unreasonable (or unphysical).
+
+Succinctly stating the model
+============================
+
+Our model is complete, which means that we have now completely specified
+the posterior. We can write it out. First, defining the parametrization of the priors.
+
+.. math::
+
+    \begin{align}
+    &\mu_\mu = 50 \text{ microns} \nonumber \\[1em]
+    &\sigma_\mu = 20 \text{ microns} \nonumber \\[1em]
+    &\mu_\sigma = 5 \text{ microns} \nonumber \\[1em]
+    &\sigma_\sigma = 2 \text{ microns}.
+    \end{align}
+
+Then, the posterior is
+
+.. math::
+
+    \begin{aligned}
+    g(\mu, \sigma\mid y) = &\;\frac{1}{f(y)}\,\left\{\left(\frac{1}{2\pi \sigma^2} \right)^{\frac{n}{2}}\,
+    \exp\left[-\frac{1}{2\sigma^2}\,\sum_{i=1}^n (y_i - \mu)^2\right] \right.\nonumber\\ 
+    &\;\;\;\;\;\;\;\;\;\;\;\times \, \frac{1}{\sqrt{2\pi \sigma_\mu^2}}\,\exp\left[-\frac{(\mu-\mu_\mu)^2}{2 \sigma_\mu^2}\right] \nonumber\\
+    &\;\;\;\;\;\;\;\;\;\;\;\times\,\left.\frac{1}{\sqrt{2\pi \sigma_\sigma^2}}\,\exp\left[-\frac{(\sigma-\mu_\sigma)^2}{2 \sigma_\sigma^2}\right]\right\},
+    \end{aligned}
+
+with
+
+.. math::
+
+    \begin{aligned}
+    f(y) = \int \mathrm{d}\mu\,\int\mathrm{d}\sigma\, \{\text{term in braces in the above equation}\}.
+    \end{aligned}
+
+Oh my, this is a mess, even for this simple model! Even though we have
+the posterior, it is very hard to make sense of it. Essentially the rest
+of the course involved making sense of the posterior, which is the
+challenge. It turns out that writing it down is relatively easy.
+
+One of the first things we can do to make sense of our model, and also
+to specify it, is to use a shorthand for model specification. First of
+all, we do not need to specify the evidence, since it is always given by
+integrating the likelihood and prior; that is by fully marginalizing the
+likelihood. So, we will always omit its specification. Now, we would
+like to have a notation for stating the likelihood and prior. English
+works well.
+
+   - The parameter :math:`\mu` is Normally distributed with location parameter 50 µm and scale parameter 20 µm.
+
+   - The parameter :math:`\sigma` is Normally distributed with location parameter 5 µm and scale parameter 2 µm.
+
+   - The egg lengths are i.i.d. and are Normally distributed with location parameter :math:`\mu` and scale parameter :math:`\sigma`.
+
+This is much easier to understand. We can write this with a convenient,
+and self evident, shorthand. [1]_
+
+.. math::
+
+    \begin{aligned}
+    &\mu \sim \text{Norm}(\mu_\mu, \sigma_\mu),\\[1em]
+    &\sigma \sim \text{Norm}(\mu_\sigma, \sigma_\sigma),\\[1em]
+    &y_i \sim \text{Norm}(\mu, \sigma) \;\forall i.
+    \end{aligned}
+
+Here, the symbol :math:`\sim` may be read as “is distributed as.” The
+above three lines are completely sufficient to specify our model.
+Because we will be using a probabilistic programming language in
+practice, we will almost never need to code up any nasty mathematical
+expressions in our modeling and we can express a model as we have done here.
+
+
+----
+
+
+.. [1]
+   I understand that I should be providing units on all parameters that
+   I am specifying with numbers. I am not doing this here, nor
+   throughout the course, to avoid notational clutter and to maintain
+   focus on the modeling.

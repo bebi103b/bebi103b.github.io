@@ -40,11 +40,11 @@ People
    :caption: Lessons
 
    lessons/00/setup.ipynb
-   .. lessons/01/cycle_of_science
-   .. lessons/02/index
-   .. lessons/03/index
-   .. lessons/04/style.ipynb
-   .. lessons/05/index
+   lessons/01/index
+   lessons/02/plotting_posteriors.ipynb
+   lessons/03/marginalization_by_numerical_quadrature.ipynb
+   lessons/04/index
+   lessons/05/index
    .. lessons/06/index
    .. lessons/07/data_storage_and_sharing
    .. lessons/08/index
@@ -88,7 +88,7 @@ People
 
    homework/00/index
    homework/01/index
-   .. homework/02/index
+   homework/02/index
    .. homework/03/index
    .. homework/04/index
    .. homework/05/index

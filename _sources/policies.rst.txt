@@ -105,6 +105,7 @@ Data analysis is almost always a collaborative effort in both research and indus
    day late. After that, no more late homeworks will be accepted.
    No grace days may be applied to the last two homeworks due to
    the end of term schedule. The instructor will not grant less than six grace days, but reserves the right to grant more grace days.
+- For solo assignments, you will have a total of two grace days for the term, again with no grace days applied to the last two homeworks.
 
 
 Grading
@@ -176,3 +177,4 @@ When posting on Ed, please follow these guidelines:
 - While you are free to post anonymously to your classmates (course staff will always know who posts), we encourage you to post with your real name. This can spur discussions among students, which can be productive.
 - Course staff strives to answer questions quickly, but students should answer when they can.
  This also spurs more conversation and results in faster answers to questions.
+

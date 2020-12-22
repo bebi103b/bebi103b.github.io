@@ -1,9 +1,8 @@
-************************************************
-1. Review of BE/Bi 103 a and generative modeling
-************************************************
+********************************
+1. Intuitive generative modeling
+********************************
 
 .. toctree::
    :maxdepth: 1
 
    hw1.1.ipynb
-   hw1.2.ipynb
