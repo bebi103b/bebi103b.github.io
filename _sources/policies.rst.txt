@@ -3,12 +3,12 @@
 Meetings
 --------
 
-We have weekly lectures Wednesday mornings 9-9:50 am PDT. On Mondays, you may attend one of the
+We have weekly lectures Wednesday mornings 9-9:50 am PDT. On Tuesdays, you may attend one of the
 two lab sessions, 1-4 pm or 7-10 pm PDT. You should always attend the
 same lab session (either 1 pm or 7 pm) along with your teammates, unless you have a
 conflict and let the course instructors know.
 
-We also have TA recitations on Thursdays 3–4:30 pm PDT, homework help on Thursday 4:30–6 pm PDT, and instructor office hours on Fridays 2:30–4 pm PDT. Attendance at these three activities is not required.
+We also have TA recitations on Thursdays 4–5:30 pm PDT, homework help on Thursday 5:30–7 pm PDT, and instructor office hours on Fridays 2:30–4 pm PDT. Attendance at these three activities is not required.
 
 All sessions are accessible via `this Zoom link <http://bebi103.caltech.edu/2020/b/zoom_links/bebi103_main>`_. Lectures and TA recitations will be recorded and posted in case you cannot attend.
 
@@ -171,10 +171,11 @@ alerts if necessary.
 
 When posting on Ed, please follow these guidelines:
 
-- Appropriately tag your question or comment with the appropriate category (e.g., "Lesson12" or "Homework 5").
+- Appropriately tag your question or comment with the appropriate category (e.g., "Lesson12" or "HW5").
 - If you have a question about a coding bug make every attempt to provide a *minimal* example that demonstrates the problem. A minimal example strips out all other details beyond what is necessary to reproduce the problem or bug. Posting error messages without code is seldom helpful.
 - If you feel that posting a minimal example will result in showing too much of your answer to your classmates, you can post your question on Ed privately so that only the course staff can see it.
 - While you are free to post anonymously to your classmates (course staff will always know who posts), we encourage you to post with your real name. This can spur discussions among students, which can be productive.
 - Course staff strives to answer questions quickly, but students should answer when they can.
- This also spurs more conversation and results in faster answers to questions.
+
+This also spurs more conversation and results in faster answers to questions.
 

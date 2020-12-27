@@ -7,9 +7,9 @@ Schedule overview
 	+ Section 1: Tuesdays, 1–4 pm PST
 	+ Section 2: Tuesdays, 7–10 pm PST
 - Lecture: Wednesdays, 9–9:50 am PST
-- Instructor office hours: Fridays, 2:30-4 pm PST
 - TA recitation: Thursdays, 4-5:30 pm PST
 - TA homework help: Thursdays, 5:30–7 pm PST
+- Instructor office hours: Fridays, 2:30-4 pm PST
 
 Unless given notice otherwise, all sessions are at `this Zoom link <http://bebi103.caltech.edu/2021/b/zoom_links/bebi103_main>`_.
 
@@ -22,7 +22,7 @@ Lectures and TA recitations will be recorded and posted at `this Google Drive li
 Homework due dates
 ------------------
 
-- :ref:`Homework 0<0. Configuring your team>`: due noon PST, January 4
+- :ref:`Homework 0<Homework 0.1: Configure your team (5 pts)>`: due noon PST, January 4
 - :ref:`Homework 1<1. Intuitive generative modeling>`: due 5 pm PST, January 11
 - Homework 2: due 5 pm PST, January 18
 - Homework 3: due 5 pm PST, January 25

@@ -1,7 +1,7 @@
 Homework 0.1: Configure your team (5 pts)
 ------------------------------------------
 
-One, and only one, member from your team, please email the course staff the following information.
+One, and only one, member from your team, please email the course staff, cc-ing your team members, the following information.
 
 1. The names of the team members.
 2. The GitHub IDs of the team members. (This is not your GitHub account number, but your user name. E.g., mine is ``justinbois``.)
