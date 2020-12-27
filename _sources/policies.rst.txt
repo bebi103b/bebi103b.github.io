@@ -22,7 +22,7 @@ The lab sessions are spent working on the week's homework, which always includes
 Lessons and lesson exercises
 ----------------------------
 
-Prior to each lab session, you must go through the lessons listed on the :ref:`schedule page<Weekly schedule>` for the week. These will give you the requisite skills you need to work on the homework problems of the week. To verify completion of the lessons and to identify points of confusion ahead of time, you will individually need to commit a small exercise to the repository in the GitHub group. Place this in the ``lesson_exercises/`` directory in a file named ``l##_your_name.ipynb``, where ``##`` is the number of the lesson. Lesson exercises are due at noon PDT on the Sunday before the lab session.
+Prior to each lab session, you must go through the lessons listed on the :ref:`schedule page<Weekly schedule>` for the week. These will give you the requisite skills you need to work on the homework problems of the week. To verify completion of the lessons and to identify points of confusion ahead of time, you will individually need to commit a small exercise to the *team repository* in the GitHub group. Place this in the ``lesson_exercises/`` directory in a file named ``l##_your_name.ipynb``, where ``##`` is the number of the lesson. Lesson exercises are due at noon PDT on the Sunday before the lab session.
 
 The lesson exercises are not graded for correctness, but for thoughtfulness. A perfectly reasonable answer to a problem in a lesson exercise is, "I am really having trouble with this concept. Can you please go over it in class?"
 
@@ -30,17 +30,17 @@ The lesson exercises are not graded for correctness, but for thoughtfulness. A p
 The BE/Bi 103 GitHub group
 --------------------------
 
-A `GitHub group <https://github.com/bebi103>`_ is set up for the class. You will be part of the group through your GitHub account. All homeworks and lesson exercises are submitted by pushing to the GitHub repository.
+A `GitHub group <https://github.com/bebi103>`_ is set up for the class. You will be part of the group through your GitHub account. You will have access to your personal repository for solo homework problems and to a team repository for all other homework and lesson exercise submission. All homeworks and lesson exercises are submitted by pushing to the appropriate GitHub repository.
 
 
 Homework
 --------
 
-There are weekly homework assignments. These consist almost entirely of working up real data sets, though there is some theoretical aspects and may be some analysis of fabricated data.
+There are weekly homework assignments. These consist almost entirely of working up real data sets, though there are some theoretical aspects and may be some analysis of fabricated data.
 
 Data analysis is almost always a collaborative effort in both research and industry. Therefore, you will be assigned to teams of three (possibly with a couple teams of four depending on course enrollment). For most problems, you will submit your homework as a team. For problems marked "solo," you will not collaborate with your team or other students in the class, but submit your own work. The following homework policies apply.
 
--  Each homework has a defined due date and time. For most homeworks, this is Friday evening at 11:59 pm PDT. Your team must tag your completed homework in your team's homework repository before this time.
+-  Each homework has a defined due date and time. For most homeworks, this is Friday evening at 11:59 pm PDT. Your team must tag your completed homework in your team's homework repository before this time. For solo submissions, you must tag your completed homework in your own repository before this time.
 -  The commit containing your final submission must be tagged with ``hw##_submission``," where ``##`` is the two-digit homework assignment number (e.g., 04). Failure to properly tag your homework will result in a 5% deduction from your point total. This sounds harsh, but we have a lot of problem sets to manage and have automated scripts to do it. These will fail if you do not properly name your files.
 -  Each homework *problem* must be committed as *both* as single Jupyter notebook and as that notebook converted to HTML. (To convert a notebook to HTML, you can use Jupyter's menu: File ⟶ Export Notebook As... ⟶ Export Notebook to HTML.) The file names must be ``hw#.#.ipynb`` and ``hw#.#.html``. For example, homework problem 3.2 is in the files ``hw3.2.ipynb`` and ``hw3.2.html``. 
 -  When you submit an assignment, the notebook and the rendered HTML must match. Furthermore, the cells should be executed in order.

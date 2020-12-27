@@ -42,6 +42,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Software" href="resources.html" />
     <link rel="prev" title="Schedule overview" href="schedule.html" /> 
 </head>
 
@@ -98,7 +99,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Homework</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="homework/00/index.html">0. Configuring your team</a></li>
+<li class="toctree-l1"><a class="reference internal" href="homework/00/hw0.1.html">0. Configuring your team</a></li>
 <li class="toctree-l1"><a class="reference internal" href="homework/01/index.html">1. Intuitive generative modeling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="homework/02/index.html">2. Analytical and graphical methods for analysis of the posterior</a></li>
 </ul>
@@ -121,6 +122,11 @@
 <li class="toctree-l1"><a class="reference internal" href="#excused-absences-and-extensions">Excused absences and extensions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="#course-communications">Course communications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="#ediquette">“Ediquette”</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Resources</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="resources.html">Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resources.html#reading">Reading</a></li>
 </ul>
 
             
@@ -228,19 +234,19 @@ conflict and let the course instructors know.</p>
 </div>
 <div class="section" id="lessons-and-lesson-exercises">
 <h1>Lessons and lesson exercises<a class="headerlink" href="#lessons-and-lesson-exercises" title="Permalink to this headline">¶</a></h1>
-<p>Prior to each lab session, you must go through the lessons listed on the <a class="reference internal" href="schedule.html#weekly-schedule"><span class="std std-ref">schedule page</span></a> for the week. These will give you the requisite skills you need to work on the homework problems of the week. To verify completion of the lessons and to identify points of confusion ahead of time, you will individually need to commit a small exercise to the repository in the GitHub group. Place this in the <code class="docutils literal notranslate"><span class="pre">lesson_exercises/</span></code> directory in a file named <code class="docutils literal notranslate"><span class="pre">l##_your_name.ipynb</span></code>, where <code class="docutils literal notranslate"><span class="pre">##</span></code> is the number of the lesson. Lesson exercises are due at noon PDT on the Sunday before the lab session.</p>
+<p>Prior to each lab session, you must go through the lessons listed on the <a class="reference internal" href="schedule.html#weekly-schedule"><span class="std std-ref">schedule page</span></a> for the week. These will give you the requisite skills you need to work on the homework problems of the week. To verify completion of the lessons and to identify points of confusion ahead of time, you will individually need to commit a small exercise to the <em>team repository</em> in the GitHub group. Place this in the <code class="docutils literal notranslate"><span class="pre">lesson_exercises/</span></code> directory in a file named <code class="docutils literal notranslate"><span class="pre">l##_your_name.ipynb</span></code>, where <code class="docutils literal notranslate"><span class="pre">##</span></code> is the number of the lesson. Lesson exercises are due at noon PDT on the Sunday before the lab session.</p>
 <p>The lesson exercises are not graded for correctness, but for thoughtfulness. A perfectly reasonable answer to a problem in a lesson exercise is, “I am really having trouble with this concept. Can you please go over it in class?”</p>
 </div>
 <div class="section" id="the-be-bi-103-github-group">
 <h1>The BE/Bi 103 GitHub group<a class="headerlink" href="#the-be-bi-103-github-group" title="Permalink to this headline">¶</a></h1>
-<p>A <a class="reference external" href="https://github.com/bebi103">GitHub group</a> is set up for the class. You will be part of the group through your GitHub account. All homeworks and lesson exercises are submitted by pushing to the GitHub repository.</p>
+<p>A <a class="reference external" href="https://github.com/bebi103">GitHub group</a> is set up for the class. You will be part of the group through your GitHub account. You will have access to your personal repository for solo homework problems and to a team repository for all other homework and lesson exercise submission. All homeworks and lesson exercises are submitted by pushing to the appropriate GitHub repository.</p>
 </div>
 <div class="section" id="homework">
 <h1>Homework<a class="headerlink" href="#homework" title="Permalink to this headline">¶</a></h1>
-<p>There are weekly homework assignments. These consist almost entirely of working up real data sets, though there is some theoretical aspects and may be some analysis of fabricated data.</p>
+<p>There are weekly homework assignments. These consist almost entirely of working up real data sets, though there are some theoretical aspects and may be some analysis of fabricated data.</p>
 <p>Data analysis is almost always a collaborative effort in both research and industry. Therefore, you will be assigned to teams of three (possibly with a couple teams of four depending on course enrollment). For most problems, you will submit your homework as a team. For problems marked “solo,” you will not collaborate with your team or other students in the class, but submit your own work. The following homework policies apply.</p>
 <ul>
-<li><p>Each homework has a defined due date and time. For most homeworks, this is Friday evening at 11:59 pm PDT. Your team must tag your completed homework in your team’s homework repository before this time.</p></li>
+<li><p>Each homework has a defined due date and time. For most homeworks, this is Friday evening at 11:59 pm PDT. Your team must tag your completed homework in your team’s homework repository before this time. For solo submissions, you must tag your completed homework in your own repository before this time.</p></li>
 <li><p>The commit containing your final submission must be tagged with <code class="docutils literal notranslate"><span class="pre">hw##_submission</span></code>,” where <code class="docutils literal notranslate"><span class="pre">##</span></code> is the two-digit homework assignment number (e.g., 04). Failure to properly tag your homework will result in a 5% deduction from your point total. This sounds harsh, but we have a lot of problem sets to manage and have automated scripts to do it. These will fail if you do not properly name your files.</p></li>
 <li><p>Each homework <em>problem</em> must be committed as <em>both</em> as single Jupyter notebook and as that notebook converted to HTML. (To convert a notebook to HTML, you can use Jupyter’s menu: File ⟶ Export Notebook As… ⟶ Export Notebook to HTML.) The file names must be <code class="docutils literal notranslate"><span class="pre">hw#.#.ipynb</span></code> and <code class="docutils literal notranslate"><span class="pre">hw#.#.html</span></code>. For example, homework problem 3.2 is in the files <code class="docutils literal notranslate"><span class="pre">hw3.2.ipynb</span></code> and <code class="docutils literal notranslate"><span class="pre">hw3.2.html</span></code>.</p></li>
 <li><p>When you submit an assignment, the notebook and the rendered HTML must match. Furthermore, the cells should be executed in order.</p></li>
@@ -377,6 +383,8 @@ alerts if necessary.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
+        <a href="resources.html" class="btn btn-neutral float-right" title="Software" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
       
         <a href="schedule.html" class="btn btn-neutral float-left" title="Schedule overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
@@ -388,11 +396,11 @@ alerts if necessary.</p>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Dec 22, 2020.
+        Last updated on Dec 27, 2020.
       </span>
 
     </p>
-  </div> <jinja2.runtime.BlockReference object at 0x7fbfb6ccb730> 
+  </div> <jinja2.runtime.BlockReference object at 0x7f9e8155a3d0> 
 
 <p>© 2021 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

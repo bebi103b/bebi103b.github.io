@@ -86,7 +86,7 @@ People
    :maxdepth: 1
    :caption: Homework
 
-   homework/00/index
+   0. Configuring your team <homework/00/hw0.1>
    homework/01/index
    homework/02/index
    .. homework/03/index
@@ -111,4 +111,11 @@ People
    :caption: Policies
 
    policies
+
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Resources
+
+   resources
 
