@@ -24,9 +24,9 @@ Homework due dates
 
 - :ref:`Homework 0<Homework 0.1: Configure your team (5 pts)>`: due noon PST, January 4
 - :ref:`Homework 1<1. Intuitive generative modeling>`: due 5 pm PST, January 11
-- Homework 2: due 5 pm PST, January 18
-- Homework 3: due 5 pm PST, January 25
-- Homework 4: due 5 pm PST, February 1
+- :ref:`Homework 2<2. Analytical and graphical methods for analysis of the posterior>`: due 5 pm PST, January 18
+- :ref:`Homework 3<3. Maximum a posteriori parameter estimation>`: due 5 pm PST, January 25
+- :ref:`Homework 4<4. Sampling with MCMC>`: due 5 pm PST, February 1
 - Homework 5: due 5 pm PST, February 8
 - Homework 6: due 5 pm PST, February 15
 - Homework 7: due 5 pm PST, February 22
@@ -42,9 +42,9 @@ Homework due dates
 Lesson exercise due dates
 -------------------------
 
-- :ref:`Lesson exercise 1<Lesson exercise 1: To be completed after lesson 4>`: due 10:30 am PST, January 12
-- Lesson exercise 2: due 10:30 am PST, January 19
-- Lesson exercise 3: due 10:30 am PST, January 26
+- :ref:`Lesson exercise 1<E1. To be completed after lesson 4>`: due 10:30 am PST, January 12
+- :ref:`Lesson exercise 2<E2. To be completed after lesson 6>`: due 10:30 am PST, January 19
+- :ref:`Lesson exercise 3<E3. To be completed after lesson 11>`: due 10:30 am PST, January 26
 - Lesson exercise 4: due 10:30 am PST, February 2
 - Lesson exercise 5: due 10:30 am PST, February 9
 - Lesson exercise 6: due 10:30 am PST, February 16
@@ -64,6 +64,7 @@ The notes for each Tuesday lesson must be read ahead of time and associated less
 - **Week 0**
 	+ :ref:`Lesson 00<0. Preparing for the course>`: Preparing for the course
 - **Week 1**
+	+ Tu 01/05: First class meeting; no reading.
 	+ W 01/06: :ref:`Lesson 01<1. Probability and the logic of scientific reasoning>`: Probability and scientific logic (lecture)
 	+ Th 01/07: Recitation 01: Review of maximum likelihood estimation
 - **Week 2**
@@ -73,40 +74,41 @@ The notes for each Tuesday lesson must be read ahead of time and associated less
 	+ W 01/13: :ref:`Lesson 05<5. Introduction to Bayesian modeling>`: Introduction to Bayesian modeling
 	+ Th 01/14: Recitation 02: Probability review
 - **Week 3**
-	+ Tu 01/19: Lesson 06: Parameter estimation by optimization
-	+ W 01/20: Lesson 07: Introduction to Markov chain Monte Carlo (lecture)
+	+ Tu 01/19: :ref:`Lesson 06<6. Parameter estimation by optimization>`: Parameter estimation by optimization
+	+ W 01/20: :ref:`Lesson 07<7. Introduction to Markov chain Monte Carlo>`: Introduction to Markov chain Monte Carlo (lecture)
 	+ Th 01/21: Recitation 03: Choosing priors
 - **Week 4**
-	+ Tu 01/26: Lesson 08: Introduction to MCMC with Stan
-	+ Tu 01/26: Lesson 09: Mixture models and label switching
-	+ Tu 01/26: Lesson 10: Regression with Stan
-	+ W 01/27: Lesson 11: Display of MCMC samples (lecture)
-	+ W 01/27: Lesson 12: Reporting summaries of the posterior (lecture)
+	+ Tu 01/26: :ref:`Lesson 08<8. AWS setup and usage>`: AWS setup and usage
+	+ Tu 01/26: :ref:`Lesson 09<9. Introduction to MCMC with Stan>`: Introduction to MCMC with Stan
+	+ Tu 01/26: :ref:`Lesson 10<10. Mixture models and label switching with MCMC>`: Mixture models and label switching
+	+ Tu 01/26: :ref:`Lesson 11<11. Regression with MCMC>`: Regression with Stan
+	+ W 01/27: Lesson 12: Display of MCMC samples (lecture)
+	+ W 01/27: Lesson 13: Reporting summaries of the posterior (lecture)
 	+ Th 01/28: Recitation 04: Introduction to computing with AWS
 - **Week 5**
-	+ Tu 02/02: Lesson 13: Model building with prior predictive checks
-	+ Tu 02/02: Lesson 14: Posterior predictive checks
-	+ W 02/03: Lesson 15: Collector's box of distributions (lecture)
+	+ Tu 02/02: Lesson 14: Model building with prior predictive checks
+	+ Tu 02/02: Lesson 15: Posterior predictive checks
+	+ W 02/03: Lesson 16: Collector's box of distributions (lecture)
 	+ Th 02/04: Recitation 05: Modeling case study
 - **Week 6**
-	+ Tu 02/09: Lesson 16: MCMC diagnostics
-	+ Tu 02/09: Lesson 17: The Funnel of Hell and noncentering
-	+ W 02/10: Lesson 18: Model comparison (lecture)
+	+ Tu 02/09: Lesson 17: MCMC diagnostics
+	+ Tu 02/09: Lesson 18: The Funnel of Hell and noncentering
+	+ W 02/10: Lesson 19: Model comparison (lecture)
 	+ Th 02/11: Recitation 06: Practice modeling
 - **Week 7**
-	+ Tu 02/16: Lesson 19: Model comparison in practice
-	+ W 02/17: Lesson 20: Hierarchical models (lecture)
+	+ Tu 02/16: Lesson 20: Model comparison in practice
+	+ W 02/17: Lesson 21: Hierarchical models (lecture)
 	+ Th 02/18: Recitation 07: Background on Hamiltonian Monte Carlo
 - **Week 8**
-	+ Tu 02/23: Lesson 21: Implementation of hierarchical models
-	+ W 02/24: Lesson 22: Principled workflows (lecture)
+	+ Tu 02/23: Lesson 22: Implementation of hierarchical models
+	+ W 02/24: Lesson 23: Principled workflows (lecture)
 	+ Th 02/25: Recitation 08: Discussion of project proposals
 - **Week 9**
-	+ Tu 03/02: Lesson 23: Simulation-based calibration in practice
-	+ W 03/03: Lesson 24: Introduction to nonparametric Bayes: Gaussian processes
+	+ Tu 03/02: Lesson 24: Simulation-based calibration in practice
+	+ W 03/03: Lesson 25: Introduction to nonparametric Bayes: Gaussian processes
 	+ Th 03/04: Recitation 09: Sampling out of discrete distributions
 - **Week 10**
-	+ Tu 03/09: Lesson 25: Implementation of Gaussian processes
-	+ W 03/10: Lesson 26: Variational inference (lecture)
+	+ Tu 03/09: Lesson 26: Implementation of Gaussian processes
+	+ W 03/10: Lesson 27: Variational inference (lecture)
 	+ Th 03/11: Recitation 10: Variational inference in practice
 

@@ -1,0 +1,81 @@
+The basic idea behind MCMC
+==========================
+
+We wish to draw *independent* samples from a **target distribution**.
+This is often accomplished directly using built-in functions in Numpy.
+For example, we could use ``np.random.uniform(0, 1, 100)`` to draw 100
+independent samples from a target Uniform distribution on the domain [0,
+1]. Because these are independent samples, the value of the 17th sample
+I draw has no influence on what I draw for the 18th sample.
+Unfortunately, generating independent samples for complicated target
+distributions, like posterior distributions from Bayesian models, is
+difficult.
+
+But the samples need not be independent! Instead, we only need that the
+samples be generated from a process that generates samples from the
+target distribution in the correct proportions. If we draw enough [1]_ of
+them, we do not need to worry about the lack of independence. In the
+case of the parameter estimation problem, the distribution we wish to
+draw from is the posterior distribution :math:`g(\theta\mid y)`. For
+notational simplicity in what follows, since we know we are always
+talking about a posterior distribution, we will use :math:`P(\theta)`
+for shorthand notation for an arbitrary distribution of :math:`\theta`. The
+techniques I discuss are not limited to sampling out of posteriors; we
+can sample out of any distribution.
+
+**The approach of MCMC is to take random walks in parameter space such
+that the probability that a walker arrives at point** :math:`\theta` **is
+proportional to** :math:`P(\theta)`. This is the main concept. You should re-read that bolded sentence.
+
+If we can achieve such a walk, we can just take the walker positions as
+samples from the distributions. To implement this random walk, we define
+a **transition kernel**, :math:`T(\theta_{i+1}\mid \theta_i)`, the
+probability of a walker stepping from position :math:`\theta_i` in
+parameter space to position :math:`\theta_{i+1}`. The transition kernel
+defines a **Markov chain**, which you can think of as a random walker
+whose next step depends only on where the walker is *right now*; i.e.,
+it has no memory. Where the walker goes for step :math:`i+1` depends
+*only* on where it was at step :math:`i`.
+
+The condition that the probability of arrival at point
+:math:`\theta_{i+1}` is proportional to :math:`P(\theta_{i+1})` may be
+stated as
+
+.. math::
+
+   \begin{aligned}
+   P(\theta_{i+1}) = \int \mathrm{d}\theta_i\, T(\theta_{i+1}\mid \theta_i)\,
+   P(\theta_i).
+   \end{aligned}
+
+Here, we have taken :math:`\theta` to be continuous. Were it discrete,
+we just replace the integral with a sum. When this relation holds, it is
+said that the target distribution is an **invariant distribution** or
+**stationary distribution** of the transition kernel. When this
+invariant distribution is unique, it is called a **limiting
+distribution**. We want to choose our transition kernel
+:math:`T(\theta_{i+1}\mid \theta_i)` such that the target distribution :math:`P(\theta)` is
+limiting. This is the case if the above equation holds and the chain is **ergodic**.
+An ergodic Markov chain has the following properties:
+
+#. It is **aperiodic**. A *periodic* Markov chain can only return to a
+   given point in parameter space after :math:`k`, :math:`2k`,
+   :math:`3k,\ldots` steps, where :math:`k` is the period. An aperiodic
+   chain is *not* periodic.
+
+#. It is **irreducible**, which means that any point in parameter space
+   is accessible to the walker from any other.
+
+#. It is **positive recurrent**, which means that the walker will surely
+   revisit any point in parameter space in a finite number of
+   steps.
+
+So, if our transition kernel satisfies this checklist and the invariance condition, it will eventually sample the
+posterior distribution. We will discuss how to come up with such a
+transition kernel in a moment; first we focus on the important concept
+of “eventually” in the preceding sentence.
+
+----
+
+.. [1]
+   The word "enough" is pretty loaded here. We need to draw enough samples such that we get a sufficient number *effectively independent* samples. One algorithm for drawing samples might require 1000 samples for each effectively independent one. Another, better one might only require 10.

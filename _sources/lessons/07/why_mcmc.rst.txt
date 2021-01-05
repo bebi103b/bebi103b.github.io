@@ -1,0 +1,97 @@
+Why MCMC?
+=========
+
+When doing Bayesian analysis, our goal is very often to understand a
+posterior distribution, :math:`g(\theta \mid y)`, where
+:math:`\theta = \{\theta^{(1)}, \theta^{(2)},\ldots\}` is a set of
+possibly many parameters and :math:`y` is the data set. [1]_ However,
+just having an analytical expression for the posterior is of little use
+if we cannot understand any properties about it. Importantly, we often
+want to marginalize the posterior; that is, we want to integrate over
+parameters we are not interested in and get distributions only for
+those we are. This is often necessary to understand all but the simplest
+models. Doing these marginalizations requires computing (nasty) integrals, which is often impossible to do analytically.
+
+Furthermore, we almost always want to compute statistical functionals, and
+**expectations** in particular, of the posterior. For example, we might
+want the mean, or expectation value, of parameter :math:`\theta^{(1)}`.
+If we know the posterior, this is
+
+.. math::
+
+   \begin{aligned}
+   \langle \theta^{(1)}\rangle = \int \mathrm{d}\theta \,\theta^{(1)}\,g(\theta\mid y).
+   \end{aligned}
+
+Generally, we can compute the expectation of any function of the
+parameters, :math:`h(\theta)`, and we often want to. This is
+
+.. math::
+
+   \begin{aligned}
+   \langle h(\theta)\rangle = \int \mathrm{d}\theta \,h(\theta)\,g(\theta\mid y).
+   \end{aligned}
+
+So, most things we want to know about the posterior require
+computation of an integral.
+
+**Markov chain Monte Carlo (MCMC)** allows us to *sample* out of an arbitrary probability
+distribution, which includes pretty much any posterior we could write
+down. [2]_ By sampling, I mean that we can choose values of the
+parameters, :math:`\theta`, where the probability that we choose a given
+value is proportional to the posterior probability or probability density. Note that each
+sample consists of a complete set of parameters :math:`\theta`; that is
+a sample contains a value for :math:`\theta^{(1)}`, a value for
+:math:`\theta^{(2)}`, .... 
+
+Using MCMC, we can collect a large number of these
+samples. From these samples, we can trivially perform marginalizations. Say we
+are interested in the marginalized distribution
+
+.. math::
+
+   \begin{aligned}
+   g(\theta^{(1)}\mid y) = \left[\int\mathrm{d}\theta^{(2)} \, \int \mathrm{d}\theta^{(3)}\cdots \right] g(\theta\mid y).
+   \end{aligned}
+
+Given a set of MCMC samples out of :math:`g(\theta\mid y)`, to get a
+set of samples out of :math:`g(\theta^{(1)}\mid y)`, we simply ignore
+the values of :math:`\theta^{(2)}`, :math:`\theta^{(3)}`, ...! Then, given
+the samples of the marginalized posterior, we can plot the CDF of the
+marginalized posterior as an ECDF of the samples, and the PDF of the
+marginalized posterior as a histogram of the samples.
+
+To compute other expectations, the MCMC samples are again very
+convenient. Now, we just approximate the integral with an average over
+samples.
+
+.. math::
+
+   \begin{aligned}
+   \langle h(\theta)\rangle = \int \mathrm{d}\theta \,h(\theta)\,g(\theta\mid y) \approx \frac{1}{N}\sum_{i=1}^N h(\theta_i),
+   \end{aligned}
+
+where :math:`\theta_i` is the :math:`i`\ th of :math:`N` MCMC samples
+taken from the posterior.
+
+Finally, we can compute other statistical functionals, such as
+quantiles, directly from the samples. For example, the median of
+:math:`\theta^{(1)}` is found by computing the median value of all of the samples
+of :math:`\theta^{(1)}`.
+
+It is now abundantly clear why the ability to generate samples from the
+posterior is so powerful. But generating samples that actually come from
+the probability distribution of interest is not a trivial matter. We
+will discuss how this is accomplished through MCMC.
+
+----
+
+.. [1]
+   It will become clear why I am using this strange superscripted
+   parenthetical indexing of the parameters as we continue with the MCMC
+   discussion. I need other subscripts later on.
+
+.. [2]
+   Well, not *any*. For some cases, we may not be able to make a
+   transition kernel that satisfies the necessary properties, which I
+   describe in the following pages.

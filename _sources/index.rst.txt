@@ -13,6 +13,7 @@ Useful links
 
 - `Ed <https://us.edstem.org/courses/3198/>`_ (used for course communications)
 - `Course Zoom link <http://bebi103.caltech.edu/2021/b/zoom_links/bebi103_main>`_ (password protected)
+- `"200 Broad" Gather link <http://bebi103.caltech.edu/2021/b/gather/200_broad/>`_ (password protected)
 - `Video recordings <http://bebi103.caltech.edu/2021/b/recordings/google_drive/>`_ (password protected)
 - `Google doc for help queue <http://bebi103.caltech.edu/2021/b/help_queue/google_drive/>`_ (password protected)
 - `Homework solutions <http://bebi103.caltech.edu/2021b_hw_solutions/hw_solutions.html>`_ (password protected)
@@ -43,43 +44,52 @@ People
    lessons/01/index
    lessons/02/plotting_posteriors.ipynb
    lessons/03/marginalization_by_numerical_quadrature.ipynb
-   lessons/04/index
+   lessons/04/conjugacy.ipynb
+   lesson_exercises/exercise_01.ipynb   
    lessons/05/index
-   .. lessons/06/index
-   .. lessons/07/data_storage_and_sharing
-   .. lessons/08/index
-   .. lessons/09/index
-   .. lessons/10/overplotting.ipynb
-   .. lessons/11/index
-   .. lessons/12/index
-   .. lessons/13/random_number_generation.ipynb
-   .. lessons/14/index
-   .. lessons/15/index
-   .. lessons/16/index
-   .. lessons/17/index
-   .. lessons/18/index
-   .. lessons/19/index
-   .. lessons/20/index
-   .. lessons/21/reproducible_workflows.rst
-   .. lessons/22/paper_of_the_future.rst
-   .. lessons/23/mixture_models.ipynb
-   .. lessons/24/index
-   .. lessons/25/index
+   lessons/06/index
+   lesson_exercises/exercise_02.ipynb   
+   lessons/07/index
+   lessons/08/index
+   lessons/09/index
+   lessons/10/mixture_model_stan.ipynb
+   lessons/11/regression_with_stan.ipynb
+   lesson_exercises/exercise_03.ipynb   
+
+..
+
+   lessons/10/overplotting.ipynb
+   lessons/11/index
+   lessons/12/index
+   lessons/13/random_number_generation.ipynb
+   lessons/14/index
+   lessons/15/index
+   lessons/16/index
+   lessons/17/index
+   lessons/18/index
+   lessons/19/index
+   lessons/20/index
+   lessons/21/reproducible_workflows.rst
+   lessons/22/paper_of_the_future.rst
+   lessons/23/mixture_models.ipynb
+   lessons/24/index
+   lessons/25/index
 
 
 .. toctree::
    :maxdepth: 1
    :caption: Recitations
 
-   .. recitations/01/index
-   .. recitations/02/git_and_github_tips.ipynb
-   .. recitations/03/time_series.ipynb
-   .. recitations/04/manipuluating_dfs.ipynb
-   .. recitations/05/index
-   .. recitations/06/probability_review.ipynb
-   .. recitations/07/topics_in_bootstrapping.ipynb
-   .. recitations/08/index
-   .. recitations/09/index
+..
+   recitations/01/index
+   recitations/02/git_and_github_tips.ipynb
+   recitations/03/time_series.ipynb
+   recitations/04/manipuluating_dfs.ipynb
+   recitations/05/index
+   recitations/06/probability_review.ipynb
+   recitations/07/topics_in_bootstrapping.ipynb
+   recitations/08/index
+   recitations/09/index
 
 
 .. toctree::
@@ -89,14 +99,16 @@ People
    0. Configuring your team <homework/00/hw0.1>
    homework/01/index
    homework/02/index
-   .. homework/03/index
-   .. homework/04/index
-   .. homework/05/index
-   .. homework/06/index
-   .. homework/07/index
-   .. homework/08/index
-   .. homework/09/index
-   .. 10. Course feedback <homework/10/hw10.ipynb>
+   homework/03/index
+   homework/04/index
+
+..
+   homework/05/index
+   homework/06/index
+   homework/07/index
+   homework/08/index
+   homework/09/index
+   10. Course feedback <homework/10/hw10.ipynb>
 
 
 .. toctree::

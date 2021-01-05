@@ -1,0 +1,10 @@
+****************************************************
+6. Parameter estimation by optimization
+****************************************************
+
+.. toctree::
+   :maxdepth: 1
+
+   optimization_basics.ipynb
+   normal_optimization.ipynb
+   regression_optimization.ipynb

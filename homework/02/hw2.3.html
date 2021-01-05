@@ -42,7 +42,7 @@
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Schedule overview" href="../../schedule.html" />
+    <link rel="next" title="3. Maximum a posteriori parameter estimation" href="../03/index.html" />
     <link rel="prev" title="Homework 2.2: Exponential conjugate prior (35 pts)" href="hw2.2.html" /> 
 </head>
 
@@ -94,8 +94,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/01/index.html">1. Probability and the logic of scientific reasoning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/02/plotting_posteriors.html">2. Plotting posteriors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/03/marginalization_by_numerical_quadrature.html">3. Marginalization by numerical quadrature</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lessons/04/index.html">4. Conjugacy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/04/conjugacy.html">4. Conjugacy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_01.html">E1. To be completed after lesson 4</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/05/index.html">5. Introduction to Bayesian modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/06/index.html">6. Parameter estimation by optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_02.html">E2. To be completed after lesson 6</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/07/index.html">7. Introduction to Markov chain Monte Carlo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/08/index.html">8. AWS setup and usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/09/index.html">9. Introduction to MCMC with Stan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/10/mixture_model_stan.html">10. Mixture models and label switching with MCMC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/11/regression_with_stan.html">11. Regression with MCMC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_03.html">E3. To be completed after lesson 11</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Homework</span></p>
 <ul class="current">
@@ -107,6 +116,8 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Homework 2.3: Nonidentifiability in HIV modeling (35 pts)</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../03/index.html">3. Maximum a posteriori parameter estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04/index.html">4. Sampling with MCMC</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -228,7 +239,7 @@
 <div class="section" id="Homework-2.3:-Nonidentifiability-in-HIV-modeling-(35-pts)">
 <h1>Homework 2.3: Nonidentifiability in HIV modeling (35 pts)<a class="headerlink" href="#Homework-2.3:-Nonidentifiability-in-HIV-modeling-(35-pts)" title="Permalink to this headline">¶</a></h1>
 <p><a class="reference external" href="https://s3.amazonaws.com/bebi103.caltech.edu/data/hiv_data.csv">Data set download</a></p>
-<hr><p>Last term, we discussed the nonidentifiability of a model for HIV clearance with a single patient’s data. You should refresh yourself about the model by reading that lecture up to the “The statistical model” section of <a class="reference external" href="https://bebi103a.github.io/lessons/25/nonidentifiable.html#The-statistical-model">that lecture from last term</a>. You can access the data set here :<a class="reference external" href="https://s3.amazonaws.com/bebi103.caltech.edu/data/hiv_data.csv">https://s3.amazonaws.com/bebi103.caltech.edu/data/hiv_data.csv</a>. It consists of <span class="math notranslate nohighlight">\((t_i, V_i)\)</span> pairs, where <span class="math notranslate nohighlight">\(t_i\)</span> is the
+<hr><p>Last term, we discussed the nonidentifiability of a model for HIV clearance with a single patient’s data. You should refresh yourself about the model by reading that lecture up to the “The statistical model” section of <a class="reference external" href="https://bebi103a.github.io/lessons/25/nonidentifiable.html#The-statistical-model">that lecture from last term</a>. You can access the data set here: <a class="reference external" href="https://s3.amazonaws.com/bebi103.caltech.edu/data/hiv_data.csv">https://s3.amazonaws.com/bebi103.caltech.edu/data/hiv_data.csv</a>. It consists of <span class="math notranslate nohighlight">\((t_i, V_i)\)</span> pairs, where <span class="math notranslate nohighlight">\(t_i\)</span> is the
 time point and <span class="math notranslate nohighlight">\(V_i\)</span> is the viral load in the patient’s blood.</p>
 <p>Similarly to what we did last term, we will take the likelihood to be a Normal distribution with a location given by the theoretical curve.</p>
 <p><span class="math">\begin{align}
@@ -257,7 +268,7 @@ time point and <span class="math notranslate nohighlight">\(V_i\)</span> is the 
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../schedule.html" class="btn btn-neutral float-right" title="Schedule overview" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../03/index.html" class="btn btn-neutral float-right" title="3. Maximum a posteriori parameter estimation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="hw2.2.html" class="btn btn-neutral float-left" title="Homework 2.2: Exponential conjugate prior (35 pts)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -270,11 +281,11 @@ time point and <span class="math notranslate nohighlight">\(V_i\)</span> is the 
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Dec 27, 2020.
+        Last updated on Jan 04, 2021.
       </span>
 
     </p>
-  </div> <jinja2.runtime.BlockReference object at 0x7fd6faf610d0> 
+  </div> <jinja2.runtime.BlockReference object at 0x7fc8a9dbdbb0> 
 
 <p>© 2021 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

@@ -1,0 +1,5 @@
+Further reading on MCMC
+========================
+
+To educate yourself more about the details of Markov chain Monte Carlo, you should check out `this vignette from Michael Betancourt <https://betanalpha.github.io/assets/case_studies/markov_chain_monte_carlo.html>`_. For more on how Stan’s HMC sampler works, I recommend `his conceptual introduction to Hamiltonian Monte Carlo <https://arxiv.org/abs/1701.02434>`_ and `his lecture <https://www.youtube.com/watch?v=VnNdhsm0rJQ>`_ on that
+topic.
