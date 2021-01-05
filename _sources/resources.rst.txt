@@ -10,10 +10,11 @@ Software
 - `The bebi103 package <https://bebi103.github.io>`_ provides utility functions for MCMC-based inference and other useful functionality for the class.
 
 
-Reading
--------
+Reading/tutorials
+-----------------
 
 - `Michael Betancourt's writings <https://betanalpha.github.io/writing/>`_ contain some of the best explanations and case studies about Bayesian inference, especially with Stan, you can find anywhere.
 - `Bayesian Data Analysis, 3rd Ed. <http://www.stat.columbia.edu/~gelman/book/>`_ by Gelman, et al., is for many researchers the primary reference for Bayesian inference. The authors have made it freely available at `this link <http://www.stat.columbia.edu/~gelman/book/BDA3.pdf>`_.
+- `Stan tutorials YouTube channel <https://www.youtube.com/playlist?list=PLCrWEzJgSUqwL85xIj1wubGdY15C5Gf7H>`_ has a great series of videos.
 - `Statistical Rethinking, 2nd Ed. <https://xcelab.net/rm/statistical-rethinking/>`_ by Richard McElreath is a good pedagogical book about Bayesian inference.
 - `A Student's Guide to Bayesian Statistics <https://ben-lambert.com/a-students-guide-to-bayesian-statistics/>`_ by Ben Lambert is another good reference, especially for beginners.

@@ -10,7 +10,7 @@ conflict and let the course instructors know.
 
 We also have TA recitations on Thursdays 4–5:30 pm PDT, homework help on Thursday 5:30–7 pm PDT, and instructor office hours on Fridays 2:30–4 pm PDT. Attendance at these three activities is not required.
 
-All sessions are accessible via `this Zoom link <http://bebi103.caltech.edu/2020/b/zoom_links/bebi103_main>`_. Lectures and TA recitations will be recorded and posted in case you cannot attend.
+All sessions are accessible via `this Zoom link <http://bebi103.caltech.edu/2021/b/zoom_links/bebi103_main>`_. Lectures and TA recitations will be recorded and posted in case you cannot attend.
 
 
 Lab sessions
