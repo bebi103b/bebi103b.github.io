@@ -78,9 +78,10 @@ People
 .. toctree::
    :maxdepth: 1
    :caption: Recitations
+   
+   recitations/01/review_of_mle.ipynb
 
 ..
-   recitations/01/index
    recitations/02/git_and_github_tips.ipynb
    recitations/03/time_series.ipynb
    recitations/04/manipuluating_dfs.ipynb
