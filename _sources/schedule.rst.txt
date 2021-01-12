@@ -71,7 +71,7 @@ The notes for each Tuesday lesson must be read ahead of time and associated less
 	+ Tu 01/12: :ref:`Lesson 02<2. Plotting posteriors>`: Plotting posteriors
 	+ Tu 01/12: :ref:`Lesson 03<3. Marginalization by numerical quadrature>`: Marginalization by numerical quadrature
 	+ Tu 01/12: :ref:`Lesson 04<4. Conjugacy>`: Conjugacy
-	+ W 01/13: :ref:`Lesson 05<5. Introduction to Bayesian modeling>`: Introduction to Bayesian modeling
+	+ W 01/13: :ref:`Lesson 05<5. Introduction to Bayesian modeling>`: Introduction to Bayesian modeling (lecture)
 	+ Th 01/14: Recitation 02: Probability review
 - **Week 3**
 	+ Tu 01/19: :ref:`Lesson 06<6. Parameter estimation by optimization>`: Parameter estimation by optimization
