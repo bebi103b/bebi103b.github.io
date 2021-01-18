@@ -181,7 +181,7 @@ Weakly informative priors
 -------------------------
 
 Remember, the prior probability distribution captures what we know about the parameter before we measure data. When coming up with a prior, I often like to sketch how I think the probability density or mass function of a parameter will
-look. This is directly encoding my prior knowledge using probability, which is what a prior is supposed to do by definition. When sketching the probability density function, though, I make sure that I draw the distribution broad enough that it covers all parameter values that are even somewhat reasonable. I limit its breadth to rule out absurd values, such as kinesis traveling faster than the speed of light. Such a prior is called a **weakly informative prior**. 
+look. This is directly encoding my prior knowledge using probability, which is what a prior is supposed to do by definition. When sketching the probability density function, though, I make sure that I draw the distribution broad enough that it covers all parameter values that are even somewhat reasonable. I limit its breadth to rule out absurd values, such as kinesin traveling faster than the speed of light. Such a prior is called a **weakly informative prior**. 
 
 To come up with the functional form, or better yet the name, of the prior distribution, I use the `Distribution Explorer <https://distribution-explorer.github.io/>`_ to find a distribution and parameter set that matches my sketch. If I have to choose between making the prior more peaked or broader, I opt for being broader. This is well-described in the useful `Stan wiki on
 priors <https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations>`__,

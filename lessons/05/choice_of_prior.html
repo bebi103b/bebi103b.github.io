@@ -373,7 +373,7 @@ g(\phi) \propto \sqrt{\mathrm{det}\,\mathrm{E}\left[\mathsf{B}_\phi\right]} = \s
 <div class="section" id="weakly-informative-priors">
 <h2>Weakly informative priors<a class="headerlink" href="#weakly-informative-priors" title="Permalink to this headline">¶</a></h2>
 <p>Remember, the prior probability distribution captures what we know about the parameter before we measure data. When coming up with a prior, I often like to sketch how I think the probability density or mass function of a parameter will
-look. This is directly encoding my prior knowledge using probability, which is what a prior is supposed to do by definition. When sketching the probability density function, though, I make sure that I draw the distribution broad enough that it covers all parameter values that are even somewhat reasonable. I limit its breadth to rule out absurd values, such as kinesis traveling faster than the speed of light. Such a prior is called a <strong>weakly informative prior</strong>.</p>
+look. This is directly encoding my prior knowledge using probability, which is what a prior is supposed to do by definition. When sketching the probability density function, though, I make sure that I draw the distribution broad enough that it covers all parameter values that are even somewhat reasonable. I limit its breadth to rule out absurd values, such as kinesin traveling faster than the speed of light. Such a prior is called a <strong>weakly informative prior</strong>.</p>
 <p>To come up with the functional form, or better yet the name, of the prior distribution, I use the <a class="reference external" href="https://distribution-explorer.github.io/">Distribution Explorer</a> to find a distribution and parameter set that matches my sketch. If I have to choose between making the prior more peaked or broader, I opt for being broader. This is well-described in the useful <a class="reference external" href="https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations">Stan wiki on
 priors</a>,
 which says, “the loss in precision by making the prior a bit too weak (compared to the true population distribution of parameters or the current expert state of knowledge) is less serious than the gain in robustness by including parts of parameter space that might be relevant.”</p>
@@ -411,11 +411,11 @@ which says, “the loss in precision by making the prior a bit too weak (compare
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jan 12, 2021.
+        Last updated on Jan 17, 2021.
       </span>
 
     </p>
-  </div> <jinja2.runtime.BlockReference object at 0x7f96ee5b9cd0> 
+  </div> <jinja2.runtime.BlockReference object at 0x7fc73074f550> 
 
 <p>© 2021 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 
