@@ -105,6 +105,7 @@
 <li class="toctree-l1"><a class="reference internal" href="lessons/10/mixture_model_stan.html">10. Mixture models and label switching with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lessons/11/regression_with_stan.html">11. Regression with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson_exercises/exercise_03.html">E3. To be completed after lesson 11</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lessons/12/index.html">12. Display of MCMC results</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Recitations</span></p>
 <ul>
@@ -333,8 +334,7 @@
 <li><p>Tu 01/26: <a class="reference internal" href="lessons/09/index.html#introduction-to-mcmc-with-stan"><span class="std std-ref">Lesson 09</span></a>: Introduction to MCMC with Stan</p></li>
 <li><p>Tu 01/26: <a class="reference internal" href="lessons/10/mixture_model_stan.html#10.-Mixture-models-and-label-switching-with-MCMC"><span class="std std-ref">Lesson 10</span></a>: Mixture models and label switching</p></li>
 <li><p>Tu 01/26: <a class="reference internal" href="lessons/11/regression_with_stan.html#11.-Regression-with-MCMC"><span class="std std-ref">Lesson 11</span></a>: Regression with Stan</p></li>
-<li><p>W 01/27: Lesson 12: Display of MCMC samples (lecture)</p></li>
-<li><p>W 01/27: Lesson 13: Reporting summaries of the posterior (lecture)</p></li>
+<li><p>W 01/27: <a class="reference internal" href="lessons/12/index.html#display-of-mcmc-results"><span class="std std-ref">Lesson 12</span></a>: Display of MCMC samples (lecture)</p></li>
 <li><p>Th 01/28: Recitation 04: Introduction to computing with AWS</p></li>
 </ul>
 </dd>
@@ -342,9 +342,9 @@
 </li>
 <li><dl class="simple">
 <dt><strong>Week 5</strong></dt><dd><ul>
-<li><p>Tu 02/02: Lesson 14: Model building with prior predictive checks</p></li>
-<li><p>Tu 02/02: Lesson 15: Posterior predictive checks</p></li>
-<li><p>W 02/03: Lesson 16: Collector’s box of distributions (lecture)</p></li>
+<li><p>Tu 02/02: Lesson 13: Model building with prior predictive checks</p></li>
+<li><p>Tu 02/02: Lesson 14: Posterior predictive checks</p></li>
+<li><p>W 02/03: Lesson 15: Collector’s box of distributions (lecture)</p></li>
 <li><p>Th 02/04: Recitation 05: Modeling case study</p></li>
 </ul>
 </dd>
@@ -352,9 +352,9 @@
 </li>
 <li><dl class="simple">
 <dt><strong>Week 6</strong></dt><dd><ul>
-<li><p>Tu 02/09: Lesson 17: MCMC diagnostics</p></li>
-<li><p>Tu 02/09: Lesson 18: The Funnel of Hell and noncentering</p></li>
-<li><p>W 02/10: Lesson 19: Model comparison (lecture)</p></li>
+<li><p>Tu 02/09: Lesson 16: MCMC diagnostics</p></li>
+<li><p>Tu 02/09: Lesson 17: The Funnel of Hell and noncentering</p></li>
+<li><p>W 02/10: Lesson 18: Model comparison (lecture)</p></li>
 <li><p>Th 02/11: Recitation 06: Practice modeling</p></li>
 </ul>
 </dd>
@@ -362,8 +362,8 @@
 </li>
 <li><dl class="simple">
 <dt><strong>Week 7</strong></dt><dd><ul>
-<li><p>Tu 02/16: Lesson 20: Model comparison in practice</p></li>
-<li><p>W 02/17: Lesson 21: Hierarchical models (lecture)</p></li>
+<li><p>Tu 02/16: Lesson 19: Model comparison in practice</p></li>
+<li><p>W 02/17: Lesson 20: Hierarchical models (lecture)</p></li>
 <li><p>Th 02/18: Recitation 07: Background on Hamiltonian Monte Carlo</p></li>
 </ul>
 </dd>
@@ -371,8 +371,8 @@
 </li>
 <li><dl class="simple">
 <dt><strong>Week 8</strong></dt><dd><ul>
-<li><p>Tu 02/23: Lesson 22: Implementation of hierarchical models</p></li>
-<li><p>W 02/24: Lesson 23: Principled workflows (lecture)</p></li>
+<li><p>Tu 02/23: Lesson 21: Implementation of hierarchical models</p></li>
+<li><p>W 02/24: Lesson 22: Principled workflows (lecture)</p></li>
 <li><p>Th 02/25: Recitation 08: Discussion of project proposals</p></li>
 </ul>
 </dd>
@@ -380,8 +380,8 @@
 </li>
 <li><dl class="simple">
 <dt><strong>Week 9</strong></dt><dd><ul>
-<li><p>Tu 03/02: Lesson 24: Simulation-based calibration in practice</p></li>
-<li><p>W 03/03: Lesson 25: Introduction to nonparametric Bayes: Gaussian processes</p></li>
+<li><p>Tu 03/02: Lesson 23: Simulation-based calibration in practice</p></li>
+<li><p>W 03/03: Lesson 24: Introduction to nonparametric Bayes: Gaussian processes</p></li>
 <li><p>Th 03/04: Recitation 09: Sampling out of discrete distributions</p></li>
 </ul>
 </dd>
@@ -389,8 +389,8 @@
 </li>
 <li><dl class="simple">
 <dt><strong>Week 10</strong></dt><dd><ul>
-<li><p>Tu 03/09: Lesson 26: Implementation of Gaussian processes</p></li>
-<li><p>W 03/10: Lesson 27: Variational inference (lecture)</p></li>
+<li><p>Tu 03/09: Lesson 25: Implementation of Gaussian processes</p></li>
+<li><p>W 03/10: Lesson 26: Variational inference (lecture)</p></li>
 <li><p>Th 03/11: Recitation 10: Variational inference in practice</p></li>
 </ul>
 </dd>
@@ -420,11 +420,11 @@
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jan 17, 2021.
+        Last updated on Jan 18, 2021.
       </span>
 
     </p>
-  </div> <jinja2.runtime.BlockReference object at 0x7fc73114a6d0> 
+  </div> <jinja2.runtime.BlockReference object at 0x7f9baf282220> 
 
 <p>© 2021 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

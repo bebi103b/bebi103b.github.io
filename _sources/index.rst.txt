@@ -55,6 +55,7 @@ People
    lessons/10/mixture_model_stan.ipynb
    lessons/11/regression_with_stan.ipynb
    lesson_exercises/exercise_03.ipynb   
+   lessons/12/index
 
 ..
    lessons/10/overplotting.ipynb
