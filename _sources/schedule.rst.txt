@@ -85,8 +85,8 @@ The notes for each Tuesday lesson must be read ahead of time and associated less
 	+ W 01/27: :ref:`Lesson 12<12. Display of MCMC results>`: Display of MCMC samples (lecture)
 	+ Th 01/28: Recitation 04: Introduction to computing with AWS
 - **Week 5**
-	+ Tu 02/02: Lesson 13: Model building with prior predictive checks
-	+ Tu 02/02: Lesson 14: Posterior predictive checks
+	+ Tu 02/02: :ref:`Lesson 13<13. Model building with prior predictive checks>`: Model building with prior predictive checks
+	+ Tu 02/02: :ref:`Lesson 14<14. Posterior predictive checks>`: Posterior predictive checks
 	+ W 02/03: Lesson 15: Collector's box of distributions (lecture)
 	+ Th 02/04: Recitation 05: Modeling case study
 - **Week 6**

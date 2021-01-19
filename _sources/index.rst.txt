@@ -56,6 +56,10 @@ People
    lessons/11/regression_with_stan.ipynb
    lesson_exercises/exercise_03.ipynb   
    lessons/12/index
+   lessons/13/prior_predictive_checks.ipynb
+   lessons/14/posterior_predictive_checks.ipynb
+   lesson_exercises/exercise_04.ipynb   
+   lessons/15/box_of_distributions.rst
 
 ..
    lessons/10/overplotting.ipynb
@@ -79,7 +83,7 @@ People
 .. toctree::
    :maxdepth: 1
    :caption: Recitations
-   
+
    recitations/01/review_of_mle.ipynb
 
 ..
