@@ -88,6 +88,8 @@ People
    :caption: Recitations
 
    recitations/01/review_of_mle.ipynb
+   recitations/02/probability_review.rst
+   recitations/03/choosing_priors.ipynb
 
 ..
    recitations/02/git_and_github_tips.ipynb
