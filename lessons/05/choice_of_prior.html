@@ -123,7 +123,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../13/prior_predictive_checks.html">13. Model building with prior predictive checks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../14/posterior_predictive_checks.html">14. Posterior predictive checks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_04.html">E4. To be completed after lesson 14</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../15/box_of_distributions.html">5. Collector’s box of distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15/box_of_distributions.html">15. Collector’s box of distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../16/mcmc_diagnostics.html">16. MCMC diagnostics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../17/funnel_of_hell.html">17. A diagnostics case study: Artificial funnel of hell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_05.html">E5. To be completed after lesson 17</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Recitations</span></p>
 <ul>
@@ -353,7 +356,7 @@ g(\phi) \propto \sqrt{\mathrm{det}\,\mathrm{E}\left[\mathsf{J}\cdot \mathsf{B}_\
 <p>We recognize the quantity <span class="math notranslate nohighlight">\(\mathsf{J}\cdot \mathsf{B}_\theta \cdot \mathsf{J}\)</span> as having the same form as the multivariable chain rule for second derivatives. Thus, we are converting <span class="math notranslate nohighlight">\(\mathsf{B}_\theta\)</span> from being a matrix of second derivatives with respect to <span class="math notranslate nohighlight">\(\theta\)</span> to being a matrix of second derivatives with respect to <span class="math notranslate nohighlight">\(\phi\)</span>. Thus,</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
-g(\phi) \propto \sqrt{\mathrm{det}\,\mathrm{E}\left[\mathsf{B}_\phi\right]} = \sqrt{\mathcal{I}(\phi)},
+g(\phi) \propto \sqrt{\mathrm{det}\,\mathrm{E}\left[\mathsf{B}_\phi\right]} = \sqrt{\mathrm{det}\,\mathcal{I}(\phi)},
 \end{align}\]</div>
 <p>thereby demonstrating that a Jeffreys prior is invariant to change of parametrizations.</p>
 </div>
@@ -416,11 +419,11 @@ which says, “the loss in precision by making the prior a bit too weak (compare
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jan 18, 2021.
+        Last updated on Jan 20, 2021.
       </span>
 
     </p>
-  </div> <jinja2.runtime.BlockReference object at 0x7ffa7b8654f0> 
+  </div> <jinja2.runtime.BlockReference object at 0x7fd2b74e76d0> 
 
 <p>© 2021 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

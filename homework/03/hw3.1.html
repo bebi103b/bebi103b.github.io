@@ -109,7 +109,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/13/prior_predictive_checks.html">13. Model building with prior predictive checks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/14/posterior_predictive_checks.html">14. Posterior predictive checks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_04.html">E4. To be completed after lesson 14</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lessons/15/box_of_distributions.html">5. Collector’s box of distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/15/box_of_distributions.html">15. Collector’s box of distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/16/mcmc_diagnostics.html">16. MCMC diagnostics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/17/funnel_of_hell.html">17. A diagnostics case study: Artificial funnel of hell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_05.html">E5. To be completed after lesson 17</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Recitations</span></p>
 <ul>
@@ -261,8 +264,8 @@ r_i = \frac{y_i - f_y(x_i;\phi)}{\sigma_i}.
 \sum_{i=1}^N r_i^2 = \sum_{i=1}^N\,\frac{(y_i - f_y(x_i;\phi))^2}{\sigma_i^2}.
 \end{align}</span></p>
 <p><strong>a)</strong> Show that finding the parameters <span class="math notranslate nohighlight">\(\phi\)</span> that minimize the sum of the squares of the residuals is equivalent to finding the MAP parameters for a model with the above likelihood and Uniform priors on all parameters. Note that the values of <span class="math notranslate nohighlight">\(\sigma_i\)</span> are taken to be known in this context; they are not parameters to be estimated.</p>
-<p><strong>b)</strong> Now assume that we have <strong>homoscedastic</strong> errors, that is that <span class="math notranslate nohighlight">\(\sigma_i = \sigma\)</span> for all <span class="math notranslate nohighlight">\(i\)</span>. Assume that further that now, <span class="math notranslate nohighlight">\(\sigma\)</span> is not known. Show that if the prior is such that <span class="math notranslate nohighlight">\(\sigma\)</span> is independent of <span class="math notranslate nohighlight">\(\phi\)</span> (which we still assume to be constant), we do not need to consider the parameter <span class="math notranslate nohighlight">\(\sigma\)</span> at all in finding the MAP values for <span class="math notranslate nohighlight">\(\phi\)</span>. (The assumption of homoscedasticity is often made when the <span class="math notranslate nohighlight">\(\sigma_i\)</span> are not known. This
-is often the procedure that is done with least squares regression.)</p>
+<p><strong>b)</strong> Now assume that we have <strong>homoscedastic</strong> errors, that is that <span class="math notranslate nohighlight">\(\sigma_i = \sigma\)</span> for all <span class="math notranslate nohighlight">\(i\)</span>. Assume further that now, <span class="math notranslate nohighlight">\(\sigma\)</span> is not known. Show that if the prior is such that <span class="math notranslate nohighlight">\(\sigma\)</span> is independent of <span class="math notranslate nohighlight">\(\phi\)</span> (which we still assume to be constant), we do not need to consider the parameter <span class="math notranslate nohighlight">\(\sigma\)</span> at all in finding the MAP values for <span class="math notranslate nohighlight">\(\phi\)</span>. (The assumption of homoscedasticity is often made when the <span class="math notranslate nohighlight">\(\sigma_i\)</span> are not known. This is
+often the procedure that is done with least squares regression.)</p>
 <p><strong>c)</strong> Discuss any issues you see with taking this approach. Think generatively.</p>
 </div>
 
@@ -287,11 +290,11 @@ is often the procedure that is done with least squares regression.)</p>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jan 18, 2021.
+        Last updated on Jan 20, 2021.
       </span>
 
     </p>
-  </div> <jinja2.runtime.BlockReference object at 0x7ffa7b69c070> 
+  </div> <jinja2.runtime.BlockReference object at 0x7fd290a25100> 
 
 <p>© 2021 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

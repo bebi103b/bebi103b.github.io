@@ -1,6 +1,6 @@
 .. _distributions:
 
-5. Collector's box of distributions
+15. Collector's box of distributions
 ====================================
 
 Probability distributions are the building blocks of any generative model. In building a model, we usually start with the likelihood and prescribe a distribution that generates the data, :math:`f(y\mid \theta)`. The likelihood makes clear for which parameters :math:`\theta` we need priors, :math:`g(\theta)`. We will ultimately characterize the posterior distribution of the parameters, :math:`g(\theta\mid y)`.

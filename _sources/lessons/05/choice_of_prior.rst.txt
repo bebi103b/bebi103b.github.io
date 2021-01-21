@@ -151,7 +151,7 @@ We recognize the quantity :math:`\mathsf{J}\cdot \mathsf{B}_\theta \cdot \mathsf
 .. math::
 
     \begin{align}
-    g(\phi) \propto \sqrt{\mathrm{det}\,\mathrm{E}\left[\mathsf{B}_\phi\right]} = \sqrt{\mathcal{I}(\phi)},
+    g(\phi) \propto \sqrt{\mathrm{det}\,\mathrm{E}\left[\mathsf{B}_\phi\right]} = \sqrt{\mathrm{det}\,\mathcal{I}(\phi)},
     \end{align}
 
 thereby demonstrating that a Jeffreys prior is invariant to change of parametrizations.

@@ -87,11 +87,11 @@ The notes for each Tuesday lesson must be read ahead of time and associated less
 - **Week 5**
 	+ Tu 02/02: :ref:`Lesson 13<13. Model building with prior predictive checks>`: Model building with prior predictive checks
 	+ Tu 02/02: :ref:`Lesson 14<14. Posterior predictive checks>`: Posterior predictive checks
-	+ W 02/03: Lesson 15: Collector's box of distributions (lecture)
+	+ W 02/03: :ref:`Lesson 15<15. Collector's box of distributions>`: Collector's box of distributions (lecture)
 	+ Th 02/04: Recitation 05: Modeling case study
 - **Week 6**
-	+ Tu 02/09: Lesson 16: MCMC diagnostics
-	+ Tu 02/09: Lesson 17: The Funnel of Hell and noncentering
+	+ Tu 02/09: :ref:`Lesson 16<16. MCMC diagnostics>`: MCMC diagnostics
+	+ Tu 02/09: :ref:`Lesson 17<17. A diagnostics case study: Artificial funnel of hell>`: The Funnel of Hell and uncentering
 	+ W 02/10: Lesson 18: Model comparison (lecture)
 	+ Th 02/11: Recitation 06: Practice modeling
 - **Week 7**
