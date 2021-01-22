@@ -27,7 +27,7 @@ Homework due dates
 - :ref:`Homework 2<2. Analytical and graphical methods for analysis of the posterior>`: due 5 pm PST, January 18
 - :ref:`Homework 3<3. Maximum a posteriori parameter estimation>`: due 5 pm PST, January 25
 - :ref:`Homework 4<4. Sampling with MCMC>`: due 5 pm PST, February 1
-- Homework 5: due 5 pm PST, February 8
+- :ref:`Homework 5<5. Inference with Stan I>`: due 5 pm PST, February 8
 - Homework 6: due 5 pm PST, February 15
 - Homework 7: due 5 pm PST, February 22
 - Homework 8: due 5 pm PST, March 1
@@ -45,8 +45,8 @@ Lesson exercise due dates
 - :ref:`Lesson exercise 1<E1. To be completed after lesson 4>`: due 10:30 am PST, January 12
 - :ref:`Lesson exercise 2<E2. To be completed after lesson 6>`: due 10:30 am PST, January 19
 - :ref:`Lesson exercise 3<E3. To be completed after lesson 11>`: due 10:30 am PST, January 26
-- Lesson exercise 4: due 10:30 am PST, February 2
-- Lesson exercise 5: due 10:30 am PST, February 9
+- :ref:`Lesson exercise 4<E4. To be completed after lesson 14>`: due 10:30 am PST, February 2
+- :ref:`Lesson exercise 5<E5. To be completed after lesson 17>`: due 10:30 am PST, February 9
 - Lesson exercise 6: due 10:30 am PST, February 16
 - Lesson exercise 7: due 10:30 am PST, February 23
 - Lesson exercise 8: due 10:30 am PST, March 2

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>HW 3.2: MAP estimates and zero-inflation for Drop-Seq controls (80 pts) &mdash; BE/Bi 103 b  documentation</title>
+  <title>Homework 3.2: MAP estimates and zero-inflation for Drop-Seq controls (80 pts) &mdash; BE/Bi 103 b  documentation</title>
   
 
   
@@ -43,7 +43,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="4. Sampling with MCMC" href="../04/index.html" />
-    <link rel="prev" title="HW 3.1 [SOLO]: Least squares (20 pts)" href="hw3.1.html" /> 
+    <link rel="prev" title="Homework 3.1 [SOLO]: Least squares (20 pts)" href="hw3.1.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -126,11 +126,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../01/index.html">1. Intuitive generative modeling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../02/index.html">2. Analytical and graphical methods for analysis of the posterior</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">3. Maximum a posteriori parameter estimation</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="hw3.1.html">HW 3.1 [SOLO]: Least squares (20 pts)</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">HW 3.2: MAP estimates and zero-inflation for Drop-Seq controls (80 pts)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hw3.1.html">Homework 3.1 [SOLO]: Least squares (20 pts)</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Homework 3.2: MAP estimates and zero-inflation for Drop-Seq controls (80 pts)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../04/index.html">4. Sampling with MCMC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05/index.html">5. Inference with Stan I</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -204,7 +205,7 @@
         
           <li><a href="index.html">3. Maximum a posteriori parameter estimation</a> &raquo;</li>
         
-      <li>HW 3.2: MAP estimates and zero-inflation for Drop-Seq controls (80 pts)</li>
+      <li>Homework 3.2: MAP estimates and zero-inflation for Drop-Seq controls (80 pts)</li>
     
     
   <li class="wy-breadcrumbs-aside">
@@ -249,8 +250,8 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="HW-3.2:-MAP-estimates-and-zero-inflation-for-Drop-Seq-controls-(80-pts)">
-<h1>HW 3.2: MAP estimates and zero-inflation for Drop-Seq controls (80 pts)<a class="headerlink" href="#HW-3.2:-MAP-estimates-and-zero-inflation-for-Drop-Seq-controls-(80-pts)" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="Homework-3.2:-MAP-estimates-and-zero-inflation-for-Drop-Seq-controls-(80-pts)">
+<h1>Homework 3.2: MAP estimates and zero-inflation for Drop-Seq controls (80 pts)<a class="headerlink" href="#Homework-3.2:-MAP-estimates-and-zero-inflation-for-Drop-Seq-controls-(80-pts)" title="Permalink to this headline">¶</a></h1>
 <p>Data set download: <a class="reference external" href="https://s3.amazonaws.com/bebi103.caltech.edu/data/zheng_gemcode_control.csv">File 1</a>, <a class="reference external" href="https://s3.amazonaws.com/bebi103.caltech.edu/data/ercc_concs.txt">File 2</a></p>
 <p><em>This problem is inspired by</em><a class="reference external" href="http://dx.doi.org/10.1038/s41587-019-0379-5">this paper by Valentine Svensson</a><em>and the related blog posts (viewable</em><a class="reference external" href="http://www.nxn.se/valent/2017/11/16/droplet-scrna-seq-is-not-zero-inflated">here</a><em>and</em><a class="reference external" href="http://www.nxn.se/valent/2018/1/30/count-depth-variation-makes-poisson-scrna-seq-data-negative-binomial">here</a><em>).</em></p>
 <hr><p><a class="reference external" href="https://en.wikipedia.org/wiki/Single_cell_sequencing#Single-cell_transcriptome_sequencing_(scRNA-seq)">Single-Cell RNA Seq</a> (scRNA-Seq) is a technology that is coming into more and more common use. It enables researchers to get counts of mRNA transcripts for specific genes in single cells. In the technique, (usually) individual cells are encased in a droplet in a microfluidic device. Importantly, each droplet also has a cDNA “barcode” molecule that enables identification of which droplet
@@ -299,7 +300,7 @@ y_{ij} \sim \text{NegBinom}(\mu_i, \phi)\,\forall i,j.
         <a href="../04/index.html" class="btn btn-neutral float-right" title="4. Sampling with MCMC" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="hw3.1.html" class="btn btn-neutral float-left" title="HW 3.1 [SOLO]: Least squares (20 pts)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="hw3.1.html" class="btn btn-neutral float-left" title="Homework 3.1 [SOLO]: Least squares (20 pts)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -313,7 +314,7 @@ y_{ij} \sim \text{NegBinom}(\mu_i, \phi)\,\forall i,j.
       </span>
 
     </p>
-  </div> <jinja2.runtime.BlockReference object at 0x7fc3fab77a60> 
+  </div> <jinja2.runtime.BlockReference object at 0x7fae8a507fd0> 
 
 <p>© 2021 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 
