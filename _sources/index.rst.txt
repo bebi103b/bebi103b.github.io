@@ -63,6 +63,9 @@ People
    lessons/16/mcmc_diagnostics.ipynb
    lessons/17/funnel_of_hell.ipynb
    lesson_exercises/exercise_05.ipynb
+   lessons/18/model_comparison.rst
+   lessons/19/index
+   lesson_exercises/exercise_06.ipynb
 
 ..
    lessons/10/overplotting.ipynb
