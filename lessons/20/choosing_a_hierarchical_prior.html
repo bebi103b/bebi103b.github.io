@@ -127,6 +127,8 @@
 <li class="toctree-l2"><a class="reference internal" href="generalization.html">Generalization of hierarchical models</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../21/hierarchical_implementation.html">21. Implementation of hierarchical models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_07.html">E7. To be completed after lesson 21</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Recitations</span></p>
 <ul>
@@ -143,6 +145,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../homework/03/index.html">3. Maximum a posteriori parameter estimation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/04/index.html">4. Sampling with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/05/index.html">5. Inference with Stan I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../homework/06/index.html">6. Practice building and assessing Bayesian models</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -272,6 +275,8 @@
 g(\theta\mid \phi) = \prod_{i=1}^k g(\theta_i\mid \phi),
 \end{align}</span></p>
 <p>which means that each of the parameters is an independent sample out of a distribution <span class="math notranslate nohighlight">\(g(\theta_i\mid \phi)\)</span>, which we often take to be the same for all <span class="math notranslate nohighlight">\(i\)</span>. This is reasonable to do in the worm reversal example.</p>
+<p>In all of the hierarchical models we will work with, we will assume exchangeability. In situations where the indices of the experiment contain real information, meaning that the prior is no longer invariant to permuations of the indices, we lose exchangeability. An example would be if we did one set of experiments on one instrument and another set of experiments on another instrument. If we suspect these different instrument may have a real effect on the measured data, we need to explicitly
+model the differences. This is an example of a <strong>factor model</strong>, which feature more nuance than the hierarchical models we will consider. We will not go into factor models in this course (but we definitely would if we had more time! Add it to the long list of beautiful advanced topics….). Of course, we may <em>choose</em> to ignore differences between the two instruments in our modeling and recover exchangeability.</p>
 </div>
 <div class="section" id="Choice-of-the-conditional-distribution">
 <h2>Choice of the conditional distribution<a class="headerlink" href="#Choice-of-the-conditional-distribution" title="Permalink to this headline">¶</a></h2>
@@ -334,11 +339,11 @@ g(\theta, \phi, \kappa \mid n, N) = \frac{f(n,N\mid \theta)\,\left(
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jan 28, 2021.
+        Last updated on Jan 31, 2021.
       </span>
 
     </p>
-  </div> <jinja2.runtime.BlockReference object at 0x7fbdd3501b20> 
+  </div> <jinja2.runtime.BlockReference object at 0x7f8c5c183760> 
 
 <p>© 2021 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

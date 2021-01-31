@@ -43,7 +43,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Meetings" href="policies.html" />
-    <link rel="prev" title="Homework 5.2: Determining dissociation constants (50 pts)" href="homework/05/hw5.2.html" /> 
+    <link rel="prev" title="Homework 6.3: Diagnosing nonidentifiability with MCMC (40 pts)" href="homework/06/hw6.3.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -117,6 +117,8 @@
 <li class="toctree-l1"><a class="reference internal" href="lessons/19/index.html">19. Model comparison in practice</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson_exercises/exercise_06.html">E6. To be completed after lesson 19</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lessons/20/index.html">20. Hierarchical models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lessons/21/hierarchical_implementation.html">21. Implementation of hierarchical models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson_exercises/exercise_07.html">E7. To be completed after lesson 21</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Recitations</span></p>
 <ul>
@@ -133,6 +135,7 @@
 <li class="toctree-l1"><a class="reference internal" href="homework/03/index.html">3. Maximum a posteriori parameter estimation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="homework/04/index.html">4. Sampling with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="homework/05/index.html">5. Inference with Stan I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="homework/06/index.html">6. Practice building and assessing Bayesian models</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Schedule</span></p>
 <ul class="current">
@@ -296,7 +299,7 @@
 <li><p><a class="reference internal" href="lesson_exercises/exercise_03.html#E3.-To-be-completed-after-lesson-11"><span class="std std-ref">Lesson exercise 3</span></a>: due 10:30 am PST, January 26</p></li>
 <li><p><a class="reference internal" href="lesson_exercises/exercise_04.html#E4.-To-be-completed-after-lesson-14"><span class="std std-ref">Lesson exercise 4</span></a>: due 10:30 am PST, February 2</p></li>
 <li><p><a class="reference internal" href="lesson_exercises/exercise_05.html#E5.-To-be-completed-after-lesson-17"><span class="std std-ref">Lesson exercise 5</span></a>: due 10:30 am PST, February 9</p></li>
-<li><p>Lesson exercise 6: due 10:30 am PST, February 16</p></li>
+<li><p><span class="xref std std-ref">Lesson exercise 6</span>: due 10:30 am PST, February 16</p></li>
 <li><p>Lesson exercise 7: due 10:30 am PST, February 23</p></li>
 <li><p>Lesson exercise 8: due 10:30 am PST, March 2</p></li>
 <li><p>Lesson exercise 9: due 10:30 am PST, March 9</p></li>
@@ -386,7 +389,7 @@
 </li>
 <li><dl class="simple">
 <dt><strong>Week 8</strong></dt><dd><ul>
-<li><p>Tu 02/23: Lesson 21: Implementation of hierarchical models</p></li>
+<li><p>Tu 02/23: <span class="xref std std-ref">Lesson 21</span>: Implementation of hierarchical models</p></li>
 <li><p>W 02/24: Lesson 22: Principled workflows (lecture)</p></li>
 <li><p>Th 02/25: Recitation 08: Discussion of project proposals</p></li>
 </ul>
@@ -425,7 +428,7 @@
         <a href="policies.html" class="btn btn-neutral float-right" title="Meetings" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="homework/05/hw5.2.html" class="btn btn-neutral float-left" title="Homework 5.2: Determining dissociation constants (50 pts)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="homework/06/hw6.3.html" class="btn btn-neutral float-left" title="Homework 6.3: Diagnosing nonidentifiability with MCMC (40 pts)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -435,11 +438,11 @@
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jan 28, 2021.
+        Last updated on Jan 31, 2021.
       </span>
 
     </p>
-  </div> <jinja2.runtime.BlockReference object at 0x7fbdddcdc370> 
+  </div> <jinja2.runtime.BlockReference object at 0x7f8c26486100> 
 
 <p>© 2021 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

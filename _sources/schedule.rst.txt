@@ -47,7 +47,7 @@ Lesson exercise due dates
 - :ref:`Lesson exercise 3<E3. To be completed after lesson 11>`: due 10:30 am PST, January 26
 - :ref:`Lesson exercise 4<E4. To be completed after lesson 14>`: due 10:30 am PST, February 2
 - :ref:`Lesson exercise 5<E5. To be completed after lesson 17>`: due 10:30 am PST, February 9
-- Lesson exercise 6: due 10:30 am PST, February 16
+- :ref:`Lesson exercise 6<E6. To be completed after lesson 21>`: due 10:30 am PST, February 16
 - Lesson exercise 7: due 10:30 am PST, February 23
 - Lesson exercise 8: due 10:30 am PST, March 2
 - Lesson exercise 9: due 10:30 am PST, March 9
@@ -99,7 +99,7 @@ The notes for each Tuesday lesson must be read ahead of time and associated less
 	+ W 02/17: :ref:`Lesson 20<20. Hierarchical models>`: Hierarchical models (lecture)
 	+ Th 02/18: Recitation 07: Background on Hamiltonian Monte Carlo
 - **Week 8**
-	+ Tu 02/23: Lesson 21: Implementation of hierarchical models
+	+ Tu 02/23: :ref:`Lesson 21<20. Implementation of hierarchical models>`: Implementation of hierarchical models
 	+ W 02/24: Lesson 22: Principled workflows (lecture)
 	+ Th 02/25: Recitation 08: Discussion of project proposals
 - **Week 9**
