@@ -127,6 +127,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../20/index.html">20. Hierarchical models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../21/hierarchical_implementation.html">21. Implementation of hierarchical models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_07.html">E7. To be completed after lesson 21</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../22/sbc.html">22. Principled analysis pipelines</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Recitations</span></p>
 <ul>
@@ -2334,7 +2335,7 @@ that predictive regression plots are useful. You may need to choose particular s
 </ol>
 <p>Conveniently, we get samples of parameter values out of the posterior from Markov chain Monte Carlo. Once we have the generated data sets, we can compare them to the measured data. This helps answer the question: Could this generative model actually produce the observed data? If the answer is yes, the generative model is not ruled out by the data (though it still may be a bad model). If the answer is no, then the generative model cannot fully describe the process by which the data were
 generated.</p>
-<p>We will again use the Good, et al. data set from the <a class="reference external" href="lessons/13/prior_predictive_checks.ipynb">last lesson</a> and will again consider two models, the independent size model and the conserved tubulin model.</p>
+<p>We will again use the Good, et al. data set from the <a class="reference internal" href="../13/prior_predictive_checks.html"><span class="doc">last lesson</span></a> and will again consider two models, the independent size model and the conserved tubulin model.</p>
 <p>Before proceeding, we’ll load in the data set and store the droplet diameters and spindle lengths as Numpy arrays so we can use them as data to pass to Stan.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
@@ -3008,11 +3009,11 @@ cmdstan   : 2.25.0
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jan 31, 2021.
+        Last updated on Feb 01, 2021.
       </span>
 
     </p>
-  </div> <jinja2.runtime.BlockReference object at 0x7f8c459b46d0> 
+  </div> <jinja2.runtime.BlockReference object at 0x7fc20b093be0> 
 
 <p>© 2021 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

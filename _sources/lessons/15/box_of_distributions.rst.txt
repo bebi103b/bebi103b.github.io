@@ -29,7 +29,7 @@ When we answer the questions, though, we typically answer them *approximately*. 
 
 As another example, imagine we have a likelihood that is a bivariate Normal and we want to come up with a prior distribution for the :math:`2 \times 2` covariance matrix.
 
-1. *Is it discrete or continuous.* It is continuous.
+1. *Is it discrete or continuous?* It is continuous.
 2. *Is the variable univariate or multivariate?* The covariance matrix is multivariate. Note that it is often the case that we approximate multivariate variables as being a set if univariate variables. So, instead of coming up with a prior for a covariance matrix, we could come up with a prior for each of the three entries (three because the fourth is determined by symmetry). We can write the covariance matrix as :math:`\mathsf{\Sigma} = \mathsf{S} \cdot \mathsf{C} \cdot \mathsf{S}`, where :math:`S_{11} = \sigma_1`, :math:`S_{22} = \sigma_2`, :math:`S_{12} = S_{21} = 0`, :math:`C_{11} = C_{22} = 1`, and :math:`C_{12} = C_{21} = \rho`. We could then assume that :math:`\sigma_1`, :math:`\sigma_2`, and :math:`\rho` are all independent and we can come up with priors for each.
 3. *On what domain is the covariance matrix defined?* The covariance matrix is positive definite, which defined the domain. We would therefore need to choose a distribution defined on that domain, and the `LKJ distribution <https://distribution-explorer.github.io/multivariate_continuous/lkj.html>`_ works for that purpose. Alternatively, we could define a distribution for :math:`\sigma_1`, :math:`\sigma_2`, and :math:`\rho` separately. The domains of :math:`\sigma_1` and :math:`\sigma_2` are positive real numbers. We could use, e.g., Half-Normal priors for these two parameters. The parameter :math:`\rho` is defined in the interval :math:`[-1, 1]`. None of the named distributions in the Distribution Explorer are defined on this domain, but the `Beta distribution <https://distribution-explorer.github.io/continuous/beta.html>`_ is defined on the domain [0, 1]. We can use a linear transformation to get a distribution for :math:`\rho`.
 
@@ -39,6 +39,29 @@ As another example, imagine we have a likelihood that is a bivariate Normal and 
     &\xi \sim \text{Beta}(\alpha, \beta)\\
     &\rho = 2\xi - 1.
     \end{align}
+
+
+Starting simple and adding flexibility
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Imagine you build a generative model based on your domain knowledge and you find it can not quite capture all of the structure the observed data as may be evident from posterior predictive checks. You then wish to update your model. How should you choose a new likelihood?
+
+In some cases, you need to rethink your domain knowledge. Maybe you can do some more theoretical work and come up with a new mathematical model (with your full generative model featuring random deviations of this mathematical model). Or, as is often the case, the main underpinnings of your theoretical model are exactly what you want, but you made some approximations in your derivations along the way that were inappropriate. You may also have neglected some effects. In these cases, your first model was an approximation or limit of the next model you may try.
+
+Perhaps you do not really have an underlying theoretical model, but are simply modeling the data acquisition with a simple probability distribution. If that simple distribution misses some of the features of the data, you should select a new distribution for which the simple distribution is a limit or special case. This way, you bring more flexibility into the model, but still retain your initial inclinations based on your domain knowledge.
+
+We can consider three examples.
+
+1. You model time between events (e.g., bursts of gene expression) as a Poisson process using an Exponential distribution. The CDF of your observed times has an inflection point, and the Exponential distribution cannot capture this. You therefore update your model to be have a Gamma likelihood. The `Exponential distribution <https://distribution-explorer.github.io/continuous/exponential.html>`_ is a special case of the `Gamma distribution <https://distribution-explorer.github.io/continuous/gamma.html>`_. If the marginal posterior distribution of the parameter :math:`\alpha` of the Gamma distribution has a lot of probability mass close to one, you know the Exponential model is reasonable. But if :math:`\alpha` departs away from one, you know the Exponential distribution is inadequate.
+
+2. You make repeated measurements and use a `Normal <https://distribution-explorer.github.io/continuous/normal.html>`_ likelihood. You discover that the data contain too many extreme measurements to be commensurate with a Normal distribution. You can therefore use a `Student-t distribution <https://distribution-explorer.github.io/continuous/student_t.html>`_. The Normal distribution is the :math:`\nu\to\infty` limit of the Student-t distribution. Therefore, if the posterior has very little probability mass for small :math:`\nu`, the Normal distribution may be adequate, but small :math:`\nu` is indicative of heavy tails.
+
+3. Consider a set of measurements :math:`\{x_1, x_2, \ldots\}`. Each measurement has associated with is some measurement error such that :math:`x_i\sim\text{Norm}(\mu_i, s)`. Furthermore, there is a natural variability from measurement to measurement such that :math:`\mu_i \sim \text{Norm}(\mu, \sigma)`. You will show in a subsequent homework that in the limit where the natural variability is much greater than the measurement error (:math:`s\ll \sigma`), the model become non-hierarchical with :math:`x_i \sim \text{Norm}(\mu, \sigma)`.
+
+
+It is general good practice in model building to start simple and then sequentially build your models to capture the complexity of the data such that each more complex model has the simpler model preceding it as a special case or limit. This helps preserve domain knowledge and keep you from wandering into ad hoc statistical modeling. It also helps in model assessment to see if the added complexity is really necessary.
+
+
 
 
 Priors for variables with support on the set of positive real numbers
@@ -65,6 +88,6 @@ We often have to choose priors with support on the set of positive real numbers.
     model {
       log10_v ~ normal(1, 2);
 
-      ...
+    ...
     }
 

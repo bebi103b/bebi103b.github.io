@@ -133,6 +133,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../20/index.html">20. Hierarchical models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../21/hierarchical_implementation.html">21. Implementation of hierarchical models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_07.html">E7. To be completed after lesson 21</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../22/sbc.html">22. Principled analysis pipelines</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Recitations</span></p>
 <ul>
@@ -2340,8 +2341,7 @@ As a scientist, I tend to shy away from model averaging; I am rather seeking to 
 <p>In this tutorial, we will demonstrate how to calculate model weights both by using Akaike weights (and variants thereof), and stacking. Conveniently, this may be done approximately directly from samples out of the posterior distributions. The <a class="reference external" href="https://arviz-devs.github.io/arviz/">ArviZ package</a> provides much of the functionality we need.</p>
 <div class="section" id="An-example-model-comparison">
 <h2>An example model comparison<a class="headerlink" href="#An-example-model-comparison" title="Permalink to this headline">¶</a></h2>
-<p>To show how we can do an model comparison, we will again consider the data set from <a class="reference external" href="http://bebi103.caltech.edu.s3-website-us-east-1.amazonaws.com/2020b/content/lessons/lesson_04/parameter_estimation_with_mcmc.html#The-data-set">Singer and coworkers</a>, where they performed RNA FISH to determine the copy numbers of RNA transcripts of specific genes in individual cells in their samples. The data set can be downloaded
-<a class="reference external" href="https://s3.amazonaws.com/bebi103.caltech.edu/data/singer_transcript_counts.csv">here</a>.</p>
+<p>To show how we can do an model comparison, we will again consider the data set from <a class="reference internal" href="../09/parameter_estimation_with_mcmc.html"><span class="doc">Singer and coworkers</span></a>, where they performed RNA FISH to determine the copy numbers of RNA transcripts of specific genes in individual cells in their samples. The data set can be downloaded <a class="reference external" href="https://s3.amazonaws.com/bebi103.caltech.edu/data/singer_transcript_counts.csv">here</a>.</p>
 <p>We will work with the Rex1 gene. In previous lessons, we considered two models. First, a model in which transcript counts are generated from a single Negative Binomial distribution. Second, a mixture model in which the transcript counts are generated from two Negative Binomial distributions. Note that this is a purely academic exercise, since the first model will fail posterior predictive checks quite spectacularly. We would never really come to this point where we needed to do a model
 comparison, but we proceed to demonstrate how it is done in practice.</p>
 <div class="section" id="Computing-the-pointwise-log-likelihood">
@@ -3250,7 +3250,7 @@ var element = document.currentScript.previousSibling.previousSibling;
 })(window);
 </script></div>
 </div>
-<p>Oof! WE failed the ESS and Rhat diagnostics. Recall that sampling is <a class="reference external" href="lessons/10/mixture_model_stan.ipynb">tricky because of label switching</a>. To protect against label switching, we will initialize the walker near where chain 1 sampled.</p>
+<p>Oof! WE failed the ESS and Rhat diagnostics. Recall that sampling is <a class="reference internal" href="../10/mixture_model_stan.html"><span class="doc">tricky because of label switching</span></a>. To protect against label switching, we will initialize the walker near where chain 1 sampled.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
@@ -3702,11 +3702,11 @@ cmdstan   : 2.25.0
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jan 31, 2021.
+        Last updated on Feb 01, 2021.
       </span>
 
     </p>
-  </div> <jinja2.runtime.BlockReference object at 0x7f8c5c4c4a30> 
+  </div> <jinja2.runtime.BlockReference object at 0x7fc2011e4370> 
 
 <p>© 2021 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

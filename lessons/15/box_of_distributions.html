@@ -112,6 +112,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">15. Collector’s box of distributions</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#check-out-the-distribution-explorer">Check out the Distribution Explorer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#choosing-distributions">Choosing distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#starting-simple-and-adding-flexibility">Starting simple and adding flexibility</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#priors-for-variables-with-support-on-the-set-of-positive-real-numbers">Priors for variables with support on the set of positive real numbers</a></li>
 </ul>
 </li>
@@ -124,6 +125,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../20/index.html">20. Hierarchical models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../21/hierarchical_implementation.html">21. Implementation of hierarchical models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_07.html">E7. To be completed after lesson 21</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../22/sbc.html">22. Principled analysis pipelines</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Recitations</span></p>
 <ul>
@@ -280,7 +282,7 @@
 </ol>
 <p>As another example, imagine we have a likelihood that is a bivariate Normal and we want to come up with a prior distribution for the <span class="math notranslate nohighlight">\(2 \times 2\)</span> covariance matrix.</p>
 <ol class="arabic simple">
-<li><p><em>Is it discrete or continuous.</em> It is continuous.</p></li>
+<li><p><em>Is it discrete or continuous?</em> It is continuous.</p></li>
 <li><p><em>Is the variable univariate or multivariate?</em> The covariance matrix is multivariate. Note that it is often the case that we approximate multivariate variables as being a set if univariate variables. So, instead of coming up with a prior for a covariance matrix, we could come up with a prior for each of the three entries (three because the fourth is determined by symmetry). We can write the covariance matrix as <span class="math notranslate nohighlight">\(\mathsf{\Sigma} = \mathsf{S} \cdot \mathsf{C} \cdot \mathsf{S}\)</span>, where <span class="math notranslate nohighlight">\(S_{11} = \sigma_1\)</span>, <span class="math notranslate nohighlight">\(S_{22} = \sigma_2\)</span>, <span class="math notranslate nohighlight">\(S_{12} = S_{21} = 0\)</span>, <span class="math notranslate nohighlight">\(C_{11} = C_{22} = 1\)</span>, and <span class="math notranslate nohighlight">\(C_{12} = C_{21} = \rho\)</span>. We could then assume that <span class="math notranslate nohighlight">\(\sigma_1\)</span>, <span class="math notranslate nohighlight">\(\sigma_2\)</span>, and <span class="math notranslate nohighlight">\(\rho\)</span> are all independent and we can come up with priors for each.</p></li>
 <li><p><em>On what domain is the covariance matrix defined?</em> The covariance matrix is positive definite, which defined the domain. We would therefore need to choose a distribution defined on that domain, and the <a class="reference external" href="https://distribution-explorer.github.io/multivariate_continuous/lkj.html">LKJ distribution</a> works for that purpose. Alternatively, we could define a distribution for <span class="math notranslate nohighlight">\(\sigma_1\)</span>, <span class="math notranslate nohighlight">\(\sigma_2\)</span>, and <span class="math notranslate nohighlight">\(\rho\)</span> separately. The domains of <span class="math notranslate nohighlight">\(\sigma_1\)</span> and <span class="math notranslate nohighlight">\(\sigma_2\)</span> are positive real numbers. We could use, e.g., Half-Normal priors for these two parameters. The parameter <span class="math notranslate nohighlight">\(\rho\)</span> is defined in the interval <span class="math notranslate nohighlight">\([-1, 1]\)</span>. None of the named distributions in the Distribution Explorer are defined on this domain, but the <a class="reference external" href="https://distribution-explorer.github.io/continuous/beta.html">Beta distribution</a> is defined on the domain [0, 1]. We can use a linear transformation to get a distribution for <span class="math notranslate nohighlight">\(\rho\)</span>.</p></li>
 </ol>
@@ -289,6 +291,19 @@
 &amp;\xi \sim \text{Beta}(\alpha, \beta)\\
 &amp;\rho = 2\xi - 1.
 \end{align}\end{split}\]</div>
+</div>
+<div class="section" id="starting-simple-and-adding-flexibility">
+<h2>Starting simple and adding flexibility<a class="headerlink" href="#starting-simple-and-adding-flexibility" title="Permalink to this headline">¶</a></h2>
+<p>Imagine you build a generative model based on your domain knowledge and you find it can not quite capture all of the structure the observed data as may be evident from posterior predictive checks. You then wish to update your model. How should you choose a new likelihood?</p>
+<p>In some cases, you need to rethink your domain knowledge. Maybe you can do some more theoretical work and come up with a new mathematical model (with your full generative model featuring random deviations of this mathematical model). Or, as is often the case, the main underpinnings of your theoretical model are exactly what you want, but you made some approximations in your derivations along the way that were inappropriate. You may also have neglected some effects. In these cases, your first model was an approximation or limit of the next model you may try.</p>
+<p>Perhaps you do not really have an underlying theoretical model, but are simply modeling the data acquisition with a simple probability distribution. If that simple distribution misses some of the features of the data, you should select a new distribution for which the simple distribution is a limit or special case. This way, you bring more flexibility into the model, but still retain your initial inclinations based on your domain knowledge.</p>
+<p>We can consider three examples.</p>
+<ol class="arabic simple">
+<li><p>You model time between events (e.g., bursts of gene expression) as a Poisson process using an Exponential distribution. The CDF of your observed times has an inflection point, and the Exponential distribution cannot capture this. You therefore update your model to be have a Gamma likelihood. The <a class="reference external" href="https://distribution-explorer.github.io/continuous/exponential.html">Exponential distribution</a> is a special case of the <a class="reference external" href="https://distribution-explorer.github.io/continuous/gamma.html">Gamma distribution</a>. If the marginal posterior distribution of the parameter <span class="math notranslate nohighlight">\(\alpha\)</span> of the Gamma distribution has a lot of probability mass close to one, you know the Exponential model is reasonable. But if <span class="math notranslate nohighlight">\(\alpha\)</span> departs away from one, you know the Exponential distribution is inadequate.</p></li>
+<li><p>You make repeated measurements and use a <a class="reference external" href="https://distribution-explorer.github.io/continuous/normal.html">Normal</a> likelihood. You discover that the data contain too many extreme measurements to be commensurate with a Normal distribution. You can therefore use a <a class="reference external" href="https://distribution-explorer.github.io/continuous/student_t.html">Student-t distribution</a>. The Normal distribution is the <span class="math notranslate nohighlight">\(\nu\to\infty\)</span> limit of the Student-t distribution. Therefore, if the posterior has very little probability mass for small <span class="math notranslate nohighlight">\(\nu\)</span>, the Normal distribution may be adequate, but small <span class="math notranslate nohighlight">\(\nu\)</span> is indicative of heavy tails.</p></li>
+<li><p>Consider a set of measurements <span class="math notranslate nohighlight">\(\{x_1, x_2, \ldots\}\)</span>. Each measurement has associated with is some measurement error such that <span class="math notranslate nohighlight">\(x_i\sim\text{Norm}(\mu_i, s)\)</span>. Furthermore, there is a natural variability from measurement to measurement such that <span class="math notranslate nohighlight">\(\mu_i \sim \text{Norm}(\mu, \sigma)\)</span>. You will show in a subsequent homework that in the limit where the natural variability is much greater than the measurement error (<span class="math notranslate nohighlight">\(s\ll \sigma\)</span>), the model become non-hierarchical with <span class="math notranslate nohighlight">\(x_i \sim \text{Norm}(\mu, \sigma)\)</span>.</p></li>
+</ol>
+<p>It is general good practice in model building to start simple and then sequentially build your models to capture the complexity of the data such that each more complex model has the simpler model preceding it as a special case or limit. This helps preserve domain knowledge and keep you from wandering into ad hoc statistical modeling. It also helps in model assessment to see if the added complexity is really necessary.</p>
 </div>
 <div class="section" id="priors-for-variables-with-support-on-the-set-of-positive-real-numbers">
 <h2>Priors for variables with support on the set of positive real numbers<a class="headerlink" href="#priors-for-variables-with-support-on-the-set-of-positive-real-numbers" title="Permalink to this headline">¶</a></h2>
@@ -311,7 +326,7 @@ transformed parameters {
 model {
   log10_v ~ normal(1, 2);
 
-  ...
+...
 }
 </pre></div>
 </div>
@@ -339,11 +354,11 @@ model {
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jan 31, 2021.
+        Last updated on Feb 01, 2021.
       </span>
 
     </p>
-  </div> <jinja2.runtime.BlockReference object at 0x7f8c3a9cf160> 
+  </div> <jinja2.runtime.BlockReference object at 0x7fc1ff513250> 
 
 <p>© 2021 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

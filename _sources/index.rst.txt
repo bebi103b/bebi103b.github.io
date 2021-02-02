@@ -69,6 +69,7 @@ People
    lessons/20/index
    lessons/21/hierarchical_implementation.ipynb
    lesson_exercises/exercise_07.ipynb
+   lessons/22/sbc.ipynb
 
 
 .. toctree::
