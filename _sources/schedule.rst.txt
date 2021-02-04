@@ -49,7 +49,7 @@ Lesson exercise due dates
 - :ref:`Lesson exercise 5<E5. To be completed after lesson 17>`: due 10:30 am PST, February 9
 - :ref:`Lesson exercise 6<E6. To be completed after lesson 19>`: due 10:30 am PST, February 16
 - :ref:`Lesson exercise 7<E7. To be completed after lesson 21>`: due 10:30 am PST, February 23
-- Lesson exercise 8: due 10:30 am PST, March 2
+- :ref:`Lesson exercise 8<E8. To be completed after lesson 23>`: due 10:30 am PST, March 2
 - Lesson exercise 9: due 10:30 am PST, March 9
 
 
@@ -88,7 +88,7 @@ The notes for each Tuesday lesson must be read ahead of time and associated less
 	+ Tu 02/02: :ref:`Lesson 13<13. Model building with prior predictive checks>`: Model building with prior predictive checks
 	+ Tu 02/02: :ref:`Lesson 14<14. Posterior predictive checks>`: Posterior predictive checks
 	+ W 02/03: :ref:`Lesson 15<15. Collector's box of distributions>`: Collector's box of distributions (lecture)
-	+ Th 02/04: Recitation 05: Modeling case study
+	+ Th 02/04: :ref:`Recitation 05<R5. A Bayesian modeling case study: Ant traffic jams>`: Modeling case study
 - **Week 6**
 	+ Tu 02/09: :ref:`Lesson 16<16. MCMC diagnostics>`: MCMC diagnostics
 	+ Tu 02/09: :ref:`Lesson 17<17. A diagnostics case study: Artificial funnel of hell>`: The Funnel of Hell and uncentering
@@ -103,7 +103,7 @@ The notes for each Tuesday lesson must be read ahead of time and associated less
 	+ W 02/24: :ref:`Lesson 22<22. Principled analysis pipelines>`: Principled workflows (lecture)
 	+ Th 02/25: Recitation 08: Discussion of project proposals
 - **Week 9**
-	+ Tu 03/02: Lesson 23: Simulation-based calibration in practice
+	+ Tu 03/02: :ref:`Lesson 23<23: Simulation based calibration and related checks in practice>`: Simulation-based calibration in practice
 	+ W 03/03: Lesson 24: Introduction to nonparametric Bayes: Gaussian processes
 	+ Th 03/04: Recitation 09: Sampling out of discrete distributions
 - **Week 10**

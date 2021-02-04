@@ -1,0 +1,10 @@
+****************************************************
+R5. A Bayesian modeling case study: Ant traffic jams
+****************************************************
+
+The solution to this recitation will be posted after the recitation meeting.
+
+.. toctree::
+   :maxdepth: 1
+
+   ant_traffic_shell.ipynb

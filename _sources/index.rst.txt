@@ -70,7 +70,8 @@ People
    lessons/21/hierarchical_implementation.ipynb
    lesson_exercises/exercise_07.ipynb
    lessons/22/sbc.ipynb
-
+   lessons/23/sbc_in_practice.ipynb
+   lesson_exercises/exercise_08.ipynb
 
 .. toctree::
    :maxdepth: 1
@@ -80,6 +81,7 @@ People
    recitations/02/probability_review.rst
    recitations/03/choosing_priors.ipynb
    recitations/04/index
+   recitations/05/index
 
 ..
    recitations/02/git_and_github_tips.ipynb

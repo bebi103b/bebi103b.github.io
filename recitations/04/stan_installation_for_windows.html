@@ -42,7 +42,7 @@
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Homework 0.1: Configure your team (5 pts)" href="../../homework/00/hw0.1.html" />
+    <link rel="next" title="R5. A Bayesian modeling case study: Ant traffic jams" href="../05/index.html" />
     <link rel="prev" title="R4. Stan installation and use of AWS" href="index.html" /> 
 </head>
 
@@ -120,6 +120,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/21/hierarchical_implementation.html">21. Implementation of hierarchical models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_07.html">E7. To be completed after lesson 21</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/22/sbc.html">22. Principled analysis pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/23/sbc_in_practice.html">23: Simulation based calibration and related checks in practice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_08.html">E8. To be completed after lesson 23</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Recitations</span></p>
 <ul class="current">
@@ -135,6 +137,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../05/index.html">R5. A Bayesian modeling case study: Ant traffic jams</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Homework</span></p>
 <ul>
@@ -545,62 +548,62 @@ redo the setup from <a class="reference external" href="https://bebi103a.github.
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span></span>import numpy as np
 
-<span class="kn">import</span> <span class="nn">cmdstanpy</span>
-<span class="kn">import</span> <span class="nn">arviz</span> <span class="k">as</span> <span class="nn">az</span>
+import cmdstanpy
+import arviz as az
 
-<span class="kn">import</span> <span class="nn">bokeh.plotting</span>
-<span class="kn">import</span> <span class="nn">bokeh.io</span>
-<span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">output_notebook</span><span class="p">()</span>
+import bokeh.plotting
+import bokeh.io
+bokeh.io.output_notebook()
 
-<span class="n">schools_data</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;J&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
-    <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">28</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">12</span><span class="p">],</span>
-    <span class="s2">&quot;sigma&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">18</span><span class="p">],</span>
-<span class="p">}</span>
+schools_data = {
+    &quot;J&quot;: 8,
+    &quot;y&quot;: [28, 8, -3, 7, -1, 1, 18, 12],
+    &quot;sigma&quot;: [15, 10, 16, 11, 9, 11, 10, 18],
+}
 
-<span class="n">schools_code</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">data {</span>
-<span class="s2">  int&lt;lower=0&gt; J; // number of schools</span>
-<span class="s2">  vector[J] y; // estimated treatment effects</span>
-<span class="s2">  vector&lt;lower=0&gt;[J] sigma; // s.e. of effect estimates</span>
-<span class="s2">}</span>
+schools_code = &quot;&quot;&quot;
+data {
+  int&lt;lower=0&gt; J; // number of schools
+  vector[J] y; // estimated treatment effects
+  vector&lt;lower=0&gt;[J] sigma; // s.e. of effect estimates
+}
 
-<span class="s2">parameters {</span>
-<span class="s2">  real mu;</span>
-<span class="s2">  real&lt;lower=0&gt; tau;</span>
-<span class="s2">  vector[J] eta;</span>
-<span class="s2">}</span>
+parameters {
+  real mu;
+  real&lt;lower=0&gt; tau;
+  vector[J] eta;
+}
 
-<span class="s2">transformed parameters {</span>
-<span class="s2">  vector[J] theta = mu + tau * eta;</span>
-<span class="s2">}</span>
+transformed parameters {
+  vector[J] theta = mu + tau * eta;
+}
 
-<span class="s2">model {</span>
-<span class="s2">  eta ~ normal(0, 1);</span>
-<span class="s2">  y ~ normal(theta, sigma);</span>
-<span class="s2">}</span>
-<span class="s2">&quot;&quot;&quot;</span>
+model {
+  eta ~ normal(0, 1);
+  y ~ normal(theta, sigma);
+}
+&quot;&quot;&quot;
 
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;schools_code.stan&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">schools_code</span><span class="p">)</span>
+with open(&quot;schools_code.stan&quot;, &quot;w&quot;) as f:
+    f.write(schools_code)
 
-<span class="n">sm</span> <span class="o">=</span> <span class="n">cmdstanpy</span><span class="o">.</span><span class="n">CmdStanModel</span><span class="p">(</span><span class="n">stan_file</span><span class="o">=</span><span class="s2">&quot;schools_code.stan&quot;</span><span class="p">)</span>
-<span class="n">samples</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">schools_data</span><span class="p">,</span> <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;./&quot;</span><span class="p">)</span>
-<span class="n">samples</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">from_cmdstanpy</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
+sm = cmdstanpy.CmdStanModel(stan_file=&quot;schools_code.stan&quot;)
+samples = sm.sample(data=schools_data, output_dir=&quot;./&quot;)
+samples = az.from_cmdstanpy(samples)
 
-<span class="c1"># Make a plot of samples</span>
-<span class="n">p</span> <span class="o">=</span> <span class="n">bokeh</span><span class="o">.</span><span class="n">plotting</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span>
-    <span class="n">frame_height</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="n">frame_width</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="n">x_axis_label</span><span class="o">=</span><span class="s2">&quot;μ&quot;</span><span class="p">,</span> <span class="n">y_axis_label</span><span class="o">=</span><span class="s2">&quot;τ&quot;</span>
-<span class="p">)</span>
-<span class="n">p</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span>
-    <span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">samples</span><span class="o">.</span><span class="n">posterior</span><span class="p">[</span><span class="s2">&quot;mu&quot;</span><span class="p">]),</span>
-    <span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">samples</span><span class="o">.</span><span class="n">posterior</span><span class="p">[</span><span class="s2">&quot;tau&quot;</span><span class="p">]),</span>
-    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span>
-<span class="p">)</span>
+# Make a plot of samples
+p = bokeh.plotting.figure(
+    frame_height=250, frame_width=250, x_axis_label=&quot;μ&quot;, y_axis_label=&quot;τ&quot;
+)
+p.circle(
+    np.ravel(samples.posterior[&quot;mu&quot;]),
+    np.ravel(samples.posterior[&quot;tau&quot;]),
+    alpha=0.1
+)
 
-<span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+bokeh.io.show(p)
 </pre></div>
 </div>
 </div>
@@ -982,8 +985,8 @@ var element = document.currentScript.previousSibling.previousSibling;
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%</span><span class="k">load_ext</span> watermark
-<span class="o">%</span><span class="k">watermark</span> -v -p numpy,bokeh,cmdstanpy,arviz,jupyterlab
+<span></span>%load_ext watermark
+%watermark -v -p numpy,bokeh,cmdstanpy,arviz,jupyterlab
 </pre></div>
 </div>
 </div>
@@ -1013,7 +1016,7 @@ jupyterlab 2.2.6
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../homework/00/hw0.1.html" class="btn btn-neutral float-right" title="Homework 0.1: Configure your team (5 pts)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../05/index.html" class="btn btn-neutral float-right" title="R5. A Bayesian modeling case study: Ant traffic jams" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="index.html" class="btn btn-neutral float-left" title="R4. Stan installation and use of AWS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -1026,11 +1029,11 @@ jupyterlab 2.2.6
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Feb 02, 2021.
+        Last updated on Feb 03, 2021.
       </span>
 
     </p>
-  </div> <jinja2.runtime.BlockReference object at 0x7fc98f0dfe20> 
+  </div> <jinja2.runtime.BlockReference object at 0x7fa65e120bb0> 
 
 <p>© 2021 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

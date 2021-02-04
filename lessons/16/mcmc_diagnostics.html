@@ -140,6 +140,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../21/hierarchical_implementation.html">21. Implementation of hierarchical models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_07.html">E7. To be completed after lesson 21</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../22/sbc.html">22. Principled analysis pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../23/sbc_in_practice.html">23: Simulation based calibration and related checks in practice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_08.html">E8. To be completed after lesson 23</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Recitations</span></p>
 <ul>
@@ -147,6 +149,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/02/probability_review.html">R2: Review of probability</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/03/choosing_priors.html">R3. Choosing priors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/04/index.html">R4. Stan installation and use of AWS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../recitations/05/index.html">R5. A Bayesian modeling case study: Ant traffic jams</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Homework</span></p>
 <ul>
@@ -512,30 +515,30 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Colab setup ------------------</span>
-<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">subprocess</span>
-<span class="k">if</span> <span class="s2">&quot;google.colab&quot;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
-    <span class="n">cmd</span> <span class="o">=</span> <span class="s2">&quot;pip install --upgrade colorcet bebi103 arviz cmdstanpy watermark&quot;</span>
-    <span class="n">process</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="n">cmd</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span>
-    <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">process</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span>
-    <span class="kn">import</span> <span class="nn">cmdstanpy</span><span class="p">;</span> <span class="n">cmdstanpy</span><span class="o">.</span><span class="n">install_cmdstan</span><span class="p">()</span>
-    <span class="n">data_path</span> <span class="o">=</span> <span class="s2">&quot;https://s3.amazonaws.com/bebi103.caltech.edu/data/&quot;</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="n">data_path</span> <span class="o">=</span> <span class="s2">&quot;../data/&quot;</span>
-<span class="c1"># ------------------------------</span>
+<span></span># Colab setup ------------------
+import os, sys, subprocess
+if &quot;google.colab&quot; in sys.modules:
+    cmd = &quot;pip install --upgrade colorcet bebi103 arviz cmdstanpy watermark&quot;
+    process = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    stdout, stderr = process.communicate()
+    import cmdstanpy; cmdstanpy.install_cmdstan()
+    data_path = &quot;https://s3.amazonaws.com/bebi103.caltech.edu/data/&quot;
+else:
+    data_path = &quot;../data/&quot;
+# ------------------------------
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+import numpy as np
+import pandas as pd
 
-<span class="kn">import</span> <span class="nn">cmdstanpy</span>
-<span class="kn">import</span> <span class="nn">arviz</span> <span class="k">as</span> <span class="nn">az</span>
+import cmdstanpy
+import arviz as az
 
-<span class="kn">import</span> <span class="nn">bebi103</span>
-<span class="kn">import</span> <span class="nn">iqplot</span>
+import bebi103
+import iqplot
 
-<span class="kn">import</span> <span class="nn">bokeh.io</span>
-<span class="kn">import</span> <span class="nn">bokeh.plotting</span>
-<span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">output_notebook</span><span class="p">()</span>
+import bokeh.io
+import bokeh.plotting
+bokeh.io.output_notebook()
 </pre></div>
 </div>
 </div>
@@ -2349,10 +2352,10 @@ data set.</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;singer_transcript_counts.csv&#39;</span><span class="p">),</span> <span class="n">comment</span><span class="o">=</span><span class="s1">&#39;#&#39;</span><span class="p">)</span>
-<span class="n">n</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Rest&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span></span>df = pd.read_csv(os.path.join(data_path, &#39;singer_transcript_counts.csv&#39;), comment=&#39;#&#39;)
+n = df[&#39;Rest&#39;].values
 
-<span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">iqplot</span><span class="o">.</span><span class="n">ecdf</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">q</span><span class="o">=</span><span class="s1">&#39;transcript count&#39;</span><span class="p">))</span>
+bokeh.io.show(iqplot.ecdf(n, q=&#39;transcript count&#39;))
 </pre></div>
 </div>
 </div>
@@ -2442,7 +2445,7 @@ var element = document.currentScript.previousSibling.previousSibling;
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">sm</span> <span class="o">=</span> <span class="n">cmdstanpy</span><span class="o">.</span><span class="n">CmdStanModel</span><span class="p">(</span><span class="n">stan_file</span><span class="o">=</span><span class="s1">&#39;smfish.stan&#39;</span><span class="p">)</span>
+<span></span>sm = cmdstanpy.CmdStanModel(stan_file=&#39;smfish.stan&#39;)
 </pre></div>
 </div>
 </div>
@@ -2462,9 +2465,9 @@ INFO:cmdstanpy:compiled model file: /Users/bois/Dropbox/git/bebi103_course/2021/
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">with</span> <span class="n">bebi103</span><span class="o">.</span><span class="n">stan</span><span class="o">.</span><span class="n">disable_logging</span><span class="p">():</span>
-    <span class="n">samples</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">),</span> <span class="n">seed</span><span class="o">=</span><span class="mi">3252</span><span class="p">)</span>
-<span class="n">samples</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">from_cmdstanpy</span><span class="p">(</span><span class="n">posterior</span><span class="o">=</span><span class="n">samples</span><span class="p">)</span>
+<span></span>with bebi103.stan.disable_logging():
+    samples = sm.sample(data=dict(N=len(n), n=n), seed=3252)
+samples = az.from_cmdstanpy(posterior=samples)
 </pre></div>
 </div>
 </div>
@@ -2487,7 +2490,7 @@ al. paper.</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">az</span><span class="o">.</span><span class="n">rhat</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
+<span></span>az.rhat(samples)
 </pre></div>
 </div>
 </div>
@@ -2863,7 +2866,7 @@ Data variables:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">az</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
+<span></span>az.summary(samples)
 </pre></div>
 </div>
 </div>
@@ -2985,13 +2988,13 @@ Data variables:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">with</span> <span class="n">bebi103</span><span class="o">.</span><span class="n">stan</span><span class="o">.</span><span class="n">disable_logging</span><span class="p">():</span>
-    <span class="n">samples_limited_warmup</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span>
-        <span class="n">data</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">),</span> <span class="n">iter_warmup</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">iter_sampling</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">3252</span>
-    <span class="p">)</span>
-<span class="n">samples_limited_warmup</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">from_cmdstanpy</span><span class="p">(</span><span class="n">samples_limited_warmup</span><span class="p">)</span>
+<span></span>with bebi103.stan.disable_logging():
+    samples_limited_warmup = sm.sample(
+        data=dict(N=len(n), n=n), iter_warmup=7, iter_sampling=1000, seed=3252
+    )
+samples_limited_warmup = az.from_cmdstanpy(samples_limited_warmup)
 
-<span class="n">az</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">samples_limited_warmup</span><span class="p">)</span>
+az.summary(samples_limited_warmup)
 </pre></div>
 </div>
 </div>
@@ -3113,13 +3116,13 @@ Data variables:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">show</span><span class="p">(</span>
-    <span class="n">bebi103</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">trace</span><span class="p">(</span>
-        <span class="n">samples_limited_warmup</span><span class="p">,</span>
-        <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;alpha&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">],</span>
-        <span class="n">line_kwargs</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">line_width</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span>
-    <span class="p">)</span>
-<span class="p">)</span>
+<span></span>bokeh.io.show(
+    bebi103.viz.trace(
+        samples_limited_warmup,
+        parameters=[&quot;alpha&quot;, &quot;b&quot;],
+        line_kwargs=dict(line_width=2),
+    )
+)
 </pre></div>
 </div>
 </div>
@@ -3176,7 +3179,7 @@ var element = document.currentScript.previousSibling.previousSibling;
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">az</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
+<span></span>az.summary(samples)
 </pre></div>
 </div>
 </div>
@@ -3317,7 +3320,7 @@ be detected and are registered as <strong>divergences</strong>. A given Monte Ca
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">samples</span><span class="o">.</span><span class="n">sample_stats</span><span class="o">.</span><span class="n">diverging</span>
+<span></span>samples.sample_stats.diverging
 </pre></div>
 </div>
 </div>
@@ -3695,7 +3698,7 @@ Coordinates:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">samples</span><span class="o">.</span><span class="n">sample_stats</span><span class="o">.</span><span class="n">diverging</span><span class="p">))</span>
+<span></span>int(np.sum(samples.sample_stats.diverging))
 </pre></div>
 </div>
 </div>
@@ -3714,7 +3717,7 @@ Coordinates:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">samples_limited_warmup</span><span class="o">.</span><span class="n">sample_stats</span><span class="o">.</span><span class="n">diverging</span><span class="p">))</span>
+<span></span>int(np.sum(samples_limited_warmup.sample_stats.diverging))
 </pre></div>
 </div>
 </div>
@@ -3740,7 +3743,7 @@ wrong, but less efficient. Stan therefore reports the tree depth information for
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">samples</span><span class="o">.</span><span class="n">sample_stats</span><span class="o">.</span><span class="n">treedepth</span>
+<span></span>samples.sample_stats.treedepth
 </pre></div>
 </div>
 </div>
@@ -4118,7 +4121,7 @@ Coordinates:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">samples</span><span class="o">.</span><span class="n">sample_stats</span><span class="o">.</span><span class="n">treedepth</span> <span class="o">==</span> <span class="mi">10</span><span class="p">))</span>
+<span></span>int(np.sum(samples.sample_stats.treedepth == 10))
 </pre></div>
 </div>
 </div>
@@ -4142,7 +4145,7 @@ Coordinates:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">samples</span><span class="o">.</span><span class="n">sample_stats</span><span class="o">.</span><span class="n">energy</span>
+<span></span>samples.sample_stats.energy
 </pre></div>
 </div>
 </div>
@@ -4520,7 +4523,7 @@ Coordinates:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">samples</span><span class="o">.</span><span class="n">sample_stats</span><span class="o">.</span><span class="n">energy</span> <span class="o">&lt;</span> <span class="mf">0.3</span><span class="p">))</span>
+<span></span>int(np.sum(samples.sample_stats.energy &lt; 0.3))
 </pre></div>
 </div>
 </div>
@@ -4544,7 +4547,7 @@ Coordinates:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">bebi103</span><span class="o">.</span><span class="n">stan</span><span class="o">.</span><span class="n">check_all_diagnostics</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
+<span></span>bebi103.stan.check_all_diagnostics(samples)
 </pre></div>
 </div>
 </div>
@@ -4579,7 +4582,7 @@ E-BFMI indicated no pathological behavior.
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">bebi103</span><span class="o">.</span><span class="n">stan</span><span class="o">.</span><span class="n">clean_cmdstan</span><span class="p">()</span>
+<span></span>bebi103.stan.clean_cmdstan()
 </pre></div>
 </div>
 </div>
@@ -4591,9 +4594,9 @@ E-BFMI indicated no pathological behavior.
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%</span><span class="k">load_ext</span> watermark
-<span class="o">%</span><span class="k">watermark</span> -v -p numpy,pandas,cmdstanpy,arviz,bokeh,bebi103,jupyterlab
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;cmdstan   :&quot;</span><span class="p">,</span> <span class="n">bebi103</span><span class="o">.</span><span class="n">stan</span><span class="o">.</span><span class="n">cmdstan_version</span><span class="p">())</span>
+<span></span>%load_ext watermark
+%watermark -v -p numpy,pandas,cmdstanpy,arviz,bokeh,bebi103,jupyterlab
+print(&quot;cmdstan   :&quot;, bebi103.stan.cmdstan_version())
 </pre></div>
 </div>
 </div>
@@ -4641,11 +4644,11 @@ cmdstan   : 2.25.0
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Feb 02, 2021.
+        Last updated on Feb 03, 2021.
       </span>
 
     </p>
-  </div> <jinja2.runtime.BlockReference object at 0x7fc98e214700> 
+  </div> <jinja2.runtime.BlockReference object at 0x7fa660fdba00> 
 
 <p>© 2021 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

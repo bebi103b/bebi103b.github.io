@@ -134,6 +134,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../21/hierarchical_implementation.html">21. Implementation of hierarchical models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_07.html">E7. To be completed after lesson 21</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../22/sbc.html">22. Principled analysis pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../23/sbc_in_practice.html">23: Simulation based calibration and related checks in practice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_08.html">E8. To be completed after lesson 23</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Recitations</span></p>
 <ul>
@@ -141,6 +143,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/02/probability_review.html">R2: Review of probability</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/03/choosing_priors.html">R3. Choosing priors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/04/index.html">R4. Stan installation and use of AWS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../recitations/05/index.html">R5. A Bayesian modeling case study: Ant traffic jams</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Homework</span></p>
 <ul>
@@ -508,29 +511,29 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Colab setup ------------------</span>
-<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">subprocess</span>
-<span class="k">if</span> <span class="s2">&quot;google.colab&quot;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
-    <span class="n">cmd</span> <span class="o">=</span> <span class="s2">&quot;pip install --upgrade colorcet bebi103 arviz cmdstanpy watermark&quot;</span>
-    <span class="n">process</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="n">cmd</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span>
-    <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">process</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span>
-    <span class="kn">import</span> <span class="nn">cmdstanpy</span><span class="p">;</span> <span class="n">cmdstanpy</span><span class="o">.</span><span class="n">install_cmdstan</span><span class="p">()</span>
-    <span class="n">data_path</span> <span class="o">=</span> <span class="s2">&quot;https://s3.amazonaws.com/bebi103.caltech.edu/data/&quot;</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="n">data_path</span> <span class="o">=</span> <span class="s2">&quot;../data/&quot;</span>
-<span class="c1"># ------------------------------</span>
+<span></span># Colab setup ------------------
+import os, sys, subprocess
+if &quot;google.colab&quot; in sys.modules:
+    cmd = &quot;pip install --upgrade colorcet bebi103 arviz cmdstanpy watermark&quot;
+    process = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    stdout, stderr = process.communicate()
+    import cmdstanpy; cmdstanpy.install_cmdstan()
+    data_path = &quot;https://s3.amazonaws.com/bebi103.caltech.edu/data/&quot;
+else:
+    data_path = &quot;../data/&quot;
+# ------------------------------
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+import numpy as np
+import pandas as pd
 
-<span class="kn">import</span> <span class="nn">cmdstanpy</span>
-<span class="kn">import</span> <span class="nn">arviz</span> <span class="k">as</span> <span class="nn">az</span>
+import cmdstanpy
+import arviz as az
 
-<span class="kn">import</span> <span class="nn">bebi103</span>
+import bebi103
 
-<span class="kn">import</span> <span class="nn">bokeh.io</span>
-<span class="kn">import</span> <span class="nn">bokeh.plotting</span>
-<span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">output_notebook</span><span class="p">()</span>
+import bokeh.io
+import bokeh.plotting
+bokeh.io.output_notebook()
 </pre></div>
 </div>
 </div>
@@ -2404,15 +2407,15 @@ probability mass function for the distribution).</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Load data and make data dictionary</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s2">&quot;singer_transcript_counts.csv&quot;</span><span class="p">),</span> <span class="n">comment</span><span class="o">=</span><span class="s2">&quot;#&quot;</span><span class="p">)</span>
-<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;N&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">),</span> <span class="s2">&quot;n&quot;</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Rex1&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)}</span>
+<span></span># Load data and make data dictionary
+df = pd.read_csv(os.path.join(data_path, &quot;singer_transcript_counts.csv&quot;), comment=&quot;#&quot;)
+data = {&quot;N&quot;: len(df), &quot;n&quot;: df[&quot;Rex1&quot;].values.astype(int)}
 
-<span class="c1"># Compile the model</span>
-<span class="n">sm</span> <span class="o">=</span> <span class="n">cmdstanpy</span><span class="o">.</span><span class="n">CmdStanModel</span><span class="p">(</span><span class="n">stan_file</span><span class="o">=</span><span class="s2">&quot;neg_binom.stan&quot;</span><span class="p">)</span>
+# Compile the model
+sm = cmdstanpy.CmdStanModel(stan_file=&quot;neg_binom.stan&quot;)
 
-<span class="c1"># Perform sampling</span>
-<span class="n">samples</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+# Perform sampling
+samples = sm.sample(data=data)
 </pre></div>
 </div>
 </div>
@@ -2440,10 +2443,10 @@ INFO:cmdstanpy:finish chain 3
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Convert to ArviZ object</span>
-<span class="n">samples</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">from_cmdstanpy</span><span class="p">(</span>
-    <span class="n">posterior</span><span class="o">=</span><span class="n">samples</span><span class="p">,</span> <span class="n">posterior_predictive</span><span class="o">=</span><span class="s2">&quot;n_ppc&quot;</span><span class="p">,</span> <span class="n">log_likelihood</span><span class="o">=</span><span class="s2">&quot;log_lik&quot;</span>
-<span class="p">)</span>
+<span></span># Convert to ArviZ object
+samples = az.from_cmdstanpy(
+    posterior=samples, posterior_predictive=&quot;n_ppc&quot;, log_likelihood=&quot;log_lik&quot;
+)
 </pre></div>
 </div>
 </div>
@@ -2453,11 +2456,11 @@ INFO:cmdstanpy:finish chain 3
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Check diagnostics</span>
-<span class="n">bebi103</span><span class="o">.</span><span class="n">stan</span><span class="o">.</span><span class="n">check_all_diagnostics</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
+<span></span># Check diagnostics
+bebi103.stan.check_all_diagnostics(samples)
 
-<span class="c1"># Make a corner plot</span>
-<span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">bebi103</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;alpha&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">]))</span>
+# Make a corner plot
+bokeh.io.show(bebi103.viz.corner(samples, parameters=[&#39;alpha&#39;, &#39;b&#39;]))
 </pre></div>
 </div>
 </div>
@@ -2524,18 +2527,18 @@ var element = document.currentScript.previousSibling.previousSibling;
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">n_ppc</span> <span class="o">=</span> <span class="n">samples</span><span class="o">.</span><span class="n">posterior_predictive</span><span class="o">.</span><span class="n">n_ppc</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span>
-    <span class="p">{</span><span class="s2">&quot;sample&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;chain&quot;</span><span class="p">,</span> <span class="s2">&quot;draw&quot;</span><span class="p">)}</span>
-<span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="s2">&quot;sample&quot;</span><span class="p">,</span> <span class="s2">&quot;n_ppc_dim_0&quot;</span><span class="p">)</span>
+<span></span>n_ppc = samples.posterior_predictive.n_ppc.stack(
+    {&quot;sample&quot;: (&quot;chain&quot;, &quot;draw&quot;)}
+).transpose(&quot;sample&quot;, &quot;n_ppc_dim_0&quot;)
 
-<span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">show</span><span class="p">(</span>
-    <span class="n">bebi103</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">predictive_ecdf</span><span class="p">(</span>
-        <span class="n">n_ppc</span><span class="p">,</span>
-        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;n_ppc&quot;</span><span class="p">,</span>
-        <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Rex1&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
-        <span class="n">x_axis_label</span><span class="o">=</span><span class="s2">&quot;mRNA copy number&quot;</span><span class="p">,</span>
-    <span class="p">)</span>
-<span class="p">)</span>
+bokeh.io.show(
+    bebi103.viz.predictive_ecdf(
+        n_ppc,
+        name=&quot;n_ppc&quot;,
+        data=df[&quot;Rex1&quot;].values,
+        x_axis_label=&quot;mRNA copy number&quot;,
+    )
+)
 </pre></div>
 </div>
 </div>
@@ -2586,7 +2589,7 @@ var element = document.currentScript.previousSibling.previousSibling;
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">samples</span><span class="o">.</span><span class="n">log_likelihood</span>
+<span></span>samples.log_likelihood
 </pre></div>
 </div>
 </div>
@@ -3011,7 +3014,7 @@ Attributes:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">az</span><span class="o">.</span><span class="n">waic</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="s2">&quot;deviance&quot;</span><span class="p">)</span>
+<span></span>az.waic(samples, scale=&quot;deviance&quot;)
 </pre></div>
 </div>
 </div>
@@ -3035,9 +3038,9 @@ p_waic            2.06        -
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">single_loo</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">loo</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="s2">&quot;deviance&quot;</span><span class="p">)</span>
+<span></span>single_loo = az.loo(samples, scale=&quot;deviance&quot;)
 
-<span class="n">single_loo</span>
+single_loo
 </pre></div>
 </div>
 </div>
@@ -3124,12 +3127,12 @@ p_loo            2.06        -
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">sm_mix</span> <span class="o">=</span> <span class="n">cmdstanpy</span><span class="o">.</span><span class="n">CmdStanModel</span><span class="p">(</span><span class="n">stan_file</span><span class="o">=</span><span class="s2">&quot;neg_binom_mix.stan&quot;</span><span class="p">)</span>
+<span></span>sm_mix = cmdstanpy.CmdStanModel(stan_file=&quot;neg_binom_mix.stan&quot;)
 
-<span class="n">samples_mix</span> <span class="o">=</span> <span class="n">sm_mix</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">3252</span><span class="p">)</span>
-<span class="n">samples_mix</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">from_cmdstanpy</span><span class="p">(</span>
-    <span class="n">posterior</span><span class="o">=</span><span class="n">samples_mix</span><span class="p">,</span> <span class="n">posterior_predictive</span><span class="o">=</span><span class="s2">&quot;n_ppc&quot;</span><span class="p">,</span> <span class="n">log_likelihood</span><span class="o">=</span><span class="s2">&quot;log_lik&quot;</span>
-<span class="p">)</span>
+samples_mix = sm_mix.sample(data=data, seed=3252)
+samples_mix = az.from_cmdstanpy(
+    posterior=samples_mix, posterior_predictive=&quot;n_ppc&quot;, log_likelihood=&quot;log_lik&quot;
+)
 </pre></div>
 </div>
 </div>
@@ -3157,17 +3160,17 @@ INFO:cmdstanpy:finish chain 4
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Check diagnostics</span>
-<span class="n">bebi103</span><span class="o">.</span><span class="n">stan</span><span class="o">.</span><span class="n">check_all_diagnostics</span><span class="p">(</span><span class="n">samples_mix</span><span class="p">)</span>
+<span></span># Check diagnostics
+bebi103.stan.check_all_diagnostics(samples_mix)
 
-<span class="c1"># Make corner plot</span>
-<span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">show</span><span class="p">(</span>
-    <span class="n">bebi103</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span>
-        <span class="n">samples_mix</span><span class="p">,</span>
-        <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;alpha[0]&quot;</span><span class="p">,</span> <span class="s2">&quot;alpha[1]&quot;</span><span class="p">,</span> <span class="s2">&quot;b[0]&quot;</span><span class="p">,</span> <span class="s2">&quot;b[1]&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">],</span>
-        <span class="n">xtick_label_orientation</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">4</span><span class="p">,</span>
-    <span class="p">)</span>
-<span class="p">)</span>
+# Make corner plot
+bokeh.io.show(
+    bebi103.viz.corner(
+        samples_mix,
+        parameters=[&quot;alpha[0]&quot;, &quot;alpha[1]&quot;, &quot;b[0]&quot;, &quot;b[1]&quot;, &quot;w&quot;],
+        xtick_label_orientation=np.pi / 4,
+    )
+)
 </pre></div>
 </div>
 </div>
@@ -3256,21 +3259,21 @@ var element = document.currentScript.previousSibling.previousSibling;
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Compute mean of parameters for chain 1</span>
-<span class="n">inits</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;alpha&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="nb">float</span><span class="p">(</span><span class="n">samples_mix</span><span class="o">.</span><span class="n">posterior</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">chain</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alpha_dim_0</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">alpha</span><span class="o">.</span><span class="n">mean</span><span class="p">()),</span>
-        <span class="nb">float</span><span class="p">(</span><span class="n">samples_mix</span><span class="o">.</span><span class="n">posterior</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">chain</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alpha_dim_0</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">alpha</span><span class="o">.</span><span class="n">mean</span><span class="p">()),</span>
-    <span class="p">],</span>
-    <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="nb">float</span><span class="p">(</span><span class="n">samples_mix</span><span class="o">.</span><span class="n">posterior</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">chain</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">b_dim_0</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">mean</span><span class="p">()),</span>
-        <span class="nb">float</span><span class="p">(</span><span class="n">samples_mix</span><span class="o">.</span><span class="n">posterior</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">chain</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">b_dim_0</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">mean</span><span class="p">()),</span>
-    <span class="p">],</span>
-    <span class="s2">&quot;w&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">samples_mix</span><span class="o">.</span><span class="n">posterior</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">chain</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">w</span><span class="o">.</span><span class="n">mean</span><span class="p">()),</span>
-<span class="p">}</span>
+<span></span># Compute mean of parameters for chain 1
+inits = {
+    &quot;alpha&quot;: [
+        float(samples_mix.posterior.sel(chain=1, alpha_dim_0=0).alpha.mean()),
+        float(samples_mix.posterior.sel(chain=1, alpha_dim_0=1).alpha.mean()),
+    ],
+    &quot;b&quot;: [
+        float(samples_mix.posterior.sel(chain=1, b_dim_0=0).b.mean()),
+        float(samples_mix.posterior.sel(chain=1, b_dim_0=0).b.mean()),
+    ],
+    &quot;w&quot;: float(samples_mix.posterior.sel(chain=1).w.mean()),
+}
 
-<span class="c1"># Take a look</span>
-<span class="n">inits</span>
+# Take a look
+inits
 </pre></div>
 </div>
 </div>
@@ -3291,25 +3294,25 @@ var element = document.currentScript.previousSibling.previousSibling;
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Sample</span>
-<span class="n">samples_mix</span> <span class="o">=</span> <span class="n">sm_mix</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">inits</span><span class="o">=</span><span class="n">inits</span><span class="p">)</span>
+<span></span># Sample
+samples_mix = sm_mix.sample(data, inits=inits)
 
-<span class="c1"># Convert to ArviZ</span>
-<span class="n">samples_mix</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">from_cmdstanpy</span><span class="p">(</span>
-    <span class="n">posterior</span><span class="o">=</span><span class="n">samples_mix</span><span class="p">,</span> <span class="n">posterior_predictive</span><span class="o">=</span><span class="s2">&quot;n_ppc&quot;</span><span class="p">,</span> <span class="n">log_likelihood</span><span class="o">=</span><span class="s2">&quot;log_lik&quot;</span>
-<span class="p">)</span>
+# Convert to ArviZ
+samples_mix = az.from_cmdstanpy(
+    posterior=samples_mix, posterior_predictive=&quot;n_ppc&quot;, log_likelihood=&quot;log_lik&quot;
+)
 
-<span class="c1"># Check diagnostics</span>
-<span class="n">bebi103</span><span class="o">.</span><span class="n">stan</span><span class="o">.</span><span class="n">check_all_diagnostics</span><span class="p">(</span><span class="n">samples_mix</span><span class="p">)</span>
+# Check diagnostics
+bebi103.stan.check_all_diagnostics(samples_mix)
 
-<span class="c1"># Make corner plot</span>
-<span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">show</span><span class="p">(</span>
-    <span class="n">bebi103</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span>
-        <span class="n">samples_mix</span><span class="p">,</span>
-        <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;alpha[0]&quot;</span><span class="p">,</span> <span class="s2">&quot;alpha[1]&quot;</span><span class="p">,</span> <span class="s2">&quot;b[0]&quot;</span><span class="p">,</span> <span class="s2">&quot;b[1]&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">],</span>
-        <span class="n">xtick_label_orientation</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">4</span><span class="p">,</span>
-    <span class="p">)</span>
-<span class="p">)</span>
+# Make corner plot
+bokeh.io.show(
+    bebi103.viz.corner(
+        samples_mix,
+        parameters=[&quot;alpha[0]&quot;, &quot;alpha[1]&quot;, &quot;b[0]&quot;, &quot;b[1]&quot;, &quot;w&quot;],
+        xtick_label_orientation=np.pi / 4,
+    )
+)
 </pre></div>
 </div>
 </div>
@@ -3391,18 +3394,18 @@ var element = document.currentScript.previousSibling.previousSibling;
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">n_ppc</span> <span class="o">=</span> <span class="n">samples_mix</span><span class="o">.</span><span class="n">posterior_predictive</span><span class="o">.</span><span class="n">n_ppc</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span>
-    <span class="p">{</span><span class="s2">&quot;sample&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;chain&quot;</span><span class="p">,</span> <span class="s2">&quot;draw&quot;</span><span class="p">)}</span>
-<span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="s2">&quot;sample&quot;</span><span class="p">,</span> <span class="s2">&quot;n_ppc_dim_0&quot;</span><span class="p">)</span>
+<span></span>n_ppc = samples_mix.posterior_predictive.n_ppc.stack(
+    {&quot;sample&quot;: (&quot;chain&quot;, &quot;draw&quot;)}
+).transpose(&quot;sample&quot;, &quot;n_ppc_dim_0&quot;)
 
-<span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">show</span><span class="p">(</span>
-    <span class="n">bebi103</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">predictive_ecdf</span><span class="p">(</span>
-        <span class="n">n_ppc</span><span class="p">,</span>
-        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;n_ppc&quot;</span><span class="p">,</span>
-        <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Rex1&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
-        <span class="n">x_axis_label</span><span class="o">=</span><span class="s2">&quot;mRNA copy number&quot;</span><span class="p">,</span>
-    <span class="p">)</span>
-<span class="p">)</span>
+bokeh.io.show(
+    bebi103.viz.predictive_ecdf(
+        n_ppc,
+        name=&quot;n_ppc&quot;,
+        data=df[&quot;Rex1&quot;].values,
+        x_axis_label=&quot;mRNA copy number&quot;,
+    )
+)
 </pre></div>
 </div>
 </div>
@@ -3453,7 +3456,7 @@ var element = document.currentScript.previousSibling.previousSibling;
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">az</span><span class="o">.</span><span class="n">waic</span><span class="p">(</span><span class="n">samples_mix</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="s2">&quot;deviance&quot;</span><span class="p">)</span>
+<span></span>az.waic(samples_mix, scale=&quot;deviance&quot;)
 </pre></div>
 </div>
 </div>
@@ -3476,9 +3479,9 @@ p_waic            5.65        -
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">mix_loo</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">loo</span><span class="p">(</span><span class="n">samples_mix</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="s2">&quot;deviance&quot;</span><span class="p">)</span>
+<span></span>mix_loo = az.loo(samples_mix, scale=&quot;deviance&quot;)
 
-<span class="n">mix_loo</span>
+mix_loo
 </pre></div>
 </div>
 </div>
@@ -3501,7 +3504,7 @@ p_loo            5.65        -
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">mix_loo</span><span class="o">.</span><span class="n">loo</span> <span class="o">-</span> <span class="n">single_loo</span><span class="o">.</span><span class="n">loo</span>
+<span></span>mix_loo.loo - single_loo.loo
 </pre></div>
 </div>
 </div>
@@ -3532,12 +3535,12 @@ w_i = \frac{\exp\left[-(\text{LOO}_i-\text{LOO}_j)/2\right]}{1 + \exp\left[-(\te
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">d_loo</span> <span class="o">=</span> <span class="n">mix_loo</span><span class="o">.</span><span class="n">loo</span> <span class="o">-</span> <span class="n">single_loo</span><span class="o">.</span><span class="n">loo</span>
-<span class="n">w_single</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">d_loo</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">d_loo</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
-<span class="n">w_mix</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">w_single</span>
+<span></span>d_loo = mix_loo.loo - single_loo.loo
+w_single = np.exp(d_loo/2) / (1 + np.exp(d_loo/2))
+w_mix = 1 - w_single
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;           Mixture model weight:&#39;</span><span class="p">,</span> <span class="n">w_mix</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Single Neg. Binom. model weight:&#39;</span><span class="p">,</span> <span class="n">w_single</span><span class="p">)</span>
+print(&#39;           Mixture model weight:&#39;, w_mix)
+print(&#39;Single Neg. Binom. model weight:&#39;, w_single)
 </pre></div>
 </div>
 </div>
@@ -3557,7 +3560,7 @@ Single Neg. Binom. model weight: 3.3119263617346847e-20
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">az</span><span class="o">.</span><span class="n">compare</span><span class="p">({</span><span class="s2">&quot;single&quot;</span><span class="p">:</span> <span class="n">samples</span><span class="p">,</span> <span class="s2">&quot;mix&quot;</span><span class="p">:</span> <span class="n">samples_mix</span><span class="p">},</span> <span class="n">ic</span><span class="o">=</span><span class="s2">&quot;loo&quot;</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="s2">&quot;deviance&quot;</span><span class="p">)</span>
+<span></span>az.compare({&quot;single&quot;: samples, &quot;mix&quot;: samples_mix}, ic=&quot;loo&quot;, scale=&quot;deviance&quot;)
 </pre></div>
 </div>
 </div>
@@ -3639,7 +3642,7 @@ Single Neg. Binom. model weight: 3.3119263617346847e-20
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">bebi103</span><span class="o">.</span><span class="n">stan</span><span class="o">.</span><span class="n">clean_cmdstan</span><span class="p">()</span>
+<span></span>bebi103.stan.clean_cmdstan()
 </pre></div>
 </div>
 </div>
@@ -3652,9 +3655,9 @@ Single Neg. Binom. model weight: 3.3119263617346847e-20
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%</span><span class="k">load_ext</span> watermark
-<span class="o">%</span><span class="k">watermark</span> -v -p numpy,pandas,cmdstanpy,arviz,bokeh,bebi103,jupyterlab
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;cmdstan   :&quot;</span><span class="p">,</span> <span class="n">bebi103</span><span class="o">.</span><span class="n">stan</span><span class="o">.</span><span class="n">cmdstan_version</span><span class="p">())</span>
+<span></span>%load_ext watermark
+%watermark -v -p numpy,pandas,cmdstanpy,arviz,bokeh,bebi103,jupyterlab
+print(&quot;cmdstan   :&quot;, bebi103.stan.cmdstan_version())
 </pre></div>
 </div>
 </div>
@@ -3702,11 +3705,11 @@ cmdstan   : 2.25.0
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Feb 02, 2021.
+        Last updated on Feb 03, 2021.
       </span>
 
     </p>
-  </div> <jinja2.runtime.BlockReference object at 0x7fc98b7874f0> 
+  </div> <jinja2.runtime.BlockReference object at 0x7fa665b72ca0> 
 
 <p>© 2021 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

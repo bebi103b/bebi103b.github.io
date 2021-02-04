@@ -120,6 +120,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/21/hierarchical_implementation.html">21. Implementation of hierarchical models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_07.html">E7. To be completed after lesson 21</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/22/sbc.html">22. Principled analysis pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/23/sbc_in_practice.html">23: Simulation based calibration and related checks in practice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_08.html">E8. To be completed after lesson 23</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Recitations</span></p>
 <ul>
@@ -127,6 +129,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/02/probability_review.html">R2: Review of probability</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/03/choosing_priors.html">R3. Choosing priors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/04/index.html">R4. Stan installation and use of AWS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../recitations/05/index.html">R5. A Bayesian modeling case study: Ant traffic jams</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Homework</span></p>
 <ul class="current">
@@ -497,8 +500,8 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">numba</span>
+<span></span>import numpy as np
+import numba
 </pre></div>
 </div>
 </div>
@@ -512,30 +515,30 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">def</span> <span class="nf">mh_step</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">logtarget</span><span class="p">,</span> <span class="n">logtarget_current</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">()):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    x : ndarray, shape (n_variables,)</span>
-<span class="sd">        The present location of the walker in parameter space.</span>
-<span class="sd">    logtarget : function</span>
-<span class="sd">        The function to compute the log posterior. It has call</span>
-<span class="sd">        signature `logtarget(x, *args)`.</span>
-<span class="sd">    logtarget_current : float</span>
-<span class="sd">        The current value of the log posterior.</span>
-<span class="sd">    sigma : ndarray, shape (n_variables, )</span>
-<span class="sd">        The standard deviations for the proposal distribution.</span>
-<span class="sd">    args : tuple</span>
-<span class="sd">        Additional arguments passed to `logtarget()` function.</span>
+<span></span>def mh_step(x, logtarget, logtarget_current, sigma, args=()):
+    &quot;&quot;&quot;
+    Parameters
+    ----------
+    x : ndarray, shape (n_variables,)
+        The present location of the walker in parameter space.
+    logtarget : function
+        The function to compute the log posterior. It has call
+        signature `logtarget(x, *args)`.
+    logtarget_current : float
+        The current value of the log posterior.
+    sigma : ndarray, shape (n_variables, )
+        The standard deviations for the proposal distribution.
+    args : tuple
+        Additional arguments passed to `logtarget()` function.
 
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    output : ndarray, shape (n_variables,)</span>
-<span class="sd">        The position of the walker after the Metropolis-Hastings</span>
-<span class="sd">        step. If no step is taken, returns the inputted `x`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    Returns
+    -------
+    output : ndarray, shape (n_variables,)
+        The position of the walker after the Metropolis-Hastings
+        step. If no step is taken, returns the inputted `x`.
+    &quot;&quot;&quot;
 
-    <span class="k">pass</span>
+    pass
 </pre></div>
 </div>
 </div>
@@ -547,38 +550,38 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">def</span> <span class="nf">mh_sample</span><span class="p">(</span>
-    <span class="n">logtarget</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(),</span> <span class="n">n_burn</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">n_steps</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">variable_names</span><span class="o">=</span><span class="kc">None</span>
-<span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    logtarget : function</span>
-<span class="sd">        The function to compute the log posterior. It has call</span>
-<span class="sd">        signature `logtarget(x, *args)`.</span>
-<span class="sd">    x0 : ndarray, shape (n_variables,)</span>
-<span class="sd">        The starting location of a walker in parameter space.</span>
-<span class="sd">    sigma : ndarray, shape (n_variables, )</span>
-<span class="sd">        The standard deviations for the proposal distribution.</span>
-<span class="sd">    args : tuple</span>
-<span class="sd">        Additional arguments passed to `logtarget()` function.</span>
-<span class="sd">    n_burn : int, default 1000</span>
-<span class="sd">        Number of burn-in steps.</span>
-<span class="sd">    n_steps : int, default 1000</span>
-<span class="sd">        Number of steps to take after burn-in.</span>
-<span class="sd">    variable_names : list, length n_variables</span>
-<span class="sd">        List of names of variables. If None, then variable names</span>
-<span class="sd">        are sequential integers.</span>
+<span></span>def mh_sample(
+    logtarget, x0, sigma, args=(), n_burn=1000, n_steps=1000, variable_names=None
+):
+    &quot;&quot;&quot;
+    Parameters
+    ----------
+    logtarget : function
+        The function to compute the log posterior. It has call
+        signature `logtarget(x, *args)`.
+    x0 : ndarray, shape (n_variables,)
+        The starting location of a walker in parameter space.
+    sigma : ndarray, shape (n_variables, )
+        The standard deviations for the proposal distribution.
+    args : tuple
+        Additional arguments passed to `logtarget()` function.
+    n_burn : int, default 1000
+        Number of burn-in steps.
+    n_steps : int, default 1000
+        Number of steps to take after burn-in.
+    variable_names : list, length n_variables
+        List of names of variables. If None, then variable names
+        are sequential integers.
 
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    output : DataFrame</span>
-<span class="sd">        The first `n_variables` columns contain the samples.</span>
-<span class="sd">        Additionally, column &#39;lnprob&#39; has the log posterior value</span>
-<span class="sd">        at each sample.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    Returns
+    -------
+    output : DataFrame
+        The first `n_variables` columns contain the samples.
+        Additionally, column &#39;lnprob&#39; has the log posterior value
+        at each sample.
+    &quot;&quot;&quot;
 
-    <span class="k">pass</span>
+    pass
 </pre></div>
 </div>
 </div>
@@ -596,16 +599,16 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">10.0</span><span class="p">,</span> <span class="mi">20</span><span class="p">])</span>
-<span class="n">cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">],[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">]])</span>
-<span class="n">inv_cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">cov</span><span class="p">)</span>
+<span></span>mu = np.array([10.0, 20])
+cov = np.array([[4, -2],[-2, 6]])
+inv_cov = np.linalg.inv(cov)
 
-<span class="nd">@numba</span><span class="o">.</span><span class="n">njit</span>
-<span class="k">def</span> <span class="nf">log_test_distribution</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">inv_cov</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Unnormalized log posterior of a multivariate Gaussian.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">((</span><span class="n">x</span><span class="o">-</span><span class="n">mu</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">inv_cov</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">mu</span><span class="p">)))</span> <span class="o">/</span> <span class="mi">2</span>
+@numba.njit
+def log_test_distribution(x, mu, inv_cov):
+    &quot;&quot;&quot;
+    Unnormalized log posterior of a multivariate Gaussian.
+    &quot;&quot;&quot;
+    return -np.dot((x-mu), np.dot(inv_cov, (x-mu))) / 2
 </pre></div>
 </div>
 </div>
@@ -666,11 +669,11 @@ div.rendered_html tbody tr:hover {
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Feb 02, 2021.
+        Last updated on Feb 03, 2021.
       </span>
 
     </p>
-  </div> <jinja2.runtime.BlockReference object at 0x7fc98bdd4ac0> 
+  </div> <jinja2.runtime.BlockReference object at 0x7fa64dc1c2b0> 
 
 <p>© 2021 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

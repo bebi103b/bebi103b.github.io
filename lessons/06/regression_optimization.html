@@ -134,6 +134,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../21/hierarchical_implementation.html">21. Implementation of hierarchical models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_07.html">E7. To be completed after lesson 21</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../22/sbc.html">22. Principled analysis pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../23/sbc_in_practice.html">23: Simulation based calibration and related checks in practice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_08.html">E8. To be completed after lesson 23</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Recitations</span></p>
 <ul>
@@ -141,6 +143,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/02/probability_review.html">R2: Review of probability</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/03/choosing_priors.html">R3. Choosing priors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/04/index.html">R4. Stan installation and use of AWS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../recitations/05/index.html">R5. A Bayesian modeling case study: Ant traffic jams</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Homework</span></p>
 <ul>
@@ -508,33 +511,33 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Colab setup ------------------</span>
-<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">subprocess</span>
-<span class="k">if</span> <span class="s2">&quot;google.colab&quot;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
-    <span class="n">cmd</span> <span class="o">=</span> <span class="s2">&quot;pip install --upgrade bebi103 watermark&quot;</span>
-    <span class="n">process</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="n">cmd</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span>
-    <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">process</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span>
-    <span class="n">data_path</span> <span class="o">=</span> <span class="s2">&quot;https://s3.amazonaws.com/bebi103.caltech.edu/data/&quot;</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="n">data_path</span> <span class="o">=</span> <span class="s2">&quot;../data/&quot;</span>
-<span class="c1"># ------------------------------</span>
+<span></span># Colab setup ------------------
+import os, sys, subprocess
+if &quot;google.colab&quot; in sys.modules:
+    cmd = &quot;pip install --upgrade bebi103 watermark&quot;
+    process = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    stdout, stderr = process.communicate()
+    data_path = &quot;https://s3.amazonaws.com/bebi103.caltech.edu/data/&quot;
+else:
+    data_path = &quot;../data/&quot;
+# ------------------------------
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">scipy.optimize</span>
-<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">st</span>
-<span class="kn">import</span> <span class="nn">statsmodels.tools.numdiff</span> <span class="k">as</span> <span class="nn">smnd</span>
+import numpy as np
+import pandas as pd
+import scipy.optimize
+import scipy.stats as st
+import statsmodels.tools.numdiff as smnd
 
-<span class="kn">import</span> <span class="nn">tqdm</span>
+import tqdm
 
-<span class="kn">import</span> <span class="nn">bebi103</span>
+import bebi103
 
-<span class="kn">import</span> <span class="nn">holoviews</span> <span class="k">as</span> <span class="nn">hv</span>
-<span class="n">hv</span><span class="o">.</span><span class="n">extension</span><span class="p">(</span><span class="s1">&#39;bokeh&#39;</span><span class="p">)</span>
-<span class="n">bebi103</span><span class="o">.</span><span class="n">hv</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">()</span>
+import holoviews as hv
+hv.extension(&#39;bokeh&#39;)
+bebi103.hv.set_defaults()
 
-<span class="kn">import</span> <span class="nn">bokeh.io</span>
-<span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">output_notebook</span><span class="p">()</span>
+import bokeh.io
+bokeh.io.output_notebook()
 </pre></div>
 </div>
 </div>
@@ -3818,24 +3821,24 @@ var element = document.currentScript.previousSibling.previousSibling;
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Load in Data Frame</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/good_invitro_droplet_data.csv&#39;</span><span class="p">,</span> <span class="n">comment</span><span class="o">=</span><span class="s1">&#39;#&#39;</span><span class="p">)</span>
+<span></span># Load in Data Frame
+df = pd.read_csv(&#39;../data/good_invitro_droplet_data.csv&#39;, comment=&#39;#&#39;)
 
-<span class="c1"># Pull out numpy arrays</span>
-<span class="n">ell</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Spindle Length (um)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
-<span class="n">d</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Droplet Diameter (um)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+# Pull out numpy arrays
+ell = df[&#39;Spindle Length (um)&#39;].values
+d = df[&#39;Droplet Diameter (um)&#39;].values
 
-<span class="c1"># Make a plot</span>
-<span class="n">data_plot</span> <span class="o">=</span> <span class="n">hv</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
-    <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span>
-    <span class="n">kdims</span><span class="o">=</span><span class="s1">&#39;Droplet Diameter (um)&#39;</span><span class="p">,</span>
-    <span class="n">vdims</span><span class="o">=</span><span class="s1">&#39;Spindle Length (um)&#39;</span><span class="p">,</span>
-<span class="p">)</span><span class="o">.</span><span class="n">opts</span><span class="p">(</span>
-    <span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-    <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-<span class="p">)</span>
+# Make a plot
+data_plot = hv.Scatter(
+    data=df,
+    kdims=&#39;Droplet Diameter (um)&#39;,
+    vdims=&#39;Spindle Length (um)&#39;,
+).opts(
+    xlim=(0, None),
+    ylim=(0, None),
+)
 
-<span class="n">data_plot</span>
+data_plot
 </pre></div>
 </div>
 </div>
@@ -3905,16 +3908,16 @@ droplet. So, I will choose a prior for <span class="math notranslate nohighlight
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">gamma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span></span>gamma = np.linspace(0, 1, 200)
 
-<span class="n">hv</span><span class="o">.</span><span class="n">Curve</span><span class="p">(</span>
-    <span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">st</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">)),</span>
-    <span class="n">kdims</span><span class="o">=</span><span class="s1">&#39;γ&#39;</span><span class="p">,</span>
-    <span class="n">vdims</span><span class="o">=</span><span class="s1">&#39;g(γ)&#39;</span><span class="p">,</span>
-<span class="p">)</span><span class="o">.</span><span class="n">opts</span><span class="p">(</span>
-    <span class="n">frame_height</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
-    <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-<span class="p">)</span>
+hv.Curve(
+    (gamma, st.beta.pdf(gamma, 1.5, 1.5)),
+    kdims=&#39;γ&#39;,
+    vdims=&#39;g(γ)&#39;,
+).opts(
+    frame_height=200,
+    ylim=(0, None),
+)
 </pre></div>
 </div>
 </div>
@@ -3993,36 +3996,36 @@ droplet. So, I will choose a prior for <span class="math notranslate nohighlight
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">def</span> <span class="nf">theoretical_spindle_length</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">gamma</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Theoretical spindle length for tubulin conservation model.&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">d</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">cbrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="n">gamma</span> <span class="o">*</span> <span class="n">d</span> <span class="o">/</span> <span class="n">phi</span><span class="p">)</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
+<span></span>def theoretical_spindle_length(d, phi, gamma):
+    &quot;&quot;&quot;Theoretical spindle length for tubulin conservation model.&quot;&quot;&quot;
+    return gamma * d / np.cbrt(1 + (gamma * d / phi)**3)
 
 
-<span class="k">def</span> <span class="nf">log_prior</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Log prior for tubulin conservation model&quot;&quot;&quot;</span>
-    <span class="n">lp</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">lognorm</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
-    <span class="n">lp</span> <span class="o">+=</span> <span class="n">st</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">)</span>
-    <span class="n">lp</span> <span class="o">+=</span> <span class="n">st</span><span class="o">.</span><span class="n">halfnorm</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+def log_prior(phi, gamma, sigma):
+    &quot;&quot;&quot;Log prior for tubulin conservation model&quot;&quot;&quot;
+    lp = st.lognorm.logpdf(phi, 0.75, loc=0, scale=np.exp(3))
+    lp += st.beta.logpdf(gamma, 1.5, 1.5)
+    lp += st.halfnorm.logpdf(sigma, 0, 20)
 
-    <span class="k">return</span> <span class="n">lp</span>
-
-
-<span class="k">def</span> <span class="nf">log_likelihood</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">ell</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Log likelihood for independent size model&quot;&quot;&quot;</span>
-    <span class="n">mu</span> <span class="o">=</span> <span class="n">theoretical_spindle_length</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">gamma</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">ell</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">))</span>
+    return lp
 
 
-<span class="k">def</span> <span class="nf">log_posterior</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">ell</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Log posterior of indpendent size model.&quot;&quot;&quot;</span>
-    <span class="n">phi</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="n">params</span>
+def log_likelihood(d, ell, phi, gamma, sigma):
+    &quot;&quot;&quot;Log likelihood for independent size model&quot;&quot;&quot;
+    mu = theoretical_spindle_length(d, phi, gamma)
 
-    <span class="n">lp</span> <span class="o">=</span> <span class="n">log_prior</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">lp</span> <span class="o">==</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">lp</span>
+    return np.sum(st.norm.logpdf(ell, mu, sigma))
 
-    <span class="k">return</span> <span class="n">lp</span> <span class="o">+</span> <span class="n">log_likelihood</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">ell</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
+
+def log_posterior(params, d, ell):
+    &quot;&quot;&quot;Log posterior of indpendent size model.&quot;&quot;&quot;
+    phi, gamma, sigma = params
+
+    lp = log_prior(phi, gamma, sigma)
+    if lp == -np.inf:
+        return lp
+
+    return lp + log_likelihood(d, ell, phi, gamma, sigma)
 </pre></div>
 </div>
 </div>
@@ -4032,8 +4035,8 @@ droplet. So, I will choose a prior for <span class="math notranslate nohighlight
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">def</span> <span class="nf">neg_log_posterior</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">ell</span><span class="p">):</span>
-    <span class="k">return</span> <span class="o">-</span><span class="n">log_posterior</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">ell</span><span class="p">)</span>
+<span></span>def neg_log_posterior(params, d, ell):
+    return -log_posterior(params, d, ell)
 </pre></div>
 </div>
 </div>
@@ -4043,7 +4046,7 @@ droplet. So, I will choose a prior for <span class="math notranslate nohighlight
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">args</span> <span class="o">=</span> <span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">ell</span><span class="p">)</span>
+<span></span>args = (d, ell)
 </pre></div>
 </div>
 </div>
@@ -4053,7 +4056,7 @@ droplet. So, I will choose a prior for <span class="math notranslate nohighlight
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">params_0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">35</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span></span>params_0 = np.array([35, 0.8, 4])
 </pre></div>
 </div>
 </div>
@@ -4063,11 +4066,11 @@ droplet. So, I will choose a prior for <span class="math notranslate nohighlight
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Compute the MAP</span>
-<span class="n">res</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">optimize</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">neg_log_posterior</span><span class="p">,</span> <span class="n">params_0</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;powell&quot;</span><span class="p">)</span>
+<span></span># Compute the MAP
+res = scipy.optimize.minimize(neg_log_posterior, params_0, args=args, method=&quot;powell&quot;)
 
-<span class="c1"># Extract optimal parameters</span>
-<span class="n">popt</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">x</span>
+# Extract optimal parameters
+popt = res.x
 </pre></div>
 </div>
 </div>
@@ -4077,9 +4080,9 @@ droplet. So, I will choose a prior for <span class="math notranslate nohighlight
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Compute Hessian and covariance matrix</span>
-<span class="n">hes</span> <span class="o">=</span> <span class="n">smnd</span><span class="o">.</span><span class="n">approx_hess</span><span class="p">(</span><span class="n">popt</span><span class="p">,</span> <span class="n">log_posterior</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">)</span>
-<span class="n">cov</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">hes</span><span class="p">)</span>
+<span></span># Compute Hessian and covariance matrix
+hes = smnd.approx_hess(popt, log_posterior, args=args)
+cov = -np.linalg.inv(hes)
 </pre></div>
 </div>
 </div>
@@ -4089,26 +4092,26 @@ droplet. So, I will choose a prior for <span class="math notranslate nohighlight
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># For convenience...</span>
-<span class="n">phi_MAP</span><span class="p">,</span> <span class="n">gamma_MAP</span><span class="p">,</span> <span class="n">sigma_MAP</span> <span class="o">=</span> <span class="n">popt</span>
+<span></span># For convenience...
+phi_MAP, gamma_MAP, sigma_MAP = popt
 
-<span class="c1"># Print results</span>
-<span class="nb">print</span><span class="p">(</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Most probable parameters</span>
-<span class="sd">------------------------</span>
-<span class="sd">φ = {0:.2f} ± {1:.2f}  µm</span>
-<span class="sd">γ = {2:.3f} ± {3:.3f}</span>
-<span class="sd">σ = {4:.3f} ± {5:.3f} µm</span>
-<span class="sd">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-        <span class="n">phi_MAP</span><span class="p">,</span>
-        <span class="mf">1.96</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">cov</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]),</span>
-        <span class="n">gamma_MAP</span><span class="p">,</span>
-        <span class="mf">1.96</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">cov</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span>
-        <span class="n">sigma_MAP</span><span class="p">,</span>
-        <span class="mf">1.96</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">cov</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]),</span>
-    <span class="p">)</span>
-<span class="p">)</span>
+# Print results
+print(
+    &quot;&quot;&quot;
+Most probable parameters
+------------------------
+φ = {0:.2f} ± {1:.2f}  µm
+γ = {2:.3f} ± {3:.3f}
+σ = {4:.3f} ± {5:.3f} µm
+&quot;&quot;&quot;.format(
+        phi_MAP,
+        1.96 * np.sqrt(cov[0, 0]),
+        gamma_MAP,
+        1.96 * np.sqrt(cov[1, 1]),
+        sigma_MAP,
+        1.96 * np.sqrt(cov[2, 2]),
+    )
+)
 </pre></div>
 </div>
 </div>
@@ -4138,22 +4141,22 @@ to take several minutes. If we had any more parameters, this brute force style o
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Set up plotting range</span>
-<span class="n">phi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">37</span><span class="p">,</span> <span class="mf">39.5</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">gamma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.91</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">PHI</span><span class="p">,</span> <span class="n">GAMMA</span><span class="p">,</span> <span class="n">SIGMA</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
+<span></span># Set up plotting range
+phi = np.linspace(37, 39.5, 100)
+gamma = np.linspace(0.8, 0.91, 100)
+sigma = np.linspace(3.0, 4.5, 100)
+PHI, GAMMA, SIGMA = np.meshgrid(phi, gamma, sigma)
 
-<span class="c1"># Compute log posterior</span>
-<span class="n">LOG_POST</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">PHI</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="o">.</span><span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">PHI</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">PHI</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
-        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">PHI</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]):</span>
-            <span class="n">LOG_POST</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">log_posterior</span><span class="p">(</span>
-                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">PHI</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">],</span> <span class="n">GAMMA</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">],</span> <span class="n">SIGMA</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">]]),</span> <span class="n">d</span><span class="p">,</span> <span class="n">ell</span><span class="p">)</span>
+# Compute log posterior
+LOG_POST = np.empty_like(PHI)
+for i in tqdm.tqdm(range(PHI.shape[0])):
+    for j in range(PHI.shape[1]):
+        for k in range(PHI.shape[2]):
+            LOG_POST[i, j, k] = log_posterior(
+                    np.array([PHI[i,j,k], GAMMA[i,j,k], SIGMA[i,j,k]]), d, ell)
 
-<span class="c1"># Exponentiate. Ignore normalization, so set max LOG_POST to zero</span>
-<span class="n">POST_exact</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">LOG_POST</span> <span class="o">-</span> <span class="n">LOG_POST</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+# Exponentiate. Ignore normalization, so set max LOG_POST to zero
+POST_exact = np.exp(LOG_POST - LOG_POST.max())
 </pre></div>
 </div>
 </div>
@@ -4171,8 +4174,8 @@ to take several minutes. If we had any more parameters, this brute force style o
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Compute marginalized posterior</span>
-<span class="n">POST_marginalized</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">POST_exact</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span></span># Compute marginalized posterior
+POST_marginalized = np.trapz(POST_exact, x=sigma, axis=2)
 </pre></div>
 </div>
 </div>
@@ -4182,16 +4185,16 @@ to take several minutes. If we had any more parameters, this brute force style o
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Plot</span>
-<span class="n">p</span> <span class="o">=</span> <span class="n">bebi103</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span>
-    <span class="n">PHI</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">],</span>
-    <span class="n">GAMMA</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">],</span>
-    <span class="n">POST_marginalized</span><span class="p">,</span>
-    <span class="n">x_axis_label</span><span class="o">=</span><span class="s2">&quot;ϕ (µm)&quot;</span><span class="p">,</span>
-    <span class="n">y_axis_label</span><span class="o">=</span><span class="s2">&quot;γ&quot;</span><span class="p">,</span>
-    <span class="n">overlaid</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-<span class="p">)</span>
-<span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span></span># Plot
+p = bebi103.viz.contour(
+    PHI[:, :, 0],
+    GAMMA[:, :, 0],
+    POST_marginalized,
+    x_axis_label=&quot;ϕ (µm)&quot;,
+    y_axis_label=&quot;γ&quot;,
+    overlaid=False,
+)
+bokeh.io.show(p)
 </pre></div>
 </div>
 </div>
@@ -4242,20 +4245,20 @@ var element = document.currentScript.previousSibling.previousSibling;
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Set up plotting range</span>
-<span class="n">POST_norm</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span>
-    <span class="n">np</span><span class="o">.</span><span class="n">dstack</span><span class="p">((</span><span class="n">PHI</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">GAMMA</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">])),</span> <span class="n">popt</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">cov</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-<span class="p">)</span>
+<span></span># Set up plotting range
+POST_norm = st.multivariate_normal.pdf(
+    np.dstack((PHI[:, :, 0], GAMMA[:, :, 0])), popt[:-1], cov[:-1, :-1]
+)
 
-<span class="n">p</span> <span class="o">=</span> <span class="n">bebi103</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span>
-    <span class="n">PHI</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">],</span>
-    <span class="n">GAMMA</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">],</span>
-    <span class="n">POST_norm</span><span class="p">,</span>
-    <span class="n">line_kwargs</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">line_color</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">),</span>
-    <span class="n">overlaid</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">,</span>
-<span class="p">)</span>
-<span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+p = bebi103.viz.contour(
+    PHI[:, :, 0],
+    GAMMA[:, :, 0],
+    POST_norm,
+    line_kwargs=dict(line_color=&quot;orange&quot;),
+    overlaid=False,
+    p=p,
+)
+bokeh.io.show(p)
 </pre></div>
 </div>
 </div>
@@ -4310,15 +4313,15 @@ var element = document.currentScript.previousSibling.previousSibling;
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Extract parameters</span>
-<span class="n">phi</span><span class="p">,</span> <span class="n">gamma</span> <span class="o">=</span> <span class="n">popt</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+<span></span># Extract parameters
+phi, gamma = popt[:2]
 
-<span class="c1"># Make theoretical curve</span>
-<span class="n">d_theor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="mi">250</span><span class="p">)</span>
-<span class="n">ell_theor</span> <span class="o">=</span> <span class="n">theoretical_spindle_length</span><span class="p">(</span><span class="n">d_theor</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">gamma</span><span class="p">)</span>
+# Make theoretical curve
+d_theor = np.linspace(0, 250, 250)
+ell_theor = theoretical_spindle_length(d_theor, phi, gamma)
 
-<span class="c1"># Make the plot</span>
-<span class="n">data_plot</span> <span class="o">*</span> <span class="n">hv</span><span class="o">.</span><span class="n">Curve</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">(</span><span class="n">d_theor</span><span class="p">,</span> <span class="n">ell_theor</span><span class="p">))</span><span class="o">.</span><span class="n">opts</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">)</span>
+# Make the plot
+data_plot * hv.Curve(data=(d_theor, ell_theor)).opts(color=&quot;orange&quot;)
 </pre></div>
 </div>
 </div>
@@ -4379,8 +4382,8 @@ var element = document.currentScript.previousSibling.previousSibling;
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%</span><span class="k">load_ext</span> watermark
-<span class="o">%</span><span class="k">watermark</span> -v -p numpy,pandas,scipy,tqdm,statsmodels,bokeh,holoviews,bebi103,jupyterlab
+<span></span>%load_ext watermark
+%watermark -v -p numpy,pandas,scipy,tqdm,statsmodels,bokeh,holoviews,bebi103,jupyterlab
 </pre></div>
 </div>
 </div>
@@ -4429,11 +4432,11 @@ jupyterlab : 2.2.6
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Feb 02, 2021.
+        Last updated on Feb 03, 2021.
       </span>
 
     </p>
-  </div> <jinja2.runtime.BlockReference object at 0x7fc98e1a10d0> 
+  </div> <jinja2.runtime.BlockReference object at 0x7fa6601693a0> 
 
 <p>© 2021 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

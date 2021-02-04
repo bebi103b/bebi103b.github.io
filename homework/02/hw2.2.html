@@ -120,6 +120,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/21/hierarchical_implementation.html">21. Implementation of hierarchical models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_07.html">E7. To be completed after lesson 21</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/22/sbc.html">22. Principled analysis pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/23/sbc_in_practice.html">23: Simulation based calibration and related checks in practice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_08.html">E8. To be completed after lesson 23</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Recitations</span></p>
 <ul>
@@ -127,6 +129,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/02/probability_review.html">R2: Review of probability</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/03/choosing_priors.html">R3. Choosing priors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/04/index.html">R4. Stan installation and use of AWS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../recitations/05/index.html">R5. A Bayesian modeling case study: Ant traffic jams</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Homework</span></p>
 <ul class="current">
@@ -503,24 +506,24 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">def</span> <span class="nf">read_fasta_single_record</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Read a sequence in from a FASTA file containing a single sequence.</span>
+<span></span>def read_fasta_single_record(filename):
+    &quot;&quot;&quot;Read a sequence in from a FASTA file containing a single sequence.
 
-<span class="sd">    We assume that the first line of the file is the descriptor and all</span>
-<span class="sd">    subsequent lines are sequence.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-        <span class="c1"># Read in descriptor</span>
-        <span class="n">descriptor</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
+    We assume that the first line of the file is the descriptor and all
+    subsequent lines are sequence.
+    &quot;&quot;&quot;
+    with open(filename, &#39;r&#39;) as f:
+        # Read in descriptor
+        descriptor = f.readline().rstrip()
 
-        <span class="c1"># Read in sequence, stripping the whitespace from each line</span>
-        <span class="n">seq</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-        <span class="n">line</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
-        <span class="k">while</span> <span class="n">line</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
-            <span class="n">seq</span> <span class="o">+=</span> <span class="n">line</span>
-            <span class="n">line</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
+        # Read in sequence, stripping the whitespace from each line
+        seq = &#39;&#39;
+        line = f.readline().rstrip()
+        while line != &#39;&#39;:
+            seq += line
+            line = f.readline().rstrip()
 
-    <span class="k">return</span> <span class="n">descriptor</span><span class="p">,</span> <span class="n">seq</span>
+    return descriptor, seq
 
 </pre></div>
 </div>
@@ -531,16 +534,16 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">re</span>
+<span></span>import re
 
 
-<span class="k">def</span> <span class="nf">restriction_sites_with_re</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span> <span class="n">recog_seq</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Find the indices of all restriction sites in a sequence.&quot;&quot;&quot;</span>
-    <span class="n">sites</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="n">re</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="n">recog_seq</span><span class="p">,</span> <span class="n">seq</span><span class="p">):</span>
-        <span class="n">sites</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">site</span><span class="o">.</span><span class="n">start</span><span class="p">())</span>
+def restriction_sites_with_re(seq, recog_seq):
+    &quot;&quot;&quot;Find the indices of all restriction sites in a sequence.&quot;&quot;&quot;
+    sites = []
+    for site in re.finditer(recog_seq, seq):
+        sites.append(site.start())
 
-    <span class="k">return</span> <span class="n">sites</span>
+    return sites
 </pre></div>
 </div>
 </div>
@@ -571,11 +574,11 @@ div.rendered_html tbody tr:hover {
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Feb 02, 2021.
+        Last updated on Feb 03, 2021.
       </span>
 
     </p>
-  </div> <jinja2.runtime.BlockReference object at 0x7fc9899b22b0> 
+  </div> <jinja2.runtime.BlockReference object at 0x7fa64dbddac0> 
 
 <p>© 2021 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

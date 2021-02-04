@@ -120,6 +120,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/21/hierarchical_implementation.html">21. Implementation of hierarchical models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_07.html">E7. To be completed after lesson 21</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/22/sbc.html">22. Principled analysis pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/23/sbc_in_practice.html">23: Simulation based calibration and related checks in practice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_08.html">E8. To be completed after lesson 23</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Recitations</span></p>
 <ul>
@@ -127,6 +129,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/02/probability_review.html">R2: Review of probability</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/03/choosing_priors.html">R3. Choosing priors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/04/index.html">R4. Stan installation and use of AWS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../recitations/05/index.html">R5. A Bayesian modeling case study: Ant traffic jams</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Homework</span></p>
 <ul class="current">
@@ -499,7 +502,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span></span>import numpy as np
 </pre></div>
 </div>
 </div>
@@ -511,10 +514,10 @@ results are most easily loaded directly into a Numpy array into a variable we wi
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
-    <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">190</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">249</span><span class="p">,</span> <span class="mi">232</span><span class="p">,</span> <span class="mi">319</span><span class="p">,</span> <span class="mi">104</span><span class="p">,</span> <span class="mi">93</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span>
-     <span class="mi">287</span><span class="p">,</span> <span class="mi">49</span><span class="p">,</span> <span class="mi">311</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">243</span><span class="p">,</span> <span class="mi">113</span><span class="p">,</span> <span class="mi">133</span><span class="p">,</span> <span class="mi">179</span><span class="p">]</span>
-<span class="p">)</span>
+<span></span>y = np.array(
+    [200, 190, 200, 249, 232, 319, 104, 93, 233,
+     287, 49, 311, 225, 243, 113, 133, 179]
+)
 </pre></div>
 </div>
 </div>
@@ -562,11 +565,11 @@ results are most easily loaded directly into a Numpy array into a variable we wi
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Feb 02, 2021.
+        Last updated on Feb 03, 2021.
       </span>
 
     </p>
-  </div> <jinja2.runtime.BlockReference object at 0x7fc99d72ba30> 
+  </div> <jinja2.runtime.BlockReference object at 0x7fa64ed9e9d0> 
 
 <p>© 2021 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

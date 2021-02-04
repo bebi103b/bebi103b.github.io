@@ -137,6 +137,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../21/hierarchical_implementation.html">21. Implementation of hierarchical models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_07.html">E7. To be completed after lesson 21</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../22/sbc.html">22. Principled analysis pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../23/sbc_in_practice.html">23: Simulation based calibration and related checks in practice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_08.html">E8. To be completed after lesson 23</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Recitations</span></p>
 <ul>
@@ -144,6 +146,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/02/probability_review.html">R2: Review of probability</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/03/choosing_priors.html">R3. Choosing priors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/04/index.html">R4. Stan installation and use of AWS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../recitations/05/index.html">R5. A Bayesian modeling case study: Ant traffic jams</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Homework</span></p>
 <ul>
@@ -510,35 +513,35 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Colab setup ------------------</span>
-<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">subprocess</span>
-<span class="k">if</span> <span class="s2">&quot;google.colab&quot;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
-    <span class="n">cmd</span> <span class="o">=</span> <span class="s2">&quot;pip install --upgrade iqplot colorcet bebi103 arviz cmdstanpy watermark&quot;</span>
-    <span class="n">process</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="n">cmd</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span>
-    <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">process</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span>
-    <span class="kn">import</span> <span class="nn">cmdstanpy</span><span class="p">;</span> <span class="n">cmdstanpy</span><span class="o">.</span><span class="n">install_cmdstan</span><span class="p">()</span>
-    <span class="n">data_path</span> <span class="o">=</span> <span class="s2">&quot;https://s3.amazonaws.com/bebi103.caltech.edu/data/&quot;</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="n">data_path</span> <span class="o">=</span> <span class="s2">&quot;../data/&quot;</span>
-<span class="c1"># ------------------------------</span>
+<span></span># Colab setup ------------------
+import os, sys, subprocess
+if &quot;google.colab&quot; in sys.modules:
+    cmd = &quot;pip install --upgrade iqplot colorcet bebi103 arviz cmdstanpy watermark&quot;
+    process = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    stdout, stderr = process.communicate()
+    import cmdstanpy; cmdstanpy.install_cmdstan()
+    data_path = &quot;https://s3.amazonaws.com/bebi103.caltech.edu/data/&quot;
+else:
+    data_path = &quot;../data/&quot;
+# ------------------------------
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">scipy.special</span>
-<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">st</span>
+import numpy as np
+import pandas as pd
+import scipy.special
+import scipy.stats as st
 
-<span class="kn">import</span> <span class="nn">cmdstanpy</span>
-<span class="kn">import</span> <span class="nn">arviz</span> <span class="k">as</span> <span class="nn">az</span>
+import cmdstanpy
+import arviz as az
 
-<span class="kn">import</span> <span class="nn">iqplot</span>
+import iqplot
 
-<span class="kn">import</span> <span class="nn">bebi103</span>
+import bebi103
 
-<span class="kn">import</span> <span class="nn">colorcet</span>
+import colorcet
 
-<span class="kn">import</span> <span class="nn">bokeh.io</span>
-<span class="kn">import</span> <span class="nn">bokeh.plotting</span>
-<span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">output_notebook</span><span class="p">()</span>
+import bokeh.io
+import bokeh.plotting
+bokeh.io.output_notebook()
 </pre></div>
 </div>
 </div>
@@ -2342,7 +2345,7 @@ var element = document.currentScript.previousSibling.previousSibling;
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello, world.&quot;</span><span class="p">)</span>
+<span></span>print(&quot;Hello, world.&quot;)
 </pre></div>
 </div>
 </div>
@@ -2409,7 +2412,7 @@ Hello, world.
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">sm</span> <span class="o">=</span> <span class="n">cmdstanpy</span><span class="o">.</span><span class="n">CmdStanModel</span><span class="p">(</span><span class="n">stan_file</span><span class="o">=</span><span class="s1">&#39;hello_world.stan&#39;</span><span class="p">)</span>
+<span></span>sm = cmdstanpy.CmdStanModel(stan_file=&#39;hello_world.stan&#39;)
 </pre></div>
 </div>
 </div>
@@ -2429,10 +2432,10 @@ INFO:cmdstanpy:compiled model file: /Users/bois/Dropbox/git/bebi103_course/2021/
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">samples</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span>
-    <span class="n">chains</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
-    <span class="n">iter_sampling</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
-<span class="p">)</span>
+<span></span>samples = sm.sample(
+    chains=4,
+    iter_sampling=1000,
+)
 </pre></div>
 </div>
 </div>
@@ -2460,7 +2463,7 @@ INFO:cmdstanpy:finish chain 4
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">samples</span>
+<span></span>samples
 </pre></div>
 </div>
 </div>
@@ -2489,11 +2492,11 @@ CmdStanMCMC: model=hello_world chains=4[&#39;method=sample&#39;, &#39;num_sample
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># There may be a deprecation warning from cmdstanpy, which can be ignored</span>
-<span class="n">samples</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">from_cmdstanpy</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
+<span></span># There may be a deprecation warning from cmdstanpy, which can be ignored
+samples = az.from_cmdstanpy(samples)
 
-<span class="c1"># Take a look</span>
-<span class="n">samples</span>
+# Take a look
+samples
 </pre></div>
 </div>
 </div>
@@ -3646,7 +3649,7 @@ taken using the <code class="docutils literal notranslate"><span class="pre">mod
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">samples</span><span class="o">.</span><span class="n">posterior</span>
+<span></span>samples.posterior
 </pre></div>
 </div>
 </div>
@@ -4035,7 +4038,7 @@ multiple <code class="docutils literal notranslate"><span class="pre">DataArray<
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">samples</span><span class="o">.</span><span class="n">posterior</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span>
+<span></span>samples.posterior[&#39;x&#39;]
 </pre></div>
 </div>
 </div>
@@ -4421,11 +4424,11 @@ Coordinates:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">show</span><span class="p">(</span>
-    <span class="n">iqplot</span><span class="o">.</span><span class="n">ecdf</span><span class="p">(</span>
-        <span class="n">samples</span><span class="o">.</span><span class="n">posterior</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
-    <span class="p">)</span>
-<span class="p">)</span>
+<span></span>bokeh.io.show(
+    iqplot.ecdf(
+        samples.posterior[&#39;x&#39;].values.ravel()
+    )
+)
 </pre></div>
 </div>
 </div>
@@ -4481,26 +4484,26 @@ var element = document.currentScript.previousSibling.previousSibling;
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">rg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">()</span>
-<span class="n">np_samples</span> <span class="o">=</span> <span class="n">rg</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span></span>rg = np.random.default_rng()
+np_samples = rg.normal(0, 1, size=300)
 
-<span class="n">sp_samples</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+sp_samples = st.norm.rvs(0, 1, size=300)
 
-<span class="c1"># Plot samples</span>
-<span class="n">p</span> <span class="o">=</span> <span class="n">iqplot</span><span class="o">.</span><span class="n">ecdf</span><span class="p">(</span>
-    <span class="n">np_samples</span><span class="p">,</span>
-    <span class="n">style</span><span class="o">=</span><span class="s1">&#39;staircase&#39;</span><span class="p">,</span>
-    <span class="n">palette</span><span class="o">=</span><span class="p">[</span><span class="n">colorcet</span><span class="o">.</span><span class="n">b_glasbey_category10</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span>
-<span class="p">)</span>
+# Plot samples
+p = iqplot.ecdf(
+    np_samples,
+    style=&#39;staircase&#39;,
+    palette=[colorcet.b_glasbey_category10[0]],
+)
 
-<span class="n">p</span> <span class="o">=</span> <span class="n">iqplot</span><span class="o">.</span><span class="n">ecdf</span><span class="p">(</span>
-    <span class="n">sp_samples</span><span class="p">,</span>
-    <span class="n">style</span><span class="o">=</span><span class="s1">&#39;staircase&#39;</span><span class="p">,</span>
-    <span class="n">palette</span><span class="o">=</span><span class="p">[</span><span class="n">colorcet</span><span class="o">.</span><span class="n">b_glasbey_category10</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span>
-    <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">,</span>
-<span class="p">)</span>
+p = iqplot.ecdf(
+    sp_samples,
+    style=&#39;staircase&#39;,
+    palette=[colorcet.b_glasbey_category10[1]],
+    p=p,
+)
 
-<span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+bokeh.io.show(p)
 </pre></div>
 </div>
 </div>
@@ -4559,7 +4562,7 @@ var element = document.currentScript.previousSibling.previousSibling;
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">sm_rng</span> <span class="o">=</span> <span class="n">cmdstanpy</span><span class="o">.</span><span class="n">CmdStanModel</span><span class="p">(</span><span class="n">stan_file</span><span class="o">=</span><span class="s1">&#39;norm_rng.stan&#39;</span><span class="p">)</span>
+<span></span>sm_rng = cmdstanpy.CmdStanModel(stan_file=&#39;norm_rng.stan&#39;)
 </pre></div>
 </div>
 </div>
@@ -4579,12 +4582,12 @@ INFO:cmdstanpy:compiled model file: /Users/bois/Dropbox/git/bebi103_course/2021/
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Draw samples</span>
-<span class="n">stan_samples</span> <span class="o">=</span> <span class="n">sm_rng</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span>
-    <span class="n">chains</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-    <span class="n">iter_sampling</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span>
-    <span class="n">fixed_param</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="p">)</span>
+<span></span># Draw samples
+stan_samples = sm_rng.sample(
+    chains=1,
+    iter_sampling=300,
+    fixed_param=True,
+)
 </pre></div>
 </div>
 </div>
@@ -4603,13 +4606,13 @@ INFO:cmdstanpy:finish chain 1
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Convert to ArviZ InferenceData</span>
-<span class="n">stan_samples</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">from_cmdstanpy</span><span class="p">(</span>
-    <span class="n">posterior</span><span class="o">=</span><span class="n">stan_samples</span>
-<span class="p">)</span>
+<span></span># Convert to ArviZ InferenceData
+stan_samples = az.from_cmdstanpy(
+    posterior=stan_samples
+)
 
-<span class="c1"># Extract Numpy array</span>
-<span class="n">stan_samples</span> <span class="o">=</span> <span class="n">stan_samples</span><span class="o">.</span><span class="n">posterior</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+# Extract Numpy array
+stan_samples = stan_samples.posterior[&#39;x&#39;].values.flatten()
 </pre></div>
 </div>
 </div>
@@ -4619,14 +4622,14 @@ INFO:cmdstanpy:finish chain 1
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">p</span> <span class="o">=</span> <span class="n">iqplot</span><span class="o">.</span><span class="n">ecdf</span><span class="p">(</span>
-    <span class="n">stan_samples</span><span class="p">,</span>
-    <span class="n">style</span><span class="o">=</span><span class="s1">&#39;staircase&#39;</span><span class="p">,</span>
-    <span class="n">palette</span><span class="o">=</span><span class="p">[</span><span class="n">colorcet</span><span class="o">.</span><span class="n">b_glasbey_category10</span><span class="p">[</span><span class="mi">2</span><span class="p">]],</span>
-    <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">,</span>
-<span class="p">)</span>
+<span></span>p = iqplot.ecdf(
+    stan_samples,
+    style=&#39;staircase&#39;,
+    palette=[colorcet.b_glasbey_category10[2]],
+    p=p,
+)
 
-<span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+bokeh.io.show(p)
 </pre></div>
 </div>
 </div>
@@ -4692,7 +4695,7 @@ modeling is more convenient.</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="nb">print</span><span class="p">(</span><span class="n">sm</span><span class="o">.</span><span class="n">code</span><span class="p">())</span>
+<span></span>print(sm.code())
 </pre></div>
 </div>
 </div>
@@ -4721,7 +4724,7 @@ model {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">samples</span><span class="o">.</span><span class="n">to_netcdf</span><span class="p">(</span><span class="s1">&#39;stan_hello_world.nc&#39;</span><span class="p">)</span>
+<span></span>samples.to_netcdf(&#39;stan_hello_world.nc&#39;)
 </pre></div>
 </div>
 </div>
@@ -4740,7 +4743,7 @@ model {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">samples</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">from_netcdf</span><span class="p">(</span><span class="s1">&#39;stan_hello_world.nc&#39;</span><span class="p">)</span>
+<span></span>samples = az.from_netcdf(&#39;stan_hello_world.nc&#39;)
 </pre></div>
 </div>
 </div>
@@ -4759,7 +4762,7 @@ model {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">bebi103</span><span class="o">.</span><span class="n">stan</span><span class="o">.</span><span class="n">clean_cmdstan</span><span class="p">()</span>
+<span></span>bebi103.stan.clean_cmdstan()
 </pre></div>
 </div>
 </div>
@@ -4772,9 +4775,9 @@ model {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%</span><span class="k">load_ext</span> watermark
-<span class="o">%</span><span class="k">watermark</span> -v -p numpy,pandas,scipy,cmdstanpy,arviz,iqplot,bebi103,bokeh,colorcet,jupyterlab
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;cmdstan   :&quot;</span><span class="p">,</span> <span class="n">bebi103</span><span class="o">.</span><span class="n">stan</span><span class="o">.</span><span class="n">cmdstan_version</span><span class="p">())</span>
+<span></span>%load_ext watermark
+%watermark -v -p numpy,pandas,scipy,cmdstanpy,arviz,iqplot,bebi103,bokeh,colorcet,jupyterlab
+print(&quot;cmdstan   :&quot;, bebi103.stan.cmdstan_version())
 </pre></div>
 </div>
 </div>
@@ -4825,11 +4828,11 @@ cmdstan   : 2.25.0
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Feb 02, 2021.
+        Last updated on Feb 03, 2021.
       </span>
 
     </p>
-  </div> <jinja2.runtime.BlockReference object at 0x7fc989876c10> 
+  </div> <jinja2.runtime.BlockReference object at 0x7fa66df097c0> 
 
 <p>© 2021 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

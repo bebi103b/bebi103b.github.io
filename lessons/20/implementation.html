@@ -129,6 +129,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../21/hierarchical_implementation.html">21. Implementation of hierarchical models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_07.html">E7. To be completed after lesson 21</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../22/sbc.html">22. Principled analysis pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../23/sbc_in_practice.html">23: Simulation based calibration and related checks in practice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_08.html">E8. To be completed after lesson 23</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Recitations</span></p>
 <ul>
@@ -136,6 +138,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/02/probability_review.html">R2: Review of probability</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/03/choosing_priors.html">R3. Choosing priors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/04/index.html">R4. Stan installation and use of AWS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../recitations/05/index.html">R5. A Bayesian modeling case study: Ant traffic jams</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Homework</span></p>
 <ul>
@@ -502,29 +505,29 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Colab setup ------------------</span>
-<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">subprocess</span>
-<span class="k">if</span> <span class="s2">&quot;google.colab&quot;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
-    <span class="n">cmd</span> <span class="o">=</span> <span class="s2">&quot;pip install --upgrade colorcet bebi103 arviz cmdstanpy watermark&quot;</span>
-    <span class="n">process</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="n">cmd</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span>
-    <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">process</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span>
-    <span class="kn">import</span> <span class="nn">cmdstanpy</span><span class="p">;</span> <span class="n">cmdstanpy</span><span class="o">.</span><span class="n">install_cmdstan</span><span class="p">()</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="n">data_path</span> <span class="o">=</span> <span class="s2">&quot;../data/&quot;</span>
-<span class="c1"># ------------------------------</span>
+<span></span># Colab setup ------------------
+import os, sys, subprocess
+if &quot;google.colab&quot; in sys.modules:
+    cmd = &quot;pip install --upgrade colorcet bebi103 arviz cmdstanpy watermark&quot;
+    process = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    stdout, stderr = process.communicate()
+    import cmdstanpy; cmdstanpy.install_cmdstan()
+else:
+    data_path = &quot;../data/&quot;
+# ------------------------------
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+import numpy as np
 
-<span class="kn">import</span> <span class="nn">cmdstanpy</span>
-<span class="kn">import</span> <span class="nn">arviz</span> <span class="k">as</span> <span class="nn">az</span>
+import cmdstanpy
+import arviz as az
 
-<span class="kn">import</span> <span class="nn">bebi103</span>
+import bebi103
 
-<span class="kn">import</span> <span class="nn">iqplot</span>
+import iqplot
 
-<span class="kn">import</span> <span class="nn">bokeh</span>
-<span class="n">colors</span> <span class="o">=</span> <span class="n">bokeh</span><span class="o">.</span><span class="n">palettes</span><span class="o">.</span><span class="n">d3</span><span class="p">[</span><span class="s1">&#39;Category10&#39;</span><span class="p">][</span><span class="mi">10</span><span class="p">]</span>
-<span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">output_notebook</span><span class="p">()</span>
+import bokeh
+colors = bokeh.palettes.d3[&#39;Category10&#39;][10]
+bokeh.io.output_notebook()
 </pre></div>
 </div>
 </div>
@@ -2338,9 +2341,9 @@ var element = document.currentScript.previousSibling.previousSibling;
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Data</span>
-<span class="n">n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">9</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">110</span><span class="p">])</span>
-<span class="n">N</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">35</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">54</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">660</span><span class="p">])</span>
+<span></span># Data
+n = np.array([9, 12, 18, 14, 5, 110])
+N = np.array([35, 35, 54, 40, 34, 660])
 </pre></div>
 </div>
 </div>
@@ -2390,14 +2393,14 @@ var element = document.currentScript.previousSibling.previousSibling;
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">sm</span> <span class="o">=</span> <span class="n">cmdstanpy</span><span class="o">.</span><span class="n">CmdStanModel</span><span class="p">(</span><span class="n">stan_file</span><span class="o">=</span><span class="s1">&#39;worm_hier.stan&#39;</span><span class="p">)</span>
+<span></span>sm = cmdstanpy.CmdStanModel(stan_file=&#39;worm_hier.stan&#39;)
 
-<span class="n">data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">K</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="n">N</span><span class="p">)</span>
+data = dict(K=len(n), n=n, N=N)
 
-<span class="n">samples</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
-<span class="n">samples</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">from_cmdstanpy</span><span class="p">(</span><span class="n">posterior</span><span class="o">=</span><span class="n">samples</span><span class="p">)</span>
+samples = sm.sample(data=data)
+samples = az.from_cmdstanpy(posterior=samples)
 
-<span class="n">bebi103</span><span class="o">.</span><span class="n">stan</span><span class="o">.</span><span class="n">check_all_diagnostics</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
+bebi103.stan.check_all_diagnostics(samples)
 </pre></div>
 </div>
 </div>
@@ -2450,13 +2453,13 @@ E-BFMI indicated no pathological behavior.
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">g</span> <span class="o">=</span> <span class="n">bebi103</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span>
-    <span class="n">samples</span><span class="p">,</span>
-    <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;phi&quot;</span><span class="p">,</span> <span class="s2">&quot;kappa&quot;</span><span class="p">,</span> <span class="s2">&quot;theta[0]&quot;</span><span class="p">,</span> <span class="s2">&quot;theta[1]&quot;</span><span class="p">,</span> <span class="s2">&quot;theta[5]&quot;</span><span class="p">],</span>
-    <span class="n">xtick_label_orientation</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">4</span><span class="p">,</span>
-<span class="p">)</span>
+<span></span>g = bebi103.viz.corner(
+    samples,
+    parameters=[&quot;phi&quot;, &quot;kappa&quot;, &quot;theta[0]&quot;, &quot;theta[1]&quot;, &quot;theta[5]&quot;],
+    xtick_label_orientation=np.pi / 4,
+)
 
-<span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+bokeh.io.show(g)
 </pre></div>
 </div>
 </div>
@@ -2508,37 +2511,37 @@ again with a Uniform prior.</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Plot ECDF of phi samples</span>
-<span class="n">p</span> <span class="o">=</span> <span class="n">iqplot</span><span class="o">.</span><span class="n">ecdf</span><span class="p">(</span>
-    <span class="n">samples</span><span class="o">.</span><span class="n">posterior</span><span class="o">.</span><span class="n">phi</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span>
-    <span class="n">frame_width</span><span class="o">=</span><span class="mi">650</span><span class="p">,</span>
-    <span class="n">style</span><span class="o">=</span><span class="s2">&quot;staircase&quot;</span><span class="p">,</span>
-    <span class="n">line_kwargs</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">line_color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">),</span>
-    <span class="n">y_axis_label</span><span class="o">=</span><span class="s2">&quot;marginal posterior CDF&quot;</span><span class="p">,</span>
-    <span class="n">x_axis_label</span><span class="o">=</span><span class="s2">&quot;parameter value&quot;</span><span class="p">,</span>
-<span class="p">)</span>
+<span></span># Plot ECDF of phi samples
+p = iqplot.ecdf(
+    samples.posterior.phi.values.flatten(),
+    frame_width=650,
+    style=&quot;staircase&quot;,
+    line_kwargs=dict(line_color=&quot;black&quot;),
+    y_axis_label=&quot;marginal posterior CDF&quot;,
+    x_axis_label=&quot;parameter value&quot;,
+)
 
-<span class="c1"># Plot the ECDFs for each theta_i</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="p">)):</span>
-    <span class="n">p</span> <span class="o">=</span> <span class="n">iqplot</span><span class="o">.</span><span class="n">ecdf</span><span class="p">(</span>
-        <span class="n">samples</span><span class="o">.</span><span class="n">posterior</span><span class="o">.</span><span class="n">theta</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">theta_dim_0</span><span class="o">=</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span>
-        <span class="n">style</span><span class="o">=</span><span class="s2">&quot;staircase&quot;</span><span class="p">,</span>
-        <span class="n">line_kwargs</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">line_color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span>
-        <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">,</span>
-    <span class="p">)</span>
+# Plot the ECDFs for each theta_i
+for i in range(len(n)):
+    p = iqplot.ecdf(
+        samples.posterior.theta.sel(theta_dim_0=i).values.flatten(),
+        style=&quot;staircase&quot;,
+        line_kwargs=dict(line_color=colors[i]),
+        p=p,
+    )
 
-<span class="c1"># MAP of individuals (given by (n + α - 1) / (N + α + β - 2))</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="p">)):</span>
-    <span class="n">theta_map</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">N</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.2</span><span class="p">)</span>
-    <span class="n">p</span><span class="o">.</span><span class="n">diamond</span><span class="p">(</span><span class="n">theta_map</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">legend_label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;θ</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+# MAP of individuals (given by (n + α - 1) / (N + α + β - 2))
+for i in range(len(n)):
+    theta_map = (n[i] + 0.1) / (N[i] + 0.2)
+    p.diamond(theta_map, 0.5, color=colors[i], size=20, legend_label=f&quot;θ{i}&quot;)
 
-<span class="c1"># Pooled MLE</span>
-<span class="n">theta_map</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">N</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">+</span> <span class="mf">0.2</span><span class="p">)</span>
-<span class="n">p</span><span class="o">.</span><span class="n">diamond</span><span class="p">(</span><span class="n">theta_map</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">legend_label</span><span class="o">=</span><span class="s2">&quot;ϕ&quot;</span><span class="p">)</span>
+# Pooled MLE
+theta_map = (n.sum() + 0.1) / (N.sum() + 0.2)
+p.diamond(theta_map, 0.5, color=&quot;black&quot;, size=20, legend_label=&quot;ϕ&quot;)
 
-<span class="n">p</span><span class="o">.</span><span class="n">legend</span><span class="o">.</span><span class="n">visible</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="n">p</span><span class="o">.</span><span class="n">legend</span><span class="o">.</span><span class="n">location</span> <span class="o">=</span> <span class="s2">&quot;bottom_right&quot;</span>
-<span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+p.legend.visible = True
+p.legend.location = &quot;bottom_right&quot;
+bokeh.io.show(p)
 </pre></div>
 </div>
 </div>
@@ -2590,13 +2593,13 @@ var element = document.currentScript.previousSibling.previousSibling;
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="nb">print</span><span class="p">(</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">φ = [{0:.3f}, {1:.3f}, {2:.3f}]</span>
-<span class="sd">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-        <span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">samples</span><span class="o">.</span><span class="n">posterior</span><span class="o">.</span><span class="n">phi</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">90</span><span class="p">])</span>
-    <span class="p">)</span>
-<span class="p">)</span>
+<span></span>print(
+    &quot;&quot;&quot;
+φ = [{0:.3f}, {1:.3f}, {2:.3f}]
+&quot;&quot;&quot;.format(
+        *np.percentile(samples.posterior.phi.values.flatten(), [10, 50, 90])
+    )
+)
 </pre></div>
 </div>
 </div>
@@ -2615,7 +2618,7 @@ var element = document.currentScript.previousSibling.previousSibling;
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">bebi103</span><span class="o">.</span><span class="n">stan</span><span class="o">.</span><span class="n">clean_cmdstan</span><span class="p">()</span>
+<span></span>bebi103.stan.clean_cmdstan()
 </pre></div>
 </div>
 </div>
@@ -2626,8 +2629,8 @@ var element = document.currentScript.previousSibling.previousSibling;
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%</span><span class="k">load_ext</span> watermark
-<span class="o">%</span><span class="k">watermark</span> -v -p numpy,cmdstanpy,arviz,iqplot,bebi103,bokeh,jupyterlab
+<span></span>%load_ext watermark
+%watermark -v -p numpy,cmdstanpy,arviz,iqplot,bebi103,bokeh,jupyterlab
 </pre></div>
 </div>
 </div>
@@ -2672,11 +2675,11 @@ jupyterlab 2.2.6
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Feb 02, 2021.
+        Last updated on Feb 03, 2021.
       </span>
 
     </p>
-  </div> <jinja2.runtime.BlockReference object at 0x7fc98eff8d30> 
+  </div> <jinja2.runtime.BlockReference object at 0x7fa6843e75e0> 
 
 <p>© 2021 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 
