@@ -158,6 +158,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../homework/04/index.html">4. Sampling with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/05/index.html">5. Inference with Stan I</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/06/index.html">6. Practice building and assessing Bayesian models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../homework/07/index.html">7. Model comparison</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -555,17 +556,17 @@ local machine or on Colab. Importantly, when using <a class="reference external"
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># Colab setup ------------------
-import os, sys, subprocess
-if &quot;google.colab&quot; in sys.modules:
-    cmd = &quot;pip install --upgrade iqplot colorcet datashader bebi103 arviz cmdstanpy watermark&quot;
-    process = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    stdout, stderr = process.communicate()
-    import cmdstanpy; cmdstanpy.install_cmdstan()
-    data_path = &quot;https://s3.amazonaws.com/bebi103.caltech.edu/data/&quot;
-else:
-    data_path = &quot;../data/&quot;
-# ------------------------------
+<span></span><span class="c1"># Colab setup ------------------</span>
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">subprocess</span>
+<span class="k">if</span> <span class="s2">&quot;google.colab&quot;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+    <span class="n">cmd</span> <span class="o">=</span> <span class="s2">&quot;pip install --upgrade iqplot colorcet datashader bebi103 arviz cmdstanpy watermark&quot;</span>
+    <span class="n">process</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="n">cmd</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span>
+    <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">process</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span>
+    <span class="kn">import</span> <span class="nn">cmdstanpy</span><span class="p">;</span> <span class="n">cmdstanpy</span><span class="o">.</span><span class="n">install_cmdstan</span><span class="p">()</span>
+    <span class="n">data_path</span> <span class="o">=</span> <span class="s2">&quot;https://s3.amazonaws.com/bebi103.caltech.edu/data/&quot;</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">data_path</span> <span class="o">=</span> <span class="s2">&quot;../data/&quot;</span>
+<span class="c1"># ------------------------------</span>
 </pre></div>
 </div>
 </div>
@@ -610,62 +611,62 @@ Amazon Machine Image (AMI) that has all of the installations you need, and you c
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>import numpy as np
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-import cmdstanpy
-import arviz as az
+<span class="kn">import</span> <span class="nn">cmdstanpy</span>
+<span class="kn">import</span> <span class="nn">arviz</span> <span class="k">as</span> <span class="nn">az</span>
 
-import bokeh.plotting
-import bokeh.io
-bokeh.io.output_notebook()
+<span class="kn">import</span> <span class="nn">bokeh.plotting</span>
+<span class="kn">import</span> <span class="nn">bokeh.io</span>
+<span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">output_notebook</span><span class="p">()</span>
 
-schools_data = {
-    &quot;J&quot;: 8,
-    &quot;y&quot;: [28, 8, -3, 7, -1, 1, 18, 12],
-    &quot;sigma&quot;: [15, 10, 16, 11, 9, 11, 10, 18],
-}
+<span class="n">schools_data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;J&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">28</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">12</span><span class="p">],</span>
+    <span class="s2">&quot;sigma&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">18</span><span class="p">],</span>
+<span class="p">}</span>
 
-schools_code = &quot;&quot;&quot;
-data {
-  int&lt;lower=0&gt; J; // number of schools
-  vector[J] y; // estimated treatment effects
-  vector&lt;lower=0&gt;[J] sigma; // s.e. of effect estimates
-}
+<span class="n">schools_code</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">data {</span>
+<span class="s2">  int&lt;lower=0&gt; J; // number of schools</span>
+<span class="s2">  vector[J] y; // estimated treatment effects</span>
+<span class="s2">  vector&lt;lower=0&gt;[J] sigma; // s.e. of effect estimates</span>
+<span class="s2">}</span>
 
-parameters {
-  real mu;
-  real&lt;lower=0&gt; tau;
-  vector[J] eta;
-}
+<span class="s2">parameters {</span>
+<span class="s2">  real mu;</span>
+<span class="s2">  real&lt;lower=0&gt; tau;</span>
+<span class="s2">  vector[J] eta;</span>
+<span class="s2">}</span>
 
-transformed parameters {
-  vector[J] theta = mu + tau * eta;
-}
+<span class="s2">transformed parameters {</span>
+<span class="s2">  vector[J] theta = mu + tau * eta;</span>
+<span class="s2">}</span>
 
-model {
-  eta ~ normal(0, 1);
-  y ~ normal(theta, sigma);
-}
-&quot;&quot;&quot;
+<span class="s2">model {</span>
+<span class="s2">  eta ~ normal(0, 1);</span>
+<span class="s2">  y ~ normal(theta, sigma);</span>
+<span class="s2">}</span>
+<span class="s2">&quot;&quot;&quot;</span>
 
-with open(&quot;schools_code.stan&quot;, &quot;w&quot;) as f:
-    f.write(schools_code)
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;schools_code.stan&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">schools_code</span><span class="p">)</span>
 
-sm = cmdstanpy.CmdStanModel(stan_file=&quot;schools_code.stan&quot;)
-samples = sm.sample(data=schools_data, output_dir=&quot;./&quot;)
-samples = az.from_cmdstanpy(samples)
+<span class="n">sm</span> <span class="o">=</span> <span class="n">cmdstanpy</span><span class="o">.</span><span class="n">CmdStanModel</span><span class="p">(</span><span class="n">stan_file</span><span class="o">=</span><span class="s2">&quot;schools_code.stan&quot;</span><span class="p">)</span>
+<span class="n">samples</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">schools_data</span><span class="p">,</span> <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;./&quot;</span><span class="p">)</span>
+<span class="n">samples</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">from_cmdstanpy</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
 
-# Make a plot of samples
-p = bokeh.plotting.figure(
-    frame_height=250, frame_width=250, x_axis_label=&quot;μ&quot;, y_axis_label=&quot;τ&quot;
-)
-p.circle(
-    np.ravel(samples.posterior[&quot;mu&quot;]),
-    np.ravel(samples.posterior[&quot;tau&quot;]),
-    alpha=0.1
-)
+<span class="c1"># Make a plot of samples</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">bokeh</span><span class="o">.</span><span class="n">plotting</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span>
+    <span class="n">frame_height</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="n">frame_width</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="n">x_axis_label</span><span class="o">=</span><span class="s2">&quot;μ&quot;</span><span class="p">,</span> <span class="n">y_axis_label</span><span class="o">=</span><span class="s2">&quot;τ&quot;</span>
+<span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">samples</span><span class="o">.</span><span class="n">posterior</span><span class="p">[</span><span class="s2">&quot;mu&quot;</span><span class="p">]),</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">samples</span><span class="o">.</span><span class="n">posterior</span><span class="p">[</span><span class="s2">&quot;tau&quot;</span><span class="p">]),</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span>
+<span class="p">)</span>
 
-bokeh.io.show(p)
+<span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1053,8 +1054,8 @@ var element = document.currentScript.previousSibling.previousSibling;
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>%load_ext watermark
-%watermark -v -p numpy,bokeh,cmdstanpy,arviz,jupyterlab
+<span></span><span class="o">%</span><span class="k">load_ext</span> watermark
+<span class="o">%</span><span class="k">watermark</span> -v -p numpy,bokeh,cmdstanpy,arviz,jupyterlab
 </pre></div>
 </div>
 </div>
@@ -1099,11 +1100,11 @@ jupyterlab: 2.2.6
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Feb 03, 2021.
+        Last updated on Feb 09, 2021.
       </span>
 
     </p>
-  </div> <jinja2.runtime.BlockReference object at 0x7fa64ef168e0> 
+  </div> <jinja2.runtime.BlockReference object at 0x7f9ddf459a90> 
 
 <p>© 2021 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

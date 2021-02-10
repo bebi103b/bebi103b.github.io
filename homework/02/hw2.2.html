@@ -146,6 +146,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../04/index.html">4. Sampling with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../05/index.html">5. Inference with Stan I</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../06/index.html">6. Practice building and assessing Bayesian models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07/index.html">7. Model comparison</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -506,24 +507,24 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>def read_fasta_single_record(filename):
-    &quot;&quot;&quot;Read a sequence in from a FASTA file containing a single sequence.
+<span></span><span class="k">def</span> <span class="nf">read_fasta_single_record</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Read a sequence in from a FASTA file containing a single sequence.</span>
 
-    We assume that the first line of the file is the descriptor and all
-    subsequent lines are sequence.
-    &quot;&quot;&quot;
-    with open(filename, &#39;r&#39;) as f:
-        # Read in descriptor
-        descriptor = f.readline().rstrip()
+<span class="sd">    We assume that the first line of the file is the descriptor and all</span>
+<span class="sd">    subsequent lines are sequence.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="c1"># Read in descriptor</span>
+        <span class="n">descriptor</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
 
-        # Read in sequence, stripping the whitespace from each line
-        seq = &#39;&#39;
-        line = f.readline().rstrip()
-        while line != &#39;&#39;:
-            seq += line
-            line = f.readline().rstrip()
+        <span class="c1"># Read in sequence, stripping the whitespace from each line</span>
+        <span class="n">seq</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
+        <span class="k">while</span> <span class="n">line</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">seq</span> <span class="o">+=</span> <span class="n">line</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
 
-    return descriptor, seq
+    <span class="k">return</span> <span class="n">descriptor</span><span class="p">,</span> <span class="n">seq</span>
 
 </pre></div>
 </div>
@@ -534,16 +535,16 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>import re
+<span></span><span class="kn">import</span> <span class="nn">re</span>
 
 
-def restriction_sites_with_re(seq, recog_seq):
-    &quot;&quot;&quot;Find the indices of all restriction sites in a sequence.&quot;&quot;&quot;
-    sites = []
-    for site in re.finditer(recog_seq, seq):
-        sites.append(site.start())
+<span class="k">def</span> <span class="nf">restriction_sites_with_re</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span> <span class="n">recog_seq</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Find the indices of all restriction sites in a sequence.&quot;&quot;&quot;</span>
+    <span class="n">sites</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="n">re</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="n">recog_seq</span><span class="p">,</span> <span class="n">seq</span><span class="p">):</span>
+        <span class="n">sites</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">site</span><span class="o">.</span><span class="n">start</span><span class="p">())</span>
 
-    return sites
+    <span class="k">return</span> <span class="n">sites</span>
 </pre></div>
 </div>
 </div>
@@ -574,11 +575,11 @@ def restriction_sites_with_re(seq, recog_seq):
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Feb 03, 2021.
+        Last updated on Feb 09, 2021.
       </span>
 
     </p>
-  </div> <jinja2.runtime.BlockReference object at 0x7fa64dbddac0> 
+  </div> <jinja2.runtime.BlockReference object at 0x7f9dcc5305e0> 
 
 <p>© 2021 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

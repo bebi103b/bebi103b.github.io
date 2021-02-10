@@ -148,6 +148,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../homework/04/index.html">4. Sampling with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/05/index.html">5. Inference with Stan I</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/06/index.html">6. Practice building and assessing Bayesian models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../homework/07/index.html">7. Model comparison</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -503,28 +504,28 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># Colab setup ------------------
-import os, sys, subprocess
-if &quot;google.colab&quot; in sys.modules:
-    cmd = &quot;pip install --upgrade colorcet bebi103 arviz cmdstanpy watermark&quot;
-    process = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    stdout, stderr = process.communicate()
-    import cmdstanpy; cmdstanpy.install_cmdstan()
-    data_path = &quot;https://s3.amazonaws.com/bebi103.caltech.edu/data/&quot;
-else:
-    data_path = &quot;../data/&quot;
-# ------------------------------
+<span></span><span class="c1"># Colab setup ------------------</span>
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">subprocess</span>
+<span class="k">if</span> <span class="s2">&quot;google.colab&quot;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+    <span class="n">cmd</span> <span class="o">=</span> <span class="s2">&quot;pip install --upgrade colorcet bebi103 arviz cmdstanpy watermark&quot;</span>
+    <span class="n">process</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="n">cmd</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span>
+    <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">process</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span>
+    <span class="kn">import</span> <span class="nn">cmdstanpy</span><span class="p">;</span> <span class="n">cmdstanpy</span><span class="o">.</span><span class="n">install_cmdstan</span><span class="p">()</span>
+    <span class="n">data_path</span> <span class="o">=</span> <span class="s2">&quot;https://s3.amazonaws.com/bebi103.caltech.edu/data/&quot;</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">data_path</span> <span class="o">=</span> <span class="s2">&quot;../data/&quot;</span>
+<span class="c1"># ------------------------------</span>
 
-import numpy as np
-import pandas as pd
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
-import cmdstanpy
-import arviz as az
+<span class="kn">import</span> <span class="nn">cmdstanpy</span>
+<span class="kn">import</span> <span class="nn">arviz</span> <span class="k">as</span> <span class="nn">az</span>
 
-import bebi103
+<span class="kn">import</span> <span class="nn">bebi103</span>
 
-import bokeh.io
-bokeh.io.output_notebook()
+<span class="kn">import</span> <span class="nn">bokeh.io</span>
+<span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">output_notebook</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -2345,10 +2346,10 @@ generated.</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>df = pd.read_csv(os.path.join(data_path, &quot;good_invitro_droplet_data.csv&quot;), comment=&quot;#&quot;)
+<span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s2">&quot;good_invitro_droplet_data.csv&quot;</span><span class="p">),</span> <span class="n">comment</span><span class="o">=</span><span class="s2">&quot;#&quot;</span><span class="p">)</span>
 
-d = df[&#39;Droplet Diameter (um)&#39;].values
-ell = df[&#39;Spindle Length (um)&#39;].values
+<span class="n">d</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Droplet Diameter (um)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">ell</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Spindle Length (um)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
 </pre></div>
 </div>
 </div>
@@ -2398,13 +2399,13 @@ ell = df[&#39;Spindle Length (um)&#39;].values
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>data = {&quot;N&quot;: len(ell), &quot;ell&quot;: ell}
+<span></span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;N&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">ell</span><span class="p">),</span> <span class="s2">&quot;ell&quot;</span><span class="p">:</span> <span class="n">ell</span><span class="p">}</span>
 
-sm = cmdstanpy.CmdStanModel(stan_file=&quot;indep_size_model.stan&quot;)
+<span class="n">sm</span> <span class="o">=</span> <span class="n">cmdstanpy</span><span class="o">.</span><span class="n">CmdStanModel</span><span class="p">(</span><span class="n">stan_file</span><span class="o">=</span><span class="s2">&quot;indep_size_model.stan&quot;</span><span class="p">)</span>
 
-samples = sm.sample(data=data, iter_sampling=1000, chains=4)
+<span class="n">samples</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">iter_sampling</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">chains</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 
-samples = az.from_cmdstanpy(posterior=samples, posterior_predictive=[&quot;ell_ppc&quot;])
+<span class="n">samples</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">from_cmdstanpy</span><span class="p">(</span><span class="n">posterior</span><span class="o">=</span><span class="n">samples</span><span class="p">,</span> <span class="n">posterior_predictive</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;ell_ppc&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -2432,7 +2433,7 @@ INFO:cmdstanpy:finish chain 3
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>bokeh.io.show(bebi103.viz.corner(samples, xtick_label_orientation=np.pi / 4))
+<span></span><span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">bebi103</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">xtick_label_orientation</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">4</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -2484,7 +2485,7 @@ var element = document.currentScript.previousSibling.previousSibling;
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>samples.posterior_predictive[&#39;ell_ppc&#39;].shape
+<span></span><span class="n">samples</span><span class="o">.</span><span class="n">posterior_predictive</span><span class="p">[</span><span class="s1">&#39;ell_ppc&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
 </div>
@@ -2503,7 +2504,7 @@ var element = document.currentScript.previousSibling.previousSibling;
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>ell_ppc = samples.posterior_predictive[&quot;ell_ppc&quot;].stack({&quot;sample&quot;: (&quot;chain&quot;, &quot;draw&quot;)})
+<span></span><span class="n">ell_ppc</span> <span class="o">=</span> <span class="n">samples</span><span class="o">.</span><span class="n">posterior_predictive</span><span class="p">[</span><span class="s2">&quot;ell_ppc&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">stack</span><span class="p">({</span><span class="s2">&quot;sample&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;chain&quot;</span><span class="p">,</span> <span class="s2">&quot;draw&quot;</span><span class="p">)})</span>
 </pre></div>
 </div>
 </div>
@@ -2513,7 +2514,7 @@ var element = document.currentScript.previousSibling.previousSibling;
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>ell_ppc = ell_ppc.transpose(&#39;sample&#39;, &#39;ell_ppc_dim_0&#39;)
+<span></span><span class="n">ell_ppc</span> <span class="o">=</span> <span class="n">ell_ppc</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="s1">&#39;sample&#39;</span><span class="p">,</span> <span class="s1">&#39;ell_ppc_dim_0&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -2524,14 +2525,14 @@ var element = document.currentScript.previousSibling.previousSibling;
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>bokeh.io.show(
-    bebi103.viz.predictive_ecdf(
-        ell_ppc,
-        percentiles=[30, 50, 70, 99],
-        data=ell,
-        x_axis_label=&#39;spindle length [µm]&#39;
-    )
-)
+<span></span><span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">show</span><span class="p">(</span>
+    <span class="n">bebi103</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">predictive_ecdf</span><span class="p">(</span>
+        <span class="n">ell_ppc</span><span class="p">,</span>
+        <span class="n">percentiles</span><span class="o">=</span><span class="p">[</span><span class="mi">30</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">99</span><span class="p">],</span>
+        <span class="n">data</span><span class="o">=</span><span class="n">ell</span><span class="p">,</span>
+        <span class="n">x_axis_label</span><span class="o">=</span><span class="s1">&#39;spindle length [µm]&#39;</span>
+    <span class="p">)</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -2582,15 +2583,15 @@ var element = document.currentScript.previousSibling.previousSibling;
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>bokeh.io.show(
-    bebi103.viz.predictive_ecdf(
-        ell_ppc,
-        percentiles=[30, 50, 70, 99],
-        data=ell,
-        diff=&#39;ecdf&#39;,
-        x_axis_label=&#39;spindle length [µm]&#39;
-    )
-)
+<span></span><span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">show</span><span class="p">(</span>
+    <span class="n">bebi103</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">predictive_ecdf</span><span class="p">(</span>
+        <span class="n">ell_ppc</span><span class="p">,</span>
+        <span class="n">percentiles</span><span class="o">=</span><span class="p">[</span><span class="mi">30</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">99</span><span class="p">],</span>
+        <span class="n">data</span><span class="o">=</span><span class="n">ell</span><span class="p">,</span>
+        <span class="n">diff</span><span class="o">=</span><span class="s1">&#39;ecdf&#39;</span><span class="p">,</span>
+        <span class="n">x_axis_label</span><span class="o">=</span><span class="s1">&#39;spindle length [µm]&#39;</span>
+    <span class="p">)</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -2645,16 +2646,16 @@ var element = document.currentScript.previousSibling.previousSibling;
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>bokeh.io.show(
-    bebi103.viz.predictive_regression(
-        ell_ppc,
-        samples_x=d,
-        percentiles=[30, 50, 70, 99],
-        data=np.vstack((d, ell)).transpose(),
-        x_axis_label=&#39;droplet diameter [µm]&#39;,
-        y_axis_label=&#39;spindle length [µm]&#39;
-    )
-)
+<span></span><span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">show</span><span class="p">(</span>
+    <span class="n">bebi103</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">predictive_regression</span><span class="p">(</span>
+        <span class="n">ell_ppc</span><span class="p">,</span>
+        <span class="n">samples_x</span><span class="o">=</span><span class="n">d</span><span class="p">,</span>
+        <span class="n">percentiles</span><span class="o">=</span><span class="p">[</span><span class="mi">30</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">99</span><span class="p">],</span>
+        <span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">d</span><span class="p">,</span> <span class="n">ell</span><span class="p">))</span><span class="o">.</span><span class="n">transpose</span><span class="p">(),</span>
+        <span class="n">x_axis_label</span><span class="o">=</span><span class="s1">&#39;droplet diameter [µm]&#39;</span><span class="p">,</span>
+        <span class="n">y_axis_label</span><span class="o">=</span><span class="s1">&#39;spindle length [µm]&#39;</span>
+    <span class="p">)</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -2775,15 +2776,15 @@ var element = document.currentScript.previousSibling.previousSibling;
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>N_ppc = 200
-d_ppc = np.linspace(0.1, 250, N_ppc)
-data = {
-    &quot;N&quot;: len(ell),
-    &quot;d&quot;: d,
-    &quot;ell&quot;: ell,
-    &quot;N_ppc&quot;: N_ppc,
-    &quot;d_ppc&quot;: d_ppc,
-}
+<span></span><span class="n">N_ppc</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">d_ppc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="n">N_ppc</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;N&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">ell</span><span class="p">),</span>
+    <span class="s2">&quot;d&quot;</span><span class="p">:</span> <span class="n">d</span><span class="p">,</span>
+    <span class="s2">&quot;ell&quot;</span><span class="p">:</span> <span class="n">ell</span><span class="p">,</span>
+    <span class="s2">&quot;N_ppc&quot;</span><span class="p">:</span> <span class="n">N_ppc</span><span class="p">,</span>
+    <span class="s2">&quot;d_ppc&quot;</span><span class="p">:</span> <span class="n">d_ppc</span><span class="p">,</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -2793,11 +2794,11 @@ data = {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>sm = cmdstanpy.CmdStanModel(stan_file=&#39;cons_tubulin_model.stan&#39;)
+<span></span><span class="n">sm</span> <span class="o">=</span> <span class="n">cmdstanpy</span><span class="o">.</span><span class="n">CmdStanModel</span><span class="p">(</span><span class="n">stan_file</span><span class="o">=</span><span class="s1">&#39;cons_tubulin_model.stan&#39;</span><span class="p">)</span>
 
-samples = sm.sample(data=data, iter_sampling=1000, chains=4)
+<span class="n">samples</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">iter_sampling</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">chains</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 
-samples = az.from_cmdstanpy(posterior=samples, posterior_predictive=[&quot;ell_ppc&quot;])
+<span class="n">samples</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">from_cmdstanpy</span><span class="p">(</span><span class="n">posterior</span><span class="o">=</span><span class="n">samples</span><span class="p">,</span> <span class="n">posterior_predictive</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;ell_ppc&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -2825,13 +2826,13 @@ INFO:cmdstanpy:finish chain 4
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>bokeh.io.show(
-    bebi103.viz.corner(
-        samples,
-        parameters=[&quot;phi&quot;, &quot;gamma_&quot;, &quot;sigma_0&quot;],
-        xtick_label_orientation=np.pi / 4,
-    )
-)
+<span></span><span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">show</span><span class="p">(</span>
+    <span class="n">bebi103</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span>
+        <span class="n">samples</span><span class="p">,</span>
+        <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;phi&quot;</span><span class="p">,</span> <span class="s2">&quot;gamma_&quot;</span><span class="p">,</span> <span class="s2">&quot;sigma_0&quot;</span><span class="p">],</span>
+        <span class="n">xtick_label_orientation</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -2882,23 +2883,23 @@ var element = document.currentScript.previousSibling.previousSibling;
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>ell_ppc = (
-    samples.posterior_predictive[&quot;ell_ppc&quot;]
-    .stack({&quot;sample&quot;: (&quot;chain&quot;, &quot;draw&quot;)})
-    .transpose(&quot;sample&quot;, &quot;ell_ppc_dim_0&quot;)
-)
+<span></span><span class="n">ell_ppc</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">samples</span><span class="o">.</span><span class="n">posterior_predictive</span><span class="p">[</span><span class="s2">&quot;ell_ppc&quot;</span><span class="p">]</span>
+    <span class="o">.</span><span class="n">stack</span><span class="p">({</span><span class="s2">&quot;sample&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;chain&quot;</span><span class="p">,</span> <span class="s2">&quot;draw&quot;</span><span class="p">)})</span>
+    <span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="s2">&quot;sample&quot;</span><span class="p">,</span> <span class="s2">&quot;ell_ppc_dim_0&quot;</span><span class="p">)</span>
+<span class="p">)</span>
 
-bokeh.io.show(
-    bebi103.viz.predictive_regression(
-        ell_ppc,
-        samples_x=d_ppc,
-        percentiles=[30, 50, 70, 99],
-        data=np.vstack((d, ell)).transpose(),
-        x_axis_label=&quot;droplet diameter [µm]&quot;,
-        y_axis_label=&quot;spindle length [µm]&quot;,
-        x_range=[0, 250],
-    )
-)
+<span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">show</span><span class="p">(</span>
+    <span class="n">bebi103</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">predictive_regression</span><span class="p">(</span>
+        <span class="n">ell_ppc</span><span class="p">,</span>
+        <span class="n">samples_x</span><span class="o">=</span><span class="n">d_ppc</span><span class="p">,</span>
+        <span class="n">percentiles</span><span class="o">=</span><span class="p">[</span><span class="mi">30</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">99</span><span class="p">],</span>
+        <span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">d</span><span class="p">,</span> <span class="n">ell</span><span class="p">))</span><span class="o">.</span><span class="n">transpose</span><span class="p">(),</span>
+        <span class="n">x_axis_label</span><span class="o">=</span><span class="s2">&quot;droplet diameter [µm]&quot;</span><span class="p">,</span>
+        <span class="n">y_axis_label</span><span class="o">=</span><span class="s2">&quot;spindle length [µm]&quot;</span><span class="p">,</span>
+        <span class="n">x_range</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">250</span><span class="p">],</span>
+    <span class="p">)</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -2950,7 +2951,7 @@ var element = document.currentScript.previousSibling.previousSibling;
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>bebi103.stan.clean_cmdstan()
+<span></span><span class="n">bebi103</span><span class="o">.</span><span class="n">stan</span><span class="o">.</span><span class="n">clean_cmdstan</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -2962,9 +2963,9 @@ var element = document.currentScript.previousSibling.previousSibling;
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>%load_ext watermark
-%watermark -v -p numpy,pandas,cmdstanpy,arviz,bokeh,bebi103,jupyterlab
-print(&quot;cmdstan   :&quot;, bebi103.stan.cmdstan_version())
+<span></span><span class="o">%</span><span class="k">load_ext</span> watermark
+<span class="o">%</span><span class="k">watermark</span> -v -p numpy,pandas,cmdstanpy,arviz,bokeh,bebi103,jupyterlab
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;cmdstan   :&quot;</span><span class="p">,</span> <span class="n">bebi103</span><span class="o">.</span><span class="n">stan</span><span class="o">.</span><span class="n">cmdstan_version</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -3010,11 +3011,11 @@ cmdstan   : 2.26.0
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Feb 03, 2021.
+        Last updated on Feb 09, 2021.
       </span>
 
     </p>
-  </div> <jinja2.runtime.BlockReference object at 0x7fa6613eb9d0> 
+  </div> <jinja2.runtime.BlockReference object at 0x7f9ddb486670> 
 
 <p>© 2021 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

@@ -105,6 +105,7 @@ People
    homework/04/index
    homework/05/index
    homework/06/index
+   homework/07/index
 
 ..
    homework/05/index

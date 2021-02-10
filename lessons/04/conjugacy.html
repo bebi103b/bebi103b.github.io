@@ -149,6 +149,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../homework/04/index.html">4. Sampling with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/05/index.html">5. Inference with Stan I</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/06/index.html">6. Practice building and assessing Bayesian models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../homework/07/index.html">7. Model comparison</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -503,25 +504,25 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># Colab setup ------------------
-import os, sys, subprocess
-if &quot;google.colab&quot; in sys.modules:
-    cmd = &quot;pip install --upgrade bebi103 watermark&quot;
-    process = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    stdout, stderr = process.communicate()
-    data_path = &quot;https://s3.amazonaws.com/bebi103.caltech.edu/data/&quot;
-else:
-    data_path = &quot;../data/&quot;
-# ------------------------------
+<span></span><span class="c1"># Colab setup ------------------</span>
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">subprocess</span>
+<span class="k">if</span> <span class="s2">&quot;google.colab&quot;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+    <span class="n">cmd</span> <span class="o">=</span> <span class="s2">&quot;pip install --upgrade bebi103 watermark&quot;</span>
+    <span class="n">process</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="n">cmd</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span>
+    <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">process</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span>
+    <span class="n">data_path</span> <span class="o">=</span> <span class="s2">&quot;https://s3.amazonaws.com/bebi103.caltech.edu/data/&quot;</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">data_path</span> <span class="o">=</span> <span class="s2">&quot;../data/&quot;</span>
+<span class="c1"># ------------------------------</span>
 
-import numpy as np
-import scipy.stats as st
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">st</span>
 
-import bebi103
+<span class="kn">import</span> <span class="nn">bebi103</span>
 
-import holoviews as hv
-hv.extension(&#39;bokeh&#39;)
-bebi103.hv.set_defaults()
+<span class="kn">import</span> <span class="nn">holoviews</span> <span class="k">as</span> <span class="nn">hv</span>
+<span class="n">hv</span><span class="o">.</span><span class="n">extension</span><span class="p">(</span><span class="s1">&#39;bokeh&#39;</span><span class="p">)</span>
+<span class="n">bebi103</span><span class="o">.</span><span class="n">hv</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -3542,36 +3543,36 @@ g(\theta \mid n, N, \alpha, \beta) = \frac{\theta^{n+\alpha-1}(1-\theta)^{N-n+\b
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># Observed data
-n_old = 94
-N_old = 176
-n_young = 154
-N_young = 190
+<span></span><span class="c1"># Observed data</span>
+<span class="n">n_old</span> <span class="o">=</span> <span class="mi">94</span>
+<span class="n">N_old</span> <span class="o">=</span> <span class="mi">176</span>
+<span class="n">n_young</span> <span class="o">=</span> <span class="mi">154</span>
+<span class="n">N_young</span> <span class="o">=</span> <span class="mi">190</span>
 
-# Assume uniform prior
-alpha = 1
-beta = 1
+<span class="c1"># Assume uniform prior</span>
+<span class="n">alpha</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">beta</span> <span class="o">=</span> <span class="mi">1</span>
 
-# Theoretical theta values
-theta = np.linspace(0, 1, 400)
+<span class="c1"># Theoretical theta values</span>
+<span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
 
-# Old posterior
-post_old = hv.Curve(
-    (theta, st.beta.pdf(theta, n_old + alpha, N_old - n_old + beta)),
-    kdims=&#39;θ&#39;,
-    vdims=&#39;g(θ | n, N)&#39;,
-    label=&#39;old mothers&#39;,
-)
+<span class="c1"># Old posterior</span>
+<span class="n">post_old</span> <span class="o">=</span> <span class="n">hv</span><span class="o">.</span><span class="n">Curve</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">st</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">n_old</span> <span class="o">+</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">N_old</span> <span class="o">-</span> <span class="n">n_old</span> <span class="o">+</span> <span class="n">beta</span><span class="p">)),</span>
+    <span class="n">kdims</span><span class="o">=</span><span class="s1">&#39;θ&#39;</span><span class="p">,</span>
+    <span class="n">vdims</span><span class="o">=</span><span class="s1">&#39;g(θ | n, N)&#39;</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="s1">&#39;old mothers&#39;</span><span class="p">,</span>
+<span class="p">)</span>
 
-# Young posterior
-post_young = hv.Curve(
-    (theta, st.beta.pdf(theta, n_young + alpha, N_young - n_young + beta)),
-    kdims=&#39;θ&#39;,
-    vdims=&#39;g(θ | n, N)&#39;,
-    label=&#39;young mothers&#39;,
-)
+<span class="c1"># Young posterior</span>
+<span class="n">post_young</span> <span class="o">=</span> <span class="n">hv</span><span class="o">.</span><span class="n">Curve</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">st</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">n_young</span> <span class="o">+</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">N_young</span> <span class="o">-</span> <span class="n">n_young</span> <span class="o">+</span> <span class="n">beta</span><span class="p">)),</span>
+    <span class="n">kdims</span><span class="o">=</span><span class="s1">&#39;θ&#39;</span><span class="p">,</span>
+    <span class="n">vdims</span><span class="o">=</span><span class="s1">&#39;g(θ | n, N)&#39;</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="s1">&#39;young mothers&#39;</span><span class="p">,</span>
+<span class="p">)</span>
 
-post_young * post_old
+<span class="n">post_young</span> <span class="o">*</span> <span class="n">post_old</span>
 </pre></div>
 </div>
 </div>
@@ -3646,8 +3647,8 @@ to wait for, and depend in detail upon, the likelihood function.”</p></li>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>%load_ext watermark
-%watermark -v -p numpy,scipy,bokeh,holoviews,bebi103,jupyterlab
+<span></span><span class="o">%</span><span class="k">load_ext</span> watermark
+<span class="o">%</span><span class="k">watermark</span> -v -p numpy,scipy,bokeh,holoviews,bebi103,jupyterlab
 </pre></div>
 </div>
 </div>
@@ -3691,11 +3692,11 @@ jupyterlab 2.2.6
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Feb 03, 2021.
+        Last updated on Feb 09, 2021.
       </span>
 
     </p>
-  </div> <jinja2.runtime.BlockReference object at 0x7fa664209ac0> 
+  </div> <jinja2.runtime.BlockReference object at 0x7f9ddb9b3760> 
 
 <p>© 2021 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

@@ -154,6 +154,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../homework/04/index.html">4. Sampling with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/05/index.html">5. Inference with Stan I</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/06/index.html">6. Practice building and assessing Bayesian models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../homework/07/index.html">7. Model comparison</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -510,26 +511,26 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># Colab setup ------------------
-import os, sys, subprocess
-if &quot;google.colab&quot; in sys.modules:
-    cmd = &quot;pip install --upgrade iqplot colorcet arviz watermark&quot;
-    process = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    stdout, stderr = process.communicate()
-    data_path = &quot;https://s3.amazonaws.com/bebi103.caltech.edu/data/&quot;
-else:
-    data_path = &quot;../data/&quot;
-# ------------------------------
+<span></span><span class="c1"># Colab setup ------------------</span>
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">subprocess</span>
+<span class="k">if</span> <span class="s2">&quot;google.colab&quot;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+    <span class="n">cmd</span> <span class="o">=</span> <span class="s2">&quot;pip install --upgrade iqplot colorcet arviz watermark&quot;</span>
+    <span class="n">process</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="n">cmd</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span>
+    <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">process</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span>
+    <span class="n">data_path</span> <span class="o">=</span> <span class="s2">&quot;https://s3.amazonaws.com/bebi103.caltech.edu/data/&quot;</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">data_path</span> <span class="o">=</span> <span class="s2">&quot;../data/&quot;</span>
+<span class="c1"># ------------------------------</span>
 
-import numpy as np
-import pandas as pd
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
-import arviz as az
+<span class="kn">import</span> <span class="nn">arviz</span> <span class="k">as</span> <span class="nn">az</span>
 
-import iqplot
+<span class="kn">import</span> <span class="nn">iqplot</span>
 
-import bokeh.io
-bokeh.io.output_notebook()
+<span class="kn">import</span> <span class="nn">bokeh.io</span>
+<span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">output_notebook</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -869,30 +870,30 @@ plotted as an error bar.</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># Parametrize models
-mu = 1.0
-sigma = 0.25
-mu_2 = np.array([mu, 3.0])
-sigma_2 = np.array([sigma, 0.5])
+<span></span><span class="c1"># Parametrize models</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.25</span>
+<span class="n">mu_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">mu</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">])</span>
+<span class="n">sigma_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">sigma</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">])</span>
 
-# Instantiate RNG
-rg = np.random.default_rng(seed=3252)
+<span class="c1"># Instantiate RNG</span>
+<span class="n">rg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">3252</span><span class="p">)</span>
 
-# Draw out of the distributions, start with exponential
-x_expon = rg.exponential(mu, size=15000)
+<span class="c1"># Draw out of the distributions, start with exponential</span>
+<span class="n">x_expon</span> <span class="o">=</span> <span class="n">rg</span><span class="o">.</span><span class="n">exponential</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">15000</span><span class="p">)</span>
 
-# Normal
-x_norm = rg.normal(mu, sigma, size=15000)
+<span class="c1"># Normal</span>
+<span class="n">x_norm</span> <span class="o">=</span> <span class="n">rg</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">15000</span><span class="p">)</span>
 
-# Bimodal mixture of Normals
-which_norm = rg.choice([0, 1], 15000)
-x_2norm = rg.normal(mu_2[which_norm], sigma_2[which_norm])
+<span class="c1"># Bimodal mixture of Normals</span>
+<span class="n">which_norm</span> <span class="o">=</span> <span class="n">rg</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="mi">15000</span><span class="p">)</span>
+<span class="n">x_2norm</span> <span class="o">=</span> <span class="n">rg</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mu_2</span><span class="p">[</span><span class="n">which_norm</span><span class="p">],</span> <span class="n">sigma_2</span><span class="p">[</span><span class="n">which_norm</span><span class="p">])</span>
 
-# Heavy tailed Pareto
-x_heavytail = rg.pareto(1.2, size=15000)
+<span class="c1"># Heavy tailed Pareto</span>
+<span class="n">x_heavytail</span> <span class="o">=</span> <span class="n">rg</span><span class="o">.</span><span class="n">pareto</span><span class="p">(</span><span class="mf">1.2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">15000</span><span class="p">)</span>
 
-# Store samples in a list for easy access
-samples = [x_expon, x_norm, x_2norm, x_heavytail]
+<span class="c1"># Store samples in a list for easy access</span>
+<span class="n">samples</span> <span class="o">=</span> <span class="p">[</span><span class="n">x_expon</span><span class="p">,</span> <span class="n">x_norm</span><span class="p">,</span> <span class="n">x_2norm</span><span class="p">,</span> <span class="n">x_heavytail</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -902,42 +903,42 @@ samples = [x_expon, x_norm, x_2norm, x_heavytail]
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>names = [&quot;Exponential&quot;, &quot;Gaussian&quot;, &quot;Two Gaussians&quot;, &quot;Heavy tail&quot;]
-plots = [
-    iqplot.histogram(
-        x,
-        density=True,
-        rug=False,
-        kind=&#39;step&#39;,
-        frame_width=250,
-        frame_height=200,
-        x_axis_label=&quot;x&quot;,
-        y_axis_label=&quot;pdf&quot;,
-        title=t,
-        line_kwargs={&quot;line_width&quot;: 2, &quot;line_color&quot;: &quot;gray&quot;},
-    )
-    for x, t in zip(samples[:-1], names[:-1])
-]
+<span></span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Exponential&quot;</span><span class="p">,</span> <span class="s2">&quot;Gaussian&quot;</span><span class="p">,</span> <span class="s2">&quot;Two Gaussians&quot;</span><span class="p">,</span> <span class="s2">&quot;Heavy tail&quot;</span><span class="p">]</span>
+<span class="n">plots</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">iqplot</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span>
+        <span class="n">x</span><span class="p">,</span>
+        <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">rug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">,</span>
+        <span class="n">frame_width</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span>
+        <span class="n">frame_height</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+        <span class="n">x_axis_label</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span>
+        <span class="n">y_axis_label</span><span class="o">=</span><span class="s2">&quot;pdf&quot;</span><span class="p">,</span>
+        <span class="n">title</span><span class="o">=</span><span class="n">t</span><span class="p">,</span>
+        <span class="n">line_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;line_width&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;line_color&quot;</span><span class="p">:</span> <span class="s2">&quot;gray&quot;</span><span class="p">},</span>
+    <span class="p">)</span>
+    <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">samples</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">names</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="p">]</span>
 
-# Make plot for heavy tail (needs different bins because of heavy tail)
-plots.append(
-    iqplot.histogram(
-        samples[-1],
-        bins=np.arange(21),
-        density=True,
-        rug=False,
-        kind=&#39;step&#39;,
-        frame_width=250,
-        frame_height=200,
-        x_axis_label=&quot;x&quot;,
-        y_axis_label=&quot;pdf&quot;,
-        title=&quot;Heavy tail&quot;,
-        line_kwargs={&quot;line_width&quot;: 2, &quot;line_color&quot;: &quot;gray&quot;},
-    )
-)
+<span class="c1"># Make plot for heavy tail (needs different bins because of heavy tail)</span>
+<span class="n">plots</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+    <span class="n">iqplot</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span>
+        <span class="n">samples</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+        <span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">21</span><span class="p">),</span>
+        <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">rug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">,</span>
+        <span class="n">frame_width</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span>
+        <span class="n">frame_height</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+        <span class="n">x_axis_label</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span>
+        <span class="n">y_axis_label</span><span class="o">=</span><span class="s2">&quot;pdf&quot;</span><span class="p">,</span>
+        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Heavy tail&quot;</span><span class="p">,</span>
+        <span class="n">line_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;line_width&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;line_color&quot;</span><span class="p">:</span> <span class="s2">&quot;gray&quot;</span><span class="p">},</span>
+    <span class="p">)</span>
+<span class="p">)</span>
 
-# Show in a grid
-bokeh.io.show(bokeh.layouts.gridplot(plots, ncols=2))
+<span class="c1"># Show in a grid</span>
+<span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">bokeh</span><span class="o">.</span><span class="n">layouts</span><span class="o">.</span><span class="n">gridplot</span><span class="p">(</span><span class="n">plots</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -991,16 +992,16 @@ var element = document.currentScript.previousSibling.previousSibling;
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># DataFrame to store summary stats
-df_summary = pd.DataFrame(
-    index=[&quot;mean&quot;, &quot;std&quot;, &quot;2.5&quot;, &quot;median&quot;, &quot;97.5&quot;, &quot;mode&quot;, &quot;hpd_low&quot;, &quot;hpd_high&quot;],
-    columns=names,
-)
+<span></span><span class="c1"># DataFrame to store summary stats</span>
+<span class="n">df_summary</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="s2">&quot;std&quot;</span><span class="p">,</span> <span class="s2">&quot;2.5&quot;</span><span class="p">,</span> <span class="s2">&quot;median&quot;</span><span class="p">,</span> <span class="s2">&quot;97.5&quot;</span><span class="p">,</span> <span class="s2">&quot;mode&quot;</span><span class="p">,</span> <span class="s2">&quot;hpd_low&quot;</span><span class="p">,</span> <span class="s2">&quot;hpd_high&quot;</span><span class="p">],</span>
+    <span class="n">columns</span><span class="o">=</span><span class="n">names</span><span class="p">,</span>
+<span class="p">)</span>
 
-for x, name in zip(samples, names):
-    df_summary.loc[&quot;mean&quot;, name] = np.mean(x)
-    df_summary.loc[&quot;std&quot;, name] = np.std(x)
-    df_summary.loc[[&quot;2.5&quot;, &quot;median&quot;, &quot;97.5&quot;], name] = np.percentile(x, [2.5, 50, 97.5])
+<span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">names</span><span class="p">):</span>
+    <span class="n">df_summary</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">df_summary</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;std&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">df_summary</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="s2">&quot;2.5&quot;</span><span class="p">,</span> <span class="s2">&quot;median&quot;</span><span class="p">,</span> <span class="s2">&quot;97.5&quot;</span><span class="p">],</span> <span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">[</span><span class="mf">2.5</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mf">97.5</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -1010,8 +1011,8 @@ for x, name in zip(samples, names):
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>for x, name in zip(samples, names):
-    df_summary.loc[[&#39;hpd_low&#39;, &#39;hpd_high&#39;], name] = az.hdi(x, hdi_prob=0.95)
+<span></span><span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">names</span><span class="p">):</span>
+    <span class="n">df_summary</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="s1">&#39;hpd_low&#39;</span><span class="p">,</span> <span class="s1">&#39;hpd_high&#39;</span><span class="p">],</span> <span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">hdi</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">hdi_prob</span><span class="o">=</span><span class="mf">0.95</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1021,7 +1022,7 @@ for x, name in zip(samples, names):
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>df_summary.loc[&#39;mode&#39;, :] = [0, mu, mu, 1]
+<span></span><span class="n">df_summary</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;mode&#39;</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1031,7 +1032,7 @@ for x, name in zip(samples, names):
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>df_summary
+<span></span><span class="n">df_summary</span>
 </pre></div>
 </div>
 </div>
@@ -1131,50 +1132,50 @@ for x, name in zip(samples, names):
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># y_values for bars on plots
-y_vals = [
-    [0.8, 0.6, 0.4, 0.2],    # Exponential
-    [1.33, 1, 0.66, 0.33],   # Gaussian
-    [0.6, 0.45, 0.3, 0.15],  # Two Gaussians
-    [0.5, 0.4, 0.3, 0.2],  # Heavy tail
-]
+<span></span><span class="c1"># y_values for bars on plots</span>
+<span class="n">y_vals</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">],</span>    <span class="c1"># Exponential</span>
+    <span class="p">[</span><span class="mf">1.33</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.66</span><span class="p">,</span> <span class="mf">0.33</span><span class="p">],</span>   <span class="c1"># Gaussian</span>
+    <span class="p">[</span><span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">],</span>  <span class="c1"># Two Gaussians</span>
+    <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">],</span>  <span class="c1"># Heavy tail</span>
+<span class="p">]</span>
 
-# Color scheme
-colors = bokeh.palettes.Category10[10]
-
-
-def plot_interval(x, y, barx, color, legend_label, p):
-    p.circle([x], [y], size=10, color=color, legend_label=legend_label)
-    p.line(barx, [y, y], line_width=4, color=color)
+<span class="c1"># Color scheme</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="n">bokeh</span><span class="o">.</span><span class="n">palettes</span><span class="o">.</span><span class="n">Category10</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span>
 
 
-legends = [&quot;mean ± std&quot;, &quot;quantile&quot;, &quot;mode/HPD&quot;, &quot;median/HPD&quot;]
-for p, name, y in zip(plots, names, y_vals):
-    # Mean ± std
-    x = df_summary.loc[&quot;mean&quot;, name]
-    barx = x + np.array([1, -1]) * 1.96 * df_summary.loc[&quot;std&quot;, name]
-    plot_interval(x, y[0], barx, colors[0], legends[0], p)
+<span class="k">def</span> <span class="nf">plot_interval</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">barx</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">legend_label</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">circle</span><span class="p">([</span><span class="n">x</span><span class="p">],</span> <span class="p">[</span><span class="n">y</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">legend_label</span><span class="o">=</span><span class="n">legend_label</span><span class="p">)</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">barx</span><span class="p">,</span> <span class="p">[</span><span class="n">y</span><span class="p">,</span> <span class="n">y</span><span class="p">],</span> <span class="n">line_width</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
 
-    # Median with central 95% interval
-    x = df_summary.loc[&quot;median&quot;, name]
-    barx = df_summary.loc[[&quot;2.5&quot;, &quot;97.5&quot;], name]
-    plot_interval(x, y[1], barx, colors[1], legends[1], p)
 
-    # Mode with HPD
-    x = df_summary.loc[&quot;mode&quot;, name]
-    barx = df_summary.loc[[&quot;hpd_low&quot;, &quot;hpd_high&quot;], name]
-    plot_interval(x, y[2], barx, colors[2], legends[2], p)
+<span class="n">legends</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;mean ± std&quot;</span><span class="p">,</span> <span class="s2">&quot;quantile&quot;</span><span class="p">,</span> <span class="s2">&quot;mode/HPD&quot;</span><span class="p">,</span> <span class="s2">&quot;median/HPD&quot;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">plots</span><span class="p">,</span> <span class="n">names</span><span class="p">,</span> <span class="n">y_vals</span><span class="p">):</span>
+    <span class="c1"># Mean ± std</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">df_summary</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">]</span>
+    <span class="n">barx</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="mf">1.96</span> <span class="o">*</span> <span class="n">df_summary</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;std&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">]</span>
+    <span class="n">plot_interval</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">barx</span><span class="p">,</span> <span class="n">colors</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">legends</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">p</span><span class="p">)</span>
 
-    # Median with HPD
-    x = df_summary.loc[&quot;median&quot;, name]
-    barx = df_summary.loc[[&quot;hpd_low&quot;, &quot;hpd_high&quot;], name]
-    plot_interval(x, y[3], barx, colors[3], legends[3], p)
+    <span class="c1"># Median with central 95% interval</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">df_summary</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;median&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">]</span>
+    <span class="n">barx</span> <span class="o">=</span> <span class="n">df_summary</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="s2">&quot;2.5&quot;</span><span class="p">,</span> <span class="s2">&quot;97.5&quot;</span><span class="p">],</span> <span class="n">name</span><span class="p">]</span>
+    <span class="n">plot_interval</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">barx</span><span class="p">,</span> <span class="n">colors</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">legends</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">p</span><span class="p">)</span>
 
-plots[0].legend.visible = True
-for i in [1, 2, 3]:
-    plots[i].legend.visible = False
+    <span class="c1"># Mode with HPD</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">df_summary</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;mode&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">]</span>
+    <span class="n">barx</span> <span class="o">=</span> <span class="n">df_summary</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="s2">&quot;hpd_low&quot;</span><span class="p">,</span> <span class="s2">&quot;hpd_high&quot;</span><span class="p">],</span> <span class="n">name</span><span class="p">]</span>
+    <span class="n">plot_interval</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">barx</span><span class="p">,</span> <span class="n">colors</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">legends</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">p</span><span class="p">)</span>
 
-bokeh.io.show(bokeh.layouts.gridplot(plots, ncols=2))
+    <span class="c1"># Median with HPD</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">df_summary</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;median&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">]</span>
+    <span class="n">barx</span> <span class="o">=</span> <span class="n">df_summary</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="s2">&quot;hpd_low&quot;</span><span class="p">,</span> <span class="s2">&quot;hpd_high&quot;</span><span class="p">],</span> <span class="n">name</span><span class="p">]</span>
+    <span class="n">plot_interval</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">barx</span><span class="p">,</span> <span class="n">colors</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">legends</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">p</span><span class="p">)</span>
+
+<span class="n">plots</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="o">.</span><span class="n">visible</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]:</span>
+    <span class="n">plots</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="o">.</span><span class="n">visible</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">bokeh</span><span class="o">.</span><span class="n">layouts</span><span class="o">.</span><span class="n">gridplot</span><span class="p">(</span><span class="n">plots</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1241,8 +1242,8 @@ var element = document.currentScript.previousSibling.previousSibling;
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>%load_ext watermark
-%watermark -v -p numpy,pandas,arviz,bokeh,iqplot,jupyterlab
+<span></span><span class="o">%</span><span class="k">load_ext</span> watermark
+<span class="o">%</span><span class="k">watermark</span> -v -p numpy,pandas,arviz,bokeh,iqplot,jupyterlab
 </pre></div>
 </div>
 </div>
@@ -1286,11 +1287,11 @@ jupyterlab 2.2.6
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Feb 03, 2021.
+        Last updated on Feb 09, 2021.
       </span>
 
     </p>
-  </div> <jinja2.runtime.BlockReference object at 0x7fa65f2879d0> 
+  </div> <jinja2.runtime.BlockReference object at 0x7f9deb6ec550> 
 
 <p>© 2021 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

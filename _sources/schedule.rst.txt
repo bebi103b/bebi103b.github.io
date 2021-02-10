@@ -29,7 +29,7 @@ Homework due dates
 - :ref:`Homework 4<4. Sampling with MCMC>`: due 5 pm PST, February 1
 - :ref:`Homework 5<5. Inference with Stan I>`: due 5 pm PST, February 8
 - :ref:`Homework 6<6. Practice building and assessing Bayesian models>`: due 5 pm PST, February 15
-- Homework 7: due 5 pm PST, February 22
+- :ref:`Homework 7<7. Model comparison>`: due 5 pm PST, February 22
 - Homework 8: due 5 pm PST, March 1
 - Homework 9: due 5 pm PST, March 8
 - Homework 10: due 5 pm PST, March 15
