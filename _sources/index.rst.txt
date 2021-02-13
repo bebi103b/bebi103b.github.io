@@ -82,6 +82,7 @@ People
    recitations/03/choosing_priors.ipynb
    recitations/04/index
    recitations/05/index
+   recitations/06/practice_model_building.ipynb
 
 ..
    recitations/02/git_and_github_tips.ipynb

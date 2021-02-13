@@ -227,7 +227,7 @@ the true distribution :math:`f_t(\tilde{y})`, we can write [1]_
 .. math::
 
    \begin{aligned}
-   D_\mathrm{KL}(f_t \| f_M) = \int \mathrm{d}\tilde{y}\,\,f_t(\tilde{y})\,\ln\frac{f_t(\tilde{y})}{f_M(\tilde{y})}.
+   D_\mathrm{KL}(f_t \| f_M) = \int \mathrm{d}\tilde{y}\,\,f_t(\tilde{y})\,\ln\frac{f_t(\tilde{y})}{f_M(\tilde{y} \mid y)}.
    \end{aligned}
 
 
