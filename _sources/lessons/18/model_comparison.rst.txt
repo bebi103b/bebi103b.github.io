@@ -157,7 +157,7 @@ information. We are free to choose the base of the logarithm, and it is
 traditional to choose base 2. The units of information are then called
 *bits*. We, however, will use natural logarithms for convenience.
 
-Now, saw we have an ensemble of events. Then the *average* information we
+Now, say we have an ensemble of events. Then the *average* information we
 get from observing events (i.e., the level of surprise) is
 
 .. math::
@@ -306,7 +306,7 @@ different models gives their relative closeness (as defined by the KL
 divergence) to the true distribution. [3]_ While we would like to
 compute elpd, we cannot, because :math:`f_t(\tilde{y})` is not known.
 All we have is a single data set sampled from it (the one we got by
-doing the experiment). We therefore seen to find ways to *approximately*
+doing the experiment). We therefore seek ways to *approximately*
 compute elpd.
 
 
