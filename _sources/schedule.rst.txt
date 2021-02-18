@@ -93,11 +93,11 @@ The notes for each Tuesday lesson must be read ahead of time and associated less
 	+ Tu 02/09: :ref:`Lesson 16<16. MCMC diagnostics>`: MCMC diagnostics
 	+ Tu 02/09: :ref:`Lesson 17<17. A diagnostics case study: Artificial funnel of hell>`: The Funnel of Hell and uncentering
 	+ W 02/10: :ref:`Lesson 18<18. Model comparison>`: Model comparison (lecture)
-	+ Th 02/11: Recitation 06: Practice modeling
+	+ Th 02/11: :ref:`Recitation 06<R6. Practice model building>`: Practice modeling
 - **Week 7**
 	+ Tu 02/16: :ref:`Lesson 19<19. Model comparison in practice>`: Model comparison in practice
 	+ W 02/17: :ref:`Lesson 20<20. Hierarchical models>`: Hierarchical models (lecture)
-	+ Th 02/18: Recitation 07: Background on Hamiltonian Monte Carlo
+	+ Th 02/18: :ref:`Recitation 07<R7. Introduction to Hamiltonian Monte Carlo>`: Background on Hamiltonian Monte Carlo
 - **Week 8**
 	+ Tu 02/23: :ref:`Lesson 21<21. Implementation of hierarchical models>`: Implementation of hierarchical models
 	+ W 02/24: :ref:`Lesson 22<22. Principled analysis pipelines>`: Principled workflows (lecture)
@@ -109,5 +109,6 @@ The notes for each Tuesday lesson must be read ahead of time and associated less
 - **Week 10**
 	+ Tu 03/09: Lesson 25: Implementation of Gaussian processes
 	+ W 03/10: Lesson 26: Variational inference (lecture)
-	+ Th 03/11: Recitation 10: Variational inference in practice
+	+ W 03/10: Lesson 27: Variational inference in practice
+	+ Th 03/11: Recitation 10: Gaussian processes
 
