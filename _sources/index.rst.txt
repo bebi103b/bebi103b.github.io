@@ -72,6 +72,7 @@ People
    lessons/22/sbc.ipynb
    lessons/23/sbc_in_practice.ipynb
    lesson_exercises/exercise_08.ipynb
+   lessons/24/intro_to_gps.ipynb
 
 .. toctree::
    :maxdepth: 1
