@@ -73,6 +73,7 @@ People
    lessons/23/sbc_in_practice.ipynb
    lesson_exercises/exercise_08.ipynb
    lessons/24/intro_to_gps.ipynb
+   lessons/25/index
 
 .. toctree::
    :maxdepth: 1
@@ -85,16 +86,7 @@ People
    recitations/05/index
    recitations/06/practice_model_building.ipynb
    recitations/07/hmc.ipynb
-
-..
-   recitations/02/git_and_github_tips.ipynb
-   recitations/03/time_series.ipynb
-   recitations/04/manipuluating_dfs.ipynb
-   recitations/05/index
-   recitations/06/probability_review.ipynb
-   recitations/07/topics_in_bootstrapping.ipynb
-   recitations/08/index
-   recitations/09/index
+   recitations/08/project_proposals.rst
 
 
 .. toctree::

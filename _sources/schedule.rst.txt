@@ -101,13 +101,13 @@ The notes for each Tuesday lesson must be read ahead of time and associated less
 - **Week 8**
 	+ Tu 02/23: :ref:`Lesson 21<21. Implementation of hierarchical models>`: Implementation of hierarchical models
 	+ W 02/24: :ref:`Lesson 22<22. Principled analysis pipelines>`: Principled workflows (lecture)
-	+ Th 02/25: Recitation 08: Discussion of project proposals
+	+ Th 02/25: :ref:`Recitation 08<R8: Discussion of HW 10 project proposals>`: Discussion of project proposals
 - **Week 9**
 	+ Tu 03/02: :ref:`Lesson 23<23: Simulation based calibration and related checks in practice>`: Simulation-based calibration in practice
 	+ W 03/03: :ref:`Lesson 24<24. Introduction to Gaussian processes>`: Introduction to nonparametric Bayes: Gaussian processes
 	+ Th 03/04: Recitation 09: Sampling out of discrete distributions
 - **Week 10**
-	+ Tu 03/09: Lesson 25: Implementation of Gaussian processes
+	+ Tu 03/09: :ref:`Lesson 25<25. Implementation of Gaussian processes>`: Implementation of Gaussian processes
 	+ W 03/10: Lesson 26: Variational inference (lecture)
 	+ W 03/10: Lesson 27: Variational inference in practice
 	+ Th 03/11: Recitation 10: Gaussian processes

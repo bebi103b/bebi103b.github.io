@@ -123,6 +123,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/23/sbc_in_practice.html">23: Simulation based calibration and related checks in practice</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_08.html">E8. To be completed after lesson 23</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/24/intro_to_gps.html">24. Introduction to Gaussian processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/25/index.html">25. Implementation of Gaussian processes</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Recitations</span></p>
 <ul>
@@ -133,6 +134,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/05/index.html">R5. A Bayesian modeling case study: Ant traffic jams</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/06/practice_model_building.html">R6. Practice model building</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/07/hmc.html">R7. Introduction to Hamiltonian Monte Carlo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../recitations/08/project_proposals.html">R8: Discussion of HW 10 project proposals</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Homework</span></p>
 <ul class="current">
@@ -283,8 +285,8 @@ h^2 = \frac{\sigma_{po}}{\sigma_p^2},
 <p>In practice, <span class="math notranslate nohighlight">\(h^2\)</span> is often computed by plotting the average beak depth of the offspring against the average beak depth of the two parents, and then preforming a linear least squares regression, with <span class="math notranslate nohighlight">\(h^2\)</span> being given by the slope. Show that this gives a maximum likelihood estimate of <span class="math notranslate nohighlight">\(h^2\)</span> as we have defined it. Equivalently, you can show that this gives an MAP estimate with uniform priors on all parameters. (This is in some ways an exercise in trying to understand what people
 mean when the describe their methods with inadequate detail to reproduce it without guesswork, which happens all too often.)</p>
 <p><em>Note</em>: in this analysis, we are neglecting confounding issues and just assuming the environment is unchanging and that the mean trait values we are using for the parents and the offspring is indicative of the differences.</p>
-<p><strong>b)</strong> In choosing to do a linear regression, we tacitly assume a statistical model where there is no error at all in the measurement of beak depth (the x-axis), and homoscedastic errors in the beak length (the y-axis). Since both are measured in a similar way, this is not really a good generative statistical model. Instead propose a generative model and perform a parameter estimate for the heritability using that model. You should go through a complete principled pipeline. This includes prior
-predictive checks, simulation-based calibration with checks for shrinkage and z-scores, and posterior predictive checks.</p>
+<p><strong>b)</strong> In choosing to do a linear regression, we tacitly assume a statistical model where there is no error at all in the measurement of parental beak depth (the x-axis), and homoscedastic errors in the offspring beak depth (the y-axis). Since both are measured in a similar way, this is not really a good generative statistical model. Instead propose a generative model and perform a parameter estimate for the heritability using that model. You should go through a complete principled pipeline.
+This includes prior predictive checks, simulation-based calibration with checks for shrinkage and z-scores, and posterior predictive checks.</p>
 </div>
 
 
@@ -308,11 +310,11 @@ predictive checks, simulation-based calibration with checks for shrinkage and z-
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Feb 25, 2021.
+        Last updated on Mar 01, 2021.
       </span>
 
     </p>
-  </div> <jinja2.runtime.BlockReference object at 0x7fb67bc8f580> 
+  </div> <jinja2.runtime.BlockReference object at 0x7fe01551f610> 
 
 <p>© 2021 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 
