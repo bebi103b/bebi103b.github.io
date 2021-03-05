@@ -87,6 +87,7 @@ People
    recitations/06/practice_model_building.ipynb
    recitations/07/hmc.ipynb
    recitations/08/project_proposals.rst
+   recitations/09/sampling_discrete_parameters.ipynb
 
 
 .. toctree::
