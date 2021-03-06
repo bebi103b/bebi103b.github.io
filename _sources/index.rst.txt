@@ -74,6 +74,8 @@ People
    lesson_exercises/exercise_08.ipynb
    lessons/24/intro_to_gps.ipynb
    lessons/25/index
+   lesson_exercises/exercise_09.ipynb
+
 
 .. toctree::
    :maxdepth: 1

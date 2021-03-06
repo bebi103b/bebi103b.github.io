@@ -50,7 +50,7 @@ Lesson exercise due dates
 - :ref:`Lesson exercise 6<E6. To be completed after lesson 19>`: due 10:30 am PST, February 16
 - :ref:`Lesson exercise 7<E7. To be completed after lesson 21>`: due 10:30 am PST, February 23
 - :ref:`Lesson exercise 8<E8. To be completed after lesson 23>`: due 10:30 am PST, March 2
-- Lesson exercise 9: due 10:30 am PST, March 9
+- :ref:`Lesson exercise 9<E9. To be completed after lesson 25>`: due 10:30 am PST, March 9
 
 
 ----
@@ -108,7 +108,7 @@ The notes for each Tuesday lesson must be read ahead of time and associated less
 	+ Th 03/04: Recitation 09: Sampling out of discrete distributions
 - **Week 10**
 	+ Tu 03/09: :ref:`Lesson 25<25. Implementation of Gaussian processes>`: Implementation of Gaussian processes
-	+ W 03/10: Lesson 26: Variational inference (lecture)
+	+ W 03/10: Lesson 26: Course wrap-up (lecture)
 	+ W 03/10: Lesson 27: Variational inference in practice
 	+ Th 03/11: Recitation 10: Gaussian processes
 
