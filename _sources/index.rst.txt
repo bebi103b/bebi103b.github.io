@@ -75,7 +75,8 @@ People
    lessons/24/intro_to_gps.ipynb
    lessons/25/index
    lesson_exercises/exercise_09.ipynb
-   lessons/26/wrapup
+   lessons/26/variational_inference.ipynb
+   lessons/27/wrapup
 
 
 .. toctree::

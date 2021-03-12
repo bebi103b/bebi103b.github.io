@@ -108,7 +108,7 @@ The notes for each Tuesday lesson must be read ahead of time and associated less
 	+ Th 03/04: :ref:`Recitation 09<R9: Sampling discrete parameters with Stan>`: Sampling out of discrete distributions
 - **Week 10**
 	+ Tu 03/09: :ref:`Lesson 25<25. Implementation of Gaussian processes>`: Implementation of Gaussian processes
-	+ W 03/10: :ref:`Lesson 26<26: Wrap-up>`: Course wrap-up (lecture)
-	+ W 03/10: Lesson 27: Variational inference in practice
+	+ W 03/10: :ref:`Lesson 26<26: Variational Bayesian inference>`: Variational inference
+	+ W 03/10: :ref:`Lesson 27<27: Wrap-up>`: Course wrap-up (lecture)
 	+ Th 03/11: Recitation 10: Gaussian processes
 

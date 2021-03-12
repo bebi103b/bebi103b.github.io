@@ -1,0 +1,4 @@
+R10: Review of Gaussian processes
+----------------------------------
+
+Recitation 10 was a review of Gaussian processes. We may post written materials later.
