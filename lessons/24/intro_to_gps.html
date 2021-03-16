@@ -2714,6 +2714,7 @@ f(\mathbf{x}) \mid \theta_m, \theta_k \sim \text{GP}(m(\mathbf{x} ; \theta_m), k
 <p><span class="math">\begin{align}
 \pi(f(\mathbf{X}_*)\mid \mathbf{X}_*, \mathbf{y}, \mathbf{X}) = \frac{\pi(\mathbf{y}, \mathbf{X}\mid f(\mathbf{X}_*), \mathbf{X}_*)\,\pi(f(\mathbf{X}_*) \mid \mathbf{X}_*)}{\pi(\mathbf{y}, \mathbf{X})}.
 \end{align}</span></p>
+<p>The values of the nonparametric function, <span class="math notranslate nohighlight">\(f(\mathbf{X}_*)\)</span> are often referred to as <strong>latent variables</strong> because they are variables that are not directly observed.</p>
 <div class="section" id="The-mean-function-and-centering-and-scaling">
 <h3>The mean function and centering and scaling<a class="headerlink" href="#The-mean-function-and-centering-and-scaling" title="Permalink to this headline">¶</a></h3>
 <p>In a purely nonparametric approach, we almost always take the mean function to be zero; <span class="math notranslate nohighlight">\(m(\mathbf{x}) = 0\)</span>. We may, however, wish to do a <strong>semi-parametric regression</strong> and introduce an explicit bias via <span class="math notranslate nohighlight">\(m(\mathbf{x})\)</span>. We often do this when we have, e.g., count data, that we cannot really transform such that the mean is zero.</p>
@@ -2771,7 +2772,7 @@ f \mid \theta_k \sim \text{GP}(0, k(\mathbf{x}, \mathbf{x}'; \theta_k)).
 <p><span class="math">\begin{align}
 f \mid \alpha, \rho \sim \text{GP}(\mathbf{0}, k_\mathrm{SE}(\mathbf{x}, \mathbf{x}'; \alpha, \rho)).
 \end{align}</span></p>
-<p>Remember that we can represent the prior <span class="math notranslate nohighlight">\(\pi(f\mid \alpha, \rho)\)</span> as a multivariate Normal distribution over a set of finite points. For ease, let’s consider a one-dimensional dependent variable, so <span class="math notranslate nohighlight">\(\mathbf{x} = x\)</span>. Say we want to evaluate <span class="math notranslate nohighlight">\(f(x)\)</span> at a set of positions <span class="math notranslate nohighlight">\(\mathbf{x}_*\)</span>. Then,</p>
+<p>Remember that we can represent the prior <span class="math notranslate nohighlight">\(\pi(f\mid \alpha, \rho)\)</span> as a multivariate Normal distribution over a set of finite points. For ease, let’s consider a one-dimensional dependent variable, so <span class="math notranslate nohighlight">\(\mathbf{x} = x\)</span>. Say we want to evaluate <span class="math notranslate nohighlight">\(f(x)\)</span> at a set of positions <span class="math notranslate nohighlight">\(\mathbf{x}_*\)</span>. Then the latent variables are distributed as</p>
 <p><span class="math">\begin{align}
 f(\mathbf{x}_*) \mid \alpha, \rho \sim \text{MultiNorm}(\mathbf{0}, \mathsf{K}(\mathbf{x}_*, \mathbf{x}_*)).
 \end{align}</span></p>
@@ -3607,11 +3608,11 @@ cmdstan   : 2.26.1
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Mar 11, 2021.
+        Last updated on Mar 16, 2021.
       </span>
 
     </p>
-  </div> <jinja2.runtime.BlockReference object at 0x7fd64b3dbaf0> 
+  </div> <jinja2.runtime.BlockReference object at 0x7ff271b40220> 
 
 <p>© 2021 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 
