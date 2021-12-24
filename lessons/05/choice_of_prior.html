@@ -1,74 +1,42 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Choosing priors &mdash; BE/Bi 103 b  documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
-
-  
-  
-  
-  
-
-  
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/clipboard.min.js"></script>
         <script src="../../_static/copybutton.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "document", "processHtmlClass": "math|output_area"}}</script>
+    <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="6. Parameter estimation by optimization" href="../06/index.html" />
     <link rel="prev" title="Choosing likelihoods" href="choice_of_likelihood.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: #827F7F" >
-          
-
-          
             <a href="../../index.html">
-          
-
-          
-            
             <img src="../../_static/logo.png" class="logo" alt="Logo"/>
-          
           </a>
-
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -76,19 +44,8 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Lessons</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Lessons</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../00/setup.html">0. Preparing for the course</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../01/index.html">1. Probability and the logic of scientific reasoning</a></li>
@@ -107,6 +64,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#why-not-use-jeffreys-priors">Why not use Jeffreys priors?</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#weakly-informative-priors">Weakly informative priors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#conjugate-priors">Conjugate priors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-bet-the-farm-method-of-specifying-weakly-informative-priors">The bet-the-farm method of specifying weakly informative priors</a></li>
 </ul>
 </li>
 </ul>
@@ -114,69 +72,27 @@
 <li class="toctree-l1"><a class="reference internal" href="../06/index.html">6. Parameter estimation by optimization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_02.html">E2. To be completed after lesson 6</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../07/index.html">7. Introduction to Markov chain Monte Carlo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../08/index.html">8. AWS setup and usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08/index.html">8. Cloud computing setup and usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../09/index.html">9. Introduction to MCMC with Stan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../10/mixture_model_stan.html">10. Mixture models and label switching with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../11/regression_with_stan.html">11. Regression with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_03.html">E3. To be completed after lesson 11</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../12/index.html">12. Display of MCMC results</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../13/prior_predictive_checks.html">13. Model building with prior predictive checks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../14/posterior_predictive_checks.html">14. Posterior predictive checks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_04.html">E4. To be completed after lesson 14</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../15/box_of_distributions.html">15. Collector’s box of distributions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../16/mcmc_diagnostics.html">16. MCMC diagnostics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../17/funnel_of_hell.html">17. A diagnostics case study: Artificial funnel of hell</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_05.html">E5. To be completed after lesson 17</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../18/model_comparison.html">18. Model comparison</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../19/index.html">19. Model comparison in practice</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_06.html">E6. To be completed after lesson 19</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../20/index.html">20. Hierarchical models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../21/hierarchical_implementation.html">21. Implementation of hierarchical models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_07.html">E7. To be completed after lesson 21</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../22/sbc.html">22. Principled analysis pipelines</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../23/sbc_in_practice.html">23: Simulation based calibration and related checks in practice</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_08.html">E8. To be completed after lesson 23</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../24/intro_to_gps.html">24. Introduction to Gaussian processes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../25/index.html">25. Implementation of Gaussian processes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_09.html">E9. To be completed after lesson 25</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../26/variational_inference.html">26: Variational Bayesian inference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../27/wrapup.html">27: Wrap-up</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Recitations</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../recitations/01/review_of_mle.html">R1. Review of MLE</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../recitations/02/probability_review.html">R2: Review of probability</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../recitations/03/choosing_priors.html">R3. Choosing priors</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../recitations/04/index.html">R4. Stan installation and use of AWS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../recitations/05/index.html">R5. A Bayesian modeling case study: Ant traffic jams</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../recitations/06/practice_model_building.html">R6. Practice model building</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../recitations/07/hmc.html">R7. Introduction to Hamiltonian Monte Carlo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../recitations/08/project_proposals.html">R8: Discussion of HW 10 project proposals</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../recitations/09/sampling_discrete_parameters.html">R9: Sampling discrete parameters with Stan</a></li>
-</ul>
-<p class="caption"><span class="caption-text">Homework</span></p>
+<p class="caption" role="heading"><span class="caption-text">Homework</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/00/hw0.1.html">0. Configuring your team</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/01/index.html">1. Intuitive generative modeling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/02/index.html">2. Analytical and graphical methods for analysis of the posterior</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/03/index.html">3. Maximum a posteriori parameter estimation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../homework/04/index.html">4. Sampling with MCMC</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../homework/05/index.html">5. Inference with Stan I</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../homework/06/index.html">6. Practice building and assessing Bayesian models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../homework/07/index.html">7. Model comparison</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../homework/08/index.html">8. Hierarchical models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../homework/09/index.html">9. Principled pipelines and hierarchical modeling of noise</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../homework/10/index.html">10. The grand finale</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../homework/11/hw11.html">11. Course feedback</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Schedule</span></p>
+<p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../schedule.html">Schedule overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../schedule.html#homework-due-dates">Homework due dates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../schedule.html#lesson-exercise-due-dates">Lesson exercise due dates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../schedule.html#weekly-schedule">Weekly schedule</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Policies</span></p>
+<p class="caption" role="heading"><span class="caption-text">Policies</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../policies.html">Meetings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../policies.html#lab-sessions">Lab sessions</a></li>
@@ -189,61 +105,28 @@
 <li class="toctree-l1"><a class="reference internal" href="../../policies.html#course-communications">Course communications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../policies.html#ediquette">“Ediquette”</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Resources</span></p>
+<p class="caption" role="heading"><span class="caption-text">Resources</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../resources.html">Software</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../resources.html#reading-tutorials">Reading/tutorials</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #827F7F" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">BE/Bi 103 b</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-        
           <li><a href="index.html">5. Introduction to Bayesian modeling</a> &raquo;</li>
-        
       <li>Choosing priors</li>
-    
-    
   <li class="wy-breadcrumbs-aside">
     
         
@@ -255,13 +138,11 @@
   </li>
 
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   
 <style>
 /* CSS overrides for sphinx_rtd_theme */
@@ -286,12 +167,12 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="choosing-priors">
-<h1>Choosing priors<a class="headerlink" href="#choosing-priors" title="Permalink to this headline">¶</a></h1>
+<section id="choosing-priors">
+<h1>Choosing priors<a class="headerlink" href="#choosing-priors" title="Permalink to this headline"></a></h1>
 <p>While choosing likelihoods often amounts to story matching, choosing priors can be more subtle and challenging. In our example of model building for measurements of <em>C. elegans</em> egg lengths, we assumed Normal priors for the two parameters <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>. We did that because we felt that it best codified in probabilistic terms our knowledge of those parameters before seeing the data. That is one of many ways we can go about choosing priors. In fact, choice of prior is a major topic of (often heated) discussion about how best to go about Bayesian modeling. Some believe that the fact you have to specify a prior in the Bayesian framework invalidates Bayesian inference entirely because it necessarily introduces a modeler’s bias into the analysis.</p>
 <p>Among the many approaches to choose priors are choices of uniform priors, Jeffreys priors, weakly informative priors, conjugate priors, maximum entropy priors, Bernardo’s reference priors, and others. We will discuss the first four of these, eventually advocating for weakly informative priors.</p>
-<div class="section" id="uniform-priors">
-<h2>Uniform priors<a class="headerlink" href="#uniform-priors" title="Permalink to this headline">¶</a></h2>
+<section id="uniform-priors">
+<h2>Uniform priors<a class="headerlink" href="#uniform-priors" title="Permalink to this headline"></a></h2>
 <p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Principle_of_indifference">principle of insufficient reason</a> is an old rule for assigning probability to events or outcomes. It simply says that if we do not know anything about a set of outcomes, then every possible outcome should be assigned equal probability. Thus, we assume that the prior is flat, or uniform.</p>
 <p>This notion is quite widely used. In fact, if we attempt to summarize the posterior by a single point in parameter space, namely where the posterior is maximal, and we chose uniform priors for all parameters, we get estimates for the parameters that are the same as if we performed a maximum likelihood estimate in a frequentist approach.</p>
 <p>However, using uniform priors has a great many problems. I discuss but a few of them here.</p>
@@ -302,9 +183,9 @@
 <li><p>A primary criticism from Fisher and his contemporaries was that the way you choose to parametrize a model can affect how a uniform prior transforms. We illustrate this problem and its resolution when we talk about Jeffreys priors next.</p></li>
 </ol>
 <p>In summary, uniform priors, while widely used, and in fact used in the early homeworks of this course, are a pathologically bad idea. (Note, though, that this is still subject to debate, and many respected researchers do not agree with this assessment.)</p>
-</div>
-<div class="section" id="jeffreys-priors">
-<h2>Jeffreys priors<a class="headerlink" href="#jeffreys-priors" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="jeffreys-priors">
+<h2>Jeffreys priors<a class="headerlink" href="#jeffreys-priors" title="Permalink to this headline"></a></h2>
 <p>Fisher and others complained that application of the principle of insufficient reason to choose uniform priors resulted in different effects based on parametrization of a model. To make this more concrete consider the example of a one-dimensional Normal likelihood. The probability density function is</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
@@ -388,17 +269,17 @@ g(\phi) \propto \sqrt{\mathrm{det}\,\mathrm{E}\left[\mathsf{J}\cdot \mathsf{B}_\
 g(\phi) \propto \sqrt{\mathrm{det}\,\mathrm{E}\left[\mathsf{B}_\phi\right]} = \sqrt{\mathrm{det}\,\mathcal{I}(\phi)},
 \end{align}\]</div>
 <p>thereby demonstrating that a Jeffreys prior is invariant to change of parametrizations.</p>
-</div>
-<div class="section" id="example-jeffreys-priors">
-<h2>Example Jeffreys priors<a class="headerlink" href="#example-jeffreys-priors" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="example-jeffreys-priors">
+<h2>Example Jeffreys priors<a class="headerlink" href="#example-jeffreys-priors" title="Permalink to this headline"></a></h2>
 <p>Computing a Jeffreys prior can be difficult. It involves computing derivatives of the likelihood and then computing expectations by performing integrals. As models become more complicated, analytical results for Jeffreys priors become intractable, which is one of the arguments against using them. Nonetheless, for two common likelihoods, we can compute the Jeffreys priors. We will not show the calculations (they involve the tedious calculations I just mentioned), but will state the results.</p>
 <ul class="simple">
 <li><p>For a Normal likelihood, the Jeffreys prior is <span class="math notranslate nohighlight">\(g(\sigma) \propto 1/\sigma\)</span>. That means that the priors for parameters <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> are independent and that parameter <span class="math notranslate nohighlight">\(\mu\)</span> should have a uniform prior and that <span class="math notranslate nohighlight">\(\sigma\)</span> has a prior that goes like the inverse of <span class="math notranslate nohighlight">\(\sigma\)</span>. This is an example of a Jeffreys prior that is improper.</p></li>
 <li><p>For a Binomial or Bernoulli likelihood, the Jeffreys prior for the parameter <span class="math notranslate nohighlight">\(\theta\)</span>, which is the probability of success of a Bernoulli trial, is <span class="math notranslate nohighlight">\(g(\theta) = 1/\pi\sqrt{\theta(1-\theta)}\)</span>, defined on the interval [0, 1]. This is a proper prior. Note that it is highly peaked at zero and at one. This suggests that the probability of success for a Bernoulli trial, <em>a priori</em>, is most likely very close to zero or one.</p></li>
 </ul>
-</div>
-<div class="section" id="why-not-use-jeffreys-priors">
-<h2>Why not use Jeffreys priors?<a class="headerlink" href="#why-not-use-jeffreys-priors" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="why-not-use-jeffreys-priors">
+<h2>Why not use Jeffreys priors?<a class="headerlink" href="#why-not-use-jeffreys-priors" title="Permalink to this headline"></a></h2>
 <p>Jeffreys priors are pleasing in that they deal with Fisher’s criticisms. They guarantee that we get the same results, regardless of choice of parametrization of the likelihood. They are also not very <strong>informative</strong>, meaning that the prior has little influence over the posterior, leaving almost all of the influence to the likelihood. This is also pleasing because it gives a sense of a lack of bias. However, there are still several reasons why not to use Jeffreys priors.</p>
 <ol class="arabic simple">
 <li><p>They can be very difficult or impossible to derive for more complicated models.</p></li>
@@ -406,53 +287,69 @@ g(\phi) \propto \sqrt{\mathrm{det}\,\mathrm{E}\left[\mathsf{B}_\phi\right]} = \s
 <li><p>In the case of hierarchical models, which we will get to later in the term, use of Jeffreys priors can nefariously lead to improper <em>posteriors</em>! It is often difficult to discover that this is the case for a particular model without doing a very careful analysis.</p></li>
 <li><p>They still do not really encode prior knowledge anyway. We still have the problem of a kinesin motor traveling at faster than the speed of light.</p></li>
 </ol>
-</div>
-<div class="section" id="weakly-informative-priors">
-<h2>Weakly informative priors<a class="headerlink" href="#weakly-informative-priors" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="weakly-informative-priors">
+<h2>Weakly informative priors<a class="headerlink" href="#weakly-informative-priors" title="Permalink to this headline"></a></h2>
 <p>Remember, the prior probability distribution captures what we know about the parameter before we measure data. When coming up with a prior, I often like to sketch how I think the probability density or mass function of a parameter will
 look. This is directly encoding my prior knowledge using probability, which is what a prior is supposed to do by definition. When sketching the probability density function, though, I make sure that I draw the distribution broad enough that it covers all parameter values that are even somewhat reasonable. I limit its breadth to rule out absurd values, such as kinesin traveling faster than the speed of light. Such a prior is called a <strong>weakly informative prior</strong>.</p>
 <p>To come up with the functional form, or better yet the name, of the prior distribution, I use the <a class="reference external" href="https://distribution-explorer.github.io/">Distribution Explorer</a> to find a distribution and parameter set that matches my sketch. If I have to choose between making the prior more peaked or broader, I opt for being broader. This is well-described in the useful <a class="reference external" href="https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations">Stan wiki on
 priors</a>,
 which says, “the loss in precision by making the prior a bit too weak (compared to the true population distribution of parameters or the current expert state of knowledge) is less serious than the gain in robustness by including parts of parameter space that might be relevant.”</p>
-<p>I generally prefer to use weakly informative priors, mostly because they actually encode prior knowledge, separating the sublime from the ridiculous. In fact, we used weakly informative priors in the example of <em>C. elegans</em> egg lengths in the first part of this lecture. As we will see when we perform MCMC calculations, there are also practical advantages to using weakly informative priors. In general, prior choice that can affect second main task of Bayesian inference: making sense of the posterior. We will discuss these practical considerations when we start summarizing posteriors using Markov chain Monte Carlo.</p>
-</div>
-<div class="section" id="conjugate-priors">
-<h2>Conjugate priors<a class="headerlink" href="#conjugate-priors" title="Permalink to this headline">¶</a></h2>
+<p>I generally prefer to use weakly informative priors, mostly because they actually encode prior knowledge, separating the sublime from the ridiculous. In fact, we used weakly informative priors in the example of <em>C. elegans</em> egg lengths in the first part of this lecture. As we will see when we perform MCMC calculations, there are also practical advantages to using weakly informative priors. In general, prior choice can affect the second main task of Bayesian inference: making sense of the posterior. We will discuss these practical considerations when we start summarizing posteriors using Markov chain Monte Carlo.</p>
+</section>
+<section id="conjugate-priors">
+<h2>Conjugate priors<a class="headerlink" href="#conjugate-priors" title="Permalink to this headline"></a></h2>
 <p>We have <a class="reference internal" href="../04/conjugacy.html#4.-Conjugacy"><span class="std std-ref">discussed conjugate priors</span></a> in the context of plotting posteriors. Conjugate priors are useful because we can make sense of the posterior analytically; the posterior and prior are the same distribution, differing by the updated parametrization in the posterior. If it is convenient to use a conjugate prior to encode prior information as we have described in our discussion of weakly informative priors, you can do so. There are two difficulties that make this convenience rare in practice.</p>
 <ol class="arabic simple">
 <li><p>Only a few likelihoods have known conjugate priors. Even in cases where the conjugate is known, its probability density function can be a complicated function.</p></li>
 <li><p>As soon as a model grows in complexity beyond one or two parameters, and certainly into hierarchy, conjugate priors are simply not available.</p></li>
 </ol>
-<p>Thus, conjugate priors, while conceptually pleasing and parametrizable into weakly informative priors, have limited practice use.</p>
-</div>
-</div>
+<p>Thus, conjugate priors, while conceptually pleasing and parametrizable into weakly informative priors, have limited practical use.</p>
+</section>
+<section id="the-bet-the-farm-method-of-specifying-weakly-informative-priors">
+<h2>The bet-the-farm method of specifying weakly informative priors<a class="headerlink" href="#the-bet-the-farm-method-of-specifying-weakly-informative-priors" title="Permalink to this headline"></a></h2>
+<p>Since we have decided that weakly informative priors are of greatest utility, I will share a technique I like to use for coming up with priors for positive continuous unbounded parameters, a commonly encountered situation. I like to take what I call the <a class="reference external" href="https://en.wiktionary.org/wiki/bet_the_farm">bet-the-farm</a> approach. The idiomatic term “to bet the farm” means to make a giant wager on an outcome. You could think instead about betting a year’s salary. As an example, would you bet the farm that pigs cannot fly? I would be comfortable waging a year’s salary (since I don’t have a farm) that they do not. While I certainly hope the Los Angeles Football Club wins the MLS cup in the next few years, I would not be comfortable betting the farm on it.</p>
+<p>The technique is best described through example. Let’s say someone tells me about a new bacterium and I have to guess how long a single cell of that species is.</p>
+<p>To make my guess, I start absurdly low. Certainly, the cell is bigger than of order nanometer, since that’s the diameter of a strand of DNA. I would bet the farm (or a year’s salary) on it. I would also bet the farm that it would be bigger than 10 nm without flinching. How about 100 nm? Well, I’m pretty sure that bacteria tend not to be smaller than 100 nm, but I don’t think I’d bet the farm. I feel uneasy enough about that that I won’t make that bet. So, I put 100 nm as the lower end of my guess.</p>
+<p>Now, let’s consider absurdly large sizes. I would bet the farm that it is less than a meter long. How about 10 cm? That’s still gigantic, and I would bet the farm that it’s smaller than that. How about 1 cm? Still gigantic. How about 1 mm? Well, this is still huge, but there is tremendous diversity among bacteria. I know there are eukaryotic cells this big (for example a <em>Xenopus</em> egg), so, even though I strongly suspect that bacterium would be smaller than 1 mm, I wouldn’t bet a farm. So, 1 mm is my upper bound.</p>
+<p>If we were coming up with an order-of-magnitude estimate, we would take the geometric mean of the high and low boundaries. In this case, we would get <span class="math notranslate nohighlight">\(\sqrt{10^{-7}\cdot 10^{-3}} \text{ m} = 10^{-5}\text{ m} =\)</span> 10 µm, which, perhaps not surprisingly, is within an order of magnitude of “typical” bacterial size, for example of <em>E. coli</em>.</p>
+<p>Notice that these order-of-magnitude type of estimates operates on a logarithmic scale. We estimated between <span class="math notranslate nohighlight">\(10^{-7}\)</span> and <span class="math notranslate nohighlight">\(10^{-3}\)</span> meters. So, for encoding a prior for the parameter, it is convenient to come up with the prior for the base-ten logarithm of the parameter instead (ignoring the mathematical absurdity with taking logarithms of quantities with units), and then transform the variable. In the bacterial size example, I could use a Normal distribution where 95% of the probability mass lies between <span class="math notranslate nohighlight">\(-7\)</span> and <span class="math notranslate nohighlight">\(-3\)</span>. The width of my range of reasonable values from the bet-the-farm approach is 4 log units, so if I choose a Normal distribution centered at <span class="math notranslate nohighlight">\(-5\)</span> with scale parameter of 1, I capture this prior information. So, my prior for the bacterial length <span class="math notranslate nohighlight">\(\ell\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+&amp;\log_{10} \ell \sim \text{Norm}(-5, 1),\\[1em]
+&amp;\ell = 10^{\log_{10}\ell}.
+\end{align}\end{split}\]</div>
+<p>Equivalently, since <span class="math notranslate nohighlight">\(\ln 10 \approx 2.3\)</span>, we can write this as <span class="math notranslate nohighlight">\(\ell \sim \text{LogNorm}(-2.3\cdot 5, 2.3)\)</span>.</p>
+<p>To summarize the procedure for finding a prior for positive continuous unbounded parameter <span class="math notranslate nohighlight">\(\theta\)</span> is as follows.</p>
+<ol class="arabic simple">
+<li><p>Start at absurdly low values for the parameter and work your way up to a value that you would be hesitant to bet the farm on. This is your low estimate, <span class="math notranslate nohighlight">\(\theta_\mathrm{min}\)</span>.</p></li>
+<li><p>Start at absurdly high values for the parameter and work your way down to a value that you would be hesitant to bet the farm on. This is your high estimate, <span class="math notranslate nohighlight">\(\theta_\mathrm{max}\)</span>.</p></li>
+<li><p>Determine the center of your two estimates on a logarithmic scale. This is the location parameter <span class="math notranslate nohighlight">\(\mu_{10} = (\theta_\mathrm{max} + \theta_\mathrm{min})/2\)</span> for the Normal prior of <span class="math notranslate nohighlight">\(\log_{10}\theta\)</span>.</p></li>
+<li><p>Take the difference of the high to low estimates and divide it by four. The result is the scale parameter <span class="math notranslate nohighlight">\(\sigma_{10} = (\theta_\mathrm{max} - \theta_\mathrm{min})/4\)</span> for the Normal prior of <span class="math notranslate nohighlight">\(\log_{10}\theta\)</span>.</p></li>
+<li><p>The prior for the base-ten logarithm of the parameter is then <span class="math notranslate nohighlight">\(\log_{10}\theta \sim \text{Norm}(\mu_{10}, \sigma_{10})\)</span>. Equivalently, we can say that the prior is distributed as <span class="math notranslate nohighlight">\(\theta \sim \text{LogNorm}(2.3\mu_{10}, 2.3\sigma_{10})\)</span>.</p></li>
+</ol>
+<p>The result is a broad distribution that contains all conceivable values of the parameters, as determined by you.</p>
+<p>Earlier in this lesson, I came up with a Normal (not Log-Normal as I would get using the bet-the-farm approach) for the length of a <em>C. elegans</em> egg. This is because I had firm prior knowledge about <em>C. elegans</em> eggs; I have looked at countless of them, and they are about 50 µm long. For most cases where I do not have prior knowledge like that, I use the bet the farm approach.</p>
+</section>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="../06/index.html" class="btn btn-neutral float-right" title="6. Parameter estimation by optimization" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="choice_of_likelihood.html" class="btn btn-neutral float-left" title="Choosing likelihoods" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="choice_of_likelihood.html" class="btn btn-neutral float-left" title="Choosing likelihoods" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../06/index.html" class="btn btn-neutral float-right" title="6. Parameter estimation by optimization" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">
-        Last updated on Mar 16, 2021.
-      </span>
+      <span class="lastupdated">Last updated on Dec 23, 2021.
+      </span></p>
+  </div>
 
-    </p>
-  </div> <jinja2.runtime.BlockReference object at 0x7ff271f47af0> 
+   <jinja2.runtime.BlockReference object at 0x7f945ad8b190> 
 
 <p>© 2021 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 
@@ -467,37 +364,26 @@ which says, “the loss in precision by making the prior a bit too weak (compare
  
 
 </footer>
-
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
     <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-54852702-1"></script>
     <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-    ga('create', 'UA-54852702-1', 'auto');
-    ga('send', 'pageview');
-    </script>
-
-    
-    
+      gtag('config', 'UA-54852702-1', {
+          'anonymize_ip': false,
+      });
+    </script>  
 
   <style>
          .wy-nav-content { max-width: none; }

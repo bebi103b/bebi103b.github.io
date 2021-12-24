@@ -1,7 +1,7 @@
 BE/Bi 103 b: Statistical Inference in the Biological Sciences
 =============================================================
 
-In the `prequel to this course <https://bebi103a.github.io/>`_, we developed tools to build data analysis pieplines, including the organization, preservation, sharing, and display quantitative data. We also learned basic techniques in statistical inference using resampling methods taking a frequentist approach.
+In the `prequel to this course <https://bebi103a.github.io/>`_, we developed tools to build data analysis pipelines, including the organization, preservation, sharing, and display quantitative data. We also learned basic techniques in statistical inference using resampling methods taking a frequentist approach.
 
 In this class, we go deeper into statistical modeling and inference, mostly taking a Bayesian approach. We discuss generative modeling, parameter estimation, model comparison, hierarchical modeling, Markov chain Monte Carlo, graphical display of inference results, and principled workflows. All of these topics are explored through analysis of real biological data sets.
 
@@ -11,14 +11,10 @@ If you are enrolled in the course, please read the :ref:`Course policies<Policie
 Useful links
 -------------
 
-- `Ed <https://us.edstem.org/courses/3198/>`_ (used for course communications)
-- `Course Zoom link <http://bebi103.caltech.edu/2021/b/zoom_links/bebi103_main>`_ (password protected)
-- `"200 Broad" Gather link <http://bebi103.caltech.edu/2021/b/gather/200_broad/>`_ (password protected)
-- `Video recordings <http://bebi103.caltech.edu/2021/b/recordings/google_drive/>`_ (password protected)
-- `Google doc for help queue <http://bebi103.caltech.edu/2021/b/help_queue/google_drive/>`_ (password protected)
-- `Homework solutions <http://bebi103.caltech.edu/2021b_hw_solutions/hw_solutions.html>`_ (password protected)
-
-During lab and homework help sessions, we will break out into different Zoom sessions headed by various course staff members. Their individual Zoom links are accessible below.
+- `Ed <https://edstem.org/us/courses/16335/>`_ (used for course communications)
+- `Course Zoom link <http://bebi103.caltech.edu/2022b/zoom>`_ (password protected)
+- `Google doc for help queue <http://bebi103.caltech.edu/2022b/help_queue>`_ (password protected)
+- `Homework solutions <http://bebi103.caltech.edu/2022b/hw_solutions/hw_solutions.html>`_ (password protected)
 
 
 People
@@ -31,9 +27,8 @@ People
 - TAs
 
    + Rosita Fu (`rfu at caltech dot edu`)
-   + Tom Röschinger (`troeschi at caltech dot edu`)
-   + Ariana Tribby (`atribby at caltech dot edu`)
-   + Julian Wagner (`jwagner2 at caltech dot edu`)
+   + Matteo Guareschi (`mmguar at caltech dot edu`)
+   + Arjuna Subramanian (`amsubram at caltech dot edu`)
 
 
 .. toctree::
@@ -55,43 +50,43 @@ People
    lessons/10/mixture_model_stan.ipynb
    lessons/11/regression_with_stan.ipynb
    lesson_exercises/exercise_03.ipynb   
-   lessons/12/index
-   lessons/13/prior_predictive_checks.ipynb
-   lessons/14/posterior_predictive_checks.ipynb
-   lesson_exercises/exercise_04.ipynb   
-   lessons/15/box_of_distributions.rst
-   lessons/16/mcmc_diagnostics.ipynb
-   lessons/17/funnel_of_hell.ipynb
-   lesson_exercises/exercise_05.ipynb
-   lessons/18/model_comparison.rst
-   lessons/19/index
-   lesson_exercises/exercise_06.ipynb
-   lessons/20/index
-   lessons/21/hierarchical_implementation.ipynb
-   lesson_exercises/exercise_07.ipynb
-   lessons/22/sbc.ipynb
-   lessons/23/sbc_in_practice.ipynb
-   lesson_exercises/exercise_08.ipynb
-   lessons/24/intro_to_gps.ipynb
-   lessons/25/index
-   lesson_exercises/exercise_09.ipynb
-   lessons/26/variational_inference.ipynb
-   lessons/27/wrapup
+   .. lessons/12/index
+   .. lessons/13/prior_predictive_checks.ipynb
+   .. lessons/14/posterior_predictive_checks.ipynb
+   .. lesson_exercises/exercise_04.ipynb   
+   .. lessons/15/box_of_distributions.rst
+   .. lessons/16/mcmc_diagnostics.ipynb
+   .. lessons/17/funnel_of_hell.ipynb
+   .. lesson_exercises/exercise_05.ipynb
+   .. lessons/18/model_comparison.rst
+   .. lessons/19/index
+   .. lesson_exercises/exercise_06.ipynb
+   .. lessons/20/index
+   .. lessons/21/hierarchical_implementation.ipynb
+   .. lesson_exercises/exercise_07.ipynb
+   .. lessons/22/sbc.ipynb
+   .. lessons/23/sbc_in_practice.ipynb
+   .. lesson_exercises/exercise_08.ipynb
+   .. lessons/24/intro_to_gps.ipynb
+   .. lessons/25/index
+   .. lesson_exercises/exercise_09.ipynb
+   .. lessons/26/variational_inference.ipynb
+   .. lessons/27/wrapup
 
 
 .. toctree::
    :maxdepth: 1
    :caption: Recitations
 
-   recitations/01/review_of_mle.ipynb
-   recitations/02/probability_review.rst
-   recitations/03/choosing_priors.ipynb
-   recitations/04/index
-   recitations/05/index
-   recitations/06/practice_model_building.ipynb
-   recitations/07/hmc.ipynb
-   recitations/08/project_proposals.rst
-   recitations/09/sampling_discrete_parameters.ipynb
+   .. recitations/01/review_of_mle.ipynb
+   .. recitations/02/probability_review.rst
+   .. recitations/03/choosing_priors.ipynb
+   .. recitations/04/index
+   .. recitations/05/index
+   .. recitations/06/practice_model_building.ipynb
+   .. recitations/07/hmc.ipynb
+   .. recitations/08/project_proposals.rst
+   .. recitations/09/sampling_discrete_parameters.ipynb
 
 
 .. toctree::
@@ -102,14 +97,14 @@ People
    homework/01/index
    homework/02/index
    homework/03/index
-   homework/04/index
-   homework/05/index
-   homework/06/index
-   homework/07/index
-   homework/08/index
-   homework/09/index
-   homework/10/index
-   11. Course feedback <homework/11/hw11.ipynb>
+   .. homework/04/index
+   .. homework/05/index
+   .. homework/06/index
+   .. homework/07/index
+   .. homework/08/index
+   .. homework/09/index
+   .. homework/10/index
+   .. 11. Course feedback <homework/11/hw11.ipynb>
 
 
 .. toctree::
@@ -132,3 +127,9 @@ People
 
    resources
 
+
+Previous editions of the course
+------------------------------- 
+
+- `Winter 2021 <http://bebi103.caltech.edu.s3-website-us-east-1.amazonaws.com/2021b/>`_
+- `Winter 2020 <http://bebi103.caltech.edu.s3-website-us-east-1.amazonaws.com/2020b/>`_

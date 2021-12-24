@@ -7,13 +7,13 @@ Let’s say we repeat a measurement many times. This could be beak depths of fin
 
 Our measurements of *C. elegans* egg length are :math:`y \equiv\{y_1, y_2, \ldots y_n\}`. We will ambiguously define a parameter of interest to be :math:`\mu`, the typical egg length. We will sharpen our definition of this parameter through specification of the likelihood. 
 
-We wish to calculate :math:`g(\mu  \mid y)`, the posterior probability distribution for the parameter :math:`\mu`, given the data. Values of :math:`\mu` for
-which the posterior probability is high are more probable (that is, more
+We wish to calculate :math:`g(\mu  \mid y)`, the posterior probability density function for the parameter :math:`\mu`, given the data. Values of :math:`\mu` for
+which the posterior probability density is high are more probable (that is, more
 plausible) than those for which is it low. The posterior
 :math:`g(\mu \mid y)` codifies our knowledge about :math:`\mu` in
 light of our data :math:`y`.
 
-To compute the posterior probability, we use Bayes’s theorem.
+To compute the posterior, we use Bayes’s theorem.
 
 .. math::
 
@@ -89,7 +89,7 @@ processes may contribute to noise in the measurement, the Normal
 distribution is a good choice for a likelihood.
 
 More generally, the **multivariate Normal distribution** for
-:math:`y = (y_1, y_2, \cdots, y_n)` is
+:math:`y = (y_1, y_2, \cdots, y_n)^\mathsf{T}` is
 
 .. math::
 
@@ -98,12 +98,12 @@ More generally, the **multivariate Normal distribution** for
     \exp\left[-\frac{1}{2}(y - \boldsymbol{\mu})^\mathsf{T}\cdot \mathsf{\Sigma}^{-1}\cdot(y - \boldsymbol{\mu})\right],
     \end{aligned}
 
-where :math:`\boldsymbol{\mu} = \{\mu_1, \mu_2,\ldots, \mu_n\}` is an
+where :math:`\boldsymbol{\mu} = (\mu_1, \mu_2,\ldots, \mu_n)^\mathsf{T}` is an
 array of location parameters. The parameter
 :math:`\mathsf{\Sigma}` is a symmetric positive definite matrix called
 the **covariance matrix**. If off-diagonal entry
 :math:`\Sigma_{ij}` is nonzero, then :math:`y_i` and
-:math:`y_j` are correlated. In the case where all :math:`y_i` are
+:math:`y_j` are correlated (or anticorrelated). In the case where all :math:`y_i` are
 independent, all off-diagonal terms in the covariance matrix are zero,
 and the multivariate Normal distribution reduces to
 

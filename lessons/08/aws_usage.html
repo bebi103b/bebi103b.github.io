@@ -1,72 +1,42 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Running Jupyter notebooks with AWS &mdash; BE/Bi 103 b  documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
-
-  
-  
-  
-  
-
-  
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/clipboard.min.js"></script>
         <script src="../../_static/copybutton.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "document", "processHtmlClass": "math|output_area"}}</script>
+    <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="9. Introduction to MCMC with Stan" href="../09/index.html" />
+    <link rel="next" title="Using Stan with Google Colab" href="colab_stan.html" />
     <link rel="prev" title="AWS setup" href="aws_setup.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: #827F7F" >
-          
-
-          
             <a href="../../index.html">
-          
-
-          
-            
             <img src="../../_static/logo.png" class="logo" alt="Logo"/>
-          
           </a>
-
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -74,19 +44,8 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Lessons</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Lessons</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../00/setup.html">0. Preparing for the course</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../01/index.html">1. Probability and the logic of scientific reasoning</a></li>
@@ -98,7 +57,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../06/index.html">6. Parameter estimation by optimization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_02.html">E2. To be completed after lesson 6</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../07/index.html">7. Introduction to Markov chain Monte Carlo</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">8. AWS setup and usage</a><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">8. Cloud computing setup and usage</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="aws_setup.html">AWS setup</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Running Jupyter notebooks with AWS</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#1.-Get-your-instance-running">1. Get your instance running</a></li>
@@ -110,70 +69,29 @@
 <li class="toctree-l3"><a class="reference internal" href="#7.-Seriously.-Stop-your-instances-if-you-are-not-using-them.">7. Seriously. Stop your instances if you are not using them.</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="colab_stan.html">Using Stan with Google Colab</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../09/index.html">9. Introduction to MCMC with Stan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../10/mixture_model_stan.html">10. Mixture models and label switching with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../11/regression_with_stan.html">11. Regression with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_03.html">E3. To be completed after lesson 11</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../12/index.html">12. Display of MCMC results</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../13/prior_predictive_checks.html">13. Model building with prior predictive checks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../14/posterior_predictive_checks.html">14. Posterior predictive checks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_04.html">E4. To be completed after lesson 14</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../15/box_of_distributions.html">15. Collector’s box of distributions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../16/mcmc_diagnostics.html">16. MCMC diagnostics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../17/funnel_of_hell.html">17. A diagnostics case study: Artificial funnel of hell</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_05.html">E5. To be completed after lesson 17</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../18/model_comparison.html">18. Model comparison</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../19/index.html">19. Model comparison in practice</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_06.html">E6. To be completed after lesson 19</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../20/index.html">20. Hierarchical models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../21/hierarchical_implementation.html">21. Implementation of hierarchical models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_07.html">E7. To be completed after lesson 21</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../22/sbc.html">22. Principled analysis pipelines</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../23/sbc_in_practice.html">23: Simulation based calibration and related checks in practice</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_08.html">E8. To be completed after lesson 23</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../24/intro_to_gps.html">24. Introduction to Gaussian processes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../25/index.html">25. Implementation of Gaussian processes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_09.html">E9. To be completed after lesson 25</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../26/variational_inference.html">26: Variational Bayesian inference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../27/wrapup.html">27: Wrap-up</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Recitations</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../recitations/01/review_of_mle.html">R1. Review of MLE</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../recitations/02/probability_review.html">R2: Review of probability</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../recitations/03/choosing_priors.html">R3. Choosing priors</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../recitations/04/index.html">R4. Stan installation and use of AWS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../recitations/05/index.html">R5. A Bayesian modeling case study: Ant traffic jams</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../recitations/06/practice_model_building.html">R6. Practice model building</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../recitations/07/hmc.html">R7. Introduction to Hamiltonian Monte Carlo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../recitations/08/project_proposals.html">R8: Discussion of HW 10 project proposals</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../recitations/09/sampling_discrete_parameters.html">R9: Sampling discrete parameters with Stan</a></li>
-</ul>
-<p class="caption"><span class="caption-text">Homework</span></p>
+<p class="caption" role="heading"><span class="caption-text">Homework</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/00/hw0.1.html">0. Configuring your team</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/01/index.html">1. Intuitive generative modeling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/02/index.html">2. Analytical and graphical methods for analysis of the posterior</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/03/index.html">3. Maximum a posteriori parameter estimation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../homework/04/index.html">4. Sampling with MCMC</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../homework/05/index.html">5. Inference with Stan I</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../homework/06/index.html">6. Practice building and assessing Bayesian models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../homework/07/index.html">7. Model comparison</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../homework/08/index.html">8. Hierarchical models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../homework/09/index.html">9. Principled pipelines and hierarchical modeling of noise</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../homework/10/index.html">10. The grand finale</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../homework/11/hw11.html">11. Course feedback</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Schedule</span></p>
+<p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../schedule.html">Schedule overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../schedule.html#homework-due-dates">Homework due dates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../schedule.html#lesson-exercise-due-dates">Lesson exercise due dates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../schedule.html#weekly-schedule">Weekly schedule</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Policies</span></p>
+<p class="caption" role="heading"><span class="caption-text">Policies</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../policies.html">Meetings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../policies.html#lab-sessions">Lab sessions</a></li>
@@ -186,79 +104,44 @@
 <li class="toctree-l1"><a class="reference internal" href="../../policies.html#course-communications">Course communications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../policies.html#ediquette">“Ediquette”</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Resources</span></p>
+<p class="caption" role="heading"><span class="caption-text">Resources</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../resources.html">Software</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../resources.html#reading-tutorials">Reading/tutorials</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #827F7F" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">BE/Bi 103 b</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-        
-          <li><a href="index.html">8. AWS setup and usage</a> &raquo;</li>
-        
+          <li><a href="index.html">8. Cloud computing setup and usage</a> &raquo;</li>
       <li>Running Jupyter notebooks with AWS</li>
-    
-    
   <li class="wy-breadcrumbs-aside">
     
         
         
-            <a href="https://colab.research.google.com/github/bebi103b/bebi103b.github.io/blob/master/lessons/08/aws_usage.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open in Google Colab" title="Open in Google Colab"></a> | <a href="https://raw.githubusercontent.com/bebi103b/bebi103b.github.io/master/lessons/08/aws_usage.ipynb" download> Download notebook</a>
+            <a href="https://colab.research.google.com/github/bebi103b/bebi103b.github.io/blob/master/lessons/08/aws_usage" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open in Google Colab" title="Open in Google Colab"></a> | <a href="https://raw.githubusercontent.com/bebi103b/bebi103b.github.io/master/lessons/08/aws_usage" download> Download notebook</a>
         
       
     
   </li>
 
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   
 <style>
 /* CSS overrides for sphinx_rtd_theme */
@@ -283,23 +166,23 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="Running-Jupyter-notebooks-with-AWS">
-<h1>Running Jupyter notebooks with AWS<a class="headerlink" href="#Running-Jupyter-notebooks-with-AWS" title="Permalink to this headline">¶</a></h1>
+<section id="Running-Jupyter-notebooks-with-AWS">
+<h1>Running Jupyter notebooks with AWS<a class="headerlink" href="#Running-Jupyter-notebooks-with-AWS" title="Permalink to this headline"></a></h1>
 <hr><p>In the <a class="reference internal" href="aws_setup.html"><span class="doc">previous part of this lesson on setting up AWS</span></a>, we had instructions on setting up your AWS account and getting running with EC2. Once you have your account set up with keypairs and everything else, you can follow the instructions below to run your instances. Some of the instructions are repeated from the previous part of this lesson on setting up AWS, but we leave them here so this page can serve as a convenient reference. (Students have explicitly asked that we do
 this in the past!)</p>
-<div class="section" id="1.-Get-your-instance-running">
-<h2>1. Get your instance running<a class="headerlink" href="#1.-Get-your-instance-running" title="Permalink to this headline">¶</a></h2>
+<section id="1.-Get-your-instance-running">
+<h2>1. Get your instance running<a class="headerlink" href="#1.-Get-your-instance-running" title="Permalink to this headline"></a></h2>
 <p>Now that you already have your account set up, all you need to do is:</p>
 <ol class="arabic simple">
-<li><p>Go to the AWS Console either via your account (postdocs) or via AWS Educate (students). If you are using AWS Educate, log in to AWS Educate and then choose <code class="docutils literal notranslate"><span class="pre">My</span> <span class="pre">Classrooms</span></code> from the top menu. Select our class (“Statistical Inference in the Biological Sciences” and click <code class="docutils literal notranslate"><span class="pre">Go</span> <span class="pre">to</span> <span class="pre">Classroom</span></code>. Proceed to Vocarean, and once logged in there, click on the <code class="docutils literal notranslate"><span class="pre">AWS</span> <span class="pre">Console</span></code> button.</p></li>
+<li><p>Go to the AWS Console.</p></li>
 <li><p>Select EC2 from the <code class="docutils literal notranslate"><span class="pre">Services</span></code> pulldown menu at the top of your screen.</p></li>
 <li><p>After selecting EC2, you will see the EC2 Dashboard on the left pane. Under <code class="docutils literal notranslate"><span class="pre">Instances</span></code> there, click <code class="docutils literal notranslate"><span class="pre">Instances</span></code>. Alternatively, you can also click the <code class="docutils literal notranslate"><span class="pre">Running</span> <span class="pre">Instances</span></code> link under the <code class="docutils literal notranslate"><span class="pre">Resources</span></code> main heading at the top of the page.</p></li>
 <li><p>Right click over the name of the instance you wish to start and go to <code class="docutils literal notranslate"><span class="pre">Instance</span> <span class="pre">State</span></code> → <code class="docutils literal notranslate"><span class="pre">Start</span></code>.</p></li>
 </ol>
 <p>It may take a little while for your instance to get going. When the <code class="docutils literal notranslate"><span class="pre">Instance</span> <span class="pre">State</span></code> says <code class="docutils literal notranslate"><span class="pre">running</span></code> and the <code class="docutils literal notranslate"><span class="pre">Status</span> <span class="pre">Checks</span></code> are complete, your instance is ready for you to get working.</p>
-</div>
-<div class="section" id="2.-Connect-to-your-instance">
-<h2>2. Connect to your instance<a class="headerlink" href="#2.-Connect-to-your-instance" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="2.-Connect-to-your-instance">
+<h2>2. Connect to your instance<a class="headerlink" href="#2.-Connect-to-your-instance" title="Permalink to this headline"></a></h2>
 <p>Now that your instance is launched, you can connect to it using your computer and the <em>ssh</em> protocol. The instructions work for Windows, macOS, or Linux, assuming you have a terminal running bash. In Windows, this is accomplished using <a class="reference external" href="https://git-scm.com">GitBash</a>. For macOS, use Terminal.</p>
 <ol class="arabic">
 <li><p>Open a new GitBash (Windows) or Terminal (macOS) window.</p></li>
@@ -315,9 +198,9 @@ this in the past!)</p>
 </li>
 </ol>
 <p>You are now connected to your instance!</p>
-</div>
-<div class="section" id="3.-Launch-JupyterLab">
-<h2>3. Launch JupyterLab<a class="headerlink" href="#3.-Launch-JupyterLab" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="3.-Launch-JupyterLab">
+<h2>3. Launch JupyterLab<a class="headerlink" href="#3.-Launch-JupyterLab" title="Permalink to this headline"></a></h2>
 <p>When you launch JupyterLab, you want to use <code class="docutils literal notranslate"><span class="pre">`screen</span></code> &lt;<a class="reference external" href="https://en.wikipedia.org/wiki/GNU_Screen">https://en.wikipedia.org/wiki/GNU_Screen</a>&gt;`__. By running screen, your JupyterLab session will not get interrupted if you disconnect from your instance. So, on the command line in your instance:</p>
 <ol class="arabic">
 <li><p>Execute the following:</p>
@@ -337,14 +220,14 @@ this in the past!)</p>
 <li><p>Now you can paste the <strong>URL given when you launched JupyterLab on your EC2 instance</strong> into your browser, but substitute <code class="docutils literal notranslate"><span class="pre">8000</span></code> for <code class="docutils literal notranslate"><span class="pre">8888</span></code>.</p></li>
 </ol>
 <p>You will now have JupyterLab up and running!</p>
-</div>
-<div class="section" id="4.-If-you-get-detached">
-<h2>4. If you get detached<a class="headerlink" href="#4.-If-you-get-detached" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="4.-If-you-get-detached">
+<h2>4. If you get detached<a class="headerlink" href="#4.-If-you-get-detached" title="Permalink to this headline"></a></h2>
 <p>If you lose your internet connection, you can reconnect to your session, with JupyterLab running, by reattaching your screen. Execute <code class="docutils literal notranslate"><span class="pre">screen</span> <span class="pre">-r</span></code> on the command line after SSH-ing back in to your EC2 instance to do this.</p>
 <p>You can see what screens are active by doing <code class="docutils literal notranslate"><span class="pre">screen</span> <span class="pre">-ls</span></code> on the command line. You can also detach the current screen by using <code class="docutils literal notranslate"><span class="pre">screen</span> <span class="pre">-d</span></code>.</p>
-</div>
-<div class="section" id="5.-Copying-results-to-and-from-AWS-to-your-local-machine">
-<h2>5. Copying results to and from AWS to your local machine<a class="headerlink" href="#5.-Copying-results-to-and-from-AWS-to-your-local-machine" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="5.-Copying-results-to-and-from-AWS-to-your-local-machine">
+<h2>5. Copying results to and from AWS to your local machine<a class="headerlink" href="#5.-Copying-results-to-and-from-AWS-to-your-local-machine" title="Permalink to this headline"></a></h2>
 <p>As you work on notebooks and create new files you want to save, you may want to move them to your local machine. If you are working on a notebook or <code class="docutils literal notranslate"><span class="pre">.stan</span></code> file, the best option is to use git and commit and push those files to your repository directly from the command line on your EC2 instance.</p>
 <p>Some files, though, such as MCMC results or intermediate data processing results, are not meant to be under version control. For these file, you an use <code class="docutils literal notranslate"><span class="pre">scp</span></code>.</p>
 <ol class="arabic">
@@ -356,9 +239,9 @@ this in the past!)</p>
 <p><code class="docutils literal notranslate"><span class="pre">scp</span> <span class="pre">-i</span> <span class="pre">&quot;~/key_pairs/bebi103_aws_keypair.pem&quot;</span> <span class="pre">my_file.txt</span> <span class="pre">ec2-user&#64;&lt;IPv4</span> <span class="pre">Public</span> <span class="pre">IP&gt;:~/</span></code></p>
 </li>
 </ol>
-</div>
-<div class="section" id="6.-Exiting">
-<h2>6. Exiting<a class="headerlink" href="#6.-Exiting" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="6.-Exiting">
+<h2>6. Exiting<a class="headerlink" href="#6.-Exiting" title="Permalink to this headline"></a></h2>
 <ol class="arabic simple">
 <li><p>Shut down your notebook in the browser.</p></li>
 <li><p>If necessary, in the terminal window used to launch JupyterLab, you can shut down JupyterLab by pressing <code class="docutils literal notranslate"><span class="pre">Ctrl-c</span></code>.</p></li>
@@ -366,39 +249,30 @@ this in the past!)</p>
 <li><p>For good measure, you should also quit your screen by doing <code class="docutils literal notranslate"><span class="pre">screen</span> <span class="pre">-X</span> <span class="pre">quit</span></code>.</p></li>
 <li><p><strong>STOP YOUR INSTANCE ON AWS.</strong> To do this, go back to the <code class="docutils literal notranslate"><span class="pre">Instances</span></code> page on your EC2 console. Right click your instance, and navigate to <code class="docutils literal notranslate"><span class="pre">Instance</span> <span class="pre">State</span></code> → <code class="docutils literal notranslate"><span class="pre">Stop</span></code>. <strong>Do not terminate your instance</strong> unless you really want to. Terminating an instance will get rid of any changes you made to it.</p></li>
 </ol>
-</div>
-<div class="section" id="7.-Seriously.-Stop-your-instances-if-you-are-not-using-them.">
-<h2>7. Seriously. Stop your instances if you are not using them.<a class="headerlink" href="#7.-Seriously.-Stop-your-instances-if-you-are-not-using-them." title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="7.-Seriously.-Stop-your-instances-if-you-are-not-using-them.">
+<h2>7. Seriously. Stop your instances if you are not using them.<a class="headerlink" href="#7.-Seriously.-Stop-your-instances-if-you-are-not-using-them." title="Permalink to this headline"></a></h2>
 <p>If your instance is not stopped and you leave it running, you will get charged. You can rack up a massive bill with idle, but running, instances. You should stop your instances whenever you are not using them and watch them stop all the way. It is a minor pain to wait for them to spin up again, but forgetting about a running instance will cause more pain than that to your pocketbook.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="../09/index.html" class="btn btn-neutral float-right" title="9. Introduction to MCMC with Stan" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="aws_setup.html" class="btn btn-neutral float-left" title="AWS setup" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="aws_setup.html" class="btn btn-neutral float-left" title="AWS setup" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="colab_stan.html" class="btn btn-neutral float-right" title="Using Stan with Google Colab" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">
-        Last updated on Mar 16, 2021.
-      </span>
+      <span class="lastupdated">Last updated on Dec 23, 2021.
+      </span></p>
+  </div>
 
-    </p>
-  </div> <jinja2.runtime.BlockReference object at 0x7ff27a2c6d90> 
+   <jinja2.runtime.BlockReference object at 0x7f947fdd7640> 
 
 <p>© 2021 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 
@@ -413,37 +287,26 @@ this in the past!)</p>
  
 
 </footer>
-
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
     <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-54852702-1"></script>
     <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-    ga('create', 'UA-54852702-1', 'auto');
-    ga('send', 'pageview');
-    </script>
-
-    
-    
+      gtag('config', 'UA-54852702-1', {
+          'anonymize_ip': false,
+      });
+    </script>  
 
   <style>
          .wy-nav-content { max-width: none; }

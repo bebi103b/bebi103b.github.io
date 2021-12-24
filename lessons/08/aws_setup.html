@@ -1,72 +1,42 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AWS setup &mdash; BE/Bi 103 b  documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
-
-  
-  
-  
-  
-
-  
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/clipboard.min.js"></script>
         <script src="../../_static/copybutton.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "document", "processHtmlClass": "math|output_area"}}</script>
+    <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Running Jupyter notebooks with AWS" href="aws_usage.html" />
-    <link rel="prev" title="8. AWS setup and usage" href="index.html" /> 
+    <link rel="prev" title="8. Cloud computing setup and usage" href="index.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: #827F7F" >
-          
-
-          
             <a href="../../index.html">
-          
-
-          
-            
             <img src="../../_static/logo.png" class="logo" alt="Logo"/>
-          
           </a>
-
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -74,19 +44,8 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Lessons</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Lessons</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../00/setup.html">0. Preparing for the course</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../01/index.html">1. Probability and the logic of scientific reasoning</a></li>
@@ -98,13 +57,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../06/index.html">6. Parameter estimation by optimization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_02.html">E2. To be completed after lesson 6</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../07/index.html">7. Introduction to Markov chain Monte Carlo</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">8. AWS setup and usage</a><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">8. Cloud computing setup and usage</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">AWS setup</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#1.-Create-an-Amazon-Web-Services-account">1. Create an Amazon Web Services account</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#Instructions-for-students">Instructions for students</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#Instructions-for-postdocs">Instructions for postdocs</a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="#1.-Create-an-Amazon-Web-Services-account">1. Create an Amazon Web Services account</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#2.-Launch-your-instance">2. Launch your instance</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#3.-Connect-to-your-instance">3. Connect to your instance</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#4.-Launch-JupyterLab">4. Launch JupyterLab</a></li>
@@ -117,70 +72,29 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="aws_usage.html">Running Jupyter notebooks with AWS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="colab_stan.html">Using Stan with Google Colab</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../09/index.html">9. Introduction to MCMC with Stan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../10/mixture_model_stan.html">10. Mixture models and label switching with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../11/regression_with_stan.html">11. Regression with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_03.html">E3. To be completed after lesson 11</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../12/index.html">12. Display of MCMC results</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../13/prior_predictive_checks.html">13. Model building with prior predictive checks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../14/posterior_predictive_checks.html">14. Posterior predictive checks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_04.html">E4. To be completed after lesson 14</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../15/box_of_distributions.html">15. Collector’s box of distributions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../16/mcmc_diagnostics.html">16. MCMC diagnostics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../17/funnel_of_hell.html">17. A diagnostics case study: Artificial funnel of hell</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_05.html">E5. To be completed after lesson 17</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../18/model_comparison.html">18. Model comparison</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../19/index.html">19. Model comparison in practice</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_06.html">E6. To be completed after lesson 19</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../20/index.html">20. Hierarchical models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../21/hierarchical_implementation.html">21. Implementation of hierarchical models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_07.html">E7. To be completed after lesson 21</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../22/sbc.html">22. Principled analysis pipelines</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../23/sbc_in_practice.html">23: Simulation based calibration and related checks in practice</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_08.html">E8. To be completed after lesson 23</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../24/intro_to_gps.html">24. Introduction to Gaussian processes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../25/index.html">25. Implementation of Gaussian processes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_09.html">E9. To be completed after lesson 25</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../26/variational_inference.html">26: Variational Bayesian inference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../27/wrapup.html">27: Wrap-up</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Recitations</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../recitations/01/review_of_mle.html">R1. Review of MLE</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../recitations/02/probability_review.html">R2: Review of probability</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../recitations/03/choosing_priors.html">R3. Choosing priors</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../recitations/04/index.html">R4. Stan installation and use of AWS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../recitations/05/index.html">R5. A Bayesian modeling case study: Ant traffic jams</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../recitations/06/practice_model_building.html">R6. Practice model building</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../recitations/07/hmc.html">R7. Introduction to Hamiltonian Monte Carlo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../recitations/08/project_proposals.html">R8: Discussion of HW 10 project proposals</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../recitations/09/sampling_discrete_parameters.html">R9: Sampling discrete parameters with Stan</a></li>
-</ul>
-<p class="caption"><span class="caption-text">Homework</span></p>
+<p class="caption" role="heading"><span class="caption-text">Homework</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/00/hw0.1.html">0. Configuring your team</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/01/index.html">1. Intuitive generative modeling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/02/index.html">2. Analytical and graphical methods for analysis of the posterior</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/03/index.html">3. Maximum a posteriori parameter estimation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../homework/04/index.html">4. Sampling with MCMC</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../homework/05/index.html">5. Inference with Stan I</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../homework/06/index.html">6. Practice building and assessing Bayesian models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../homework/07/index.html">7. Model comparison</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../homework/08/index.html">8. Hierarchical models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../homework/09/index.html">9. Principled pipelines and hierarchical modeling of noise</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../homework/10/index.html">10. The grand finale</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../homework/11/hw11.html">11. Course feedback</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Schedule</span></p>
+<p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../schedule.html">Schedule overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../schedule.html#homework-due-dates">Homework due dates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../schedule.html#lesson-exercise-due-dates">Lesson exercise due dates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../schedule.html#weekly-schedule">Weekly schedule</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Policies</span></p>
+<p class="caption" role="heading"><span class="caption-text">Policies</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../policies.html">Meetings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../policies.html#lab-sessions">Lab sessions</a></li>
@@ -193,79 +107,44 @@
 <li class="toctree-l1"><a class="reference internal" href="../../policies.html#course-communications">Course communications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../policies.html#ediquette">“Ediquette”</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Resources</span></p>
+<p class="caption" role="heading"><span class="caption-text">Resources</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../resources.html">Software</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../resources.html#reading-tutorials">Reading/tutorials</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #827F7F" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">BE/Bi 103 b</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-        
-          <li><a href="index.html">8. AWS setup and usage</a> &raquo;</li>
-        
+          <li><a href="index.html">8. Cloud computing setup and usage</a> &raquo;</li>
       <li>AWS setup</li>
-    
-    
   <li class="wy-breadcrumbs-aside">
     
         
         
-            <a href="https://colab.research.google.com/github/bebi103b/bebi103b.github.io/blob/master/lessons/08/aws_setup.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open in Google Colab" title="Open in Google Colab"></a> | <a href="https://raw.githubusercontent.com/bebi103b/bebi103b.github.io/master/lessons/08/aws_setup.ipynb" download> Download notebook</a>
+            <a href="https://colab.research.google.com/github/bebi103b/bebi103b.github.io/blob/master/lessons/08/aws_setup" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open in Google Colab" title="Open in Google Colab"></a> | <a href="https://raw.githubusercontent.com/bebi103b/bebi103b.github.io/master/lessons/08/aws_setup" download> Download notebook</a>
         
       
     
   </li>
 
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   
 <style>
 /* CSS overrides for sphinx_rtd_theme */
@@ -290,43 +169,24 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="AWS-setup">
-<h1>AWS setup<a class="headerlink" href="#AWS-setup" title="Permalink to this headline">¶</a></h1>
-<hr><p>As we start to do more involved statistical inference using Stan, you will want to run your calculations on more powerful machines. There are many options for this, including <a class="reference external" href="https://aws.amazon.com/">Amazon Web Services</a> (AWS), <a class="reference external" href="https://cloud.google.com">Google Cloud Platform</a>, <a class="reference external" href="https://azure.microsoft.com/">Microsoft Azure</a>, and Caltech’s own <a class="reference external" href="http://www.hpc.caltech.edu/">high performance computing center</a>. In this lesson, we will show you how to get up and running with AWS. While
-it looks like a lot of steps, some of the steps are done only once, so it is not much more work to launch instances after the initial setup. The <a class="reference internal" href="aws_usage.html"><span class="doc">next part of this lesson</span></a> serves as a quick reference for how to spin up instances and use them after you have completed the setup outlined in this part of the lesson.</p>
-<div class="section" id="1.-Create-an-Amazon-Web-Services-account">
-<h2>1. Create an Amazon Web Services account<a class="headerlink" href="#1.-Create-an-Amazon-Web-Services-account" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="Instructions-for-students">
-<h3>Instructions for students<a class="headerlink" href="#Instructions-for-students" title="Permalink to this headline">¶</a></h3>
-<p>If you are a <em>student</em>, you will use <a class="reference external" href="http://awseducate.com/">AWS Educate</a> to access AWS. You should have received an invitation from AWS.</p>
-<ol class="arabic simple">
-<li><p>Follow the instructions in that email and on subsequent pages you encounter in your browser to set up an AWS Educate account. You will need to fill out a form with some basic information about your education (e.g., when you graduate).</p></li>
-<li><p>AWS will then review the information and you will receive an email from them verifying your account. (This may take some time.)</p></li>
-<li><p>Again, follow the instructions on their confirmation email and subsequent screens in your browser. You will need to agree to their terms of use, which you should obviously only do if you are comfortable with that.</p></li>
-<li><p>Once you are able to log in to AWS Educate, do so.</p></li>
-<li><p>Once logged in, click <code class="docutils literal notranslate"><span class="pre">Classrooms</span></code> on the top menu.</p></li>
-<li><p>Choose our class, “Statistical Inference in the Biological Sciences” and click <code class="docutils literal notranslate"><span class="pre">Go</span> <span class="pre">to</span> <span class="pre">Classroom</span></code>.</p></li>
-<li><p>You will be directed to go to AWS’s third party educational platform provider, Vocareum.</p></li>
-<li><p>Once on Vocareum’s page, click the <code class="docutils literal notranslate"><span class="pre">AWS</span> <span class="pre">Console</span></code> button. This will bring you to the AWS Console, which is where you will launch your instances.</p></li>
-</ol>
-</div>
-<div class="section" id="Instructions-for-postdocs">
-<h3>Instructions for postdocs<a class="headerlink" href="#Instructions-for-postdocs" title="Permalink to this headline">¶</a></h3>
-<p>Unfortunately, AWS does not provide credits for people who are not enrolled as students. If your lab has an AWS account, you should speak with whoever in your lab is responsible for administering them and ask for access. Discuss with them how to log in and get to the AWS Console.</p>
-<p>If you want to use your own account, you can create an AWS account by clicking on the link on the upper right corner of <a class="reference external" href="https://aws.amazon.com/">this page</a>. Once you have your account you can go back to it by clicking on <em>Sign In To Console</em>, which should now be in the upper right corner of the same site.</p>
-<p>Importantly, whether you are using your own account or your lab’s account, <em>a credit card will be charged for all of your AWS usage.</em> The total cost for the class should be well under $50.</p>
-</div>
-</div>
-<div class="section" id="2.-Launch-your-instance">
-<h2>2. Launch your instance<a class="headerlink" href="#2.-Launch-your-instance" title="Permalink to this headline">¶</a></h2>
-<p>Once you are on the AWS Console page, you can launch your instance. We have set up an Amazon Machine Image (AMI), which has the software you need for the course installed and the data sets pre-loaded. The AMI is available in <strong>N. Virginia</strong> (us-east-1). If you are a student and using AWS Educate, you must use N. Virginia. Postdocs may use either. Be sure to select this region from the top right corner of the console. You should use the same region throughout the course, since that is physically
-where your machine will live.</p>
+<section id="AWS-setup">
+<h1>AWS setup<a class="headerlink" href="#AWS-setup" title="Permalink to this headline"></a></h1>
+<hr><p>As we start to do more involved statistical inference using Stan, you may want to run your calculations on more powerful machines. While a local installation on your own machine may suffice, it will serve you well to have more expansive computing resources available. There are many options for this, including <a class="reference external" href="https://aws.amazon.com/">Amazon Web Services</a> (AWS), <a class="reference external" href="https://cloud.google.com">Google Cloud Platform</a>, <a class="reference external" href="https://azure.microsoft.com/">Microsoft Azure</a>, and Caltech’s own <a class="reference external" href="http://www.hpc.caltech.edu/">high
+performance computing center</a>. In this lesson, we will show you how to get up and running with AWS. While it looks like a lot of steps, some of the steps are done only once, so it is not much more work to launch instances after the initial setup. The <a class="reference internal" href="aws_usage.html"><span class="doc">next part of this lesson</span></a> serves as a quick reference for how to spin up instances and use them after you have completed the setup outlined in this part of the lesson.</p>
+<section id="1.-Create-an-Amazon-Web-Services-account">
+<h2>1. Create an Amazon Web Services account<a class="headerlink" href="#1.-Create-an-Amazon-Web-Services-account" title="Permalink to this headline"></a></h2>
+<p>You should create an AWS account if you have not already. You can do so through <a class="reference external" href="https://www.awseducate.com/">AWS Educate</a> if you are a student, or by clicking on the link on the upper right corner of <a class="reference external" href="https://aws.amazon.com/">this page</a>. You should be able to get credits for computing through AWS Educate, but if you cannot, the total cost of computing for the course should be under $50.</p>
+</section>
+<section id="2.-Launch-your-instance">
+<h2>2. Launch your instance<a class="headerlink" href="#2.-Launch-your-instance" title="Permalink to this headline"></a></h2>
+<p>Log on to the AWS Console by going to <a class="reference external" href="https://aws.amazon.com/">https://aws.amazon.com</a> and clicking on the button at the upper right of the page.</p>
+<p>Once you are on the AWS Console page, you can launch your instance. We have set up an Amazon Machine Image (AMI), which has the software you need for the course installed and the data sets pre-loaded. The AMI is available in <strong>N. Virginia</strong> (us-east-1). Be sure to select this region from the top right corner of the console. You should use the same region throughout the course, since that is physically where your machine will live.</p>
 <ol class="arabic simple">
 <li><p>To launch an instance with this AMI, choose EC2 among the services available from your AWS console. You can select EC2 from the <code class="docutils literal notranslate"><span class="pre">Services</span></code> pulldown menu at the top of your screen.</p></li>
 <li><p>After selecting EC2, you will see a menu of options the left pane. Under <code class="docutils literal notranslate"><span class="pre">Images</span></code> there, click <code class="docutils literal notranslate"><span class="pre">AMIs</span></code>.</p></li>
 <li><p>The resulting menu will default to AMIs <code class="docutils literal notranslate"><span class="pre">Owned</span> <span class="pre">by</span> <span class="pre">me</span></code> (you likely do not have any). Select instead <code class="docutils literal notranslate"><span class="pre">Public</span> <span class="pre">images</span></code>.</p></li>
 <li><p>In the search menu, search for <code class="docutils literal notranslate"><span class="pre">BE/Bi</span> <span class="pre">103</span></code>, and the class AMI should appear. If it does not, double check to make sure your region is N. Virginia.</p></li>
-<li><p>You will see the <code class="docutils literal notranslate"><span class="pre">Caltech</span> <span class="pre">BE/Bi</span> <span class="pre">103</span> <span class="pre">b</span> <span class="pre">2021</span></code> AMI listed. Right click on it and select <code class="docutils literal notranslate"><span class="pre">Launch</span></code>. (You may also select <code class="docutils literal notranslate"><span class="pre">Spot</span> <span class="pre">request</span></code> if you want to save some money, but when you stop a spot instance, you will lose whatever you stored there.)</p></li>
+<li><p>You will see the <code class="docutils literal notranslate"><span class="pre">Caltech</span> <span class="pre">BE/Bi</span> <span class="pre">103</span> <span class="pre">b</span> <span class="pre">2022</span></code> AMI listed. Right click on it and select <code class="docutils literal notranslate"><span class="pre">Launch</span></code>. (You may also select <code class="docutils literal notranslate"><span class="pre">Spot</span> <span class="pre">request</span></code> if you want to save some money, but when you stop a spot instance, you will lose whatever you stored there.)</p></li>
 <li><p>You will then be given many choices of instance types. For our beginning usage of Stan, I recommend a <code class="docutils literal notranslate"><span class="pre">c5.xlarge</span></code> instance, which as 4 cores. When we start doing simulation based calibration (SBC), which is the most computationally intensive part of the course, I would use a <code class="docutils literal notranslate"><span class="pre">c5.2xlarge</span></code> instance or larger (8 or more cores). Note that the <code class="docutils literal notranslate"><span class="pre">c5.2xlarge</span></code> instance may not be available for AWS Educate users, but if you do want eight cores, then a t2.2xlarge instance, which is available to
 AWS Educate users, will work.</p></li>
 <li><p>After you select which instance you want, click <code class="docutils literal notranslate"><span class="pre">Next:</span> <span class="pre">Configure</span> <span class="pre">Instance</span> <span class="pre">Details</span></code> at the bottom of the screen.</p></li>
@@ -345,9 +205,9 @@ AWS Educate users, will work.</p></li>
 </ol>
 <p>After following those steps, your instance will spin up. You can view your running instances by clicking on <code class="docutils literal notranslate"><span class="pre">Instances</span></code> on the dashboard on the left part of the screen.</p>
 <p>It will take a while for your instance to spin up. When the <code class="docutils literal notranslate"><span class="pre">Instance</span> <span class="pre">State</span></code> says <code class="docutils literal notranslate"><span class="pre">running</span></code> and the <code class="docutils literal notranslate"><span class="pre">Status</span> <span class="pre">Checks</span></code> are complete, your instance is ready for you.</p>
-</div>
-<div class="section" id="3.-Connect-to-your-instance">
-<h2>3. Connect to your instance<a class="headerlink" href="#3.-Connect-to-your-instance" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="3.-Connect-to-your-instance">
+<h2>3. Connect to your instance<a class="headerlink" href="#3.-Connect-to-your-instance" title="Permalink to this headline"></a></h2>
 <p>Now that your instance is launched, you can connect to it using your computer and the <em>ssh</em> protocol. The instructions work for Windows, macOS, or Linux, assuming you have a terminal running bash or zsh. In Windows, this is accomplished using <a class="reference external" href="https://git-scm.com">GitBash</a>, which you should install if you have not already. For macOS, use Terminal.</p>
 <ol class="arabic">
 <li><p>Identify where you put your keypair file. For the purposes of this exercise, I will assume that you have a directory in your home directory called <code class="docutils literal notranslate"><span class="pre">key_pairs/</span></code> and that your keypair file is <code class="docutils literal notranslate"><span class="pre">~/key_pairs/bebi103_aws_keypair.pem</span></code>.</p></li>
@@ -362,13 +222,13 @@ AWS Educate users, will work.</p></li>
 <p><code class="docutils literal notranslate"><span class="pre">echo</span> <span class="pre">ssh-add</span> <span class="pre">-K</span> <span class="pre">$HOME/keypairs/bebi103_aws_keypair.pem</span> <span class="pre">&gt;&gt;</span> <span class="pre">~/.zshrc;</span></code> <code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">~/.zshrc</span></code></p>
 </li>
 <li><p>Now that you are SSH’d into the instance, you can clone your team’s repository. Using team 6 as an example, execute</p>
-<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">https://github.com/bebi103/06-bebi103b-2021.git</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">https://github.com/bebi103/06-bebi103b-2022.git</span></code></p>
 </li>
 </ol>
-<p>This will clone your repository to your instance. Note that if you log back in to your instance, you may not need to clone again, but can instead do <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">~/06-bebi103b-2021;</span> <span class="pre">git</span> <span class="pre">pull</span></code>. In fact, you should pretty much always <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> as the first thing you do when you ssh into your instance so that you are up to date with your group’s work.</p>
+<p>This will clone your repository to your instance. Note that if you log back in to your instance, you may not need to clone again, but can instead do <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">~/06-bebi103b-2022;</span> <span class="pre">git</span> <span class="pre">pull</span></code>. In fact, you should pretty much always <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> as the first thing you do when you ssh into your instance so that you are up to date with your group’s work.</p>
 <ol class="arabic" start="7">
 <li><p>The data for the course are located in the <code class="docutils literal notranslate"><span class="pre">~/data</span></code> folder. To keep the same relative paths you have been using from inside your repository (and as the TAs are expecting for grading), you should make a symbolic link to the <code class="docutils literal notranslate"><span class="pre">~/data</span></code> directory. To do that, for example if you are in team 6, do the following on the command line.</p>
-<p><code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">~/06-bebi103b-2021;</span> <span class="pre">ln</span> <span class="pre">-s</span> <span class="pre">$HOME/data</span> <span class="pre">./data</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">~/06-bebi103b-2022;</span> <span class="pre">ln</span> <span class="pre">-s</span> <span class="pre">$HOME/data</span> <span class="pre">./data</span></code></p>
 </li>
 <li><p>Whenever you log in to your instance, you should update the instance in case I updated any software or added data sets. To do this, run</p>
 <p><code class="docutils literal notranslate"><span class="pre">bebi103_update</span></code></p>
@@ -378,115 +238,106 @@ AWS Educate users, will work.</p></li>
 <ol class="arabic simple" start="9">
 <li><p>You now have your repository and all of the data for the course on your instance! Any documents you create or edit on your AWS instance can be managed with git and push/pulled to/from GitHub.</p></li>
 </ol>
-</div>
-<div class="section" id="4.-Launch-JupyterLab">
-<h2>4. Launch JupyterLab<a class="headerlink" href="#4.-Launch-JupyterLab" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="4.-Launch-JupyterLab">
+<h2>4. Launch JupyterLab<a class="headerlink" href="#4.-Launch-JupyterLab" title="Permalink to this headline"></a></h2>
 <p>When you launch JupyterLab, you want to use <code class="docutils literal notranslate"><span class="pre">`screen</span></code> &lt;<a class="reference external" href="https://en.wikipedia.org/wiki/GNU_Screen">https://en.wikipedia.org/wiki/GNU_Screen</a>&gt;`__. By running screen, your JupyterLab session will not get interrupted if you disconnect from your instance. So, on the command line in your instance, execute</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">screen</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>screen
 </pre></div>
 </div>
 <p>Then, you can launch JupyterLab by executing</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">jupyter</span> <span class="n">lab</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">browser</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>jupyter lab --no-browser
 </pre></div>
 </div>
 <p>on the command line. This will launch JupyterLab. You will see output like this:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>To access the notebook, open this file in a browser:
-    file:///home/ec2-user/.local/share/jupyter/runtime/nbserver-1821-open.html
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>To access the server, open this file in a browser:
+    file:///home/ec2-user/.local/share/jupyter/runtime/jpserver-30060-open.html
 Or copy and paste one of these URLs:
-    http://localhost:8888/?token=b9910e579549381a3b6dvd359fada1624bcdf718422bab95
- or http://127.0.0.1:8888/?token=b9910e579549381a3b6dvd359fada1624bcdf718422bab95
+    http://localhost:8888/lab?token=e52184f06c9fb0f9ceea176b1d51d9cb36c72a019e688fed
+ or http://127.0.0.1:8888/lab?token=e52184f06c9fb0f9ceea176b1d51d9cb36c72a019e688fed
 </pre></div>
 </div>
 <p>Keep this window open.</p>
 <p>In order to use JupyterLab through a browser on your machine, you need to set up a socket. To do so, open up another GitBash or Terminal window and execute the following.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="o">-</span><span class="n">i</span> <span class="s2">&quot;~/key_pairs/bebi103_aws_keypair.pem&quot;</span> <span class="o">-</span><span class="n">L</span> <span class="mi">8000</span><span class="p">:</span><span class="n">localhost</span><span class="p">:</span><span class="mi">8888</span> <span class="n">ec2</span><span class="o">-</span><span class="n">user</span><span class="o">@&lt;</span><span class="n">IPv4</span> <span class="n">Public</span> <span class="n">IP</span><span class="o">&gt;</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ssh -i &quot;~/key_pairs/bebi103_aws_keypair.pem&quot; -L 8000:localhost:8888 ec2-user@&lt;IPv4 Public IP&gt;
 </pre></div>
 </div>
 <p>This sets up a socket connecting port <code class="docutils literal notranslate"><span class="pre">8888</span></code> on your EC2 instance to port <code class="docutils literal notranslate"><span class="pre">8000</span></code> on your local machine. You can change these numbers as necessary. For example, in the URL listed above that you got with you launched JupyterLab, the port may be <code class="docutils literal notranslate"><span class="pre">localhost:8889</span></code>, in which case you need to substitute <code class="docutils literal notranslate"><span class="pre">8889</span></code> for <code class="docutils literal notranslate"><span class="pre">8888</span></code> in your ssh command. You may also want a different local port if you already have a JupyterLab instance running on port <code class="docutils literal notranslate"><span class="pre">8000</span></code>, e.g., <code class="docutils literal notranslate"><span class="pre">8001</span></code>. In what follows, I will use
 port number <code class="docutils literal notranslate"><span class="pre">8000</span></code> and <code class="docutils literal notranslate"><span class="pre">8888</span></code>, which you will probably use 90% of the time, but you can make changes as you see fit.</p>
 <p>After you have set up the socket, you can paste the URL given when you launched JupyterLab on your EC2 instance into your browser, but substitute <code class="docutils literal notranslate"><span class="pre">8000</span></code> for <code class="docutils literal notranslate"><span class="pre">8888</span></code>. That is, direct your browser to</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>http://localhost:8000/?token=b9910e579549381a3b6dvd359fada1624bcdf718422bab95
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>http://localhost:8000/lab?token=e52184f06c9fb0f9ceea176b1d51d9cb36c72a019e688fed
 </pre></div>
 </div>
 <p>You will now have JupyterLab up and running!</p>
 <p>Note that you may be running JupyterLab locally on your own machine. You should make sure you do not use the same port number of any JupyterLab instance running on your local machine when you launch JupyterLab on AWS. You can specify the port number to be, for example 8890, by launching JupyterLab with</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">jupyter</span> <span class="n">lab</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">browser</span> <span class="o">--</span><span class="n">port</span> <span class="mi">8890</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>jupyter lab --no-browser --port 8890
 </pre></div>
 </div>
 <p>If you do that, make sure you use the corresponding port numbers when setting up your socket.</p>
-</div>
-<div class="section" id="5.-If-you-get-detached">
-<h2>5. If you get detached<a class="headerlink" href="#5.-If-you-get-detached" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="5.-If-you-get-detached">
+<h2>5. If you get detached<a class="headerlink" href="#5.-If-you-get-detached" title="Permalink to this headline"></a></h2>
 <p>If you lose your internet connection, you can reconnect to your session, with JupyterLab running, by reattaching your screen. Execute <code class="docutils literal notranslate"><span class="pre">screen</span> <span class="pre">-r</span></code> on the command line after SSH-ing back in to your EC2 instance to do this.</p>
 <p>You can see what screens are active by doing <code class="docutils literal notranslate"><span class="pre">screen</span> <span class="pre">-ls</span></code> on the command line. You can also detach the current screen by using <code class="docutils literal notranslate"><span class="pre">screen</span> <span class="pre">-d</span></code>.</p>
-</div>
-<div class="section" id="6.-Copying-results-to-and-from-AWS-to-your-local-machine">
-<h2>6. Copying results to and from AWS to your local machine<a class="headerlink" href="#6.-Copying-results-to-and-from-AWS-to-your-local-machine" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="6.-Copying-results-to-and-from-AWS-to-your-local-machine">
+<h2>6. Copying results to and from AWS to your local machine<a class="headerlink" href="#6.-Copying-results-to-and-from-AWS-to-your-local-machine" title="Permalink to this headline"></a></h2>
 <p>As you work on notebooks and create new files you want to save, you may want to move them to your local machine. If you are working on a notebook or <code class="docutils literal notranslate"><span class="pre">.stan</span></code> file, the best option is to use git and commit and push those files to your repository directly from the command line on your EC2 instance.</p>
 <p>Some files, though, such as MCMC results or intermediate data processing results, are not meant to be under version control. For these file, you an use <code class="docutils literal notranslate"><span class="pre">scp</span></code>. Within your GitBash or Terminal window on your local machine (you probably have to open yet another window), you can copy files as follows.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scp</span> <span class="o">-</span><span class="n">i</span> <span class="s2">&quot;~/key_pairs/bebi103_aws_keypair.pem&quot;</span> <span class="n">ec2</span><span class="o">-</span><span class="n">user</span><span class="o">@&lt;</span><span class="n">IPv4</span> <span class="n">Public</span> <span class="n">IP</span><span class="o">&gt;</span><span class="p">:</span><span class="o">~/</span><span class="n">my_file</span><span class="o">.</span><span class="n">csv</span> <span class="o">./</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>scp -i &quot;~/key_pairs/bebi103_aws_keypair.pem&quot; ec2-user@&lt;IPv4 Public IP&gt;:~/my_file.csv ./
 </pre></div>
 </div>
 <p>This command will copy files from your EC2 instance to your working directory. Simply put the full path to the file you want to transfer after the colon above (remember <code class="docutils literal notranslate"><span class="pre">~/</span></code> means “home directory”). The second argument of <code class="docutils literal notranslate"><span class="pre">scp</span></code> is where you want to copy the file.</p>
 <p>Similarly, you can upload files to your EC2 instance as follows (in this example to the home directory in your instance).</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scp</span> <span class="o">-</span><span class="n">i</span> <span class="s2">&quot;~/key_pairs/bebi103_aws_keypair.pem&quot;</span> <span class="n">my_file</span><span class="o">.</span><span class="n">txt</span> <span class="n">ec2</span><span class="o">-</span><span class="n">user</span><span class="o">@&lt;</span><span class="n">IPv4</span> <span class="n">Public</span> <span class="n">IP</span><span class="o">&gt;</span><span class="p">:</span><span class="o">~/</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>scp -i &quot;~/key_pairs/bebi103_aws_keypair.pem&quot; my_file.txt ec2-user@&lt;IPv4 Public IP&gt;:~/
 </pre></div>
 </div>
-</div>
-<div class="section" id="7.-Exiting">
-<h2>7. Exiting<a class="headerlink" href="#7.-Exiting" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="7.-Exiting">
+<h2>7. Exiting<a class="headerlink" href="#7.-Exiting" title="Permalink to this headline"></a></h2>
 <p>When you are finished with your session, you can shut down your notebook in the browser. If the shutdown does not give you a new prompt in the terminal window, you can do a hard shutdown of JupyterLab by pressing <code class="docutils literal notranslate"><span class="pre">Ctrl-c</span></code>. After Jupyter is terminated, you should detach your screen by doing <code class="docutils literal notranslate"><span class="pre">screen</span> <span class="pre">-d</span></code>. Finally, you should quit your screen by doing <code class="docutils literal notranslate"><span class="pre">screen</span> <span class="pre">-X</span> <span class="pre">quit</span></code>.</p>
 <p>In the past, I have had students have their instances littered with detached screens. You should clean house from time to time by running <code class="docutils literal notranslate"><span class="pre">screen</span> <span class="pre">-X</span> <span class="pre">quit</span></code>.</p>
 <p>After you are finished with your work on your instance, you should stop your instance. To do this, go back to the <code class="docutils literal notranslate"><span class="pre">Instances</span></code> page on your EC2 console. Right click your instance, and navigate to <code class="docutils literal notranslate"><span class="pre">Instance</span> <span class="pre">State</span></code> → <code class="docutils literal notranslate"><span class="pre">Stop</span></code>. <strong>Do not terminate your instance</strong> unless you really want to. Terminating an instance will get rid of any changes you made to it.</p>
-</div>
-<div class="section" id="8.-Seriously.-Stop-your-instances-if-you-are-not-using-them.">
-<h2>8. Seriously. Stop your instances if you are not using them.<a class="headerlink" href="#8.-Seriously.-Stop-your-instances-if-you-are-not-using-them." title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="8.-Seriously.-Stop-your-instances-if-you-are-not-using-them.">
+<h2>8. Seriously. Stop your instances if you are not using them.<a class="headerlink" href="#8.-Seriously.-Stop-your-instances-if-you-are-not-using-them." title="Permalink to this headline"></a></h2>
 <p>If your instance is not stopped and you leave it running, you will get charged against the $50 of credits AWS Educate provides. You can rack up a massive bill with idle, but running, instances. You should stop your instances whenever you are not using them. It is a minor pain to wait for them to spin up again, but forgetting about a running instance will cause more pain than that to your pocketbook.</p>
-</div>
-<div class="section" id="9.-Terminate-your-instances-after-the-class-is-over">
-<h2>9. Terminate your instances after the class is over<a class="headerlink" href="#9.-Terminate-your-instances-after-the-class-is-over" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="9.-Terminate-your-instances-after-the-class-is-over">
+<h2>9. Terminate your instances after the class is over<a class="headerlink" href="#9.-Terminate-your-instances-after-the-class-is-over" title="Permalink to this headline"></a></h2>
 <p>After the class is over, you might want to terminate your instance, especially if you plan on using your own account going forward. This is because the storage in your instance (stored using AWS’s EBS, which is what keeps your repository, installations, etc., all in tact) is not free. Once your free tier accessibility expires in a year if you are new to AWS, and/or your promo codes expire, you will start getting bills for your EBS usage. These get wiped if you terminate your instance and you
 will not get billed.</p>
-</div>
-<div class="section" id="Building-the-AMI">
-<h2>Building the AMI<a class="headerlink" href="#Building-the-AMI" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="Building-the-AMI">
+<h2>Building the AMI<a class="headerlink" href="#Building-the-AMI" title="Permalink to this headline"></a></h2>
 <p>You should now have the power to use AWS for your computing. If you are curious, to build the AMI, I ran the steps below on the command line of my instance when I first SSH’d into it.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">yum</span> <span class="o">-</span><span class="n">y</span> <span class="n">update</span><span class="p">;</span>
-<span class="n">sudo</span> <span class="n">yum</span> <span class="o">-</span><span class="n">y</span> <span class="n">install</span> <span class="n">git</span><span class="p">;</span>
-<span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">justinbois</span><span class="o">/</span><span class="n">bebi103_ami_setup</span><span class="o">.</span><span class="n">git</span><span class="p">;</span>
-<span class="n">bash</span> <span class="o">~/</span><span class="n">bebi103_ami_setup</span><span class="o">/</span><span class="n">setup_ami</span><span class="o">.</span><span class="n">sh</span><span class="p">;</span>
-<span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="n">bebi103_ami_setup</span><span class="p">;</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>sudo yum -y update;
+sudo yum -y install git;
+git clone https://github.com/justinbois/bebi103_ami_setup.git;
+bash ~/bebi103_ami_setup/setup_ami.sh;
+rm -rf bebi103_ami_setup;
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="aws_usage.html" class="btn btn-neutral float-right" title="Running Jupyter notebooks with AWS" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="index.html" class="btn btn-neutral float-left" title="8. AWS setup and usage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="8. Cloud computing setup and usage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="aws_usage.html" class="btn btn-neutral float-right" title="Running Jupyter notebooks with AWS" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">
-        Last updated on Mar 16, 2021.
-      </span>
+      <span class="lastupdated">Last updated on Dec 23, 2021.
+      </span></p>
+  </div>
 
-    </p>
-  </div> <jinja2.runtime.BlockReference object at 0x7ff2796ed610> 
+   <jinja2.runtime.BlockReference object at 0x7f945c161400> 
 
 <p>© 2021 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 
@@ -501,37 +352,26 @@ will not get billed.</p>
  
 
 </footer>
-
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
     <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-54852702-1"></script>
     <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-    ga('create', 'UA-54852702-1', 'auto');
-    ga('send', 'pageview');
-    </script>
-
-    
-    
+      gtag('config', 'UA-54852702-1', {
+          'anonymize_ip': false,
+      });
+    </script>  
 
   <style>
          .wy-nav-content { max-width: none; }

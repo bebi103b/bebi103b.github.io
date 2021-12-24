@@ -1,13 +1,12 @@
-Homework 0.1: Configure your team (5 pts)
+Homework 0.1: Configure your team (0 pts)
 ------------------------------------------
 
 One, and only one, member from your team, please email the course staff, cc-ing your team members, the following information.
 
 1. The names of the team members.
 2. The GitHub IDs of the team members. (This is not your GitHub account number, but your user name. E.g., mine is ``justinbois``.)
-3. Which of the Tuesday sections you will be joining.
-4. A link to the recurring Zoom meeting your team will use for the class. If the meeting has a password, be sure it is embedded in the link.
-5. A note affirming that your team has had a Zoom session together of at least a half hour where you discussed your working style and schedules. You should also use that time to get to know each other.
+3. Which of the Tuesday sections you are in.
+4. A link to the recurring Zoom meeting your team will use for the class. If the meeting has a password, be sure it is embedded in the link. This is necessary in the event that we must do remote learning during the term.
 
 The staff email addresses are available from the :ref:`main page of the course<
 People>`.

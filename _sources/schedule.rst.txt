@@ -9,11 +9,13 @@ Schedule overview
 - Lecture: Wednesdays, 9–9:50 am PST
 - TA recitation: Thursdays, 7-8:30 pm PST
 - TA homework help: Thursdays, 8:30–10 pm PST
-- Instructor office hours: Fridays, 2:30-4 pm PST
+- Instructor office hours: Wednesdays, 2:30-3:30 pm PST
 
-Unless given notice otherwise, all sessions are at `this Zoom link <http://bebi103.caltech.edu/2021/b/zoom_links/bebi103_main>`_.
+Unless given notice otherwise, lab sessions, TA recitations, and TA homework help are in Chen 130 and lectures are in Chen 100. Instructor office hours are in Broad 100.
 
-Lectures and TA recitations will be recorded and posted at `this Google Drive link <http://bebi103.caltech.edu/2021/b/recordings/google_drive/>`_.
+.. Unless given notice otherwise, all sessions are at `this Zoom link <http://bebi103.caltech.edu/2021/b/zoom_links/bebi103_main>`_.
+
+.. Lectures and TA recitations will be recorded and posted at `this Google Drive link <http://bebi103.caltech.edu/2021/b/recordings/google_drive/>`_.
 
 
 ----
@@ -22,18 +24,18 @@ Lectures and TA recitations will be recorded and posted at `this Google Drive li
 Homework due dates
 ------------------
 
-- :ref:`Homework 0<Homework 0.1: Configure your team (5 pts)>`: due noon PST, January 4
-- :ref:`Homework 1<1. Intuitive generative modeling>`: due 5 pm PST, January 11
-- :ref:`Homework 2<2. Analytical and graphical methods for analysis of the posterior>`: due 5 pm PST, January 18
-- :ref:`Homework 3<3. Maximum a posteriori parameter estimation>`: due 5 pm PST, January 25
-- :ref:`Homework 4<4. Sampling with MCMC>`: due 5 pm PST, February 1
-- :ref:`Homework 5<5. Inference with Stan I>`: due 5 pm PST, February 8
-- :ref:`Homework 6<6. Practice building and assessing Bayesian models>`: due 5 pm PST, February 15
-- :ref:`Homework 7<7. Model comparison>`: due 5 pm PST, February 22
-- :ref:`Homework 8<8. Hierarchical models>`: due 5 pm PST, March 1
-- :ref:`Homework 9<9. Principled pipelines and hierarchical modeling of noise>`: due 5 pm PST, March 8
-- :ref:`Homework 10<10. The grand finale>`: due 5 pm PST, March 17
-- :ref:`Homework 11<11. Course feedback>`: due 5 pm PST, March 17
+- :ref:`Homework 0<Homework 0.1: Configure your team (0 pts)>`: due as soon as you can, January 4
+- :ref:`Homework 1<1. Intuitive generative modeling>`: due 5 pm PST, January 14
+- :ref:`Homework 2<2. Analytical and graphical methods for analysis of the posterior>`: due 5 pm PST, January 21
+- :ref:`Homework 3<3. Maximum a posteriori parameter estimation>`: due 5 pm PST, January 28
+- :ref:`Homework 4<4. Sampling with MCMC>`: due 5 pm PST, February 4
+- :ref:`Homework 5<5. Inference with Stan I>`: due 5 pm PST, February 11
+- :ref:`Homework 6<6. Practice building and assessing Bayesian models>`: due 5 pm PST, February 18
+- :ref:`Homework 7<7. Model comparison>`: due 5 pm PST, February 25
+- :ref:`Homework 8<8. Hierarchical models>`: due 5 pm PST, March 4
+- :ref:`Homework 9<9. Principled pipelines and hierarchical modeling of noise>`: due 5 pm PST, March 11
+- :ref:`Homework 10<10. The grand finale>`: due 5 pm PST, March 15
+- :ref:`Homework 11<11. Course feedback>`: due 5 pm PST, March 16
 
 
 ----
@@ -42,15 +44,15 @@ Homework due dates
 Lesson exercise due dates
 -------------------------
 
-- :ref:`Lesson exercise 1<E1. To be completed after lesson 4>`: due 10:30 am PST, January 12
-- :ref:`Lesson exercise 2<E2. To be completed after lesson 6>`: due 10:30 am PST, January 19
-- :ref:`Lesson exercise 3<E3. To be completed after lesson 11>`: due 10:30 am PST, January 26
-- :ref:`Lesson exercise 4<E4. To be completed after lesson 14>`: due 10:30 am PST, February 2
-- :ref:`Lesson exercise 5<E5. To be completed after lesson 17>`: due 10:30 am PST, February 9
-- :ref:`Lesson exercise 6<E6. To be completed after lesson 19>`: due 10:30 am PST, February 16
-- :ref:`Lesson exercise 7<E7. To be completed after lesson 21>`: due 10:30 am PST, February 23
-- :ref:`Lesson exercise 8<E8. To be completed after lesson 23>`: due 10:30 am PST, March 2
-- :ref:`Lesson exercise 9<E9. To be completed after lesson 25>`: due 10:30 am PST, March 9
+- :ref:`Lesson exercise 1<E1. To be completed after lesson 4>`: due 10:30 am PST, January 11
+- :ref:`Lesson exercise 2<E2. To be completed after lesson 6>`: due 10:30 am PST, January 18
+- :ref:`Lesson exercise 3<E3. To be completed after lesson 11>`: due 10:30 am PST, January 25
+- :ref:`Lesson exercise 4<E4. To be completed after lesson 14>`: due 10:30 am PST, February 1
+- :ref:`Lesson exercise 5<E5. To be completed after lesson 17>`: due 10:30 am PST, February 8
+- :ref:`Lesson exercise 6<E6. To be completed after lesson 19>`: due 10:30 am PST, February 15
+- :ref:`Lesson exercise 7<E7. To be completed after lesson 21>`: due 10:30 am PST, February 22
+- :ref:`Lesson exercise 8<E8. To be completed after lesson 23>`: due 10:30 am PST, March 1
+- :ref:`Lesson exercise 9<E9. To be completed after lesson 25>`: due 10:30 am PST, March 7
 
 
 ----
@@ -64,51 +66,51 @@ The notes for each Tuesday lesson must be read ahead of time and associated less
 - **Week 0**
 	+ :ref:`Lesson 00<0. Preparing for the course>`: Preparing for the course
 - **Week 1**
-	+ Tu 01/05: First class meeting; no reading.
-	+ W 01/06: :ref:`Lesson 01<1. Probability and the logic of scientific reasoning>`: Probability and scientific logic (lecture)
-	+ Th 01/07: Recitation 01: Review of maximum likelihood estimation
+	+ Tu 01/04: First class meeting; no reading.
+	+ W 01/05: :ref:`Lesson 01<1. Probability and the logic of scientific reasoning>`: Probability and scientific logic (lecture)
+	+ Th 01/06: Recitation 01: Review of maximum likelihood estimation
 - **Week 2**
-	+ Tu 01/12: :ref:`Lesson 02<2. Plotting posteriors>`: Plotting posteriors
-	+ Tu 01/12: :ref:`Lesson 03<3. Marginalization by numerical quadrature>`: Marginalization by numerical quadrature
-	+ Tu 01/12: :ref:`Lesson 04<4. Conjugacy>`: Conjugacy
-	+ W 01/13: :ref:`Lesson 05<5. Introduction to Bayesian modeling>`: Introduction to Bayesian modeling (lecture)
-	+ Th 01/14: Recitation 02: Probability review
+	+ Tu 01/11: :ref:`Lesson 02<2. Plotting posteriors>`: Plotting posteriors
+	+ Tu 01/11: :ref:`Lesson 03<3. Marginalization by numerical quadrature>`: Marginalization by numerical quadrature
+	+ Tu 01/11: :ref:`Lesson 04<4. Conjugacy>`: Conjugacy
+	+ W 01/12: :ref:`Lesson 05<5. Introduction to Bayesian modeling>`: Introduction to Bayesian modeling (lecture)
+	+ Th 01/13: Recitation 02: Probability review
 - **Week 3**
-	+ Tu 01/19: :ref:`Lesson 06<6. Parameter estimation by optimization>`: Parameter estimation by optimization
-	+ W 01/20: :ref:`Lesson 07<7. Introduction to Markov chain Monte Carlo>`: Introduction to Markov chain Monte Carlo (lecture)
-	+ Th 01/21: Recitation 03: Choosing priors
+	+ Tu 01/18: :ref:`Lesson 06<6. Parameter estimation by optimization>`: Parameter estimation by optimization
+	+ W 01/19: :ref:`Lesson 07<7. Introduction to Markov chain Monte Carlo>`: Introduction to Markov chain Monte Carlo (lecture)
+	+ Th 01/20: Recitation 03: Choosing priors
 - **Week 4**
-	+ Tu 01/26: :ref:`Lesson 08<8. AWS setup and usage>`: AWS setup and usage
-	+ Tu 01/26: :ref:`Lesson 09<9. Introduction to MCMC with Stan>`: Introduction to MCMC with Stan
-	+ Tu 01/26: :ref:`Lesson 10<10. Mixture models and label switching with MCMC>`: Mixture models and label switching
-	+ Tu 01/26: :ref:`Lesson 11<11. Regression with MCMC>`: Regression with Stan
-	+ W 01/27: :ref:`Lesson 12<12. Display of MCMC results>`: Display of MCMC samples (lecture)
-	+ Th 01/28: Recitation 04: Introduction to computing with AWS
+	+ Tu 01/25: :ref:`Lesson 08<8. Cloud computing setup and usage>`: AWS setup and usage
+	+ Tu 01/25: :ref:`Lesson 09<9. Introduction to MCMC with Stan>`: Introduction to MCMC with Stan
+	+ Tu 01/25: :ref:`Lesson 10<10. Mixture models and label switching with MCMC>`: Mixture models and label switching
+	+ Tu 01/25: :ref:`Lesson 11<11. Regression with MCMC>`: Regression with Stan
+	+ W 01/26: :ref:`Lesson 12<12. Display of MCMC results>`: Display of MCMC samples (lecture)
+	+ Th 01/27: Recitation 04: Introduction to computing with AWS
 - **Week 5**
-	+ Tu 02/02: :ref:`Lesson 13<13. Model building with prior predictive checks>`: Model building with prior predictive checks
-	+ Tu 02/02: :ref:`Lesson 14<14. Posterior predictive checks>`: Posterior predictive checks
-	+ W 02/03: :ref:`Lesson 15<15. Collector's box of distributions>`: Collector's box of distributions (lecture)
-	+ Th 02/04: :ref:`Recitation 05<R5. A Bayesian modeling case study: Ant traffic jams>`: Modeling case study
+	+ Tu 02/01: :ref:`Lesson 13<13. Model building with prior predictive checks>`: Model building with prior predictive checks
+	+ Tu 02/01: :ref:`Lesson 14<14. Posterior predictive checks>`: Posterior predictive checks
+	+ W 02/02: :ref:`Lesson 15<15. Collector's box of distributions>`: Collector's box of distributions (lecture)
+	+ Th 02/03: :ref:`Recitation 05<R5. A Bayesian modeling case study: Ant traffic jams>`: Modeling case study
 - **Week 6**
-	+ Tu 02/09: :ref:`Lesson 16<16. MCMC diagnostics>`: MCMC diagnostics
-	+ Tu 02/09: :ref:`Lesson 17<17. A diagnostics case study: Artificial funnel of hell>`: The Funnel of Hell and uncentering
-	+ W 02/10: :ref:`Lesson 18<18. Model comparison>`: Model comparison (lecture)
-	+ Th 02/11: :ref:`Recitation 06<R6. Practice model building>`: Practice modeling
+	+ Tu 02/08: :ref:`Lesson 16<16. MCMC diagnostics>`: MCMC diagnostics
+	+ Tu 02/08: :ref:`Lesson 17<17. A diagnostics case study: Artificial funnel of hell>`: The Funnel of Hell and uncentering
+	+ W 02/09: :ref:`Lesson 18<18. Model comparison>`: Model comparison (lecture)
+	+ Th 02/10: :ref:`Recitation 06<R6. Practice model building>`: Practice modeling
 - **Week 7**
-	+ Tu 02/16: :ref:`Lesson 19<19. Model comparison in practice>`: Model comparison in practice
-	+ W 02/17: :ref:`Lesson 20<20. Hierarchical models>`: Hierarchical models (lecture)
-	+ Th 02/18: :ref:`Recitation 07<R7. Introduction to Hamiltonian Monte Carlo>`: Background on Hamiltonian Monte Carlo
+	+ Tu 02/15: :ref:`Lesson 19<19. Model comparison in practice>`: Model comparison in practice
+	+ W 02/16: :ref:`Lesson 20<20. Hierarchical models>`: Hierarchical models (lecture)
+	+ Th 02/17: :ref:`Recitation 07<R7. Introduction to Hamiltonian Monte Carlo>`: Background on Hamiltonian Monte Carlo
 - **Week 8**
-	+ Tu 02/23: :ref:`Lesson 21<21. Implementation of hierarchical models>`: Implementation of hierarchical models
-	+ W 02/24: :ref:`Lesson 22<22. Principled analysis pipelines>`: Principled workflows (lecture)
-	+ Th 02/25: :ref:`Recitation 08<R8: Discussion of HW 10 project proposals>`: Discussion of project proposals
+	+ Tu 02/22: :ref:`Lesson 21<21. Implementation of hierarchical models>`: Implementation of hierarchical models
+	+ W 02/23: :ref:`Lesson 22<22. Principled analysis pipelines>`: Principled workflows (lecture)
+	+ Th 02/24: :ref:`Recitation 08<R8: Discussion of HW 10 project proposals>`: Discussion of project proposals
 - **Week 9**
-	+ Tu 03/02: :ref:`Lesson 23<23: Simulation based calibration and related checks in practice>`: Simulation-based calibration in practice
-	+ W 03/03: :ref:`Lesson 24<24. Introduction to Gaussian processes>`: Introduction to nonparametric Bayes: Gaussian processes
-	+ Th 03/04: :ref:`Recitation 09<R9: Sampling discrete parameters with Stan>`: Sampling out of discrete distributions
+	+ Tu 03/01: :ref:`Lesson 23<23: Simulation based calibration and related checks in practice>`: Simulation-based calibration in practice
+	+ W 03/02: :ref:`Lesson 24<24. Introduction to Gaussian processes>`: Introduction to nonparametric Bayes: Gaussian processes
+	+ Th 03/03: :ref:`Recitation 09<R9: Sampling discrete parameters with Stan>`: Sampling out of discrete distributions
 - **Week 10**
-	+ Tu 03/09: :ref:`Lesson 25<25. Implementation of Gaussian processes>`: Implementation of Gaussian processes
-	+ W 03/10: :ref:`Lesson 26<26: Variational Bayesian inference>`: Variational inference
-	+ W 03/10: :ref:`Lesson 27<27: Wrap-up>`: Course wrap-up (lecture)
-	+ Th 03/11: Recitation 10: Gaussian processes
+	+ Tu 03/08: :ref:`Lesson 25<25. Implementation of Gaussian processes>`: Implementation of Gaussian processes
+	+ W 03/09: :ref:`Lesson 26<26: Variational Bayesian inference>`: Variational inference
+	+ W 03/09: :ref:`Lesson 27<27: Wrap-up>`: Course wrap-up (lecture)
+	+ Th 03/10: Recitation 10: Extended homework help
 

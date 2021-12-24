@@ -1,5 +1,5 @@
 *********************************************************
-8. AWS setup and usage
+8. Cloud computing setup and usage
 *********************************************************
 
 .. toctree::
@@ -7,3 +7,4 @@
 
    aws_setup
    aws_usage
+   colab_stan

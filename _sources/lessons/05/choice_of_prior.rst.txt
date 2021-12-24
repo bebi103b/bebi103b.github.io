@@ -187,7 +187,7 @@ To come up with the functional form, or better yet the name, of the prior distri
 priors <https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations>`__,
 which says, “the loss in precision by making the prior a bit too weak (compared to the true population distribution of parameters or the current expert state of knowledge) is less serious than the gain in robustness by including parts of parameter space that might be relevant.”
 
-I generally prefer to use weakly informative priors, mostly because they actually encode prior knowledge, separating the sublime from the ridiculous. In fact, we used weakly informative priors in the example of *C. elegans* egg lengths in the first part of this lecture. As we will see when we perform MCMC calculations, there are also practical advantages to using weakly informative priors. In general, prior choice that can affect second main task of Bayesian inference: making sense of the posterior. We will discuss these practical considerations when we start summarizing posteriors using Markov chain Monte Carlo.
+I generally prefer to use weakly informative priors, mostly because they actually encode prior knowledge, separating the sublime from the ridiculous. In fact, we used weakly informative priors in the example of *C. elegans* egg lengths in the first part of this lecture. As we will see when we perform MCMC calculations, there are also practical advantages to using weakly informative priors. In general, prior choice can affect the second main task of Bayesian inference: making sense of the posterior. We will discuss these practical considerations when we start summarizing posteriors using Markov chain Monte Carlo.
 
 
 Conjugate priors
@@ -198,4 +198,41 @@ We have :ref:`discussed conjugate priors<4. Conjugacy>` in the context of plotti
 1. Only a few likelihoods have known conjugate priors. Even in cases where the conjugate is known, its probability density function can be a complicated function.
 2. As soon as a model grows in complexity beyond one or two parameters, and certainly into hierarchy, conjugate priors are simply not available.
 
-Thus, conjugate priors, while conceptually pleasing and parametrizable into weakly informative priors, have limited practice use.
+Thus, conjugate priors, while conceptually pleasing and parametrizable into weakly informative priors, have limited practical use.
+
+
+The bet-the-farm method of specifying weakly informative priors
+----------------------------------------------------------------
+
+Since we have decided that weakly informative priors are of greatest utility, I will share a technique I like to use for coming up with priors for positive continuous unbounded parameters, a commonly encountered situation. I like to take what I call the `bet-the-farm <https://en.wiktionary.org/wiki/bet_the_farm>`_ approach. The idiomatic term "to bet the farm" means to make a giant wager on an outcome. You could think instead about betting a year's salary. As an example, would you bet the farm that pigs cannot fly? I would be comfortable waging a year's salary (since I don't have a farm) that they do not. While I certainly hope the Los Angeles Football Club wins the MLS cup in the next few years, I would not be comfortable betting the farm on it.
+
+The technique is best described through example. Let's say someone tells me about a new bacterium and I have to guess how long a single cell of that species is. 
+
+To make my guess, I start absurdly low. Certainly, the cell is bigger than of order nanometer, since that's the diameter of a strand of DNA. I would bet the farm (or a year's salary) on it. I would also bet the farm that it would be bigger than 10 nm without flinching. How about 100 nm? Well, I'm pretty sure that bacteria tend not to be smaller than 100 nm, but I don't think I'd bet the farm. I feel uneasy enough about that that I won't make that bet. So, I put 100 nm as the lower end of my guess.
+
+Now, let's consider absurdly large sizes. I would bet the farm that it is less than a meter long. How about 10 cm? That's still gigantic, and I would bet the farm that it's smaller than that. How about 1 cm? Still gigantic. How about 1 mm? Well, this is still huge, but there is tremendous diversity among bacteria. I know there are eukaryotic cells this big (for example a *Xenopus* egg), so, even though I strongly suspect that bacterium would be smaller than 1 mm, I wouldn't bet a farm. So, 1 mm is my upper bound.
+
+If we were coming up with an order-of-magnitude estimate, we would take the geometric mean of the high and low boundaries. In this case, we would get :math:`\sqrt{10^{-7}\cdot 10^{-3}} \text{ m} = 10^{-5}\text{ m} =` 10 µm, which, perhaps not surprisingly, is within an order of magnitude of "typical" bacterial size, for example of *E. coli*.
+
+Notice that these order-of-magnitude type of estimates operates on a logarithmic scale. We estimated between :math:`10^{-7}` and :math:`10^{-3}` meters. So, for encoding a prior for the parameter, it is convenient to come up with the prior for the base-ten logarithm of the parameter instead (ignoring the mathematical absurdity with taking logarithms of quantities with units), and then transform the variable. In the bacterial size example, I could use a Normal distribution where 95% of the probability mass lies between :math:`-7` and :math:`-3`. The width of my range of reasonable values from the bet-the-farm approach is 4 log units, so if I choose a Normal distribution centered at :math:`-5` with scale parameter of 1, I capture this prior information. So, my prior for the bacterial length :math:`\ell` is
+
+.. math::
+    \begin{align}
+    &\log_{10} \ell \sim \text{Norm}(-5, 1),\\[1em]
+    &\ell = 10^{\log_{10}\ell}.
+    \end{align}
+
+Equivalently, since :math:`\ln 10 \approx 2.3`, we can write this as :math:`\ell \sim \text{LogNorm}(-2.3\cdot 5, 2.3)`.
+
+To summarize the procedure for finding a prior for positive continuous unbounded parameter :math:`\theta` is as follows.
+
+1. Start at absurdly low values for the parameter and work your way up to a value that you would be hesitant to bet the farm on. This is your low estimate, :math:`\theta_\mathrm{min}`.
+2. Start at absurdly high values for the parameter and work your way down to a value that you would be hesitant to bet the farm on. This is your high estimate, :math:`\theta_\mathrm{max}`.
+3. Determine the center of your two estimates on a logarithmic scale. This is the location parameter :math:`\mu_{10} = (\theta_\mathrm{max} + \theta_\mathrm{min})/2` for the Normal prior of :math:`\log_{10}\theta`.
+4. Take the difference of the high to low estimates and divide it by four. The result is the scale parameter :math:`\sigma_{10} = (\theta_\mathrm{max} - \theta_\mathrm{min})/4` for the Normal prior of :math:`\log_{10}\theta`.
+5. The prior for the base-ten logarithm of the parameter is then :math:`\log_{10}\theta \sim \text{Norm}(\mu_{10}, \sigma_{10})`. Equivalently, we can say that the prior is distributed as :math:`\theta \sim \text{LogNorm}(2.3\mu_{10}, 2.3\sigma_{10})`.
+
+The result is a broad distribution that contains all conceivable values of the parameters, as determined by you.
+
+Earlier in this lesson, I came up with a Normal (not Log-Normal as I would get using the bet-the-farm approach) for the length of a *C. elegans* egg. This is because I had firm prior knowledge about *C. elegans* eggs; I have looked at countless of them, and they are about 50 µm long. For most cases where I do not have prior knowledge like that, I use the bet the farm approach.
+

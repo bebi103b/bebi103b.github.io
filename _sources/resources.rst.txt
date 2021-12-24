@@ -18,3 +18,4 @@ Reading/tutorials
 - `Stan tutorials YouTube channel <https://www.youtube.com/playlist?list=PLCrWEzJgSUqwL85xIj1wubGdY15C5Gf7H>`_ has a great series of videos.
 - `Statistical Rethinking, 2nd Ed. <https://xcelab.net/rm/statistical-rethinking/>`_ by Richard McElreath is a good pedagogical book about Bayesian inference.
 - `A Student's Guide to Bayesian Statistics <https://ben-lambert.com/a-students-guide-to-bayesian-statistics/>`_ by Ben Lambert is another good reference, especially for beginners.
+- `Bayesian Logical Data Analysis for the Physical Sciences <https://doi.org/10.1017/CBO9780511791277>`_ by Phil Gregory. There is also a `supplement available <https://www.cambridge.org/files/1215/2763/1556/Supplement_Gregory_23Jan2018.pdf>`_. This is a nice book to discuss how Bayesian inference fits in with logical approaches to science.

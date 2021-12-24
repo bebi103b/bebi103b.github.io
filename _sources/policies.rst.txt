@@ -2,11 +2,11 @@ Meetings
 --------
 
 We have weekly lectures Wednesday mornings 9-9:50 am PDT. On Tuesdays, you may attend one of the
-two lab sessions, 1-4 pm or 7-10 pm PDT. You should always attend the
+two lab sessions, 1-4 pm or 7-10 pm PST. You should always attend the
 same lab session (either 1 pm or 7 pm) along with your teammates, unless you have a
 conflict and let the course instructors know.
 
-We also have TA recitations on Thursdays 4–5:30 pm PDT, homework help on Thursday 5:30–7 pm PDT, and instructor office hours on Fridays 2:30–4 pm PDT. Attendance at these three activities is not required.
+We also have TA recitations on Thursdays 7–8:30 pm PST, homework help on Thursday 8:30–10 pm PST, and instructor office hours on Fridays 2:30–3:30 pm PST. Attendance at these three activities is not required.
 
 All sessions are accessible via `this Zoom link <http://bebi103.caltech.edu/2021/b/zoom_links/bebi103_main>`_. Lectures and TA recitations will be recorded and posted in case you cannot attend.
 
@@ -36,9 +36,9 @@ Homework
 
 There are weekly homework assignments. These consist almost entirely of working up real data sets, though there are some theoretical aspects and may be some analysis of fabricated data.
 
-Data analysis is almost always a collaborative effort in both research and industry. Therefore, you will be assigned to teams of three (possibly with a couple teams of four depending on course enrollment). For most problems, you will submit your homework as a team. For problems marked "solo," you will not collaborate with your team or other students in the class, but submit your own work. The following homework policies apply.
+Data analysis is almost always a collaborative effort in both research and industry. Therefore, you will be assigned to teams of three (possibly with some teams of four depending on course enrollment). For most problems, you will submit your homework as a team. For problems marked "SOLO," you will not collaborate with your team or other students in the class, but submit your own work. The following homework policies apply.
 
--  Each homework has a defined due date and time. For most homeworks, this is Monday at 5 pm PDT. Your team must tag your completed homework in your team's homework repository before this time. For solo submissions, you must tag your completed homework in your own repository before this time.
+-  Each homework has a defined due date and time. For most homeworks, this is Friday at 5 pm PST. Your team must tag your completed homework in your team's homework repository before this time. For solo submissions, you must tag your completed homework in your own repository before this time.
 -  The commit containing your final submission must be tagged with ``hw##_submission``," where ``##`` is the two-digit homework assignment number (e.g., 04). Failure to properly tag your homework will result in a 5% deduction from your point total. This sounds harsh, but we have a lot of problem sets to manage and have automated scripts to do it. These will fail if you do not properly name your files.
 -  Each homework *problem* must be committed as *both* as single Jupyter notebook and as that notebook converted to HTML. (To convert a notebook to HTML, you can use Jupyter's menu: File ⟶ Export Notebook As... ⟶ Export Notebook to HTML.) The file names must be ``hw#.#.ipynb`` and ``hw#.#.html``. For example, homework problem 3.2 is in the files ``hw3.2.ipynb`` and ``hw3.2.html``. 
 -  When you submit an assignment, the notebook and the rendered HTML must match. Furthermore, the cells should be executed in order.
@@ -58,7 +58,7 @@ Data analysis is almost always a collaborative effort in both research and indus
       else:
           data_path = "../data/"
 
-   When accessing files without your notebooks, do it with something like this: ``filename = os.path.join(data_path, 'name_of_datafile.csv')``.
+   When accessing files within your notebooks, do it with something like this: ``filename = os.path.join(data_path, 'name_of_datafile.csv')``.
 -  All of your results must be clearly explained and all graphics
    clearly presented and embedded in the Jupyter notebook.
 -  Any mathematics in your homework must render clearly and
@@ -131,7 +131,7 @@ not to distribute anywhere outside of this class.
 Since most of the homework is done in assigned teams, you obviously should
 collaborate heavily with the other members of your team. You are
 free to discuss the homework with other teams, including via
-`Ed <https://us.edstem.org/courses/3198/>`_, but the work you
+`Ed <https://edstem.org/us/courses/16335/>`_, but the work you
 submit must be the work of your own team. Solo homework problems are to be done entirely on your own.
 
 You may not consult solutions of homework problems from previous
@@ -159,7 +159,7 @@ Course communications
 ---------------------
 
 You are free to contact the course staff via email at any
-time, but we encourage you to use the `class Ed page <https://us.edstem.org/courses/3198/>`_ for questions related to course topics and homework. Most of our mass communication with you will
+time, but we encourage you to use the `class Ed page <https://edstem.org/us/courses/16335/>`_ for questions related to course topics and homework. Most of our mass communication with you will
 be through Ed, so be sure to set your Ed account to give you email
 alerts if necessary.
 
@@ -171,6 +171,7 @@ When posting on Ed, please follow these guidelines:
 
 - Appropriately tag your question or comment with the appropriate category (e.g., "Lesson12" or "HW5").
 - If you have a question about a coding bug make every attempt to provide a *minimal* example that demonstrates the problem. A minimal example strips out all other details beyond what is necessary to reproduce the problem or bug. Posting error messages without code is seldom helpful.
+- Better than a screen shot is a code snippet as text.
 - If you feel that posting a minimal example will result in showing too much of your answer to your classmates, you can post your question on Ed privately so that only the course staff can see it.
 - While you are free to post anonymously to your classmates (course staff will always know who posts), we encourage you to post with your real name. This can spur discussions among students, which can be productive.
 - Course staff strives to answer questions quickly, but students should answer when they can.

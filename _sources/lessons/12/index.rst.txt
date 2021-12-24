@@ -1,9 +1,0 @@
-****************************************************
-12. Display of MCMC results
-****************************************************
-
-.. toctree::
-   :maxdepth: 1
-
-   display_of_mcmc_samples
-   posterior_summaries

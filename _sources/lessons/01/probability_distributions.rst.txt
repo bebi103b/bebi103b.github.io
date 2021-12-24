@@ -35,6 +35,7 @@ probability is assigned to :math:`y`. A CDF for a Normal distribution is shown i
 
 .. figure:: normal_height_dist.png
    :alt: normal distribution
+   :width: 800
 
    a) The cumulative distribution function for a Normal distribution
    that could describe, for example, the heights of men in centimeters
@@ -87,6 +88,7 @@ example, :math:`n` is the outcome of the roll of a fair die
 
 .. figure:: dice_roll_dist.png
    :alt: Die roll distribution.
+   :width: 800
 
    a) The cumulative distribution function for the outcome of a fair
    die roll. b) The corresponding probability mass function.

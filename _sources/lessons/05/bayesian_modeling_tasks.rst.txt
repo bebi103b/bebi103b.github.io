@@ -45,7 +45,7 @@ Step (1) is the task of **model building**, or modeling. This is typically done 
 
 .. For example, if we did an experiment where we dropped balls from different heights in a vacuum and measured how long it took them to hit the floor, we could use the theoretical result that the time to hit the floor from height :math:`h` is :math:`\sqrt{2 g h}`, where :math:`g` is the gravitational constant. We know that this relation holds from classical physics. The likelihood distribution takes this into account and additionally any measurement noise of experimental aberrations (like imperfect vacuum, etc.).
 
-After the likelihood is constructed we need to specify prior distributions for the parameters of the likelihood. That is, the likelihood, as a model of the generative process, prescribes what the parameters :math:`\theta` of the model are. Knowing what parameters we need to write priors for, we go about codifying what we know about the parameters before we do the experiment as prior probabilities. 
+After the likelihood is constructed we need to specify prior distributions for the parameters of the likelihood. That is, the likelihood, as a model of the generative process, prescribes what the parameters :math:`\theta` of the model are (but not their values). Knowing what parameters we need to write priors for, we go about codifying what we know about the parameters before we do the experiment as prior probabilities. 
 
 So, the process of model building involves prescribing a likelihood that describes the process of data generation. The parameters to be estimated are defined in the likelihood, and from these we construct priors. We will discuss *how* we go about building likelihoods and priors in this lecture and subsequently in the course.
 
@@ -88,7 +88,7 @@ In addition to using conjagacy, which we have already discussed, in coming lesso
 
 1. Finding the values of the parameters :math:`\theta` that maximize the posterior and then approximating the posterior as locally Normal. This involves a numerical optimization calculation to find the maximizing parameters, and then uses known analytical results about multivariate Normal distributions to automatically compute the integrals (without actually having to do integration!).
 2. *Sampling* out of the posterior. As you saw in an earlier homework, we can perform marginalization, and indeed most other integrals, by sampling. The trick is sampling out of the posterior, which is not as easy as the sampling you have done so far. We resort to using the sampling method called **Markov chain Monte Carlo** (MCMC) to do it.
-3. Performing and optimization to find which distribution in a family of distributions most closely approximates the posterior, and then use this approximate distribution as a substitute for the posterior. We choose the family of candidate distributions have nice properties, known analytical results, ease of sampling, etc., thereby making exploration of the posterior much easier than by full MCMC. This is called **variational inference**.
+3. Performing and optimization to find which distribution in a family of distributions most closely approximates the posterior, and then use this approximate distribution as a substitute for the posterior. We choose the family of candidate distributions to have nice properties, known analytical results, ease of sampling, etc., thereby making exploration of the posterior much easier than by full MCMC. This is called **variational inference**.
 
 For the rest of this lecture, though, we will focus on model building.
 

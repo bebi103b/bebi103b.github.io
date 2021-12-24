@@ -56,7 +56,7 @@ Probability serves this role.
 
 So, **statistical inference requires a probability theory.** Thus,
 probability theory is a generalization of logic. Due to this logical
-connection and its crucial role in science, E. T. Jaynes says that
+connection and its crucial role in science, E. T. Jaynes said that
 probability is the “logic of science.”
 
 The problem of probability
