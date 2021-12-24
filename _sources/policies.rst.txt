@@ -1,14 +1,16 @@
 Meetings
 --------
 
-We have weekly lectures Wednesday mornings 9-9:50 am PDT. On Tuesdays, you may attend one of the
+We have weekly lectures Wednesday mornings 9-9:50 am PST. On Tuesdays, you may attend one of the
 two lab sessions, 1-4 pm or 7-10 pm PST. You should always attend the
 same lab session (either 1 pm or 7 pm) along with your teammates, unless you have a
 conflict and let the course instructors know.
 
-We also have TA recitations on Thursdays 7–8:30 pm PST, homework help on Thursday 8:30–10 pm PST, and instructor office hours on Fridays 2:30–3:30 pm PST. Attendance at these three activities is not required.
+We also have TA recitations on Thursdays 7–8:30 pm PST, homework help on Thursday 8:30–10 pm PST, and instructor office hours on Wednesdays 2:30–3:30 pm PST. Attendance at these three activities is not required.
 
-All sessions are accessible via `this Zoom link <http://bebi103.caltech.edu/2021/b/zoom_links/bebi103_main>`_. Lectures and TA recitations will be recorded and posted in case you cannot attend.
+Tuesday and Thursday meetings are normally in Chen 130, and Wednesday meetings are in Chen 100. Wednesday meetings are in Broad 200.
+
+If we need to do remote learning for any portion of the term, class meetings will be at `this Zoom link <http://bebi103.caltech.edu/2021/b/zoom_links/bebi103_main>`_. This includes the first week of the term.
 
 
 Lab sessions

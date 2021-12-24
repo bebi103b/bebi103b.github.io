@@ -2,6 +2,8 @@
 1. Intuitive generative modeling
 ********************************
 
+This homework is due at 5 pm PST on January 14, 2022.
+
 .. toctree::
    :maxdepth: 1
 

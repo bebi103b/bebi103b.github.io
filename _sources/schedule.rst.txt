@@ -11,7 +11,9 @@ Schedule overview
 - TA homework help: Thursdays, 8:30–10 pm PST
 - Instructor office hours: Wednesdays, 2:30-3:30 pm PST
 
-Unless given notice otherwise, lab sessions, TA recitations, and TA homework help are in Chen 130 and lectures are in Chen 100. Instructor office hours are in Broad 100.
+For the first week, all meetings are offered over `Zoom <http://bebi103.caltech.edu/2021/b/zoom_links/bebi103_main>`_.
+
+Unless given notice otherwise, lab sessions, TA recitations, and TA homework help are in Chen 130 and lectures are in Chen 100. Instructor office hours are in Broad 200.
 
 .. Unless given notice otherwise, all sessions are at `this Zoom link <http://bebi103.caltech.edu/2021/b/zoom_links/bebi103_main>`_.
 
@@ -24,7 +26,7 @@ Unless given notice otherwise, lab sessions, TA recitations, and TA homework hel
 Homework due dates
 ------------------
 
-- :ref:`Homework 0<Homework 0.1: Configure your team (0 pts)>`: due as soon as you can, January 4
+- :ref:`Homework 0<Homework 0.1: Configure your team (0 pts)>`: due at noon PST, January 3
 - :ref:`Homework 1<1. Intuitive generative modeling>`: due 5 pm PST, January 14
 - :ref:`Homework 2<2. Analytical and graphical methods for analysis of the posterior>`: due 5 pm PST, January 21
 - :ref:`Homework 3<3. Maximum a posteriori parameter estimation>`: due 5 pm PST, January 28

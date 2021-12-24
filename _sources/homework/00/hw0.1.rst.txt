@@ -1,6 +1,9 @@
 Homework 0.1: Configure your team (0 pts)
 ------------------------------------------
 
+This homework is due at noon on January 3, 2022.
+
+
 One, and only one, member from your team, please email the course staff, cc-ing your team members, the following information.
 
 1. The names of the team members.
