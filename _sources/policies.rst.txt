@@ -176,7 +176,5 @@ When posting on Ed, please follow these guidelines:
 - Better than a screen shot is a code snippet as text.
 - If you feel that posting a minimal example will result in showing too much of your answer to your classmates, you can post your question on Ed privately so that only the course staff can see it.
 - While you are free to post anonymously to your classmates (course staff will always know who posts), we encourage you to post with your real name. This can spur discussions among students, which can be productive.
-- Course staff strives to answer questions quickly, but students should answer when they can.
-
-This also spurs more conversation and results in faster answers to questions.
+- Course staff strives to answer questions quickly, but students should answer when they can. This also spurs more conversation and results in faster answers to questions.
 

@@ -497,7 +497,7 @@ approval.</p>
 <p>We will be using <a class="reference external" href="http://mc-stan">Stan</a> for much of our statistical modeling. Stan has a probabilistic programming language. Programs written in this language, called <em>Stan programs</em>, are translated into C++ by the Stan parser, and then the C++ code is compiled. As you will see throughout the class, there are many advantages to this approach.</p>
 <p>There are many interfaces for Stan, including the two most widely used <a class="reference external" href="https://cran.r-project.org/web/packages/rstan/vignettes/rstan.html">RStan</a> and <a class="reference external" href="https://pystan.readthedocs.io">PyStan</a>, which are R and Python interfaces, respectively. We will use a newer interface, <a class="reference external" href="https://mc-stan.org/cmdstanpy/">CmdStanPy</a>, which has several advantages that will become apparent when you start using it.</p>
 <p>Whichever interface you use needs to have Stan installed and functional, which means you have to have an installed C++ toolchain. Installation and compilation can be tricky and varies from operating system to operating system. To facilitate configuration of Stan and also to allow you to tackle more involved calculations, we will use <a class="reference external" href="https://aws.amazon.com">AWS</a> for computing with Stan. Within the first few weeks of class, you will receive instructions on how to use AWS. We have a pre-built
-Amazon Machine Image (AMI) that has all of the installations you need, and you can run your calculations on those machines. Because of the difficulties involved with local installations and the availability of AWS resources, we will not <em>officially</em> provide support for local installations of Stan, CmdStanPy, or other Stan interfaces.</p>
+Amazon Machine Image (AMI) that has all of the installations you need, and you can run your calculations on those machines. Bear in mind that because of the difficulties involved with local installations, we may not be able to provide support for all local installations of Stan, CmdStanPy, or other Stan interfaces. AWS provides a viable, if not free, alternative with more computing power.</p>
 <p>Note, however, that you can also use Stan and CmdStanPy on Google Colab, but you are limited to only two cores for their free service.</p>
 <p>That said, if you would like to install Stan and CmdStanPy locally, you may do so. Read on for instructions, though we offer no guarantees that they will work.</p>
 <section id="Configuring-a-C++-toolchain-for-MacOS">
@@ -1011,11 +1011,11 @@ CmdStan : 2.28
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Dec 23, 2021.
+      <span class="lastupdated">Last updated on Jan 04, 2022.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x7f7c29724d00> 
+   <jinja2.runtime.BlockReference object at 0x7ff44057d9d0> 
 
 <p>© 2021 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 
