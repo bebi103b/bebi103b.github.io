@@ -70,13 +70,13 @@ The notes for each Tuesday lesson must be read ahead of time and associated less
 - **Week 1**
 	+ Tu 01/04: First class meeting; no reading.
 	+ W 01/05: :ref:`Lesson 01<1. Probability and the logic of scientific reasoning>`: Probability and scientific logic (lecture)
-	+ Th 01/06: Recitation 01: Review of maximum likelihood estimation
+	+ Th 01/06: Recitation 01: Probability review
 - **Week 2**
 	+ Tu 01/11: :ref:`Lesson 02<2. Plotting posteriors>`: Plotting posteriors
 	+ Tu 01/11: :ref:`Lesson 03<3. Marginalization by numerical quadrature>`: Marginalization by numerical quadrature
 	+ Tu 01/11: :ref:`Lesson 04<4. Conjugacy>`: Conjugacy
 	+ W 01/12: :ref:`Lesson 05<5. Introduction to Bayesian modeling>`: Introduction to Bayesian modeling (lecture)
-	+ Th 01/13: Recitation 02: Probability review
+	+ Th 01/13: Recitation 02: Review of maximum likelihood estimation
 - **Week 3**
 	+ Tu 01/18: :ref:`Lesson 06<6. Parameter estimation by optimization>`: Parameter estimation by optimization
 	+ W 01/19: :ref:`Lesson 07<7. Introduction to Markov chain Monte Carlo>`: Introduction to Markov chain Monte Carlo (lecture)

@@ -14,6 +14,7 @@ Useful links
 - `Ed <https://edstem.org/us/courses/16335/>`_ (used for course communications)
 - `Course Zoom link <http://bebi103.caltech.edu/2022b/zoom>`_ (password protected)
 - `Google doc for help queue <http://bebi103.caltech.edu/2022b/help_queue>`_ (password protected)
+- `Meeting recordings <http://bebi103.caltech.edu/2022b/recordings>`_ (password protected)
 - `Homework solutions <http://bebi103.caltech.edu/2022b/hw_solutions/hw_solutions.html>`_ (password protected)
 
 
@@ -78,8 +79,8 @@ People
    :maxdepth: 1
    :caption: Recitations
 
-   .. recitations/01/review_of_mle.ipynb
-   .. recitations/02/probability_review.rst
+   recitations/01/probability_review.rst
+   .. recitations/02/review_of_mle.ipynb
    .. recitations/03/choosing_priors.ipynb
    .. recitations/04/index
    .. recitations/05/index
