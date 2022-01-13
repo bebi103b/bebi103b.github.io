@@ -21,7 +21,7 @@
         <script src="../../_static/copybutton.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "document", "processHtmlClass": "math|output_area"}}</script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -66,6 +66,7 @@
 <p class="caption" role="heading"><span class="caption-text">Recitations</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/01/probability_review.html">R1: Review of probability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../recitations/02/review_of_mle.html">R2. Review of MLE</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Homework</span></p>
 <ul class="current">
@@ -348,7 +349,7 @@ div.nboutput.container div.output_area > div[class^='highlight']{
 }
 
 /* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
-.prompt a.copybtn {
+.prompt .copybtn {
     display: none;
 }
 
@@ -418,8 +419,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">def</span> <span class="nf">read_fasta_single_record</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">read_fasta_single_record</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Read a sequence in from a FASTA file containing a single sequence.</span>
 
 <span class="sd">    We assume that the first line of the file is the descriptor and all</span>
@@ -437,8 +437,7 @@ div.rendered_html tbody tr:hover {
             <span class="n">line</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
 
     <span class="k">return</span> <span class="n">descriptor</span><span class="p">,</span> <span class="n">seq</span>
-
-</pre></div>
+<br/></pre></div>
 </div>
 </div>
 <p><strong>c)</strong> Find the index in the sequence of all <a class="reference external" href="https://en.wikipedia.org/wiki/Shine-Dalgarno_sequence">Shine-Delgarno motifs</a>, which is an important motif in initiation of protein synthesis. The Shine-Delgarno sequence is <code class="docutils literal notranslate"><span class="pre">AGGAGGT</span></code>. You can use the function below to find recognition sequences.</p>
@@ -446,8 +445,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">re</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
 
 
 <span class="k">def</span> <span class="nf">recognition_sites_with_re</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span> <span class="n">recog_seq</span><span class="p">):</span>
@@ -478,11 +476,11 @@ div.rendered_html tbody tr:hover {
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Jan 05, 2022.
+      <span class="lastupdated">Last updated on Jan 13, 2022.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x7fcd34d57130> 
+   <jinja2.runtime.BlockReference object at 0x7fc87b732370> 
 
 <p>© 2021 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

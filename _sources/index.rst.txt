@@ -80,7 +80,7 @@ People
    :caption: Recitations
 
    recitations/01/probability_review.rst
-   .. recitations/02/review_of_mle.ipynb
+   recitations/02/review_of_mle.ipynb
    .. recitations/03/choosing_priors.ipynb
    .. recitations/04/index
    .. recitations/05/index
