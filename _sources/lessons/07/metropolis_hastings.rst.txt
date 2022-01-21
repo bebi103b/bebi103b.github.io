@@ -62,8 +62,8 @@ write this in terms of the transition kernel,
 
    \begin{aligned}
    P(\theta_{i+1}, \theta_i) &= P(\theta_i)\,T(\theta_{i+1}\mid \theta_i) \nonumber \\[1em]
-    &= P(\theta_i)\,\alpha(\theta_{i+1}\mid \theta)\,K(\theta_{i+1}\mid \theta_i) \nonumber \\[1em]
-   &= P(\theta_i)\,K(\theta_{i+1}\mid \theta)\,\min\left(1, \frac{P(\theta_{i+1})\,K(\theta_i\mid \theta_{i+1})}
+    &= P(\theta_i)\,\alpha(\theta_{i+1}\mid \theta_i)\,K(\theta_{i+1}\mid \theta_i) \nonumber \\[1em]
+   &= P(\theta_i)\,K(\theta_{i+1}\mid \theta_i)\,\min\left(1, \frac{P(\theta_{i+1})\,K(\theta_i\mid \theta_{i+1})}
        {P(\theta_i)\,K(\theta_{i+1}\mid \theta_i)}\right) \nonumber \\[1em]
    &= \min\left[P(\theta_i)\,K(\theta_{i+1}\mid \theta_i),
    P(\theta_{i+1})\,K(\theta_i\mid \theta_{i+1})\right] \nonumber \\[1em]
