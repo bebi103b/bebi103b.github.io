@@ -51,14 +51,14 @@ People
    lessons/10/mixture_model_stan.ipynb
    lessons/11/regression_with_stan.ipynb
    lesson_exercises/exercise_03.ipynb   
-   .. lessons/12/index
-   .. lessons/13/prior_predictive_checks.ipynb
-   .. lessons/14/posterior_predictive_checks.ipynb
-   .. lesson_exercises/exercise_04.ipynb   
-   .. lessons/15/box_of_distributions.rst
-   .. lessons/16/mcmc_diagnostics.ipynb
-   .. lessons/17/funnel_of_hell.ipynb
-   .. lesson_exercises/exercise_05.ipynb
+   lessons/12/index
+   lessons/13/prior_predictive_checks.ipynb
+   lessons/14/posterior_predictive_checks.ipynb
+   lesson_exercises/exercise_04.ipynb   
+   lessons/15/box_of_distributions.rst
+   lessons/16/mcmc_diagnostics.ipynb
+   lessons/17/funnel_of_hell.ipynb
+   lesson_exercises/exercise_05.ipynb
    .. lessons/18/model_comparison.rst
    .. lessons/19/index
    .. lesson_exercises/exercise_06.ipynb
@@ -98,8 +98,8 @@ People
    homework/01/index
    homework/02/index
    homework/03/index
-   .. homework/04/index
-   .. homework/05/index
+   homework/04/index
+   homework/05/index
    .. homework/06/index
    .. homework/07/index
    .. homework/08/index
