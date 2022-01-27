@@ -1,0 +1,10 @@
+****************************************************
+R4. Stan installation and use of AWS
+****************************************************
+
+This recitation covered use of AWS for Stan as well as installations of Stan on your own machine. To review Stan on your own machine, check out the :ref:`Stan installation` section of the first lesson. For additional tips on Windows installations, see below.
+
+.. toctree::
+   :maxdepth: 1
+
+   stan_installation_for_windows.ipynb

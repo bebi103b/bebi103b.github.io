@@ -21,7 +21,7 @@
         <script src="../../_static/copybutton.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "document", "processHtmlClass": "math|output_area"}}</script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -96,6 +96,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/01/probability_review.html">R1: Review of probability</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/02/review_of_mle.html">R2. Review of MLE</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/03/choosing_priors.html">R3. Choosing priors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../recitations/04/index.html">R4. Stan installation and use of AWS</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Homework</span></p>
 <ul>
@@ -373,7 +374,7 @@ div.nboutput.container div.output_area > div[class^='highlight']{
 }
 
 /* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
-.prompt a.copybtn {
+.prompt .copybtn {
     display: none;
 }
 
@@ -440,8 +441,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
 <span class="kn">import</span> <span class="nn">cmdstanpy</span>
@@ -2352,8 +2352,7 @@ data set.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s2">&quot;singer_transcript_counts.csv&quot;</span><span class="p">),</span> <span class="n">comment</span><span class="o">=</span><span class="s2">&quot;#&quot;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s2">&quot;singer_transcript_counts.csv&quot;</span><span class="p">),</span> <span class="n">comment</span><span class="o">=</span><span class="s2">&quot;#&quot;</span><span class="p">)</span>
 <span class="n">n</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Rest&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
 
 <span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">iqplot</span><span class="o">.</span><span class="n">ecdf</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">q</span><span class="o">=</span><span class="s2">&quot;transcript count&quot;</span><span class="p">))</span>
@@ -2445,8 +2444,7 @@ var element = document.currentScript.previousSibling.previousSibling;
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">sm</span> <span class="o">=</span> <span class="n">cmdstanpy</span><span class="o">.</span><span class="n">CmdStanModel</span><span class="p">(</span><span class="n">stan_file</span><span class="o">=</span><span class="s1">&#39;smfish.stan&#39;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sm</span> <span class="o">=</span> <span class="n">cmdstanpy</span><span class="o">.</span><span class="n">CmdStanModel</span><span class="p">(</span><span class="n">stan_file</span><span class="o">=</span><span class="s1">&#39;smfish.stan&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -2464,8 +2462,7 @@ INFO:cmdstanpy:compiled model executable: /Users/bois/Dropbox/git/bebi103_course
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">with</span> <span class="n">bebi103</span><span class="o">.</span><span class="n">stan</span><span class="o">.</span><span class="n">disable_logging</span><span class="p">():</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">bebi103</span><span class="o">.</span><span class="n">stan</span><span class="o">.</span><span class="n">disable_logging</span><span class="p">():</span>
     <span class="n">samples</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">),</span> <span class="n">seed</span><span class="o">=</span><span class="mi">3252</span><span class="p">)</span>
 <span class="n">samples</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">from_cmdstanpy</span><span class="p">(</span><span class="n">posterior</span><span class="o">=</span><span class="n">samples</span><span class="p">)</span>
 </pre></div>
@@ -2521,8 +2518,7 @@ al. paper.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">az</span><span class="o">.</span><span class="n">rhat</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">rhat</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -2897,8 +2893,7 @@ Data variables:
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">az</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -3007,8 +3002,7 @@ Data variables:
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">with</span> <span class="n">bebi103</span><span class="o">.</span><span class="n">stan</span><span class="o">.</span><span class="n">disable_logging</span><span class="p">():</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">bebi103</span><span class="o">.</span><span class="n">stan</span><span class="o">.</span><span class="n">disable_logging</span><span class="p">():</span>
     <span class="n">samples_limited_warmup</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span>
         <span class="n">data</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">),</span> <span class="n">iter_warmup</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">iter_sampling</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">3252</span>
     <span class="p">)</span>
@@ -3155,8 +3149,7 @@ Data variables:
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">show</span><span class="p">(</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">show</span><span class="p">(</span>
     <span class="n">bebi103</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">trace</span><span class="p">(</span>
         <span class="n">samples_limited_warmup</span><span class="p">,</span>
         <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;alpha&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">],</span>
@@ -3218,8 +3211,7 @@ var element = document.currentScript.previousSibling.previousSibling;
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">az</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -3347,8 +3339,7 @@ be detected and are registered as <strong>divergences</strong>. A given Monte Ca
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">samples</span><span class="o">.</span><span class="n">sample_stats</span><span class="o">.</span><span class="n">diverging</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">samples</span><span class="o">.</span><span class="n">sample_stats</span><span class="o">.</span><span class="n">diverging</span>
 </pre></div>
 </div>
 </div>
@@ -3725,8 +3716,7 @@ Coordinates:
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">samples</span><span class="o">.</span><span class="n">sample_stats</span><span class="o">.</span><span class="n">diverging</span><span class="p">))</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">samples</span><span class="o">.</span><span class="n">sample_stats</span><span class="o">.</span><span class="n">diverging</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -3744,8 +3734,7 @@ Coordinates:
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">samples_limited_warmup</span><span class="o">.</span><span class="n">sample_stats</span><span class="o">.</span><span class="n">diverging</span><span class="p">))</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">samples_limited_warmup</span><span class="o">.</span><span class="n">sample_stats</span><span class="o">.</span><span class="n">diverging</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -3770,8 +3759,7 @@ wrong, but less efficient. Stan therefore reports the tree depth information for
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">samples</span><span class="o">.</span><span class="n">sample_stats</span><span class="o">.</span><span class="n">treedepth</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">samples</span><span class="o">.</span><span class="n">sample_stats</span><span class="o">.</span><span class="n">treedepth</span>
 </pre></div>
 </div>
 </div>
@@ -4148,8 +4136,7 @@ Coordinates:
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">samples</span><span class="o">.</span><span class="n">sample_stats</span><span class="o">.</span><span class="n">treedepth</span> <span class="o">==</span> <span class="mi">10</span><span class="p">))</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">samples</span><span class="o">.</span><span class="n">sample_stats</span><span class="o">.</span><span class="n">treedepth</span> <span class="o">==</span> <span class="mi">10</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -4172,8 +4159,7 @@ Coordinates:
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">samples</span><span class="o">.</span><span class="n">sample_stats</span><span class="o">.</span><span class="n">energy</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">samples</span><span class="o">.</span><span class="n">sample_stats</span><span class="o">.</span><span class="n">energy</span>
 </pre></div>
 </div>
 </div>
@@ -4550,8 +4536,7 @@ Coordinates:
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">samples</span><span class="o">.</span><span class="n">sample_stats</span><span class="o">.</span><span class="n">energy</span> <span class="o">&lt;</span> <span class="mf">0.3</span><span class="p">))</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">samples</span><span class="o">.</span><span class="n">sample_stats</span><span class="o">.</span><span class="n">energy</span> <span class="o">&lt;</span> <span class="mf">0.3</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -4574,8 +4559,7 @@ Coordinates:
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">bebi103</span><span class="o">.</span><span class="n">stan</span><span class="o">.</span><span class="n">check_all_diagnostics</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bebi103</span><span class="o">.</span><span class="n">stan</span><span class="o">.</span><span class="n">check_all_diagnostics</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -4609,8 +4593,7 @@ E-BFMI indicated no pathological behavior.
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">bebi103</span><span class="o">.</span><span class="n">stan</span><span class="o">.</span><span class="n">clean_cmdstan</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bebi103</span><span class="o">.</span><span class="n">stan</span><span class="o">.</span><span class="n">clean_cmdstan</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -4621,8 +4604,7 @@ E-BFMI indicated no pathological behavior.
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%</span><span class="k">load_ext</span> watermark
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
 <span class="o">%</span><span class="k">watermark</span> -v -p numpy,pandas,cmdstanpy,arviz,bokeh,bebi103,jupyterlab
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;cmdstan   :&quot;</span><span class="p">,</span> <span class="n">bebi103</span><span class="o">.</span><span class="n">stan</span><span class="o">.</span><span class="n">cmdstan_version</span><span class="p">())</span>
 </pre></div>
@@ -4663,11 +4645,11 @@ cmdstan   : 2.28.2
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Jan 21, 2022.
+      <span class="lastupdated">Last updated on Jan 27, 2022.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x7fbe4b91fdf0> 
+   <jinja2.runtime.BlockReference object at 0x7fa9d7e52f10> 
 
 <p>© 2021 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 
