@@ -13,7 +13,7 @@ Schedule overview
 
 For the first week, all meetings are offered over `Zoom <http://bebi103.caltech.edu/2021/b/zoom_links/bebi103_main>`_.
 
-Unless given notice otherwise, lab sessions, TA recitations, and TA homework help are in Chen 130 and lectures are in Chen 100. Instructor office hours are in Broad 200.
+Unless given notice otherwise, lab sessions, TA recitations, and TA homework help are in Chen 130 and lectures are in Chen 100. Instructor office hours are in usually in Chen 340A, but will occasionally change. They will be announced each week.
 
 .. Unless given notice otherwise, all sessions are at `this Zoom link <http://bebi103.caltech.edu/2021/b/zoom_links/bebi103_main>`_.
 
