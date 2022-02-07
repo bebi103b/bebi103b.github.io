@@ -1,0 +1,10 @@
+******************************************************************
+6. Practice building and assessing Bayesian models
+******************************************************************
+
+.. toctree::
+   :maxdepth: 1
+
+   hw6.1.ipynb
+   hw6.2.ipynb
+   hw6.3.ipynb

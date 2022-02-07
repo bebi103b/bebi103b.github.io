@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>5. Inference with Stan I &mdash; BE/Bi 103 b  documentation</title>
+  <title>5. Inference with Stan &mdash; BE/Bi 103 b  documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
@@ -68,6 +68,15 @@
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/16/mcmc_diagnostics.html">16. MCMC diagnostics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/17/funnel_of_hell.html">17. A diagnostics case study: Artificial funnel of hell</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_05.html">E5. To be completed after lesson 17</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/18/model_comparison.html">18. Model comparison</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/19/index.html">19. Model comparison in practice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_06.html">E6. To be completed after lesson 19</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/20/index.html">20. Hierarchical models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/21/hierarchical_implementation.html">21. Implementation of hierarchical models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_07.html">E7. To be completed after lesson 21</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/22/sbc.html">22. Principled analysis pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/23/sbc_in_practice.html">23: Simulation based calibration and related checks in practice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_08.html">E8. To be completed after lesson 23</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Recitations</span></p>
 <ul>
@@ -84,11 +93,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../02/index.html">2. Analytical and graphical methods for analysis of the posterior</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../03/index.html">3. Maximum a posteriori parameter estimation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../04/index.html">4. Sampling with MCMC</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">5. Inference with Stan I</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">5. Inference with Stan</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="hw5.1.html">Homework 5.1: Microtubule catastrophe (50 pts)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hw5.2.html">Homework 5.2: Determining dissociation constants (50 pts)</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../06/index.html">6. Practice building and assessing Bayesian models</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -130,7 +140,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>5. Inference with Stan I</li>
+      <li>5. Inference with Stan</li>
   <li class="wy-breadcrumbs-aside">
     
         
@@ -171,8 +181,8 @@
     text-align: unset;
 }
 </style>
-<section id="inference-with-stan-i">
-<h1>5. Inference with Stan I<a class="headerlink" href="#inference-with-stan-i" title="Permalink to this headline"></a></h1>
+<section id="inference-with-stan">
+<h1>5. Inference with Stan<a class="headerlink" href="#inference-with-stan" title="Permalink to this headline"></a></h1>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="hw5.1.html">Homework 5.1: Microtubule catastrophe (50 pts)</a></li>
@@ -193,11 +203,11 @@
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 03, 2022.
+      <span class="lastupdated">Last updated on Feb 07, 2022.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x7fa3f9e44100> 
+   <jinja2.runtime.BlockReference object at 0x7fb29dae4790> 
 
 <p>© 2021 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

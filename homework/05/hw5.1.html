@@ -26,7 +26,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Homework 5.2: Determining dissociation constants (50 pts)" href="hw5.2.html" />
-    <link rel="prev" title="5. Inference with Stan I" href="index.html" /> 
+    <link rel="prev" title="5. Inference with Stan" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -70,6 +70,15 @@
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/16/mcmc_diagnostics.html">16. MCMC diagnostics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/17/funnel_of_hell.html">17. A diagnostics case study: Artificial funnel of hell</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_05.html">E5. To be completed after lesson 17</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/18/model_comparison.html">18. Model comparison</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/19/index.html">19. Model comparison in practice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_06.html">E6. To be completed after lesson 19</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/20/index.html">20. Hierarchical models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/21/hierarchical_implementation.html">21. Implementation of hierarchical models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_07.html">E7. To be completed after lesson 21</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/22/sbc.html">22. Principled analysis pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/23/sbc_in_practice.html">23: Simulation based calibration and related checks in practice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_08.html">E8. To be completed after lesson 23</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Recitations</span></p>
 <ul>
@@ -86,11 +95,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../02/index.html">2. Analytical and graphical methods for analysis of the posterior</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../03/index.html">3. Maximum a posteriori parameter estimation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../04/index.html">4. Sampling with MCMC</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">5. Inference with Stan I</a><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">5. Inference with Stan</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Homework 5.1: Microtubule catastrophe (50 pts)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hw5.2.html">Homework 5.2: Determining dissociation constants (50 pts)</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../06/index.html">6. Practice building and assessing Bayesian models</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -132,7 +142,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="index.html">5. Inference with Stan I</a> &raquo;</li>
+          <li><a href="index.html">5. Inference with Stan</a> &raquo;</li>
       <li>Homework 5.1: Microtubule catastrophe (50 pts)</li>
   <li class="wy-breadcrumbs-aside">
     
@@ -189,7 +199,7 @@ catastrophe. We will consider four models for microtubule catastrophe.</p>
 <li><p>Model 4: Catastrophe happens upon the arrival of the second of two Poisson processes, each of which arrive at different rates.</p></li>
 </ul>
 <p>Note that these descriptions are for the likelihood; we have not specified priors.</p>
-<p><strong>a)</strong> Describe the first three models as stories. Give physical descriptions of the meanings of their parameters. Describe how these models are related to each other. Recall that we worked out the likelihood for model 4 <a class="reference external" href="https://bebi103a.github.io/homework/05/hw5.2.html">last term</a>.</p>
+<p><strong>a)</strong> Describe the first three models as stories. Give physical descriptions of the meanings of their parameters. Describe how these models are related to each other. Recall that we worked out the likelihood for model 4 <a class="reference external" href="https://bebi103a.github.io/homework/06/hw6.2.html">last term</a>.</p>
 <p><strong>b)</strong> Build full Bayesian generative models for each of the models. Be sure to perform prior predictive checks. After building the model, perform parameter estimates, and then do posterior predictive checks.</p>
 <p><strong>c)</strong> Based on the graphical analysis, do you prefer one model versus another? We will be discussing quantitative model comparison in coming weeks to enable to more detailed analysis.</p>
 </section>
@@ -198,7 +208,7 @@ catastrophe. We will consider four models for microtubule catastrophe.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="index.html" class="btn btn-neutral float-left" title="5. Inference with Stan I" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral float-left" title="5. Inference with Stan" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="hw5.2.html" class="btn btn-neutral float-right" title="Homework 5.2: Determining dissociation constants (50 pts)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
@@ -206,11 +216,11 @@ catastrophe. We will consider four models for microtubule catastrophe.</p>
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 03, 2022.
+      <span class="lastupdated">Last updated on Feb 07, 2022.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x7fa3e4c635b0> 
+   <jinja2.runtime.BlockReference object at 0x7fb2d35b92b0> 
 
 <p>© 2021 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

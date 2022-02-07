@@ -31,7 +31,7 @@ Homework due dates
 - :ref:`Homework 2<2. Analytical and graphical methods for analysis of the posterior>`: due 5 pm PST, January 21
 - :ref:`Homework 3<3. Maximum a posteriori parameter estimation>`: due 5 pm PST, January 28
 - :ref:`Homework 4<4. Sampling with MCMC>`: due 5 pm PST, February 4
-- :ref:`Homework 5<5. Inference with Stan I>`: due 5 pm PST, February 11
+- :ref:`Homework 5<5. Inference with Stan>`: due 5 pm PST, February 11
 - :ref:`Homework 6<6. Practice building and assessing Bayesian models>`: due 5 pm PST, February 18
 - :ref:`Homework 7<7. Model comparison>`: due 5 pm PST, February 25
 - :ref:`Homework 8<8. Hierarchical models>`: due 5 pm PST, March 4

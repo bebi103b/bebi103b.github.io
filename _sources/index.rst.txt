@@ -59,15 +59,15 @@ People
    lessons/16/mcmc_diagnostics.ipynb
    lessons/17/funnel_of_hell.ipynb
    lesson_exercises/exercise_05.ipynb
-   .. lessons/18/model_comparison.rst
-   .. lessons/19/index
-   .. lesson_exercises/exercise_06.ipynb
-   .. lessons/20/index
-   .. lessons/21/hierarchical_implementation.ipynb
-   .. lesson_exercises/exercise_07.ipynb
-   .. lessons/22/sbc.ipynb
-   .. lessons/23/sbc_in_practice.ipynb
-   .. lesson_exercises/exercise_08.ipynb
+   lessons/18/model_comparison.rst
+   lessons/19/index
+   lesson_exercises/exercise_06.ipynb
+   lessons/20/index
+   lessons/21/hierarchical_implementation.ipynb
+   lesson_exercises/exercise_07.ipynb
+   lessons/22/sbc.ipynb
+   lessons/23/sbc_in_practice.ipynb
+   lesson_exercises/exercise_08.ipynb
    .. lessons/24/intro_to_gps.ipynb
    .. lessons/25/index
    .. lesson_exercises/exercise_09.ipynb
@@ -100,7 +100,7 @@ People
    homework/03/index
    homework/04/index
    homework/05/index
-   .. homework/06/index
+   homework/06/index
    .. homework/07/index
    .. homework/08/index
    .. homework/09/index
