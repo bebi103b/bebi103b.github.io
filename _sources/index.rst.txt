@@ -84,7 +84,7 @@ People
    recitations/03/choosing_priors.ipynb
    recitations/04/index
    recitations/05/index
-   .. recitations/06/practice_model_building.ipynb
+   recitations/06/index
    .. recitations/07/hmc.ipynb
    .. recitations/08/project_proposals.rst
    .. recitations/09/sampling_discrete_parameters.ipynb
@@ -101,7 +101,7 @@ People
    homework/04/index
    homework/05/index
    homework/06/index
-   .. homework/07/index
+   homework/07/index
    .. homework/08/index
    .. homework/09/index
    .. homework/10/index
