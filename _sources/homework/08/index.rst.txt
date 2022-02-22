@@ -1,0 +1,14 @@
+******************************************************************
+8. Hierarchical models
+******************************************************************
+
+Choose **one** of 8.2, 8.3, or 8.4 to complete as a solo problem. Problems 8.1 and 10.2a are due a week before the solo problem.
+
+.. toctree::
+   :maxdepth: 1
+
+   hw8.1.ipynb
+   hw8.2.ipynb
+   hw8.3.ipynb
+   hw8.4.ipynb
+   hw10.2a.ipynb

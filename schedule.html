@@ -24,7 +24,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Meetings" href="policies.html" />
-    <link rel="prev" title="Homework 7.2: Models for microtubule catastrophe (70 pts)" href="homework/07/hw7.2.html" /> 
+    <link rel="prev" title="11. Course feedback" href="homework/11/hw11.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -77,6 +77,11 @@
 <li class="toctree-l1"><a class="reference internal" href="lessons/22/sbc.html">22. Principled analysis pipelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lessons/23/sbc_in_practice.html">23: Simulation based calibration and related checks in practice</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson_exercises/exercise_08.html">E8. To be completed after lesson 23</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lessons/24/intro_to_gps.html">24. Introduction to Gaussian processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lessons/25/index.html">25. Implementation of Gaussian processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson_exercises/exercise_09.html">E9. To be completed after lesson 25</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lessons/26/variational_inference.html">26: Variational Bayesian inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lessons/27/wrapup.html">27: Wrap-up</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Recitations</span></p>
 <ul>
@@ -86,6 +91,8 @@
 <li class="toctree-l1"><a class="reference internal" href="recitations/04/index.html">R4. Stan installation and use of AWS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="recitations/05/index.html">R5. A Bayesian modeling case study: Ant traffic jams</a></li>
 <li class="toctree-l1"><a class="reference internal" href="recitations/06/index.html">R6. Practice model building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recitations/07/index.html">R7. Introduction to Hamiltonian Monte Carlo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recitations/08/project_proposals.html">R8: Discussion of HW 10 project proposals</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Homework</span></p>
 <ul>
@@ -97,6 +104,10 @@
 <li class="toctree-l1"><a class="reference internal" href="homework/05/index.html">5. Inference with Stan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="homework/06/index.html">6. Practice building and assessing Bayesian models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="homework/07/index.html">7. Model comparison</a></li>
+<li class="toctree-l1"><a class="reference internal" href="homework/08/index.html">8. Hierarchical models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="homework/09/index.html">9. Principled pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="homework/10/index.html">10. The grand finale</a></li>
+<li class="toctree-l1"><a class="reference internal" href="homework/11/hw11.html">11. Course feedback</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul class="current">
@@ -211,10 +222,11 @@
 <li><p><a class="reference internal" href="homework/05/index.html#inference-with-stan"><span class="std std-ref">Homework 5</span></a>: due 5 pm PST, February 11</p></li>
 <li><p><a class="reference internal" href="homework/06/index.html#practice-building-and-assessing-bayesian-models"><span class="std std-ref">Homework 6</span></a>: due 5 pm PST, February 18</p></li>
 <li><p><a class="reference internal" href="homework/07/index.html#model-comparison"><span class="std std-ref">Homework 7</span></a>: due 5 pm PST, February 25</p></li>
-<li><p><span class="xref std std-ref">Homework 8</span>: due 5 pm PST, March 4</p></li>
-<li><p><span class="xref std std-ref">Homework 9</span>: due 5 pm PST, March 11</p></li>
-<li><p><span class="xref std std-ref">Homework 10</span>: due 5 pm PST, March 15</p></li>
-<li><p><span class="xref std std-ref">Homework 11</span>: due 5 pm PST, March 16</p></li>
+<li><p><a class="reference internal" href="homework/08/index.html#hierarchical-models"><span class="std std-ref">Homework 8</span></a> (team portion): due 5 pm PST, March 4</p></li>
+<li><p><a class="reference internal" href="homework/08/index.html#hierarchical-models"><span class="std std-ref">Homework 8</span></a> (solo portion): due 5 pm PST, March 11</p></li>
+<li><p><a class="reference internal" href="homework/09/index.html#principled-pipelines"><span class="std std-ref">Homework 9</span></a>: due 5 pm PST, March 11</p></li>
+<li><p><a class="reference internal" href="homework/10/index.html#the-grand-finale"><span class="std std-ref">Homework 10</span></a>: due 5 pm PST, March 15</p></li>
+<li><p><a class="reference internal" href="homework/11/hw11.html#11.-Course-feedback"><span class="std std-ref">Homework 11</span></a>: due 5 pm PST, March 16</p></li>
 </ul>
 </section>
 <hr class="docutils" />
@@ -229,7 +241,7 @@
 <li><p><a class="reference internal" href="lesson_exercises/exercise_06.html#E6.-To-be-completed-after-lesson-19"><span class="std std-ref">Lesson exercise 6</span></a>: due 10:30 am PST, February 15</p></li>
 <li><p><a class="reference internal" href="lesson_exercises/exercise_07.html#E7.-To-be-completed-after-lesson-21"><span class="std std-ref">Lesson exercise 7</span></a>: due 10:30 am PST, February 22</p></li>
 <li><p><a class="reference internal" href="lesson_exercises/exercise_08.html#E8.-To-be-completed-after-lesson-23"><span class="std std-ref">Lesson exercise 8</span></a>: due 10:30 am PST, March 1</p></li>
-<li><p><span class="xref std std-ref">Lesson exercise 9</span>: due 10:30 am PST, March 7</p></li>
+<li><p><a class="reference internal" href="lesson_exercises/exercise_09.html#E9.-To-be-completed-after-lesson-25"><span class="std std-ref">Lesson exercise 9</span></a>: due 10:30 am PST, March 7</p></li>
 </ul>
 </section>
 <hr class="docutils" />
@@ -309,7 +321,7 @@
 <dt><strong>Week 7</strong></dt><dd><ul>
 <li><p>Tu 02/15: <a class="reference internal" href="lessons/19/index.html#model-comparison-in-practice"><span class="std std-ref">Lesson 19</span></a>: Model comparison in practice</p></li>
 <li><p>W 02/16: <a class="reference internal" href="lessons/20/index.html#hierarchical-models"><span class="std std-ref">Lesson 20</span></a>: Hierarchical models (lecture)</p></li>
-<li><p>Th 02/17: <span class="xref std std-ref">Recitation 07</span>: Background on Hamiltonian Monte Carlo</p></li>
+<li><p>Th 02/17: <a class="reference internal" href="recitations/07/index.html#r7-introduction-to-hamiltonian-monte-carlo"><span class="std std-ref">Recitation 07</span></a>: Background on Hamiltonian Monte Carlo</p></li>
 </ul>
 </dd>
 </dl>
@@ -318,7 +330,7 @@
 <dt><strong>Week 8</strong></dt><dd><ul>
 <li><p>Tu 02/22: <a class="reference internal" href="lessons/21/hierarchical_implementation.html#21.-Implementation-of-hierarchical-models"><span class="std std-ref">Lesson 21</span></a>: Implementation of hierarchical models</p></li>
 <li><p>W 02/23: <a class="reference internal" href="lessons/22/sbc.html#22.-Principled-analysis-pipelines"><span class="std std-ref">Lesson 22</span></a>: Principled workflows (lecture)</p></li>
-<li><p>Th 02/24: <span class="xref std std-ref">Recitation 08</span>: Discussion of project proposals</p></li>
+<li><p>Th 02/24: <a class="reference internal" href="recitations/08/project_proposals.html#r8-discussion-of-hw-10-project-proposals"><span class="std std-ref">Recitation 08</span></a>: Discussion of project proposals</p></li>
 </ul>
 </dd>
 </dl>
@@ -326,7 +338,7 @@
 <li><dl class="simple">
 <dt><strong>Week 9</strong></dt><dd><ul>
 <li><p>Tu 03/01: <a class="reference internal" href="lessons/23/sbc_in_practice.html#23:-Simulation-based-calibration-and-related-checks-in-practice"><span class="std std-ref">Lesson 23</span></a>: Simulation-based calibration in practice</p></li>
-<li><p>W 03/02: <span class="xref std std-ref">Lesson 24</span>: Introduction to nonparametric Bayes: Gaussian processes</p></li>
+<li><p>W 03/02: <a class="reference internal" href="lessons/24/intro_to_gps.html#24.-Introduction-to-Gaussian-processes"><span class="std std-ref">Lesson 24</span></a>: Introduction to nonparametric Bayes: Gaussian processes</p></li>
 <li><p>Th 03/03: <span class="xref std std-ref">Recitation 09</span>: Sampling out of discrete distributions</p></li>
 </ul>
 </dd>
@@ -334,9 +346,9 @@
 </li>
 <li><dl class="simple">
 <dt><strong>Week 10</strong></dt><dd><ul>
-<li><p>Tu 03/08: <span class="xref std std-ref">Lesson 25</span>: Implementation of Gaussian processes</p></li>
-<li><p>W 03/09: <span class="xref std std-ref">Lesson 26</span>: Variational inference</p></li>
-<li><p>W 03/09: <span class="xref std std-ref">Lesson 27</span>: Course wrap-up (lecture)</p></li>
+<li><p>Tu 03/08: <a class="reference internal" href="lessons/25/index.html#implementation-of-gaussian-processes"><span class="std std-ref">Lesson 25</span></a>: Implementation of Gaussian processes</p></li>
+<li><p>W 03/09: <a class="reference internal" href="lessons/26/variational_inference.html#26:-Variational-Bayesian-inference"><span class="std std-ref">Lesson 26</span></a>: Variational inference</p></li>
+<li><p>W 03/09: <a class="reference internal" href="lessons/27/wrapup.html#wrap-up"><span class="std std-ref">Lesson 27</span></a>: Course wrap-up (lecture)</p></li>
 <li><p>Th 03/10: Recitation 10: Extended homework help</p></li>
 </ul>
 </dd>
@@ -349,7 +361,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="homework/07/hw7.2.html" class="btn btn-neutral float-left" title="Homework 7.2: Models for microtubule catastrophe (70 pts)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="homework/11/hw11.html" class="btn btn-neutral float-left" title="11. Course feedback" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="policies.html" class="btn btn-neutral float-right" title="Meetings" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
@@ -357,11 +369,11 @@
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 16, 2022.
+      <span class="lastupdated">Last updated on Feb 21, 2022.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x7fe37a0f15b0> 
+   <jinja2.runtime.BlockReference object at 0x7f7ddb6897c0> 
 
 <p>© 2021 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

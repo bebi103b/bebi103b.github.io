@@ -68,11 +68,11 @@ People
    lessons/22/sbc.ipynb
    lessons/23/sbc_in_practice.ipynb
    lesson_exercises/exercise_08.ipynb
-   .. lessons/24/intro_to_gps.ipynb
-   .. lessons/25/index
-   .. lesson_exercises/exercise_09.ipynb
-   .. lessons/26/variational_inference.ipynb
-   .. lessons/27/wrapup
+   lessons/24/intro_to_gps.ipynb
+   lessons/25/index
+   lesson_exercises/exercise_09.ipynb
+   lessons/26/variational_inference.ipynb
+   lessons/27/wrapup
 
 
 .. toctree::
@@ -85,8 +85,8 @@ People
    recitations/04/index
    recitations/05/index
    recitations/06/index
-   .. recitations/07/hmc.ipynb
-   .. recitations/08/project_proposals.rst
+   recitations/07/index
+   recitations/08/project_proposals.rst
    .. recitations/09/sampling_discrete_parameters.ipynb
 
 
@@ -102,10 +102,10 @@ People
    homework/05/index
    homework/06/index
    homework/07/index
-   .. homework/08/index
-   .. homework/09/index
-   .. homework/10/index
-   .. 11. Course feedback <homework/11/hw11.ipynb>
+   homework/08/index
+   homework/09/index
+   homework/10/index
+   11. Course feedback <homework/11/hw11.ipynb>
 
 
 .. toctree::
