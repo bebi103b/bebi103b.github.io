@@ -87,7 +87,7 @@ People
    recitations/06/index
    recitations/07/index
    recitations/08/project_proposals.rst
-   .. recitations/09/sampling_discrete_parameters.ipynb
+   recitations/09/sampling_discrete_parameters.ipynb
 
 
 .. toctree::
