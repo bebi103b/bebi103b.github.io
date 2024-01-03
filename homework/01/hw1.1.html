@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Homework 1.1: First attempts at generative modeling (70 pts) &mdash; BE/Bi 103 b  documentation</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  <title>Homework 1.1: First attempts at Bayesian generative modeling (70 pts) &mdash; BE/Bi 103 b  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+
+  
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -16,6 +17,7 @@
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/clipboard.min.js"></script>
         <script src="../../_static/copybutton.js"></script>
@@ -25,7 +27,7 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="2. Analytical and graphical methods for analysis of the posterior" href="../02/index.html" />
+    <link rel="next" title="Schedule overview" href="../../schedule.html" />
     <link rel="prev" title="1. Intuitive generative modeling" href="index.html" /> 
 </head>
 
@@ -34,12 +36,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: #827F7F" >
-            <a href="../../index.html">
-            <img src="../../_static/logo.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/logo.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -47,73 +53,20 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Lessons</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../lessons/00/setup.html">0. Preparing for the course</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/00/index.html">0. Setting up computing resources</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/01/index.html">1. Probability and the logic of scientific reasoning</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lessons/02/plotting_posteriors.html">2. Plotting posteriors</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lessons/03/marginalization_by_numerical_quadrature.html">3. Marginalization by numerical quadrature</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lessons/04/conjugacy.html">4. Conjugacy</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_01.html">E1. To be completed after lesson 4</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lessons/05/index.html">5. Introduction to Bayesian modeling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lessons/06/index.html">6. Parameter estimation by optimization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_02.html">E2. To be completed after lesson 6</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lessons/07/index.html">7. Introduction to Markov chain Monte Carlo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lessons/08/index.html">8. Cloud computing setup and usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lessons/09/index.html">9. Introduction to MCMC with Stan</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lessons/10/mixture_model_stan.html">10. Mixture models and label switching with MCMC</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lessons/11/regression_with_stan.html">11. Regression with MCMC</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_03.html">E3. To be completed after lesson 11</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lessons/12/index.html">12. Display of MCMC results</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lessons/13/prior_predictive_checks.html">13. Model building with prior predictive checks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lessons/14/posterior_predictive_checks.html">14. Posterior predictive checks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_04.html">E4. To be completed after lesson 14</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lessons/15/box_of_distributions.html">15. Collector’s box of distributions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lessons/16/mcmc_diagnostics.html">16. MCMC diagnostics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lessons/17/funnel_of_hell.html">17. A diagnostics case study: Artificial funnel of hell</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_05.html">E5. To be completed after lesson 17</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lessons/18/model_comparison.html">18. Model comparison</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lessons/19/index.html">19. Model comparison in practice</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_06.html">E6. To be completed after lesson 19</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lessons/20/index.html">20. Hierarchical models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lessons/21/hierarchical_implementation.html">21. Implementation of hierarchical models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_07.html">E7. To be completed after lesson 21</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lessons/22/sbc.html">22. Principled analysis pipelines</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lessons/23/sbc_in_practice.html">23: Simulation based calibration and related checks in practice</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_08.html">E8. To be completed after lesson 23</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lessons/24/intro_to_gps.html">24. Introduction to Gaussian processes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lessons/25/index.html">25. Implementation of Gaussian processes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_09.html">E9. To be completed after lesson 25</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lessons/26/variational_inference.html">26: Variational Bayesian inference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lessons/27/wrapup.html">27: Wrap-up</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">Recitations</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../recitations/01/probability_review.html">R1: Review of probability</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../recitations/02/review_of_mle.html">R2. Review of MLE</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../recitations/03/choosing_priors.html">R3. Choosing priors</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../recitations/04/index.html">R4. Stan installation and use of AWS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../recitations/05/index.html">R5. A Bayesian modeling case study: Ant traffic jams</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../recitations/06/index.html">R6. Practice model building</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../recitations/07/index.html">R7. Introduction to Hamiltonian Monte Carlo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../recitations/08/project_proposals.html">R8: Discussion of HW 10 project proposals</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../recitations/09/sampling_discrete_parameters.html">R9: Sampling discrete parameters with Stan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/02/index.html">2. Introduction to Bayesian modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/03/plotting_posteriors.html">3. Plotting posteriors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/04/marginalization_by_numerical_quadrature.html">4. Marginalization by numerical quadrature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/05/conjugacy.html">5. Conjugacy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_01.html">E1. To be completed after lesson 5</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Homework</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../00/hw0.1.html">0. Configuring your team</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">1. Intuitive generative modeling</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Homework 1.1: First attempts at generative modeling (70 pts)</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Homework 1.1: First attempts at Bayesian generative modeling (70 pts)</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../02/index.html">2. Analytical and graphical methods for analysis of the posterior</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03/index.html">3. Maximum a posteriori parameter estimation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../04/index.html">4. Sampling with MCMC</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../05/index.html">5. Inference with Stan</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../06/index.html">6. Practice building and assessing Bayesian models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../07/index.html">7. Model comparison</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../08/index.html">8. Hierarchical models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../09/index.html">9. Principled pipelines</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../10/index.html">10. The grand finale</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../11/hw11.html">11. Course feedback</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -126,12 +79,12 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../policies.html">Meetings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../policies.html#lab-sessions">Lab sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../policies.html#submission-of-assignments">Submission of assignments</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../policies.html#lessons-and-lesson-exercises">Lessons and lesson exercises</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../policies.html#the-be-bi-103-github-group">The BE/Bi 103 GitHub group</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../policies.html#homework">Homework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../policies.html#grading">Grading</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../policies.html#collaboration-policy-and-honor-code">Collaboration policy and Honor Code</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../policies.html#excused-absences-and-extensions">Excused absences and extensions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../policies.html#course-communications">Course communications</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../policies.html#ediquette">“Ediquette”</a></li>
 </ul>
@@ -154,9 +107,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="index.html">1. Intuitive generative modeling</a> &raquo;</li>
-      <li>Homework 1.1: First attempts at generative modeling (70 pts)</li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">1. Intuitive generative modeling</a></li>
+      <li class="breadcrumb-item active">Homework 1.1: First attempts at Bayesian generative modeling (70 pts)</li>
   <li class="wy-breadcrumbs-aside">
     
         
@@ -173,32 +126,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  
-<style>
-/* CSS overrides for sphinx_rtd_theme */
-
-/* 24px margin */
-.nbinput.nblast.container,
-.nboutput.nblast.container {
-    margin-bottom: 19px;  /* padding has already 5px */
-}
-
-/* ... except between code cells! */
-.nblast.container + .nbinput.container {
-    margin-top: -19px;
-}
-
-.admonition > p:before {
-    margin-right: 4px;  /* make room for the exclamation icon */
-}
-
-/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
-.math {
-    text-align: unset;
-}
-</style>
-<section id="Homework-1.1:-First-attempts-at-generative-modeling-(70-pts)">
-<h1>Homework 1.1: First attempts at generative modeling (70 pts)<a class="headerlink" href="#Homework-1.1:-First-attempts-at-generative-modeling-(70-pts)" title="Permalink to this headline"></a></h1>
+  <div class="section" id="Homework-1.1:-First-attempts-at-Bayesian-generative-modeling-(70-pts)">
+<h1>Homework 1.1: First attempts at Bayesian generative modeling (70 pts)<a class="headerlink" href="#Homework-1.1:-First-attempts-at-Bayesian-generative-modeling-(70-pts)" title="Permalink to this heading"></a></h1>
 <hr><p><a class="reference external" href="https://doi.org/10.1139/cjz-2020-0171">Collard and coworkers</a> did a simple experiment. They collected samples of carrion beetles (beetles that feed on decaying animal matter) and measured morphological features of the beetles of various species, collected from different sites at different times of the year.</p>
 <p>Imagine that you are in a cabin in Maine. There are also plenty of carrion beetles in the area in which you are staying, so you are curious to look at the morphological features of the beetles in your area. Your plan to set up a trap near your cabin to collect specimens from a given species. For each beetle you collect, you will measure its mass and the length of its <a class="reference external" href="https://en.wikipedia.org/wiki/Elytron">elytra</a>.</p>
 <p>As we will learn in class, prior to performing an experiment, it is useful to think about what kinds of data you might expect to observe. This involves proposing a generative model and then drawing data sets from the model.</p>
@@ -215,27 +144,27 @@ the Bayesian context, a full specification of a model involves a distribution de
 </ol>
 <p>You can do this many many times to see how the data sets might look. Generate many such data sets and make plots of them. (You should think carefully about how you might want to plot these to best make clear to you how the data sets coming from your generative model may look.) Does this jibe with what you would expect from your experiment? If not, do you have any ideas why not?</p>
 <p><strong>d)</strong> <em>Do not attempt this part of the problem until parts (a) through (c) are complete.</em> You can access the measurements of Collard and coworkers <a class="reference external" href="https://doi.org/10.5061/dryad.hdr7sqvg7">here</a>. Extract the measurements made of <em>Nicrophorus orbicollis</em> at location MASS 10 in trap 0. Does the measured data set fall within the data sets you might expect from your proposed generative model?</p>
-</section>
+</div>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="index.html" class="btn btn-neutral float-left" title="1. Intuitive generative modeling" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../02/index.html" class="btn btn-neutral float-right" title="2. Analytical and graphical methods for analysis of the posterior" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../../schedule.html" class="btn btn-neutral float-right" title="Schedule overview" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on May 09, 2022.
+      <span class="lastupdated">Last updated on Jan 03, 2024.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x7f7c3d49ed90> 
+   <jinja2.runtime.BlockReference object at 0x114b73a10> 
 
-<p>© 2021 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
+<p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 
 <p>This document was prepared at <a rel="caltech" href="http://www.caltech.edu">Caltech</a> with financial support from the <a rel="rosen" href="http://rosen.caltech.edu">Donna and Benjamin M. Rosen Bioengineering Center</a>.</p>
 

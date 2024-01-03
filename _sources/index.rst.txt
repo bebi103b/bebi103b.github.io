@@ -11,11 +11,9 @@ If you are enrolled in the course, please read the :ref:`Course policies<Policie
 Useful links
 -------------
 
-- `Ed <https://edstem.org/us/courses/16335/>`_ (used for course communications)
-- `Course Zoom link <http://bebi103.caltech.edu/2022b/zoom>`_ (password protected)
-- `Google doc for help queue <http://bebi103.caltech.edu/2022b/help_queue>`_ (password protected)
-- `Meeting recordings <http://bebi103.caltech.edu/2022b/recordings>`_ (password protected)
-- `Homework solutions <http://bebi103.caltech.edu/2022b/hw_solutions/hw_solutions.html>`_ (password protected)
+- `Ed <https://edstem.org/us/courses/50280/>`_ (used for course communications)
+- `Canvas <https://caltech.instructure.com/courses/6955/assignments>`_ (used for assignment submission/return)
+- `Homework solutions <http://bebi103.caltech.edu/2024b/hw_solutions/hw_solutions.html>`_ (password protected)
 
 
 People
@@ -27,22 +25,22 @@ People
 
 - TAs
 
-   + Rosita Fu (`rfu at caltech dot edu`)
-   + Matteo Guareschi (`mmguar at caltech dot edu`)
-   + Arjuna Subramanian (`amsubram at caltech dot edu`)
+   + Kayla Jackson
+   + Zach Martinez
+   + Kellan Moorse
 
 
 .. toctree::
    :maxdepth: 1
    :caption: Lessons
 
-   lessons/00/setup.ipynb
+   lessons/00/index
    lessons/01/index
-   lessons/02/plotting_posteriors.ipynb
-   lessons/03/marginalization_by_numerical_quadrature.ipynb
-   lessons/04/conjugacy.ipynb
+   lessons/02/index
+   lessons/03/plotting_posteriors.ipynb
+   lessons/04/marginalization_by_numerical_quadrature.ipynb
+   lessons/05/conjugacy.ipynb
    lesson_exercises/exercise_01.ipynb   
-   lessons/05/index
    lessons/06/index
    lesson_exercises/exercise_02.ipynb   
    lessons/07/index
@@ -132,5 +130,6 @@ People
 Previous editions of the course
 ------------------------------- 
 
+- `Winter 2022 <http://bebi103.caltech.edu.s3-website-us-east-1.amazonaws.com/2022b/>`_
 - `Winter 2021 <http://bebi103.caltech.edu.s3-website-us-east-1.amazonaws.com/2021b/>`_
 - `Winter 2020 <http://bebi103.caltech.edu.s3-website-us-east-1.amazonaws.com/2020b/>`_

@@ -3,10 +3,10 @@
 Software
 --------
 
+- `The Distribution Explorer <https://distribution-explorer.github.io>`_ provides quick references for various distributions and the syntax for using them in Python and Stan.
 - `Stan <https://mc-stan.org>`_ is our main engine for Bayesian inference. You will refer to its `documentation <https://mc-stan.org/users/documentation/>`_ many times throughout the term.
 - `CmdStanPy <https://cmdstanpy.readthedocs.io/>`_ if our primary interface to Stan.
 - `ArviZ <https://arviz-devs.github.io/arviz/>`_ provides valuable tools for parsing Stan results.
-- `The Distribution Explorer <https://distribution-explorer.github.io>`_ provides quick references for various distributions and the syntax for using them in Python and Stan.
 - `The bebi103 package <https://bebi103.github.io>`_ provides utility functions for MCMC-based inference and other useful functionality for the class.
 
 
@@ -18,4 +18,5 @@ Reading/tutorials
 - `Stan tutorials YouTube channel <https://www.youtube.com/playlist?list=PLCrWEzJgSUqwL85xIj1wubGdY15C5Gf7H>`_ has a great series of videos.
 - `Statistical Rethinking, 2nd Ed. <https://xcelab.net/rm/statistical-rethinking/>`_ by Richard McElreath is a good pedagogical book about Bayesian inference.
 - `A Student's Guide to Bayesian Statistics <https://ben-lambert.com/a-students-guide-to-bayesian-statistics/>`_ by Ben Lambert is another good reference, especially for beginners.
+- `Data Modeling for the Sciences <https://doi.org/10.1017/9781009089555>`_ by Pressé and Sgouralis is a new book that gives a clear exposition on how Bayesian inference is used in scientific reasoning.
 - `Bayesian Logical Data Analysis for the Physical Sciences <https://doi.org/10.1017/CBO9780511791277>`_ by Phil Gregory. There is also a `supplement available <https://www.cambridge.org/files/1215/2763/1556/Supplement_Gregory_23Jan2018.pdf>`_. This is a nice book to discuss how Bayesian inference fits in with logical approaches to science.
