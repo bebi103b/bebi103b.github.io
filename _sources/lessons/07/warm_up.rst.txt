@@ -1,0 +1,41 @@
+Warm-up
+=======
+
+Imagine for a moment that we devised a transition kernel that satisfies
+the desired properties we have laid out. Say we start a walker at position :math:`\theta_0`
+in parameter space and it starts walking according to the transition
+kernel. Most likely, for those first few steps, the walker is traversing
+a part of parameter space that has incredibly low probability. Once it
+gets to regions of high probability, the walker will almost never return
+to the region of parameter space in which it began. So, unless we sample
+for an incredibly long time, those first few samples visited are
+over-weighted. So, we need to let the walker walk for a while without
+keeping track of the samples so that it can arrive at the limiting
+distribution. This is called **warm-up**, otherwise known as **burn-in**
+or **tuning**\  [1]_.
+
+There is no general way to tell if a walker has reached the limiting
+distribution, so we do not know how many warm-up steps are necessary.
+Fortunately, there are several heuristics. For example, Gelman and coauthors proposed
+generating several warm-up chains and computing the **Gelman-Rubin**
+:math:`\hat{R}` statistic,
+
+.. math::
+
+   \begin{aligned}
+   \hat{R} = \frac{\text{variance between the chains}}{\text{mean variance within the chains}}.\end{aligned}
+
+Limiting chains have :math:`\hat{R} \approx 1`, and this is commonly used as
+a metric for having achieved stationarity. Gelman and his coauthors in
+their famous book *Bayesian Data Analysis* suggest that
+:math:`|1 - \hat{R}| < 0.1` as a good rule of thumb for stationary
+chains.
+
+This simple metric, though widely used, has flaws. We will not go into them in great detail here, but will defer discussion of MCMC diagnostics to a later lecture. You can read more about ensuring chains reach stationarity in this paper by `Vehtari and coworkers <https://doi.org/10.1214/20-BA1221>`_ (2020). We will use the methods outlined in that paper, along with their more stringent suggestion that :math:`|1 - \hat{R}| < 0.01`.
+
+----
+
+.. [1]
+   When using Stan’s sampler, the warm-up is a bit more than just
+   burn-in, which is just regular sampling where we simply neglect the first bunch of samples. Stan’s algorithm is actively
+   choosing stepping strategies during the warm-up phase.

@@ -26,7 +26,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Meetings" href="policies.html" />
-    <link rel="prev" title="Homework 1.1: First attempts at Bayesian generative modeling (70 pts)" href="homework/01/hw1.1.html" /> 
+    <link rel="prev" title="Homework 2.2: Exponential conjugate prior (55 pts)" href="homework/02/hw2.2.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -58,10 +58,19 @@
 <li class="toctree-l1"><a class="reference internal" href="lessons/04/marginalization_by_numerical_quadrature.html">4. Marginalization by numerical quadrature</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lessons/05/conjugacy.html">5. Conjugacy</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson_exercises/exercise_01.html">E1. To be completed after lesson 5</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lessons/06/index.html">6. Parameter estimation by optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson_exercises/exercise_02.html">E2. To be completed after lesson 6</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lessons/07/index.html">7. Introduction to Markov chain Monte Carlo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lessons/08/index.html">8. Introduction to MCMC with Stan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lessons/09/mixture_model_stan.html">9. Mixture models and label switching with MCMC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lessons/10/variate_covariate_with_stan.html">10. Variate-covariate models with MCMC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson_exercises/exercise_03.html">E3. To be completed after lesson 11</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lessons/11/index.html">11. Display of MCMC results</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Homework</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="homework/01/index.html">1. Intuitive generative modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="homework/02/index.html">2. Analytical and graphical methods for analysis of the posterior</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul class="current">
@@ -150,7 +159,7 @@
 <h1>Homework due dates<a class="headerlink" href="#homework-due-dates" title="Permalink to this heading"></a></h1>
 <ul class="simple">
 <li><p><a class="reference internal" href="homework/01/index.html#intuitive-generative-modeling"><span class="std std-ref">Homework 1</span></a>: due 5 pm, January 12</p></li>
-<li><p><span class="xref std std-ref">Homework 2</span>: due 5 pm, January 19</p></li>
+<li><p><a class="reference internal" href="homework/02/index.html#analytical-and-graphical-methods-for-analysis-of-the-posterior"><span class="std std-ref">Homework 2</span></a>: due 5 pm, January 19</p></li>
 <li><p><span class="xref std std-ref">Homework 3</span>: due 5 pm, January 26</p></li>
 <li><p><span class="xref std std-ref">Homework 4</span>: due 5 pm, February 2</p></li>
 <li><p><span class="xref std std-ref">Homework 5</span>: due 5 pm, February 9</p></li>
@@ -167,8 +176,8 @@
 <h1>Lesson exercise due dates<a class="headerlink" href="#lesson-exercise-due-dates" title="Permalink to this heading"></a></h1>
 <ul class="simple">
 <li><p><a class="reference internal" href="lesson_exercises/exercise_01.html#E1.-To-be-completed-after-lesson-5"><span class="std std-ref">Lesson exercise 1</span></a>: due noon, January 9</p></li>
-<li><p><span class="xref std std-ref">Lesson exercise 2</span>: due noon, January 16</p></li>
-<li><p><span class="xref std std-ref">Lesson exercise 3</span>: due noon, January 23</p></li>
+<li><p><a class="reference internal" href="lesson_exercises/exercise_02.html#E2.-To-be-completed-after-lesson-6"><span class="std std-ref">Lesson exercise 2</span></a>: due noon, January 16</p></li>
+<li><p><a class="reference internal" href="lesson_exercises/exercise_03.html#E3.-To-be-completed-after-lesson-11"><span class="std std-ref">Lesson exercise 3</span></a>: due noon, January 23</p></li>
 <li><p><span class="xref std std-ref">Lesson exercise 4</span>: due noon, January 30</p></li>
 <li><p><span class="xref std std-ref">Lesson exercise 5</span>: due noon, February 6</p></li>
 <li><p><span class="xref std std-ref">Lesson exercise 6</span>: due noon, February 13</p></li>
@@ -209,80 +218,80 @@
 </li>
 <li><dl class="simple">
 <dt><strong>Week 3</strong></dt><dd><ul class="simple">
-<li><p>M 01/15: <span class="xref std std-ref">Lesson 07</span>: Introduction to Markov chain Monte Carlo (lecture)</p></li>
-<li><p>W 01/17: <span class="xref std std-ref">Lesson 06</span>: Parameter estimation by optimization</p></li>
-<li><p>Th 01/18: Recitation 03: Choosing priors</p></li>
+<li><p>M 01/15: <a class="reference internal" href="lessons/07/index.html#introduction-to-markov-chain-monte-carlo"><span class="std std-ref">Lesson 07</span></a>: Introduction to Markov chain Monte Carlo (lecture)</p></li>
+<li><p>W 01/17: <a class="reference internal" href="lessons/06/index.html#parameter-estimation-by-optimization"><span class="std std-ref">Lesson 06</span></a>: Parameter estimation by optimization</p></li>
+<li><p>Th 01/18: Recitation 02: Choosing priors</p></li>
 </ul>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
 <dt><strong>Week 4</strong></dt><dd><ul class="simple">
-<li><p>M 01/22: <span class="xref std std-ref">Lesson 12</span>: Display of MCMC samples (lecture)</p></li>
-<li><p>W 01/24: <span class="xref std std-ref">Lesson 09</span>: Introduction to MCMC with Stan</p></li>
-<li><p>W 01/24: <span class="xref std std-ref">Lesson 10</span>: Mixture models and label switching</p></li>
-<li><p>W 01/24: <span class="xref std std-ref">Lesson 11</span>: Regression with Stan</p></li>
-<li><p>Th 01/25: Recitation 04: TBA</p></li>
+<li><p>M 01/22: <a class="reference internal" href="lessons/11/index.html#display-of-mcmc-results"><span class="std std-ref">Lesson 11</span></a>: Display of MCMC samples (lecture)</p></li>
+<li><p>W 01/24: <a class="reference internal" href="lessons/08/index.html#introduction-to-mcmc-with-stan"><span class="std std-ref">Lesson 08</span></a>: Introduction to MCMC with Stan</p></li>
+<li><p>W 01/24: <a class="reference internal" href="lessons/09/mixture_model_stan.html#9.-Mixture-models-and-label-switching-with-MCMC"><span class="std std-ref">Lesson 09</span></a>: Mixture models and label switching</p></li>
+<li><p>W 01/24: <a class="reference internal" href="lessons/10/variate_covariate_with_stan.html#10.-Variate-covariate-models-with-MCMC"><span class="std std-ref">Lesson 10</span></a>: Regression with Stan</p></li>
+<li><p>Th 01/25: Recitation 03: TBA</p></li>
 </ul>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
 <dt><strong>Week 5</strong></dt><dd><ul class="simple">
-<li><p>M 01/29: <span class="xref std std-ref">Lesson 15</span>: Collector’s box of distributions (lecture)</p></li>
-<li><p>W 01/31: <span class="xref std std-ref">Lesson 13</span>: Model building with prior predictive checks</p></li>
-<li><p>W 01/31: <span class="xref std std-ref">Lesson 14</span>: Posterior predictive checks</p></li>
-<li><p>Th 02/01: <span class="xref std std-ref">Recitation 05</span>: Modeling case study</p></li>
+<li><p>M 01/29: <span class="xref std std-ref">Lesson 14</span>: Collector’s box of distributions (lecture)</p></li>
+<li><p>W 01/31: <span class="xref std std-ref">Lesson 12</span>: Model building with prior predictive checks</p></li>
+<li><p>W 01/31: <span class="xref std std-ref">Lesson 13</span>: Posterior predictive checks</p></li>
+<li><p>Th 02/01: Recitation 04: TBA</p></li>
 </ul>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
 <dt><strong>Week 6</strong></dt><dd><ul class="simple">
-<li><p>M 02/05: <span class="xref std std-ref">Lesson 18</span>: Model comparison (lecture)</p></li>
-<li><p>W 02/07: <span class="xref std std-ref">Lesson 16</span>: MCMC diagnostics</p></li>
-<li><p>W 02/07: <span class="xref std std-ref">Lesson 17</span>: The Funnel of Hell and uncentering</p></li>
-<li><p>Th 02/08: <span class="xref std std-ref">Recitation 06</span>: Practice modeling</p></li>
+<li><p>M 02/05: <span class="xref std std-ref">Lesson 17</span>: Model comparison (lecture)</p></li>
+<li><p>W 02/07: <span class="xref std std-ref">Lesson 15</span>: MCMC diagnostics</p></li>
+<li><p>W 02/07: <span class="xref std std-ref">Lesson 16</span>: The Funnel of Hell and uncentering</p></li>
+<li><p>Th 02/08: Recitation 05: TBA</p></li>
 </ul>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
 <dt><strong>Week 7</strong></dt><dd><ul class="simple">
-<li><p>M 02/12: <span class="xref std std-ref">Lesson 20</span>: Hierarchical models (lecture)</p></li>
-<li><p>W 02/14: <span class="xref std std-ref">Lesson 19</span>: Model comparison in practice</p></li>
-<li><p>Th 02/15: <span class="xref std std-ref">Recitation 07</span>: Background on Hamiltonian Monte Carlo</p></li>
+<li><p>M 02/12: <span class="xref std std-ref">Lesson 19</span>: Hierarchical models (lecture)</p></li>
+<li><p>W 02/14: <span class="xref std std-ref">Lesson 18</span>: Model comparison in practice</p></li>
+<li><p>Th 02/15: Recitation 06: TBA</p></li>
 </ul>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
 <dt><strong>Week 8</strong></dt><dd><ul class="simple">
-<li><p>M 02/19: <span class="xref std std-ref">Lesson 22</span>: Principled workflows (lecture)</p></li>
-<li><p>W 02/21: <span class="xref std std-ref">Lesson 21</span>: Implementation of hierarchical models</p></li>
-<li><p>Th 02/22: <span class="xref std std-ref">Recitation 08</span>: Discussion of project proposals</p></li>
+<li><p>M 02/19: <span class="xref std std-ref">Lesson 21</span>: Principled workflows (lecture)</p></li>
+<li><p>W 02/21: <span class="xref std std-ref">Lesson 20</span>: Implementation of hierarchical models</p></li>
+<li><p>Th 02/22: Recitation 07: TBA</p></li>
 </ul>
 </dd>
 </dl>
 </li>
 <li><dl>
 <dt><strong>Week 9</strong></dt><dd><ul class="simple">
-<li><p>M 02/26: <span class="xref std std-ref">Lesson 26</span>: Variational inference</p></li>
+<li><p>M 02/26: <span class="xref std std-ref">Lesson 25</span>: Variational inference</p></li>
 </ul>
 <ul class="simple">
-<li><p>W 02/28: <span class="xref std std-ref">Lesson 23</span>: Simulation-based calibration in practice</p></li>
-<li><p>Th 02/29: <span class="xref std std-ref">Recitation 09</span>: Sampling out of discrete distributions</p></li>
+<li><p>W 02/28: <span class="xref std std-ref">Lesson 24</span>: Simulation-based calibration in practice</p></li>
+<li><p>Th 02/29: Recitation 08: TBA</p></li>
 </ul>
 </dd>
 </dl>
 </li>
 <li><dl>
 <dt><strong>Week 10</strong></dt><dd><ul class="simple">
-<li><p>M 03/04: <span class="xref std std-ref">Lesson 27</span>: Course wrap-up (lecture)</p></li>
+<li><p>M 03/04: <span class="xref std std-ref">Lesson 26</span>: Course wrap-up (lecture)</p></li>
 <li><p>W 03/06: Work on final homework</p></li>
 </ul>
 <ul class="simple">
-<li><p>Th 03/08: Recitation 10: TBD</p></li>
+<li><p>Th 03/08: Recitation 09: TBD</p></li>
 </ul>
 </dd>
 </dl>
@@ -294,7 +303,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="homework/01/hw1.1.html" class="btn btn-neutral float-left" title="Homework 1.1: First attempts at Bayesian generative modeling (70 pts)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="homework/02/hw2.2.html" class="btn btn-neutral float-left" title="Homework 2.2: Exponential conjugate prior (55 pts)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="policies.html" class="btn btn-neutral float-right" title="Meetings" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
@@ -302,11 +311,11 @@
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Jan 03, 2024.
+      <span class="lastupdated">Last updated on Jan 07, 2024.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x115ba8c90> 
+   <jinja2.runtime.BlockReference object at 0x10f98f850> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

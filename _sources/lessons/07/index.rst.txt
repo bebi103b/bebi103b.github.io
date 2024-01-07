@@ -1,0 +1,12 @@
+****************************************************
+7. Introduction to Markov chain Monte Carlo
+****************************************************
+
+.. toctree::
+   :maxdepth: 1
+
+   why_mcmc
+   mcmc_idea
+   warm_up
+   metropolis_hastings
+   further_reading

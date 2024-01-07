@@ -1,0 +1,9 @@
+*********************************************************
+8. Introduction to MCMC with Stan
+*********************************************************
+
+.. toctree::
+   :maxdepth: 1
+
+   stan_hello_world
+   parameter_estimation_with_mcmc

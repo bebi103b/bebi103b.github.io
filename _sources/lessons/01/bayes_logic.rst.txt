@@ -215,7 +215,7 @@ Ahoy! The quantity :math:`P(\theta \mid y)` is exactly what we want
 from our statistical inference. This is the probability for values of a parameter, given
 measured data. 
 
-But wait a minute. The parameter :math:`\theta` is not something that can vary meaningfully from experiment to experiment; it is not a random variable. So, in the frequentist picture, we cannot assign a probability to it. That is, :math:`P(\theta\mid y)` and :math:`P(y, \theta)` do not make any sense. So, in the frequentist perspective, we can really only analyze :math:`P(y\mid \theta)`. But in a Bayesian perspective, we *can*!
+But wait a minute. The parameter :math:`\theta` is not something that can vary meaningfully from experiment to experiment; it is not a random variable. So, in the frequentist picture, we cannot assign a probability to it. That is, :math:`P(\theta\mid y)` and :math:`P(y, \theta)` do not make any sense. So, in the frequentist perspective, we can really only analyze :math:`P(y\mid \theta)`. But in a Bayesian perspective, we *can* analyze what we want, :math:`P(\theta\mid y)`!
 
 Now, how do we compute it :math:`P(\theta\mid y)`?
 
@@ -292,7 +292,7 @@ inference tasks.
 
 
 .. [1]
-   But not too formal. For example, we are not discussing :math:`\sigma`
+   But we were not too formal. For example, we were not discussing :math:`\sigma`
    algebras, measurability, etc.
 
 .. [2]
@@ -300,6 +300,6 @@ inference tasks.
    an experiment to real numbers.
 
 .. [3]
-   I have heard this referred to as the “fully marginalized likelihood”
+   I have heard this referred to as the "fully marginalized likelihood"
    because of the cute correspondence of the acronym and how some people
    feel trying to get their head around the meaning of the quantity.

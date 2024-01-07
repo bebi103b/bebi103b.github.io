@@ -6,7 +6,7 @@ Software
 - `The Distribution Explorer <https://distribution-explorer.github.io>`_ provides quick references for various distributions and the syntax for using them in Python and Stan.
 - `Stan <https://mc-stan.org>`_ is our main engine for Bayesian inference. You will refer to its `documentation <https://mc-stan.org/users/documentation/>`_ many times throughout the term.
 - `CmdStanPy <https://cmdstanpy.readthedocs.io/>`_ if our primary interface to Stan.
-- `ArviZ <https://arviz-devs.github.io/arviz/>`_ provides valuable tools for parsing Stan results.
+- `ArviZ <https://python.arviz.org/>`_ provides valuable tools for parsing Stan results.
 - `The bebi103 package <https://bebi103.github.io>`_ provides utility functions for MCMC-based inference and other useful functionality for the class.
 
 

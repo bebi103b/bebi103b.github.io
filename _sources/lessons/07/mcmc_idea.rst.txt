@@ -1,0 +1,143 @@
+Random number generation
+========================
+
+To understand the posterior probability distribution, we can draw samples from it. We have already seen how to draw random numbers from various distributions using the ``np.random`` module. Importantly, the samples we draw are **independent**, meaning that what the value of the sample number :math:`n` is has not bearing on what we will get for sample number :math:`n+1`.
+
+How do we get random numbers from a specific distribution? Random number generators are capable of (approximately) drawing integers from a Discrete Uniform distribution. For example, NumPy's built-in generator, the `PCG64 generator <https://en.wikipedia.org/wiki/Permuted_congruential_generator>`_, generates 128 bit numbers, allowing for :math:`2^{128}`, or about :math:`10^{38}`, possible integers. In practice, these are converted to floating point numbers (since a double floating point number has far less than 128 bits) on the interval [0, 1) by dividing the random number by :math:`2^{128}`. Effectively, then, the random number generators provide draws out of a Uniform distribution on the interval [0, 1).
+
+To convert from random numbers on a Uniform distribution to random numbers from a nonuniform distribution, we need a transform. For many named distributions convenient transforms exist. For example, the `Box-Muller transform` is often used to get random draws from a Normal distribution. In the absence of a clever transform we can use a distribution's `quantile function <https://en.wikipedia.org/wiki/Quantile_function>`_, also known as a **percent-point function**, which is the inverse CDF, :math:`F^{-1}(y)`. For example, the quantile function for the Exponential distribution is
+
+.. math::
+
+   \begin{align}
+   F^{-1}(p) = -\beta^{-1}\,\ln(1-p),
+   \end{align}
+
+where :math:`p` is the value of the CDF, ranging from zero to one. We first draw :math:`p` out of a Uniform distribution on [0, 1), and the compute :math:`F^{-1}(p)` to get a draw from an exponential distribution. A graphical illustration of using a quantile function to draw 50 random numbers out of Gamma(5, 2) is shown below.
+
+.. bokeh-plot::
+   :source-position: none
+
+   import numpy as np
+   import scipy.stats as st
+
+   import bokeh.io
+   import bokeh.plotting
+
+   rng = np.random.default_rng(seed=12341234)
+   alpha = 5
+   beta = 2
+   y = np.linspace(0, 8, 400)
+   cdf = st.gamma.cdf(y, alpha, loc=0, scale=1 / beta)
+
+   udraws = rng.uniform(size=50)
+
+   p = bokeh.plotting.figure(
+       width=300,
+       height=200,
+       x_axis_label="y",
+       y_axis_label="F(y; 2, 5)",
+       x_range=[0, 8],
+       y_range=[0, 1],
+   )
+   p.xgrid.grid_line_color = None
+   p.ygrid.grid_line_color = None
+
+   p.line(y, cdf, line_width=2)
+
+   for u in udraws:
+       x_vals = [0] + [st.gamma.ppf(u, alpha, loc=0, scale=1 / beta)] * 2
+       y_vals = [u, u, 0]
+       p.line(x_vals, y_vals, color="gray", line_width=0.5)
+
+   p.x(np.zeros_like(udraws), udraws, color="black", line_width=0.5, size=7)
+   p.circle(
+       st.gamma.ppf(udraws, alpha, loc=0, scale=1 / beta),
+       np.zeros_like(udraws),
+       line_width=0.5,
+       fill_color=None,
+       line_color="black",
+   )
+
+   p.renderers[0].level = "overlay"
+   p.renderers[-1].level = "overlay"
+   p.renderers[-2].level = "overlay"
+
+   bokeh.io.show(p)
+
+Each draw from a Uniform distribution, marked by an × on the vertical axis, is converted to a draw from a Gamma distribution, marked by ○ on the horizontal axis, by computing the inverse CDF.
+
+
+The basic idea behind MCMC
+==========================
+
+Our goal is to draw independent samples from a **target distribution**. In the above plot, that distribution is the Gamma distribution with parameters :math:`\alpha = 5` and :math:`\beta = 2`. As we have seen, in order get independent samples, we need to be able to define a transform the converts draws from a Uniform distribution to draws from the target distribution. Unfortunately, we almost never can derive such a transformation for an arbitrary distribution, including the posterior distributions we get from Bayesian models.
+
+But the samples need not be independent! Instead, we only need that the
+samples be generated from a process that generates samples from the
+target distribution in the correct proportions. If we draw enough [1]_ of
+them, we do not need to worry about the lack of independence. In the
+case of the parameter estimation problem, the distribution we wish to
+draw from is the posterior distribution :math:`g(\theta\mid y)`. For
+notational simplicity in what follows, since we know we are always
+talking about a posterior distribution, we will use :math:`P(\theta)`
+for shorthand notation for an arbitrary distribution of :math:`\theta`. The
+techniques I discuss are not limited to sampling out of posteriors; we
+can sample out of any distribution.
+
+**The approach of MCMC is to take random walks in parameter space such
+that the probability that a walker arrives at point** :math:`\theta` **is
+proportional to** :math:`P(\theta)`. This is the main concept. You should re-read that bolded sentence.
+
+If we can achieve such a walk, we can just take the walker positions as
+samples from the distributions. To implement this random walk, we define
+a **transition kernel**, :math:`T(\theta_{i+1}\mid \theta_i)`, the
+probability of a walker stepping from position :math:`\theta_i` in
+parameter space to position :math:`\theta_{i+1}`. The transition kernel
+defines a **Markov chain**, which you can think of as a random walker
+whose next step depends only on where the walker is *right now*; i.e.,
+it has no memory. Where the walker goes for step :math:`i+1` depends
+*only* on where it was at step :math:`i`.
+
+The condition that the probability of arrival at point
+:math:`\theta_{i+1}` is proportional to :math:`P(\theta_{i+1})` may be
+stated as
+
+.. math::
+
+   \begin{aligned}
+   P(\theta_{i+1}) = \int \mathrm{d}\theta_i\, T(\theta_{i+1}\mid \theta_i)\,
+   P(\theta_i).
+   \end{aligned}
+
+Here, we have taken :math:`\theta` to be continuous. Were it discrete,
+we just replace the integral with a sum. When this relation holds, it is
+said that the target distribution is an **invariant distribution** or
+**stationary distribution** of the transition kernel. When this
+invariant distribution is unique, it is called a **limiting
+distribution**. We want to choose our transition kernel
+:math:`T(\theta_{i+1}\mid \theta_i)` such that the target distribution :math:`P(\theta)` is
+limiting. This is the case if the above equation holds and the chain is **ergodic**.
+An ergodic Markov chain has the following properties:
+
+#. It is **aperiodic**. A *periodic* Markov chain can only return to a
+   given point in parameter space after :math:`k`, :math:`2k`,
+   :math:`3k,\ldots` steps, where :math:`k` is the period. An aperiodic
+   chain is *not* periodic.
+
+#. It is **irreducible**, which means that any point in parameter space
+   is accessible to the walker from any other.
+
+#. It is **positive recurrent**, which means that the walker will surely
+   revisit any point in parameter space in a finite number of
+   steps.
+
+So, if our transition kernel satisfies this checklist and the invariance condition, it will eventually sample the
+posterior distribution. We will discuss how to come up with such a
+transition kernel in a moment; first we focus on the important concept
+of “eventually” in the preceding sentence.
+
+----
+
+.. [1]
+   The word "enough" is pretty loaded here. We need to draw enough samples such that we get a sufficient number *effectively independent* samples. One algorithm for drawing samples might require 1000 samples for each effectively independent one. Another, better one might only require 10. `Margossian and Gelman <https://arxiv.org/abs/2311.02726>`_ have a nice discussion on this.

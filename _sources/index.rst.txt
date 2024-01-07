@@ -45,32 +45,31 @@ People
    lesson_exercises/exercise_02.ipynb   
    lessons/07/index
    lessons/08/index
-   lessons/09/index
-   lessons/10/mixture_model_stan.ipynb
-   lessons/11/regression_with_stan.ipynb
+   lessons/09/mixture_model_stan.ipynb
+   lessons/10/variate_covariate_with_stan.ipynb
    lesson_exercises/exercise_03.ipynb   
-   lessons/12/index
-   lessons/13/prior_predictive_checks.ipynb
-   lessons/14/posterior_predictive_checks.ipynb
+   lessons/11/index
+   lessons/12/prior_predictive_checks.ipynb
+   lessons/13/posterior_predictive_checks.ipynb
    lesson_exercises/exercise_04.ipynb   
-   lessons/15/box_of_distributions.rst
-   lessons/16/mcmc_diagnostics.ipynb
-   lessons/17/funnel_of_hell.ipynb
+   lessons/14/box_of_distributions.rst
+   lessons/15/mcmc_diagnostics.ipynb
+   lessons/16/funnel_of_hell.ipynb
    lesson_exercises/exercise_05.ipynb
-   lessons/18/model_comparison.rst
-   lessons/19/index
+   lessons/17/model_comparison.rst
+   lessons/18/index
    lesson_exercises/exercise_06.ipynb
-   lessons/20/index
-   lessons/21/hierarchical_implementation.ipynb
+   lessons/19/index
+   lessons/20/hierarchical_implementation.ipynb
    lesson_exercises/exercise_07.ipynb
-   lessons/22/sbc.ipynb
-   lessons/23/sbc_in_practice.ipynb
+   lessons/21/sbc.ipynb
+   lessons/22/sbc_in_practice.ipynb
    lesson_exercises/exercise_08.ipynb
-   lessons/24/intro_to_gps.ipynb
-   lessons/25/index
+   lessons/23/intro_to_gps.ipynb
+   lessons/24/index
    lesson_exercises/exercise_09.ipynb
-   lessons/26/variational_inference.ipynb
-   lessons/27/wrapup
+   lessons/25/variational_inference.ipynb
+   lessons/26/wrapup
 
 
 .. toctree::
