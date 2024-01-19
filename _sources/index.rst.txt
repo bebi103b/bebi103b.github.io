@@ -13,7 +13,7 @@ Useful links
 
 - `Ed <https://edstem.org/us/courses/50280/>`_ (used for course communications)
 - `Canvas <https://caltech.instructure.com/courses/6955/assignments>`_ (used for assignment submission/return)
-- `Homework solutions <http://bebi103.caltech.edu/2024b/hw_solutions/hw_solutions.html>`_ (password protected)
+- `Homework solutions <http://bebi103.caltech.edu/2024b_hw_solutions/hw_solutions.html>`_ (password protected)
 
 
 People

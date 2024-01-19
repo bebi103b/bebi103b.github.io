@@ -140,7 +140,7 @@
   <div class="section" id="Homework-3.2:-MAP-estimates-and-zero-inflation-for-Drop-Seq-controls-(80-pts)">
 <h1>Homework 3.2: MAP estimates and zero-inflation for Drop-Seq controls (80 pts)<a class="headerlink" href="#Homework-3.2:-MAP-estimates-and-zero-inflation-for-Drop-Seq-controls-(80-pts)" title="Permalink to this heading"></a></h1>
 <p>Data set download: <a class="reference external" href="https://s3.amazonaws.com/bebi103.caltech.edu/data/zheng_gemcode_control.csv">File 1</a>, <a class="reference external" href="https://s3.amazonaws.com/bebi103.caltech.edu/data/ercc_concs.txt">File 2</a></p>
-<p><em>This problem is inspired by</em> <a class="reference external" href="http://dx.doi.org/10.1038/s41587-019-0379-5">this paper by Valentine Svensson</a> <em>and the related blog posts (viewable</em> <a class="reference external" href="http://www.nxn.se/valent/2017/11/16/droplet-scrna-seq-is-not-zero-inflated">here</a> <em>and</em> <a class="reference external" href="http://www.nxn.se/valent/2018/1/30/count-depth-variation-makes-poisson-scrna-seq-data-negative-binomial">here</a><em>).</em></p>
+<p><em>This problem is inspired by</em><a class="reference external" href="http://dx.doi.org/10.1038/s41587-019-0379-5">this paper by Valentine Svensson</a><em>and the related blog posts (viewable</em><a class="reference external" href="http://www.nxn.se/valent/2017/11/16/droplet-scrna-seq-is-not-zero-inflated">here</a><em>and</em><a class="reference external" href="http://www.nxn.se/valent/2018/1/30/count-depth-variation-makes-poisson-scrna-seq-data-negative-binomial">here</a><em>).</em></p>
 <hr><p><a class="reference external" href="https://en.wikipedia.org/wiki/Single_cell_sequencing#Single-cell_transcriptome_sequencing_(scRNA-seq)">Single-Cell RNA Seq</a> (scRNA-Seq) is a technology that is coming into more and more common use. It enables researchers to get counts of mRNA transcripts for specific genes in single cells. In the technique, (usually) individual cells are encased in a droplet in a microfluidic device. Importantly, each droplet also has a cDNA “barcode” molecule that enables identification of which droplet
 reads of a given mRNA sequence come from.</p>
 <p>An output from a scRNA-Seq experiment is a <strong>count matrix</strong>. In a count matrix, each row corresponds to a given droplet (indexed by its barcode sequence) and each column is a gene. The entries in the count matrix are integer counts of mRNA transcripts. The process by which the count matrix is generated from the reads is important and worth considering in a detailed analysis. Tools such as <a class="reference external" href="https://pachterlab.github.io/kallisto/">Kalisto</a> enable computing the count matrix. We will not attempt
@@ -188,11 +188,11 @@ y_{ij} \sim \text{NegBinom}(\mu_i, \phi)\,\forall i,j.
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Jan 16, 2024.
+      <span class="lastupdated">Last updated on Jan 19, 2024.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x1271915d0> 
+   <jinja2.runtime.BlockReference object at 0x16a48e450> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 
