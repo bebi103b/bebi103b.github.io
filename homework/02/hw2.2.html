@@ -69,6 +69,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/10/variate_covariate_with_stan.html">10. Variate-covariate models with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_03.html">E3. To be completed after lesson 11</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/11/index.html">11. Display of MCMC results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/12/prior_predictive_checks.html">12. Model building with prior predictive checks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/13/posterior_predictive_checks.html">13. Posterior predictive checks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_04.html">E4. To be completed after lesson 13</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/14/box_of_distributions.html">14. Collector’s box of distributions</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Homework</span></p>
 <ul class="current">
@@ -79,6 +83,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../03/index.html">3. Maximum a posteriori parameter estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04/index.html">4. Sampling with MCMC</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -141,8 +146,8 @@
   <div class="section" id="Homework-2.2:-Exponential-conjugate-prior-(55-pts)">
 <h1>Homework 2.2: Exponential conjugate prior (55 pts)<a class="headerlink" href="#Homework-2.2:-Exponential-conjugate-prior-(55-pts)" title="Permalink to this heading"></a></h1>
 <p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/sviewer/viewer.fcgi?tool=portal&amp;sendto=on&amp;log$=seqview&amp;db=nuccore&amp;dopt=fasta&amp;val=CP042865.1">Data set download</a></p>
-<p><em>This problem was motivated by discussion in section 2.10 of</em><a class="reference external" href="http://web.stanford.edu/class/bios221/book/">Holmes and Huber’s book</a><em>.</em></p>
-<hr><p><strong>a)</strong> Show that the conjugate distribution for the Exponential distribution is the Gamma distribution. How are the parameters of the Gamma updated from the prior to the posterior? (<em>You are welcome to look at</em><a class="reference external" href="https://en.wikipedia.org/wiki/Conjugate_prior">Wikipedia’s table of conjugate priors</a><em>to check your answer, but you should not look up the actual proof that the Gamma distribution is conjugate to the Exponential.</em>)</p>
+<p><em>This problem was motivated by discussion in section 2.10 of</em> <a class="reference external" href="http://web.stanford.edu/class/bios221/book/">Holmes and Huber’s book</a><em>.</em></p>
+<hr><p><strong>a)</strong> Show that the conjugate distribution for the Exponential distribution is the Gamma distribution. How are the parameters of the Gamma updated from the prior to the posterior? (<em>You are welcome to look at</em> <a class="reference external" href="https://en.wikipedia.org/wiki/Conjugate_prior">Wikipedia’s table of conjugate priors</a> <em>to check your answer, but you should not look up the actual proof that the Gamma distribution is conjugate to the Exponential.</em>)</p>
 <p><strong>b)</strong> Download the sequence of the chromosomal DNA of <em>E coli</em> strain ATCC BAA-196 <a class="reference external" href="http://www.ncbi.nlm.nih.gov/sviewer/viewer.fcgi?tool=portal&amp;sendto=on&amp;log$=seqview&amp;db=nuccore&amp;dopt=fasta&amp;val=CP042865.1">here</a> in FASTA format. This strain is resistant to multiple drugs and is used in studies of antibiotic resistance. The sequence was published in <a class="reference external" href="https://doi.org/10.1128/MRA.01118-19">this paper</a>. Read the sequence in as a single string, using the function below, if you like.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
@@ -205,11 +210,11 @@
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Jan 19, 2024.
+      <span class="lastupdated">Last updated on Jan 20, 2024.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x16a553a90> 
+   <jinja2.runtime.BlockReference object at 0x12b219e50> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

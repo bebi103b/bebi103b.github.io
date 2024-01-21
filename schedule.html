@@ -26,7 +26,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Meetings" href="policies.html" />
-    <link rel="prev" title="Homework 3.2: MAP estimates and zero-inflation for Drop-Seq controls (80 pts)" href="homework/03/hw3.2.html" /> 
+    <link rel="prev" title="Homework 4.2: MCMC with Boolean data (30 pts)" href="homework/04/hw4.2.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -66,12 +66,17 @@
 <li class="toctree-l1"><a class="reference internal" href="lessons/10/variate_covariate_with_stan.html">10. Variate-covariate models with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson_exercises/exercise_03.html">E3. To be completed after lesson 11</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lessons/11/index.html">11. Display of MCMC results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lessons/12/prior_predictive_checks.html">12. Model building with prior predictive checks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lessons/13/posterior_predictive_checks.html">13. Posterior predictive checks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson_exercises/exercise_04.html">E4. To be completed after lesson 13</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lessons/14/box_of_distributions.html">14. Collector’s box of distributions</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Homework</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="homework/01/index.html">1. Intuitive generative modeling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="homework/02/index.html">2. Analytical and graphical methods for analysis of the posterior</a></li>
 <li class="toctree-l1"><a class="reference internal" href="homework/03/index.html">3. Maximum a posteriori parameter estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="homework/04/index.html">4. Sampling with MCMC</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul class="current">
@@ -163,7 +168,7 @@
 <li><p><a class="reference internal" href="homework/01/index.html#intuitive-generative-modeling"><span class="std std-ref">Homework 1</span></a>: due 5 pm, January 12</p></li>
 <li><p><a class="reference internal" href="homework/02/index.html#analytical-and-graphical-methods-for-analysis-of-the-posterior"><span class="std std-ref">Homework 2</span></a>: due 5 pm, January 19</p></li>
 <li><p><a class="reference internal" href="homework/03/index.html#maximum-a-posteriori-parameter-estimation"><span class="std std-ref">Homework 3</span></a>: due 5 pm, January 26</p></li>
-<li><p><span class="xref std std-ref">Homework 4</span>: due 5 pm, February 2</p></li>
+<li><p><a class="reference internal" href="homework/04/index.html#sampling-with-mcmc"><span class="std std-ref">Homework 4</span></a>: due 5 pm, February 2</p></li>
 <li><p><span class="xref std std-ref">Homework 5</span>: due 5 pm, February 9</p></li>
 <li><p><span class="xref std std-ref">Homework 6</span>: due 5 pm, February 16</p></li>
 <li><p><span class="xref std std-ref">Homework 7</span>: due 5 pm, February 23</p></li>
@@ -220,9 +225,10 @@
 </li>
 <li><dl class="simple">
 <dt><strong>Week 3</strong></dt><dd><ul class="simple">
-<li><p>M 01/15: <a class="reference internal" href="lessons/07/index.html#introduction-to-markov-chain-monte-carlo"><span class="std std-ref">Lesson 07</span></a>: Introduction to Markov chain Monte Carlo (lecture)</p></li>
+<li><p>M 01/15: No class; Martin Luther King Day</p></li>
+<li><p>W 01/17: <a class="reference internal" href="lessons/07/index.html#introduction-to-markov-chain-monte-carlo"><span class="std std-ref">Lesson 07</span></a>: Introduction to Markov chain Monte Carlo (lecture)</p></li>
 <li><p>W 01/17: <a class="reference internal" href="lessons/06/index.html#parameter-estimation-by-optimization"><span class="std std-ref">Lesson 06</span></a>: Parameter estimation by optimization</p></li>
-<li><p>Th 01/18: Recitation 02: Choosing priors</p></li>
+<li><p>Th 01/18: Recitation 02: Choosing priors and review of optimization</p></li>
 </ul>
 </dd>
 </dl>
@@ -240,9 +246,9 @@
 </li>
 <li><dl class="simple">
 <dt><strong>Week 5</strong></dt><dd><ul class="simple">
-<li><p>M 01/29: <span class="xref std std-ref">Lesson 14</span>: Collector’s box of distributions (lecture)</p></li>
-<li><p>W 01/31: <span class="xref std std-ref">Lesson 12</span>: Model building with prior predictive checks</p></li>
-<li><p>W 01/31: <span class="xref std std-ref">Lesson 13</span>: Posterior predictive checks</p></li>
+<li><p>M 01/29: <a class="reference internal" href="lessons/14/box_of_distributions.html#collector-s-box-of-distributions"><span class="std std-ref">Lesson 14</span></a>: Collector’s box of distributions (lecture)</p></li>
+<li><p>W 01/31: <a class="reference internal" href="lessons/12/prior_predictive_checks.html#12.-Model-building-with-prior-predictive-checks"><span class="std std-ref">Lesson 12</span></a>: Model building with prior predictive checks</p></li>
+<li><p>W 01/31: <a class="reference internal" href="lessons/13/posterior_predictive_checks.html#13.-Posterior-predictive-checks"><span class="std std-ref">Lesson 13</span></a>: Posterior predictive checks</p></li>
 <li><p>Th 02/01: Recitation 04: TBA</p></li>
 </ul>
 </dd>
@@ -269,7 +275,8 @@
 </li>
 <li><dl class="simple">
 <dt><strong>Week 8</strong></dt><dd><ul class="simple">
-<li><p>M 02/19: <span class="xref std std-ref">Lesson 21</span>: Principled workflows (lecture)</p></li>
+<li><p>M 02/19: No class; Presidents Day</p></li>
+<li><p>W 02/21: <span class="xref std std-ref">Lesson 21</span>: Principled workflows (lecture)</p></li>
 <li><p>W 02/21: <span class="xref std std-ref">Lesson 20</span>: Implementation of hierarchical models</p></li>
 <li><p>Th 02/22: Recitation 07: TBA</p></li>
 </ul>
@@ -305,7 +312,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="homework/03/hw3.2.html" class="btn btn-neutral float-left" title="Homework 3.2: MAP estimates and zero-inflation for Drop-Seq controls (80 pts)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="homework/04/hw4.2.html" class="btn btn-neutral float-left" title="Homework 4.2: MCMC with Boolean data (30 pts)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="policies.html" class="btn btn-neutral float-right" title="Meetings" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
@@ -313,11 +320,11 @@
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Jan 19, 2024.
+      <span class="lastupdated">Last updated on Jan 20, 2024.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x171193650> 
+   <jinja2.runtime.BlockReference object at 0x112bcadd0> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 
