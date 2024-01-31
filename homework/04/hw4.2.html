@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Homework 4.2: MCMC with Boolean data (30 pts) &mdash; BE/Bi 103 b  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
-
-  
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -159,7 +157,7 @@ behavior, such as reversals.</p>
 <p>There are six non-motor neurons acting in a circuit that responds to environmental cues and triggers a reversal, a shown in the figure below (based on <a class="reference external" href="https://doi.org/10.1371/journal.pone.0018766">Schultheis et. al. 2011</a>). These include four sensory neurons (ALM, AVM, ASH, and PLM) and two interneurons (AVD and AVA). Each sensory neuron is sensitive to a different type of stimulus. For example, the sensory neuron we are studying (ASH) is sensitive to chemosensory stimuli such as toxins,
 while another neuron (PLM) is sensitive to mechanical stimuli (touch) in the posterior part of the worm’s body. The sensory neurons send signals that are integrated by the two command interneurons (AVA and AVD). Each sensory neuron can provide an impulse to the command interneurons at any time. In order for the command interneuron to fire and activate motor neurons, the sum of the stimuli at any point in time must exceed a certain threshold. Once the stimuli from one or more sensory neurons has
 induced an action potential in a command interneuron, that signal is passed to motor neurons which will modulate worm behavior.</p>
-<p><img alt="Reversal neural network" src="../../_images/reversal_neural_network.png" /></p>
+<img alt="Reversal neural network" src="../../_images/reversal_neural_network.png" />
 <p>In the experiment, we used optogenetics to dissect the function of individual neurons in this circuit. We worked with two optogenetic worm strains. The ASH strain has Channelrhodopsin (ChR2, represented by a red barrel in the figure above) expressed only in the ASH sensory neuron. When we shine blue light on this strain, we should activate the ChR2, which will allow sodium and calcium cations to flow into the neuron, simulating an action potential. We want to quantify how robustly this
 stimulation will cause the worm to exhibit aversion behavior and reverse.</p>
 <p>We also studied an AVA strain that has channelrhodopsin expressed only in the AVA command interneuron. Our goal is to quantify the effects of stimulating this neuron in terms of reversals compared to the ASH neuron and to wild type.</p>
@@ -249,7 +247,7 @@ stimulation will cause the worm to exhibit aversion behavior and reverse.</p>
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x12c357dd0> 
+   <jinja2.runtime.BlockReference object at 0x16f4f1b50> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 
