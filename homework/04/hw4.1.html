@@ -160,7 +160,7 @@
 </pre></div>
 </div>
 </div>
-<p><strong>a)</strong> Write your own MCMC sampler that employs a Metropolis-Hastings algorithm to sample continuous parameters (it does not need to handle discrete parameters) that uses a Normal proposal distribution. Since you are sampling multiple parameters, your proposal distribution will be multi-dimensional. You can use a Normal proposal distribution with a diagonal covariance. In other words, you generate a proposal for each variable in the posterior independently.</p>
+<p><strong>a)</strong> Write your own MCMC sampler that employs a Metropolis-Hastings algorithm to sample continuous parameters (it does not need to handle discrete parameters) that uses a Normal proposal distribution. Since you are sampling multiple parameters, your proposal distribution will be multi-dimensional. You can use a Normal proposal distribution with a diagonal covariance. In other words, you generate a proposal for each variable in the target distribution independently.</p>
 <p>You can organize your code how you like, but here is a suggestion.</p>
 <ul class="simple">
 <li><p>Write a function that takes a Metropolis-Hastings step. It should look something like the below (obviously where it does something instead of <code class="docutils literal notranslate"><span class="pre">pass</span></code>ing).</p></li>
@@ -176,10 +176,10 @@
 <span class="sd">    x : ndarray, shape (n_variables,)</span>
 <span class="sd">        The present location of the walker in parameter space.</span>
 <span class="sd">    logtarget : function</span>
-<span class="sd">        The function to compute the log posterior. It has call</span>
+<span class="sd">        The function to compute the log target. It has call</span>
 <span class="sd">        signature `logtarget(x, *args)`.</span>
 <span class="sd">    logtarget_current : float</span>
-<span class="sd">        The current value of the log posterior.</span>
+<span class="sd">        The current value of the log target.</span>
 <span class="sd">    sigma : ndarray, shape (n_variables, )</span>
 <span class="sd">        The standard deviations for the proposal distribution.</span>
 <span class="sd">    args : tuple</span>
@@ -214,7 +214,7 @@
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    logtarget : function</span>
-<span class="sd">        The function to compute the log posterior. It has call</span>
+<span class="sd">        The function to compute the log target. It has call</span>
 <span class="sd">        signature `logtarget(x, *args)`.</span>
 <span class="sd">    x0 : ndarray, shape (n_variables,)</span>
 <span class="sd">        The starting location of a walker in parameter space.</span>
@@ -234,7 +234,7 @@
 <span class="sd">    -------</span>
 <span class="sd">    output : DataFrame</span>
 <span class="sd">        The first `n_variables` columns contain the samples.</span>
-<span class="sd">        Additionally, column &#39;lnprob&#39; has the log posterior value</span>
+<span class="sd">        Additionally, column &#39;lnprob&#39; has the log target value</span>
 <span class="sd">        at each sample.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -262,7 +262,7 @@
 <span class="nd">@numba</span><span class="o">.</span><span class="n">njit</span>
 <span class="k">def</span> <span class="nf">log_test_distribution</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">inv_cov</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Unnormalized log posterior of a multivariate Gaussian.</span>
+<span class="sd">    Unnormalized log target of a multivariate Gaussian.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">((</span><span class="n">x</span><span class="o">-</span><span class="n">mu</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">inv_cov</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">mu</span><span class="p">)))</span> <span class="o">/</span> <span class="mi">2</span>
 </pre></div>
@@ -320,7 +320,7 @@
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x16f732450> 
+   <jinja2.runtime.BlockReference object at 0x170cbbf50> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 
