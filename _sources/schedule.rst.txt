@@ -43,8 +43,8 @@ Lesson exercise due dates
 - :ref:`Lesson exercise 1<E1. To be completed after lesson 5>`: due noon, January 9
 - :ref:`Lesson exercise 2<E2. To be completed after lesson 6>`: due noon, January 16
 - :ref:`Lesson exercise 3<E3. To be completed after lesson 11>`: due noon, January 23
-- :ref:`Lesson exercise 4<E4. To be completed after lesson 14>`: due noon, January 30
-- :ref:`Lesson exercise 5<E5. To be completed after lesson 17>`: due noon, February 6
+- :ref:`Lesson exercise 4<E4. To be completed after lesson 13>`: due noon, January 30
+- :ref:`Lesson exercise 5<E5. To be completed after lesson 16>`: due noon, February 6
 - :ref:`Lesson exercise 6<E6. To be completed after lesson 19>`: due noon, February 13
 - :ref:`Lesson exercise 7<E7. To be completed after lesson 21>`: due noon, February 20
 - :ref:`Lesson exercise 8<E8. To be completed after lesson 23>`: due noon, February 27
@@ -79,17 +79,17 @@ The lessons for each Wednesday must be read ahead of time and associated lesson 
 	+ W 01/24: :ref:`Lesson 08<8. Introduction to MCMC with Stan>`: Introduction to MCMC with Stan
 	+ W 01/24: :ref:`Lesson 09<9. Mixture models and label switching with MCMC>`: Mixture models and label switching
 	+ W 01/24: :ref:`Lesson 10<10. Variate-covariate models with MCMC>`: Regression with Stan
-	+ Th 01/25: Recitation 03: TBA
+	+ Th 01/25: No recitation; only homework help
 - **Week 5**
 	+ M 01/29: :ref:`Lesson 14<14. Collector's box of distributions>`: Collector's box of distributions (lecture)
 	+ W 01/31: :ref:`Lesson 12<12. Model building with prior predictive checks>`: Model building with prior predictive checks
 	+ W 01/31: :ref:`Lesson 13<13. Posterior predictive checks>`: Posterior predictive checks
-	+ Th 02/01: Recitation 04: TBA
+	+ Th 02/01: Recitation 04: Introduction to Hamiltonian Monte Carlo
 - **Week 6**
 	+ M 02/05: :ref:`Lesson 17<17. Model comparison>`: Model comparison (lecture)
 	+ W 02/07: :ref:`Lesson 15<15. MCMC diagnostics>`: MCMC diagnostics
 	+ W 02/07: :ref:`Lesson 16<16. A diagnostics case study: Artificial funnel of hell>`: The Funnel of Hell and uncentering
-	+ Th 02/08: Recitation 05: TBA
+	+ Th 02/08: Recitation 05: Using the HPC
 - **Week 7**
 	+ M 02/12: :ref:`Lesson 19<19. Hierarchical models>`: Hierarchical models (lecture)
 	+ W 02/14: :ref:`Lesson 18<18. Model comparison in practice>`: Model comparison in practice
