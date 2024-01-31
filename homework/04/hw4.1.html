@@ -244,13 +244,14 @@
 </div>
 <p><strong>b)</strong> To test your code, we will get samples out of a known distribution. We will use a bivariate Normal with a mean of <span class="math notranslate nohighlight">\(\boldsymbol{\mu} = (10, 20)\)</span> and covariance matrix of</p>
 <p><span class="math">\begin{align}
-\boldsymbol{\sigma} = \begin{pmatrix}
+\mathsf{\Sigma} = \begin{pmatrix}
 4 & -2 \\
 -2 & 6
 \end{pmatrix}
 \end{align}</span></p>
 <p>I have written the log-PDF function to be unnormalized and JITted with <a class="reference external" href="https://numba.pydata.org">numba</a> for optimal speed.</p>
-<p><em>Do not be confused</em>: In this test function we are sampling <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> out of <span class="math notranslate nohighlight">\(P(\mathbf{x}\mid \boldsymbol{\mu},\boldsymbol{\sigma})\)</span>. This is not sampling a posterior; it is just a test for your code. Furthermore, though both Normal, this test function is not the proposal distribution. You will pass <code class="docutils literal notranslate"><span class="pre">log_test_distribution</span></code> as the <code class="docutils literal notranslate"><span class="pre">logtarget</span></code> argument in the above functions.</p>
+<p><em>Do not be confused</em>: In this test function we are sampling <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> out of <span class="math notranslate nohighlight">\(P(\mathbf{x}\mid \boldsymbol{\mu},\mathsf{\Sigma})\)</span>. This is not sampling a posterior; it is just a test for your code. (Remember, MCMC samplers can sample out of arbitrary distributions, not just posteriors. In general, the distribution we sample out of is called a target distribution.) Furthermore, though both Normal, this test function is not the proposal distribution. You will pass
+<code class="docutils literal notranslate"><span class="pre">log_test_distribution</span></code> as the <code class="docutils literal notranslate"><span class="pre">logtarget</span></code> argument in the above functions.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
@@ -320,7 +321,7 @@
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x170cbbf50> 
+   <jinja2.runtime.BlockReference object at 0x118388410> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 
