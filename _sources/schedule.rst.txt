@@ -45,7 +45,7 @@ Lesson exercise due dates
 - :ref:`Lesson exercise 3<E3. To be completed after lesson 11>`: due noon, January 23
 - :ref:`Lesson exercise 4<E4. To be completed after lesson 13>`: due noon, January 30
 - :ref:`Lesson exercise 5<E5. To be completed after lesson 16>`: due noon, February 6
-- :ref:`Lesson exercise 6<E6. To be completed after lesson 19>`: due noon, February 13
+- :ref:`Lesson exercise 6<E6. To be completed after lesson 18>`: due noon, February 13
 - :ref:`Lesson exercise 7<E7. To be completed after lesson 21>`: due noon, February 20
 - :ref:`Lesson exercise 8<E8. To be completed after lesson 23>`: due noon, February 27
 - :ref:`Lesson exercise 9<E9. To be completed after lesson 25>`: due noon, March 5
@@ -68,7 +68,7 @@ The lessons for each Wednesday must be read ahead of time and associated lesson 
 	+ W 01/10: :ref:`Lesson 03<3. Plotting posteriors>`: Plotting posteriors
 	+ W 01/10: :ref:`Lesson 04<4. Marginalization by numerical quadrature>`: Marginalization by integration
 	+ W 01/10: :ref:`Lesson 05<5. Conjugacy>`: Conjugacy
-	+ Th 01/11: Recitation 01: Probability review
+	+ Th 01/11: :ref:`Recitation 01<R1: Review of probability>`: Probability review
 - **Week 3**
 	+ M 01/15: No class; Martin Luther King Day
 	+ W 01/17: :ref:`Lesson 07<7. Introduction to Markov chain Monte Carlo>`: Introduction to Markov chain Monte Carlo (lecture)

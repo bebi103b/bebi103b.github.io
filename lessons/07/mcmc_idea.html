@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Random number generation &mdash; BE/Bi 103 b  documentation</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+
+  
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -82,8 +84,15 @@
 <li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_05.html">E5. To be completed after lesson 16</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../17/model_comparison.html">17. Model comparison</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../18/index.html">18. Model comparison in practice</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_06.html">E6. To be completed after lesson 19</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_06.html">E6. To be completed after lesson 18</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../19/index.html">19. Hierarchical models</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Recitations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../recitations/01/probability_review.html">R1: Review of probability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../recitations/02/choosing_priors.html">R2: Choosing priors and review of optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../recitations/03/just_hw_help.html">R3: Just homework help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../recitations/04/index.html">R4. Introduction to Hamiltonian Monte Carlo</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Homework</span></p>
 <ul>
@@ -161,7 +170,7 @@
 F^{-1}(p) = -\beta^{-1}\,\ln(1-p),
 \end{align}\]</div>
 <p>where <span class="math notranslate nohighlight">\(p\)</span> is the value of the CDF, ranging from zero to one. We first draw <span class="math notranslate nohighlight">\(p\)</span> out of a Uniform distribution on [0, 1), and the compute <span class="math notranslate nohighlight">\(F^{-1}(p)\)</span> to get a draw from an exponential distribution. A graphical illustration of using a quantile function to draw 50 random numbers out of Gamma(5, 2) is shown below.</p>
-<div style="height:200px;"><script src="bokeh-content-7838743849e640ac8ae6901e3e12b908-lessons-07-mcmc_idea.js" id="a2951336-582f-4358-86bf-0e999ddd4b59"></script></div><p>Each draw from a Uniform distribution, marked by an × on the vertical axis, is converted to a draw from a Gamma distribution, marked by ○ on the horizontal axis, by computing the inverse CDF.</p>
+<div style="height:200px;"><script src="bokeh-content-b6bc61694c59402f804e3fb63940622c-lessons-07-mcmc_idea.js" id="ecbfe75d-166b-4a9a-a1a6-96bdc61eef48"></script></div><p>Each draw from a Uniform distribution, marked by an × on the vertical axis, is converted to a draw from a Gamma distribution, marked by ○ on the horizontal axis, by computing the inverse CDF.</p>
 </div>
 <div class="section" id="the-basic-idea-behind-mcmc">
 <h1>The basic idea behind MCMC<a class="headerlink" href="#the-basic-idea-behind-mcmc" title="Permalink to this heading"></a></h1>
@@ -241,11 +250,11 @@ of “eventually” in the preceding sentence.</p>
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Jan 31, 2024.
+      <span class="lastupdated">Last updated on Feb 01, 2024.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x170ac1e10> 
+   <jinja2.runtime.BlockReference object at 0x155d3bf90> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

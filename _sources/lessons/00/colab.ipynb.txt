@@ -84,7 +84,7 @@
     "    from cmdstanpy.install_cmdstan import latest_version\n",
     "    cmdstan_version = latest_version()\n",
     "    cmdstan_url = f\"https://github.com/stan-dev/cmdstan/releases/download/v{cmdstan_version}/\"\n",
-    "    fname = f\"collab-cmdstan-{cmdstan_version}.tgz\"\n",
+    "    fname = f\"colab-cmdstan-{cmdstan_version}.tgz\"\n",
     "    urllib.request.urlretrieve(cmdstan_url + fname, fname)\n",
     "    shutil.unpack_archive(fname)\n",
     "    os.environ[\"CMDSTAN\"] = f\"./cmdstan-{cmdstan_version}\"\n",

@@ -1,0 +1,9 @@
+R2: Choosing priors and review of optimization
+----------------------------------------------
+
+Recitation 2 featured a review of choosing priors and optimization.
+
+.. toctree::
+   :maxdepth: 1
+
+   choosing_priors.ipynb
