@@ -80,6 +80,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/18/index.html">18. Model comparison in practice</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_06.html">E6. To be completed after lesson 18</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/19/index.html">19. Hierarchical models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/20/hierarchical_implementation.html">20. Implementation of hierarchical models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_07.html">E7. To be completed after lesson 21</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/21/sbc.html">21. Principled analysis pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/22/sbc_in_practice.html">22: Simulation based calibration and related checks in practice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_08.html">E8. To be completed after lesson 23</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Recitations</span></p>
 <ul class="current">
@@ -1404,7 +1409,7 @@ H(q,p) = T(q,p) + U(q).
 \end{align}</span></p>
 <p>The only thing we are left with is to choose a kinetic energy. How we choose a kinetic energy will be discussed in the next section. Assume for now that we have chosen a kinetic energy and know its derivative. Then we can compute the trajectories for both momentum and location (our parameters)! As we said before, we want to sample out of the typical set, which means that we want to find a trajectory which follows the typical set. By sampling out of the typical set of the joint distribution we
 automatically sample out of the typical set of the posterior distribution.</p>
-<img alt="Joint typical set" src="../../_images/joint_typical.png" />
+<p><img alt="Joint typical set" src="../../_images/joint_typical.png" /></p>
 <p>(Image taken from <a class="reference external" href="https://arxiv.org/abs/1701.02434">Betancourt, Michael. “A conceptual introduction to Hamiltonian Monte Carlo.” arXiv preprint arXiv:1701.02434 (2017).</a>)</p>
 </div>
 <div class="section" id="Transition-using-HMC">
@@ -1951,11 +1956,11 @@ jupyterlab: 4.0.10
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 01, 2024.
+      <span class="lastupdated">Last updated on Feb 04, 2024.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x16f86c8d0> 
+   <jinja2.runtime.BlockReference object at 0x10d4ffd50> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

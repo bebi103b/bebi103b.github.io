@@ -79,6 +79,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/18/index.html">18. Model comparison in practice</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_06.html">E6. To be completed after lesson 18</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/19/index.html">19. Hierarchical models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/20/hierarchical_implementation.html">20. Implementation of hierarchical models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_07.html">E7. To be completed after lesson 21</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/21/sbc.html">21. Principled analysis pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/22/sbc_in_practice.html">22: Simulation based calibration and related checks in practice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_08.html">E8. To be completed after lesson 23</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Recitations</span></p>
 <ul>
@@ -166,7 +171,7 @@ behavior, such as reversals.</p>
 <p>There are six non-motor neurons acting in a circuit that responds to environmental cues and triggers a reversal, a shown in the figure below (based on <a class="reference external" href="https://doi.org/10.1371/journal.pone.0018766">Schultheis et. al. 2011</a>). These include four sensory neurons (ALM, AVM, ASH, and PLM) and two interneurons (AVD and AVA). Each sensory neuron is sensitive to a different type of stimulus. For example, the sensory neuron we are studying (ASH) is sensitive to chemosensory stimuli such as toxins,
 while another neuron (PLM) is sensitive to mechanical stimuli (touch) in the posterior part of the worm’s body. The sensory neurons send signals that are integrated by the two command interneurons (AVA and AVD). Each sensory neuron can provide an impulse to the command interneurons at any time. In order for the command interneuron to fire and activate motor neurons, the sum of the stimuli at any point in time must exceed a certain threshold. Once the stimuli from one or more sensory neurons has
 induced an action potential in a command interneuron, that signal is passed to motor neurons which will modulate worm behavior.</p>
-<img alt="Reversal neural network" src="../../_images/reversal_neural_network.png" />
+<p><img alt="Reversal neural network" src="../../_images/reversal_neural_network.png" /></p>
 <p>In the experiment, we used optogenetics to dissect the function of individual neurons in this circuit. We worked with two optogenetic worm strains. The ASH strain has Channelrhodopsin (ChR2, represented by a red barrel in the figure above) expressed only in the ASH sensory neuron. When we shine blue light on this strain, we should activate the ChR2, which will allow sodium and calcium cations to flow into the neuron, simulating an action potential. We want to quantify how robustly this
 stimulation will cause the worm to exhibit aversion behavior and reverse.</p>
 <p>We also studied an AVA strain that has channelrhodopsin expressed only in the AVA command interneuron. Our goal is to quantify the effects of stimulating this neuron in terms of reversals compared to the ASH neuron and to wild type.</p>
@@ -252,11 +257,11 @@ stimulation will cause the worm to exhibit aversion behavior and reverse.</p>
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 01, 2024.
+      <span class="lastupdated">Last updated on Feb 04, 2024.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x155d11fd0> 
+   <jinja2.runtime.BlockReference object at 0x124d69850> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

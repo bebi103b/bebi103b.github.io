@@ -80,6 +80,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/18/index.html">18. Model comparison in practice</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_06.html">E6. To be completed after lesson 18</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/19/index.html">19. Hierarchical models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/20/hierarchical_implementation.html">20. Implementation of hierarchical models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_07.html">E7. To be completed after lesson 21</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/21/sbc.html">21. Principled analysis pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/22/sbc_in_practice.html">22: Simulation based calibration and related checks in practice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_08.html">E8. To be completed after lesson 23</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Recitations</span></p>
 <ul>
@@ -161,8 +166,8 @@
   <div class="section" id="Homework-2.2:-Exponential-conjugate-prior-(55-pts)">
 <h1>Homework 2.2: Exponential conjugate prior (55 pts)<a class="headerlink" href="#Homework-2.2:-Exponential-conjugate-prior-(55-pts)" title="Permalink to this heading"></a></h1>
 <p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/sviewer/viewer.fcgi?tool=portal&amp;sendto=on&amp;log$=seqview&amp;db=nuccore&amp;dopt=fasta&amp;val=CP042865.1">Data set download</a></p>
-<p><em>This problem was motivated by discussion in section 2.10 of</em><a class="reference external" href="http://web.stanford.edu/class/bios221/book/">Holmes and Huber’s book</a><em>.</em></p>
-<hr><p><strong>a)</strong> Show that the conjugate distribution for the Exponential distribution is the Gamma distribution. How are the parameters of the Gamma updated from the prior to the posterior? (<em>You are welcome to look at</em><a class="reference external" href="https://en.wikipedia.org/wiki/Conjugate_prior">Wikipedia’s table of conjugate priors</a><em>to check your answer, but you should not look up the actual proof that the Gamma distribution is conjugate to the Exponential.</em>)</p>
+<p><em>This problem was motivated by discussion in section 2.10 of</em> <a class="reference external" href="http://web.stanford.edu/class/bios221/book/">Holmes and Huber’s book</a><em>.</em></p>
+<hr><p><strong>a)</strong> Show that the conjugate distribution for the Exponential distribution is the Gamma distribution. How are the parameters of the Gamma updated from the prior to the posterior? (<em>You are welcome to look at</em> <a class="reference external" href="https://en.wikipedia.org/wiki/Conjugate_prior">Wikipedia’s table of conjugate priors</a> <em>to check your answer, but you should not look up the actual proof that the Gamma distribution is conjugate to the Exponential.</em>)</p>
 <p><strong>b)</strong> Download the sequence of the chromosomal DNA of <em>E coli</em> strain ATCC BAA-196 <a class="reference external" href="http://www.ncbi.nlm.nih.gov/sviewer/viewer.fcgi?tool=portal&amp;sendto=on&amp;log$=seqview&amp;db=nuccore&amp;dopt=fasta&amp;val=CP042865.1">here</a> in FASTA format. This strain is resistant to multiple drugs and is used in studies of antibiotic resistance. The sequence was published in <a class="reference external" href="https://doi.org/10.1128/MRA.01118-19">this paper</a>. Read the sequence in as a single string, using the function below, if you like.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
@@ -225,11 +230,11 @@
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 01, 2024.
+      <span class="lastupdated">Last updated on Feb 04, 2024.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x16f860750> 
+   <jinja2.runtime.BlockReference object at 0x124fc4c50> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

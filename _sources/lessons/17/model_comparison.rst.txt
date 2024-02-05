@@ -101,7 +101,7 @@ usually a plot of the samples out of :math:`f_M(\tilde{y}\mid y)`
 overlaid with the actual data set :math:`y`. If there is good overlap,
 the posterior predictive check suggests that data generated from your model is commensurate with those generated from the true generative process.
 
-Note that good overlap of the samples out of the posterior predictive distribution with the measured data set does *not* mean that your proposed model is necessarily a good one.  Quite often, an model can be overly flexible such that the range of posterior predictive data sets is broad and include the measured data simple for that reason.
+Note that good overlap of the samples out of the posterior predictive distribution with the measured data set does *not* mean that your proposed model is necessarily a good one.  Quite often, an model can be overly flexible such that the range of posterior predictive data sets is broad and include the measured data simply for that reason.
 
 
 Closeness metrics

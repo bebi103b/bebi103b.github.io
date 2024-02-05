@@ -79,6 +79,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/18/index.html">18. Model comparison in practice</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_06.html">E6. To be completed after lesson 18</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/19/index.html">19. Hierarchical models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/20/hierarchical_implementation.html">20. Implementation of hierarchical models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_07.html">E7. To be completed after lesson 21</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/21/sbc.html">21. Principled analysis pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lessons/22/sbc_in_practice.html">22: Simulation based calibration and related checks in practice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_08.html">E8. To be completed after lesson 23</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Recitations</span></p>
 <ul class="current">
@@ -176,7 +181,7 @@
              
   <div class="section" id="Overview-of-Hamiltonian-Monte-Carlo">
 <h1>Overview of Hamiltonian Monte Carlo<a class="headerlink" href="#Overview-of-Hamiltonian-Monte-Carlo" title="Permalink to this heading"></a></h1>
-<p><em>This portion of the recitation we prepared by Rosita Fu. It is an outline of</em><a class="reference external" href="https://arxiv.org/pdf/1701.02434.pdf">Betancourt’s paper</a><em>. All figures and notation are from the paper. All lingering inaccuracies are my own.</em></p>
+<p><em>This portion of the recitation we prepared by Rosita Fu. It is an outline of</em> <a class="reference external" href="https://arxiv.org/pdf/1701.02434.pdf">Betancourt’s paper</a><em>. All figures and notation are from the paper. All lingering inaccuracies are my own.</em></p>
 <p>This notebook will be presented in parallel with the next notebook by former TA Tom Röeschinger, which demonstrates the notion of a typical set alongside more detailed math/visualization and implementation of Hamiltonian Monte Carlo.</p>
 <div class="section" id="Notation">
 <h2><em>Notation</em><a class="headerlink" href="#Notation" title="Permalink to this heading"></a></h2>
@@ -199,7 +204,7 @@
 <li><p>There is much more volume outside any given neighborhood than inside of it (consider simple case of partitioning 1D line, 2D box, 3D cube). We are thus interested in the neighborhoods in Q that balance both the denisty and volume in any given integration/expectation.</p></li>
 <li><p>Volume and density end up pulling the mass to two different extremes—the result is that the predominant concentration of mass sits away from either extreme (high density: at the mode, concentrated in small volume blocks, high volume: mostly out in the tails, each “block” contributes small density, but there is an overwhelming number of blocks!)</p></li>
 <li><p>This all motivates the definition of a <strong>typical set</strong>, the region of parameter space <span class="math notranslate nohighlight">\(Q\)</span> (volume) where most of our probability mass, the integrated quantity <span class="math notranslate nohighlight">\(\pi(q) \mathrm{d}q\)</span>, sits.</p>
-<center><p><img alt="31608fa1981d4fd7838b6cfa9614fe9a" class="no-scaled-link" src="../../_images/typical_set.png" style="width: 325px;" /></p>
+<center><p><img alt="c9336714ca6e4e068043d0f78b6eb599" class="no-scaled-link" src="../../_images/typical_set.png" style="width: 325px;" /></p>
 </center></li>
 </ul>
 </div>
@@ -207,7 +212,7 @@
 <h2><em>But the question then remains: how do we design an algorithm to sample the typical set?</em><a class="headerlink" href="#But-the-question-then-remains:-how-do-we-design-an-algorithm-to-sample-the-typical-set?" title="Permalink to this heading"></a></h2>
 <ul>
 <li><p>A helpful framework underpinning what we will try is a <strong>Markov chain</strong>. Loosely speaking, it’s a way to define the probability of a new element <span class="math notranslate nohighlight">\(x_{i+1}\)</span> that relies solely on the previous element <span class="math notranslate nohighlight">\(x_{i}\)</span> (hence a chain). Note that a Markov chain doesn’t specify <em>how</em> we transition to the next element, just that we do so solely on the basis of the previous one. One method is a transition <em>matrix</em> (like Metropolis-Hastings), but you could imagine many ways to creatively structure
-a new transition (which we will see w/ the Hamiltonian). <em>The particular features of Markov chains we will take advantage of:</em><strong>recurrence</strong><em>and</em><strong>ergodicity</strong><em>.</em> small note: “Monte Carlo” basically alludes to anything stochastic (as opposed to deterministic) whereas Markov Chain defines this type of sampling/walking motion… note that these are the “chains” we refer to!</p></li>
+a new transition (which we will see w/ the Hamiltonian). <em>The particular features of Markov chains we will take advantage of:</em> <strong>recurrence</strong> <em>and</em> <strong>ergodicity</strong><em>.</em> small note: “Monte Carlo” basically alludes to anything stochastic (as opposed to deterministic) whereas Markov Chain defines this type of sampling/walking motion… note that these are the “chains” we refer to!</p></li>
 <li><p>A <em>recurrent</em> and <em>ergodic</em> markov chain tells us that given infinite time, samples from a random walk dictated by a given transition matrix will eventually be equivalent to a sample from the target distribution itself. This directly gives us samples from the typical set. This is precisely what we are trying to do!!… except on finite time. This is a type of central limit theorem, where</p>
 <div class="math notranslate nohighlight">
 \[f_N^{\mathrm{MCMC}} \sim \mathcal{N} (\mathbb{E}_{\pi}[f], \mathrm{SE}_\mathrm{MCMC})\]</div>
@@ -242,8 +247,8 @@ can try pushing a larger acceptance probability, but the small jumps lead to an 
 </li>
 </ul>
 <p>The task of finding a typical set then translates to the objective of placing a satellite in a <em>stable orbit</em> around the planet. Intuitively, a stable orbit conserves energy, otherwise we either crash into the planet (being pulled towards the mode of our target distribution/heavily biased by the density), or eject out into space (running away from the mode <em>and</em> the typical set, biased by the volume).</p>
-<center><p><img alt="8e51f2e0041b42df8a38b2a5f04a80c6" class="no-scaled-link" src="../../_images/vectorfield1.png" style="width: 250px;" /></p>
-</center><center><p><img alt="668457a5e5c048feb2bfa0b70cfb93df" class="no-scaled-link" src="../../_images/vectorfield2.png" style="width: 250px;" /></p>
+<center><p><img alt="4040b323696340c293eaf545e469e651" class="no-scaled-link" src="../../_images/vectorfield1.png" style="width: 250px;" /></p>
+</center><center><p><img alt="ed79b831632b4bfb938f77acaa6f52d6" class="no-scaled-link" src="../../_images/vectorfield2.png" style="width: 250px;" /></p>
 </center><p>To do so, we intuit that we need to introduce some auxiliary <em>momentum</em> parameters (denote with <span class="math notranslate nohighlight">\(p\)</span>). This doubles our parameter space from D to 2xD-dimensional space; together with our target parameter space, we call this the <strong>phase space</strong>.</p>
 <div class="math notranslate nohighlight">
 \[q_n \rightarrow (q_n, p_n)\]</div>
@@ -276,7 +281,7 @@ E &= H(q, p) \\[0.5em]
 <div class="math notranslate nohighlight">
 \[\pi(p, q) = \pi(\Omega_E | E) \pi(E)\]</div>
 <p>where <span class="math notranslate nohighlight">\(\pi(E)\)</span> is the marginal energy distribution, and <span class="math notranslate nohighlight">\(\pi(\Omega_E | E)\)</span> the microcanonical distribution. You can easily visualize <span class="math notranslate nohighlight">\(\pi(E)\)</span> as a distribution over the rings you see below.</p>
-<center><p><img alt="f09b5c1a3b514dbe8e283decfb728eed" class="no-scaled-link" src="../../_images/level_sets.png" style="width: 315px;" /></p>
+<center><p><img alt="73b214c1f5ad4f218aa1d9eff6e99825" class="no-scaled-link" src="../../_images/level_sets.png" style="width: 315px;" /></p>
 </center><p>Now that we have all this math set-up, let’s see what we can actually do with it!</p>
 </div>
 <div class="section" id="The-Ideal-Hamiltonian-Markov-Transition">
@@ -301,8 +306,8 @@ E &= H(q, p) \\[0.5em]
 <div class="math notranslate nohighlight">
 \[\boxed{(q, p) \rightarrow q }\]</div>
 <p>Altogether, this is what four transitions looks like:</p>
-<center><p><img alt="5f7d412f130e46fb8d93448cc17e2509" class="no-scaled-link" src="../../_images/lifting.png" style="width: 700px;" /></p>
-</center><p><img alt="1c3da6b6a841499cac97f74af10aec82" class="no-scaled-link" src="../../_images/darkorange_pause_symbol.png" style="width: 40px;" /></p>
+<center><p><img alt="f7119747c18747f7878e139ced5a3a13" class="no-scaled-link" src="../../_images/lifting.png" style="width: 700px;" /></p>
+</center><p><img alt="12b20c7c67a44a908dfe4d36a5dc5dd8" class="no-scaled-link" src="../../_images/darkorange_pause_symbol.png" style="width: 40px;" /></p>
 <p>Let’s pause for a moment. What have we actually done here?</p>
 <p>We started off with some intuition about momentum, and introduced the concept of a phase space. This doubled our dimension—so every <span class="math notranslate nohighlight">\(q_i\)</span> dimension now has some associated momentum <span class="math notranslate nohighlight">\(p_i\)</span>. So where/why did the Hamiltonian come in?</p>
 <p>We essentially needed to somehow expand our probability space over our momentum dimensions, and the very definition that unlocked this for us was the following:</p>
@@ -312,7 +317,7 @@ E &= H(q, p) \\[0.5em]
 <ul class="simple">
 <li><p><em>Stochastic step</em>: lifting <span class="math notranslate nohighlight">\(q\)</span> into <span class="math notranslate nohighlight">\((q, p)\)</span> by defining some distribution <span class="math notranslate nohighlight">\(K = -\log(p|q)\)</span></p></li>
 <li><p><em>Deterministic step</em>: integrating Hamilton’s equations of motion for <span class="math notranslate nohighlight">\((q, p)\)</span> over time to get some trajectory <span class="math notranslate nohighlight">\(\phi_t(q, p)\)</span>; we then take the last position of this integration, and retrieve <span class="math notranslate nohighlight">\(q\)</span>… this becomes the next iteration of our Markov chain!</p></li>
-<li><p>Repeatedly doing ^ those two steps gives us a <em>Hamiltonian Monte Carlo Markov</em><strong>Chain</strong>. Does it make sense what it means to initialize 4 chains in Stan, and how each one is transitioning?</p></li>
+<li><p>Repeatedly doing ^ those two steps gives us a <em>Hamiltonian Monte Carlo Markov</em> <strong>Chain</strong>. Does it make sense what it means to initialize 4 chains in Stan, and how each one is transitioning?</p></li>
 <li><p>The deterministic step explores individual energy level sets, while the stochastic step explores <em>between</em> level sets. Both steps require some tuning on the user-end, or at least looking at some diagnostics.</p></li>
 </ul>
 <p>Note: What does this have to do with the typical set? Out in the tails of the target distribution, momentum sampling and projection allows the chain to rapidly fall in toward the typical set. Once inside the typical set, trajectories <span class="math notranslate nohighlight">\(\phi_t(q, p)\)</span> move swiftly through phase space and remain constrained to the typical set.</p>
@@ -356,7 +361,7 @@ E &= H(q, p) \\[0.5em]
 <div class="math notranslate nohighlight">
 \[\pi(p | q) = \mathcal{N}(p | 0, \Sigma(q))\]</div>
 <p><em>Motivation</em>: We want to choose a kinetic energy such that the microcanonical distribution <span class="math notranslate nohighlight">\(\pi(E|q)\)</span> looks like the marginal energy distribution<span class="math notranslate nohighlight">\(\pi(E)\)</span> (<em>left</em>). Otherwise, our chain may not be able to completely explore the tails of the target distribution (<em>right</em>).</p>
-<center><p><img alt="aa65d5d9978148799767bb143e18cd5d" class="no-scaled-link" src="../../_images/energy_density.png" style="width: 600px;" /></p>
+<center><p><img alt="823c15cfebd640bf84881ca853539892" class="no-scaled-link" src="../../_images/energy_density.png" style="width: 600px;" /></p>
 </center><p>E-BFMI: Stan is already doing the work of choosing <span class="math notranslate nohighlight">\(K\)</span> and tuning it; on the user end, we see the E-BFMI diagnostic that tells us how Stan’s algorithms are doing on this front.</p>
 <p>The empirical Bayesian fraction of missing information identifies when the momentum resampling is inefficiently exploring the energy level sets, and is essentially the ratio:</p>
 <div class="math notranslate nohighlight">
@@ -371,9 +376,9 @@ E &= H(q, p) \\[0.5em]
 <ul class="simple">
 <li><p><strong>Symplectic integrators</strong> are a family of numerical solvers that are robust to drift; they have the special property of <em>preserving phase space volume</em>! Their errors lead to trajectories that oscillate around the exact level set, even as we integrate for longer and longer times.</p></li>
 </ul>
-<center><p><img alt="c4fb88d2fba94deda4634aa1a258df70" class="no-scaled-link" src="../../_images/integration_sad.png" style="width: 300px;" /><span class="math notranslate nohighlight">\(\hspace{3em}\)</span><img alt="b57add39228d4cb18d3a6e9d9019bab3" class="no-scaled-link" src="../../_images/integration_happy.png" style="width: 300px;" /></p>
+<center><p><img alt="ba55bb798f4447d5aa5f0e09b1865315" class="no-scaled-link" src="../../_images/integration_sad.png" style="width: 300px;" /><span class="math notranslate nohighlight">\(\hspace{3em}\)</span><img alt="bee39e5d156f490d8fbaa961f90008f6" class="no-scaled-link" src="../../_images/integration_happy.png" style="width: 300px;" /></p>
 </center><p>Note: this is where the leapfrog integrator is used, given some time discretization step size <span class="math notranslate nohighlight">\(\epsilon\)</span>.</p>
-<center><p><img alt="7d77e889a9774d6abba736037435309f" class="no-scaled-link" src="../../_images/leapfrog.png" style="width: 260px;" /></p>
+<center><p><img alt="c939299791c940b99a34929707906748" class="no-scaled-link" src="../../_images/leapfrog.png" style="width: 260px;" /></p>
 </center><p>However; even symplectic integrator suffers from regions of <strong>high curvature</strong>; this induces a <strong>divergence</strong>. - From a modeling perspective, one approach to eliminate divergences is <a class="reference external" href="https://bebi103b.github.io/lessons/17/funnel_of_hell.html?highlight=noncenter#Noncentering">noncentering</a>. This greatly smoothens out regions of high curvature. - From a tuning perspective, we can try <em>decreasing the step size :math:`epsilon`</em> by <em>increasing ``adapt_delta``</em>. If divergences persist regardless
 of how small the step size, this calls for stronger priors or an alternative representation of the model. - Use the divergences diagnostically; their existence <em>should</em> prompt suspicion, as the estimators (as is) <em>will be biased</em>.</p>
 </div>
@@ -383,7 +388,7 @@ of how small the step size, this calls for stronger priors or an alternative rep
 <li><p>Now that we have the method, we need to know just how long to integrate for each transition.</p></li>
 <li><p>Integration time aims to explore “just enough” of each level set. But how do we quantify this idea on computational time scales?</p></li>
 </ul>
-<center><p><img alt="1e87adbc373a4630862b8acb00d6d92e" class="no-scaled-link" src="../../_images/sojourn.png" style="width: 375px;" /></p>
+<center><p><img alt="20f007ab6cfa46a28be4424dd9b3950e" class="no-scaled-link" src="../../_images/sojourn.png" style="width: 375px;" /></p>
 </center><ul class="simple">
 <li><p>Here’s a simple thought experiment: Think of a posterior <span class="math notranslate nohighlight">\(\pi_\beta(q)\)</span> of below form, where <span class="math notranslate nohighlight">\(\beta\)</span> describes how heavy our posterior tail is. With a Euclidean-Gaussian KE (denoted <span class="math notranslate nohighlight">\(\mathcal{N}\)</span>), the optimal integration time <span class="math notranslate nohighlight">\(T_{\mathrm{optimal}}\)</span> scales with the energy of the level set <span class="math notranslate nohighlight">\(H(q,p)\)</span> containing the trajectory:</p></li>
 </ul>
@@ -415,11 +420,11 @@ complex to solve. In implementation and usage, the pathologies we might face mot
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 01, 2024.
+      <span class="lastupdated">Last updated on Feb 04, 2024.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x147c365d0> 
+   <jinja2.runtime.BlockReference object at 0x10d3dfb50> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 
