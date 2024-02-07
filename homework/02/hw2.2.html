@@ -1,16 +1,14 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Homework 2.2: Exponential conjugate prior (55 pts) &mdash; BE/Bi 103 b  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
-
-  
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/nbsphinx-code-cells.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -104,6 +102,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../03/index.html">3. Maximum a posteriori parameter estimation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../04/index.html">4. Sampling with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../05/index.html">5. Inference with Stan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06/index.html">6. MCMC with ion channels</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -166,8 +165,8 @@
   <div class="section" id="Homework-2.2:-Exponential-conjugate-prior-(55-pts)">
 <h1>Homework 2.2: Exponential conjugate prior (55 pts)<a class="headerlink" href="#Homework-2.2:-Exponential-conjugate-prior-(55-pts)" title="Permalink to this heading"></a></h1>
 <p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/sviewer/viewer.fcgi?tool=portal&amp;sendto=on&amp;log$=seqview&amp;db=nuccore&amp;dopt=fasta&amp;val=CP042865.1">Data set download</a></p>
-<p><em>This problem was motivated by discussion in section 2.10 of</em> <a class="reference external" href="http://web.stanford.edu/class/bios221/book/">Holmes and Huber’s book</a><em>.</em></p>
-<hr><p><strong>a)</strong> Show that the conjugate distribution for the Exponential distribution is the Gamma distribution. How are the parameters of the Gamma updated from the prior to the posterior? (<em>You are welcome to look at</em> <a class="reference external" href="https://en.wikipedia.org/wiki/Conjugate_prior">Wikipedia’s table of conjugate priors</a> <em>to check your answer, but you should not look up the actual proof that the Gamma distribution is conjugate to the Exponential.</em>)</p>
+<p><em>This problem was motivated by discussion in section 2.10 of</em><a class="reference external" href="http://web.stanford.edu/class/bios221/book/">Holmes and Huber’s book</a><em>.</em></p>
+<hr><p><strong>a)</strong> Show that the conjugate distribution for the Exponential distribution is the Gamma distribution. How are the parameters of the Gamma updated from the prior to the posterior? (<em>You are welcome to look at</em><a class="reference external" href="https://en.wikipedia.org/wiki/Conjugate_prior">Wikipedia’s table of conjugate priors</a><em>to check your answer, but you should not look up the actual proof that the Gamma distribution is conjugate to the Exponential.</em>)</p>
 <p><strong>b)</strong> Download the sequence of the chromosomal DNA of <em>E coli</em> strain ATCC BAA-196 <a class="reference external" href="http://www.ncbi.nlm.nih.gov/sviewer/viewer.fcgi?tool=portal&amp;sendto=on&amp;log$=seqview&amp;db=nuccore&amp;dopt=fasta&amp;val=CP042865.1">here</a> in FASTA format. This strain is resistant to multiple drugs and is used in studies of antibiotic resistance. The sequence was published in <a class="reference external" href="https://doi.org/10.1128/MRA.01118-19">this paper</a>. Read the sequence in as a single string, using the function below, if you like.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
@@ -230,11 +229,11 @@
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 04, 2024.
+      <span class="lastupdated">Last updated on Feb 07, 2024.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x124fc4c50> 
+   <jinja2.runtime.BlockReference object at 0x17048bfd0> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

@@ -362,7 +362,7 @@ where the variance is computed over the posterior. Written out, this is
 .. math::
 
    \begin{aligned}
-   \text{variance}(\ln f_M(y_i\mid \theta)) &=  \int\mathrm{d}\theta\, g_M(\theta \mid y)\,(\ln f_M(y_i\mid y))^2 \nonumber \\
+   \text{variance}(\ln f_M(y_i\mid y)) &=  \int\mathrm{d}\theta\, g_M(\theta \mid y)\,(\ln f_M(y_i\mid y))^2 \nonumber \\
    &\;\;\;\;- \left(\int\mathrm{d}\theta\, g_M(\theta \mid y)\,\ln f_M(y_i\mid y)\right)^2.
    \end{aligned}
 

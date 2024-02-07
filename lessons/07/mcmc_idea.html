@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Random number generation &mdash; BE/Bi 103 b  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
-
-  
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -106,6 +104,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../homework/03/index.html">3. Maximum a posteriori parameter estimation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/04/index.html">4. Sampling with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/05/index.html">5. Inference with Stan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../homework/06/index.html">6. MCMC with ion channels</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -175,7 +174,7 @@
 F^{-1}(p) = -\beta^{-1}\,\ln(1-p),
 \end{align}\]</div>
 <p>where <span class="math notranslate nohighlight">\(p\)</span> is the value of the CDF, ranging from zero to one. We first draw <span class="math notranslate nohighlight">\(p\)</span> out of a Uniform distribution on [0, 1), and the compute <span class="math notranslate nohighlight">\(F^{-1}(p)\)</span> to get a draw from an exponential distribution. A graphical illustration of using a quantile function to draw 50 random numbers out of Gamma(5, 2) is shown below.</p>
-<div style="height:200px;"><script src="bokeh-content-6163cb53b72c4830b569625fb10ff19e-lessons-07-mcmc_idea.js" id="e0cb225b-b8f1-4ab1-8619-52ff9c437c26"></script></div><p>Each draw from a Uniform distribution, marked by an × on the vertical axis, is converted to a draw from a Gamma distribution, marked by ○ on the horizontal axis, by computing the inverse CDF.</p>
+<div style="height:200px;"><script src="bokeh-content-43b301a77c7142678c770e6202586e71-lessons-07-mcmc_idea.js" id="f5bf9ad8-5fdf-4669-b219-df4f2f6765e6"></script></div><p>Each draw from a Uniform distribution, marked by an × on the vertical axis, is converted to a draw from a Gamma distribution, marked by ○ on the horizontal axis, by computing the inverse CDF.</p>
 </div>
 <div class="section" id="the-basic-idea-behind-mcmc">
 <h1>The basic idea behind MCMC<a class="headerlink" href="#the-basic-idea-behind-mcmc" title="Permalink to this heading"></a></h1>
@@ -255,11 +254,11 @@ of “eventually” in the preceding sentence.</p>
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 04, 2024.
+      <span class="lastupdated">Last updated on Feb 07, 2024.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x124aca290> 
+   <jinja2.runtime.BlockReference object at 0x16edf78d0> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 
