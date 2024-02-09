@@ -5,4 +5,5 @@
 .. toctree::
    :maxdepth: 1
 
+   hw6.1.ipynb
    hw6.2.ipynb

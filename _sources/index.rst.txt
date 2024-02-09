@@ -80,7 +80,7 @@ People
    recitations/02/choosing_priors.rst
    recitations/03/just_hw_help.rst
    recitations/04/index
-   recitations/05/index
+   recitations/05/practice_model_building.ipynb
    recitations/06/index
    recitations/07/index
    recitations/08/project_proposals.rst

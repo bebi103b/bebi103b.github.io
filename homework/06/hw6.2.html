@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Homework 6.2: Diagnosing nonidentifiability with MCMC (60 pts) &mdash; BE/Bi 103 b  documentation</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+
+  
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -26,7 +28,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Schedule overview" href="../../schedule.html" />
-    <link rel="prev" title="6. MCMC with ion channels" href="index.html" /> 
+    <link rel="prev" title="Homework 6.1: Surviving osmotic shock (40 pts)" href="hw6.1.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -89,6 +91,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/02/choosing_priors.html">R2: Choosing priors and review of optimization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/03/just_hw_help.html">R3: Just homework help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/04/index.html">R4. Introduction to Hamiltonian Monte Carlo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../recitations/05/practice_model_building.html">R5: Bayesian model building</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Homework</span></p>
 <ul class="current">
@@ -98,6 +101,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../04/index.html">4. Sampling with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../05/index.html">5. Inference with Stan</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">6. MCMC with ion channels</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="hw6.1.html">Homework 6.1: Surviving osmotic shock (40 pts)</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Homework 6.2: Diagnosing nonidentifiability with MCMC (60 pts)</a></li>
 </ul>
 </li>
@@ -162,6 +166,7 @@
              
   <div class="section" id="Homework-6.2:-Diagnosing-nonidentifiability-with-MCMC-(60-pts)">
 <h1>Homework 6.2: Diagnosing nonidentifiability with MCMC (60 pts)<a class="headerlink" href="#Homework-6.2:-Diagnosing-nonidentifiability-with-MCMC-(60-pts)" title="Permalink to this heading"></a></h1>
+<p><a class="reference external" href="https://s3.amazonaws.com/bebi103.caltech.edu/data/lester_acetylcholine.csv">Data set download</a></p>
 <hr><p>Caltech’s <a class="reference external" href="http://henrylesterresearchgroup.caltech.edu">Henry Lester</a> has been studying nicotinic acetylcholine receptors for decades. A schematic of the receptor, which is an ion channel, and its five (four unique) subunits, adapted from the book <a class="reference external" href="http://www.rpgroup.caltech.edu/pboc2/">Physical Biology of the Cell 2</a>, is shown below.</p>
 <div style="margin: auto; width: 250px;"><img alt="nicotinic_acetylcholine_receptor_schematic.png" src="../../_images/nicotinic_acetylcholine_receptor_schematic.png" />
 </div><p>When acetylcholine ligands bind to the α units (the binding sites are shown as divots in the schematic), the channel opens and ions can flow through.</p>
@@ -191,7 +196,7 @@ F(c) = 2\Delta E_\mathrm{u} + 2 k_B T \ln\left(\frac{1+c/K_\mathrm{do}}{1+c/K_{d
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="index.html" class="btn btn-neutral float-left" title="6. MCMC with ion channels" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="hw6.1.html" class="btn btn-neutral float-left" title="Homework 6.1: Surviving osmotic shock (40 pts)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="../../schedule.html" class="btn btn-neutral float-right" title="Schedule overview" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
@@ -199,11 +204,11 @@ F(c) = 2\Delta E_\mathrm{u} + 2 k_B T \ln\left(\frac{1+c/K_\mathrm{do}}{1+c/K_{d
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 07, 2024.
+      <span class="lastupdated">Last updated on Feb 08, 2024.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x17072bed0> 
+   <jinja2.runtime.BlockReference object at 0x159c96f50> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

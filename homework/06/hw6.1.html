@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Homework 6.1: Osmotic shock (50 pts) &mdash; BE/Bi 103 b  documentation</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  <title>Homework 6.1: Surviving osmotic shock (40 pts) &mdash; BE/Bi 103 b  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+
+  
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -24,7 +26,9 @@
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" /> 
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Homework 6.2: Diagnosing nonidentifiability with MCMC (60 pts)" href="hw6.2.html" />
+    <link rel="prev" title="6. MCMC with ion channels" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -87,15 +91,20 @@
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/02/choosing_priors.html">R2: Choosing priors and review of optimization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/03/just_hw_help.html">R3: Just homework help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/04/index.html">R4. Introduction to Hamiltonian Monte Carlo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../recitations/05/practice_model_building.html">R5: Bayesian model building</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Homework</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../01/index.html">1. Intuitive generative modeling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../02/index.html">2. Analytical and graphical methods for analysis of the posterior</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../03/index.html">3. Maximum a posteriori parameter estimation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../04/index.html">4. Sampling with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../05/index.html">5. Inference with Stan</a></li>
-<li class="toctree-l1"><a class="reference internal" href="index.html">6. MCMC with ion channels</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">6. MCMC with ion channels</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Homework 6.1: Surviving osmotic shock (40 pts)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hw6.2.html">Homework 6.2: Diagnosing nonidentifiability with MCMC (60 pts)</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -137,7 +146,8 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Homework 6.1: Osmotic shock (50 pts)</li>
+          <li class="breadcrumb-item"><a href="index.html">6. MCMC with ion channels</a></li>
+      <li class="breadcrumb-item active">Homework 6.1: Surviving osmotic shock (40 pts)</li>
   <li class="wy-breadcrumbs-aside">
     
         
@@ -154,28 +164,37 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="Homework-6.1:-Osmotic-shock-(50-pts)">
-<h1>Homework 6.1: Osmotic shock (50 pts)<a class="headerlink" href="#Homework-6.1:-Osmotic-shock-(50-pts)" title="Permalink to this heading"></a></h1>
-<hr><p>In an investigation of how mechosensitive ion channels imbue a bacterial cell with the ability to withstand an osmotic shock, <a class="reference external" href=".https://%20doi.org/10.1128/JB.00460-18">Chure, et al.</a> did an experiment where they placed a collection of bacterial cells in a microfluidic chamber. The cells had fluorescently tagged mechnosensitive ion channels. Based on fluorescence, they could determine the number <span class="math notranslate nohighlight">\(N\)</span> of channels each cell had. They then exposed the cells to an osmotic shock and observed
-whether each cell exploded or survived the shock. So, for each cell they had a data pair, <span class="math notranslate nohighlight">\((N, S)\)</span>, where <span class="math notranslate nohighlight">\(S\)</span> is one if the cell survived and zero if it exploded.</p>
-<p><strong>a)</strong> Develop a generative model for this system.</p>
-<p><strong>b)</strong></p>
+  <div class="section" id="Homework-6.1:-Surviving-osmotic-shock-(40-pts)">
+<h1>Homework 6.1: Surviving osmotic shock (40 pts)<a class="headerlink" href="#Homework-6.1:-Surviving-osmotic-shock-(40-pts)" title="Permalink to this heading"></a></h1>
+<p><a class="reference external" href="https://s3.amazonaws.com/bebi103.caltech.edu/data/chure_mscl_survival.csv">Data set download</a></p>
+<hr><p>In an investigation of how mechosensitive ion channels imbue a bacterial cell with the ability to withstand an osmotic shock, <a class="reference external" href="https://%20doi.org/10.1128/JB.00460-18">Chure, et al.</a> did an experiment where they placed a collection of bacterial cells in a microfluidic chamber. They then exposed the cells to an osmotic shock and observed whether each cell exploded or survived the shock.</p>
+<p>The cells they used had fluorescently labeled mechanosensitive ion channels (MscL). The McsL copy number was varied by varying the sequence in the ribosome binding site (RBS) for the <em>mscL</em> gene, thereby inhibiting translation of <em>mscL</em>. From the fluorescent intensity that was measured simultaneously with the osmotic shock, they could compute the effective number of ion channels.</p>
+<p>So, for each cell they had a data pair, <span class="math notranslate nohighlight">\((N, S)\)</span>, where <span class="math notranslate nohighlight">\(S\)</span> is one if the cell survived and zero if it exploded.</p>
+<p>You task is to develop a generative model for this experiment and then to get parameter estimates for this model using the observed data.</p>
+<p>You can download the data set <a class="reference external" href="https://s3.amazonaws.com/bebi103.caltech.edu/data/chure_mscl_survival.csv">here</a>. Note that if you are using AWS, this data set is not in the machine image, so you will need to load it in directly, e.g., as</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>df = pd.read_csv(&#39;https://s3.amazonaws.com/bebi103.caltech.edu/data/chure_mscl_survival.csv&#39;)
+</pre></div>
+</div>
+<p>This problem is quite open-ended. You will necessarily be modeling this phenomenologically, as it is difficult to know the particulars of how copy numbers of ion channels can impart survivability. Think about how you might do prior predictive checks and posterior predictive checks. You will almost certinaly have to come up with your own way of doing this. This is a good exercise in model building and estimation therewith.</p>
 </div>
 
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="6. MCMC with ion channels" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="hw6.2.html" class="btn btn-neutral float-right" title="Homework 6.2: Diagnosing nonidentifiability with MCMC (60 pts)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 07, 2024.
+      <span class="lastupdated">Last updated on Feb 08, 2024.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x1707f2d10> 
+   <jinja2.runtime.BlockReference object at 0x15fc08910> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

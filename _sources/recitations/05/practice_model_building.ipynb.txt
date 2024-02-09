@@ -1,0 +1,59 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# R5: Bayesian model building\n",
+    "\n",
+    "*This recitation is based on work by Heidi Klumpe.*\n",
+    "\n",
+    "<hr>"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Following are a series of proposed experiments. Write full generative models (priors and likelihoods) for the data from each experiment. In writing the models, it will become clear what parameters you would like to estimate. Explain clearly why you chose the model you did. You may also wish to conduct a prior predictive check to make sure your model makes sense. Note that there is no right answer to this problem.\n",
+    "\n",
+    "The experiments might be encountered in the Elowitz lab, which is interested in the design principles of cellular signaling pathway architectures, or how the interactions between signaling pathway components (things like extracellular ligands and receptors) give rise to different signal processing capabilities.\n",
+    "\n",
+    "**Experiment 1**: You have images of many fields of cells, where fluorescently-labeled receptors at the cell surface appear as dots. (Assume these are maximum projections of confocal images, so that the image includes the entire cell membrane). Your lab has an automated image analysis tool that can count the number of dots on each cell. You data set is therefore a set of counts of receptors in a collection of cells.\n",
+    "\n",
+    "\n",
+    "**Experiment 2**: You decide to get higher throughput counts by using flow cytometry with your fluorescently-labeled cells. However, first you need to know how the fluorescence depends on the number of fluorophores, which we presume to be equal to the number of receptors. To start approximating this, you use your flow cytometer to measure the fluorescence of beads ($F$) with a known number $N$ of fluorophores attached to each. You assume the fluorescence depends linearly on the number of fluorophores, and that there is some background fluorescence; $F(N ; a, b) = a N + b$. We are interested in estimating the values of $a$ and  $b$ in this control experiment (though we recognize the background fluorescence will probably be different in our cells).\n",
+    "\n",
+    "\n",
+    "**Experiment 3**: A fully-formed signaling complex requires two receptor subunits, and sometimes these receptors come together spontaneously. You devise an experiment to study the rate at which they spontaneously come together. You put one half of a fluorescent protein on one receptor subunit and the other half on the other receptor subunit. If the subunits spontaneously come together, you will observe a fluorescent dot. You use time-lapse microscopy to image these cells, and generate a list of the times of appearance of dots on given single cells.\n",
+    "\n",
+    "\n",
+    "**Experiment 4**: You weren't able to do the experiment described in Experiment 3, but you read about it in a paper and request the data. They send you a table that reports the number of times receptor complexes spontaneously formed in ten minute intervals for each cell they analyzed.\n",
+    "\n",
+    "\n",
+    "**Experiment 5**: You are studying a signaling pathway that, when the ligand binds the receptor, forms a multimeric protein complex at the intracellular side of the membrane. You assume that the rate of each protein joining this complex is roughly the same. You want to estimate the number of proteins in this complex, and the average rate at which they join. You employ a similar approach as in Experiment 3, using protein fusions that produce a fluorescent signal only when the complex is fully-formed. You use time-lapse microscopy to time how long it takes the complex to fully form after you add the ligand."
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.11.5"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 4
+}

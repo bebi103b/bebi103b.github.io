@@ -73,7 +73,7 @@ The lessons for each Wednesday must be read ahead of time and associated lesson 
 	+ M 01/15: No class; Martin Luther King Day
 	+ W 01/17: :ref:`Lesson 07<7. Introduction to Markov chain Monte Carlo>`: Introduction to Markov chain Monte Carlo (lecture)
 	+ W 01/17: :ref:`Lesson 06<6. Parameter estimation by optimization>`: Parameter estimation by optimization
-	+ Th 01/18: Recitation 02: Choosing priors and review of optimization
+	+ Th 01/18: `Recitation 02<R2: Choosing priors and review of optimization>`: Choosing priors and review of optimization
 - **Week 4**
 	+ M 01/22: :ref:`Lesson 11<11. Display of MCMC results>`: Display of MCMC samples (lecture)
 	+ W 01/24: :ref:`Lesson 08<8. Introduction to MCMC with Stan>`: Introduction to MCMC with Stan
@@ -84,12 +84,12 @@ The lessons for each Wednesday must be read ahead of time and associated lesson 
 	+ M 01/29: :ref:`Lesson 14<14. Collector's box of distributions>`: Collector's box of distributions (lecture)
 	+ W 01/31: :ref:`Lesson 12<12. Model building with prior predictive checks>`: Model building with prior predictive checks
 	+ W 01/31: :ref:`Lesson 13<13. Posterior predictive checks>`: Posterior predictive checks
-	+ Th 02/01: Recitation 04: Introduction to Hamiltonian Monte Carlo
+	+ Th 02/01: `Recitation 04<R4. Introduction to Hamiltonian Monte Carlo>`: Introduction to Hamiltonian Monte Carlo
 - **Week 6**
 	+ M 02/05: :ref:`Lesson 17<17. Model comparison>`: Model comparison (lecture)
 	+ W 02/07: :ref:`Lesson 15<15. MCMC diagnostics>`: MCMC diagnostics
 	+ W 02/07: :ref:`Lesson 16<16. A diagnostics case study: Artificial funnel of hell>`: The Funnel of Hell and uncentering
-	+ Th 02/08: Recitation 05: Using the HPC
+	+ Th 02/08: `Recitation 05<R5: Bayesian model building>`: Practice model building
 - **Week 7**
 	+ M 02/12: :ref:`Lesson 19<19. Hierarchical models>`: Hierarchical models (lecture)
 	+ W 02/14: :ref:`Lesson 18<18. Model comparison in practice>`: Model comparison in practice
