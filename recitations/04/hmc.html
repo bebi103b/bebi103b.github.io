@@ -116,6 +116,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../homework/04/index.html">4. Sampling with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/05/index.html">5. Inference with Stan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/06/index.html">6. MCMC with ion channels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../homework/07/index.html">7. Model comparison</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -1411,7 +1412,7 @@ H(q,p) = T(q,p) + U(q).
 \end{align}</span></p>
 <p>The only thing we are left with is to choose a kinetic energy. How we choose a kinetic energy will be discussed in the next section. Assume for now that we have chosen a kinetic energy and know its derivative. Then we can compute the trajectories for both momentum and location (our parameters)! As we said before, we want to sample out of the typical set, which means that we want to find a trajectory which follows the typical set. By sampling out of the typical set of the joint distribution we
 automatically sample out of the typical set of the posterior distribution.</p>
-<img alt="Joint typical set" src="../../_images/joint_typical.png" />
+<p><img alt="Joint typical set" src="../../_images/joint_typical.png" /></p>
 <p>(Image taken from <a class="reference external" href="https://arxiv.org/abs/1701.02434">Betancourt, Michael. “A conceptual introduction to Hamiltonian Monte Carlo.” arXiv preprint arXiv:1701.02434 (2017).</a>)</p>
 </div>
 <div class="section" id="Transition-using-HMC">
@@ -1958,11 +1959,11 @@ jupyterlab: 4.0.10
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 08, 2024.
+      <span class="lastupdated">Last updated on Feb 13, 2024.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x158d13c10> 
+   <jinja2.runtime.BlockReference object at 0x121f1d450> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

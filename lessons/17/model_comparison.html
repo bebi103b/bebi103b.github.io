@@ -113,6 +113,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../homework/04/index.html">4. Sampling with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/05/index.html">5. Inference with Stan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/06/index.html">6. MCMC with ion channels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../homework/07/index.html">7. Model comparison</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -420,7 +421,7 @@ first approximate the elpd by the <strong>log pointwise predictive density</stro
 or <strong>lpd</strong> (sometimes called lppd). It is computed by using the plug-in estimate for <span class="math notranslate nohighlight">\(f_t(\tilde{y})\)</span>. That is,</p>
 <div class="math notranslate nohighlight">
 \[\begin{aligned}
-f_t(\tilde{y}) \approx \hat{f}_t(\tilde{y}) \equiv \frac{1}{N}\sum_{i=1}^N \delta(\tilde{y}_i - y_i),
+f_t(\tilde{y}_j) \approx \hat{f}_t(\tilde{y}_j) \equiv \frac{1}{N}\sum_{i=1}^N \delta(\tilde{y}_j - y_i),
 \end{aligned}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\delta\)</span> denotes the Dirac delta function. Substitution of this expression into the expression for the elpd gives</p>
 <div class="math notranslate nohighlight">
@@ -593,11 +594,11 @@ to its relationship to the Kullback-Leibler divergence.</p>
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 08, 2024.
+      <span class="lastupdated">Last updated on Feb 13, 2024.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x159fdea10> 
+   <jinja2.runtime.BlockReference object at 0x122dda250> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

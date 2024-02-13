@@ -79,7 +79,7 @@
     "\n",
     "\\begin{align}\n",
     "&\\phi \\sim \\text{Beta}(1.1, 1.1), \\\\[1em]\n",
-    "&\\kappa \\sim \\text{HalfNorm}(0, 10), \\\\[1em]\n",
+    "&\\kappa \\sim \\text{HalfNorm}(0, 1000), \\\\[1em]\n",
     "&\\alpha = \\phi \\kappa, \\\\[1em]\n",
     "&\\beta = (1-\\phi)\\kappa,\\\\[1em]\n",
     "&\\theta_i \\sim \\text{Beta}(\\alpha, \\beta) \\;\\;\\forall i,\\\\[1em]\n",

@@ -324,7 +324,7 @@ or **lpd** (sometimes called lppd). It is computed by using the plug-in estimate
 .. math::
 
    \begin{aligned}
-   f_t(\tilde{y}) \approx \hat{f}_t(\tilde{y}) \equiv \frac{1}{N}\sum_{i=1}^N \delta(\tilde{y}_i - y_i),
+   f_t(\tilde{y}_j) \approx \hat{f}_t(\tilde{y}_j) \equiv \frac{1}{N}\sum_{i=1}^N \delta(\tilde{y}_j - y_i),
    \end{aligned}
 
 where :math:`\delta` denotes the Dirac delta function. Substitution of this expression into the expression for the elpd gives
