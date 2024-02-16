@@ -1,20 +1,4 @@
-Here is the information you requested for the most recent charge. There were charges like this starting with my August statement.
-
-1) Charge amount: 296.76
-2) Currency: Dollars
-3) Date of charge: January 3, 2024
-4) Credit Card Type: Visa
-5) Last four digits: 3492
-6) Reference per bank statement: 
-7) Transaction ID:
-8) First six digits: 414740
-
-Additionally, my credit card statement had the Amazon order number as: 80000197178497.
-
-Thank you!
-
-Be well,
-JBWhy MCMC?
+Why MCMC?
 =========
 
 When doing Bayesian analysis, our goal is very often to understand a

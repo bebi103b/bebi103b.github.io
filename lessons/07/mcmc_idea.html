@@ -28,7 +28,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Warm-up" href="warm_up.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="why_mcmc.html" /> 
+    <link rel="prev" title="Why MCMC?" href="why_mcmc.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -63,6 +63,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../06/index.html">6. Parameter estimation by optimization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_02.html">E2. To be completed after lesson 6</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">7. Introduction to Markov chain Monte Carlo</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="why_mcmc.html">Why MCMC?</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Random number generation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#the-basic-idea-behind-mcmc">The basic idea behind MCMC</a></li>
 <li class="toctree-l2"><a class="reference internal" href="warm_up.html">Warm-up</a></li>
@@ -178,7 +179,7 @@
 F^{-1}(p) = -\beta^{-1}\,\ln(1-p),
 \end{align}\]</div>
 <p>where <span class="math notranslate nohighlight">\(p\)</span> is the value of the CDF, ranging from zero to one. We first draw <span class="math notranslate nohighlight">\(p\)</span> out of a Uniform distribution on [0, 1), and the compute <span class="math notranslate nohighlight">\(F^{-1}(p)\)</span> to get a draw from an exponential distribution. A graphical illustration of using a quantile function to draw 50 random numbers out of Gamma(5, 2) is shown below.</p>
-<div style="height:200px;"><script src="bokeh-content-35117666cf9f4b32bfa6233f41611ecf-lessons-07-mcmc_idea.js" id="a4be5cc3-8ae3-40d2-9691-92b3d05f1b54"></script></div><p>Each draw from a Uniform distribution, marked by an × on the vertical axis, is converted to a draw from a Gamma distribution, marked by ○ on the horizontal axis, by computing the inverse CDF.</p>
+<div style="height:200px;"><script src="bokeh-content-34cba0c05ae64d71adfafeef896a1834-lessons-07-mcmc_idea.js" id="a80e2738-c38f-4e1a-a8e8-259e2886d3dc"></script></div><p>Each draw from a Uniform distribution, marked by an × on the vertical axis, is converted to a draw from a Gamma distribution, marked by ○ on the horizontal axis, by computing the inverse CDF.</p>
 </div>
 <div class="section" id="the-basic-idea-behind-mcmc">
 <h1>The basic idea behind MCMC<a class="headerlink" href="#the-basic-idea-behind-mcmc" title="Permalink to this heading"></a></h1>
@@ -250,7 +251,7 @@ of “eventually” in the preceding sentence.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="why_mcmc.html" class="btn btn-neutral float-left" title="&lt;no title&gt;" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="why_mcmc.html" class="btn btn-neutral float-left" title="Why MCMC?" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="warm_up.html" class="btn btn-neutral float-right" title="Warm-up" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
@@ -258,11 +259,11 @@ of “eventually” in the preceding sentence.</p>
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 13, 2024.
+      <span class="lastupdated">Last updated on Feb 15, 2024.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x121eac290> 
+   <jinja2.runtime.BlockReference object at 0x12cf4a150> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 
