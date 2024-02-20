@@ -520,7 +520,7 @@
     "\n",
     "parameters {\n",
     "  real log10_phi;\n",
-    "  real gamma_;\n",
+    "  real<lower=0, upper=1> gamma_;\n",
     "  real<lower=0> sigma;\n",
     "}\n",
     "\n",

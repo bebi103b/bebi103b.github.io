@@ -99,6 +99,11 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../22/sbc_in_practice.html">22: Simulation based calibration and related checks in practice</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_08.html">E8. To be completed after lesson 23</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../23/intro_to_gps.html">23. Introduction to Gaussian processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../24/index.html">24. Implementation of Gaussian processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_09.html">E9. To be completed after lesson 25</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../25/variational_inference.html">25. Variational Bayesian inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../26/wrapup.html">26: Wrap-up</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Recitations</span></p>
 <ul>
@@ -177,7 +182,7 @@
              
   <div class="section" id="21.-Principled-analysis-pipelines">
 <h1>21. Principled analysis pipelines<a class="headerlink" href="#21.-Principled-analysis-pipelines" title="Permalink to this heading"></a></h1>
-<p><em>This lesson is based heavily on</em> <a class="reference external" href="https://betanalpha.github.io/assets/case_studies/principled_bayesian_workflow.html">this article</a> <em>by Michael Betancourt.</em></p>
+<p><em>This lesson is based heavily on</em><a class="reference external" href="https://betanalpha.github.io/assets/case_studies/principled_bayesian_workflow.html">this article</a><em>by Michael Betancourt.</em></p>
 <hr><div class="section" id="Building-a-workflow">
 <h2>Building a workflow<a class="headerlink" href="#Building-a-workflow" title="Permalink to this heading"></a></h2>
 <p>We have talked at length about Bayesian model building. The steps were roughly as follows.</p>
@@ -244,7 +249,7 @@ s_i = 1 - \frac{\sigma_{i,\mathrm{post}}^2}{\sigma_{i,\mathrm{prior}}^2}.
 <div class="section" id="Shrinkage-vs.-z-score-plot">
 <h3>Shrinkage vs. z-score plot<a class="headerlink" href="#Shrinkage-vs.-z-score-plot" title="Permalink to this heading"></a></h3>
 <p>To graphically assess the shrinkage and z-score, we typically make a shrinkage vs. z-score plot. Each point in the plot represents the results from one of the <span class="math notranslate nohighlight">\(N\)</span> data sets drawn from the generative model. A typical shrinkage vs. z-score plot for a model with two parameters <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(b\)</span> is shown below.</p>
-<div style="margin: auto; width: 350px"><p><img alt="z-shrinkage" src="../../_images/z-shrinkage.png" /></p>
+<div style="margin: auto; width: 350px"><img alt="z-shrinkage" src="../../_images/z-shrinkage.png" />
 </div><p>Note that the z-scores are symmetric about zero and do not range much above three. The shrinkage is mostly close to unity, and those that drift away do not drift too far. This model permits learning from the data.</p>
 </div>
 <div class="section" id="Rank-statistics">
@@ -274,7 +279,7 @@ g(\theta) = \int\mathrm{d}\tilde{y}\,\int\mathrm{d}\tilde{\theta}\,g(\theta \mid
 <div class="section" id="A-rank-statistic-ECDF-plot">
 <h3>A rank statistic ECDF plot<a class="headerlink" href="#A-rank-statistic-ECDF-plot" title="Permalink to this heading"></a></h3>
 <p>We can make an ECDF difference plot to test for uniformity. Such a plot is shown below.</p>
-<div style="margin: auto; width: 350px"><p><img alt="rank_plot" src="../../_images/rank_plot.png" /></p>
+<div style="margin: auto; width: 350px"><img alt="rank_plot" src="../../_images/rank_plot.png" />
 </div><p>The y-axis is the difference between the ECDF of the <span class="math notranslate nohighlight">\(N\)</span> rank statistics and that of a Uniform distribution. The surrounding envelope is the confidence interval of the ECDF difference. If the actual ECDF difference is too much outside of the envelope, then the data averaged posterior and the prior are not equal, and there is a problem with sampling. In the case above, for each of the two parameters, the sampler seems to be performing ok.</p>
 </div>
 <div class="section" id="Rank-statistic-histograms">
@@ -316,11 +321,11 @@ properly sample the true posterior. And by checking the diagnostics, you will kn
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 15, 2024.
+      <span class="lastupdated">Last updated on Feb 20, 2024.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x12d15fe90> 
+   <jinja2.runtime.BlockReference object at 0x16c995e90> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 
