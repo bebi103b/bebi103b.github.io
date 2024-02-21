@@ -26,7 +26,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Meetings" href="policies.html" />
-    <link rel="prev" title="Homework 7.2: Models for microtubule catastrophe (70 pts)" href="homework/07/hw7.2.html" /> 
+    <link rel="prev" title="Homework 10.2: Propose your own analysis (100 pts)" href="homework/10/hw10.2.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -84,8 +84,8 @@
 <li class="toctree-l1"><a class="reference internal" href="lesson_exercises/exercise_08.html">E8. To be completed after lesson 23</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lessons/23/intro_to_gps.html">23. Introduction to Gaussian processes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lessons/24/index.html">24. Implementation of Gaussian processes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lesson_exercises/exercise_09.html">E9. To be completed after lesson 25</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lessons/25/variational_inference.html">25. Variational Bayesian inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lesson_exercises/exercise_09.html">E9. To be completed after lesson 25</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lessons/26/wrapup.html">26: Wrap-up</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Recitations</span></p>
@@ -94,7 +94,10 @@
 <li class="toctree-l1"><a class="reference internal" href="recitations/02/choosing_priors.html">R2: Choosing priors and review of optimization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="recitations/03/just_hw_help.html">R3: Just homework help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="recitations/04/index.html">R4. Introduction to Hamiltonian Monte Carlo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="recitations/05/practice_model_building.html">R5: Bayesian model building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recitations/06/intro_to_hpc.html">R6: MCMC using Caltech’s HPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recitations/07/sampling_discrete_parameters.html">R7: Sampling discrete parameters with Stan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recitations/08/project_proposals.html">R8: Discussion of HW 10 project proposals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recitations/09/just_hw_help.html">R9: Just homework help</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Homework</span></p>
 <ul>
@@ -105,6 +108,9 @@
 <li class="toctree-l1"><a class="reference internal" href="homework/05/index.html">5. Inference with Stan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="homework/06/index.html">6. MCMC with ion channels</a></li>
 <li class="toctree-l1"><a class="reference internal" href="homework/07/index.html">7. Model comparison</a></li>
+<li class="toctree-l1"><a class="reference internal" href="homework/08/index.html">8. Hierarchical models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="homework/09/index.html">9. Forthcoming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="homework/10/index.html">10. The grand finale</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul class="current">
@@ -200,9 +206,9 @@
 <li><p><a class="reference internal" href="homework/05/index.html#inference-with-stan"><span class="std std-ref">Homework 5</span></a>: due 5 pm, February 9</p></li>
 <li><p><span class="xref std std-ref">Homework 6</span>: due 5 pm, February 16</p></li>
 <li><p><a class="reference internal" href="homework/07/index.html#model-comparison"><span class="std std-ref">Homework 7</span></a>: due 5 pm, February 23</p></li>
-<li><p><span class="xref std std-ref">Homework 8</span>: due 5 pm, March 1</p></li>
+<li><p><a class="reference internal" href="homework/08/index.html#hierarchical-models"><span class="std std-ref">Homework 8</span></a>: due 5 pm, March 1</p></li>
 <li><p><span class="xref std std-ref">Homework 9</span>: due 5 pm, March 8</p></li>
-<li><p><span class="xref std std-ref">Homework 10</span>: due 4 pm, March 15</p></li>
+<li><p><a class="reference internal" href="homework/10/index.html#the-grand-finale"><span class="std std-ref">Homework 10</span></a>: due 4 pm, March 15</p></li>
 <li><p><span class="xref std std-ref">Homework 11</span>: due 5 pm, March 15</p></li>
 </ul>
 </div>
@@ -225,23 +231,23 @@
 <div class="section" id="weekly-schedule">
 <h1>Weekly schedule<a class="headerlink" href="#weekly-schedule" title="Permalink to this heading"></a></h1>
 <p>The lessons for each Wednesday must be read ahead of time and associated lesson exercise submitted by noon on the Tuesday before.</p>
-<ul>
+<ul class="simple">
 <li><dl class="simple">
-<dt><strong>Week 0</strong></dt><dd><ul class="simple">
+<dt><strong>Week 0</strong></dt><dd><ul>
 <li><p><span class="xref std std-ref">Lesson 00</span>: Preparing for the course</p></li>
 </ul>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt><strong>Week 1</strong></dt><dd><ul class="simple">
+<dt><strong>Week 1</strong></dt><dd><ul>
 <li><p>W 01/03: <a class="reference internal" href="lessons/01/index.html#probability-and-the-logic-of-scientific-reasoning"><span class="std std-ref">Lesson 01</span></a>: Probability and scientific logic (lecture)</p></li>
 </ul>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt><strong>Week 2</strong></dt><dd><ul class="simple">
+<dt><strong>Week 2</strong></dt><dd><ul>
 <li><p>M 01/08: <a class="reference internal" href="lessons/02/index.html#introduction-to-bayesian-modeling"><span class="std std-ref">Lesson 02</span></a>: Introduction to Bayesian modeling (lecture)</p></li>
 <li><p>W 01/10: <a class="reference internal" href="lessons/03/plotting_posteriors.html#3.-Plotting-posteriors"><span class="std std-ref">Lesson 03</span></a>: Plotting posteriors</p></li>
 <li><p>W 01/10: <a class="reference internal" href="lessons/04/marginalization_by_numerical_quadrature.html#4.-Marginalization-by-numerical-quadrature"><span class="std std-ref">Lesson 04</span></a>: Marginalization by integration</p></li>
@@ -252,17 +258,17 @@
 </dl>
 </li>
 <li><dl class="simple">
-<dt><strong>Week 3</strong></dt><dd><ul class="simple">
+<dt><strong>Week 3</strong></dt><dd><ul>
 <li><p>M 01/15: No class; Martin Luther King Day</p></li>
 <li><p>W 01/17: <a class="reference internal" href="lessons/07/index.html#introduction-to-markov-chain-monte-carlo"><span class="std std-ref">Lesson 07</span></a>: Introduction to Markov chain Monte Carlo (lecture)</p></li>
 <li><p>W 01/17: <a class="reference internal" href="lessons/06/index.html#parameter-estimation-by-optimization"><span class="std std-ref">Lesson 06</span></a>: Parameter estimation by optimization</p></li>
-<li><p>Th 01/18: <cite>Recitation 02&lt;R2: Choosing priors and review of optimization&gt;</cite>: Choosing priors and review of optimization</p></li>
+<li><p>Th 01/18: <a class="reference internal" href="recitations/02/index.html#r2-choosing-priors-and-review-of-optimization"><span class="std std-ref">Recitation 02</span></a>: Choosing priors and review of optimization</p></li>
 </ul>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt><strong>Week 4</strong></dt><dd><ul class="simple">
+<dt><strong>Week 4</strong></dt><dd><ul>
 <li><p>M 01/22: <a class="reference internal" href="lessons/11/index.html#display-of-mcmc-results"><span class="std std-ref">Lesson 11</span></a>: Display of MCMC samples (lecture)</p></li>
 <li><p>W 01/24: <a class="reference internal" href="lessons/08/index.html#introduction-to-mcmc-with-stan"><span class="std std-ref">Lesson 08</span></a>: Introduction to MCMC with Stan</p></li>
 <li><p>W 01/24: <a class="reference internal" href="lessons/09/mixture_model_stan.html#9.-Mixture-models-and-label-switching-with-MCMC"><span class="std std-ref">Lesson 09</span></a>: Mixture models and label switching</p></li>
@@ -273,62 +279,58 @@
 </dl>
 </li>
 <li><dl class="simple">
-<dt><strong>Week 5</strong></dt><dd><ul class="simple">
+<dt><strong>Week 5</strong></dt><dd><ul>
 <li><p>M 01/29: <a class="reference internal" href="lessons/14/box_of_distributions.html#collector-s-box-of-distributions"><span class="std std-ref">Lesson 14</span></a>: Collector’s box of distributions (lecture)</p></li>
 <li><p>W 01/31: <a class="reference internal" href="lessons/12/prior_predictive_checks.html#12.-Model-building-with-prior-predictive-checks"><span class="std std-ref">Lesson 12</span></a>: Model building with prior predictive checks</p></li>
 <li><p>W 01/31: <a class="reference internal" href="lessons/13/posterior_predictive_checks.html#13.-Posterior-predictive-checks"><span class="std std-ref">Lesson 13</span></a>: Posterior predictive checks</p></li>
-<li><p>Th 02/01: <cite>Recitation 04&lt;R4. Introduction to Hamiltonian Monte Carlo&gt;</cite>: Introduction to Hamiltonian Monte Carlo</p></li>
+<li><p>Th 02/01: <a class="reference internal" href="recitations/04/index.html#r4-introduction-to-hamiltonian-monte-carlo"><span class="std std-ref">Recitation 04</span></a>: Introduction to Hamiltonian Monte Carlo</p></li>
 </ul>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt><strong>Week 6</strong></dt><dd><ul class="simple">
+<dt><strong>Week 6</strong></dt><dd><ul>
 <li><p>M 02/05: <a class="reference internal" href="lessons/17/model_comparison.html#model-comparison"><span class="std std-ref">Lesson 17</span></a>: Model comparison (lecture)</p></li>
 <li><p>W 02/07: <a class="reference internal" href="lessons/15/mcmc_diagnostics.html#15.-MCMC-diagnostics"><span class="std std-ref">Lesson 15</span></a>: MCMC diagnostics</p></li>
 <li><p>W 02/07: <a class="reference internal" href="lessons/16/funnel_of_hell.html#16.-A-diagnostics-case-study:-Artificial-funnel-of-hell"><span class="std std-ref">Lesson 16</span></a>: The Funnel of Hell and uncentering</p></li>
-<li><p>Th 02/08: <cite>Recitation 05&lt;R5: Bayesian model building&gt;</cite>: Practice model building</p></li>
+<li><p>Th 02/08: <a class="reference internal" href="recitations/05/practice_model_building.html#R5:-Bayesian-model-building"><span class="std std-ref">Recitation 05</span></a>: Practice model building</p></li>
 </ul>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt><strong>Week 7</strong></dt><dd><ul class="simple">
+<dt><strong>Week 7</strong></dt><dd><ul>
 <li><p>M 02/12: <a class="reference internal" href="lessons/19/index.html#hierarchical-models"><span class="std std-ref">Lesson 19</span></a>: Hierarchical models (lecture)</p></li>
 <li><p>W 02/14: <a class="reference internal" href="lessons/18/index.html#model-comparison-in-practice"><span class="std std-ref">Lesson 18</span></a>: Model comparison in practice</p></li>
-<li><p>Th 02/15: Recitation 06: TBA</p></li>
+<li><p>Th 02/15: <a class="reference internal" href="recitations/06/intro_to_hpc.html#r6-mcmc-using-caltech-s-hpc"><span class="std std-ref">Recitation 06</span></a>: MCMC using Caltech’s HPC</p></li>
 </ul>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt><strong>Week 8</strong></dt><dd><ul class="simple">
+<dt><strong>Week 8</strong></dt><dd><ul>
 <li><p>M 02/19: No class; Presidents Day</p></li>
 <li><p>W 02/21: <a class="reference internal" href="lessons/21/sbc.html#21.-Principled-analysis-pipelines"><span class="std std-ref">Lesson 21</span></a>: Principled workflows (lecture)</p></li>
 <li><p>W 02/21: <a class="reference internal" href="lessons/20/hierarchical_implementation.html#20.-Implementation-of-hierarchical-models"><span class="std std-ref">Lesson 20</span></a>: Implementation of hierarchical models</p></li>
-<li><p>Th 02/22: Recitation 07: TBA</p></li>
+<li><p>Th 02/22: <a class="reference internal" href="recitations/07/sampling_discrete_parameters.html#R7:-Sampling-discrete-parameters-with-Stan"><span class="std std-ref">Recitation 07</span></a>: Sampling discrete parameters with Stan</p></li>
 </ul>
 </dd>
 </dl>
 </li>
-<li><dl>
-<dt><strong>Week 9</strong></dt><dd><ul class="simple">
-<li><p>M 02/26: <span class="xref std std-ref">Lesson 25</span>: Variational inference</p></li>
-</ul>
-<ul class="simple">
-<li><p>W 02/28: <span class="xref std std-ref">Lesson 24</span>: Simulation-based calibration in practice</p></li>
-<li><p>Th 02/29: Recitation 08: TBA</p></li>
+<li><dl class="simple">
+<dt><strong>Week 9</strong></dt><dd><ul>
+<li><p>M 02/26: <a class="reference internal" href="lessons/25/variational_inference.html#25.-Variational-Bayesian-inference"><span class="std std-ref">Lesson 25</span></a>: Variational inference</p></li>
+<li><p>W 02/28: <a class="reference internal" href="lessons/22/sbc_in_practice.html#22:-Simulation-based-calibration-and-related-checks-in-practice"><span class="std std-ref">Lesson 22</span></a>: Simulation-based calibration in practice</p></li>
+<li><p>Th 02/29: <a class="reference internal" href="recitations/08/project_proposals.html#r8-discussion-of-hw-10-project-proposals"><span class="std std-ref">Recitation 08</span></a>: Discussion of HW 10 project proposals</p></li>
 </ul>
 </dd>
 </dl>
 </li>
-<li><dl>
-<dt><strong>Week 10</strong></dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt><strong>Week 10</strong></dt><dd><ul>
 <li><p>M 03/04: <a class="reference internal" href="lessons/26/wrapup.html#wrap-up"><span class="std std-ref">Lesson 26</span></a>: Course wrap-up (lecture)</p></li>
 <li><p>W 03/06: Work on final homework</p></li>
-</ul>
-<ul class="simple">
-<li><p>Th 03/08: Recitation 09: TBD</p></li>
+<li><p>Th 03/08: No recitation; only homework help</p></li>
 </ul>
 </dd>
 </dl>
@@ -340,7 +342,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="homework/07/hw7.2.html" class="btn btn-neutral float-left" title="Homework 7.2: Models for microtubule catastrophe (70 pts)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="homework/10/hw10.2.html" class="btn btn-neutral float-left" title="Homework 10.2: Propose your own analysis (100 pts)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="policies.html" class="btn btn-neutral float-right" title="Meetings" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
@@ -352,7 +354,7 @@
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x16cb516d0> 
+   <jinja2.runtime.BlockReference object at 0x12f836b10> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

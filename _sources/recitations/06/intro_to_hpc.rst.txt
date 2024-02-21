@@ -1,0 +1,5 @@
+R6: MCMC using Caltech's HPC
+----------------------------
+
+Recitation 6 does not feature any written materials. Zach presented how to use Caltech's HPC to do MCMC calculations.
+

@@ -67,8 +67,8 @@ People
    lesson_exercises/exercise_08.ipynb
    lessons/23/intro_to_gps.ipynb
    lessons/24/index
-   lesson_exercises/exercise_09.ipynb
    lessons/25/variational_inference.ipynb
+   lesson_exercises/exercise_09.ipynb
    lessons/26/wrapup
 
 
@@ -80,11 +80,11 @@ People
    recitations/02/choosing_priors.rst
    recitations/03/just_hw_help.rst
    recitations/04/index
-   recitations/05/practice_model_building.ipynb
-   recitations/06/index
-   recitations/07/index
+   recitations/05/practice_model_building_solution.ipynb
+   recitations/06/intro_to_hpc.rst
+   recitations/07/sampling_discrete_parameters.ipynb
    recitations/08/project_proposals.rst
-   recitations/09/sampling_discrete_parameters.ipynb
+   recitations/09/just_hw_help.rst
 
 
 .. toctree::

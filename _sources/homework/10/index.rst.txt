@@ -1,0 +1,11 @@
+******************************************************************
+10. The grand finale
+******************************************************************
+
+Do *either* problem 10.1 or 10.2. If you do 10.2, you must have prior approval from course staff for your proposed problem.
+
+.. toctree::
+   :maxdepth: 1
+
+   hw10.1.ipynb
+   hw10.2.ipynb

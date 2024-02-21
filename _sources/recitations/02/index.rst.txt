@@ -1,0 +1,10 @@
+****************************************************
+R2: Choosing priors and review of optimization
+****************************************************
+
+
+.. toctree::
+   :maxdepth: 1
+
+   choosing_priors.rst
+   choosing_priors.ipynb

@@ -73,7 +73,7 @@ The lessons for each Wednesday must be read ahead of time and associated lesson 
 	+ M 01/15: No class; Martin Luther King Day
 	+ W 01/17: :ref:`Lesson 07<7. Introduction to Markov chain Monte Carlo>`: Introduction to Markov chain Monte Carlo (lecture)
 	+ W 01/17: :ref:`Lesson 06<6. Parameter estimation by optimization>`: Parameter estimation by optimization
-	+ Th 01/18: `Recitation 02<R2: Choosing priors and review of optimization>`: Choosing priors and review of optimization
+	+ Th 01/18: :ref:`Recitation 02<R2: Choosing priors and review of optimization>`: Choosing priors and review of optimization
 - **Week 4**
 	+ M 01/22: :ref:`Lesson 11<11. Display of MCMC results>`: Display of MCMC samples (lecture)
 	+ W 01/24: :ref:`Lesson 08<8. Introduction to MCMC with Stan>`: Introduction to MCMC with Stan
@@ -84,29 +84,27 @@ The lessons for each Wednesday must be read ahead of time and associated lesson 
 	+ M 01/29: :ref:`Lesson 14<14. Collector's box of distributions>`: Collector's box of distributions (lecture)
 	+ W 01/31: :ref:`Lesson 12<12. Model building with prior predictive checks>`: Model building with prior predictive checks
 	+ W 01/31: :ref:`Lesson 13<13. Posterior predictive checks>`: Posterior predictive checks
-	+ Th 02/01: `Recitation 04<R4. Introduction to Hamiltonian Monte Carlo>`: Introduction to Hamiltonian Monte Carlo
+	+ Th 02/01: :ref:`Recitation 04<R4. Introduction to Hamiltonian Monte Carlo>`: Introduction to Hamiltonian Monte Carlo
 - **Week 6**
 	+ M 02/05: :ref:`Lesson 17<17. Model comparison>`: Model comparison (lecture)
 	+ W 02/07: :ref:`Lesson 15<15. MCMC diagnostics>`: MCMC diagnostics
 	+ W 02/07: :ref:`Lesson 16<16. A diagnostics case study: Artificial funnel of hell>`: The Funnel of Hell and uncentering
-	+ Th 02/08: `Recitation 05<R5: Bayesian model building>`: Practice model building
+	+ Th 02/08: :ref:`Recitation 05<R5: Bayesian model building>`: Practice model building
 - **Week 7**
 	+ M 02/12: :ref:`Lesson 19<19. Hierarchical models>`: Hierarchical models (lecture)
 	+ W 02/14: :ref:`Lesson 18<18. Model comparison in practice>`: Model comparison in practice
-	+ Th 02/15: Recitation 06: TBA
+	+ Th 02/15: :ref:`Recitation 06<R6: MCMC using Caltech's HPC>`: MCMC using Caltech's HPC
 - **Week 8**
 	+ M 02/19: No class; Presidents Day
 	+ W 02/21: :ref:`Lesson 21<21. Principled analysis pipelines>`: Principled workflows (lecture)
 	+ W 02/21: :ref:`Lesson 20<20. Implementation of hierarchical models>`: Implementation of hierarchical models
-	+ Th 02/22: Recitation 07: TBA
+	+ Th 02/22: :ref:`Recitation 07<R7: Sampling discrete parameters with Stan>`: Sampling discrete parameters with Stan
 - **Week 9**
-	+ M 02/26: :ref:`Lesson 25<25: Variational Bayesian inference>`: Variational inference
-	.. + M 03/02: :ref:`Lesson 24<24. Introduction to Gaussian processes>`: Introduction to nonparametric Bayes: Gaussian processes
-	+ W 02/28: :ref:`Lesson 24<24: Simulation based calibration and related checks in practice>`: Simulation-based calibration in practice
-	+ Th 02/29: Recitation 08: TBA
+	+ M 02/26: :ref:`Lesson 25<25. Variational Bayesian inference>`: Variational inference
+	+ W 02/28: :ref:`Lesson 22<22: Simulation based calibration and related checks in practice>`: Simulation-based calibration in practice
+	+ Th 02/29: :ref:`Recitation 08<R8: Discussion of HW 10 project proposals>`: Discussion of HW 10 project proposals
 - **Week 10**
 	+ M 03/04: :ref:`Lesson 26<26: Wrap-up>`: Course wrap-up (lecture)
 	+ W 03/06: Work on final homework
-	.. + Tu 03/08: :ref:`Lesson 25<25. Implementation of Gaussian processes>`: Implementation of Gaussian processes
-	+ Th 03/08: Recitation 09: TBD
+	+ Th 03/08: No recitation; only homework help
 

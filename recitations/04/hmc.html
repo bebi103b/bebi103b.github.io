@@ -28,7 +28,7 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="R5: Bayesian model building" href="../05/practice_model_building.html" />
+    <link rel="next" title="R6: MCMC using Caltech’s HPC" href="../06/intro_to_hpc.html" />
     <link rel="prev" title="Overview of Hamiltonian Monte Carlo" href="overview.html" /> 
 </head>
 
@@ -87,8 +87,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_08.html">E8. To be completed after lesson 23</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/23/intro_to_gps.html">23. Introduction to Gaussian processes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/24/index.html">24. Implementation of Gaussian processes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_09.html">E9. To be completed after lesson 25</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/25/variational_inference.html">25. Variational Bayesian inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_09.html">E9. To be completed after lesson 25</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/26/wrapup.html">26: Wrap-up</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Recitations</span></p>
@@ -111,7 +111,10 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../05/practice_model_building.html">R5: Bayesian model building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06/intro_to_hpc.html">R6: MCMC using Caltech’s HPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07/sampling_discrete_parameters.html">R7: Sampling discrete parameters with Stan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08/project_proposals.html">R8: Discussion of HW 10 project proposals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09/just_hw_help.html">R9: Just homework help</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Homework</span></p>
 <ul>
@@ -122,6 +125,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../../homework/05/index.html">5. Inference with Stan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/06/index.html">6. MCMC with ion channels</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/07/index.html">7. Model comparison</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../homework/08/index.html">8. Hierarchical models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../homework/09/index.html">9. Forthcoming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../homework/10/index.html">10. The grand finale</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -1417,7 +1423,7 @@ H(q,p) = T(q,p) + U(q).
 \end{align}</span></p>
 <p>The only thing we are left with is to choose a kinetic energy. How we choose a kinetic energy will be discussed in the next section. Assume for now that we have chosen a kinetic energy and know its derivative. Then we can compute the trajectories for both momentum and location (our parameters)! As we said before, we want to sample out of the typical set, which means that we want to find a trajectory which follows the typical set. By sampling out of the typical set of the joint distribution we
 automatically sample out of the typical set of the posterior distribution.</p>
-<img alt="Joint typical set" src="../../_images/joint_typical.png" />
+<p><img alt="Joint typical set" src="../../_images/joint_typical.png" /></p>
 <p>(Image taken from <a class="reference external" href="https://arxiv.org/abs/1701.02434">Betancourt, Michael. “A conceptual introduction to Hamiltonian Monte Carlo.” arXiv preprint arXiv:1701.02434 (2017).</a>)</p>
 </div>
 <div class="section" id="Transition-using-HMC">
@@ -1957,7 +1963,7 @@ jupyterlab: 4.0.10
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="overview.html" class="btn btn-neutral float-left" title="Overview of Hamiltonian Monte Carlo" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../05/practice_model_building.html" class="btn btn-neutral float-right" title="R5: Bayesian model building" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../06/intro_to_hpc.html" class="btn btn-neutral float-right" title="R6: MCMC using Caltech’s HPC" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
@@ -1968,7 +1974,7 @@ jupyterlab: 4.0.10
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x16df1f0d0> 
+   <jinja2.runtime.BlockReference object at 0x12e483390> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 
