@@ -1,5 +1,13 @@
 ******************************************************************
-9. Forthcoming
+9. Principled pipelines and/or VI and/or hierarchical modeling
 ******************************************************************
 
-Problem set 9 is forthcoming.
+Do *only* one of the four problems below.
+
+.. toctree::
+   :maxdepth: 1
+
+   hw9.1.ipynb
+   hw9.2.ipynb
+   hw9.3.ipynb
+   hw9.4.ipynb

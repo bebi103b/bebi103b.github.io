@@ -29,7 +29,7 @@ Homework due dates
 - :ref:`Homework 6<6. Practice building and assessing Bayesian models>`: due 5 pm, February 16
 - :ref:`Homework 7<7. Model comparison>`: due 5 pm, February 23
 - :ref:`Homework 8<8. Hierarchical models>`: due 5 pm, March 1
-- :ref:`Homework 9<9. Principled pipelines>`: due 5 pm, March 8
+- :ref:`Homework 9<9. Principled pipelines and/or VI and/or hierarchical modeling>`: due 5 pm, March 8
 - :ref:`Homework 10<10. The grand finale>`: due 4 pm, March 15
 - :ref:`Homework 11<11. Course feedback>`: due 5 pm, March 15
 
