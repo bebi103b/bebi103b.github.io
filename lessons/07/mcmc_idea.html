@@ -104,7 +104,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/02/choosing_priors.html">R2: Choosing priors and review of optimization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/03/just_hw_help.html">R3: Just homework help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/04/index.html">R4. Introduction to Hamiltonian Monte Carlo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../recitations/06/intro_to_hpc.html">R6: MCMC using Caltech’s HPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../recitations/05/practice_model_building.html">R5: Bayesian model building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../recitations/06/HPC.html">R6: MCMC using Caltech’s HPC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/07/sampling_discrete_parameters.html">R7: Sampling discrete parameters with Stan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/08/project_proposals.html">R8: Discussion of HW 10 project proposals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/09/just_hw_help.html">R9: Just homework help</a></li>
@@ -190,7 +191,7 @@
 F^{-1}(p) = -\beta^{-1}\,\ln(1-p),
 \end{align}\]</div>
 <p>where <span class="math notranslate nohighlight">\(p\)</span> is the value of the CDF, ranging from zero to one. We first draw <span class="math notranslate nohighlight">\(p\)</span> out of a Uniform distribution on [0, 1), and the compute <span class="math notranslate nohighlight">\(F^{-1}(p)\)</span> to get a draw from an exponential distribution. A graphical illustration of using a quantile function to draw 50 random numbers out of Gamma(5, 2) is shown below.</p>
-<div style="height:200px;"><script src="bokeh-content-11e4986983a144e5a7a69dae059dcdc4-lessons-07-mcmc_idea.js" id="bb01d2b4-138d-4bb2-b0a4-15c9529bf2d4"></script></div><p>Each draw from a Uniform distribution, marked by an × on the vertical axis, is converted to a draw from a Gamma distribution, marked by ○ on the horizontal axis, by computing the inverse CDF.</p>
+<div style="height:200px;"><script src="bokeh-content-d776c1b32a3945aea39b48568615467b-lessons-07-mcmc_idea.js" id="f313b364-edb1-4917-9c6c-b6edb563310a"></script></div><p>Each draw from a Uniform distribution, marked by an × on the vertical axis, is converted to a draw from a Gamma distribution, marked by ○ on the horizontal axis, by computing the inverse CDF.</p>
 </div>
 <div class="section" id="the-basic-idea-behind-mcmc">
 <h1>The basic idea behind MCMC<a class="headerlink" href="#the-basic-idea-behind-mcmc" title="Permalink to this heading"></a></h1>
@@ -270,11 +271,11 @@ of “eventually” in the preceding sentence.</p>
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 28, 2024.
+      <span class="lastupdated">Last updated on Mar 05, 2024.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x123b14610> 
+   <jinja2.runtime.BlockReference object at 0x160fe7a90> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

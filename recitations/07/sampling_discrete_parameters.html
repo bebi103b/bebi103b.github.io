@@ -29,7 +29,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="R8: Discussion of HW 10 project proposals" href="../08/project_proposals.html" />
-    <link rel="prev" title="R6: MCMC using Caltech’s HPC" href="../06/intro_to_hpc.html" /> 
+    <link rel="prev" title="R6: MCMC using Caltech’s HPC" href="../06/HPC.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -97,7 +97,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../02/choosing_priors.html">R2: Choosing priors and review of optimization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../03/just_hw_help.html">R3: Just homework help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../04/index.html">R4. Introduction to Hamiltonian Monte Carlo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../06/intro_to_hpc.html">R6: MCMC using Caltech’s HPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05/practice_model_building.html">R5: Bayesian model building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06/HPC.html">R6: MCMC using Caltech’s HPC</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">R7: Sampling discrete parameters with Stan</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#Review-of-LogSumExp,-the-cornerstone-of-stable-marginalization-with-discrete-parameters">Review of LogSumExp, the cornerstone of stable marginalization with discrete parameters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#Handling-log-probabilities-of-discrete-valued-vectors-in-Stan">Handling log probabilities of discrete valued vectors in Stan</a></li>
@@ -566,7 +567,7 @@ were able to calculate it without running out of storage space for our datatype)
 <div class="section" id="Handling-log-probabilities-of-discrete-valued-vectors-in-Stan">
 <h2>Handling log probabilities of discrete valued vectors in Stan<a class="headerlink" href="#Handling-log-probabilities-of-discrete-valued-vectors-in-Stan" title="Permalink to this heading"></a></h2>
 <p>A need to quantifying the size of natural populations of animals often arises in ecology. A popular approach to count populations is to mark them with a label of some type like a leg bands on a birds or a fin tags on a shark. In 1970, <a class="reference external" href="http://doi.org/10.2307/2855">Stradling</a> marked ants by feeding them with radioactive phosphorous (32P), which would get integrated into their tissue and persist over time without transferring to their other ants.</p>
-<div style="width: 450px; margin: auto;"><p><img alt="Myrmica rubra ants" src="../../_images/Myrmica_rubra_workers.jpg" /></p>
+<div style="width: 450px; margin: auto;"><img alt="Myrmica rubra ants" src="../../_images/Myrmica_rubra_workers.jpg" />
 </div><center><p>Worker Myrmica rubra ants. Image by Gary Alpert, can be found here.</p>
 </center><p>After labeling a bunch of animals, Stradling released them back into the population and allowed them to mix. Then, he re-sampled and counted how many of the labeled animals he pulled from the population. As an introduction to the concepts used in handling discrete parameters, I will first code up how to quantify the population size based on this information in Stan (a brute force type approach) before mixing in continuous variables with some other mark and recapture data. It is quite apparent
 that Stradling’s data matches the story of the <a class="reference external" href="https://distribution-explorer.github.io/discrete/hypergeometric.html">hypergeometric distribution</a>. We will call the radioactively labeled ants the ‘white balls’, and the unlabeled ones the ‘black balls’, which are mixed together in the colony and then samples without replacement. Hence, we have for our likelihood</p>
@@ -2375,7 +2376,7 @@ jupyterlab: 4.0.10
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../06/intro_to_hpc.html" class="btn btn-neutral float-left" title="R6: MCMC using Caltech’s HPC" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../06/HPC.html" class="btn btn-neutral float-left" title="R6: MCMC using Caltech’s HPC" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="../08/project_proposals.html" class="btn btn-neutral float-right" title="R8: Discussion of HW 10 project proposals" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
@@ -2383,11 +2384,11 @@ jupyterlab: 4.0.10
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 28, 2024.
+      <span class="lastupdated">Last updated on Mar 05, 2024.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x122a16a10> 
+   <jinja2.runtime.BlockReference object at 0x160b8cc10> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

@@ -96,7 +96,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/02/choosing_priors.html">R2: Choosing priors and review of optimization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/03/just_hw_help.html">R3: Just homework help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/04/index.html">R4. Introduction to Hamiltonian Monte Carlo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../recitations/06/intro_to_hpc.html">R6: MCMC using Caltech’s HPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../recitations/05/practice_model_building.html">R5: Bayesian model building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../recitations/06/HPC.html">R6: MCMC using Caltech’s HPC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/07/sampling_discrete_parameters.html">R7: Sampling discrete parameters with Stan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/08/project_proposals.html">R8: Discussion of HW 10 project proposals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/09/just_hw_help.html">R9: Just homework help</a></li>
@@ -180,7 +181,7 @@
   <div class="section" id="Homework-8.2:-Noise-in-gene-expression-(80-pts)">
 <h1>Homework 8.2: Noise in gene expression (80 pts)<a class="headerlink" href="#Homework-8.2:-Noise-in-gene-expression-(80-pts)" title="Permalink to this heading"></a></h1>
 <p><a class="reference external" href="https://s3.amazonaws.com/bebi103.caltech.edu/data/elowitz_et_al_2002_fig_3a.csv">Data set download</a></p>
-<hr><p><strong>Some of the text of this problem was co-written with Michael Elowitz. The problem itself was inspired by Michael Elowitz and by</strong> <a class="reference external" href="https://doi.org/10.1101/049486">this paper</a> <strong>by</strong> <a class="reference external" href="http://nimwegenlab.org">Erik van Nimwegen</a><strong>.</strong></p>
+<hr><p><strong>Some of the text of this problem was co-written with Michael Elowitz. The problem itself was inspired by Michael Elowitz and by</strong><a class="reference external" href="https://doi.org/10.1101/049486">this paper</a><strong>by</strong><a class="reference external" href="http://nimwegenlab.org">Erik van Nimwegen</a><strong>.</strong></p>
 <p>One cell may seem at first glance identical to any other cell living alongside it in the same conditions. However, contents inside of cells may be highly variable due to variations in gene expression. Generally speaking, we call deviations from what we might expect from a deterministic view of gene expression <em>stochasticity</em>, or <strong>noise</strong>. This is a key concept, because nearly all cellular processes are susceptible to noise, for a host of reasons, including low copy numbers of molecular
 regulators of gene expression.</p>
 <p>To quantitatively define noise, it helps to perform a thought experiment. Say we have many exactly identical cells. In the future, as gene expression, responses to the environment (which we assume is the same for each cell), etc. proceed, the cells will no longer be identical due to stochasticity in all of these processes involving small numbers of molecules. Consider one gene product of interest in these cells. We can define the <strong>total noise</strong>, <span class="math notranslate nohighlight">\(\eta_\mathrm{tot}\)</span>, as the <strong>coefficient
@@ -196,9 +197,9 @@ transcription, translation, and degradation rates, or other factors we are not a
 <p>Delineating intrinsic and extrinsic noise is difficult, if not impossible, by measuring expression of a single gene in a cell. To construct an experiment to study this, we can conduct another thought experiment. Say we put two perfectly molecularly identical cells in the exact same environment and see if they behave similarly. Unfortunately, we cannot do this, because we cannot prepare two perfectly identical cells. However, we can put two (nearly) identical <em>genes</em> in the <em>same</em> cell. This is
 conceptually related, and allows us to think of these two genes as two independent stochastic samples of the same underlying process. If everything behaved deterministically and was only influenced by extrinsic noise, we would expect strongly correlated variation in both genes. If, however, expression is non-deterministic then variation will be uncorrelated.</p>
 <p>To perform this experiment <a class="reference external" href="https://doi.org/10.1126/science.1070919">Elowitz and coworkers (Science, 2002)</a> developed a system in which identical promoters were used to express fluorescent proteins of different color, cyan fluorescent protein (CFP) and YFP. The promoters were repressed by the LacI protein. They could tune the repression by changing concentration of IPTG, since IPTG inhibits LacI’s ability to act as a repressor.</p>
-<div style="margin: auto; width: 150px;"><p><img alt="intrinsic_extrinsic" src="../../_images/laci_cfp_yfp_circuit.png" /></p>
+<div style="margin: auto; width: 150px;"><img alt="intrinsic_extrinsic" src="../../_images/laci_cfp_yfp_circuit.png" />
 </div><p>They were also careful to integrate the promoters into the genome at loci that were equidistant from the origin of replication so that the copy number of each on the chromosome remains the the same as the genome is replicated. They then could measure the expression level for identical promoters under identical conditions, since the promoters are in the same cell. A typical result in shown in the images below.</p>
-<div style="margin: auto; width: 550px;"><p><img alt="cell noise" src="../../_images/cell_noise.png" /></p>
+<div style="margin: auto; width: 550px;"><img alt="cell noise" src="../../_images/cell_noise.png" />
 </div><p>We can see that in some cells, both the CFP and YFP levels are high (yellow in the merge), but in other cases, they CFP and YFP levels differ (green or red in the merge).</p>
 <p>A data set from this experiment, collected by Michael Elowitz, is available <a class="reference external" href="https://s3.amazonaws.com/bebi103.caltech.edu/data/elowitz_et_al_2002_fig_3a.csv">here</a>. Your job in this problem is to do Bayesian modeling to get parameter estimates for the intrinsic and extrinsic noise. This problem has been approached several times, first, of course, in the original <a class="reference external" href="https://doi.org/10.1126/science.1070919">Elowitz paper</a>. Swain, Elowitz, and Siggia (<a class="reference external" href="https://doi.org/10.1073/pnas.162041399">PNAS,
 2002</a>) put out a paper shortly thereafter studying statistical analysis of noise. More recently, Fu and Pachter (<a class="reference external" href="https://doi.org/10.1515/sagmb-2016-0002">Stat. Appl. Genet. Mol. Biol., 2016</a>) studied this problem. Van Nimwegen (<a class="reference external" href="https://doi.org/10.1101/049486">bioRxiv, 2016</a>) took a Bayesian approach, which is what we take here.</p>
@@ -224,11 +225,11 @@ conceptually related, and allows us to think of these two genes as two independe
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 28, 2024.
+      <span class="lastupdated">Last updated on Mar 05, 2024.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x122fa0390> 
+   <jinja2.runtime.BlockReference object at 0x16101a2d0> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

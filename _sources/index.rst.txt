@@ -80,8 +80,8 @@ People
    recitations/02/choosing_priors.rst
    recitations/03/just_hw_help.rst
    recitations/04/index
-   recitations/05/practice_model_building_solution.ipynb
-   recitations/06/intro_to_hpc.rst
+   recitations/05/practice_model_building.ipynb
+   recitations/06/HPC.ipynb
    recitations/07/sampling_discrete_parameters.ipynb
    recitations/08/project_proposals.rst
    recitations/09/just_hw_help.rst

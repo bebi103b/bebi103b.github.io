@@ -96,7 +96,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/02/choosing_priors.html">R2: Choosing priors and review of optimization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/03/just_hw_help.html">R3: Just homework help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/04/index.html">R4. Introduction to Hamiltonian Monte Carlo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../recitations/06/intro_to_hpc.html">R6: MCMC using Caltech’s HPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../recitations/05/practice_model_building.html">R5: Bayesian model building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../recitations/06/HPC.html">R6: MCMC using Caltech’s HPC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/07/sampling_discrete_parameters.html">R7: Sampling discrete parameters with Stan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/08/project_proposals.html">R8: Discussion of HW 10 project proposals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../recitations/09/just_hw_help.html">R9: Just homework help</a></li>
@@ -181,11 +182,11 @@
   <div class="section" id="Homework-9.2:-Inferring-fitness-from-pooled-competition-assays-(100-pts)">
 <h1>Homework 9.2: Inferring fitness from pooled competition assays (100 pts)<a class="headerlink" href="#Homework-9.2:-Inferring-fitness-from-pooled-competition-assays-(100-pts)" title="Permalink to this heading"></a></h1>
 <p><a class="reference external" href="https://s3.amazonaws.com/bebi103.caltech.edu/data/fitness_assay.csv">Data set download</a></p>
-<hr><p><em>This problem is based on</em> <a class="reference external" href="https://www.biorxiv.org/content/10.1101/2023.10.14.562365v1">Razo-Mejia, Mani, and Petrov, Bayesian inference of relative fitness on high-throughput pooled competition assays, Plos Computational Biology, in press</a><em>. Manuel Razo-Mejia provided valuable consultation.</em></p>
+<hr><p><em>This problem is based on</em><a class="reference external" href="https://www.biorxiv.org/content/10.1101/2023.10.14.562365v1">Razo-Mejia, Mani, and Petrov, Bayesian inference of relative fitness on high-throughput pooled competition assays, Plos Computational Biology, in press</a><em>. Manuel Razo-Mejia provided valuable consultation.</em></p>
 <p>A pooled competition assay works as follows. A population of cells of different strains are placed in minimal media and are allowed to grow for a given time interval. The cells are then diluted and placed in a fresh solution of minimal media. This is repeated several times.</p>
 <p>Most of the cells that are in the initial sample are an unlabeled reference strain. Each of the other strains has a unique barcode sequence integrated into its genome. Among these other strains a <strong>neutral lineages</strong>, which have barcodes but are otherwise equivalent to the reference strain. Immediately prior to each dilution, some volume of cells are collected and sequencing is done to get counts of cells via counts of the respective barcodes. The schematic below, taken from the Razo-Mejia,
 Mani, and Petrov paper illustrates this process.</p>
-<p><img alt="Competition assay schematic" src="../../_images/competition_assay_schematic.png" /></p>
+<img alt="Competition assay schematic" src="../../_images/competition_assay_schematic.png" />
 <p>In the above plot, the black lines are the neutral strains, whose barcode frequency decreases over time, being outcompeted by some of the other non-neutral strains.</p>
 <p>So, the output of the experiment is a set of read counts for each barcode at each discrete time point. Let us now develop a model connecting these read counts of barcodes to fitness of the strains of cells that have the respective barcodes. We follow the treatment in the Razo-Mejia paper.</p>
 <p><strong>a)</strong> Let <span class="math notranslate nohighlight">\(r_t^{(b)}\)</span> be the number of reads of barcode <span class="math notranslate nohighlight">\(b\)</span> at the end of cycle number <span class="math notranslate nohighlight">\(t\)</span>. This is what the data set consists of. In our model, we will will model <span class="math notranslate nohighlight">\(r_t^{(b)}\)</span> as being Poisson distributed. Specifically,</p>
@@ -228,11 +229,11 @@ f_{t+1}^{(b)} = f_t^{(b)}\,\mathrm{e}^{s^{(b)} - \bar{s}_t},
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 28, 2024.
+      <span class="lastupdated">Last updated on Mar 05, 2024.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x1230fb6d0> 
+   <jinja2.runtime.BlockReference object at 0x161078350> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 
