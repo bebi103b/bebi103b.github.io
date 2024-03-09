@@ -26,7 +26,7 @@ Homework due dates
 - :ref:`Homework 3<3. Maximum a posteriori parameter estimation>`: due 5 pm, January 26
 - :ref:`Homework 4<4. Sampling with MCMC>`: due 5 pm, February 2
 - :ref:`Homework 5<5. Inference with Stan>`: due 5 pm, February 9
-- :ref:`Homework 6<6. Practice building and assessing Bayesian models>`: due 5 pm, February 16
+- :ref:`Homework 6<6. MCMC with ion channels>`: due 5 pm, February 16
 - :ref:`Homework 7<7. Model comparison>`: due 5 pm, February 23
 - :ref:`Homework 8<8. Hierarchical models>`: due 5 pm, March 1
 - :ref:`Homework 9<9. Principled pipelines and/or VI and/or hierarchical modeling>`: due 5 pm, March 8
