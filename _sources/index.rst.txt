@@ -11,9 +11,9 @@ If you are enrolled in the course, please read the :ref:`Course policies<Policie
 Useful links
 -------------
 
-- `Ed <https://edstem.org/us/courses/50280/>`_ (used for course communications)
-- `Canvas <https://caltech.instructure.com/courses/6955/assignments>`_ (used for assignment submission/return)
-- `Homework solutions <http://bebi103.caltech.edu/2024b_hw_solutions/hw_solutions.html>`_ (password protected)
+- `Ed <https://edstem.org/us/courses/70298/>`_ (used for course communications)
+- `Canvas <https://caltech.instructure.com/courses/8207/assignments>`_ (used for assignment submission/return)
+- `Homework solutions <http://bebi103.caltech.edu/2025b_hw_solutions/hw_solutions.html>`_ (password protected)
 
 
 People
@@ -23,11 +23,9 @@ People
 
    + `Justin Bois <http://bois.caltech.edu/>`_ (`bois at caltech dot edu`)
 
-- TAs
+- TA
 
    + Kayla Jackson
-   + Zach Martinez
-   + Kellan Moorse
 
 
 .. toctree::
@@ -72,26 +70,25 @@ People
    lessons/26/wrapup
 
 
-.. toctree::
-   :maxdepth: 1
-   :caption: Recitations
+.. .. toctree::
+..    :maxdepth: 1
+..    :caption: Recitations
 
-   recitations/01/probability_review.rst
-   recitations/02/choosing_priors.rst
-   recitations/03/just_hw_help.rst
-   recitations/04/index
-   recitations/05/practice_model_building.ipynb
-   recitations/06/HPC.ipynb
-   recitations/07/sampling_discrete_parameters.ipynb
-   recitations/08/project_proposals.rst
-   recitations/09/just_hw_help.rst
+..    recitations/01/probability_review.rst
+..    recitations/02/choosing_priors.rst
+..    recitations/03/just_hw_help.rst
+..    recitations/04/index
+..    recitations/05/practice_model_building.ipynb
+..    recitations/06/HPC.ipynb
+..    recitations/07/sampling_discrete_parameters.ipynb
+..    recitations/08/project_proposals.rst
+..    recitations/09/just_hw_help.rst
 
 
 .. toctree::
    :maxdepth: 1
    :caption: Homework
 
-   0. Configuring your team <homework/00/hw0.1>
    homework/01/index
    homework/02/index
    homework/03/index
@@ -129,6 +126,7 @@ People
 Previous editions of the course
 ------------------------------- 
 
+- `Winter 2024 <http://bebi103.caltech.edu.s3-website-us-east-1.amazonaws.com/2024b/>`_
 - `Winter 2022 <http://bebi103.caltech.edu.s3-website-us-east-1.amazonaws.com/2022b/>`_
 - `Winter 2021 <http://bebi103.caltech.edu.s3-website-us-east-1.amazonaws.com/2021b/>`_
 - `Winter 2020 <http://bebi103.caltech.edu.s3-website-us-east-1.amazonaws.com/2020b/>`_

@@ -1,9 +1,9 @@
 Meetings
 --------
 
-You may attend one of the two lectures Monday mornings, 9-9:50 am or 10-10:50 am, both in Broad 100. On Wednesdays, you may attend one of the two lab sessions, 9 am–noon in Broad 200 or 1-4 pm in Chen 240a. You should always attend the same lab session, unless you have a conflict and let the course instructors know.
+Lectures are Monday mornings, 9-9:50 am in Broad 100. Lab sessions are on Wednesdays 9 am–noon in Broad 200. Attendance at both lectures and lab sessions is required. Note that the location of class meetings may change.
 
-We also have TA recitations on Thursdays 7–8:30 pm, homework help on Thursdays 8:30–10 pm, and instructor office hours on Mondays 2–3 pm. Attendance at these three activities is not required.
+We also have TA recitations/homework help on Thursdays 7–8:30 pm, and instructor office hours on Tuesdays 2–3 pm. Attendance at these activities is not required.
 
 
 Lab sessions
@@ -15,20 +15,14 @@ The lab sessions are spent working on the week's homework, which always includes
 Submission of assignments
 -------------------------
 
-All assignments are submitted (and graded assignments handed back) via `Canvas <https://caltech.instructure.com/courses/6955/assignments>`_. Lesson exercises are submitted as a single ``.ipynb`` file, and each homework *problem* is submitted separately. (See the Homework section below for more details.)
+All assignments are submitted (and graded assignments handed back) via `Canvas <https://caltech.instructure.com/courses/8207/assignments>`_. Lesson exercises are submitted as a single ``.ipynb`` file, and each homework *problem* is submitted separately. (See the Homework section below for more details.)
+
 
 Lessons and lesson exercises
 ----------------------------
 
-Prior to each lab session, you must go through the lessons listed on the :ref:`schedule page<Weekly schedule>` for the week. These will give you the requisite skills you need to work on the homework problems of the week. To verify completion of the lessons and to identify points of confusion ahead of time, you will individually need to commit a small exercise to the *team repository* in the GitHub group. Place this in the ``lesson_exercises/`` directory in a file named ``l##_your_name.ipynb``, where ``##`` is the number of the lesson. Lesson exercises are due at noon on the Tuesday before the lab session.
-
+Prior to each lab session, you must go through the lessons listed on the :ref:`schedule page<Weekly schedule>` for the week. These will give you the requisite skills you need to work on the homework problems of the week. To verify completion of the lessons and to identify points of confusion ahead of time, you will submit a small exercise. The file name must be ``l##_lastname_firstname.ipynb``, where ``##`` is the number of the lesson exercise. Lesson exercises are due at noon Pacific time on the Sunday before the lab session.
 The lesson exercises are not graded for correctness, but for thoughtfulness. A perfectly reasonable answer to a problem in a lesson exercise is, "I am really having trouble with this concept. Can you please go over it in class?"
-
-
-The BE/Bi 103 GitHub group
---------------------------
-
-A `GitHub group <https://github.com/bebi103>`_ is set up for the class. You will be part of the group through your GitHub account. You will have access to your personal repository for solo homework problems and to a team repository for all other homework and lesson exercise submission. All homeworks and lesson exercises are submitted by pushing to the appropriate GitHub repository.
 
 
 Homework
@@ -37,9 +31,8 @@ Homework
 There are weekly homework assignments. These consist almost entirely of working up real data sets, though there are some theoretical aspects and may be some analysis of fabricated data.
 
 
--  Each homework has a defined due date and time. For most homeworks, this is Friday at 5 pm. 
--  Each homework *problem* must be submitted as ZIP file containing a single Jupyter notebook with file name ``hw#.#_lastname_firstname.ipynb`` and an HTML file with the file name ``hw#.#_lastname_firstname.html``. All cells in the notebook must be pre-run in order prior to submission. (A tip: You should use Jupyter's "Restart and Run All" option under the ``Run`` pulldown menu to make sure your notebook is in runnable, submittable form.) Additionally, any other files, especially Stan files, that are necessary for your homework should also be submitted in the ZIP file. Note that these are all submitted as separate files, but the TAs will only add grading comments to the Jupyter notebook. The exception to this rule is for homework problems where the instructions specifically say they may be submitted as a PDF, in which case a single PDF with file name ``hw#.#_lastname_firstname.pdf`` is submitted.
-- For team-problems, all members of the team submit exactly the same notebook (except with different file names containing the name of the submitter), with the names of all team members at the top of the notebook.
+-  Each homework has a defined due date and time. For most homeworks, this is Friday at 5 pm Pacific time. 
+-  Each homework *problem* must be submitted as ZIP file containing a single Jupyter notebook with file name ``hw#.#_lastname_firstname.ipynb`` and an HTML file with the file name ``hw#.#_lastname_firstname.html``. All cells in the notebook must be pre-run in order prior to submission. (A tip: You should use Jupyter's "Restart and Run All" option under the ``Run`` pulldown menu to make sure your notebook is in runnable, submittable form.) Additionally, any other files, especially Stan files, that are necessary for your homework should also be submitted in the ZIP file. Note that these are all submitted as separate files, but the TAs will only add grading comments to the Jupyter notebook. The exception to this rule is for homework problems where the instructions specifically say they may be submitted as a single Jupyter notebook or as a single PDF, in which case the file name is ``hw#.#_lastname_firstname.ipynb`` or ``hw#.#_lastname_firstname.pdf``, respectively.
 -  All code you wrote to do your assignment must be included in the notebook. If you wrote a Stan file for your work that you compiled into a model ``CmdStanModel`` Python object ``sm``, you must show the code in your Jupyter notebook using ``print(sm.code())``. Code from imported packages that you did not write (e.g., modules distributed by the class instructors) need not be displayed in the notebook. We will often run the code in your notebook; all code must run to get credit.
 -  Since we are running your code to check it, you must have the data sets be accessed in the standard way for the class. That is to say, the following code (or something similar that sets up the correct directory structure) must be at the top of each submitted notebook that uses a data set.
 
@@ -68,18 +61,11 @@ There are weekly homework assignments. These consist almost entirely of working 
       In this class, this at least means using headers to
       delineate parts of the problem.
 
-   Because this is important to make your work clear, the TAs will
-   deduct points if these rules are not followed.
--  There is seldom a single right way to analyze a set of data.
-   You are encouraged to try different approaches to analysis. If
-   you perform an analysis and find problems with it, clearly
-   write what the problems are and how they came about. Even if
-   your analysis does not completely work, but you demonstrate
-   that you thought carefully about it and understand its
-   difficulties, you will get nearly full credit.
+   Because this is important to make your work clear, the TAs will deduct points if these rules are not followed.
+-  There is seldom a single right way to analyze a set of data. You are encouraged to try different approaches to analysis. If you perform an analysis and find problems with it, clearly write what the problems are and how they came about. Even if your analysis does not completely work, but you demonstrate that you thought carefully about it and understand its difficulties, you will get nearly full credit.
 -  You are expected to submit all assignments on time. No late assignments will be accepted with exceptions outlined below.
 
-   + You have a total of six "grace days" you can use throughout the term. If you use grace days, your homework may be submitted late without penalty. A grace day is spent for each 24 hours, or portion thereof, that a given homework is late. For example, if a homework is due at noon on Friday, but you turn it in at 3 pm on Monday, you spend two grace days, the first one being spent at noon on Saturday, the second at noon on Sunday, and the third for the remaining three hours on Monday. After you spend six grace days for the term, no late homeworks will be accepted.
+   + You have a total of six "grace days" you can use throughout the term. If you use grace days, your homework may be submitted late without penalty. A grace day is spent for each 24 hours, or portion thereof, that a given homework is late. For example, if a homework is due at 5 pm on Friday, but you turn it in at 8 pm on Monday, you spend three grace days, the first one being spent at noon on Saturday, the second at noon on Sunday, and the third for the remaining three hours on Monday. After you spend six grace days for the term, no late homeworks will be accepted.
    + Grace days may not be applied to lesson exercises. No late lesson exercises will be accepted.
    + If you have an extended illness requiring you to spend more than six grace days, you need to provide a note from a health care provider.
    + If you have a CASS accommodation, you need to communicate it to the instructor within the first week of class. If your accommodation allows for extra time on coursework, you need to let the instructor know you will be exercising that accommodation at least 24 hours before the homework is due.
@@ -89,39 +75,41 @@ There are weekly homework assignments. These consist almost entirely of working 
 Grading
 -------
 
-90% of your grade is determined from homework. 10% of your grade is determined from submission of lesson exercises. 
+I have not yet decided on whether we will have an exam. We will announce if we will have a final exam by the end of week 5 of the term. If we do have a final exam, the grade breakdown is as follows.
 
+- 5% lesson exercises
+- 20% final exam
+- 75% homework
+
+If we do not have a final exam, the grade breakdown is
+
+- 5% lesson exercises
+- 95% homework.
+
+In order to pass the course, all homework and the final exam (if given) must be completed. Note that you can turn in homework after all grace days are spent (but before the official end of the term) in order to ensure passage of the class, even though you will not receive points for the late homework. Homeworks or exams that are nullified due to Honor Code violations are not considered complete, and you will therefore not pass the class if you violate the Honor Code.
 
 
 Collaboration policy and Honor Code
 -----------------------------------
 
-Some of the data we will use in this course is unpublished,
-generously given to us by researchers both from Caltech and from
-other institutions. They have given us their data in good faith
-that it will be used only in this class. It is therefore
-imperative that you do not disseminate data sets that I ask you
-not to distribute anywhere outside of this class.
+Most of the data sets we will use are publicly available. However, some of the data we will use in this course is unpublished, generously given to us by researchers both from Caltech and from other institutions. They have given us their data in good faith that it will be used only in this class. It is therefore imperative that you do not disseminate data sets that I ask you not to distribute anywhere outside of this class.
 
-You may work on your assignments with classmates, but each submission must be your own. You must indicate with whom you collaborated on the top of each problem. The exceptions are team-problems; you and your teammate(s) submit exactly the same assignment.
+You may work on your assignments with classmates, but each submission must be your own. You must indicate with whom you collaborated on the top of each problem.
 
 You may not consult solutions of homework problems from previous
 editions of this course.
 
-You are free to consult references, literature, websites, blogs,
-etc., outside of the materials presented in class. (The exceptions
-are places where homework problems are completely worked out, such
-as previous editions of this or other courses, or other students'
-work.) If you do, you must
-properly cite the sources in your homework.
+You are free to consult references, literature, websites, blogs, etc., outside of the materials presented in class. (The exceptions are places where homework problems are completely worked out, such as previous editions of this or other courses, or other students' work.) If you do, you must properly cite the sources in your homework.
 
-Except for when we explicitly ask you to use them, you may not use large language models (LLMs; examples include ChatGPT and GPT-4) or other AI tools. For looking up resources and documentation, Google or other search engines should work just fine. I have this rule with the understanding that many scientists and data scientists actively use LLMs in their work. I am not trying to deny you an important tool; quite the contrary. In order to effectively use LLMs, you need to have a basal competence to be able to understand what the LLM gives you, and even what to ask of it. In this course, we are building that competence, so using LLMs will result in confusion and are best avoided.
+Except for when we explicitly ask you to use them, you may not use large language models (LLMs; ; examples include ChatGPT, GPT-4, Llama, Gemini, Claude, Cursor, and CoPilot) or other AI tools. For looking up resources and documentation, Google or other search engines should work just fine. I have this rule with the understanding that many scientists and data scientists actively use LLMs in their work. I am not trying to deny you an important tool; quite the contrary. In order to effectively use LLMs, you need to have a basal competence to be able to understand what the LLM gives you, and even what to ask of it. In this course, we are building that competence, so using LLMs will result in confusion and are best avoided.
+
+I want to reiterate that I am serious about using LLMs. In recent courses, we have had far too many students using chatbots. Do not do it.
 
 
 Course communications
 ---------------------
 
-You should use the `course Ed page <https://edstem.org/us/courses/50280/>`_ for all questions related to the course. Note that you may post private messages to course staff via Ed if you wish. If you need to communicate with course staff about a private matter, you should email the instructor.
+You should use the `course Ed page <https://edstem.org/us/courses/70298/>`_ for all questions related to the course. Note that you may post private messages to course staff via Ed if you wish. If you need to communicate with course staff about a private matter, you should email the instructor.
 
 Most of our mass communication with you will be through Ed, so be sure to set your Ed account to give you email alerts if necessary.
 

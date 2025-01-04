@@ -3,16 +3,10 @@ Schedule overview
 
 *The schedule information on this page is subject to changes.*
 
-- Lab
-	+ Section 1: Wednesdays, 9 am–noon, Broad 200
-	+ Section 2: Wednesdays, 1–4 pm, Chen 240a
-- Lecture
-	+ Section 1: Mondays, 9–10 am, Broad 100
-	+ Section 2: Mondays, 10–11 am, Broad 100
-- TA recitation: Thursdays, 7–8:30 pm, Chen 100
-- TA homework help: Tuesdays, 2:30–4 pm, Broad 200
-- Extra TA homework help: Thursdays, 8:30–10 pm, Chen 100
-- Instructor office hours: Mondays, 2-3 pm, Kerkchoff B123
+- Lab: Wednesdays, 9 am–noon, Broad 200
+- Lecture: Mondays, 9–10 am, Broad 100
+- TA recitation and homework help: Thursdays, 5–7 pm, B123 Kerckhoff
+- Instructor office hours: Tuesdays, 2:30-3:30 pm, Kerkchoff B123
 
 
 ----
@@ -21,17 +15,16 @@ Schedule overview
 Homework due dates
 ------------------
 
-- :ref:`Homework 1<1. Intuitive generative modeling>`: due 5 pm, January 12
-- :ref:`Homework 2<2. Analytical and graphical methods for analysis of the posterior>`: due 5 pm, January 19
-- :ref:`Homework 3<3. Maximum a posteriori parameter estimation>`: due 5 pm, January 26
-- :ref:`Homework 4<4. Sampling with MCMC>`: due 5 pm, February 2
-- :ref:`Homework 5<5. Inference with Stan>`: due 5 pm, February 9
-- :ref:`Homework 6<6. MCMC with ion channels>`: due 5 pm, February 16
-- :ref:`Homework 7<7. Model comparison>`: due 5 pm, February 23
-- :ref:`Homework 8<8. Hierarchical models>`: due 5 pm, March 1
-- :ref:`Homework 9<9. Principled pipelines and/or VI and/or hierarchical modeling>`: due 5 pm, March 8
-- :ref:`Homework 10<10. The grand finale>`: due 4 pm, March 15
-- :ref:`Homework 11<11. Course feedback>`: due 5 pm, March 15
+- :ref:`Homework 1<1. Intuitive generative modeling>`: due 5 pm, January 10
+- :ref:`Homework 2<2. Analytical and graphical methods for analysis of the posterior>`: due 5 pm, January 17
+- :ref:`Homework 3<3. Maximum a posteriori parameter estimation>`: due 5 pm, January 24
+- :ref:`Homework 4<4. Sampling with MCMC>`: due 5 pm, January 31
+- :ref:`Homework 5<5. Inference with Stan>`: due 5 pm, February 7
+- :ref:`Homework 6<6. MCMC with ion channels>`: due 5 pm, February 14
+- :ref:`Homework 7<7. Model comparison>`: due 5 pm, February 21
+- :ref:`Homework 8<8. Hierarchical models>`: due 5 pm, February 28
+- :ref:`Homework 9<9. Principled pipelines and/or VI and/or hierarchical modeling>`: due 5 pm, March 7
+- :ref:`Homework 10<10. The grand finale>`: due 5 pm, March 14
 
 
 ----
@@ -40,15 +33,15 @@ Homework due dates
 Lesson exercise due dates
 -------------------------
 
-- :ref:`Lesson exercise 1<E1. To be completed after lesson 5>`: due noon, January 9
-- :ref:`Lesson exercise 2<E2. To be completed after lesson 6>`: due noon, January 16
-- :ref:`Lesson exercise 3<E3. To be completed after lesson 11>`: due noon, January 23
-- :ref:`Lesson exercise 4<E4. To be completed after lesson 13>`: due noon, January 30
-- :ref:`Lesson exercise 5<E5. To be completed after lesson 16>`: due noon, February 6
-- :ref:`Lesson exercise 6<E6. To be completed after lesson 18>`: due noon, February 13
-- :ref:`Lesson exercise 7<E7. To be completed after lesson 21>`: due noon, February 20
-- :ref:`Lesson exercise 8<E8. To be completed after lesson 23>`: due noon, February 27
-- :ref:`Lesson exercise 9<E9. To be completed after lesson 25>`: due noon, March 5
+- :ref:`Lesson exercise 1<E1. To be completed after lesson 5>`: due noon, January 14
+- :ref:`Lesson exercise 2<E2. To be completed after lesson 6>`: due noon, January 21
+- :ref:`Lesson exercise 3<E3. To be completed after lesson 10>`: due noon, January 28
+- :ref:`Lesson exercise 4<E4. To be completed after lesson 13>`: due noon, February 4
+- :ref:`Lesson exercise 5<E5. To be completed after lesson 16>`: due noon, February 11
+- :ref:`Lesson exercise 6<E6. To be completed after lesson 18>`: due noon, February 18
+- :ref:`Lesson exercise 7<E7. To be completed after lesson 20>`: due noon, February 25
+- :ref:`Lesson exercise 8<E8. To be completed after lesson 22>`: due noon, March 4
+- :ref:`Lesson exercise 9<E9. To be completed after lesson 25>`: due noon, March 11
 
 
 ----
@@ -62,49 +55,41 @@ The lessons for each Wednesday must be read ahead of time and associated lesson 
 - **Week 0**
 	+ :ref:`Lesson 00<0. Preparing for the course>`: Preparing for the course
 - **Week 1**
-	+ W 01/03: :ref:`Lesson 01<1. Probability and the logic of scientific reasoning>`: Probability and scientific logic (lecture)
+	+ M 01/06: :ref:`Lesson 01<1. Probability and the logic of scientific reasoning>`: Probability and scientific logic (lecture)
+	+ W 01/08: Intuitive modeling (no reading)
 - **Week 2**
-	+ M 01/08: :ref:`Lesson 02<2. Introduction to Bayesian modeling>`: Introduction to Bayesian modeling (lecture)
-	+ W 01/10: :ref:`Lesson 03<3. Plotting posteriors>`: Plotting posteriors
-	+ W 01/10: :ref:`Lesson 04<4. Marginalization by numerical quadrature>`: Marginalization by integration
-	+ W 01/10: :ref:`Lesson 05<5. Conjugacy>`: Conjugacy
-	+ Th 01/11: :ref:`Recitation 01<R1: Review of probability>`: Probability review
+	+ M 01/13: :ref:`Lesson 02<2. Introduction to Bayesian modeling>`: Introduction to Bayesian modeling (lecture)
+	+ W 01/15: :ref:`Lesson 03<3. Plotting posteriors>`: Plotting posteriors
+	+ W 01/15: :ref:`Lesson 04<4. Marginalization by numerical quadrature>`: Marginalization by integration
+	+ W 01/15: :ref:`Lesson 05<5. Conjugacy>`: Conjugacy
 - **Week 3**
-	+ M 01/15: No class; Martin Luther King Day
-	+ W 01/17: :ref:`Lesson 07<7. Introduction to Markov chain Monte Carlo>`: Introduction to Markov chain Monte Carlo (lecture)
-	+ W 01/17: :ref:`Lesson 06<6. Parameter estimation by optimization>`: Parameter estimation by optimization
-	+ Th 01/18: :ref:`Recitation 02<R2: Choosing priors and review of optimization>`: Choosing priors and review of optimization
+	+ M 01/20: No class; Martin Luther King Day
+	+ W 01/22: :ref:`Lesson 06<6. Parameter estimation by optimization>`: Parameter estimation by optimization
 - **Week 4**
-	+ M 01/22: :ref:`Lesson 11<11. Display of MCMC results>`: Display of MCMC samples (lecture)
-	+ W 01/24: :ref:`Lesson 08<8. Introduction to MCMC with Stan>`: Introduction to MCMC with Stan
-	+ W 01/24: :ref:`Lesson 09<9. Mixture models and label switching with MCMC>`: Mixture models and label switching
-	+ W 01/24: :ref:`Lesson 10<10. Variate-covariate models with MCMC>`: Regression with Stan
-	+ Th 01/25: No recitation; only homework help
+	+ M 01/27: :ref:`Lesson 07<7. Introduction to Markov chain Monte Carlo>`: Introduction to Markov chain Monte Carlo (lecture)
+	+ M 01/27: :ref:`Lesson 11<11. Display of MCMC results>`: Display of MCMC samples (lecture)
+	+ W 01/29: :ref:`Lesson 08<8. Introduction to MCMC with Stan>`: Introduction to MCMC with Stan
+	+ W 01/29: :ref:`Lesson 09<9. Mixture models and label switching with MCMC>`: Mixture models and label switching
+	+ W 01/29: :ref:`Lesson 10<10. Variate-covariate models with MCMC>`: Variate-covariate models
 - **Week 5**
-	+ M 01/29: :ref:`Lesson 14<14. Collector's box of distributions>`: Collector's box of distributions (lecture)
-	+ W 01/31: :ref:`Lesson 12<12. Model building with prior predictive checks>`: Model building with prior predictive checks
-	+ W 01/31: :ref:`Lesson 13<13. Posterior predictive checks>`: Posterior predictive checks
-	+ Th 02/01: :ref:`Recitation 04<R4. Introduction to Hamiltonian Monte Carlo>`: Introduction to Hamiltonian Monte Carlo
+	+ M 02/03: :ref:`Lesson 14<14. Collector's box of distributions>`: Collector's box of distributions (lecture)
+	+ W 02/05: :ref:`Lesson 12<12. Model building with prior predictive checks>`: Model building with prior predictive checks
+	+ W 02/05: :ref:`Lesson 13<13. Posterior predictive checks>`: Posterior predictive checks
 - **Week 6**
-	+ M 02/05: :ref:`Lesson 17<17. Model comparison>`: Model comparison (lecture)
-	+ W 02/07: :ref:`Lesson 15<15. MCMC diagnostics>`: MCMC diagnostics
-	+ W 02/07: :ref:`Lesson 16<16. A diagnostics case study: Artificial funnel of hell>`: The Funnel of Hell and uncentering
-	+ Th 02/08: :ref:`Recitation 05<R5: Bayesian model building>`: Practice model building
+	+ M 02/10: :ref:`Lesson 17<17. Model comparison>`: Model comparison (lecture)
+	+ W 02/12: :ref:`Lesson 15<15. MCMC diagnostics>`: MCMC diagnostics
+	+ W 02/12: :ref:`Lesson 16<16. A diagnostics case study: Artificial funnel of hell>`: The Funnel of Hell and uncentering
 - **Week 7**
-	+ M 02/12: :ref:`Lesson 19<19. Hierarchical models>`: Hierarchical models (lecture)
-	+ W 02/14: :ref:`Lesson 18<18. Model comparison in practice>`: Model comparison in practice
-	+ Th 02/15: :ref:`Recitation 06<R6: MCMC using Caltech's HPC>`: MCMC using Caltech's HPC
+	+ M 02/17: :ref:`Lesson 19<19. Hierarchical models>`: Hierarchical models (lecture)
+	+ W 02/19: :ref:`Lesson 18<18. Model comparison in practice>`: Model comparison in practice
 - **Week 8**
-	+ M 02/19: No class; Presidents Day
-	+ W 02/21: :ref:`Lesson 21<21. Principled analysis pipelines>`: Principled workflows (lecture)
-	+ W 02/21: :ref:`Lesson 20<20. Implementation of hierarchical models>`: Implementation of hierarchical models
-	+ Th 02/22: :ref:`Recitation 07<R7: Sampling discrete parameters with Stan>`: Sampling discrete parameters with Stan
+	+ M 02/24: No class; Presidents Day
+	+ W 02/26: :ref:`Lesson 21<21. Principled analysis pipelines>`: Principled workflows (lecture)
+	+ W 02/26: :ref:`Lesson 20<20. Implementation of hierarchical models>`: Implementation of hierarchical models
 - **Week 9**
-	+ M 02/26: :ref:`Lesson 25<25. Variational Bayesian inference>`: Variational inference
-	+ W 02/28: :ref:`Lesson 22<22: Simulation based calibration and related checks in practice>`: Simulation-based calibration in practice
-	+ Th 02/29: :ref:`Recitation 08<R8: Discussion of HW 10 project proposals>`: Discussion of HW 10 project proposals
+	+ M 03/03: :ref:`Lesson 25<25. Variational Bayesian inference>`: Variational inference
+	+ W 03/05: :ref:`Lesson 22<22: Simulation based calibration and related checks in practice>`: Simulation-based calibration in practice
 - **Week 10**
-	+ M 03/04: :ref:`Lesson 26<26: Wrap-up>`: Course wrap-up (lecture)
-	+ W 03/06: Work on final homework
-	+ Th 03/08: No recitation; only homework help
+	+ M 03/10: :ref:`Lesson 26<26: Wrap-up>`: Course wrap-up (lecture)
+	+ W 03/12: Work on final homework
 

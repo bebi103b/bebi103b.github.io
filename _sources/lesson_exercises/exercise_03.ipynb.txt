@@ -4,7 +4,7 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "# E3. To be completed after lesson 11\n",
+    "# E3. To be completed after lesson 10\n",
     "\n",
     "<hr />"
    ]

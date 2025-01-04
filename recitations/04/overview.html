@@ -19,6 +19,7 @@
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
         <script src="../../_static/clipboard.min.js"></script>
         <script src="../../_static/copybutton.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -26,9 +27,7 @@
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="More details on Hamiltonian Monte Carlo" href="hmc.html" />
-    <link rel="prev" title="R4. Introduction to Hamiltonian Monte Carlo" href="index.html" /> 
+    <link rel="search" title="Search" href="../../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -66,7 +65,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/08/index.html">8. Introduction to MCMC with Stan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/09/mixture_model_stan.html">9. Mixture models and label switching with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/10/variate_covariate_with_stan.html">10. Variate-covariate models with MCMC</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_03.html">E3. To be completed after lesson 11</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_03.html">E3. To be completed after lesson 10</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/11/index.html">11. Display of MCMC results</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/12/prior_predictive_checks.html">12. Model building with prior predictive checks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/13/posterior_predictive_checks.html">13. Posterior predictive checks</a></li>
@@ -80,62 +79,19 @@
 <li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_06.html">E6. To be completed after lesson 18</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/19/index.html">19. Hierarchical models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/20/hierarchical_implementation.html">20. Implementation of hierarchical models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_07.html">E7. To be completed after lesson 21</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_07.html">E7. To be completed after lesson 20</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/21/sbc.html">21. Principled analysis pipelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/22/sbc_in_practice.html">22: Simulation based calibration and related checks in practice</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_08.html">E8. To be completed after lesson 23</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_08.html">E8. To be completed after lesson 22</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/23/intro_to_gps.html">23. Introduction to Gaussian processes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/24/index.html">24. Implementation of Gaussian processes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/25/variational_inference.html">25. Variational Bayesian inference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lesson_exercises/exercise_09.html">E9. To be completed after lesson 25</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../lessons/26/wrapup.html">26: Wrap-up</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Recitations</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../01/probability_review.html">R1: Review of probability</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../02/choosing_priors.html">R2: Choosing priors and review of optimization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03/just_hw_help.html">R3: Just homework help</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">R4. Introduction to Hamiltonian Monte Carlo</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Overview of Hamiltonian Monte Carlo</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#Notation"><em>Notation</em></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Motivating-interest:"><em>Motivating interest:</em></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Features-of-a-high-dimensional-space-Q:"><em>Features of a high-dimensional space Q:</em></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#But-the-question-then-remains:-how-do-we-design-an-algorithm-to-sample-the-typical-set?"><em>But the question then remains: how do we design an algorithm to sample the typical set?</em></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#So-this-all-leads-us-to-...-🎉-Hamiltonian-Monte-Carlo!-🎉"><em>So this all leads us to … 🎉 Hamiltonian Monte Carlo! 🎉</em></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#The-Ideal-Hamiltonian-Markov-Transition"><em>The Ideal Hamiltonian Markov Transition</em></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#Actual-Implementation-of-Hamiltonian-Markov-Transition-Considerations"><em>Actual Implementation of Hamiltonian Markov Transition Considerations</em></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#(A)-Optimizing-Choice-of-Kinetic-Energy-K(q,-p)">(A) Optimizing Choice of Kinetic Energy <span class="math notranslate nohighlight">\(K(q, p)\)</span></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#(B)-Integration-method">(B) Integration method</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#(C)-Integration-time">(C) Integration time</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#Concluding-thoughts"><em>Concluding thoughts</em></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="hmc.html">More details on Hamiltonian Monte Carlo</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../05/practice_model_building.html">R5: Bayesian model building</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../06/HPC.html">R6: MCMC using Caltech’s HPC</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../07/sampling_discrete_parameters.html">R7: Sampling discrete parameters with Stan</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../08/project_proposals.html">R8: Discussion of HW 10 project proposals</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../09/just_hw_help.html">R9: Just homework help</a></li>
-</ul>
 <p class="caption" role="heading"><span class="caption-text">Homework</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/01/index.html">1. Intuitive generative modeling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../homework/02/index.html">2. Analytical and graphical methods for analysis of the posterior</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../homework/03/index.html">3. Maximum a posteriori parameter estimation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../homework/04/index.html">4. Sampling with MCMC</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../homework/05/index.html">5. Inference with Stan</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../homework/06/index.html">6. MCMC with ion channels</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../homework/07/index.html">7. Model comparison</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../homework/08/index.html">8. Hierarchical models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../homework/09/index.html">9. Principled pipelines and/or VI and/or hierarchical modeling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../homework/10/index.html">10. The grand finale</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../homework/11/hw11.html">11. Course feedback</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -150,7 +106,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../../policies.html#lab-sessions">Lab sessions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../policies.html#submission-of-assignments">Submission of assignments</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../policies.html#lessons-and-lesson-exercises">Lessons and lesson exercises</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../policies.html#the-be-bi-103-github-group">The BE/Bi 103 GitHub group</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../policies.html#homework">Homework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../policies.html#grading">Grading</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../policies.html#collaboration-policy-and-honor-code">Collaboration policy and Honor Code</a></li>
@@ -177,7 +132,6 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="index.html">R4. Introduction to Hamiltonian Monte Carlo</a></li>
       <li class="breadcrumb-item active">Overview of Hamiltonian Monte Carlo</li>
   <li class="wy-breadcrumbs-aside">
     
@@ -220,7 +174,7 @@
 <li><p>There is much more volume outside any given neighborhood than inside of it (consider simple case of partitioning 1D line, 2D box, 3D cube). We are thus interested in the neighborhoods in Q that balance both the denisty and volume in any given integration/expectation.</p></li>
 <li><p>Volume and density end up pulling the mass to two different extremes—the result is that the predominant concentration of mass sits away from either extreme (high density: at the mode, concentrated in small volume blocks, high volume: mostly out in the tails, each “block” contributes small density, but there is an overwhelming number of blocks!)</p></li>
 <li><p>This all motivates the definition of a <strong>typical set</strong>, the region of parameter space <span class="math notranslate nohighlight">\(Q\)</span> (volume) where most of our probability mass, the integrated quantity <span class="math notranslate nohighlight">\(\pi(q) \mathrm{d}q\)</span>, sits.</p>
-<center><p><img alt="4043d0f997c64d449799fda2c6ba61c1" class="no-scaled-link" src="../../_images/typical_set.png" style="width: 325px;" /></p>
+<center><p><img alt="4fcb63fc0bcc4190b98ebbdffaea94f5" class="no-scaled-link" src="../../_images/typical_set.png" style="width: 325px;" /></p>
 </center></li>
 </ul>
 </div>
@@ -263,8 +217,8 @@ can try pushing a larger acceptance probability, but the small jumps lead to an 
 </li>
 </ul>
 <p>The task of finding a typical set then translates to the objective of placing a satellite in a <em>stable orbit</em> around the planet. Intuitively, a stable orbit conserves energy, otherwise we either crash into the planet (being pulled towards the mode of our target distribution/heavily biased by the density), or eject out into space (running away from the mode <em>and</em> the typical set, biased by the volume).</p>
-<center><p><img alt="1467f6710cd748809d1702b492596c67" class="no-scaled-link" src="../../_images/vectorfield1.png" style="width: 250px;" /></p>
-</center><center><p><img alt="84820968b9e7443ea57f08fadcd5ef83" class="no-scaled-link" src="../../_images/vectorfield2.png" style="width: 250px;" /></p>
+<center><p><img alt="a4346447a18d4b0594ab44dbaedf5319" class="no-scaled-link" src="../../_images/vectorfield1.png" style="width: 250px;" /></p>
+</center><center><p><img alt="d2a39852f45249e8abcf3d02071474c0" class="no-scaled-link" src="../../_images/vectorfield2.png" style="width: 250px;" /></p>
 </center><p>To do so, we intuit that we need to introduce some auxiliary <em>momentum</em> parameters (denote with <span class="math notranslate nohighlight">\(p\)</span>). This doubles our parameter space from D to 2xD-dimensional space; together with our target parameter space, we call this the <strong>phase space</strong>.</p>
 <div class="math notranslate nohighlight">
 \[q_n \rightarrow (q_n, p_n)\]</div>
@@ -297,7 +251,7 @@ E &= H(q, p) \\[0.5em]
 <div class="math notranslate nohighlight">
 \[\pi(p, q) = \pi(\Omega_E | E) \pi(E)\]</div>
 <p>where <span class="math notranslate nohighlight">\(\pi(E)\)</span> is the marginal energy distribution, and <span class="math notranslate nohighlight">\(\pi(\Omega_E | E)\)</span> the microcanonical distribution. You can easily visualize <span class="math notranslate nohighlight">\(\pi(E)\)</span> as a distribution over the rings you see below.</p>
-<center><p><img alt="22c879a83fc84b5cb9197715e95e16f1" class="no-scaled-link" src="../../_images/level_sets.png" style="width: 315px;" /></p>
+<center><p><img alt="dec6dfe54d0548799d384d5bd3802fb2" class="no-scaled-link" src="../../_images/level_sets.png" style="width: 315px;" /></p>
 </center><p>Now that we have all this math set-up, let’s see what we can actually do with it!</p>
 </div>
 <div class="section" id="The-Ideal-Hamiltonian-Markov-Transition">
@@ -322,8 +276,8 @@ E &= H(q, p) \\[0.5em]
 <div class="math notranslate nohighlight">
 \[\boxed{(q, p) \rightarrow q }\]</div>
 <p>Altogether, this is what four transitions looks like:</p>
-<center><p><img alt="0b1606e186f043c290264127a1ccc731" class="no-scaled-link" src="../../_images/lifting.png" style="width: 700px;" /></p>
-</center><p><img alt="e6d7b36a9b7a468cb4928b52e395ef45" class="no-scaled-link" src="../../_images/darkorange_pause_symbol.png" style="width: 40px;" /></p>
+<center><p><img alt="468a14814dd14910b1cac7cde9ad7c92" class="no-scaled-link" src="../../_images/lifting.png" style="width: 700px;" /></p>
+</center><p><img alt="a3dd1d1ccfeb4570854aa236b54bdb67" class="no-scaled-link" src="../../_images/darkorange_pause_symbol.png" style="width: 40px;" /></p>
 <p>Let’s pause for a moment. What have we actually done here?</p>
 <p>We started off with some intuition about momentum, and introduced the concept of a phase space. This doubled our dimension—so every <span class="math notranslate nohighlight">\(q_i\)</span> dimension now has some associated momentum <span class="math notranslate nohighlight">\(p_i\)</span>. So where/why did the Hamiltonian come in?</p>
 <p>We essentially needed to somehow expand our probability space over our momentum dimensions, and the very definition that unlocked this for us was the following:</p>
@@ -377,7 +331,7 @@ E &= H(q, p) \\[0.5em]
 <div class="math notranslate nohighlight">
 \[\pi(p | q) = \mathcal{N}(p | 0, \Sigma(q))\]</div>
 <p><em>Motivation</em>: We want to choose a kinetic energy such that the microcanonical distribution <span class="math notranslate nohighlight">\(\pi(E|q)\)</span> looks like the marginal energy distribution<span class="math notranslate nohighlight">\(\pi(E)\)</span> (<em>left</em>). Otherwise, our chain may not be able to completely explore the tails of the target distribution (<em>right</em>).</p>
-<center><p><img alt="4db94d5b2a33441887fd4ea9b5d22e8d" class="no-scaled-link" src="../../_images/energy_density.png" style="width: 600px;" /></p>
+<center><p><img alt="c1a9905d52b04d23a038f46c0e0a1e6b" class="no-scaled-link" src="../../_images/energy_density.png" style="width: 600px;" /></p>
 </center><p>E-BFMI: Stan is already doing the work of choosing <span class="math notranslate nohighlight">\(K\)</span> and tuning it; on the user end, we see the E-BFMI diagnostic that tells us how Stan’s algorithms are doing on this front.</p>
 <p>The empirical Bayesian fraction of missing information identifies when the momentum resampling is inefficiently exploring the energy level sets, and is essentially the ratio:</p>
 <div class="math notranslate nohighlight">
@@ -392,9 +346,9 @@ E &= H(q, p) \\[0.5em]
 <ul class="simple">
 <li><p><strong>Symplectic integrators</strong> are a family of numerical solvers that are robust to drift; they have the special property of <em>preserving phase space volume</em>! Their errors lead to trajectories that oscillate around the exact level set, even as we integrate for longer and longer times.</p></li>
 </ul>
-<center><p><img alt="8f0d0701a4814297ba58d8d560632722" class="no-scaled-link" src="../../_images/integration_sad.png" style="width: 300px;" /><span class="math notranslate nohighlight">\(\hspace{3em}\)</span><img alt="edb0e556ca2b407eb771c8704d521135" class="no-scaled-link" src="../../_images/integration_happy.png" style="width: 300px;" /></p>
+<center><p><img alt="e77db1e55f3144a1ab196b809156964f" class="no-scaled-link" src="../../_images/integration_sad.png" style="width: 300px;" /><span class="math notranslate nohighlight">\(\hspace{3em}\)</span><img alt="c76bda753d0343149bbb516ac586c887" class="no-scaled-link" src="../../_images/integration_happy.png" style="width: 300px;" /></p>
 </center><p>Note: this is where the leapfrog integrator is used, given some time discretization step size <span class="math notranslate nohighlight">\(\epsilon\)</span>.</p>
-<center><p><img alt="ae5ef3f87b98458285b966fb337e226e" class="no-scaled-link" src="../../_images/leapfrog.png" style="width: 260px;" /></p>
+<center><p><img alt="d60f5b63191843058a8598b94029462d" class="no-scaled-link" src="../../_images/leapfrog.png" style="width: 260px;" /></p>
 </center><p>However; even symplectic integrator suffers from regions of <strong>high curvature</strong>; this induces a <strong>divergence</strong>. - From a modeling perspective, one approach to eliminate divergences is <a class="reference external" href="https://bebi103b.github.io/lessons/17/funnel_of_hell.html?highlight=noncenter#Noncentering">noncentering</a>. This greatly smoothens out regions of high curvature. - From a tuning perspective, we can try <em>decreasing the step size :math:`epsilon`</em> by <em>increasing ``adapt_delta``</em>. If divergences persist regardless
 of how small the step size, this calls for stronger priors or an alternative representation of the model. - Use the divergences diagnostically; their existence <em>should</em> prompt suspicion, as the estimators (as is) <em>will be biased</em>.</p>
 </div>
@@ -404,7 +358,7 @@ of how small the step size, this calls for stronger priors or an alternative rep
 <li><p>Now that we have the method, we need to know just how long to integrate for each transition.</p></li>
 <li><p>Integration time aims to explore “just enough” of each level set. But how do we quantify this idea on computational time scales?</p></li>
 </ul>
-<center><p><img alt="8284721069854d1c87da7cdaf1762961" class="no-scaled-link" src="../../_images/sojourn.png" style="width: 375px;" /></p>
+<center><p><img alt="2c51719a48fa46d8a46c5f51eddffc09" class="no-scaled-link" src="../../_images/sojourn.png" style="width: 375px;" /></p>
 </center><ul class="simple">
 <li><p>Here’s a simple thought experiment: Think of a posterior <span class="math notranslate nohighlight">\(\pi_\beta(q)\)</span> of below form, where <span class="math notranslate nohighlight">\(\beta\)</span> describes how heavy our posterior tail is. With a Euclidean-Gaussian KE (denoted <span class="math notranslate nohighlight">\(\mathcal{N}\)</span>), the optimal integration time <span class="math notranslate nohighlight">\(T_{\mathrm{optimal}}\)</span> scales with the energy of the level set <span class="math notranslate nohighlight">\(H(q,p)\)</span> containing the trajectory:</p></li>
 </ul>
@@ -427,20 +381,17 @@ complex to solve. In implementation and usage, the pathologies we might face mot
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="index.html" class="btn btn-neutral float-left" title="R4. Introduction to Hamiltonian Monte Carlo" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="hmc.html" class="btn btn-neutral float-right" title="More details on Hamiltonian Monte Carlo" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
+          <footer>
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Mar 08, 2024.
+      <span class="lastupdated">Last updated on Jan 03, 2025.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x157712710> 
+   <jinja2.runtime.BlockReference object at 0x302a1ad50> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

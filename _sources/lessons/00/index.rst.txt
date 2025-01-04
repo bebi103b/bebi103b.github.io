@@ -6,14 +6,13 @@
 The statistical inference in this course requires some computations that may take significant computing resources, several hours on multiple cores for some problems later in the term. There are a few approaches you can take.
 
 #. **Configure your own machine (preferred)**. There are several advantages, including that you learn how to set up your own machine and that you do not need an internet connection to do your work. The disadvantage is that for large calculations, your computer may get loud and hot and unavailable for other computing you need to do with it during the time your computations are running.
-#. **Use Google Colab**. You can use up to two (pretty fast) cores for free. The biggest disavantage is that if you do not interact with your Colab instance, you can get disconnected, which can get annoying because you will have to babysit large calculations. You can upgrade to Colab Pro, but that is not free.
-#. **Use AWS**. The disadvantages are that it is not free and that you need an internet connection. The advantages are that you can use very large, fast machines, all software is pre-built, and you have can do real-time collaboration in a Jupyter notebook with it.
+#. **Use Google Colab**. You can use up to two (pretty fast) cores for free. The biggest disadvantage is that if you do not interact with your Colab instance, you can get disconnected, which can get annoying because you will have to babysit large calculations. You can upgrade to Colab Pro, but that is not free.
+#. **Use other cloud resources**. You could also use Microsoft Azure, AWS, or other commercial cloud services, but we leave that to you to set up. You may also use Caltech's high performance computing (HPC) resources.
 
-In this section of the lesson, we will go through setup of your own machine, followed by instructions on how to use Google Colab and AWS.
+In this section of the lesson, we will go through setup of your own machine, followed by instructions on how to use Google Colab.
 
 .. toctree::
    :maxdepth: 1
 
    setup.ipynb
    colab.ipynb
-   aws_setup.ipynb
