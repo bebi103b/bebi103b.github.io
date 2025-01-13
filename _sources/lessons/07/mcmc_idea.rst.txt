@@ -50,7 +50,7 @@ where :math:`p` is the value of the CDF, ranging from zero to one. We first draw
        y_vals = [u, u, 0]
        p.line(x_vals, y_vals, color="gray", line_width=0.5)
 
-   p.x(np.zeros_like(udraws), udraws, color="black", line_width=0.5, size=7)
+   p.scatter(np.zeros_like(udraws), udraws, marker="x", color="black", line_width=0.5, size=7)
    p.scatter(
        st.gamma.ppf(udraws, alpha, loc=0, scale=1 / beta),
        np.zeros_like(udraws),
