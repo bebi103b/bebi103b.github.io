@@ -3,7 +3,7 @@ Schedule overview
 
 *The schedule information on this page is subject to changes.*
 
-- Lab: Wednesdays, 9 am–noon, Broad 200
+- Lab: Wednesdays, 9 am–noon, Kerckhoff B123
 - Lecture: Mondays, 9–10 am, Broad 100
 - TA recitation and homework help: Thursdays, 5–7 pm, B123 Kerckhoff
 - Instructor office hours: Tuesdays, 2:30-3:30 pm, Kerkchoff B123
