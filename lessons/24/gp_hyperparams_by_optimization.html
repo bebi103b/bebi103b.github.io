@@ -1,28 +1,28 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gaussian process hyperparameters by optimization &mdash; BE/Bi 103 b  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=22ddcdb3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
 
   
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
-        <script src="../../_static/clipboard.min.js"></script>
-        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=9bcbadda"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=f281be69"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -113,6 +113,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../homework/04/index.html">4. Sampling with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/05/index.html">5. Inference with Stan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/06/index.html">6. MCMC with ion channels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../homework/07/index.html">7. Model comparison</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -171,24 +172,24 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="Gaussian-process-hyperparameters-by-optimization">
-<h1>Gaussian process hyperparameters by optimization<a class="headerlink" href="#Gaussian-process-hyperparameters-by-optimization" title="Permalink to this heading"></a></h1>
+  <section id="Gaussian-process-hyperparameters-by-optimization">
+<h1>Gaussian process hyperparameters by optimization<a class="headerlink" href="#Gaussian-process-hyperparameters-by-optimization" title="Link to this heading"></a></h1>
 <p><a class="reference external" href="https://s3.amazonaws.com/bebi103.caltech.edu/data/wolfenden_arrhenius.csv">Data set download</a></p>
 <hr><div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">polars</span> <span class="k">as</span> <span class="nn">pl</span>
-<span class="kn">import</span> <span class="nn">scipy.optimize</span>
-<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">st</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.optimize</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
 
-<span class="kn">import</span> <span class="nn">cmdstanpy</span>
-<span class="kn">import</span> <span class="nn">arviz</span> <span class="k">as</span> <span class="nn">az</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">cmdstanpy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">arviz</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">az</span>
 
-<span class="kn">import</span> <span class="nn">bebi103</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">bebi103</span>
 
-<span class="kn">import</span> <span class="nn">bokeh.io</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">bokeh.io</span>
 <span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">output_notebook</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -581,8 +582,8 @@ optimization approach to obtain MAP estimates for these parameters.</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="Priors-for-hyperparameters">
-<h2>Priors for hyperparameters<a class="headerlink" href="#Priors-for-hyperparameters" title="Permalink to this heading"></a></h2>
+<section id="Priors-for-hyperparameters">
+<h2>Priors for hyperparameters<a class="headerlink" href="#Priors-for-hyperparameters" title="Link to this heading"></a></h2>
 <p>Before we can proceed with inference, we need to first stipulate which kernel we will use and the hyperpriors for its hyperparameters. We will use a squared exponential kernel, which has hyperparameters <span class="math notranslate nohighlight">\(\rho\)</span> (a length scale) and <span class="math notranslate nohighlight">\(\alpha\)</span> (a marginal deviation). That is, <span class="math notranslate nohighlight">\(\theta_k = (\alpha, \rho)\)</span>.</p>
 <p>In choosing the priors for these hyperparameters, it is important to use domain knowledge about what kinds of functions might describe the data (remembering that the data are centered and scaled!). Specifically, <span class="math notranslate nohighlight">\(\alpha\)</span> quantifies how large of an amplitude the the function has and <span class="math notranslate nohighlight">\(\rho\)</span> quantifies how wiggly the function is.</p>
 <p>For <span class="math notranslate nohighlight">\(\alpha\)</span>, a Half-Normal prior is usually reasonable, capturing functions that do not vary much and those that do. For centered and scaled data that I suspect are free of extreme outliers, I usually chose <span class="math notranslate nohighlight">\(\alpha \sim \text{HalfNorm}(2)\)</span>, but you can be more generous on the tail of your prior if you suspect their may be outliers.</p>
@@ -597,15 +598,15 @@ application every time and make sure you choose wise priors for <em>your</em> mo
 &\mathbf{y} \mid \mathbf{X}, \sigma, \alpha, \rho \sim \mathrm{MultiNorm}(\mathbf{0}, \mathsf{K}_\mathbf{y}),
 \end{align}</span></p>
 <p>where <span class="math notranslate nohighlight">\(\mathsf{K}_\mathbf{y}\)</span> is constructed from an SE kernel parametrized by <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\rho\)</span>, with <span class="math notranslate nohighlight">\(\sigma\)</span> added to its diagonal.</p>
-</div>
-<div class="section" id="Computing-the-MAP-with-SciPy">
-<h2>Computing the MAP with SciPy<a class="headerlink" href="#Computing-the-MAP-with-SciPy" title="Permalink to this heading"></a></h2>
+</section>
+<section id="Computing-the-MAP-with-SciPy">
+<h2>Computing the MAP with SciPy<a class="headerlink" href="#Computing-the-MAP-with-SciPy" title="Link to this heading"></a></h2>
 <p>As we did in early lessons, we can use SciPy to compute the maximal a posteriori probability parameter values of <span class="math notranslate nohighlight">\(\alpha\)</span>, <span class="math notranslate nohighlight">\(\rho\)</span>, and <span class="math notranslate nohighlight">\(\sigma\)</span>. We proceed exactly as we did in the early lessons, first by coding up the log prior.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">log_prior</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">rho</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">log_prior</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">rho</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Log prior for homoscedastic error and GP hyperparameters&quot;&quot;&quot;</span>
     <span class="c1"># Choose 1e-6 as upper bound for sigma to protect against</span>
     <span class="c1"># singular covariance matrix</span>
@@ -625,7 +626,7 @@ application every time and make sure you choose wise priors for <em>your</em> mo
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">log_likelihood</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">rho</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">log_likelihood</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">rho</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Normal log likelihood for centered and scaled GP.&quot;&quot;&quot;</span>
     <span class="n">diag_to_add</span> <span class="o">=</span> <span class="n">sigma</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
     <span class="n">Ky</span> <span class="o">=</span> <span class="n">bebi103</span><span class="o">.</span><span class="n">gp</span><span class="o">.</span><span class="n">cov_exp_quad</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="n">rho</span><span class="o">=</span><span class="n">rho</span><span class="p">)</span> <span class="o">+</span> <span class="n">diag_to_add</span>
@@ -639,7 +640,7 @@ application every time and make sure you choose wise priors for <em>your</em> mo
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">log_posterior</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">log_posterior</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Log posterior for GP with normal likelihood.&quot;&quot;&quot;</span>
     <span class="n">sigma</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">rho</span> <span class="o">=</span> <span class="n">params</span>
 
@@ -650,7 +651,7 @@ application every time and make sure you choose wise priors for <em>your</em> mo
     <span class="k">return</span> <span class="n">lp</span> <span class="o">+</span> <span class="n">log_likelihood</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">rho</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">neg_log_posterior</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">neg_log_posterior</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
     <span class="k">return</span> <span class="o">-</span><span class="n">log_posterior</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -778,9 +779,9 @@ var element = document.currentScript.previousSibling.previousSibling;
 </script></div>
 </div>
 <p>Again, remember that the line in the plot is the most probable function <em>for the MAP values of the hyperparameters and</em> <span class="math notranslate nohighlight">\(\sigma\)</span>. The envelope is <em>not</em> posterior predictive of data sets. However, we can sample out of the generative model for the posterior with fixed parameters <span class="math notranslate nohighlight">\(\alpha\)</span>, <span class="math notranslate nohighlight">\(\rho\)</span>, and <span class="math notranslate nohighlight">\(\sigma\)</span> specified by our MAP estimates.</p>
-</div>
-<div class="section" id="Posterior-predictive-samples">
-<h2>Posterior predictive samples<a class="headerlink" href="#Posterior-predictive-samples" title="Permalink to this heading"></a></h2>
+</section>
+<section id="Posterior-predictive-samples">
+<h2>Posterior predictive samples<a class="headerlink" href="#Posterior-predictive-samples" title="Link to this heading"></a></h2>
 <p>To sample out of a posterior predictive distribution <span class="math notranslate nohighlight">\(f(\tilde{y} \mid y)\)</span> for a fixed set of hyperparameters and <span class="math notranslate nohighlight">\(\sigma\)</span>, we need to draw a sample of a function out of the posterior GP, and then draw samples from a Normal distribution that has a mean given by the function and a standard deviation of <span class="math notranslate nohighlight">\(\sigma\)</span>.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
@@ -789,7 +790,7 @@ var element = document.currentScript.previousSibling.previousSibling;
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sample function</span>
 <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">()</span>
 
-<span class="k">def</span> <span class="nf">draw_gp_ppc</span><span class="p">(</span><span class="n">mstar</span><span class="p">,</span> <span class="n">Sigmastar</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">y_mean</span><span class="p">,</span> <span class="n">y_std</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">draw_gp_ppc</span><span class="p">(</span><span class="n">mstar</span><span class="p">,</span> <span class="n">Sigmastar</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">y_mean</span><span class="p">,</span> <span class="n">y_std</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Draw a GP posterior predictive sample of centered</span>
 <span class="sd">    and scaled data that is then uncentered and unscaled.&quot;&quot;&quot;</span>
     <span class="c1"># Draw nonparametric function</span>
@@ -904,9 +905,9 @@ var element = document.currentScript.previousSibling.previousSibling;
 </script></div>
 </div>
 <p>The posterior predictive plot looks good!</p>
-</div>
-<div class="section" id="Obtaining-hyperpriors-by-optimizing-with-Stan">
-<h2>Obtaining hyperpriors by optimizing with Stan<a class="headerlink" href="#Obtaining-hyperpriors-by-optimizing-with-Stan" title="Permalink to this heading"></a></h2>
+</section>
+<section id="Obtaining-hyperpriors-by-optimizing-with-Stan">
+<h2>Obtaining hyperpriors by optimizing with Stan<a class="headerlink" href="#Obtaining-hyperpriors-by-optimizing-with-Stan" title="Link to this heading"></a></h2>
 <p>While we have not discussed it thus far, Stan does have functionality to find MAP parameters by optimization. It may be easier to code you model in Stan and then use its optimizer. This can be the case for GP-based models. The Stan code for the model we have been considering is</p>
 <div class="highlight-stan notranslate"><div class="highlight"><pre><span></span><span class="kn">data</span> <span class="p">{</span>
   <span class="kt">int</span><span class="o">&lt;</span><span class="k">lower</span><span class="p">=</span><span class="mf">1</span><span class="o">&gt;</span> <span class="n">N</span><span class="p">;</span>
@@ -1071,9 +1072,9 @@ var element = document.currentScript.previousSibling.previousSibling;
 </pre></div>
 </div>
 </div>
-</div>
-<div class="section" id="Computing-environment">
-<h2>Computing environment<a class="headerlink" href="#Computing-environment" title="Permalink to this heading"></a></h2>
+</section>
+<section id="Computing-environment">
+<h2>Computing environment<a class="headerlink" href="#Computing-environment" title="Link to this heading"></a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
@@ -1105,8 +1106,8 @@ jupyterlab: 4.2.6
 cmdstan   : 2.36.0
 </pre></div></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -1120,11 +1121,11 @@ cmdstan   : 2.36.0
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 01, 2025.
+      <span class="lastupdated">Last updated on Feb 14, 2025.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x300a69a00> 
+   <jinja2.runtime.BlockReference object at 0x171cab470> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

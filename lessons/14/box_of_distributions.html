@@ -1,27 +1,27 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>14. Collector’s box of distributions &mdash; BE/Bi 103 b  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=22ddcdb3" />
 
   
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
-        <script src="../../_static/clipboard.min.js"></script>
-        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=9bcbadda"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=f281be69"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -105,6 +105,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../homework/04/index.html">4. Sampling with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/05/index.html">5. Inference with Stan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/06/index.html">6. MCMC with ion channels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../homework/07/index.html">7. Model comparison</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -162,15 +163,15 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="collector-s-box-of-distributions">
-<span id="distributions"></span><h1>14. Collector’s box of distributions<a class="headerlink" href="#collector-s-box-of-distributions" title="Permalink to this heading"></a></h1>
+  <section id="collector-s-box-of-distributions">
+<span id="distributions"></span><h1>14. Collector’s box of distributions<a class="headerlink" href="#collector-s-box-of-distributions" title="Link to this heading"></a></h1>
 <p>Probability distributions are the building blocks of any generative model. In building a model, we usually start with the likelihood and prescribe a distribution that generates the data, <span class="math notranslate nohighlight">\(f(y\mid \theta)\)</span>. The likelihood makes clear for which parameters <span class="math notranslate nohighlight">\(\theta\)</span> we need priors, <span class="math notranslate nohighlight">\(g(\theta)\)</span>. We will ultimately characterize the posterior distribution of the parameters, <span class="math notranslate nohighlight">\(g(\theta\mid y)\)</span>.</p>
-<div class="section" id="check-out-the-distribution-explorer">
-<h2>Check out the Distribution Explorer<a class="headerlink" href="#check-out-the-distribution-explorer" title="Permalink to this heading"></a></h2>
+<section id="check-out-the-distribution-explorer">
+<h2>Check out the Distribution Explorer<a class="headerlink" href="#check-out-the-distribution-explorer" title="Link to this heading"></a></h2>
 <p>Sometimes, we need to derive a distribution from first principles. But often, we can use off-the-shelf named distributions in our modeling. It is therefore very valuable to be familiar with these distributions. You should therefore read and interact with the content of the <a class="reference external" href="https://distribution-explorer.github.io/">Distribution Explorer</a>.</p>
-</div>
-<div class="section" id="choosing-distributions">
-<h2>Choosing distributions<a class="headerlink" href="#choosing-distributions" title="Permalink to this heading"></a></h2>
+</section>
+<section id="choosing-distributions">
+<h2>Choosing distributions<a class="headerlink" href="#choosing-distributions" title="Link to this heading"></a></h2>
 <p>Each of the named distributions has a <strong>story</strong>. Oftentimes the process of choosing a distribution for a model amounts to matching the story of the data generative process to that of a distribution. To help pare down which distributions to consider, we answer the following questions about the variable (either data or parameter) of interest.</p>
 <ol class="arabic simple">
 <li><p>Is the variable a discrete quantity of a continuous one? Only discrete distributions describe discrete variables and only continuous distributions describe continuous variables.</p></li>
@@ -194,9 +195,9 @@
 &amp;\xi \sim \text{Beta}(\alpha, \beta)\\
 &amp;\rho = 2\xi - 1.
 \end{align}\end{split}\]</div>
-</div>
-<div class="section" id="starting-simple-and-adding-flexibility">
-<h2>Starting simple and adding flexibility<a class="headerlink" href="#starting-simple-and-adding-flexibility" title="Permalink to this heading"></a></h2>
+</section>
+<section id="starting-simple-and-adding-flexibility">
+<h2>Starting simple and adding flexibility<a class="headerlink" href="#starting-simple-and-adding-flexibility" title="Link to this heading"></a></h2>
 <p>Imagine you build a generative model based on your domain knowledge and you find it can not quite capture all of the structure the observed data as may be evident from posterior predictive checks. You then wish to update your model. How should you choose a new likelihood?</p>
 <p>In some cases, you need to rethink your domain knowledge. Maybe you can do some more theoretical work and come up with a new mathematical model (with your full generative model featuring random deviations of this mathematical model). Or, as is often the case, the main underpinnings of your theoretical model are exactly what you want, but you made some approximations in your derivations along the way that were inappropriate. You may also have neglected some effects. In these cases, your first model was an approximation or limit of the next model you may try.</p>
 <p>Perhaps you do not really have an underlying theoretical model, but are simply modeling the data acquisition with a simple probability distribution. If that simple distribution misses some of the features of the data, you should select a new distribution for which the simple distribution is a limit or special case. This way, you bring more flexibility into the model, but still retain your initial inclinations based on your domain knowledge.</p>
@@ -207,34 +208,34 @@
 <li><p>Consider a set of measurements <span class="math notranslate nohighlight">\(\{x_1, x_2, \ldots\}\)</span>. Each measurement has associated with is some measurement error such that <span class="math notranslate nohighlight">\(x_i\sim\text{Norm}(\mu_i, s)\)</span>. Furthermore, there is a natural variability from measurement to measurement such that <span class="math notranslate nohighlight">\(\mu_i \sim \text{Norm}(\mu, \sigma)\)</span>. You will show in a subsequent homework that in the limit where the natural variability is much greater than the measurement error (<span class="math notranslate nohighlight">\(s\ll \sigma\)</span>), the model become non-hierarchical with <span class="math notranslate nohighlight">\(x_i \sim \text{Norm}(\mu, \sigma)\)</span>.</p></li>
 </ol>
 <p>It is general good practice in model building to start simple and then sequentially build your models to capture the complexity of the data such that each more complex model has the simpler model preceding it as a special case or limit. This helps preserve domain knowledge and keep you from wandering into ad hoc statistical modeling. It also helps in model assessment to see if the added complexity is really necessary.</p>
-</div>
-<div class="section" id="priors-for-variables-with-support-on-the-set-of-positive-real-numbers">
-<h2>Priors for variables with support on the set of positive real numbers<a class="headerlink" href="#priors-for-variables-with-support-on-the-set-of-positive-real-numbers" title="Permalink to this heading"></a></h2>
+</section>
+<section id="priors-for-variables-with-support-on-the-set-of-positive-real-numbers">
+<h2>Priors for variables with support on the set of positive real numbers<a class="headerlink" href="#priors-for-variables-with-support-on-the-set-of-positive-real-numbers" title="Link to this heading"></a></h2>
 <p>We often have to choose priors with support on the set of positive real numbers. In practice, I find there are three classes of distributions I use for this.</p>
 <ol class="arabic simple">
 <li><p><strong>Half-distributions.</strong> Listed in order from lightest to heaviest tail, these are the <a class="reference external" href="https://distribution-explorer.github.io/continuous/halfnormal.html">Half-Normal</a>, <a class="reference external" href="https://distribution-explorer.github.io/continuous/halfstudent_t.html">Half-Student-t</a> and <a class="reference external" href="https://distribution-explorer.github.io/continuous/halfcauchy.html">Half-Cauchy</a> distributions. There is more mass around around zero in these distribution than the Gamma/Inv-Gamma distributions, but these can also have very heavy tails, as is the case with the Half-Cauchy.</p></li>
 <li><p><strong>Gamma/Inv-Gamma distirbutions.</strong> The <a class="reference external" href="https://distribution-explorer.github.io/continuous/gamma.html">Gamma distribution</a> and <a class="reference external" href="https://distribution-explorer.github.io/continuous/inverse_gamma.html">Inverse Gamma</a> distributions are defined on the domain of positive real numbers. The Gamma distribution put more probability mass near zero than the Inverse Gamma. The Inverse Gamma has a much heavier tail. So, if you want to keep the probability mass away from zero and toward larger values, use an Inverse Gamma. For the opposite, use a Gamma.</p></li>
 <li><p><strong>Log-Normal.</strong> I find the Log-Normal distribution to be very useful when I have order-of-magnitude estimates of the maximum and minimum values I might expect a parameter to have. This is the “bet-the-farm” approach to prior building. Consider for example a single molecule experiment where we are assessing the speed of a <a class="reference external" href="https://en.wikipedia.org/wiki/Kinesin">kinesin motor</a>. I am sure that the kinesin motor walks slower than a 0.1 meters per second and faster than a nanometer per second. That is, I know a priori that kinesin’s walking speed is between <span class="math notranslate nohighlight">\(10^{-3}\)</span> µm/s and <span class="math notranslate nohighlight">\(10^{5}\)</span> µm/s. So, I might choose a prior such that the base ten logarithm of the kinesin speed is between –3 and 5. If I choose to have about 95% of the probability mass between these two values, I can choose a Normal distribution with a location parameter of 1 and a scale parameter of <span class="math notranslate nohighlight">\((5 - (-3)) / 2 / 2 = 2\)</span>. Thus, <span class="math notranslate nohighlight">\(\log_{10} v \sim \text{Norm}(1, 2)\)</span>. This is equivalent to a Log-Normal prior for <span class="math notranslate nohighlight">\(v\)</span>. In practice, I almost always specify a Log-Normal prior as a Normal prior on the logarithm of the parameter and then exponentiate. Here is how that could look in Stan.</p></li>
 </ol>
-<div class="highlight-stan notranslate"><div class="highlight"><pre><span></span>parameters {
-  real log10_v;
-}
+<div class="highlight-stan notranslate"><div class="highlight"><pre><span></span><span class="kn">parameters</span> <span class="p">{</span>
+  <span class="kt">real</span> <span class="n">log10_v</span><span class="p">;</span>
+<span class="p">}</span>
 
 
-transformed parameters {
-  real v = 10^log10_v;
-}
+<span class="kn">transformed parameters</span> <span class="p">{</span>
+  <span class="kt">real</span> <span class="n">v</span> <span class="o">=</span> <span class="mf">10</span><span class="o">^</span><span class="n">log10_v</span><span class="p">;</span>
+<span class="p">}</span>
 
 
-model {
-  log10_v ~ normal(1, 2);
+<span class="kn">model</span> <span class="p">{</span>
+  <span class="n">log10_v</span> <span class="o">~</span><span class="w"> </span><span class="nb">normal</span><span class="p">(</span><span class="mf">1</span><span class="p">,</span> <span class="mf">2</span><span class="p">);</span>
 
-...
-}
+<span class="err">...</span>
+<span class="p">}</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -248,11 +249,11 @@ model {
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 01, 2025.
+      <span class="lastupdated">Last updated on Feb 14, 2025.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x301036cf0> 
+   <jinja2.runtime.BlockReference object at 0x17ac8e690> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

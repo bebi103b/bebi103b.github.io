@@ -1,28 +1,28 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Using Google Colab &mdash; BE/Bi 103 b  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=22ddcdb3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
 
   
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
-        <script src="../../_static/clipboard.min.js"></script>
-        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=9bcbadda"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=f281be69"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -110,6 +110,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../homework/04/index.html">4. Sampling with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/05/index.html">5. Inference with Stan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/06/index.html">6. MCMC with ion channels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../homework/07/index.html">7. Model comparison</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -168,14 +169,14 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="Using-Google-Colab">
-<h1>Using Google Colab<a class="headerlink" href="#Using-Google-Colab" title="Permalink to this heading"></a></h1>
+  <section id="Using-Google-Colab">
+<h1>Using Google Colab<a class="headerlink" href="#Using-Google-Colab" title="Link to this heading"></a></h1>
 <hr><p>Google Colab provides a convenient, free platform for running Jupyter notebooks in the cloud.</p>
 <p>In order to use Google Colab, you must have a Google account. Caltech students and employees have an account through Caltech’s G Suite. Many of you may have a personal Google account, usually set up for things like GMail, YouTube, etc. For your work in this class, <strong>use your Caltech account.</strong> This will facilitate collaboration with your teammates in the course, as well as with course staff.</p>
 <p>Many of you probably use your personal Google account on your machine, so it can get annoying to log in and out of it. A trick that I find useful is to use one browser, e.g., Safari or Microsoft Edge, for your personal use, web browsing, etc., and a different browser for your scientific work, including the work in this class. Google Colab are most tested for Chrome, Firefox, and Safari (in fact JupyterLab, which you will use on your own machine, only supports these three browsers).</p>
 <p>Once you have either logged out of all of your personal accounts or have a different browser open, you can launch a Colab notebook by simply navigating to <a class="reference external" href="https://colab.research.google.com/">https://colab.research.google.com/</a>. Alternatively, you can click the “Launch in Colab” badge at the top right of this page, and you will launch this notebook in Colab. That badge will appear in the top right of all pages in the course content generated from notebooks.</p>
-<div class="section" id="Watchouts-when-using-Colab">
-<h2>Watchouts when using Colab<a class="headerlink" href="#Watchouts-when-using-Colab" title="Permalink to this heading"></a></h2>
+<section id="Watchouts-when-using-Colab">
+<h2>Watchouts when using Colab<a class="headerlink" href="#Watchouts-when-using-Colab" title="Link to this heading"></a></h2>
 <p>If you do run a notebook in Colab, you are doing your computing on one of Google’s computers via a virtual machine. You get two CPU cores and limited (about 12 GB, but it varies) RAM. You can also get GPUs and TPUs (Google’s tensor processing units), but we will not use those in this course. The computing resources should be enough for all of our calculations this term, but due to the limitation to two cores and some of the watchouts below, Colab may not be the best platform to use.</p>
 <ul class="simple">
 <li><p>If your notebook is idle for too long, you will get disconnected from your notebook. “Idle” means that cells are not being edited or executed. The idle timeout varies depending on the load on Google’s computers; I find that I almost always get disconnected if idle for an hour.</p></li>
@@ -188,19 +189,19 @@
 <li><p>Colab instances have specific software installed, so you will need to install anything else you need in your notebook. This is not a major burden, and is discussed in the next section.</p></li>
 </ul>
 <p>To circumvent these limitations, you may with to upgrade to Colab Pro, which is not free. I recommend reading the <a class="reference external" href="https://research.google.com/colaboratory/faq.html">Colab FAQs</a> for more information about Colab.</p>
-</div>
-<div class="section" id="Software-in-Colab">
-<h2>Software in Colab<a class="headerlink" href="#Software-in-Colab" title="Permalink to this heading"></a></h2>
+</section>
+<section id="Software-in-Colab">
+<h2>Software in Colab<a class="headerlink" href="#Software-in-Colab" title="Link to this heading"></a></h2>
 <p>When you launch a Google Colab notebook, much of the software we will use in class is already installed. It is not always the latest version of the software, however. In fact, as of January 2024, Colab is running Python 3.10, whereas you will run Python 3.11 on your machine through your Anaconda installation. Nonetheless, most (but not all) of the analyses we do for this class will work just fine in Colab.</p>
 <p>Because the notebooks in Colab have software preinstalled, and no more, you will often need to install software before you can run the rest of the code in a notebook. To enable this, when necessary, in the first code cell of each notebook in this class, we will have the following code (or a variant thereof depending on what is needed or if the default installations of Colab change). Running this code will not affect running your notebook on your local machine; the same notebook will work on your
 local machine or on Colab. Importantly, when using <a class="reference external" href="http://mc-stan">Stan</a>, you will need to install Stan in your Colab session using <code class="docutils literal notranslate"><span class="pre">cmdstanpy.install_cmdstan()</span></code>, which can take some time, usually several minutes.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Colab setup ------------------</span>
-<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">subprocess</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">sys</span><span class="o">,</span><span class="w"> </span><span class="nn">subprocess</span>
 <span class="k">if</span> <span class="s2">&quot;google.colab&quot;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
     <span class="n">cmd</span> <span class="o">=</span> <span class="s2">&quot;pip install --upgrade polars iqplot colorcet datashader bebi103 arviz cmdstanpy watermark&quot;</span>
     <span class="n">process</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="n">cmd</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span>
     <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">process</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span>
-    <span class="kn">import</span> <span class="nn">cmdstanpy</span><span class="p">;</span> <span class="n">cmdstanpy</span><span class="o">.</span><span class="n">install_cmdstan</span><span class="p">()</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">cmdstanpy</span><span class="p">;</span> <span class="n">cmdstanpy</span><span class="o">.</span><span class="n">install_cmdstan</span><span class="p">()</span>
     <span class="n">data_path</span> <span class="o">=</span> <span class="s2">&quot;https://s3.amazonaws.com/bebi103.caltech.edu/data/&quot;</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="n">data_path</span> <span class="o">=</span> <span class="s2">&quot;../data/&quot;</span>
@@ -209,12 +210,12 @@ local machine or on Colab. Importantly, when using <a class="reference external"
 </div>
 <p>The above method works well and ensures that you have the most recent version of CmdStan installed. The drawback is that the installation of CmdStan takes several minutes. As an alternative, if you want to quick installation, you can use pre-built binaries of CmdStan for Colab.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Colab setup ------------------</span>
-<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">shutil</span><span class="o">,</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">subprocess</span><span class="o">,</span> <span class="nn">urllib.request</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">shutil</span><span class="o">,</span><span class="w"> </span><span class="nn">sys</span><span class="o">,</span><span class="w"> </span><span class="nn">subprocess</span><span class="o">,</span><span class="w"> </span><span class="nn">urllib.request</span>
 <span class="k">if</span> <span class="s2">&quot;google.colab&quot;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
     <span class="n">cmd</span> <span class="o">=</span> <span class="s2">&quot;pip install --upgrade iqplot colorcet datashader bebi103 arviz cmdstanpy watermark&quot;</span>
     <span class="n">process</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="n">cmd</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span>
     <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">process</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span>
-    <span class="kn">from</span> <span class="nn">cmdstanpy.install_cmdstan</span> <span class="kn">import</span> <span class="n">latest_version</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">cmdstanpy.install_cmdstan</span><span class="w"> </span><span class="kn">import</span> <span class="n">latest_version</span>
     <span class="n">cmdstan_version</span> <span class="o">=</span> <span class="n">latest_version</span><span class="p">()</span>
     <span class="n">cmdstan_url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://github.com/stan-dev/cmdstan/releases/download/v</span><span class="si">{</span><span class="n">cmdstan_version</span><span class="si">}</span><span class="s2">/&quot;</span>
     <span class="n">fname</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;colab-cmdstan-</span><span class="si">{</span><span class="n">cmdstan_version</span><span class="si">}</span><span class="s2">.tgz&quot;</span>
@@ -230,21 +231,21 @@ local machine or on Colab. Importantly, when using <a class="reference external"
 <p>Notebooks will use this faster mode of installing CmdStan.</p>
 <p>In addition to installing the necessary software on a Colab instance, this also sets the relative path to data sets we will use in the course. When running in Colab, the data set is fetched from cloud storage on <a class="reference external" href="https://aws.amazon.com">AWS</a>. When running on your local machine for homeworks, the path to the data is one directory up from where you are working.</p>
 <p>In most notebooks, the Colab and data path setup code cells are hidden in the HTML rendering to avoid clutter, but will be present when you download the notebooks.</p>
-</div>
-<div class="section" id="A-sample-calculation">
-<h2>A sample calculation<a class="headerlink" href="#A-sample-calculation" title="Permalink to this heading"></a></h2>
+</section>
+<section id="A-sample-calculation">
+<h2>A sample calculation<a class="headerlink" href="#A-sample-calculation" title="Link to this heading"></a></h2>
 <p>To verify that Colab works for you, fire up a Colab instance and run the code below.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Colab setup ------------------</span>
-<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">shutil</span><span class="o">,</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">subprocess</span><span class="o">,</span> <span class="nn">urllib.request</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">shutil</span><span class="o">,</span><span class="w"> </span><span class="nn">sys</span><span class="o">,</span><span class="w"> </span><span class="nn">subprocess</span><span class="o">,</span><span class="w"> </span><span class="nn">urllib.request</span>
 <span class="k">if</span> <span class="s2">&quot;google.colab&quot;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
     <span class="n">cmd</span> <span class="o">=</span> <span class="s2">&quot;pip install --upgrade polars iqplot colorcet datashader bebi103 arviz cmdstanpy watermark&quot;</span>
     <span class="n">process</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="n">cmd</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span>
     <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">process</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span>
-    <span class="kn">from</span> <span class="nn">cmdstanpy.install_cmdstan</span> <span class="kn">import</span> <span class="n">latest_version</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">cmdstanpy.install_cmdstan</span><span class="w"> </span><span class="kn">import</span> <span class="n">latest_version</span>
     <span class="n">cmdstan_version</span> <span class="o">=</span> <span class="n">latest_version</span><span class="p">()</span>
     <span class="n">cmdstan_url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://github.com/stan-dev/cmdstan/releases/download/v</span><span class="si">{</span><span class="n">cmdstan_version</span><span class="si">}</span><span class="s2">/&quot;</span>
     <span class="n">fname</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;collab-cmdstan-</span><span class="si">{</span><span class="n">cmdstan_version</span><span class="si">}</span><span class="s2">.tgz&quot;</span>
@@ -256,14 +257,14 @@ local machine or on Colab. Importantly, when using <a class="reference external"
     <span class="n">data_path</span> <span class="o">=</span> <span class="s2">&quot;../data/&quot;</span>
 <span class="c1"># ------------------------------</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="kn">import</span> <span class="nn">bebi103</span>
-<span class="kn">import</span> <span class="nn">cmdstanpy</span>
-<span class="kn">import</span> <span class="nn">arviz</span> <span class="k">as</span> <span class="nn">az</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">bebi103</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">cmdstanpy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">arviz</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">az</span>
 
-<span class="kn">import</span> <span class="nn">bokeh.plotting</span>
-<span class="kn">import</span> <span class="nn">bokeh.io</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">bokeh.plotting</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">bokeh.io</span>
 <span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">output_notebook</span><span class="p">()</span>
 
 <span class="n">schools_data</span> <span class="o">=</span> <span class="p">{</span>
@@ -697,9 +698,9 @@ var element = document.currentScript.previousSibling.previousSibling;
 })(window);
 </script></div>
 </div>
-</div>
-<div class="section" id="Computing-environment">
-<h2>Computing environment<a class="headerlink" href="#Computing-environment" title="Permalink to this heading"></a></h2>
+</section>
+<section id="Computing-environment">
+<h2>Computing environment<a class="headerlink" href="#Computing-environment" title="Link to this heading"></a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
@@ -727,8 +728,8 @@ jupyterlab: 4.2.5
 
 </pre></div></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -742,11 +743,11 @@ jupyterlab: 4.2.5
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 01, 2025.
+      <span class="lastupdated">Last updated on Feb 14, 2025.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x16ffee660> 
+   <jinja2.runtime.BlockReference object at 0x17b235340> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

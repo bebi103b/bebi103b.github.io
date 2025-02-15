@@ -1,27 +1,27 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Homework 4.2: MCMC with Boolean data (30 pts) &mdash; BE/Bi 103 b  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=22ddcdb3" />
 
   
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
-        <script src="../../_static/clipboard.min.js"></script>
-        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=9bcbadda"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=f281be69"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -103,6 +103,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../05/index.html">5. Inference with Stan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../06/index.html">6. MCMC with ion channels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07/index.html">7. Model comparison</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -161,8 +162,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="Homework-4.2:-MCMC-with-Boolean-data-(30-pts)">
-<h1>Homework 4.2: MCMC with Boolean data (30 pts)<a class="headerlink" href="#Homework-4.2:-MCMC-with-Boolean-data-(30-pts)" title="Permalink to this heading"></a></h1>
+  <section id="Homework-4.2:-MCMC-with-Boolean-data-(30-pts)">
+<h1>Homework 4.2: MCMC with Boolean data (30 pts)<a class="headerlink" href="#Homework-4.2:-MCMC-with-Boolean-data-(30-pts)" title="Link to this heading"></a></h1>
 <hr><p>In this problem, we will work with data of the True/False type. Lots of data sets in the biological sciences are like this. For example, we might look at a certain mutation in <em>Drosophila</em> that affects development and we might check whether or not eggs hatch.</p>
 <p>The data we will use comes from an experiment we have done in past years in <a class="reference external" href="http://bi1x.caltech.edu/">Bi 1x</a> here at Caltech. The experiment was developed by Meaghan Sullivan with help from Ravi Nath. Jimmy Hamilton and Sophie Walton also worked to improve the experiment. We studied a neural circuit in <em>C. elegans</em> using optogenetics.</p>
 <p>A neural circuit is a series of interconnected neurons that create a pathway to transmit a signal from where it is received to where it causes a behavioral response in an animal. An example is the neural circuit involved in reversals in <em>C. elegans</em>. This circuit consists of three types of neurons: sensory neurons receive stimuli from the environment, command interneurons integrate information from many sensory neurons and pass a signal to the motor neurons, and motor neurons that control worm
@@ -176,12 +177,6 @@ stimulation will cause the worm to exhibit aversion behavior and reverse.</p>
 <p>We also studied an AVA strain that has channelrhodopsin expressed only in the AVA command interneuron. Our goal is to quantify the effects of stimulating this neuron in terms of reversals compared to the ASH neuron and to wild type.</p>
 <p>The True/False data here are the whether or not the worms undergo a reversal. Here is what the students observed.</p>
 <table class="docutils align-default">
-<colgroup>
-<col style="width: 24%" />
-<col style="width: 16%" />
-<col style="width: 24%" />
-<col style="width: 36%" />
-</colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Strain</p></th>
 <th class="head"><p>Year</p></th>
@@ -242,7 +237,7 @@ stimulation will cause the worm to exhibit aversion behavior and reverse.</p>
 <p><strong>a)</strong> Use your Metropolis-Hastings sampler from the previous problem to do the same. Get samples of <span class="math notranslate nohighlight">\(\theta\)</span> for each of the three strains. Plot either histograms or ECDFs of your samples.</p>
 <p><strong>b)</strong> The posterior plots of <span class="math notranslate nohighlight">\(\theta\)</span> are illuminating, but suppose we want to quantify <em>the difference</em> in reversal probability between the two strains, say strain 1 and strain 2. That is, we want to compute <span class="math notranslate nohighlight">\(g(\delta_{12}\mid n_1, N_1, n_2, N_2)\)</span>, where <span class="math notranslate nohighlight">\(\delta_{12} \equiv \theta_2 - \theta_1\)</span>. Note that computing this distribution by hand is possible, but quite difficult.</p>
 <p><strong>c)</strong> <em>Not graded.</em> We will use Stan in coming weeks and it is good practice, if you have time, to start now. So, for this part of the problem, use Stan to repeat part (a).</p>
-</div>
+</section>
 
 
            </div>
@@ -256,11 +251,11 @@ stimulation will cause the worm to exhibit aversion behavior and reverse.</p>
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 01, 2025.
+      <span class="lastupdated">Last updated on Feb 14, 2025.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x30a5f5cd0> 
+   <jinja2.runtime.BlockReference object at 0x17ad3f980> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

@@ -1,27 +1,27 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>21. Principled analysis pipelines &mdash; BE/Bi 103 b  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=22ddcdb3" />
 
   
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
-        <script src="../../_static/clipboard.min.js"></script>
-        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=9bcbadda"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=f281be69"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -114,6 +114,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../homework/04/index.html">4. Sampling with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/05/index.html">5. Inference with Stan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/06/index.html">6. MCMC with ion channels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../homework/07/index.html">7. Model comparison</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -171,11 +172,11 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="21.-Principled-analysis-pipelines">
-<h1>21. Principled analysis pipelines<a class="headerlink" href="#21.-Principled-analysis-pipelines" title="Permalink to this heading"></a></h1>
+  <section id="21.-Principled-analysis-pipelines">
+<h1>21. Principled analysis pipelines<a class="headerlink" href="#21.-Principled-analysis-pipelines" title="Link to this heading"></a></h1>
 <p><em>This lesson is based heavily on</em><a class="reference external" href="https://betanalpha.github.io/assets/case_studies/principled_bayesian_workflow.html">this article</a><em>by Michael Betancourt.</em></p>
-<hr><div class="section" id="Building-a-workflow">
-<h2>Building a workflow<a class="headerlink" href="#Building-a-workflow" title="Permalink to this heading"></a></h2>
+<hr><section id="Building-a-workflow">
+<h2>Building a workflow<a class="headerlink" href="#Building-a-workflow" title="Link to this heading"></a></h2>
 <p>We have talked at length about Bayesian model building. The steps were roughly as follows.</p>
 <ol class="arabic simple">
 <li><p>Propose a simple generative model.</p></li>
@@ -191,15 +192,15 @@
 <p>We do have a bit missing in this work flow. There are other checks we should do with our modeling and inference procedure to ensure we will get reliable statistical results. First, we should use simulated data for which the ground truth (the actual parameter values) is known, and verify that our inference procedure can capture the ground truth. We should ensure this is the case for any conceivable data set we throw at our inference procedure. Second, we should make sure that our model is such
 that we can actually learn from the experiment. That is, we should ensure that the posterior is more concentrated around the ground truth than the prior.</p>
 <p>In this lecture, we will discuss strategies to approach these two problems.</p>
-</div>
-<div class="section" id="References-and-terminology">
-<h2>References and terminology<a class="headerlink" href="#References-and-terminology" title="Permalink to this heading"></a></h2>
+</section>
+<section id="References-and-terminology">
+<h2>References and terminology<a class="headerlink" href="#References-and-terminology" title="Link to this heading"></a></h2>
 <p>I will first describe <strong>simulation-based calibration</strong> (SBC). I encourage you to read more about how it works, starting with the <a class="reference external" href="https://mc-stan.org/docs/2_26/stan-users-guide/simulation-based-calibration.html">Stan documentation</a>. You should also refer to the <a class="reference external" href="https://arxiv.org/abs/1804.06788">original paper on SBC</a> by Talts and coworkers. Finally, you should read <a class="reference external" href="https://betanalpha.github.io/assets/case_studies/principled_bayesian_workflow.html">this article</a> by Michael Betancourt
 for a more complete treatment of what I present in this lesson.</p>
 <p>The term “simulation-based calibration” is meant to describe the self-consistency check using rank statistics described below. I will be using the term here as an umbrella term for SBC and sensitivity analysis in computing shrinkages and z-scores, also described below. The computational effort for all of these is the same, and they all use the same samples, so I hope this abuse of terminology is forgivable.</p>
-</div>
-<div class="section" id="Simulation-based-calibration">
-<h2>Simulation-based calibration<a class="headerlink" href="#Simulation-based-calibration" title="Permalink to this heading"></a></h2>
+</section>
+<section id="Simulation-based-calibration">
+<h2>Simulation-based calibration<a class="headerlink" href="#Simulation-based-calibration" title="Link to this heading"></a></h2>
 <p>We have performed prior predictive checks on our generative models to ensure that the models produce reasonable data sets. Accepting the model after the prior predictive check, we sample out of the posterior using Markov chain Monte Carlo. We check the samples by performing diagnostics, and then check the ability of the model to generate the actual data set we obtained by doing posterior predictive checks. Importantly, when we look at the posterior, we can compare it to the prior to make sure
 that the data actually were informative. If the posterior looks too much like the prior, we really have not learned anything. The process is quite powerful, but it would be nice to know if our model makes sense and if we will learn from making measurements <em>before</em> we perform the experiments. Specifically, we would like to know, ante experimentum,</p>
 <ul class="simple">
@@ -216,35 +217,35 @@ that the data actually were informative. If the posterior looks too much like th
 </ol>
 <p>In step 3, we are using a data set for which we <em>know</em> the underlying parameters that generated it. Because the data were generated using <span class="math notranslate nohighlight">\(\tilde{\theta}\)</span> as the parameter set, <span class="math notranslate nohighlight">\(\tilde{\theta}\)</span> is now the <strong>ground truth</strong> parameter set. So, we can check to see if we uncover the ground truth in the posterior sampling. We can also check diagnostics for each of the trials to make sure the sampler works properly. Furthermore, we can see if the posterior is narrower than the prior,
 meaning that the data are informing the posterior. We can also do a check, described below, to ensure the sampler is working properly, which is the main idea in the <a class="reference external" href="https://arxiv.org/abs/1804.06788">SBC paper by Talts, et al.</a></p>
-<div class="section" id="Diagnostics">
-<h3>Diagnostics<a class="headerlink" href="#Diagnostics" title="Permalink to this heading"></a></h3>
+<section id="Diagnostics">
+<h3>Diagnostics<a class="headerlink" href="#Diagnostics" title="Link to this heading"></a></h3>
 <p>For each of your <span class="math notranslate nohighlight">\(N\)</span> MCMC calculations, you should perform diagnostics. This will tell you if your sampler is having any obvious problems. It may be the case that some data sets will give it problems while other won’t, and the SBC procedure will help you identify that. If you do this before you analyze your real data, you will know something about what problems you might expect in your analysis.</p>
-</div>
-<div class="section" id="z-score">
-<h3>z-score<a class="headerlink" href="#z-score" title="Permalink to this heading"></a></h3>
+</section>
+<section id="z-score">
+<h3>z-score<a class="headerlink" href="#z-score" title="Link to this heading"></a></h3>
 <p>To check to see if the posterior encompasses the ground truth, we can compute a <strong>z-score</strong> for each parameter <span class="math notranslate nohighlight">\(\theta_i\)</span>. The z-score is a measure of how close the mean sampled parameter value is to the ground truth, relative to the posterior uncertainty in the parameter value. For each parameter <span class="math notranslate nohighlight">\(\theta_i\)</span>,</p>
 <p><span class="math">\begin{align}
 z_i = \frac{\langle\theta_i\rangle_{\mathrm{post}} - \tilde{\theta}_i}{\sigma_{i,\mathrm{post}}}.
 \end{align}</span></p>
 <p>Here, <span class="math notranslate nohighlight">\(\langle\theta_i\rangle_{\mathrm{post}}\)</span> is the average value of <span class="math notranslate nohighlight">\(\theta_i\)</span> over all posterior samples, and <span class="math notranslate nohighlight">\(\sigma_{i,\mathrm{post}}\)</span> is the standard deviation of <span class="math notranslate nohighlight">\(\theta_i\)</span> over all posterior samples. As a rule of thumb, the z-score should be symmetric about zero (indicating that there is no bias in under-or-overestimating the ground truth) and should have a magnitude less than four or five. If the z-score is much above that, it is a sign of overfitting, putting
 posterior probability mass away from the ground truth.</p>
-</div>
-<div class="section" id="Shrinkage">
-<h3>Shrinkage<a class="headerlink" href="#Shrinkage" title="Permalink to this heading"></a></h3>
+</section>
+<section id="Shrinkage">
+<h3>Shrinkage<a class="headerlink" href="#Shrinkage" title="Link to this heading"></a></h3>
 <p>To have a metric for how informative the data are in the posterior, we define the <strong>shrinkage</strong> for parameter <span class="math notranslate nohighlight">\(\theta_i\)</span> to be</p>
 <p><span class="math">\begin{align}
 s_i = 1 - \frac{\sigma_{i,\mathrm{post}}^2}{\sigma_{i,\mathrm{prior}}^2}.
 \end{align}</span></p>
 <p>Here, <span class="math notranslate nohighlight">\(\sigma_{i,\mathrm{prior}}^2\)</span> is the variance in parameter <span class="math notranslate nohighlight">\(\theta_i\)</span> in the prior distribution. When the posterior is substantially narrower than the prior (meaning that the data have informed the model), the shrinkage tends toward unity since the width of the marginal posterior distribution is much less than that of the prior distribution, or <span class="math notranslate nohighlight">\(\sigma_{i,\mathrm{post}} \ll \sigma_{i,\mathrm{prior}}\)</span>.</p>
-</div>
-<div class="section" id="Shrinkage-vs.-z-score-plot">
-<h3>Shrinkage vs. z-score plot<a class="headerlink" href="#Shrinkage-vs.-z-score-plot" title="Permalink to this heading"></a></h3>
+</section>
+<section id="Shrinkage-vs.-z-score-plot">
+<h3>Shrinkage vs. z-score plot<a class="headerlink" href="#Shrinkage-vs.-z-score-plot" title="Link to this heading"></a></h3>
 <p>To graphically assess the shrinkage and z-score, we typically make a shrinkage vs. z-score plot. Each point in the plot represents the results from one of the <span class="math notranslate nohighlight">\(N\)</span> data sets drawn from the generative model. A typical shrinkage vs. z-score plot for a model with two parameters <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(b\)</span> is shown below.</p>
 <div style="margin: auto; width: 350px"><img alt="z-shrinkage" src="../../_images/z-shrinkage.png" />
 </div><p>Note that the z-scores are symmetric about zero and do not range much above three. The shrinkage is mostly close to unity, and those that drift away do not drift too far. This model permits learning from the data.</p>
-</div>
-<div class="section" id="Rank-statistics">
-<h3>Rank statistics<a class="headerlink" href="#Rank-statistics" title="Permalink to this heading"></a></h3>
+</section>
+<section id="Rank-statistics">
+<h3>Rank statistics<a class="headerlink" href="#Rank-statistics" title="Link to this heading"></a></h3>
 <p>We additionally want to check to make sure the sampler is working properly. That is, in our sampling procedure, we want to make sure we will actually sample the posterior, getting good coverage over parameter space.</p>
 <p>In order to check to make sure the sampler is working properly, we can check for self-consistency for a relation that must hold for <em>any</em> statistical model. To derive such a relation, we consider a joint distribution <span class="math notranslate nohighlight">\(\pi(\theta, \tilde{y}, \tilde{\theta})\)</span>. Then,</p>
 <p><span class="math">\begin{align}
@@ -266,20 +267,20 @@ g(\theta) = \int\mathrm{d}\tilde{y}\,\int\mathrm{d}\tilde{\theta}\,g(\theta \mid
 <p>In English, the right hand side is the expectation of the posterior over all possible generated data sets. We refer to the right hand side as the <strong>data averaged posterior</strong>. The left hand side is the prior. For good sampling, there should be no discrepancies between the data averaged posterior and the prior.</p>
 <p>This equation says that if we average the generated data sets over the posterior distribution, we recover the prior. This means that the prior sample, <span class="math notranslate nohighlight">\(\tilde{\theta}\)</span>, and the <span class="math notranslate nohighlight">\(L\)</span> posterior samples <span class="math notranslate nohighlight">\(\theta\)</span>, are sampled out of the same distribution. In other words, if we follow the procedure above for SBC, we should get samples out of the prior.</p>
 <p>Talts and coworkers derived a general theorem which says that any the rank statistic of any variable sampled over <span class="math notranslate nohighlight">\(\theta\)</span> is Uniformly distributed. So, we can compute a rank statistic for <span class="math notranslate nohighlight">\(\tilde{\theta}\)</span> over the <span class="math notranslate nohighlight">\(L\)</span> <span class="math notranslate nohighlight">\(\theta\)</span> samples we have, and this rank statistic should be uniformly distributed on the interval <span class="math notranslate nohighlight">\([0, L]\)</span>. Since we did a few hundred to a thousand samples, we can check Uniformity of the rank statistics by plotting ECDFs of the rank statistic.</p>
-</div>
-<div class="section" id="A-rank-statistic-ECDF-plot">
-<h3>A rank statistic ECDF plot<a class="headerlink" href="#A-rank-statistic-ECDF-plot" title="Permalink to this heading"></a></h3>
+</section>
+<section id="A-rank-statistic-ECDF-plot">
+<h3>A rank statistic ECDF plot<a class="headerlink" href="#A-rank-statistic-ECDF-plot" title="Link to this heading"></a></h3>
 <p>We can make an ECDF difference plot to test for uniformity. Such a plot is shown below.</p>
 <div style="margin: auto; width: 350px"><img alt="rank_plot" src="../../_images/rank_plot.png" />
 </div><p>The y-axis is the difference between the ECDF of the <span class="math notranslate nohighlight">\(N\)</span> rank statistics and that of a Uniform distribution. The surrounding envelope is the confidence interval of the ECDF difference. If the actual ECDF difference is too much outside of the envelope, then the data averaged posterior and the prior are not equal, and there is a problem with sampling. In the case above, for each of the two parameters, the sampler seems to be performing ok.</p>
-</div>
-<div class="section" id="Rank-statistic-histograms">
-<h3>Rank statistic histograms<a class="headerlink" href="#Rank-statistic-histograms" title="Permalink to this heading"></a></h3>
+</section>
+<section id="Rank-statistic-histograms">
+<h3>Rank statistic histograms<a class="headerlink" href="#Rank-statistic-histograms" title="Link to this heading"></a></h3>
 <p>By constructing <strong>rank statistic histograms</strong>, we can diagnose how the the sampling is failing to capture the true posterior. The series of graphics in Figs. 3-7 of the <a class="reference external" href="https://arxiv.org/pdf/1804.06788.pdf">Talts paper</a> provide an excellent description of how you can perform this diagnosis.</p>
-</div>
-</div>
-<div class="section" id="A-full-principled-pipeline">
-<h2>A full principled pipeline<a class="headerlink" href="#A-full-principled-pipeline" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+<section id="A-full-principled-pipeline">
+<h2>A full principled pipeline<a class="headerlink" href="#A-full-principled-pipeline" title="Link to this heading"></a></h2>
 <p>The SBC calculation is expensive. If you want to generate <span class="math notranslate nohighlight">\(N = 1000\)</span> data sets and perform parameter estimation on them, the calculation cost is 1000 times that of performing the parameter estimation on your real data set. However, this cost comes with major benefits. By comparing against a ground truth, you can see if your model can find it for you. By checking the shrinkage, you can see if you can learn from your data. By checking the rank statistics, you can see if the sampler will
 properly sample the true posterior. And by checking the diagnostics, you will know if there will be any pathological problems.</p>
 <p>So, we update the analysis pipeline to include these SBC-based analyses.</p>
@@ -297,8 +298,8 @@ properly sample the true posterior. And by checking the diagnostics, you will kn
 <li><p>If unsatisfied, update the model with more flexibility. Make sure the updated model has the previous model as a special case or limit. Go to (2).</p></li>
 <li><p>If satisfied, stop and report results.</p></li>
 </ol>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -312,11 +313,11 @@ properly sample the true posterior. And by checking the diagnostics, you will kn
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 01, 2025.
+      <span class="lastupdated">Last updated on Feb 14, 2025.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x300bd6120> 
+   <jinja2.runtime.BlockReference object at 0x179bf7530> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

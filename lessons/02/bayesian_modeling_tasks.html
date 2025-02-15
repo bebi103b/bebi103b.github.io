@@ -1,27 +1,27 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tasks of Bayesian modeling &mdash; BE/Bi 103 b  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=22ddcdb3" />
 
   
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
-        <script src="../../_static/clipboard.min.js"></script>
-        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=9bcbadda"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=f281be69"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -112,6 +112,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../homework/04/index.html">4. Sampling with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/05/index.html">5. Inference with Stan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/06/index.html">6. MCMC with ion channels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../homework/07/index.html">7. Model comparison</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -170,8 +171,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="tasks-of-bayesian-modeling">
-<h1>Tasks of Bayesian modeling<a class="headerlink" href="#tasks-of-bayesian-modeling" title="Permalink to this heading"></a></h1>
+  <section id="tasks-of-bayesian-modeling">
+<h1>Tasks of Bayesian modeling<a class="headerlink" href="#tasks-of-bayesian-modeling" title="Link to this heading"></a></h1>
 <p>We have learned about Bayes’s theorem as a way to update
 a hypothesis in light of new data. We use the word “hypothesis” very
 loosely here. Remember, in the Bayesian view, probability can describe
@@ -197,23 +198,23 @@ f(y) = \int\mathrm{d}\theta\,\pi(y,\theta) = \int\mathrm{d}\theta\,f(y\mid\theta
 <li><p>Define the joint distribution <span class="math notranslate nohighlight">\(\pi(y,\theta)\)</span>, most commonly specified as a likelihood and prior.</p></li>
 <li><p>Make sense of the resulting posterior.</p></li>
 </ol>
-<div class="section" id="model-building">
-<h2>Model building<a class="headerlink" href="#model-building" title="Permalink to this heading"></a></h2>
+<section id="model-building">
+<h2>Model building<a class="headerlink" href="#model-building" title="Link to this heading"></a></h2>
 <p>Step (1) is the task of <strong>model building</strong>, or modeling. This is typically done by first specifying a likelihood, <span class="math notranslate nohighlight">\(f(y\mid \theta)\)</span>. This is a generative distribution in that it gives the full description of how data <span class="math notranslate nohighlight">\(y\)</span> are generated given parameters <span class="math notranslate nohighlight">\(\theta\)</span>. Importantly, included in the likelihood is a theoretical model.</p>
 <p>After the likelihood is constructed we need to specify prior distributions for the parameters of the likelihood. That is, the likelihood, as a model of the generative process, prescribes what the parameters <span class="math notranslate nohighlight">\(\theta\)</span> of the model are (but not their values). Knowing what parameters we need to write priors for, we go about codifying what we know about the parameters before we do the experiment as prior probabilities.</p>
 <p>So, the process of model building involves prescribing a likelihood that describes the process of data generation. The parameters to be estimated are defined in the likelihood, and from these we construct priors. We will discuss <em>how</em> we go about building likelihoods and priors in this lecture and subsequently in the course.</p>
-<div class="section" id="the-role-of-the-prior">
-<h3>The role of the prior<a class="headerlink" href="#the-role-of-the-prior" title="Permalink to this heading"></a></h3>
+<section id="the-role-of-the-prior">
+<h3>The role of the prior<a class="headerlink" href="#the-role-of-the-prior" title="Link to this heading"></a></h3>
 <p>As an aside, I pause to note that there may be some philosophical issues with this approach. I think Gelman, Simpson, and Betancourt clearly stated the dilemma in <a class="reference external" href="https://doi.org/10.3390/e19100555">their 2017 paper</a> with the apt title, “The Prior Can Often Only Be Understood in the Context of the Likelihood” (emphasis added by me).</p>
 <blockquote>
 <div><p>One can roughly speak of two sorts of Bayesian analyses. In the first sort, the Bayesian formalism can be taken literally: a researcher starts with a prior distribution about some externally defined quantity, perhaps some physical parameter or the effect of some social intervention, and then he or she analyzes data, leading to an updated posterior distribution. Here, the prior can be clearly defined, not just before the data are observed but <em>before the experiment has even been considered</em>. …[W]e are concerned with a second sort of analysis, what might be patterned Bayesian analysis using default priors, in which a researcher gathers data and forms a model that includes various unknown parameters and then needs to set up a prior distribution to continue with Bayesian inference. This latter approach is standard in Bayesian workflow…</p>
 <p>One might say that what makes a prior a prior, rather than simply a probability distribution, is that it is destined to be paired with a likelihood. That is, the Bayesian formalism requires that a prior distribution be updated into a posterior distribution based on new data.</p>
 </div></blockquote>
 <p>We are taking the second approach the Gelman, Simpson, and Betancourt laid out; the approach where the prior is in service to a likelihood. We are trying to model a data generation process, which requires a likelihood to even identify what the parameters are that require priors.</p>
-</div>
-</div>
-<div class="section" id="making-sense-of-the-posterior">
-<h2>Making sense of the posterior<a class="headerlink" href="#making-sense-of-the-posterior" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+<section id="making-sense-of-the-posterior">
+<h2>Making sense of the posterior<a class="headerlink" href="#making-sense-of-the-posterior" title="Link to this heading"></a></h2>
 <p>If we can write down the likelihood and prior, or more generally the joint distribution <span class="math notranslate nohighlight">\(\pi(y,\theta)\)</span>, we theoretically have the full posterior distribution. We have seen in our previous lessons that for simple models involving one parameter, we can often plot the posterior distribution in order to interpret it. When we have two parameters, it becomes more challenging to make plots, but it can be done. Things get more and more complicated as the number of parameters grow, a manifestation of the curse of dimensionality.</p>
 <p>At the heart of the technical challenges of Bayesian inference is how to make sense of the posterior. Plotting it is useful, but in almost all cases, we wish to compute <strong>expectations</strong> of the posterior. An expectation computed from the posterior is of the form</p>
 <div class="math notranslate nohighlight">
@@ -233,8 +234,8 @@ g(\theta_2 \mid y) = \int \mathrm{d}\theta_1 \, g(\theta_1, \theta_2 \mid y).
 <li><p>Performing and optimization to find which distribution in a family of distributions most closely approximates the posterior, and then use this approximate distribution as a substitute for the posterior. We choose the family of candidate distributions to have nice properties, known analytical results, ease of sampling, etc., thereby making exploration of the posterior much easier than by full MCMC. This is called <strong>variational inference</strong>.</p></li>
 </ol>
 <p>For the rest of this lecture, though, we will focus on model building.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -248,11 +249,11 @@ g(\theta_2 \mid y) = \int \mathrm{d}\theta_1 \, g(\theta_1, \theta_2 \mid y).
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 01, 2025.
+      <span class="lastupdated">Last updated on Feb 14, 2025.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x308718ec0> 
+   <jinja2.runtime.BlockReference object at 0x17af1d4f0> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

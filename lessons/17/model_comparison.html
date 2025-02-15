@@ -1,27 +1,27 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>17. Model comparison &mdash; BE/Bi 103 b  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=22ddcdb3" />
 
   
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
-        <script src="../../_static/clipboard.min.js"></script>
-        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=9bcbadda"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=f281be69"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -111,6 +111,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../homework/04/index.html">4. Sampling with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/05/index.html">5. Inference with Stan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/06/index.html">6. MCMC with ion channels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../homework/07/index.html">7. Model comparison</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -168,8 +169,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="model-comparison">
-<h1>17. Model comparison<a class="headerlink" href="#model-comparison" title="Permalink to this heading"></a></h1>
+  <section id="model-comparison">
+<h1>17. Model comparison<a class="headerlink" href="#model-comparison" title="Link to this heading"></a></h1>
 <p>We have spent a lot of time looking at the
 problem of parameter estimation. Really, we have been stepping through
 the process of bringing our thinking about a biological system into a
@@ -202,8 +203,8 @@ g_M(\theta\mid y) =
 \end{aligned}\]</div>
 <p>Here, the subscript <span class="math notranslate nohighlight">\(M\)</span> denotes that we are working with model
 <span class="math notranslate nohighlight">\(M\)</span>.</p>
-<div class="section" id="metrics-for-model-assessment">
-<h2>Metrics for model assessment<a class="headerlink" href="#metrics-for-model-assessment" title="Permalink to this heading"></a></h2>
+<section id="metrics-for-model-assessment">
+<h2>Metrics for model assessment<a class="headerlink" href="#metrics-for-model-assessment" title="Link to this heading"></a></h2>
 <p>Our goal in model assessment is to see how close our model is to the
 true unknown generative process. To determine a metric of this
 closeness, we need to make a few definitions and be a bit formal for a
@@ -226,9 +227,9 @@ statistical inference informed by the measured data <span class="math notranslat
 <span class="math notranslate nohighlight">\(f_M(\tilde{y}\mid y)\)</span> is to <span class="math notranslate nohighlight">\(f_t(\tilde{y})\)</span>. That is, we
 ask how well our generative model can generate new data compared to the
 true generative process.</p>
-</div>
-<div class="section" id="posterior-predictive-checks">
-<h2>Posterior predictive checks<a class="headerlink" href="#posterior-predictive-checks" title="Permalink to this heading"></a></h2>
+</section>
+<section id="posterior-predictive-checks">
+<h2>Posterior predictive checks<a class="headerlink" href="#posterior-predictive-checks" title="Link to this heading"></a></h2>
 <p>We considered posterior predictive checks <span class="xref std std-ref">before</span>, and they are <em>very</em> good tools for model assessment, so I provide a quick refresher here.</p>
 <p>Even though we do not know what the true distribution is, you actually
 sampled out of it by doing the experiment! You got only one sample,
@@ -249,14 +250,14 @@ usually a plot of the samples out of <span class="math notranslate nohighlight">
 overlaid with the actual data set <span class="math notranslate nohighlight">\(y\)</span>. If there is good overlap,
 the posterior predictive check suggests that data generated from your model is commensurate with those generated from the true generative process.</p>
 <p>Note that good overlap of the samples out of the posterior predictive distribution with the measured data set does <em>not</em> mean that your proposed model is necessarily a good one.  Quite often, an model can be overly flexible such that the range of posterior predictive data sets is broad and include the measured data simply for that reason.</p>
-</div>
-<div class="section" id="closeness-metrics">
-<h2>Closeness metrics<a class="headerlink" href="#closeness-metrics" title="Permalink to this heading"></a></h2>
+</section>
+<section id="closeness-metrics">
+<h2>Closeness metrics<a class="headerlink" href="#closeness-metrics" title="Link to this heading"></a></h2>
 <p>While posterior predictive checks are <em>very</em> useful and powerful for
 model assessment, it is useful to be able to quantify how close
 <span class="math notranslate nohighlight">\(f_M(\tilde{y}\mid y)\)</span> is to <span class="math notranslate nohighlight">\(f_t(\tilde{y})\)</span>.</p>
-<div class="section" id="entropy-and-the-kullback-leibler-divergence">
-<h3>Entropy and the Kullback-Leibler divergence<a class="headerlink" href="#entropy-and-the-kullback-leibler-divergence" title="Permalink to this heading"></a></h3>
+<section id="entropy-and-the-kullback-leibler-divergence">
+<h3>Entropy and the Kullback-Leibler divergence<a class="headerlink" href="#entropy-and-the-kullback-leibler-divergence" title="Link to this heading"></a></h3>
 <p>In order to answer this question, we need a definition for “closeness”
 of two probability distributions. To get this definition, we need to
 turn to notions about <strong>information</strong>. Formally, information is the
@@ -342,14 +343,14 @@ D_\mathrm{KL}(p \| q) = H[p,q] - H[p] = \sum_ip_i\,\ln\frac{p_i}{q_i}.
 \end{aligned}\]</div>
 <p>So, if we want to use the KL divergence as a metric for how close the
 posterior predictive distribution <span class="math notranslate nohighlight">\(f(\tilde{y}\mid y, M)\)</span> is to
-the true distribution <span class="math notranslate nohighlight">\(f_t(\tilde{y})\)</span>, we can write <a class="footnote-reference brackets" href="#id4" id="id1">1</a></p>
+the true distribution <span class="math notranslate nohighlight">\(f_t(\tilde{y})\)</span>, we can write <a class="footnote-reference brackets" href="#id4" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></p>
 <div class="math notranslate nohighlight">
 \[\begin{aligned}
 D_\mathrm{KL}(f_t \| f_M) = \int \mathrm{d}\tilde{y}\,\,f_t(\tilde{y})\,\ln\frac{f_t(\tilde{y})}{f_M(\tilde{y} \mid y)}.
 \end{aligned}\]</div>
-</div>
-<div class="section" id="the-expected-log-pointwise-predictive-density">
-<h3>The expected log pointwise predictive density<a class="headerlink" href="#the-expected-log-pointwise-predictive-density" title="Permalink to this heading"></a></h3>
+</section>
+<section id="the-expected-log-pointwise-predictive-density">
+<h3>The expected log pointwise predictive density<a class="headerlink" href="#the-expected-log-pointwise-predictive-density" title="Link to this heading"></a></h3>
 <p>In practice, we want to <em>compare</em> two or more models. In other words, we
 wish to know if model A is closer than model B is to the true distribution.
 So, we might be interested in the <em>difference</em> in the KL-divergences of
@@ -362,7 +363,7 @@ D_\mathrm{KL}(f_t \| f_{M_a}) - D_\mathrm{KL}(f_t \| f_{M_b}) &amp;= \int \mathr
 &amp;=\int \mathrm{d}\tilde{y}\,\,f_t(\tilde{y})\,\ln f_{M_b}(\tilde{y}\mid y) - \int \mathrm{d}\tilde{y}\,\,f_t(\tilde{y})\,\ln f_{M_a}(\tilde{y}\mid y),
 \end{align}\end{split}\]</div>
 <p>where we did the awkward splitting of a logarithm so it looks like we
-are taking logarithms of quantities with units. <a class="footnote-reference brackets" href="#id5" id="id2">2</a> This tells us that
+are taking logarithms of quantities with units. <a class="footnote-reference brackets" href="#id5" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> This tells us that
 the quantity we need to calculate for any model <span class="math notranslate nohighlight">\(M\)</span> that we wish to
 assess is</p>
 <div class="math notranslate nohighlight">
@@ -401,15 +402,15 @@ density</strong>, or <strong>elpd</strong> (sometimes elppd),</p>
 <p>It took a while, but this, the elpd, is the quantity we need to
 determine to compare models. As a reminder, comparing the elpd of two
 different models gives their relative closeness (as defined by the KL
-divergence) to the true distribution. <a class="footnote-reference brackets" href="#id6" id="id3">3</a> While we would like to
+divergence) to the true distribution. <a class="footnote-reference brackets" href="#id6" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> While we would like to
 compute the elpd, we cannot, because <span class="math notranslate nohighlight">\(f_t(\tilde{y})\)</span> is not known.
 All we have is a single data set sampled from it (the one we got by
 doing the experiment). We therefore seek ways to <em>approximately</em>
 compute elpd.</p>
-</div>
-</div>
-<div class="section" id="the-watanabe-akaike-information-criterion">
-<h2>The Watanabe-Akaike information criterion<a class="headerlink" href="#the-watanabe-akaike-information-criterion" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+<section id="the-watanabe-akaike-information-criterion">
+<h2>The Watanabe-Akaike information criterion<a class="headerlink" href="#the-watanabe-akaike-information-criterion" title="Link to this heading"></a></h2>
 <p>The first approximation of the elpd we will consider is the
 <strong>Watanabe-Akaike information criterion</strong>, also known as the widely
 applicable information criterion, or <strong>WAIC</strong>. To compute the WAIC, we
@@ -476,9 +477,9 @@ q(y_i) = \frac{1}{S}\sum_{s=1}^S\ln f_M(y_i\mid\theta^{(s)}).
 \end{aligned}\]</div>
 <p>The <a class="reference external" href="https://arviz-devs.github.io/arviz/">ArviZ package</a> offers a
 function <code class="docutils literal notranslate"><span class="pre">az.waic()</span></code> to compute the WAIC directly from MCMC samples.</p>
-</div>
-<div class="section" id="leave-one-out-estimates-of-elpd">
-<h2>Leave-one-out estimates of elpd<a class="headerlink" href="#leave-one-out-estimates-of-elpd" title="Permalink to this heading"></a></h2>
+</section>
+<section id="leave-one-out-estimates-of-elpd">
+<h2>Leave-one-out estimates of elpd<a class="headerlink" href="#leave-one-out-estimates-of-elpd" title="Link to this heading"></a></h2>
 <p><strong>Leave-one-out cross validation</strong> (<strong>LOO</strong>) is a technique widely used
 in machine learning to test how well a machine can predict new data. The
 technique is simple; one data point is held out of a set of data, and
@@ -528,9 +529,9 @@ shown that this quantity and the WAIC are asymptotically equal with
 large <span class="math notranslate nohighlight">\(N\)</span>. However, the LOO estimate for the elpd tends to be
 better than that of the WAIC, in fact much better for smaller data sets.
 LOO is therefore preferred.</p>
-</div>
-<div class="section" id="the-akaike-weights">
-<h2>The Akaike weights<a class="headerlink" href="#the-akaike-weights" title="Permalink to this heading"></a></h2>
+</section>
+<section id="the-akaike-weights">
+<h2>The Akaike weights<a class="headerlink" href="#the-akaike-weights" title="Link to this heading"></a></h2>
 <p>Remember, the value of a WAIC or LOO by itself does not tell us
 anything. Only comparison of two or more of these criteria makes sense.
 Recalling that the elpd is a logarithm of a probability density, so if
@@ -557,26 +558,29 @@ predictions of new data.</p>
 \[\begin{aligned}
 w_i = \frac{\exp\left[-\frac{1}{2}\,\text{LOO}_i\right]}{\sum_j \exp\left[-\frac{1}{2}\,\text{LOO}_j\right]}.
 \end{aligned}\]</div>
-<dl class="footnote brackets">
-<dt class="label" id="id4"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
-<dd><p>I am playing a little fast and loose here converting sums to
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id4" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>I am playing a little fast and loose here converting sums to
 integrals. There are some subtleties involved therein, but we will
 not delve into those here.</p>
-</dd>
-<dt class="label" id="id5"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
-<dd><p>Taking logarithms of quantities with units bothers me immensely.
+</aside>
+<aside class="footnote brackets" id="id5" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
+<p>Taking logarithms of quantities with units bothers me immensely.
 Going forward, imagine there is an invisible
 “<span class="math notranslate nohighlight">\(1 \text{ units-of-}y\)</span>” multiplying the
 <span class="math notranslate nohighlight">\(f_M(\tilde{y}\mid y)\)</span>’s.</p>
-</dd>
-<dt class="label" id="id6"><span class="brackets"><a class="fn-backref" href="#id3">3</a></span></dt>
-<dd><p>Note that this is not the only metric we could use to compare models,
+</aside>
+<aside class="footnote brackets" id="id6" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">3</a><span class="fn-bracket">]</span></span>
+<p>Note that this is not the only metric we could use to compare models,
 but it is the most widely used one and is intuitively convenient due
 to its relationship to the Kullback-Leibler divergence.</p>
-</dd>
-</dl>
-</div>
-</div>
+</aside>
+</aside>
+</section>
+</section>
 
 
            </div>
@@ -590,11 +594,11 @@ to its relationship to the Kullback-Leibler divergence.</p>
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 01, 2025.
+      <span class="lastupdated">Last updated on Feb 14, 2025.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x3011dc0e0> 
+   <jinja2.runtime.BlockReference object at 0x1522fdb50> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

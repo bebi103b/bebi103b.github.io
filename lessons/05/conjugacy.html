@@ -1,28 +1,28 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>5. Conjugacy &mdash; BE/Bi 103 b  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=22ddcdb3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
 
   
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
-        <script src="../../_static/clipboard.min.js"></script>
-        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=9bcbadda"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=f281be69"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -109,6 +109,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../homework/04/index.html">4. Sampling with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/05/index.html">5. Inference with Stan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/06/index.html">6. MCMC with ion channels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../homework/07/index.html">7. Model comparison</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -166,17 +167,17 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="5.-Conjugacy">
-<h1>5. Conjugacy<a class="headerlink" href="#5.-Conjugacy" title="Permalink to this heading"></a></h1>
+  <section id="5.-Conjugacy">
+<h1>5. Conjugacy<a class="headerlink" href="#5.-Conjugacy" title="Link to this heading"></a></h1>
 <hr><div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">st</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
 
-<span class="kn">import</span> <span class="nn">bokeh.plotting</span>
-<span class="kn">import</span> <span class="nn">bokeh.io</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">bokeh.plotting</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">bokeh.io</span>
 <span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">output_notebook</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -493,8 +494,8 @@ if (force === true) {
 <hr><p>We have talked about Bayes theorem as a model for learning. The idea there was that we know something before (<em>a priori</em>) acquiring data, and then we update our knowledge after (<em>a posteriori</em>). So, we come in with the prior and out with the posterior after acquiring data. It might make sense, then, that the prior and the posterior distributions have the same functional form. That is, the prior and the posterior have the same distribution, and the parameters of the distribution are updated from
 the prior to the posterior by the likelihood. When the prior and posterior have the same functional form, the prior is said to be <strong>conjugate</strong> to the likelihood. This <em>seems</em> pleasing: the likelihood serves to update the prior into the posterior, so it should determine the functional form of the prior/posterior such that they are the same.</p>
 <p>Conjugate priors are especially useful because they enable analytical calculation of the posterior, typically without have to do any mathematics yourself. This is perhaps best seen through example.</p>
-<div class="section" id="The-Beta-Binomial-conjugate-pair">
-<h2>The Beta-Binomial conjugate pair<a class="headerlink" href="#The-Beta-Binomial-conjugate-pair" title="Permalink to this heading"></a></h2>
+<section id="The-Beta-Binomial-conjugate-pair">
+<h2>The Beta-Binomial conjugate pair<a class="headerlink" href="#The-Beta-Binomial-conjugate-pair" title="Link to this heading"></a></h2>
 <p>As a motivating example of use of a conjugate prior, we will use data from one of the experiments from a paper by <a class="reference external" href="https://doi.org/10.1093/jhered/esz009">Mossman, et al., 2019</a>, in which the authors investigated the age of <em>Drosophila</em> parents on the viability of the eggs of their offspring. In one vial, they mated young (≤ 3 days old) males with old females (≥ 45 days old). Of the 176 eggs laid by their offspring over a 10-day period, 94 of them hatched, while the remainder failed to hatch.
 In another vial, they mated young males with young females. Of the 190 eggs laid by their offspring over a 10-day period, 154 hatched. (They took many more data than these, but we’re using this experiment as a demonstration of conjugacy.)</p>
 <p>The story behind the data matches that of the Binomial distribution. Each egg can by thought of as a Bernoulli trial, with success being hatching and failure being failure to hatch. The number <span class="math notranslate nohighlight">\(n\)</span> of hatches out of <span class="math notranslate nohighlight">\(N\)</span> eggs is Binomially distributed.</p>
@@ -506,8 +507,8 @@ n \mid N, \theta \sim \text{Binom}(N, \theta).
 f(n\mid N, \theta) = \begin{pmatrix}N\\n\end{pmatrix} \theta^n(1-\theta)^{N-n}.
 \end{align}</span></p>
 <p>This identifies a single parameter to estimate, <span class="math notranslate nohighlight">\(\theta\)</span>, which is the probability of hatching. Our goal, then, is to compute <span class="math notranslate nohighlight">\(g(\theta\mid n,N)\)</span>.</p>
-<div class="section" id="Finding-the-conjugate">
-<h3>Finding the conjugate<a class="headerlink" href="#Finding-the-conjugate" title="Permalink to this heading"></a></h3>
+<section id="Finding-the-conjugate">
+<h3>Finding the conjugate<a class="headerlink" href="#Finding-the-conjugate" title="Link to this heading"></a></h3>
 <p>We seek a prior that is conjugate to the likelihood. That is, we want to choose <span class="math notranslate nohighlight">\(g(\theta)\)</span> such that <span class="math notranslate nohighlight">\(g(\theta \mid n, N)\)</span> and <span class="math notranslate nohighlight">\(g(\theta)\)</span> have the same functional form. Intuitively, we might try a prior that has a similar functional form as the likelihood. The Beta distribution is one such distribution. Its PDF is</p>
 <p><span class="math">\begin{align}
 g(\theta \mid \alpha, \beta) = \frac{\theta^{\alpha-1}(1-\theta)^{\beta-1}}{B(\alpha,\beta)},
@@ -538,9 +539,9 @@ g(\theta \mid n, N, \alpha, \beta) = \frac{\theta^{n+\alpha-1}(1-\theta)^{N-n+\b
 &\theta \mid n, N \sim \text{Beta}(n+\alpha, N-n+\beta).
 \end{align}</span></p>
 <p>So, we can see that conjugacy is useful. For a given likelihood, if we know its conjugate prior, we can just immediately write down the posterior in a clear form. The <a class="reference external" href="https://en.wikipedia.org/wiki/Conjugate_prior">Wikipedia page on conjugate priors</a> has a useful table of likelihood-conjugate pairs.</p>
-</div>
-<div class="section" id="Plots-of-the-posteriors">
-<h3>Plots of the posteriors<a class="headerlink" href="#Plots-of-the-posteriors" title="Permalink to this heading"></a></h3>
+</section>
+<section id="Plots-of-the-posteriors">
+<h3>Plots of the posteriors<a class="headerlink" href="#Plots-of-the-posteriors" title="Link to this heading"></a></h3>
 <p>We can now rapidly exactly plot the posteriors for the egg hatch probability for old mothers and young mothers.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
@@ -631,10 +632,10 @@ var element = document.currentScript.previousSibling.previousSibling;
 </script></div>
 </div>
 <p>In plotting the posteriors, we see that the young mothers clearly are more likely to have their offsprings’ eggs hatch than the old mothers.</p>
-</div>
-</div>
-<div class="section" id="Comments-on-conjugates">
-<h2>Comments on conjugates<a class="headerlink" href="#Comments-on-conjugates" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+<section id="Comments-on-conjugates">
+<h2>Comments on conjugates<a class="headerlink" href="#Comments-on-conjugates" title="Link to this heading"></a></h2>
 <p>Use of conjugate priors have advantages and disavantages. First, the advantages.</p>
 <ol class="arabic simple">
 <li><p>They are conceptually pleasing in that the prior and posterior have the same form, so the update of the prior by the data via the likelihood simply updates the parameters of the distribution describing the parameter values. (See, however, the criticisms of this approach below.)</p></li>
@@ -646,9 +647,9 @@ var element = document.currentScript.previousSibling.previousSibling;
 <li><p>Our prior information about a parameter might not actually match the form of a conjugate prior. Of example, if someone tells you a coin is slightly biased, but not in which direction, you might choose a prior that is bimodal. This cannot be described with a Beta distribution. Sivia comments on this in his book: “While we might expect our initial understanding of the object of interest to have a bearing on the experiment we conduct, it seems strange that the choice of the prior pdf should have
 to wait for, and depend in detail upon, the likelihood function.”</p></li>
 </ol>
-</div>
-<div class="section" id="Computing-environment">
-<h2>Computing environment<a class="headerlink" href="#Computing-environment" title="Permalink to this heading"></a></h2>
+</section>
+<section id="Computing-environment">
+<h2>Computing environment<a class="headerlink" href="#Computing-environment" title="Link to this heading"></a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
@@ -674,8 +675,8 @@ jupyterlab: 4.0.10
 
 </pre></div></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -689,11 +690,11 @@ jupyterlab: 4.0.10
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 01, 2025.
+      <span class="lastupdated">Last updated on Feb 14, 2025.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x300d499a0> 
+   <jinja2.runtime.BlockReference object at 0x1526ffcb0> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

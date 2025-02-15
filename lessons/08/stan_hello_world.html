@@ -1,28 +1,28 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>“Hello, world” —Stan &mdash; BE/Bi 103 b  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=22ddcdb3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
 
   
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
-        <script src="../../_static/clipboard.min.js"></script>
-        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=9bcbadda"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=f281be69"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -117,6 +117,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../homework/04/index.html">4. Sampling with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/05/index.html">5. Inference with Stan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/06/index.html">6. MCMC with ion channels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../homework/07/index.html">7. Model comparison</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -175,26 +176,26 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="%22Hello,-world%22-—Stan">
-<h1>“Hello, world” —Stan<a class="headerlink" href="#%22Hello,-world%22-—Stan" title="Permalink to this heading"></a></h1>
+  <section id="%22Hello,-world%22-—Stan">
+<h1>“Hello, world” —Stan<a class="headerlink" href="#%22Hello,-world%22-—Stan" title="Link to this heading"></a></h1>
 <hr><div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">st</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
 
-<span class="kn">import</span> <span class="nn">cmdstanpy</span>
-<span class="kn">import</span> <span class="nn">arviz</span> <span class="k">as</span> <span class="nn">az</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">cmdstanpy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">arviz</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">az</span>
 
-<span class="kn">import</span> <span class="nn">iqplot</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">iqplot</span>
 
-<span class="kn">import</span> <span class="nn">bebi103</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">bebi103</span>
 
-<span class="kn">import</span> <span class="nn">colorcet</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">colorcet</span>
 
-<span class="kn">import</span> <span class="nn">bokeh.io</span>
-<span class="kn">import</span> <span class="nn">bokeh.plotting</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">bokeh.io</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">bokeh.plotting</span>
 <span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">output_notebook</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -556,8 +557,8 @@ Hello, world.
 </div>
 <p>Here, we introduce Stan, and write a “Hello, world” program for it.</p>
 <p>Before we do, we note that you may run Stan on your own machine if you have managed to get Stan and CmdStanPy installed. Otherwise, you can use AWS using the <code class="docutils literal notranslate"><span class="pre">bebi103</span></code> Amazon Machine Image, available in the Oregon region. If you wish, you may also use Google Colab, though you will be limited in how many cores you can use and how long you can use them.</p>
-<div class="section" id="Basics-of-Stan-programs">
-<h2>Basics of Stan programs<a class="headerlink" href="#Basics-of-Stan-programs" title="Permalink to this heading"></a></h2>
+<section id="Basics-of-Stan-programs">
+<h2>Basics of Stan programs<a class="headerlink" href="#Basics-of-Stan-programs" title="Link to this heading"></a></h2>
 <p>This is our first introduction to <a class="reference external" href="http://mc-stan.org/">Stan</a>, a <strong>probabilistic programming language</strong> that we will use for much of our statistical modeling. Stan is a separate language. It is <em>not</em> Python. It has a command line interface and interfaces for R, Python, Julia, Matlab, and Stata.</p>
 <p>We will be using one of the two Python interfaces, <a class="reference external" href="https://mc-stan.org/cmdstanpy/">CmdStanPy</a>. <a class="reference external" href="https://pystan.readthedocs.io">PyStan</a> is another popular interface. Remember, though, that Stan is a separate language, and any Stan program you write works across all of these interfaces.</p>
 <p>Before we dive in and write our first Stan program to draw samples out of the Normal distribution, I want to tell you a few things about Stan. Briefly, Stan works as follows when using the CmdStanPy interface.</p>
@@ -586,9 +587,9 @@ Hello, world.
 <li><p>Blocks of code are separated using curly braces.</p></li>
 <li><p>Stan programs are stored outside of your notebook in a <code class="docutils literal notranslate"><span class="pre">.stan</span></code> file. These are text files, which you can prepare with your favorite text editor, including the one included in JupyterLab.</p></li>
 </ol>
-</div>
-<div class="section" id="Say-hi,-Stan">
-<h2>Say hi, Stan<a class="headerlink" href="#Say-hi,-Stan" title="Permalink to this heading"></a></h2>
+</section>
+<section id="Say-hi,-Stan">
+<h2>Say hi, Stan<a class="headerlink" href="#Say-hi,-Stan" title="Link to this heading"></a></h2>
 <p>With this groundwork laid, let’s just go ahead and write our “Hello, world” Stan program to generate samples out of a standard Normal distribution (with zero mean and unit variance). (Note that this is <em>not</em> sampling out of a posterior.) Here is the code, which I have stored in the file <code class="docutils literal notranslate"><span class="pre">hello_world.stan</span></code>.</p>
 <div class="highlight-stan notranslate"><div class="highlight"><pre><span></span><span class="kn">parameters</span> <span class="p">{</span>
   <span class="kt">real</span> <span class="n">x</span><span class="p">;</span>
@@ -690,9 +691,9 @@ Hello, world.
 </pre></div></div>
 </div>
 <p>Notice that CmdStanPy conveniently gave us progress bars for the sampling. We can turn those off using the <code class="docutils literal notranslate"><span class="pre">show_progress=False</span></code> kwarg of <code class="docutils literal notranslate"><span class="pre">sm.sample()</span></code>.</p>
-</div>
-<div class="section" id="Parsing-output-with-ArviZ">
-<h2>Parsing output with ArviZ<a class="headerlink" href="#Parsing-output-with-ArviZ" title="Permalink to this heading"></a></h2>
+</section>
+<section id="Parsing-output-with-ArviZ">
+<h2>Parsing output with ArviZ<a class="headerlink" href="#Parsing-output-with-ArviZ" title="Link to this heading"></a></h2>
 <p>At this point, Stan did its job and acquired the samples. So, it said “hello, world.”</p>
 <p>Let’s take a look at the samples. They are stored as a <code class="docutils literal notranslate"><span class="pre">CmdStanMCMC</span></code> instance.</p>
 <div class="nbinput docutils container">
@@ -2764,9 +2765,9 @@ var element = document.currentScript.previousSibling.previousSibling;
 </script></div>
 </div>
 <p>Indeed it does! We have just verified that Stan properly said, “Hello, world.”</p>
-</div>
-<div class="section" id="Direct-sampling">
-<h2>Direct sampling<a class="headerlink" href="#Direct-sampling" title="Permalink to this heading"></a></h2>
+</section>
+<section id="Direct-sampling">
+<h2>Direct sampling<a class="headerlink" href="#Direct-sampling" title="Link to this heading"></a></h2>
 <p>Stan can also draw samples out of probability distributions without using MCMC, just as Numpy and Scipy can. For a generic posterior, we use MCMC, but for many named distributions we can directly sample.</p>
 <p>Let’s draw 300 random numbers from a Normal distribution with location parameter zero and scale parameter one using Numpy and Scipy.</p>
 <div class="nbinput docutils container">
@@ -2957,8 +2958,8 @@ var element = document.currentScript.previousSibling.previousSibling;
 </script></div>
 </div>
 <p>As we expect, sampling with Stan gives the same results.</p>
-<div class="section" id="Why-are-we-using-that?">
-<h3>Why are we using <em>that</em>?<a class="headerlink" href="#Why-are-we-using-that?" title="Permalink to this heading"></a></h3>
+<section id="Why-are-we-using-that?">
+<h3>Why are we using <em>that</em>?<a class="headerlink" href="#Why-are-we-using-that?" title="Link to this heading"></a></h3>
 <p>Yes, sampling using MCMC with Stan is a novel feature, and we used it to sample out of a trivial distribution (a standard Normal), but we can use it to sample out of very complex distributions. But with respect to the direct sampling we just did, you might be thinking, “Sampling using Stan was <strong>so</strong> much harder than with Numpy! Why are we doing that?” The answer is that for more complicated models, and doing things like prior predictive checks and posterior predictive checks, using Stan for all
 modeling is more convenient.</p>
 <p>Recalling also <a class="reference external" href="https://bebi103a.github.io/">last term’s course</a>, here is a breakdown of when we will use the respective samplers.</p>
@@ -2968,10 +2969,10 @@ modeling is more convenient.</p>
 <li><p>We will occasionally use Numpy for prior predictive checks and posterior predictive checks (defined in coming lessons).</p></li>
 <li><p>We will use Stan for everything else. This includes all Bayesian modeling that does not use optimization (and even some that does).</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="Displaying-your-Stan-code">
-<h2>Displaying your Stan code<a class="headerlink" href="#Displaying-your-Stan-code" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+<section id="Displaying-your-Stan-code">
+<h2>Displaying your Stan code<a class="headerlink" href="#Displaying-your-Stan-code" title="Link to this heading"></a></h2>
 <p>When you are working on assignments, your Stan models are written as separate files. It is instructive to display the Stan code in the Jupyter notebook. This is easily accomplished for any CmdStanPy model using the <code class="docutils literal notranslate"><span class="pre">code()</span></code> method.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
@@ -2997,9 +2998,9 @@ model {
 </pre></div></div>
 </div>
 <p>You should do this in your notebooks so the code is visible.</p>
-</div>
-<div class="section" id="Saving-samples">
-<h2>Saving samples<a class="headerlink" href="#Saving-samples" title="Permalink to this heading"></a></h2>
+</section>
+<section id="Saving-samples">
+<h2>Saving samples<a class="headerlink" href="#Saving-samples" title="Link to this heading"></a></h2>
 <p>While your samples are saved in CSV and text files by Stan, is is convenient to save the sampling information in a format the can immediately be read into an ArviZ InferenceData object. The <a class="reference external" href="https://en.wikipedia.org/wiki/NetCDF">NetCDF format</a> is useful for this. ArviZ enables saving as NetCDF as follows.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
@@ -3027,9 +3028,9 @@ model {
 </pre></div>
 </div>
 </div>
-</div>
-<div class="section" id="Cleaning-up-the-shrapnel">
-<h2>Cleaning up the shrapnel<a class="headerlink" href="#Cleaning-up-the-shrapnel" title="Permalink to this heading"></a></h2>
+</section>
+<section id="Cleaning-up-the-shrapnel">
+<h2>Cleaning up the shrapnel<a class="headerlink" href="#Cleaning-up-the-shrapnel" title="Link to this heading"></a></h2>
 <p>When using Stan, CmdStanPy leaves a lot of files on your file system.</p>
 <ol class="arabic simple">
 <li><p>Your stan model is translated into C++, and the result is stored in a <code class="docutils literal notranslate"><span class="pre">.hpp</span></code> file.</p></li>
@@ -3046,9 +3047,9 @@ model {
 </div>
 </div>
 <p>When doing sampling the results are stored in a <code class="docutils literal notranslate"><span class="pre">/var/</span></code> directory in various CSV and text files. We never work with these directly, but rather read them into RAM in a convenience <code class="docutils literal notranslate"><span class="pre">az.InferenceData</span></code> object using ArviZ. When exiting your session, CmdStanPy deletes all of these CSV files, etc., unless you specifically say which directory to store the results in your call to <code class="docutils literal notranslate"><span class="pre">sm.sample()</span></code> using the <code class="docutils literal notranslate"><span class="pre">outpur_dir</span></code> kwarg.</p>
-</div>
-<div class="section" id="Computing-environment">
-<h2>Computing environment<a class="headerlink" href="#Computing-environment" title="Permalink to this heading"></a></h2>
+</section>
+<section id="Computing-environment">
+<h2>Computing environment<a class="headerlink" href="#Computing-environment" title="Link to this heading"></a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
 </pre></div>
@@ -3081,8 +3082,8 @@ jupyterlab: 4.0.13
 cmdstan   : 2.35.0
 </pre></div></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -3096,11 +3097,11 @@ cmdstan   : 2.35.0
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 01, 2025.
+      <span class="lastupdated">Last updated on Feb 14, 2025.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x3012a87a0> 
+   <jinja2.runtime.BlockReference object at 0x1523d6630> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

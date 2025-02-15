@@ -1,28 +1,28 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Parameter estimation by optimization: A variate-covariate model &mdash; BE/Bi 103 b  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=22ddcdb3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
 
   
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
-        <script src="../../_static/clipboard.min.js"></script>
-        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=9bcbadda"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=f281be69"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -114,6 +114,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../homework/04/index.html">4. Sampling with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/05/index.html">5. Inference with Stan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/06/index.html">6. MCMC with ion channels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../homework/07/index.html">7. Model comparison</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -172,24 +173,24 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="Parameter-estimation-by-optimization:-A-variate-covariate-model">
-<h1>Parameter estimation by optimization: A variate-covariate model<a class="headerlink" href="#Parameter-estimation-by-optimization:-A-variate-covariate-model" title="Permalink to this heading"></a></h1>
+  <section id="Parameter-estimation-by-optimization:-A-variate-covariate-model">
+<h1>Parameter estimation by optimization: A variate-covariate model<a class="headerlink" href="#Parameter-estimation-by-optimization:-A-variate-covariate-model" title="Link to this heading"></a></h1>
 <p><a class="reference external" href="https://s3.amazonaws.com/bebi103.caltech.edu/data/good_invitro_droplet_data.csv">Data set download</a></p>
 <hr><div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">polars</span> <span class="k">as</span> <span class="nn">pl</span>
-<span class="kn">import</span> <span class="nn">scipy.optimize</span>
-<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">st</span>
-<span class="kn">import</span> <span class="nn">statsmodels.tools.numdiff</span> <span class="k">as</span> <span class="nn">smnd</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.optimize</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">statsmodels.tools.numdiff</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">smnd</span>
 
-<span class="kn">import</span> <span class="nn">tqdm</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tqdm</span>
 
-<span class="kn">import</span> <span class="nn">bebi103</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">bebi103</span>
 
-<span class="kn">import</span> <span class="nn">bokeh.io</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">bokeh.io</span>
 <span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">output_notebook</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -604,8 +605,8 @@ var element = document.currentScript.previousSibling.previousSibling;
 })(window);
 </script></div>
 </div>
-<div class="section" id="The-tubulin-conservation-model">
-<h2>The tubulin conservation model<a class="headerlink" href="#The-tubulin-conservation-model" title="Permalink to this heading"></a></h2>
+<section id="The-tubulin-conservation-model">
+<h2>The tubulin conservation model<a class="headerlink" href="#The-tubulin-conservation-model" title="Link to this heading"></a></h2>
 <p>In the tubulin conservation model, recall that the theoretical relationship between spindle length and droplet diameter is</p>
 <p><span class="math">\begin{align}
 l(d) = \frac{\gamma d}{\left(1+(\gamma d/\phi)^3\right)^{\frac{1}{3}}}
@@ -687,8 +688,8 @@ var element = document.currentScript.previousSibling.previousSibling;
 &\mu_i =  \frac{\gamma d_i}{\left(1+(\gamma d_i/\phi)^3\right)^{\frac{1}{3}}}\;\forall i, \\[1em]
 &l_i \sim \text{Norm}(\mu_i, \sigma) \;\forall i.
 \end{align}</span></p>
-<div class="section" id="Parameter-estimation">
-<h3>Parameter estimation<a class="headerlink" href="#Parameter-estimation" title="Permalink to this heading"></a></h3>
+<section id="Parameter-estimation">
+<h3>Parameter estimation<a class="headerlink" href="#Parameter-estimation" title="Link to this heading"></a></h3>
 <p>We will now proceed to compute the MAP and credible intervals. Before embarking on this calculation, I write down the steps for making sense of the posterior using optimization and a multivariate Normal approximation. After defining your model, do the following.</p>
 <ol class="arabic simple">
 <li><p>Write a function to compute the log posterior.</p></li>
@@ -706,12 +707,12 @@ var element = document.currentScript.previousSibling.previousSibling;
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">theoretical_spindle_length</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">gamma</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">theoretical_spindle_length</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">gamma</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Theoretical spindle length for tubulin conservation model.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">d</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">cbrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="n">gamma</span> <span class="o">*</span> <span class="n">d</span> <span class="o">/</span> <span class="n">phi</span><span class="p">)</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">log_prior</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">log_prior</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Log prior for tubulin conservation model&quot;&quot;&quot;</span>
     <span class="n">lp</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">lognorm</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="mf">2.3</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mf">2.3</span><span class="p">))</span>
     <span class="n">lp</span> <span class="o">+=</span> <span class="n">st</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">)</span>
@@ -720,14 +721,14 @@ var element = document.currentScript.previousSibling.previousSibling;
     <span class="k">return</span> <span class="n">lp</span>
 
 
-<span class="k">def</span> <span class="nf">log_likelihood</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">ell</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">log_likelihood</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">ell</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Log likelihood for independent size model&quot;&quot;&quot;</span>
     <span class="n">mu</span> <span class="o">=</span> <span class="n">theoretical_spindle_length</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">gamma</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">ell</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">))</span>
 
 
-<span class="k">def</span> <span class="nf">log_posterior</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">ell</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">log_posterior</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">ell</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Log posterior of indpendent size model.&quot;&quot;&quot;</span>
     <span class="n">phi</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="n">params</span>
 
@@ -744,7 +745,7 @@ var element = document.currentScript.previousSibling.previousSibling;
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">neg_log_posterior</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">ell</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">neg_log_posterior</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">ell</span><span class="p">):</span>
     <span class="k">return</span> <span class="o">-</span><span class="n">log_posterior</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">ell</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -833,9 +834,9 @@ Most probable parameters
 
 </pre></div></div>
 </div>
-</div>
-<div class="section" id="Checking-the-Normal-approximation">
-<h3>Checking the Normal approximation<a class="headerlink" href="#Checking-the-Normal-approximation" title="Permalink to this heading"></a></h3>
+</section>
+<section id="Checking-the-Normal-approximation">
+<h3>Checking the Normal approximation<a class="headerlink" href="#Checking-the-Normal-approximation" title="Link to this heading"></a></h3>
 <p>Plotting this distribution is harder than in the independent size model because we now have three parameters. We therefore have to marginalize out one of the parameters to make a contour plot of two parameters we are interested in. To do so, we first need to grid up the parameter values and compute the log posterior. Unlike in our previous treatment of this model when we could analytically marginalize away <span class="math notranslate nohighlight">\(\sigma\)</span>, we cannot do that here because of our choice of prior. We need to compute
 the posterior for many values of <span class="math notranslate nohighlight">\(\sigma\)</span> and then use numerical quadrature to marginalize it away.</p>
 <p>Note that this problem of computing the posterior for plotting does not scale well. For the independent size model, we evaluated the posterior at 200 <span class="math notranslate nohighlight">\(\phi\)</span> values and 200 <span class="math notranslate nohighlight">\(\sigma\)</span> values for a total of 40,000 posterior evaluations. It took a few seconds to run. Now, we will evaluate the posterior at 100 <span class="math notranslate nohighlight">\(\phi\)</span> values, 100 <span class="math notranslate nohighlight">\(\gamma\)</span> values, and 100 <span class="math notranslate nohighlight">\(\sigma_0\)</span> values, for a total of a million posterior evaluations, and you can expect the calculation in the next cell
@@ -1000,9 +1001,9 @@ var element = document.currentScript.previousSibling.previousSibling;
 </script></div>
 </div>
 <p>We are again fortunate that the Normal approximation is a good one. This is not always the case, though, and this is a <strong>major</strong> danger in using optimization methods to making sense of the posterior.</p>
-</div>
-<div class="section" id="Displaying-the-best-fit-line">
-<h3>Displaying the best fit line<a class="headerlink" href="#Displaying-the-best-fit-line" title="Permalink to this heading"></a></h3>
+</section>
+<section id="Displaying-the-best-fit-line">
+<h3>Displaying the best fit line<a class="headerlink" href="#Displaying-the-best-fit-line" title="Link to this heading"></a></h3>
 <p>Researchers typically display the best-fit line with their data points. I generally discourage this; you should instead show results from <strong>posterior predictive checks</strong>, which we will discuss in coming weeks. However, for now we do not know how to do that, so we will just display the best fit line.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
@@ -1062,10 +1063,10 @@ var element = document.currentScript.previousSibling.previousSibling;
 </script></div>
 </div>
 <p>It looks like most of the sampling was in the curved part of the plot, meaning we had few samples in the linear regime where the only relevant parameter is <span class="math notranslate nohighlight">\(\gamma\)</span>, and few in the regime where <span class="math notranslate nohighlight">\(\phi\)</span> is the only relevant parameter. Importantly, we caught enough of the dynamic region of the curve to get good parameter estimates.</p>
-</div>
-</div>
-<div class="section" id="Computing-environment">
-<h2>Computing environment<a class="headerlink" href="#Computing-environment" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+<section id="Computing-environment">
+<h2>Computing environment<a class="headerlink" href="#Computing-environment" title="Link to this heading"></a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
@@ -1095,8 +1096,8 @@ jupyterlab : 4.0.13
 
 </pre></div></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -1110,11 +1111,11 @@ jupyterlab : 4.0.13
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 01, 2025.
+      <span class="lastupdated">Last updated on Feb 14, 2025.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x300ed8890> 
+   <jinja2.runtime.BlockReference object at 0x152634b90> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

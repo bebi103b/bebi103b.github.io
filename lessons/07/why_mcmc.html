@@ -1,27 +1,27 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Why MCMC? &mdash; BE/Bi 103 b  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=22ddcdb3" />
 
   
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
-        <script src="../../_static/clipboard.min.js"></script>
-        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=9bcbadda"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=f281be69"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -107,6 +107,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../homework/04/index.html">4. Sampling with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/05/index.html">5. Inference with Stan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/06/index.html">6. MCMC with ion channels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../homework/07/index.html">7. Model comparison</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -165,12 +166,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="why-mcmc">
-<h1>Why MCMC?<a class="headerlink" href="#why-mcmc" title="Permalink to this heading"></a></h1>
+  <section id="why-mcmc">
+<h1>Why MCMC?<a class="headerlink" href="#why-mcmc" title="Link to this heading"></a></h1>
 <p>When doing Bayesian analysis, our goal is very often to understand a
 posterior distribution, <span class="math notranslate nohighlight">\(g(\theta \mid y)\)</span>, where
 <span class="math notranslate nohighlight">\(\theta = \{\theta^{(1)}, \theta^{(2)},\ldots\}\)</span> is a set of
-possibly many parameters and <span class="math notranslate nohighlight">\(y\)</span> is the data set. <a class="footnote-reference brackets" href="#id3" id="id1">1</a> However,
+possibly many parameters and <span class="math notranslate nohighlight">\(y\)</span> is the data set. <a class="footnote-reference brackets" href="#id3" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> However,
 just having an analytical expression for the posterior is of little use
 if we cannot understand any properties about it. Importantly, we often
 want to marginalize the posterior; that is, we want to integrate over
@@ -195,7 +196,7 @@ parameters, <span class="math notranslate nohighlight">\(h(\theta)\)</span>, and
 computation of an integral.</p>
 <p><strong>Markov chain Monte Carlo (MCMC)</strong> allows us to <em>sample</em> out of an arbitrary probability
 distribution, which includes pretty much any posterior we could write
-down. <a class="footnote-reference brackets" href="#id4" id="id2">2</a> By sampling, I mean that we can choose values of the
+down. <a class="footnote-reference brackets" href="#id4" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> By sampling, I mean that we can choose values of the
 parameters, <span class="math notranslate nohighlight">\(\theta\)</span>, where the probability that we choose a given
 value is proportional to the posterior probability or probability density. Note that each
 sample consists of a complete set of parameters <span class="math notranslate nohighlight">\(\theta\)</span>; that is
@@ -232,19 +233,21 @@ posterior is so powerful. But generating samples that actually come from
 the probability distribution of interest is not a trivial matter. We
 will discuss how this is accomplished through MCMC.</p>
 <hr class="docutils" />
-<dl class="footnote brackets">
-<dt class="label" id="id3"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
-<dd><p>It will become clear why I am using this strange superscripted
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id3" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>It will become clear why I am using this strange superscripted
 parenthetical indexing of the parameters as we continue with the MCMC
 discussion. I need other subscripts later on.</p>
-</dd>
-<dt class="label" id="id4"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
-<dd><p>Well, not <em>any</em>. For some cases, we may not be able to make a
+</aside>
+<aside class="footnote brackets" id="id4" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
+<p>Well, not <em>any</em>. For some cases, we may not be able to make a
 transition kernel that satisfies the necessary properties, which I
 describe in the following pages.</p>
-</dd>
-</dl>
-</div>
+</aside>
+</aside>
+</section>
 
 
            </div>
@@ -258,11 +261,11 @@ describe in the following pages.</p>
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 01, 2025.
+      <span class="lastupdated">Last updated on Feb 14, 2025.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x3015a70e0> 
+   <jinja2.runtime.BlockReference object at 0x17ad3f560> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

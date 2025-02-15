@@ -1,28 +1,28 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Homework 2.2: Exponential conjugate prior (55 pts) &mdash; BE/Bi 103 b  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=22ddcdb3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
 
   
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
-        <script src="../../_static/clipboard.min.js"></script>
-        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=9bcbadda"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=f281be69"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -104,6 +104,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../04/index.html">4. Sampling with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../05/index.html">5. Inference with Stan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../06/index.html">6. MCMC with ion channels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07/index.html">7. Model comparison</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -162,8 +163,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="Homework-2.2:-Exponential-conjugate-prior-(55-pts)">
-<h1>Homework 2.2: Exponential conjugate prior (55 pts)<a class="headerlink" href="#Homework-2.2:-Exponential-conjugate-prior-(55-pts)" title="Permalink to this heading"></a></h1>
+  <section id="Homework-2.2:-Exponential-conjugate-prior-(55-pts)">
+<h1>Homework 2.2: Exponential conjugate prior (55 pts)<a class="headerlink" href="#Homework-2.2:-Exponential-conjugate-prior-(55-pts)" title="Link to this heading"></a></h1>
 <p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/sviewer/viewer.fcgi?tool=portal&amp;sendto=on&amp;log$=seqview&amp;db=nuccore&amp;dopt=fasta&amp;val=CP042865.1">Data set download</a></p>
 <p><em>This problem was motivated by discussion in section 2.10 of</em><a class="reference external" href="http://web.stanford.edu/class/bios221/book/">Holmes and Huber’s book</a><em>.</em></p>
 <hr><p><strong>a)</strong> Show that the conjugate distribution for the Exponential distribution is the Gamma distribution. How are the parameters of the Gamma updated from the prior to the posterior? (<em>You are welcome to look at</em><a class="reference external" href="https://en.wikipedia.org/wiki/Conjugate_prior">Wikipedia’s table of conjugate priors</a><em>to check your answer, but you should not look up the actual proof that the Gamma distribution is conjugate to the Exponential.</em>)</p>
@@ -172,7 +173,7 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">read_fasta_single_record</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">read_fasta_single_record</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Read a sequence in from a FASTA file containing a single sequence.</span>
 
 <span class="sd">    We assume that the first line of the file is the descriptor and all</span>
@@ -198,10 +199,10 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 
 
-<span class="k">def</span> <span class="nf">recognition_sites_with_re</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span> <span class="n">recog_seq</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">recognition_sites_with_re</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span> <span class="n">recog_seq</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Find the indices of all recognition sites in a sequence.&quot;&quot;&quot;</span>
     <span class="n">sites</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="n">re</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="n">recog_seq</span><span class="p">,</span> <span class="n">seq</span><span class="p">):</span>
@@ -215,7 +216,7 @@
 <p><strong>d)</strong> We will model the distance between each motif as Exponentially distributed. Explain why this may be a reasonable model.</p>
 <p><strong>e)</strong> Make an exploratory plot of the ECDF of inter-motif distances. Does it look Exponential?</p>
 <p><strong>f)</strong> Use an Exponential likelihood and a Gamma prior distribution to compute and plot the posterior distribution of the rate parameter (the inverse of the characteristic distance between motifs) of the Exponential distribution.</p>
-</div>
+</section>
 
 
            </div>
@@ -229,11 +230,11 @@
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 01, 2025.
+      <span class="lastupdated">Last updated on Feb 14, 2025.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x30a3cd3d0> 
+   <jinja2.runtime.BlockReference object at 0x17ac0a9c0> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

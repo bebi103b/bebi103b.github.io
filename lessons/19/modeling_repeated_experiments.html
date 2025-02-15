@@ -1,27 +1,27 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Modeling repeated experiments &mdash; BE/Bi 103 b  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=22ddcdb3" />
 
   
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
-        <script src="../../_static/clipboard.min.js"></script>
-        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=9bcbadda"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=f281be69"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -113,6 +113,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../homework/04/index.html">4. Sampling with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/05/index.html">5. Inference with Stan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/06/index.html">6. MCMC with ion channels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../homework/07/index.html">7. Model comparison</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -171,13 +172,13 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="Modeling-repeated-experiments">
-<h1>Modeling repeated experiments<a class="headerlink" href="#Modeling-repeated-experiments" title="Permalink to this heading"></a></h1>
+  <section id="Modeling-repeated-experiments">
+<h1>Modeling repeated experiments<a class="headerlink" href="#Modeling-repeated-experiments" title="Link to this heading"></a></h1>
 <hr><p>In this lesson, we will investigate <strong>hierarchical models</strong>, in which some model parameters are dependent on others in specific ways. As is often the case, this is perhaps best learned by example.</p>
 <p>In <a class="reference internal" href="../../homework/04/hw4.2.html"><span class="doc">Homework 4.2</span></a>, we studied reversals under exposure to blue light in <em>C. elegans</em> with Channelrhodopsin in two different neurons. Let’s consider one of the strains which contains a Channelrhodopsin in the ASH sensory neuron. We considered data done in three different years by the students of <a class="reference external" href="http://bi1x.caltech.edu">Bi 1x</a>. In 2015, we found that 9 out of 35 worms reversed under exposure to blue light. In 2016, 12 out of 35 reversed. In 2017, 18 out of 54
 reversed.</p>
-<div class="section" id="A-model-for-reversals">
-<h2>A model for reversals<a class="headerlink" href="#A-model-for-reversals" title="Permalink to this heading"></a></h2>
+<section id="A-model-for-reversals">
+<h2>A model for reversals<a class="headerlink" href="#A-model-for-reversals" title="Link to this heading"></a></h2>
 <p>As we have worked out, a Binomial likelihood makes sense for this experiment; the number <span class="math notranslate nohighlight">\(n\)</span> out of <span class="math notranslate nohighlight">\(N\)</span> Bernoulli trials that are successful is Binomially distributed. The parameter we are trying to estimate, the probability of reversal <span class="math notranslate nohighlight">\(\theta\)</span>, needs a prior. A Beta distribution makes sense for this, and we will choose a Beta distribution that weakly disfavors a zero or one probability of reversal.</p>
 <p><span class="math">\begin{align}
 &\theta \sim \text{Beta}(1.1, 1.1),\\[1em]
@@ -185,26 +186,26 @@ reversed.</p>
 \end{align}</span></p>
 <p>The problem is that this is a generative model for a single experiment. We did the experiment in 2015, getting <span class="math notranslate nohighlight">\(n/N = 9/35\)</span>, and again in 2016, getting <span class="math notranslate nohighlight">\(n/N = 12/35\)</span>, and in 2017 with <span class="math notranslate nohighlight">\(n/N = 18/54\)</span>. Actually, we could imagine doing the experiment over and over again, say <span class="math notranslate nohighlight">\(k\)</span> times, each time getting a value of <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(N\)</span>. Conditions may change from experiment to experiment. For example, we may have different lighting set-ups, slight differences in the strain
 of worms we’re using, etc. We are left with some choices on how to model the data.</p>
-<div class="section" id="Pooled-data:-identical-parameters">
-<h3>Pooled data: identical parameters<a class="headerlink" href="#Pooled-data:-identical-parameters" title="Permalink to this heading"></a></h3>
+<section id="Pooled-data:-identical-parameters">
+<h3>Pooled data: identical parameters<a class="headerlink" href="#Pooled-data:-identical-parameters" title="Link to this heading"></a></h3>
 <p>We could pool all of the data together. In other words, let’s say we measure <span class="math notranslate nohighlight">\(n_1\)</span> out of <span class="math notranslate nohighlight">\(N_1\)</span> reversals in the first set of experiments, <span class="math notranslate nohighlight">\(n_2\)</span> out of <span class="math notranslate nohighlight">\(N_2\)</span> reversals in the second set, etc., up to <span class="math notranslate nohighlight">\(k\)</span> total experiments. We could pool all of the data together to get</p>
 <p><span class="math">\begin{align}
 &n = \sum_{i=1}^k n_i \text{ out of } N = \sum_{i=1}^k N_i \text{ reversals}.
 \end{align}</span></p>
 <p>We then compute our posterior as in the model above. Here, the modeling assumption is that the result in each experiment are governed by <em>identical parameters</em>. That is to say that we assume <span class="math notranslate nohighlight">\(\theta_1 = \theta_2 = \cdots = \theta_k = \theta\)</span>. This is the approach we took in <a class="reference internal" href="../../homework/04/hw4.2.html"><span class="doc">Homework 4.2</span></a>.</p>
-</div>
-<div class="section" id="Independent-parameters">
-<h3>Independent parameters<a class="headerlink" href="#Independent-parameters" title="Permalink to this heading"></a></h3>
+</section>
+<section id="Independent-parameters">
+<h3>Independent parameters<a class="headerlink" href="#Independent-parameters" title="Link to this heading"></a></h3>
 <p>As an alternative model, we could instead say that the parameters in each experiment are totally independent of each other. In this case, we assume that <span class="math notranslate nohighlight">\(\theta_1\)</span>, <span class="math notranslate nohighlight">\(\theta_2\)</span>, <span class="math notranslate nohighlight">\(\ldots\)</span>, <span class="math notranslate nohighlight">\(\theta_k\)</span> are all independent of each other. In this case, we have <span class="math notranslate nohighlight">\(k\)</span> separate models to fit, each looking like</p>
 <p><span class="math">\begin{align}
 &\theta_i \sim \text{Beta}(1.1, 1.1),\\[1em]
 &n_i \sim \text{Binomial}(N_i, \theta_i).
 \end{align}</span></p>
 <p>When we do the modeling in this way, we often report a value of <span class="math notranslate nohighlight">\(\theta\)</span> that is given by the mean of the <span class="math notranslate nohighlight">\(\theta_i\)</span>’s with some error bar.</p>
-</div>
-</div>
-<div class="section" id="The-best-of-both-worlds:-A-hierarchical-model">
-<h2>The best of both worlds: A hierarchical model<a class="headerlink" href="#The-best-of-both-worlds:-A-hierarchical-model" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+<section id="The-best-of-both-worlds:-A-hierarchical-model">
+<h2>The best of both worlds: A hierarchical model<a class="headerlink" href="#The-best-of-both-worlds:-A-hierarchical-model" title="Link to this heading"></a></h2>
 <p>Each of these extremes have their advantages. We are often trying to estimate a parameter that is more universal than our experiments, e.g., something that describes worms with Channelrhodopsin in the ASH neuron generally. So, pooling the experiments makes sense. On the other hand, we have reason to assume that there is going to be a different value of <span class="math notranslate nohighlight">\(\theta\)</span> in different experiments, as biological systems are highly variable, not to mention measurement variations. So, how can we capture
 both of these effects?</p>
 <p>We can consider a model in which there is a “global” reversal probability, which we will call <span class="math notranslate nohighlight">\(\phi\)</span>, and the values of <span class="math notranslate nohighlight">\(\theta_i\)</span> may vary from this <span class="math notranslate nohighlight">\(\phi\)</span> according to some probability distribution, <span class="math notranslate nohighlight">\(g(\theta_i\mid \phi)\)</span>. So now we have parameters <span class="math notranslate nohighlight">\(\theta_1, \theta_2, \ldots, \theta_k\)</span> and <span class="math notranslate nohighlight">\(\phi\)</span>. So, the posterior can be written using Bayes’s theorem, defining <span class="math notranslate nohighlight">\(\theta = (\theta_1, \theta_2, \ldots)\)</span>, <span class="math notranslate nohighlight">\(N = (N_1, N_2, \ldots)\)</span>, and
@@ -227,8 +228,8 @@ g(\phi,\theta\mid n, N) = \frac{f(n,N\mid \theta)\, g(\theta\mid \phi)\, g(\phi)
 <p>Now, if we read off the numerator of this equation, we see a chain of dependencies (conditioning). The experimental results <span class="math notranslate nohighlight">\(n\)</span> are conditioned on parameters <span class="math notranslate nohighlight">\(\theta\)</span>. Parameters <span class="math notranslate nohighlight">\(\theta\)</span> are conditioned on <strong>hyperparameter</strong> <span class="math notranslate nohighlight">\(\phi\)</span>. Hyperparameter <span class="math notranslate nohighlight">\(\phi\)</span> then has some <strong>hyperprior</strong> distribution. Any model that can be written as a chain of conditioning like this is called a <strong>hierarchical model</strong>, and the parameters that do not <em>directly</em> condition the data are
 called hyperparameters.</p>
 <p>So, the hierarchical model captures both the experiment-to-experiment variability, as well as the “global” regulator of outcomes, the hyperparameter. Note that the product <span class="math notranslate nohighlight">\(g(\theta\mid \phi)\, g(\phi)\)</span> comprises the prior, as it is independent of the observed data.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -242,11 +243,11 @@ called hyperparameters.</p>
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 01, 2025.
+      <span class="lastupdated">Last updated on Feb 14, 2025.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x16f96e270> 
+   <jinja2.runtime.BlockReference object at 0x1523528d0> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

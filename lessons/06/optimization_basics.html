@@ -1,28 +1,28 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bayesian approach to parameter estimation by optimization &mdash; BE/Bi 103 b  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=22ddcdb3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
 
   
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
-        <script src="../../_static/clipboard.min.js"></script>
-        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=9bcbadda"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=f281be69"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -117,6 +117,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../homework/04/index.html">4. Sampling with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/05/index.html">5. Inference with Stan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/06/index.html">6. MCMC with ion channels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../homework/07/index.html">7. Model comparison</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -175,22 +176,22 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="Bayesian-approach-to-parameter-estimation-by-optimization">
-<h1>Bayesian approach to parameter estimation by optimization<a class="headerlink" href="#Bayesian-approach-to-parameter-estimation-by-optimization" title="Permalink to this heading"></a></h1>
+  <section id="Bayesian-approach-to-parameter-estimation-by-optimization">
+<h1>Bayesian approach to parameter estimation by optimization<a class="headerlink" href="#Bayesian-approach-to-parameter-estimation-by-optimization" title="Link to this heading"></a></h1>
 <hr><div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
 <span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
     <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
 
-    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-    <span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">st</span>
-    <span class="kn">import</span> <span class="nn">bebi103.viz</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">bebi103.viz</span>
 
-<span class="kn">import</span> <span class="nn">bokeh.io</span>
-<span class="kn">import</span> <span class="nn">bokeh.plotting</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">bokeh.io</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">bokeh.plotting</span>
 <span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">output_notebook</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -509,8 +510,8 @@ if (force === true) {
 g(\theta\mid y) \propto f(y\mid \theta)\,g(\theta).
 \end{align}</span></p>
 <p>The central goal of Bayesian inference is making sense of this posterior distribution; writing it down is the easy part.</p>
-<div class="section" id="Summarizing-the-posterior-near-its-maximum">
-<h2>Summarizing the posterior near its maximum<a class="headerlink" href="#Summarizing-the-posterior-near-its-maximum" title="Permalink to this heading"></a></h2>
+<section id="Summarizing-the-posterior-near-its-maximum">
+<h2>Summarizing the posterior near its maximum<a class="headerlink" href="#Summarizing-the-posterior-near-its-maximum" title="Link to this heading"></a></h2>
 <p>For many posteriors, there exists a set of parameters for which the posterior is maximal. This set of parameters, denoted <span class="math notranslate nohighlight">\(\theta^*\)</span>, is referred to as the <strong>maximal a posteriori</strong> parameter set, abbreviated <strong>MAP</strong>. Given that <span class="math notranslate nohighlight">\(\theta^*\)</span> maximizes the posterior, it is of some importance (but certainly not paramount importance, as we will learn throughout the course), and may be useful in summarizing a posterior.</p>
 <p>Finding the MAP is an optimization problem. In some simple, rare cases, the optimization problem may be solved analytically. We will not dwell on these, because they are so seldom encountered. Instead, we will discuss numerical methods for finding <span class="math notranslate nohighlight">\(\theta^*\)</span> for continuous <span class="math notranslate nohighlight">\(\theta\)</span> as we proceed through this lesson. For now, we will proceed assuming we have found <span class="math notranslate nohighlight">\(\theta^*\)</span> and seek to approximate the posterior distribution near the MAP.</p>
 <p>Near the MAP, we can approximately express the log posterior as a Taylor expansion truncated to second order,</p>
@@ -538,8 +539,8 @@ g(\theta\mid y) \approx \frac{1}{\sqrt{2\pi\sigma^2}}\,\exp\left[-\frac{\left(\t
 \mathsf{\Sigma} = - \mathsf{B}^{-1}.
 \end{align}</span></p>
 <p>Note that the covariance matrix is <strong>not</strong> the inverse of every element of the Hessian; it is the inverse of the Hessian <em>matrix</em>. Note also that optimization theory tells us that because the Hessian is evaluated at <span class="math notranslate nohighlight">\(\theta^*\)</span>, which maximizes the posterior, the Hessian must be negative definite. Therefore, the covariance matrix must be positive definite, which we already know must by the case for a multivariate Normal distribution.</p>
-<div class="section" id="Demonstration-of-the-Normal-approximation">
-<h3>Demonstration of the Normal approximation<a class="headerlink" href="#Demonstration-of-the-Normal-approximation" title="Permalink to this heading"></a></h3>
+<section id="Demonstration-of-the-Normal-approximation">
+<h3>Demonstration of the Normal approximation<a class="headerlink" href="#Demonstration-of-the-Normal-approximation" title="Link to this heading"></a></h3>
 <p>Actually, the probability density function of <em>any</em> continuous, peaked distribution can be approximated as Normal near a peak. We can demonstrate this fact by approximating a Gamma distribution locally as Normal. Recall that the PDF for a Gamma distribution is</p>
 <p><span class="math">\begin{align}
 f(x ; \alpha, \beta) = \frac{1}{\Gamma(\alpha)}\,\frac{(\beta x)^\alpha}{x}\,\mathrm{e}^{-\beta x}.
@@ -617,16 +618,16 @@ var element = document.currentScript.previousSibling.previousSibling;
 })(window);
 </script></div>
 </div>
-</div>
-</div>
-<div class="section" id="Credible-intervals">
-<h2>Credible intervals<a class="headerlink" href="#Credible-intervals" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+<section id="Credible-intervals">
+<h2>Credible intervals<a class="headerlink" href="#Credible-intervals" title="Link to this heading"></a></h2>
 <p>A <span class="math notranslate nohighlight">\(\alpha\)</span>-percent Bayesian <strong>credible interval</strong> for a parameter is an an interval that contains <span class="math notranslate nohighlight">\(\alpha\)</span> percent of the posterior probability density. (This is different form a frequentist confidence interval, though a confidence interval is often erroneously interpreted as a credible interval.) For example, if <span class="math notranslate nohighlight">\(g(\theta \mid y)\)</span> is the marginalized posterior probability density function for a single parameter <span class="math notranslate nohighlight">\(\theta\)</span> and <span class="math notranslate nohighlight">\(G(\theta\mid y)\)</span> is the cumulative
 distribution function, then a 95% credible interval is <span class="math notranslate nohighlight">\([G^{-1}(0.025),\;G^{-1}(0.975)]\)</span>.</p>
 <p>If we approximate the posterior as a multivariate Normal distribution, we have <em>analytical</em> results for credible intervals for each parameter. This is the main benefit of using optimization; it affords us an approximate (Normal) expression for the posterior that has convenient, known analytical results. This enables us to make sense of the posterior.</p>
 <p>Specifically, if <span class="math notranslate nohighlight">\(\Sigma_{ii}\)</span> is a diagonal element in the covariance matrix <span class="math notranslate nohighlight">\(\mathsf{\Sigma}\)</span>, then, e.g., the 95% credible interval for parameter <span class="math notranslate nohighlight">\(\theta_i\)</span> is centered on the MAP estimate, <span class="math notranslate nohighlight">\(\theta_i^*\)</span> and is <span class="math notranslate nohighlight">\([\theta_i^* - 1.96\sqrt{\Sigma_{ii}},\;\theta_i^* + 1.96\sqrt{\Sigma_{ii}}]\)</span>. Because the credible intervals are symmetric under this approximation, we can report the estimates as the <span class="math notranslate nohighlight">\(\theta_i^* \pm 1.96 \sqrt{\Sigma_{ii}}\)</span>.</p>
-<div class="section" id="Credible-intervals-may-be-skewed">
-<h3>Credible intervals may be skewed<a class="headerlink" href="#Credible-intervals-may-be-skewed" title="Permalink to this heading"></a></h3>
+<section id="Credible-intervals-may-be-skewed">
+<h3>Credible intervals may be skewed<a class="headerlink" href="#Credible-intervals-may-be-skewed" title="Link to this heading"></a></h3>
 <p>We are approximating the <em>PDF</em> of a distribution close to its mode as Normal. However, for an asymmetric distribution, which posterior distributions can certainly be, the mode may not be all that relevant as far as credible regions go. As an extreme example, consider an Exponential distribution. It’s mode is zero, which is also the minimal allowed value. If we were to compute a central 95% credible region for a posterior that happened to be Exponential, the mode would not be included. In cases
 like these, though the Normal distribution approximately describes the PDF of the posterior near the MAP, the Normal approximation can lead to rather flawed credible regions.</p>
 <p>To demonstrate this, let us again return to the Gamma example, this time with <span class="math notranslate nohighlight">\(\alpha = 5\)</span> and <span class="math notranslate nohighlight">\(\beta = 2\)</span>. The mode of this Gamma distribution is 2, but the median is about 2.34. If we look graphically, we can see right away that the Normal approximation is not as good as the <span class="math notranslate nohighlight">\(\alpha = 50\)</span>, <span class="math notranslate nohighlight">\(\beta = 20\)</span> case.</p>
@@ -772,17 +773,17 @@ var element = document.currentScript.previousSibling.previousSibling;
 </script></div>
 </div>
 <p>For tiny credible intervals, the shift is clear. The median for a Gamma distribution with these parameters is shifted rightward from its mode, whereas the mode and median for a Normal distribution are equal. As we get broader credible intervals, the Normal approximation notably has the 99% credible interval containing negative values (not allowed for a Gamma distribution) and missing important values at the high end.</p>
-</div>
-</div>
-<div class="section" id="Why-use-the-MAP-for-parameter-estimation?">
-<h2>Why use the MAP for parameter estimation?<a class="headerlink" href="#Why-use-the-MAP-for-parameter-estimation?" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+<section id="Why-use-the-MAP-for-parameter-estimation?">
+<h2>Why use the MAP for parameter estimation?<a class="headerlink" href="#Why-use-the-MAP-for-parameter-estimation?" title="Link to this heading"></a></h2>
 <p>Despite these drawbacks, using the MAP/Normal approximation for parameter estimation is still useful in Bayesian inference, at least for simple, well-behaved problems. Why? The most important reason is speed. For problems with simple models (which we will encountered in the next section of this lesson), optimization is <em>much</em> faster than other methods for characterizing the posterior, such as directly plotting it or using Markov chain Monte Carlo. If you have high-throughput data, you may not
 have the computational resources to do a full Bayesian treatment with other methods. Provided your model that is tractable by optimization method, finding the MAP and summarizing with an approximate Normal distribution is an attractive method.</p>
 <p>In many cases, the Normal approximation can also be a good approximation. But this is definitely not guaranteed! In real inference problems, it is very difficult to identify pathologies that would lead to breakdown of the Normal approximation, since comparing to the real posterior would involve computationally intensive methods to compute it.</p>
 <p>In the next sections of this lesson, we will work though the mechanics of finding the MAP and computing credible regions.</p>
-</div>
-<div class="section" id="Computing-environment">
-<h2>Computing environment<a class="headerlink" href="#Computing-environment" title="Permalink to this heading"></a></h2>
+</section>
+<section id="Computing-environment">
+<h2>Computing environment<a class="headerlink" href="#Computing-environment" title="Link to this heading"></a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
@@ -809,8 +810,8 @@ jupyterlab: 4.0.10
 
 </pre></div></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -824,11 +825,11 @@ jupyterlab: 4.0.10
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 01, 2025.
+      <span class="lastupdated">Last updated on Feb 14, 2025.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x308707770> 
+   <jinja2.runtime.BlockReference object at 0x17b0ea870> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

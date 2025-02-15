@@ -1,28 +1,28 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Model comparison in practice &mdash; BE/Bi 103 b  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=22ddcdb3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
 
   
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
-        <script src="../../_static/clipboard.min.js"></script>
-        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=9bcbadda"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=f281be69"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -114,6 +114,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../homework/04/index.html">4. Sampling with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/05/index.html">5. Inference with Stan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/06/index.html">6. MCMC with ion channels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../homework/07/index.html">7. Model comparison</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -172,23 +173,23 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="Model-comparison-in-practice">
-<h1>Model comparison in practice<a class="headerlink" href="#Model-comparison-in-practice" title="Permalink to this heading"></a></h1>
+  <section id="Model-comparison-in-practice">
+<h1>Model comparison in practice<a class="headerlink" href="#Model-comparison-in-practice" title="Link to this heading"></a></h1>
 <p><a class="reference external" href="https://s3.amazonaws.com/bebi103.caltech.edu/data/singer_transcript_counts.csv">Data set download</a></p>
 <hr><div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">polars</span> <span class="k">as</span> <span class="nn">pl</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
 
-<span class="kn">import</span> <span class="nn">cmdstanpy</span>
-<span class="kn">import</span> <span class="nn">arviz</span> <span class="k">as</span> <span class="nn">az</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">cmdstanpy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">arviz</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">az</span>
 
-<span class="kn">import</span> <span class="nn">bebi103</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">bebi103</span>
 
-<span class="kn">import</span> <span class="nn">bokeh.io</span>
-<span class="kn">import</span> <span class="nn">bokeh.plotting</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">bokeh.io</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">bokeh.plotting</span>
 <span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">output_notebook</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -542,13 +543,13 @@ function(Bokeh) {
 often the case for us as scientists). As we think about generative models, and we are not sure which model best generates observed data, it is useful to think about <strong>model averaging</strong> if our aim is to be predictive. The idea here is that we do not know which model generates data. Instead, we try to find a combination of models that spans all of the models we are considering, that best generate the data. The respective weights of the models give their contributions to this combination of models.
 As a scientist, I tend to shy away from model averaging; I am rather seeking to understand how nature generates the observations I see, and nature is not trying to predict, nor average models. However, taking a model averaging approach with an eye for optimizing predictive performance leads to more robust estimates of model weights, as outlined in <a class="reference external" href="https://doi.org/10.1214/17-BA1091">this paper by Yao and coworkers</a>, which describes a technique known as <strong>stacking</strong>.</p>
 <p>In this tutorial, we will demonstrate how to calculate model weights both by using Akaike weights (and variants thereof), and stacking. Conveniently, this may be done approximately directly from samples out of the posterior distributions. The <a class="reference external" href="https://arviz-devs.github.io/arviz/">ArviZ package</a> provides much of the functionality we need.</p>
-<div class="section" id="An-example-model-comparison">
-<h2>An example model comparison<a class="headerlink" href="#An-example-model-comparison" title="Permalink to this heading"></a></h2>
+<section id="An-example-model-comparison">
+<h2>An example model comparison<a class="headerlink" href="#An-example-model-comparison" title="Link to this heading"></a></h2>
 <p>To show how we can do an model comparison, we will again consider the data set from <a class="reference external" href="../09/parameter_estimation_with_mcmc.ipynb">Singer and coworkers</a>, where they performed RNA FISH to determine the copy numbers of RNA transcripts of specific genes in individual cells in their samples. The data set can be downloaded <a class="reference external" href="https://s3.amazonaws.com/bebi103.caltech.edu/data/singer_transcript_counts.csv">here</a>.</p>
 <p>We will work with the Rex1 gene. In previous lessons, we considered two models. First, a model in which transcript counts are generated from a single Negative Binomial distribution. Second, a mixture model in which the transcript counts are generated from two Negative Binomial distributions. Note that this is a purely academic exercise, since the first model will fail posterior predictive checks quite spectacularly. We would never really come to this point where we needed to do a model
 comparison, but we proceed to demonstrate how it is done in practice.</p>
-<div class="section" id="Computing-the-pointwise-log-likelihood">
-<h3>Computing the pointwise log likelihood<a class="headerlink" href="#Computing-the-pointwise-log-likelihood" title="Permalink to this heading"></a></h3>
+<section id="Computing-the-pointwise-log-likelihood">
+<h3>Computing the pointwise log likelihood<a class="headerlink" href="#Computing-the-pointwise-log-likelihood" title="Link to this heading"></a></h3>
 <p>Recalling from lecture, the elpd is the the logarithm of the <strong>posterior predictive distribution</strong>, <span class="math notranslate nohighlight">\(f(\tilde{y}_i\mid y)\)</span>, averaged over the true generative distribution <span class="math notranslate nohighlight">\(f_t(\tilde{y}_i)\)</span>.</p>
 <p><span class="math">\begin{align}
 \text{elpd} = \sum_{i=1}^N\int\mathrm{d}\tilde{y}_i\,\,f_t(\tilde{y}_i)\,\ln f(\tilde{y}_i\mid y).
@@ -1229,9 +1230,9 @@ Attributes:
 </div>
 <p>The log likelihood is three dimensional, one dimension each for chain and draw, and then the final dimension is for the pointwise log-likelihood estimates.</p>
 <p>Given that the log likelihood is stored in the ArviZ object, we can directly use the samples to compute the WAIC and LOO.</p>
-</div>
-<div class="section" id="Computing-the-WAIC-and-LOO">
-<h3>Computing the WAIC and LOO<a class="headerlink" href="#Computing-the-WAIC-and-LOO" title="Permalink to this heading"></a></h3>
+</section>
+<section id="Computing-the-WAIC-and-LOO">
+<h3>Computing the WAIC and LOO<a class="headerlink" href="#Computing-the-WAIC-and-LOO" title="Link to this heading"></a></h3>
 <p>We will start with the WAIC. We use the <code class="docutils literal notranslate"><span class="pre">scale=&quot;deviance&quot;</span></code> kwarg to get the WAIC. By default, <code class="docutils literal notranslate"><span class="pre">az.waic()</span></code> will return the estimate for the elpd and not the traditionally used <span class="math notranslate nohighlight">\(-2\mathrm{elpd}_\mathrm{WAIC}\)</span>, which is why we use the <code class="docutils literal notranslate"><span class="pre">scale=&quot;deviance&quot;</span></code> kwarg.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
@@ -1288,9 +1289,9 @@ Pareto k diagnostic values:
 </pre></div></div>
 </div>
 <p>We see that the LOO and WAIC give almost identical results (as they should). The Pareto k diagnostic is also good, meaning that the LOO calculation does not have obvious pathologies. Remember, though, that LOO has better performance across a wider variety of models.</p>
-</div>
-<div class="section" id="Calculations-with-the-mixture-model">
-<h3>Calculations with the mixture model<a class="headerlink" href="#Calculations-with-the-mixture-model" title="Permalink to this heading"></a></h3>
+</section>
+<section id="Calculations-with-the-mixture-model">
+<h3>Calculations with the mixture model<a class="headerlink" href="#Calculations-with-the-mixture-model" title="Link to this heading"></a></h3>
 <p>Now, let’s do the same calculation for the mixture model. In this case, we do not have a built-in distribution to use a <code class="docutils literal notranslate"><span class="pre">_logpmf</span></code> function. Fortunately, the <code class="docutils literal notranslate"><span class="pre">log_mix()</span></code> function in Stan accomplishes exactly what we need, as it did when we added it to <code class="docutils literal notranslate"><span class="pre">target</span></code> in the model specification.</p>
 <div class="highlight-stan notranslate"><div class="highlight"><pre><span></span><span class="kn">data</span> <span class="p">{</span>
   <span class="kt">int</span><span class="o">&lt;</span><span class="k">lower</span><span class="p">=</span><span class="mf">0</span><span class="o">&gt;</span> <span class="n">N</span><span class="p">;</span>
@@ -1774,9 +1775,9 @@ Pareto k diagnostic values:
 \text{LOO} \approx -2\,\text{elpd}. \\[1em]
 \end{align}</span></p>
 <p>The bigger the elpd is, the smaller the Kullback-Leibler divergence is, so the better the model is. Thus, a bigger elpd means a smaller WAIC or LOO. So, the smaller the WAIC or LOO is, the closer the model is to the true generative model. This WAIC and LOO are smaller for the mixture model than for the single Negative Binomial model, so it is a better model.</p>
-</div>
-<div class="section" id="Computing-the-weights">
-<h3>Computing the weights<a class="headerlink" href="#Computing-the-weights" title="Permalink to this heading"></a></h3>
+</section>
+<section id="Computing-the-weights">
+<h3>Computing the weights<a class="headerlink" href="#Computing-the-weights" title="Link to this heading"></a></h3>
 <p>We can directly compute the Akaike weights from the values of the LOO, using</p>
 <p><span class="math">\begin{align}
 w_i = \frac{\exp\left[-(\text{LOO}_i-\text{LOO}_j)/2\right]}{1 + \exp\left[-(\text{LOO}_i-\text{LOO}_j)/2\right]}.
@@ -1885,10 +1886,10 @@ Single Neg. Binom. model weight: 3.99245113565338e-20
 </pre></div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="Computing-environment">
-<h2>Computing environment<a class="headerlink" href="#Computing-environment" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+<section id="Computing-environment">
+<h2>Computing environment<a class="headerlink" href="#Computing-environment" title="Link to this heading"></a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
 </pre></div>
@@ -1919,8 +1920,8 @@ jupyterlab: 4.0.13
 cmdstan   : 2.35.0
 </pre></div></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -1934,11 +1935,11 @@ cmdstan   : 2.35.0
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 01, 2025.
+      <span class="lastupdated">Last updated on Feb 14, 2025.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x30a2d25a0> 
+   <jinja2.runtime.BlockReference object at 0x17af83350> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

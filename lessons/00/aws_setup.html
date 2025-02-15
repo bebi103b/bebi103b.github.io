@@ -1,27 +1,27 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AWS setup and usage &mdash; BE/Bi 103 b  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=22ddcdb3" />
 
   
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
-        <script src="../../_static/clipboard.min.js"></script>
-        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=9bcbadda"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=f281be69"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -97,6 +97,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../homework/04/index.html">4. Sampling with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/05/index.html">5. Inference with Stan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/06/index.html">6. MCMC with ion channels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../homework/07/index.html">7. Model comparison</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -154,16 +155,16 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="AWS-setup-and-usage">
-<h1>AWS setup and usage<a class="headerlink" href="#AWS-setup-and-usage" title="Permalink to this heading"></a></h1>
+  <section id="AWS-setup-and-usage">
+<h1>AWS setup and usage<a class="headerlink" href="#AWS-setup-and-usage" title="Link to this heading"></a></h1>
 <hr><p>As we start to do more involved statistical inference using Stan, you may want to run your calculations on more powerful machines. While a local installation on your own machine may suffice, it will serve you well to have more expansive computing resources available. There are many options for this, including <a class="reference external" href="https://aws.amazon.com/">Amazon Web Services</a> (AWS), <a class="reference external" href="https://cloud.google.com">Google Cloud Platform</a>, <a class="reference external" href="https://azure.microsoft.com/">Microsoft Azure</a>, and Caltech’s own <a class="reference external" href="http://www.hpc.caltech.edu/">high
 performance computing center</a>. In this lesson, we will show you how to get up and running with AWS. While it looks like a lot of steps, some of the steps are done only once, so it is not much more work to launch instances after the initial setup. The <a class="reference external" href="aws_usage.ipynb">next part of this lesson</a> serves as a quick reference for how to spin up instances and use them after you have completed the setup outlined in this part of the lesson.</p>
-<div class="section" id="1.-Create-an-Amazon-Web-Services-account">
-<h2>1. Create an Amazon Web Services account<a class="headerlink" href="#1.-Create-an-Amazon-Web-Services-account" title="Permalink to this heading"></a></h2>
+<section id="1.-Create-an-Amazon-Web-Services-account">
+<h2>1. Create an Amazon Web Services account<a class="headerlink" href="#1.-Create-an-Amazon-Web-Services-account" title="Link to this heading"></a></h2>
 <p>You should create an AWS account if you have not already. For a total cost of about $20, you can have over 100 hours of compute time on a four core machine, which should be plenty for the entire course.</p>
-</div>
-<div class="section" id="2.-Launch-your-instance">
-<h2>2. Launch your instance<a class="headerlink" href="#2.-Launch-your-instance" title="Permalink to this heading"></a></h2>
+</section>
+<section id="2.-Launch-your-instance">
+<h2>2. Launch your instance<a class="headerlink" href="#2.-Launch-your-instance" title="Link to this heading"></a></h2>
 <p>Log on to the AWS Console by going to <a class="reference external" href="https://aws.amazon.com/">https://aws.amazon.com</a> and clicking on the button at the upper right of the page.</p>
 <p>Once you are on the AWS Console page, you can launch your instance. We have set up an Amazon Machine Image (AMI), which has the software you need for the course installed and the data sets pre-loaded. The AMI is available in <strong>Oregon</strong> (us-west-2). Be sure to select this region from the top right corner of the console. You should use the same region throughout the course, since that is physically where your machine will live.</p>
 <ol class="arabic simple">
@@ -183,9 +184,9 @@ that is backed up to the cloud, like Dropbox. ONLY store it locally on your mach
 </ol>
 <p>After following those steps, your instance will spin up. You can view your running instances by clicking on <code class="docutils literal notranslate"><span class="pre">Instances</span></code> on the dashboard on the left part of the screen.</p>
 <p>It will take a while for your instance to spin up. When the <code class="docutils literal notranslate"><span class="pre">Instance</span> <span class="pre">State</span></code> says <code class="docutils literal notranslate"><span class="pre">running</span></code> and the <code class="docutils literal notranslate"><span class="pre">Status</span> <span class="pre">Checks</span></code> are complete, your instance is ready for you.</p>
-</div>
-<div class="section" id="3.-Connect-to-your-instance">
-<h2>3. Connect to your instance<a class="headerlink" href="#3.-Connect-to-your-instance" title="Permalink to this heading"></a></h2>
+</section>
+<section id="3.-Connect-to-your-instance">
+<h2>3. Connect to your instance<a class="headerlink" href="#3.-Connect-to-your-instance" title="Link to this heading"></a></h2>
 <p>Now that your instance is launched, you can connect to it using your computer and the <em>ssh</em> protocol. The instructions work for Windows, macOS, or Linux, assuming you have a terminal running bash or zsh. In Windows, this is accomplished using <a class="reference external" href="https://git-scm.com">GitBash</a>, which you should install if you have not already. For macOS, use Terminal.</p>
 <ol class="arabic">
 <li><p>Identify where you put your keypair file. For the purposes of this exercise, I will assume that you have a directory in your home directory called <code class="docutils literal notranslate"><span class="pre">key_pairs/</span></code> and that your keypair file is <code class="docutils literal notranslate"><span class="pre">~/key_pairs/bebi103_aws_keypair.pem</span></code>.</p></li>
@@ -211,9 +212,9 @@ that is backed up to the cloud, like Dropbox. ONLY store it locally on your mach
 <ol class="arabic simple" start="9">
 <li><p>You now have your repository and all of the data for the course on your instance! Any documents you create or edit on your AWS instance can be managed with git and push/pulled to/from GitHub.</p></li>
 </ol>
-</div>
-<div class="section" id="4.-Launch-JupyterLab">
-<h2>4. Launch JupyterLab<a class="headerlink" href="#4.-Launch-JupyterLab" title="Permalink to this heading"></a></h2>
+</section>
+<section id="4.-Launch-JupyterLab">
+<h2>4. Launch JupyterLab<a class="headerlink" href="#4.-Launch-JupyterLab" title="Link to this heading"></a></h2>
 <p>While connected to your instance, you can launch JupyterLab by executing</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>jupyter lab --no-browser
 </pre></div>
@@ -243,9 +244,9 @@ port number <code class="docutils literal notranslate"><span class="pre">8000</s
 </pre></div>
 </div>
 <p>If you do that, make sure you use the corresponding port numbers when setting up your socket.</p>
-</div>
-<div class="section" id="5.-Copying-results-to-and-from-AWS-to-your-local-machine">
-<h2>5. Copying results to and from AWS to your local machine<a class="headerlink" href="#5.-Copying-results-to-and-from-AWS-to-your-local-machine" title="Permalink to this heading"></a></h2>
+</section>
+<section id="5.-Copying-results-to-and-from-AWS-to-your-local-machine">
+<h2>5. Copying results to and from AWS to your local machine<a class="headerlink" href="#5.-Copying-results-to-and-from-AWS-to-your-local-machine" title="Link to this heading"></a></h2>
 <p>As you work on notebooks and create new files you want to save, you may want to move them to your local machine. If you are working on a notebook or <code class="docutils literal notranslate"><span class="pre">.stan</span></code> file, the best option is to use git and commit and push those files to a git repository directly from the command line on your EC2 instance.</p>
 <p>Some files, though, such as MCMC results or intermediate data processing results, are not meant to be under version control. For these file, you an use <code class="docutils literal notranslate"><span class="pre">scp</span></code>. Within your GitBash or Terminal window on your local machine (you probably have to open yet another window), you can copy files as follows.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>scp -i &quot;~/key_pairs/bebi103_aws_keypair.pem&quot; ec2-user@&lt;IPv4 Public IP&gt;:~/my_file.csv ./
@@ -256,26 +257,26 @@ port number <code class="docutils literal notranslate"><span class="pre">8000</s
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>scp -i &quot;~/key_pairs/bebi103_aws_keypair.pem&quot; my_file.txt ec2-user@&lt;IPv4 Public IP&gt;:~/
 </pre></div>
 </div>
-</div>
-<div class="section" id="6.-Exiting">
-<h2>6. Exiting<a class="headerlink" href="#6.-Exiting" title="Permalink to this heading"></a></h2>
+</section>
+<section id="6.-Exiting">
+<h2>6. Exiting<a class="headerlink" href="#6.-Exiting" title="Link to this heading"></a></h2>
 <p>When you are finished with your session, you can shut down your notebook in the browser. If the shutdown does not give you a new prompt in the terminal window, you can do a hard shutdown of JupyterLab by pressing <code class="docutils literal notranslate"><span class="pre">Ctrl-c</span></code>.</p>
 <p>After you are finished with your work on your instance, you should stop your instance. To do this, go back to the <code class="docutils literal notranslate"><span class="pre">Instances</span></code> page on your EC2 console. Right click your instance and click <code class="docutils literal notranslate"><span class="pre">Stop</span> <span class="pre">instance</span></code>. <strong>Do not terminate your instance</strong> unless you really want to. Terminating an instance will get rid of any changes you made to it.</p>
-</div>
-<div class="section" id="7.-Seriously.-Stop-your-instances-if-you-are-not-using-them.">
-<h2>7. Seriously. Stop your instances if you are not using them.<a class="headerlink" href="#7.-Seriously.-Stop-your-instances-if-you-are-not-using-them." title="Permalink to this heading"></a></h2>
+</section>
+<section id="7.-Seriously.-Stop-your-instances-if-you-are-not-using-them.">
+<h2>7. Seriously. Stop your instances if you are not using them.<a class="headerlink" href="#7.-Seriously.-Stop-your-instances-if-you-are-not-using-them." title="Link to this heading"></a></h2>
 <p><strong>If your instance is not stopped and you leave it running, you will get charged!</strong> You can rack up a massive bill with idle, but running, instances. You should stop your instances whenever you are not using them. It is a minor pain to wait for them to spin up again, but forgetting about a running instance will cause more pain than that to your pocketbook.</p>
-</div>
-<div class="section" id="8.-Using-your-instance-again">
-<h2>8. Using your instance again<a class="headerlink" href="#8.-Using-your-instance-again" title="Permalink to this heading"></a></h2>
+</section>
+<section id="8.-Using-your-instance-again">
+<h2>8. Using your instance again<a class="headerlink" href="#8.-Using-your-instance-again" title="Link to this heading"></a></h2>
 <p>After the initial setup and your first session with your instance, you will likely start it up again. This is much easier.</p>
 <p>In the AWS console, navigate to the <code class="docutils literal notranslate"><span class="pre">Instances</span></code> page, either through the left menu or via the EC2 dashboard. Find the instance you set up (mine is named <code class="docutils literal notranslate"><span class="pre">bebi103</span></code>), right click it, and select <code class="docutils literal notranslate"><span class="pre">Start</span> <span class="pre">instance</span></code>. After it has spun up, (<code class="docutils literal notranslate"><span class="pre">Instance</span> <span class="pre">state</span></code> is <code class="docutils literal notranslate"><span class="pre">Running</span></code>), you can access the Public IPv4 address, and fire up JupyterLab as per the above instructions.</p>
-</div>
-<div class="section" id="9.-Terminate-your-instances-after-the-class-is-over">
-<h2>9. Terminate your instances after the class is over<a class="headerlink" href="#9.-Terminate-your-instances-after-the-class-is-over" title="Permalink to this heading"></a></h2>
+</section>
+<section id="9.-Terminate-your-instances-after-the-class-is-over">
+<h2>9. Terminate your instances after the class is over<a class="headerlink" href="#9.-Terminate-your-instances-after-the-class-is-over" title="Link to this heading"></a></h2>
 <p>After the class is over, you might want to terminate your instance. This is because the storage in your instance (stored using AWS’s EBS, which is what keeps your repository, installations, etc., all intact) is not free. Once your free tier accessibility expires in a year if you are new to AWS, and/or your promo codes expire, you will start getting bills for your EBS usage. These get wiped if you terminate your instance and you will not get billed.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -286,11 +287,11 @@ port number <code class="docutils literal notranslate"><span class="pre">8000</s
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 01, 2025.
+      <span class="lastupdated">Last updated on Feb 14, 2025.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x3011ddca0> 
+   <jinja2.runtime.BlockReference object at 0x17b248350> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

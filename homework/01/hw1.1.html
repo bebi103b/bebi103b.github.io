@@ -1,27 +1,27 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Homework 1.1: First attempts at Bayesian generative modeling (70 pts) &mdash; BE/Bi 103 b  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=22ddcdb3" />
 
   
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
-        <script src="../../_static/clipboard.min.js"></script>
-        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=9bcbadda"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=f281be69"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -102,6 +102,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../04/index.html">4. Sampling with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../05/index.html">5. Inference with Stan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../06/index.html">6. MCMC with ion channels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07/index.html">7. Model comparison</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -160,8 +161,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="Homework-1.1:-First-attempts-at-Bayesian-generative-modeling-(70-pts)">
-<h1>Homework 1.1: First attempts at Bayesian generative modeling (70 pts)<a class="headerlink" href="#Homework-1.1:-First-attempts-at-Bayesian-generative-modeling-(70-pts)" title="Permalink to this heading"></a></h1>
+  <section id="Homework-1.1:-First-attempts-at-Bayesian-generative-modeling-(70-pts)">
+<h1>Homework 1.1: First attempts at Bayesian generative modeling (70 pts)<a class="headerlink" href="#Homework-1.1:-First-attempts-at-Bayesian-generative-modeling-(70-pts)" title="Link to this heading"></a></h1>
 <hr><p><a class="reference external" href="https://doi.org/10.1139/cjz-2020-0171">Collard and coworkers</a> did a simple experiment. They collected samples of carrion beetles (beetles that feed on decaying animal matter) and measured morphological features of the beetles of various species, collected from different sites at different times of the year.</p>
 <p>Imagine that you are in a cabin in Maine. There are also plenty of carrion beetles in the area in which you are staying, so you are curious to look at the morphological features of the beetles in your area. Your plan to set up a trap near your cabin to collect specimens from a given species. For each beetle you collect, you will measure its mass and the length of its <a class="reference external" href="https://en.wikipedia.org/wiki/Elytron">elytra</a>.</p>
 <p>As we will learn in class, prior to performing an experiment, it is useful to think about what kinds of data you might expect to observe. This involves proposing a generative model and then drawing data sets from the model.</p>
@@ -178,7 +179,7 @@ the Bayesian context, a full specification of a model involves a distribution de
 </ol>
 <p>You can do this many many times to see how the data sets might look. Generate many such data sets and make plots of them. (You should think carefully about how you might want to plot these to best make clear to you how the data sets coming from your generative model may look.) Does this jibe with what you would expect from your experiment? If not, do you have any ideas why not?</p>
 <p><strong>d)</strong> <em>Do not attempt this part of the problem until parts (a) through (c) are complete.</em> You can access the measurements of Collard and coworkers <a class="reference external" href="https://doi.org/10.5061/dryad.hdr7sqvg7">here</a>. Extract the measurements made of <em>Nicrophorus orbicollis</em> at location MASS 10 in trap 0. Does the measured data set fall within the data sets you might expect from your proposed generative model?</p>
-</div>
+</section>
 
 
            </div>
@@ -192,11 +193,11 @@ the Bayesian context, a full specification of a model involves a distribution de
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 01, 2025.
+      <span class="lastupdated">Last updated on Feb 14, 2025.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x3087186e0> 
+   <jinja2.runtime.BlockReference object at 0x171fa0530> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

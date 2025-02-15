@@ -1,28 +1,28 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>15. MCMC diagnostics &mdash; BE/Bi 103 b  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=22ddcdb3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
 
   
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
-        <script src="../../_static/clipboard.min.js"></script>
-        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=9bcbadda"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=f281be69"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -120,6 +120,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../homework/04/index.html">4. Sampling with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/05/index.html">5. Inference with Stan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/06/index.html">6. MCMC with ion channels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../homework/07/index.html">7. Model comparison</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -177,24 +178,24 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="15.-MCMC-diagnostics">
-<h1>15. MCMC diagnostics<a class="headerlink" href="#15.-MCMC-diagnostics" title="Permalink to this heading"></a></h1>
+  <section id="15.-MCMC-diagnostics">
+<h1>15. MCMC diagnostics<a class="headerlink" href="#15.-MCMC-diagnostics" title="Link to this heading"></a></h1>
 <p><a class="reference external" href="https://s3.amazonaws.com/bebi103.caltech.edu/data/singer_transcript_counts.csv">Data set download</a></p>
 <hr><div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">polars</span> <span class="k">as</span> <span class="nn">pl</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
 
-<span class="kn">import</span> <span class="nn">cmdstanpy</span>
-<span class="kn">import</span> <span class="nn">arviz</span> <span class="k">as</span> <span class="nn">az</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">cmdstanpy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">arviz</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">az</span>
 
-<span class="kn">import</span> <span class="nn">bebi103</span>
-<span class="kn">import</span> <span class="nn">iqplot</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">bebi103</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">iqplot</span>
 
-<span class="kn">import</span> <span class="nn">bokeh.io</span>
-<span class="kn">import</span> <span class="nn">bokeh.plotting</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">bokeh.io</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">bokeh.plotting</span>
 <span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">output_notebook</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -544,8 +545,8 @@ function(Bokeh) {
 <li><p>Have we taken enough samples to get a good picture of the posterior?</p></li>
 </ol>
 <p>There are diagnostic checks we can do to address these questions, and these checks are the topic of this lesson.</p>
-<div class="section" id="The-data-set">
-<h2>The data set<a class="headerlink" href="#The-data-set" title="Permalink to this heading"></a></h2>
+<section id="The-data-set">
+<h2>The data set<a class="headerlink" href="#The-data-set" title="Link to this heading"></a></h2>
 <p>As we set out to learn about MCMC diagnostics, we will again use the <a class="reference external" href="https://s3.amazonaws.com/bebi103.caltech.edu/data/singer_transcript_counts.csv">data set</a> from <a class="reference external" href="https://doi.org/10.1016/j.molcel.2014.06.029">Singer, et al.</a> consisting of mRNA transcript counts in cells from single molecule FISH experiments. We’ll start by loading in the data set. We will work with the Rest data, which I will go ahead and pull out as a Numpy array. I’ll make a quick plot of the ECDF as a reminder of the
 data set.</p>
 <div class="nbinput docutils container">
@@ -598,8 +599,8 @@ var element = document.currentScript.previousSibling.previousSibling;
 })(window);
 </script></div>
 </div>
-<div class="section" id="The-model">
-<h3>The model<a class="headerlink" href="#The-model" title="Permalink to this heading"></a></h3>
+<section id="The-model">
+<h3>The model<a class="headerlink" href="#The-model" title="Link to this heading"></a></h3>
 <p>As we have previously discussed, the transcript counts are Negative Binomially distributed under a model for bursty gene expression. We built the following generative model.</p>
 <p><span class="math">\begin{align}
 &\log_{10} \alpha \sim \text{Norm}(0, 1), \\[1em]
@@ -690,13 +691,13 @@ var element = document.currentScript.previousSibling.previousSibling;
 
 </pre></div></div>
 </div>
-</div>
-</div>
-<div class="section" id="Diagnostics-for-any-MCMC-sampler">
-<h2>Diagnostics for any MCMC sampler<a class="headerlink" href="#Diagnostics-for-any-MCMC-sampler" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+<section id="Diagnostics-for-any-MCMC-sampler">
+<h2>Diagnostics for any MCMC sampler<a class="headerlink" href="#Diagnostics-for-any-MCMC-sampler" title="Link to this heading"></a></h2>
 <p>We will first investigate diagnostics that apply to any MCMC sampler, not just Hamiltonian Monte Carlo samplers like Stan uses.</p>
-<div class="section" id="The-Gelman-Rubin-R-hat-statistic">
-<h3>The Gelman-Rubin R-hat statistic<a class="headerlink" href="#The-Gelman-Rubin-R-hat-statistic" title="Permalink to this heading"></a></h3>
+<section id="The-Gelman-Rubin-R-hat-statistic">
+<h3>The Gelman-Rubin R-hat statistic<a class="headerlink" href="#The-Gelman-Rubin-R-hat-statistic" title="Link to this heading"></a></h3>
 <p>The <strong>Gelman-Rubin R-hat statistic</strong> is a useful metric to determine if we have achieved stationarity with our chains. The idea is that we run multiple chains in parallel (at least four). For a given parameter, we then compute the variance in the samples <em>between</em> the chains, and then the variance of samples <em>within</em> the chains. The ratio of these two is the Gelman-Rubin R-hat statistic, usually denoted as <span class="math notranslate nohighlight">\(\hat{R}\)</span>, and we compute <span class="math notranslate nohighlight">\(\hat{R}\)</span> for each chain.</p>
 <p><span class="math">\begin{align}
 \hat{R} = \frac{\text{variance between chains}}{\text{variance within chains}}.
@@ -1402,9 +1403,9 @@ var element = document.currentScript.previousSibling.previousSibling;
 </div>
 <p>This is pathological; the chains are essentially not moving. This means that most proposed steps are being rejeced.</p>
 <p>As is the case with all diagnostic metrics, there are caveats. You can read about them for <span class="math notranslate nohighlight">\(\hat{R}\)</span> in the <a class="reference external" href="https://doi.org/10.1214/20-BA1221">Vehtari, et al. paper</a> and in section <a class="reference external" href="https://mc-stan.org/docs/reference-manual/notation-for-samples-chains-and-draws.html">the Stan manual</a>.</p>
-</div>
-<div class="section" id="Effective-samples-size">
-<h3>Effective samples size<a class="headerlink" href="#Effective-samples-size" title="Permalink to this heading"></a></h3>
+</section>
+<section id="Effective-samples-size">
+<h3>Effective samples size<a class="headerlink" href="#Effective-samples-size" title="Link to this heading"></a></h3>
 <p>Recall that MCMC samplers do not draw independent samples from the target distribution. Rather, the samples are correlated. Ideally, though, we <em>would</em> draw independent samples. We would like to get an estimate for the number of <em>effectively independent</em> samples we draw. This is referred to either as <strong>effective samples size</strong> (ESS) or number of effective samples (<span class="math notranslate nohighlight">\(n_\mathrm{eff}\)</span>).</p>
 <p>ArviZ computes ESS according to the prescription laid out in the Vehtari, et al. paper using <code class="docutils literal notranslate"><span class="pre">az.ess()</span></code>. In the summary, this is given in the <code class="docutils literal notranslate"><span class="pre">ess_bulk</span></code> column.</p>
 <div class="nbinput docutils container">
@@ -1518,20 +1519,20 @@ var element = document.currentScript.previousSibling.previousSibling;
 <p>We will not consider <code class="docutils literal notranslate"><span class="pre">ess_mean</span></code> or <code class="docutils literal notranslate"><span class="pre">ess_sd</span></code>, which are ways of computing ESS used in the past, but we will consider <code class="docutils literal notranslate"><span class="pre">ess_tail</span></code>, commonly referred to as tail-ESS. Again, I will not go into detail of how this is calculated, but this is the effective sample size when considering the more extreme values of the posterior (by default the lower and upper 5th percentiles). Note that this is not the number of samples that landed in the tails, but rather a measure of what the total number of
 effective samples would be if we were effectively sampling the tails. Again, we want tail-ESS to be greater than 400 as a rule of thumb. We have accomplished this here.</p>
 <p>Bear in mind that the ESS calculation is approximate and subject to error. There are, as usual, other caveats, which are discussed in the <a class="reference external" href="https://doi.org/10.1214/20-BA1221">Vehtari, et al. paper</a> and the <a class="reference external" href="https://mc-stan.org/docs/reference-manual/effective-sample-size.html">Stan manual</a>.</p>
-</div>
-<div class="section" id="Monte-Carlo-standard-error">
-<h3>Monte Carlo standard error<a class="headerlink" href="#Monte-Carlo-standard-error" title="Permalink to this heading"></a></h3>
+</section>
+<section id="Monte-Carlo-standard-error">
+<h3>Monte Carlo standard error<a class="headerlink" href="#Monte-Carlo-standard-error" title="Link to this heading"></a></h3>
 <p>The <strong>Monte Carlo standard errors</strong> (MCSE) are reported as <code class="docutils literal notranslate"><span class="pre">msce_mean</span></code> and <code class="docutils literal notranslate"><span class="pre">mcse_sd</span></code>. They are measurements of the standard error of the mean and the standard error of the standard deviation of the chains. They provide an estimate as to how accurate the expectation values given from MCMC samples of the mean and standard deviation are. In practice, if the MCSE of the mean is less than the standard deviation of the samples themselves (that is the <code class="docutils literal notranslate"><span class="pre">mcse_mean</span></code> column is much less than the
 <code class="docutils literal notranslate"><span class="pre">sd</span></code> column), we have taken plenty of samples. The only reason to use the MCSE is if we have a particular strong interest in getting very precise measurement of the mean in particular.</p>
 <p>I was hesitant to even discuss this here, since I agree with <a class="reference external" href="https://statmodeling.stat.columbia.edu/2007/04/02/markov_chain_mo/">Gelman</a>, “For Bayesian inference, I don’t think it’s generally necessary or appropriate to report Monte Carlo standard errors of posterior means and quantiles…”</p>
-</div>
-</div>
-<div class="section" id="Diagnostics-for-HMC">
-<h2>Diagnostics for HMC<a class="headerlink" href="#Diagnostics-for-HMC" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+<section id="Diagnostics-for-HMC">
+<h2>Diagnostics for HMC<a class="headerlink" href="#Diagnostics-for-HMC" title="Link to this heading"></a></h2>
 <p>Both <span class="math notranslate nohighlight">\(\hat{R}\)</span> and ESS are useful diagnostics for any MCMC sampler, but Hamiltonian Monte Carlo offers other diagnostics to help ensure that the sampling is going as it should. It is important to note that these diagnostics are a <em>feature</em> of HMC, not a bug. By that I mean that the absence of these diagnostics, particularly divergences, from other sampling methods means that it is harder to ensure that they are sampling properly. The ability to check that it is working properly makes HMC
 all the more powerful.</p>
-<div class="section" id="Divergences">
-<h3>Divergences<a class="headerlink" href="#Divergences" title="Permalink to this heading"></a></h3>
+<section id="Divergences">
+<h3>Divergences<a class="headerlink" href="#Divergences" title="Link to this heading"></a></h3>
 <p>Hamiltonian Monte Carlo enables large step sizes by taking into account the shape of the target distribution and tracing trajectories along it. (This is of course a <em>very</em> loose description. You should read <a class="reference external" href="https://arxiv.org/abs/1701.02434">Michael Betancourt’s wonderful introduction to HMC</a> to get a more complete picture.) When a trajectory encounters a region of parameter space where the posterior (target) distribution has high curvature, the trajectory can veer sharply. These events can
 be detected and are registered as <strong>divergences</strong>. A given Monte Carlo step ends in a divergence if this happens. This does not <em>necessarily</em> mean that there is a problem with the sample, but there is a good chance that there is.</p>
 <p>Stan keeps track of divergences and reports them. In ArviZ <code class="docutils literal notranslate"><span class="pre">InferenceData</span></code> objects, they are stored in the <code class="docutils literal notranslate"><span class="pre">sample_stats</span></code> attribute. Let’s look first at our good samples where we properly warmed up the sampler.</p>
@@ -1964,9 +1965,9 @@ Coordinates:
 </div>
 <p>Yikes! All kinds of divergences there. This is endemic of a sampler in trouble.</p>
 <p>We will talk more about divergences later in future lessons when we deal with distributions that are inherently difficult to sample, regardless of whether or not we warmed up properly.</p>
-</div>
-<div class="section" id="Tree-depth">
-<h3>Tree depth<a class="headerlink" href="#Tree-depth" title="Permalink to this heading"></a></h3>
+</section>
+<section id="Tree-depth">
+<h3>Tree depth<a class="headerlink" href="#Tree-depth" title="Link to this heading"></a></h3>
 <p>The explanation of this diagnostic is a little computer-sciencey, so you can skip to the last sentence of this section if the CS terms are unfamiliar to you.</p>
 <p>The HMC algorithm used by Stan uses [recursion](<a class="reference external" href="https://en.wikipedia.org/wiki/Recursion_(computer_science">https://en.wikipedia.org/wiki/Recursion_(computer_science</a>). In practice when doing recursive calculations, you need to put a bound on how deep the recursion can go, i.e., you need to cap the <strong>tree depth</strong>, lest you get <a class="reference external" href="https://en.wikipedia.org/wiki/Stack_buffer_overflow">stack overflow</a>. Stan therefore has to have a limit on tree depth, the default of which is 10. If this tree depth is hit while trying to take a sample, the sampling is not
 wrong, but less efficient. Stan therefore reports the tree depth information for each sample. These are also included in the <code class="docutils literal notranslate"><span class="pre">sample_stats</span></code>.</p>
@@ -2380,9 +2381,9 @@ Coordinates:
 </pre></div></div>
 </div>
 <p>So, in this case, we never hit the tree depth. When we do hit the tree depth often, it typically results in a less efficient sampler and the ESS will decrease.</p>
-</div>
-<div class="section" id="E-BFMI">
-<h3>E-BFMI<a class="headerlink" href="#E-BFMI" title="Permalink to this heading"></a></h3>
+</section>
+<section id="E-BFMI">
+<h3>E-BFMI<a class="headerlink" href="#E-BFMI" title="Link to this heading"></a></h3>
 <p>The <strong>energy-Bayes fraction of missing information</strong>, or E-BFMI is another metric that is specific to HMC samplers. Loosely speaking (again), it is a measure of how effective the sampler is at taking long steps. Some details are given in the <a class="reference external" href="https://arxiv.org/abs/1701.02434">Betancourt paper on HMC</a>, and we will not go into them here, but say that as a rule of thumb, values below 0.2 can be indicative of inefficient sampling.</p>
 <p>Stan also automatically computes the E-BFMI.</p>
 <div class="nbinput docutils container">
@@ -2795,10 +2796,10 @@ Coordinates:
 </pre></div></div>
 </div>
 <p>Nope! We’re in good shape.</p>
-</div>
-</div>
-<div class="section" id="Quickly-checking-the-diagnostics">
-<h2>Quickly checking the diagnostics<a class="headerlink" href="#Quickly-checking-the-diagnostics" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+<section id="Quickly-checking-the-diagnostics">
+<h2>Quickly checking the diagnostics<a class="headerlink" href="#Quickly-checking-the-diagnostics" title="Link to this heading"></a></h2>
 <p>I wrote a function, based on <a class="reference external" href="https://github.com/betanalpha/mcmc_diagnostics">work by Michael Betancourt</a>, to quickly check these diagnostics for a set of samples. It is available in the <code class="docutils literal notranslate"><span class="pre">bebi103.stan</span></code> submodule.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
@@ -2842,9 +2843,9 @@ E-BFMI indicated no pathological behavior.
 </pre></div>
 </div>
 </div>
-</div>
-<div class="section" id="Computing-environment">
-<h2>Computing environment<a class="headerlink" href="#Computing-environment" title="Permalink to this heading"></a></h2>
+</section>
+<section id="Computing-environment">
+<h2>Computing environment<a class="headerlink" href="#Computing-environment" title="Link to this heading"></a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
 </pre></div>
@@ -2875,8 +2876,8 @@ jupyterlab: 4.0.13
 cmdstan   : 2.35.0
 </pre></div></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -2890,11 +2891,11 @@ cmdstan   : 2.35.0
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 01, 2025.
+      <span class="lastupdated">Last updated on Feb 14, 2025.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x300a6b9b0> 
+   <jinja2.runtime.BlockReference object at 0x17ac34410> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

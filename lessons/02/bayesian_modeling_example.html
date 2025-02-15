@@ -1,27 +1,27 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bayesian modeling example: parameter estimation from repeated measurements &mdash; BE/Bi 103 b  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=22ddcdb3" />
 
   
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
-        <script src="../../_static/clipboard.min.js"></script>
-        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=9bcbadda"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=f281be69"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -112,6 +112,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../homework/04/index.html">4. Sampling with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/05/index.html">5. Inference with Stan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/06/index.html">6. MCMC with ion channels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../homework/07/index.html">7. Model comparison</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -170,8 +171,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="bayesian-modeling-example-parameter-estimation-from-repeated-measurements">
-<h1>Bayesian modeling example: parameter estimation from repeated measurements<a class="headerlink" href="#bayesian-modeling-example-parameter-estimation-from-repeated-measurements" title="Permalink to this heading"></a></h1>
+  <section id="bayesian-modeling-example-parameter-estimation-from-repeated-measurements">
+<h1>Bayesian modeling example: parameter estimation from repeated measurements<a class="headerlink" href="#bayesian-modeling-example-parameter-estimation-from-repeated-measurements" title="Link to this heading"></a></h1>
 <p>We will consider one of the simplest examples of parameter estimation, and one that comes up often in research applications.
 Let’s say we repeat a measurement many times. This could be beak depths of finches, fluorescence intensity in a cell, etc. The possibilities abound. To have a concrete example in mind for this example, let’s assume we are measuring the length of <em>C. elegans</em> eggs.</p>
 <p>Our measurements of <em>C. elegans</em> egg length are <span class="math notranslate nohighlight">\(y \equiv\{y_1, y_2, \ldots y_n\}\)</span>. We will ambiguously define a parameter of interest to be <span class="math notranslate nohighlight">\(\mu\)</span>, the typical egg length. We will sharpen our definition of this parameter through specification of the likelihood.</p>
@@ -196,8 +197,8 @@ f(y) = \int \mathrm{d}\mu \,f(y\mid \mu)\,g(\mu)
 <p>to ensure normalization of the posterior <span class="math notranslate nohighlight">\(g(\mu \mid y)\)</span>. So,
 we have just to specify the likelihood <span class="math notranslate nohighlight">\(f(y\mid \mu)\)</span> and the
 prior <span class="math notranslate nohighlight">\(g(\mu)\)</span>. We begin with the likelihood.</p>
-<div class="section" id="the-likelihood">
-<h2>The likelihood<a class="headerlink" href="#the-likelihood" title="Permalink to this heading"></a></h2>
+<section id="the-likelihood">
+<h2>The likelihood<a class="headerlink" href="#the-likelihood" title="Link to this heading"></a></h2>
 <p>To specify the likelihood, we have to ask what we expect from the data,
 given a value of <span class="math notranslate nohighlight">\(\mu\)</span>. If every egg has exactly the same length and there are no errors or confounding
 factors at all in our measurements, we expect <span class="math notranslate nohighlight">\(y_i = \mu\)</span> for
@@ -214,9 +215,9 @@ our likelihood?</p>
 data generation. For our purposes here, we shall assume our data are
 generated from a Normal likelihood. Since this distribution gets heavy
 use, I will pause here to talk a bit more about it.</p>
-</div>
-<div class="section" id="the-normal-distribution">
-<h2>The Normal distribution<a class="headerlink" href="#the-normal-distribution" title="Permalink to this heading"></a></h2>
+</section>
+<section id="the-normal-distribution">
+<h2>The Normal distribution<a class="headerlink" href="#the-normal-distribution" title="Link to this heading"></a></h2>
 <p>A univariate Normal (also known as Gaussian), probability distribution has a
 probability density function (PDF) of</p>
 <div class="math notranslate nohighlight">
@@ -256,7 +257,9 @@ and the multivariate Normal distribution reduces to</p>
 f(y \mid \boldsymbol{\mu}, \boldsymbol{\sigma}) = \prod_{i=1}^n \frac{1}{\sqrt{2\pi \sigma_i^2}}\,
 \exp\left[-\frac{(y_i - \mu_i)^2}{2\sigma_i^2}\right],
 \end{aligned}\]</div>
-<p>where <span class="math notranslate nohighlight">\(\sigma^2_i\)</span> is the <span class="math notranslate nohighlight">\(i\)</span>. So, if all independent measurements <span class="math notranslate nohighlight">\(y_i\)</span> have the same
+<p>where <span class="math notranslate nohighlight">\(\sigma^2_i\)</span> is the <span class="math notranslate nohighlight">\(i`th entry along the diagonal
+of the covariance matrix. This is the variance associated with
+measurement :math:`i\)</span>. So, if all independent measurements <span class="math notranslate nohighlight">\(y_i\)</span> have the same
 location and scale parameters, which is to say that the measurements are
 <strong>independent and identically distributed</strong> (i.i.d.), the
 multi-dimensional Gaussian reduces to</p>
@@ -265,9 +268,9 @@ multi-dimensional Gaussian reduces to</p>
 f(y \mid \mu, \sigma) = \left(\frac{1}{2\pi \sigma^2} \right)^{-\frac{n}{2}}\,
 \exp\left[-\frac{1}{2\sigma^2}\,\sum_{i=1}^n (y_i - \mu)^2\right].
 \end{aligned}\]</div>
-</div>
-<div class="section" id="the-likelihood-revisited-and-another-parameter">
-<h2>The likelihood revisited: and another parameter<a class="headerlink" href="#the-likelihood-revisited-and-another-parameter" title="Permalink to this heading"></a></h2>
+</section>
+<section id="the-likelihood-revisited-and-another-parameter">
+<h2>The likelihood revisited: and another parameter<a class="headerlink" href="#the-likelihood-revisited-and-another-parameter" title="Link to this heading"></a></h2>
 <p>For the purposes of this demonstration of parameter estimation, we
 assume the Normal distribution is a good choice for our likelihood for
 repeated measurements (as it often is). We have to decide how the measurements are
@@ -297,9 +300,9 @@ g(\mu, \sigma \mid y) = \frac{f(y\mid \mu, \sigma)\,g(\mu, \sigma)}
 \[\begin{aligned}
 g(\mu\mid y) = \int_0^\infty \mathrm{d}\sigma\,g(\mu, \sigma \mid y).
 \end{aligned}\]</div>
-</div>
-<div class="section" id="choice-of-prior">
-<h2>Choice of prior<a class="headerlink" href="#choice-of-prior" title="Permalink to this heading"></a></h2>
+</section>
+<section id="choice-of-prior">
+<h2>Choice of prior<a class="headerlink" href="#choice-of-prior" title="Link to this heading"></a></h2>
 <p>Now that we have defined a likelihood, we know what the parameters are
 and we can define a prior, <span class="math notranslate nohighlight">\(g(\mu, \sigma)\)</span>. As is often the case,
 we assume <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> are independent of each other,
@@ -334,9 +337,9 @@ unphysical or mathematically disallowed. We could refine our prior distribution 
 does not happen. With any approach we choose, the prior should roughly
 match what we would sketch on a piece of paper and cover any reasonable
 parameter values and exclude any that are unreasonable (or unphysical).</p>
-</div>
-<div class="section" id="succinctly-stating-the-model">
-<h2>Succinctly stating the model<a class="headerlink" href="#succinctly-stating-the-model" title="Permalink to this heading"></a></h2>
+</section>
+<section id="succinctly-stating-the-model">
+<h2>Succinctly stating the model<a class="headerlink" href="#succinctly-stating-the-model" title="Link to this heading"></a></h2>
 <p>Our model is complete, which means that we have now completely specified
 the posterior. We can write it out. First, defining the parametrization of the priors.</p>
 <div class="math notranslate nohighlight">
@@ -378,7 +381,7 @@ works well.</p>
 </ul>
 </div></blockquote>
 <p>This is much easier to understand. We can write this with a convenient,
-and self evident, shorthand. <a class="footnote-reference brackets" href="#id2" id="id1">1</a></p>
+and self evident, shorthand. <a class="footnote-reference brackets" href="#id2" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
 &amp;\mu \sim \text{Norm}(\mu_\mu, \sigma_\mu),\\[1em]
@@ -391,16 +394,17 @@ Because we will be using a probabilistic programming language in
 practice, we will almost never need to code up any nasty mathematical
 expressions in our modeling and we can express a model as we have done here.</p>
 <hr class="docutils" />
-<dl class="footnote brackets">
-<dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
-<dd><p>I understand that I should be providing units on all parameters that
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id2" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>I understand that I should be providing units on all parameters that
 I am specifying with numbers. I am not doing this here, nor
 throughout the course, to avoid notational clutter and to maintain
 focus on the modeling.</p>
-</dd>
-</dl>
-</div>
-</div>
+</aside>
+</aside>
+</section>
+</section>
 
 
            </div>
@@ -414,11 +418,11 @@ focus on the modeling.</p>
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 01, 2025.
+      <span class="lastupdated">Last updated on Feb 14, 2025.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x30871b260> 
+   <jinja2.runtime.BlockReference object at 0x17b3fe9f0> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

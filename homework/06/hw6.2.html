@@ -1,34 +1,34 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Homework 6.2: Diagnosing nonidentifiability with MCMC (60 pts) &mdash; BE/Bi 103 b  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=22ddcdb3" />
 
   
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
-        <script src="../../_static/clipboard.min.js"></script>
-        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=9bcbadda"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=f281be69"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Schedule overview" href="../../schedule.html" />
+    <link rel="next" title="7. Model comparison" href="../07/index.html" />
     <link rel="prev" title="Homework 6.1: Surviving osmotic shock (40 pts)" href="hw6.1.html" /> 
 </head>
 
@@ -103,6 +103,7 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Homework 6.2: Diagnosing nonidentifiability with MCMC (60 pts)</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../07/index.html">7. Model comparison</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -161,13 +162,13 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="Homework-6.2:-Diagnosing-nonidentifiability-with-MCMC-(60-pts)">
-<h1>Homework 6.2: Diagnosing nonidentifiability with MCMC (60 pts)<a class="headerlink" href="#Homework-6.2:-Diagnosing-nonidentifiability-with-MCMC-(60-pts)" title="Permalink to this heading"></a></h1>
+  <section id="Homework-6.2:-Diagnosing-nonidentifiability-with-MCMC-(60-pts)">
+<h1>Homework 6.2: Diagnosing nonidentifiability with MCMC (60 pts)<a class="headerlink" href="#Homework-6.2:-Diagnosing-nonidentifiability-with-MCMC-(60-pts)" title="Link to this heading"></a></h1>
 <p><a class="reference external" href="https://s3.amazonaws.com/bebi103.caltech.edu/data/lester_acetylcholine.csv">Data set download</a></p>
 <hr><p>Caltech’s <a class="reference external" href="http://henrylesterresearchgroup.caltech.edu">Henry Lester</a> has been studying nicotinic acetylcholine receptors for decades. A schematic of the receptor, which is an ion channel, and its five (four unique) subunits, adapted from the book <a class="reference external" href="http://www.rpgroup.caltech.edu/pboc2/">Physical Biology of the Cell 2</a>, is shown below.</p>
-<div style="margin: auto; width: 250px;"><img alt="nicotinic_acetylcholine_receptor_schematic.png" src="../../_images/nicotinic_acetylcholine_receptor_schematic.png" />
+<div style="marngin: auto; width: 250px;"><img alt="nicotinic_acetylcholine_receptor_schematic.png" src="../../_images/nicotinic_acetylcholine_receptor_schematic.png" />
 </div><p>When acetylcholine ligands bind to the α units (the binding sites are shown as divots in the schematic), the channel opens and ions can flow through.</p>
-<p>In a 1995 paper (<a class="reference external" href="https://doi.org/10.1038/376514a0">Labarca, et al.</a>), Labarca and coworkers in the Lester lab measured the (normalized) voltage across the ion channel for varying concentrations of acetylcholine. They did this for five different genotypes, shown below, where an asterisk denotes a mutation.</p>
+<p>In a 1995 paper (<a class="reference external" href="https://doi.orng/10.1038/376514a0">Labarca, et al.</a>), Labarca and coworkers in the Lester lab measured the (normalized) voltage across the ion channel for varying concentrations of acetylcholine. They did this for five different genotypes, shown below, where an asterisk denotes a mutation.</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\alpha_2\beta\gamma\delta\)</span> (wild type)</p></li>
 <li><p><span class="math notranslate nohighlight">\(\alpha_2^*\beta\gamma\delta\)</span></p></li>
@@ -180,32 +181,32 @@
 <p><span class="math">\begin{align}
 f_\mathrm{open}(c) = \frac{1}{1 + \mathrm{e}^{-\beta F(c)}},
 \end{align}</span></p>
-<p>where <span class="math notranslate nohighlight">\(c\)</span> is the concentration of acetylcholine, <span class="math notranslate nohighlight">\(\beta = 1/k_B T\)</span> is the inverse thermal energy, and <span class="math notranslate nohighlight">\(F(c)\)</span> is the Bohr parameter (named after Christian Bohr, the father of Nobel laureate Niels Bohr and of Danish national team footballer and mathematician Harald Bohr, and grandfather of Nobel laureate Aage Bohr), given by</p>
+<p>where <span class="math notranslate nohighlight">\(c\)</span> is the concentration of acetylcholine, <span class="math notranslate nohighlight">\(\beta = 1/k_B T\)</span> is the inverse thermal enerngy, and <span class="math notranslate nohighlight">\(F(c)\)</span> is the Bohr parameter (named after Christian Bohr, the father of Nobel laureate Niels Bohr and of Danish national team footballer and mathematician Harald Bohr, and grandfather of Nobel laureate Aage Bohr), given by</p>
 <p><span class="math">\begin{align}
 F(c) = 2\Delta E_\mathrm{u} + 2 k_B T \ln\left(\frac{1+c/K_\mathrm{do}}{1+c/K_{dc}}\right).
 \end{align}</span></p>
-<p>Here, <span class="math notranslate nohighlight">\(\Delta E_\mathrm{u} = E_\mathrm{unbound}^\mathrm{closed} - E_\mathrm{unbound}^\mathrm{open}\)</span> is the energy difference between the closed and open state of the ion channel without any acetylcholine bound, <span class="math notranslate nohighlight">\(K_\mathrm{do}\)</span> is the dissociation constant for acetylcholine binding the receptor when it is open, and <span class="math notranslate nohighlight">\(K_\mathrm{dc}\)</span> is the dissociation constant for acetylcholine binding the receptor when it is closed.</p>
-<p>If we assume that in the limit of large concentrations the ion channel is completely open, then the normalized voltage <span class="math notranslate nohighlight">\(v(c)\)</span> across the channel is given by <span class="math notranslate nohighlight">\(f_\mathrm{open}(c)\)</span>; <span class="math notranslate nohighlight">\(v(c) = f_\mathrm{open}(c)\)</span>.</p>
+<p>Here, <span class="math notranslate nohighlight">\(\Delta E_\mathrm{u} = E_\mathrm{unbound}^\mathrm{closed} - E_\mathrm{unbound}^\mathrm{open}\)</span> is the enerngy difference between the closed and open state of the ion channel without any acetylcholine bound, <span class="math notranslate nohighlight">\(K_\mathrm{do}\)</span> is the dissociation constant for acetylcholine binding the receptor when it is open, and <span class="math notranslate nohighlight">\(K_\mathrm{dc}\)</span> is the dissociation constant for acetylcholine binding the receptor when it is closed.</p>
+<p>If we assume that in the limit of larnge concentrations the ion channel is completely open, then the normalized voltage <span class="math notranslate nohighlight">\(v(c)\)</span> across the channel is given by <span class="math notranslate nohighlight">\(f_\mathrm{open}(c)\)</span>; <span class="math notranslate nohighlight">\(v(c) = f_\mathrm{open}(c)\)</span>.</p>
 <p>Propose a generative model for this system. Then use MCMC to diagnose potential nonidentifiabilities.</p>
-</div>
+</section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="hw6.1.html" class="btn btn-neutral float-left" title="Homework 6.1: Surviving osmotic shock (40 pts)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../../schedule.html" class="btn btn-neutral float-right" title="Schedule overview" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../07/index.html" class="btn btn-neutral float-right" title="7. Model comparison" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 01, 2025.
+      <span class="lastupdated">Last updated on Feb 14, 2025.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x3086e55e0> 
+   <jinja2.runtime.BlockReference object at 0x17ac18da0> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

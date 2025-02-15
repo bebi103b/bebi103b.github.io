@@ -1,27 +1,27 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Random number generation &mdash; BE/Bi 103 b  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=22ddcdb3" />
 
   
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
-        <script src="../../_static/clipboard.min.js"></script>
-        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=9bcbadda"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=f281be69"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -107,6 +107,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../homework/04/index.html">4. Sampling with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/05/index.html">5. Inference with Stan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/06/index.html">6. MCMC with ion channels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../homework/07/index.html">7. Model comparison</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -165,8 +166,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="random-number-generation">
-<h1>Random number generation<a class="headerlink" href="#random-number-generation" title="Permalink to this heading"></a></h1>
+  <section id="random-number-generation">
+<h1>Random number generation<a class="headerlink" href="#random-number-generation" title="Link to this heading"></a></h1>
 <p>To understand the posterior probability distribution, we can draw samples from it. We have already seen how to draw random numbers from various distributions using the <code class="docutils literal notranslate"><span class="pre">np.random</span></code> module. Importantly, the samples we draw are <strong>independent</strong>, meaning that what the value of the sample number <span class="math notranslate nohighlight">\(n\)</span> is has not bearing on what we will get for sample number <span class="math notranslate nohighlight">\(n+1\)</span>.</p>
 <p>How do we get random numbers from a specific distribution? Random number generators are capable of (approximately) drawing integers from a Discrete Uniform distribution. For example, NumPy’s built-in generator, the <a class="reference external" href="https://en.wikipedia.org/wiki/Permuted_congruential_generator">PCG64 generator</a>, generates 128 bit numbers, allowing for <span class="math notranslate nohighlight">\(2^{128}\)</span>, or about <span class="math notranslate nohighlight">\(10^{38}\)</span>, possible integers. In practice, these are converted to floating point numbers (since a double floating point number has far less than 128 bits) on the interval [0, 1) by dividing the random number by <span class="math notranslate nohighlight">\(2^{128}\)</span>. Effectively, then, the random number generators provide draws out of a Uniform distribution on the interval [0, 1).</p>
 <p>To convert from random numbers on a Uniform distribution to random numbers from a nonuniform distribution, we need a transform. For many named distributions convenient transforms exist. For example, the <cite>Box-Muller transform</cite> is often used to get random draws from a Normal distribution. In the absence of a clever transform we can use a distribution’s <a class="reference external" href="https://en.wikipedia.org/wiki/Quantile_function">quantile function</a>, also known as a <strong>percent-point function</strong>, which is the inverse CDF, <span class="math notranslate nohighlight">\(F^{-1}(y)\)</span>. For example, the quantile function for the Exponential distribution is</p>
@@ -175,14 +176,14 @@
 F^{-1}(p) = -\beta^{-1}\,\ln(1-p),
 \end{align}\]</div>
 <p>where <span class="math notranslate nohighlight">\(p\)</span> is the value of the CDF, ranging from zero to one. We first draw <span class="math notranslate nohighlight">\(p\)</span> out of a Uniform distribution on [0, 1), and the compute <span class="math notranslate nohighlight">\(F^{-1}(p)\)</span> to get a draw from an exponential distribution. A graphical illustration of using a quantile function to draw 50 random numbers out of Gamma(5, 2) is shown below.</p>
-<div style="height:200px;"><script src="bokeh-content-2161d32ce3c84d85a5bfb350db805039-lessons-07-mcmc_idea.js" id="daa90a9a-1767-4e39-ab10-fd1cdc498823"></script></div><p>Each draw from a Uniform distribution, marked by an × on the vertical axis, is converted to a draw from a Gamma distribution, marked by ○ on the horizontal axis, by computing the inverse CDF.</p>
-</div>
-<div class="section" id="the-basic-idea-behind-mcmc">
-<h1>The basic idea behind MCMC<a class="headerlink" href="#the-basic-idea-behind-mcmc" title="Permalink to this heading"></a></h1>
+<div style="height:200px;"><script src="bokeh-content-b7cafd4075564abca44ec16e2623a9e0-lessons-07-mcmc_idea.js" id="e00937fe-ea98-4158-b4c2-2a7df6dcc673"></script></div><p>Each draw from a Uniform distribution, marked by an × on the vertical axis, is converted to a draw from a Gamma distribution, marked by ○ on the horizontal axis, by computing the inverse CDF.</p>
+</section>
+<section id="the-basic-idea-behind-mcmc">
+<h1>The basic idea behind MCMC<a class="headerlink" href="#the-basic-idea-behind-mcmc" title="Link to this heading"></a></h1>
 <p>Our goal is to draw independent samples from a <strong>target distribution</strong>. In the above plot, that distribution is the Gamma distribution with parameters <span class="math notranslate nohighlight">\(\alpha = 5\)</span> and <span class="math notranslate nohighlight">\(\beta = 2\)</span>. As we have seen, in order get independent samples, we need to be able to define a transform the converts draws from a Uniform distribution to draws from the target distribution. Unfortunately, we almost never can derive such a transformation for an arbitrary distribution, including the posterior distributions we get from Bayesian models.</p>
 <p>But the samples need not be independent! Instead, we only need that the
 samples be generated from a process that generates samples from the
-target distribution in the correct proportions. If we draw enough <a class="footnote-reference brackets" href="#id2" id="id1">1</a> of
+target distribution in the correct proportions. If we draw enough <a class="footnote-reference brackets" href="#id2" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> of
 them, we do not need to worry about the lack of independence. In the
 case of the parameter estimation problem, the distribution we wish to
 draw from is the posterior distribution <span class="math notranslate nohighlight">\(g(\theta\mid y)\)</span>. For
@@ -236,12 +237,13 @@ posterior distribution. We will discuss how to come up with such a
 transition kernel in a moment; first we focus on the important concept
 of “eventually” in the preceding sentence.</p>
 <hr class="docutils" />
-<dl class="footnote brackets">
-<dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
-<dd><p>The word “enough” is pretty loaded here. We need to draw enough samples such that we get a sufficient number <em>effectively independent</em> samples. One algorithm for drawing samples might require 1000 samples for each effectively independent one. Another, better one might only require 10. <a class="reference external" href="https://arxiv.org/abs/2311.02726">Margossian and Gelman</a> have a nice discussion on this.</p>
-</dd>
-</dl>
-</div>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id2" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>The word “enough” is pretty loaded here. We need to draw enough samples such that we get a sufficient number <em>effectively independent</em> samples. One algorithm for drawing samples might require 1000 samples for each effectively independent one. Another, better one might only require 10. <a class="reference external" href="https://arxiv.org/abs/2311.02726">Margossian and Gelman</a> have a nice discussion on this.</p>
+</aside>
+</aside>
+</section>
 
 
            </div>
@@ -255,11 +257,11 @@ of “eventually” in the preceding sentence.</p>
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 01, 2025.
+      <span class="lastupdated">Last updated on Feb 14, 2025.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x301583380> 
+   <jinja2.runtime.BlockReference object at 0x15260b920> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

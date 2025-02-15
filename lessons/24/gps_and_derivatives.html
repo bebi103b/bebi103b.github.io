@@ -1,28 +1,28 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Calculating derivatives from data with GPs &mdash; BE/Bi 103 b  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=22ddcdb3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
 
   
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
-        <script src="../../_static/clipboard.min.js"></script>
-        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=9bcbadda"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=f281be69"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -118,6 +118,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../homework/04/index.html">4. Sampling with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/05/index.html">5. Inference with Stan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/06/index.html">6. MCMC with ion channels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../homework/07/index.html">7. Model comparison</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -176,24 +177,24 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="Calculating-derivatives-from-data-with-GPs">
-<h1>Calculating derivatives from data with GPs<a class="headerlink" href="#Calculating-derivatives-from-data-with-GPs" title="Permalink to this heading"></a></h1>
+  <section id="Calculating-derivatives-from-data-with-GPs">
+<h1>Calculating derivatives from data with GPs<a class="headerlink" href="#Calculating-derivatives-from-data-with-GPs" title="Link to this heading"></a></h1>
 <p><a class="reference external" href="https://s3.amazonaws.com/bebi103.caltech.edu/data/wolfenden_arrhenius.csv">Data set download</a></p>
 <hr><div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">polars</span> <span class="k">as</span> <span class="nn">pl</span>
-<span class="kn">import</span> <span class="nn">scipy.optimize</span>
-<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">st</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.optimize</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
 
-<span class="kn">import</span> <span class="nn">cmdstanpy</span>
-<span class="kn">import</span> <span class="nn">arviz</span> <span class="k">as</span> <span class="nn">az</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">cmdstanpy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">arviz</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">az</span>
 
-<span class="kn">import</span> <span class="nn">bebi103</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">bebi103</span>
 
-<span class="kn">import</span> <span class="nn">bokeh.io</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">bokeh.io</span>
 <span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">output_notebook</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -625,8 +626,8 @@ var element = document.currentScript.previousSibling.previousSibling;
 </pre></div>
 </div>
 </div>
-<div class="section" id="Derivatives-of-GPs">
-<h2>Derivatives of GPs<a class="headerlink" href="#Derivatives-of-GPs" title="Permalink to this heading"></a></h2>
+<section id="Derivatives-of-GPs">
+<h2>Derivatives of GPs<a class="headerlink" href="#Derivatives-of-GPs" title="Link to this heading"></a></h2>
 <p>Applying linear operators to Gaussian processes results in Gaussian processes. Since differentiation is a linear operation, the result of differentiating a GP is a GP. In what follows, we will state results without proof, but you can reference <a class="reference external" href="https://papers.nips.cc/paper/2002/file/5b8e4fd39d9786228649a8a8bec4e008-Paper.pdf">Solak, et al.</a> and <a class="reference external" href="https://doi.org/10.1038/ncomms13766">Swain, et al.</a> for details. We will limit ourselves to cases where the x-variables are scalar (like time is
 in the present example); the analysis generalizes to multidimensional <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>, but the notation gets more cumbersome, and we often encounter scalar x-variables in practice.</p>
 <p>Recall that if I have a Normal likelihood and a GP prior with kernel <span class="math notranslate nohighlight">\(k(x, x';\theta_k)\)</span>, and the posterior predictive distribution for the nonparametric function <span class="math notranslate nohighlight">\(f(x)\)</span> is</p>
@@ -657,8 +658,8 @@ f(x) \mid \mathbf{y}, \mathbf{x} \sim \text{GP}(m(x), k(x, x') + \sigma^2_x \del
 <p><span class="math">\begin{align}
 \frac{\partial^2}{\partial x_1\,\partial x_2}\,k(x_1, x_2;\theta_k).
 \end{align}</span></p>
-<div class="section" id="Derivative-of-the-squared-exponential-kernel">
-<h3>Derivative of the squared exponential kernel<a class="headerlink" href="#Derivative-of-the-squared-exponential-kernel" title="Permalink to this heading"></a></h3>
+<section id="Derivative-of-the-squared-exponential-kernel">
+<h3>Derivative of the squared exponential kernel<a class="headerlink" href="#Derivative-of-the-squared-exponential-kernel" title="Link to this heading"></a></h3>
 <p>Since it is widely used, we show here the pertinent derivatives of the squared exponential kernel.</p>
 <p><span class="math">\begin{align}
 k_\mathrm{SE}(x_1, x_2; \alpha, \rho) = \alpha^2\,\exp\left[-\frac{(x_1-x_2)^2}{2\rho^2}\right],
@@ -668,9 +669,9 @@ k_\mathrm{SE}(x_1, x_2; \alpha, \rho) = \alpha^2\,\exp\left[-\frac{(x_1-x_2)^2}{
 &\frac{\partial}{\partial x_1}\,k_\mathrm{SE}(x_1, x_2;\alpha, \rho) = -\frac{\alpha^2}{\rho^2}\,(x_1 - x_2)\,\exp\left[-\frac{(x_1-x_2)^2}{2\rho^2}\right],\\[1em]
 &\frac{\partial^2}{\partial x_1\,\partial x_2}\,k_\mathrm{SE}(x_1, x_2;\alpha, \rho) = \frac{\alpha^2}{\rho^2}\left(1 - \frac{(x_1 - x_2)^2}{\rho^2}\right)\exp\left[-\frac{(x_1-x_2)^2}{2\rho^2}\right].
 \end{align}</span></p>
-</div>
-<div class="section" id="Derivatives-of-the-Matérn-kernel">
-<h3>Derivatives of the Matérn kernel<a class="headerlink" href="#Derivatives-of-the-Matérn-kernel" title="Permalink to this heading"></a></h3>
+</section>
+<section id="Derivatives-of-the-Matérn-kernel">
+<h3>Derivatives of the Matérn kernel<a class="headerlink" href="#Derivatives-of-the-Matérn-kernel" title="Link to this heading"></a></h3>
 <p>For a Matérn kernel,</p>
 <p><span class="math">\begin{align}
 k_{\mathrm{Matern}}(x_1, x_2;\alpha, \rho, \nu) = \alpha^2\,\frac{2^{1-\nu}}{\Gamma(\nu)} \,\beta^\nu\,K_\nu\left(\beta\right),
@@ -694,19 +695,19 @@ k_{\mathrm{Matern}}(x_1, x_2;\alpha, \rho, \nu) = \alpha^2\,\frac{2^{1-\nu}}{\Ga
 &\frac{\partial}{\partial x_1}\,k_\mathrm{Matern}(x_1, x_2;\alpha, \rho, 5/2) = -\frac{5\alpha^2}{3\rho^2}(x_1-x_2)\left(1 + \left(\frac{5(x_1-x_2)^2}{\rho^2}\right)^{1/2}\right)\exp\left[-\left(\frac{5(x_1-x_2)^2}{\rho^2}\right)^{1/2}\right],\\[1em]
 &\frac{\partial^2}{\partial x_1\,\partial x_2}\,k_\mathrm{Matern}(x_1, x_2;\alpha, \rho, 5/2) = \frac{5\alpha^2}{3\rho^4}\left(\left(1 + \left(\frac{5(x_1-x_2)^2}{\rho^2}\right)^{1/2}\right)\rho^2 - 5(x_1-x_2)^2\right)\exp\left[-\left(\frac{5(x_1-x_2)^2}{\rho^2}\right)^{1/2}\right].
 \end{align}</span></p>
-</div>
-<div class="section" id="Expressions-for-the-gradient-and-covariance-of-the-gradient">
-<h3>Expressions for the gradient and covariance of the gradient<a class="headerlink" href="#Expressions-for-the-gradient-and-covariance-of-the-gradient" title="Permalink to this heading"></a></h3>
+</section>
+<section id="Expressions-for-the-gradient-and-covariance-of-the-gradient">
+<h3>Expressions for the gradient and covariance of the gradient<a class="headerlink" href="#Expressions-for-the-gradient-and-covariance-of-the-gradient" title="Link to this heading"></a></h3>
 <p>For notational convenience, we define <span class="math notranslate nohighlight">\(\partial_1\mathsf{K}_* = \partial_1 \mathsf{K}(\mathbf{x}, \mathbf{x}_*)\)</span> and <span class="math notranslate nohighlight">\(\partial_1\partial_2\mathsf{K}_{**} = \partial_1 \partial_2 \mathsf{K}(\mathbf{x}_*, \mathbf{x}_*)\)</span>.</p>
 <p>With all of these definitions in place, we can write the expressions for <span class="math notranslate nohighlight">\(\mathbf{g}_*\)</span> and its corresponding covariance matrix <span class="math notranslate nohighlight">\(\mathsf{\Sigma}_*^\mathbf{g}\)</span>.</p>
 <p><span class="math">\begin{align}
 &\mathbf{g}_* = -(\partial_1 \mathsf{K}_*)^\mathsf{T}\cdot\mathsf{K}_\mathbf{y}^{-1}\cdot \mathbf{y},\\[1em]
 &\mathsf{\Sigma}_*^\mathbf{g} = \partial_1\partial_2\mathsf{K}_{**} - (\partial_1\mathsf{K}_{*})^\mathsf{T}\cdot\mathsf{K}_\mathbf{y}^{-1}\cdot\partial_1\mathsf{K}_{*}.
 \end{align}</span></p>
-</div>
-</div>
-<div class="section" id="Derivatives-of-GPs-in-practice-using-optimization">
-<h2>Derivatives of GPs in practice using optimization<a class="headerlink" href="#Derivatives-of-GPs-in-practice-using-optimization" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+<section id="Derivatives-of-GPs-in-practice-using-optimization">
+<h2>Derivatives of GPs in practice using optimization<a class="headerlink" href="#Derivatives-of-GPs-in-practice-using-optimization" title="Link to this heading"></a></h2>
 <p>Let’s now put these results to use. For the growth curve, we will assume the following model for the centered and scaled data.</p>
 <p><span class="math">\begin{align}
 &\alpha \sim \text{HalfNorm}(2),\\[1em]
@@ -720,7 +721,7 @@ k_{\mathrm{Matern}}(x_1, x_2;\alpha, \rho, \nu) = \alpha^2\,\frac{2^{1-\nu}}{\Ga
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">log_prior</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">rho</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">log_prior</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">rho</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Log prior for homoscedastic error and GP hyperparameters&quot;&quot;&quot;</span>
     <span class="c1"># Choose 1e-6 as upper bound for sigma to protect against</span>
     <span class="c1"># singular covariance matrix</span>
@@ -734,7 +735,7 @@ k_{\mathrm{Matern}}(x_1, x_2;\alpha, \rho, \nu) = \alpha^2\,\frac{2^{1-\nu}}{\Ga
     <span class="k">return</span> <span class="n">lp</span>
 
 
-<span class="k">def</span> <span class="nf">log_likelihood</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">rho</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">log_likelihood</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">rho</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Normal log likelihood for centered and scaled GP.&quot;&quot;&quot;</span>
     <span class="n">diag_to_add</span> <span class="o">=</span> <span class="n">sigma</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
     <span class="n">Ky</span> <span class="o">=</span> <span class="n">bebi103</span><span class="o">.</span><span class="n">gp</span><span class="o">.</span><span class="n">cov_exp_quad</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="n">rho</span><span class="o">=</span><span class="n">rho</span><span class="p">)</span> <span class="o">+</span> <span class="n">diag_to_add</span>
@@ -742,7 +743,7 @@ k_{\mathrm{Matern}}(x_1, x_2;\alpha, \rho, \nu) = \alpha^2\,\frac{2^{1-\nu}}{\Ga
     <span class="k">return</span> <span class="n">st</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">Ky</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">log_posterior</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">log_posterior</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Log posterior for GP with normal likelihood.&quot;&quot;&quot;</span>
     <span class="n">sigma</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">rho</span> <span class="o">=</span> <span class="n">params</span>
 
@@ -753,7 +754,7 @@ k_{\mathrm{Matern}}(x_1, x_2;\alpha, \rho, \nu) = \alpha^2\,\frac{2^{1-\nu}}{\Ga
     <span class="k">return</span> <span class="n">lp</span> <span class="o">+</span> <span class="n">log_likelihood</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">rho</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">neg_log_posterior</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">neg_log_posterior</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
     <span class="k">return</span> <span class="o">-</span><span class="n">log_posterior</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1058,16 +1059,16 @@ var element = document.currentScript.previousSibling.previousSibling;
 })(window);
 </script></div>
 </div>
-</div>
-<div class="section" id="Derivatives-with-a-Matérn-kernel">
-<h2>Derivatives with a Matérn kernel<a class="headerlink" href="#Derivatives-with-a-Matérn-kernel" title="Permalink to this heading"></a></h2>
+</section>
+<section id="Derivatives-with-a-Matérn-kernel">
+<h2>Derivatives with a Matérn kernel<a class="headerlink" href="#Derivatives-with-a-Matérn-kernel" title="Link to this heading"></a></h2>
 <p>A Matérn kernel provides for functions that are rougher than a squared exponential kernel, which tends to give very smooth functions. Let us see how the growth rate estimate changes with a Matérn kernel with <span class="math notranslate nohighlight">\(\nu = 5/2\)</span>. The code cell below is a bit long, since we need to redefine the posterior and again do the post-processing.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Update posterior</span>
-<span class="k">def</span> <span class="nf">log_likelihood</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">rho</span><span class="p">,</span> <span class="n">nu</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">log_likelihood</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">rho</span><span class="p">,</span> <span class="n">nu</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Normal log likelihood for centered and scaled GP.&quot;&quot;&quot;</span>
     <span class="n">diag_to_add</span> <span class="o">=</span> <span class="n">sigma</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
     <span class="n">Ky</span> <span class="o">=</span> <span class="n">bebi103</span><span class="o">.</span><span class="n">gp</span><span class="o">.</span><span class="n">cov_matern</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="n">rho</span><span class="o">=</span><span class="n">rho</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="n">nu</span><span class="p">)</span> <span class="o">+</span> <span class="n">diag_to_add</span>
@@ -1075,7 +1076,7 @@ var element = document.currentScript.previousSibling.previousSibling;
     <span class="k">return</span> <span class="n">st</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">Ky</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">log_posterior</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">nu</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">log_posterior</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">nu</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Log posterior for GP with normal likelihood.&quot;&quot;&quot;</span>
     <span class="n">sigma</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">rho</span> <span class="o">=</span> <span class="n">params</span>
 
@@ -1086,7 +1087,7 @@ var element = document.currentScript.previousSibling.previousSibling;
     <span class="k">return</span> <span class="n">lp</span> <span class="o">+</span> <span class="n">log_likelihood</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">rho</span><span class="p">,</span> <span class="n">nu</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">neg_log_posterior</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">nu</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">neg_log_posterior</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">nu</span><span class="p">):</span>
     <span class="k">return</span> <span class="o">-</span><span class="n">log_posterior</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">nu</span><span class="p">)</span>
 
 <span class="c1"># Set the roughness parameter</span>
@@ -1194,9 +1195,9 @@ var element = document.currentScript.previousSibling.previousSibling;
 </script></div>
 </div>
 <p>The growth rate for the Matérn kernel, in orange, shows a bit more wiggle and, again, low precision for the growth rate at short times.</p>
-</div>
-<div class="section" id="Sampling-derivatives-with-Stan">
-<h2>Sampling derivatives with Stan<a class="headerlink" href="#Sampling-derivatives-with-Stan" title="Permalink to this heading"></a></h2>
+</section>
+<section id="Sampling-derivatives-with-Stan">
+<h2>Sampling derivatives with Stan<a class="headerlink" href="#Sampling-derivatives-with-Stan" title="Link to this heading"></a></h2>
 <p>As we have already seen, sampling out of the GP posterior allows us to properly consider all values of the hyperparameters weighted by their posterior probability density. We can adjust the code from the last part of this lesson to include the derivative calculations outlined above. In the <code class="docutils literal notranslate"><span class="pre">generated</span> <span class="pre">quantities</span></code> block, I add the extra calculations of the values of the derivatives <span class="math notranslate nohighlight">\(\mathbf{g}_*\)</span>.</p>
 <div class="highlight-stan notranslate"><div class="highlight"><pre><span></span><span class="kn">functions</span> <span class="p">{</span>
   <span class="c1">#include gp_one_dimensional.stanfunctions</span>
@@ -1607,9 +1608,9 @@ var element = document.currentScript.previousSibling.previousSibling;
 </pre></div>
 </div>
 </div>
-</div>
-<div class="section" id="Computing-environment">
-<h2>Computing environment<a class="headerlink" href="#Computing-environment" title="Permalink to this heading"></a></h2>
+</section>
+<section id="Computing-environment">
+<h2>Computing environment<a class="headerlink" href="#Computing-environment" title="Link to this heading"></a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
@@ -1641,8 +1642,8 @@ jupyterlab: 4.2.5
 cmdstan   : 2.35.0
 </pre></div></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -1656,11 +1657,11 @@ cmdstan   : 2.35.0
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 01, 2025.
+      <span class="lastupdated">Last updated on Feb 14, 2025.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x30a6c65a0> 
+   <jinja2.runtime.BlockReference object at 0x17218a000> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

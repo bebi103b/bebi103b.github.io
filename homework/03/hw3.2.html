@@ -1,27 +1,27 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Homework 3.2: MAP estimates and zero-inflation for Drop-Seq controls (80 pts) &mdash; BE/Bi 103 b  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=22ddcdb3" />
 
   
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
-        <script src="../../_static/clipboard.min.js"></script>
-        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=9bcbadda"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=f281be69"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -103,6 +103,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../04/index.html">4. Sampling with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../05/index.html">5. Inference with Stan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../06/index.html">6. MCMC with ion channels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07/index.html">7. Model comparison</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -161,8 +162,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="Homework-3.2:-MAP-estimates-and-zero-inflation-for-Drop-Seq-controls-(80-pts)">
-<h1>Homework 3.2: MAP estimates and zero-inflation for Drop-Seq controls (80 pts)<a class="headerlink" href="#Homework-3.2:-MAP-estimates-and-zero-inflation-for-Drop-Seq-controls-(80-pts)" title="Permalink to this heading"></a></h1>
+  <section id="Homework-3.2:-MAP-estimates-and-zero-inflation-for-Drop-Seq-controls-(80-pts)">
+<h1>Homework 3.2: MAP estimates and zero-inflation for Drop-Seq controls (80 pts)<a class="headerlink" href="#Homework-3.2:-MAP-estimates-and-zero-inflation-for-Drop-Seq-controls-(80-pts)" title="Link to this heading"></a></h1>
 <p>Data set download: <a class="reference external" href="https://s3.amazonaws.com/bebi103.caltech.edu/data/zheng_gemcode_control.csv">File 1</a>, <a class="reference external" href="https://s3.amazonaws.com/bebi103.caltech.edu/data/ercc_concs.txt">File 2</a></p>
 <p><em>This problem is inspired by</em><a class="reference external" href="http://dx.doi.org/10.1038/s41587-019-0379-5">this paper by Valentine Svensson</a><em>and the related blog posts (viewable</em><a class="reference external" href="http://www.nxn.se/valent/2017/11/16/droplet-scrna-seq-is-not-zero-inflated">here</a><em>and</em><a class="reference external" href="http://www.nxn.se/valent/2018/1/30/count-depth-variation-makes-poisson-scrna-seq-data-negative-binomial">here</a><em>).</em></p>
 <hr><p><a class="reference external" href="https://en.wikipedia.org/wiki/Single_cell_sequencing#Single-cell_transcriptome_sequencing_(scRNA-seq)">Single-Cell RNA Seq</a> (scRNA-Seq) is a technology that is coming into more and more common use. It enables researchers to get counts of mRNA transcripts for specific genes in single cells. In the technique, (usually) individual cells are encased in a droplet in a microfluidic device. Importantly, each droplet also has a cDNA “barcode” molecule that enables identification of which droplet
@@ -198,7 +199,7 @@ y_{ij} \sim \text{NegBinom}(\mu_i, \phi)\,\forall i,j.
 \end{align}</span></p>
 <p>Obtain MAP parameters for <span class="math notranslate nohighlight">\(\{\mu_i\}\)</span> and <span class="math notranslate nohighlight">\(\phi\)</span>. Note that this is a trickier optimization problem because you now need to solve one big optimization problem. Report the MAP parameter values. Also report credible intervals if you can (the calculation of the Hessian will probably take several minutes) and comment on the results.</p>
 <p><strong>f)</strong> Using the MAP parameter <span class="math notranslate nohighlight">\(\phi^*\)</span> from part (e), make a smooth curve of the probability of observing a zero count versus <span class="math notranslate nohighlight">\(\mu\)</span>. Then, overlay a plot of the fraction of observed zero counts versus the MAP estimate for <span class="math notranslate nohighlight">\(\mu\)</span>. In light of this plot, do you think the data are zero-inflated?</p>
-</div>
+</section>
 
 
            </div>
@@ -212,11 +213,11 @@ y_{ij} \sim \text{NegBinom}(\mu_i, \phi)\,\forall i,j.
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 01, 2025.
+      <span class="lastupdated">Last updated on Feb 14, 2025.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x30a52f080> 
+   <jinja2.runtime.BlockReference object at 0x17ac8eae0> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

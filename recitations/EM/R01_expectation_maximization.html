@@ -1,28 +1,28 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Introduction to the EM Algorithm &mdash; BE/Bi 103 b  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=22ddcdb3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
 
   
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
-        <script src="../../_static/clipboard.min.js"></script>
-        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=9bcbadda"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=f281be69"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -98,6 +98,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../homework/04/index.html">4. Sampling with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/05/index.html">5. Inference with Stan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/06/index.html">6. MCMC with ion channels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../homework/07/index.html">7. Model comparison</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -159,19 +160,19 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">warnings</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
 <span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
     <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
 
-<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">st</span>
-<span class="kn">import</span> <span class="nn">scipy.optimize</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.optimize</span>
 
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="kn">import</span> <span class="nn">iqplot</span>
-<span class="kn">import</span> <span class="nn">bokeh.io</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">iqplot</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">bokeh.io</span>
 <span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">output_notebook</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -514,17 +515,17 @@ function(Bokeh) {
 }(window));
 </script></div>
 </div>
-<div class="section" id="Introduction-to-the-EM-Algorithm">
-<h1>Introduction to the EM Algorithm<a class="headerlink" href="#Introduction-to-the-EM-Algorithm" title="Permalink to this heading"></a></h1>
+<section id="Introduction-to-the-EM-Algorithm">
+<h1>Introduction to the EM Algorithm<a class="headerlink" href="#Introduction-to-the-EM-Algorithm" title="Link to this heading"></a></h1>
 <p>The Expectation-Maximization (EM) algorithm is a powerful iterative method used for parameter estimation in statistical models, particularly when the data is incomplete or has latent variables. It is widely used in machine learning, statistics, and signal processing to maximize the likelihood of observed data, especially when the direct computation of this likelihood is difficult.</p>
 <p>In this exercise, we will introduce the classic EM algorithm and discuss the basic idea of why it works. There are several versions of the EM algorithm that have been described in the literature. The book <a class="reference external" href="https://doi.org/10.1007/978-1-4612-4024-2">Tools for Statistical Inference</a> by Michael Tanner has a straightforward interpretation of the classical and variational forms of the EM algorithm as well as several applications.</p>
-</div>
-<div class="section" id="Description-of-the-EM-algorithm">
-<h1>Description of the EM algorithm<a class="headerlink" href="#Description-of-the-EM-algorithm" title="Permalink to this heading"></a></h1>
+</section>
+<section id="Description-of-the-EM-algorithm">
+<h1>Description of the EM algorithm<a class="headerlink" href="#Description-of-the-EM-algorithm" title="Link to this heading"></a></h1>
 <p>As mentioned above, the EM algorithm is an iterative procedure that has important applications in settings where there are <em>latent</em>, or otherwise unobserved random variables. The procedure can be described by two alternating steps: finding the expectation (E) of a function of the latent variables, and maximizing (M) the resulting posterior density to estimate the parameters. In the section below, we will show that each iteration of the algorithm increases the value of the posterior until
 convergence.</p>
-<div class="section" id="Why-does-the-EM-algorithm-work?">
-<h2>Why does the EM algorithm work?<a class="headerlink" href="#Why-does-the-EM-algorithm-work?" title="Permalink to this heading"></a></h2>
+<section id="Why-does-the-EM-algorithm-work?">
+<h2>Why does the EM algorithm work?<a class="headerlink" href="#Why-does-the-EM-algorithm-work?" title="Link to this heading"></a></h2>
 <p>To see how the algorithm works, recall that the log posterior can be written as</p>
 <div class="line-block">
 <div class="line"><br /></div>
@@ -569,9 +570,9 @@ convergence.</p>
     &amp;= Q(\theta \mid \theta_{t}) - \mathbb{E}[\ln\, f(\mathcal{X}\mid\mathcal{Y}, \theta_{t}) \mid \mathcal{Y}, \theta_{t}] \\
 \end{align}\end{split}\]</div>
 </div></blockquote>
-</div>
-<div class="section" id="Putting-it-all-together">
-<h2>Putting it all together<a class="headerlink" href="#Putting-it-all-together" title="Permalink to this heading"></a></h2>
+</section>
+<section id="Putting-it-all-together">
+<h2>Putting it all together<a class="headerlink" href="#Putting-it-all-together" title="Link to this heading"></a></h2>
 <div class="line-block">
 <div class="line">The so-called Q-function, <span class="math notranslate nohighlight">\(Q(\theta \mid \theta_{t})\)</span> is computed in the <strong>E-step</strong> of the EM algorithm, and is updated iteratively in the <strong>M-step</strong>. More specifically, the <strong>E-step</strong> and <strong>M-step</strong> work as follows:</div>
 <div class="line"><strong>E-step</strong></div>
@@ -593,10 +594,10 @@ convergence.</p>
 \end{align}\]</div>
 <p>The <strong>M-step</strong> enforces that <span class="math notranslate nohighlight">\(g(\theta_{t} \mid \theta_{t})\leq g(\theta_{t+1} \mid \theta_{t})\)</span>. Therefore, we have the inequality, <span class="math notranslate nohighlight">\(\ell(\theta_{t};\mathcal{Y}) = g(\theta_{t} \mid \theta_{t}) \leq g(\theta_{t+1} \mid \theta_{t}) \leq \ell(\theta_{t+1}; \mathcal{Y})\)</span>, which shows that the <strong>M-step</strong> results in monotonic improvement of the log likelihood!</p>
 <p>We iterate between the <strong>E-Step</strong> and <strong>M-Step</strong> until the difference between <span class="math notranslate nohighlight">\(\theta_{t}\)</span> and <span class="math notranslate nohighlight">\(\theta_{t+1}\)</span> is negligibly small, indicating convergence.</p>
-</div>
-</div>
-<div class="section" id="Application-of-the-EM-Algorigthm-to-Bayesian-Inference">
-<h1>Application of the EM Algorigthm to Bayesian Inference<a class="headerlink" href="#Application-of-the-EM-Algorigthm-to-Bayesian-Inference" title="Permalink to this heading"></a></h1>
+</section>
+</section>
+<section id="Application-of-the-EM-Algorigthm-to-Bayesian-Inference">
+<h1>Application of the EM Algorigthm to Bayesian Inference<a class="headerlink" href="#Application-of-the-EM-Algorigthm-to-Bayesian-Inference" title="Link to this heading"></a></h1>
 <p>The primary goal of Bayesian inference is to evaluate the posterior distribution. This can be challenging when the posterior is complex, multi-modal, or otherwise difficult to evaluate directly. In these cases, statitics such as the mode of the posterior distribution can be useful for summarizing the distribution. In section below, we will describe how the EM algorithm can be a useful tool for finding the mode of a posterior distribution.</p>
 <p>Notice that the likelihood can be decomposed as follows:</p>
 <div class="math notranslate nohighlight">
@@ -610,9 +611,9 @@ convergence.</p>
 <div class="math notranslate nohighlight">
 \[\ln\,g(\theta\mid\mathcal{Y}) = g(\theta\mid\theta_{t}) +  D_{\mathrm{KL}}(f(\mathcal{X}\mid\mathcal{Y},\theta_{t})\| f(\mathcal{X}\mid\mathcal{Y}, \theta)) + \ln\,g(\theta) - \ln\,f(\mathcal{y})\]</div>
 <p>If we wish to use the EM algorithm to find the mode of the posterior the E-step is exactly the same as above since only the term <span class="math notranslate nohighlight">\(g(\theta\mid\theta_{t})\)</span> has any dependence on the latent variable, <span class="math notranslate nohighlight">\(\mathcal{X}\)</span>. The M-step, however, must be updated to include the log prior, <span class="math notranslate nohighlight">\(\ln\,g(\theta)\)</span>.</p>
-</div>
-<div class="section" id="Example:-A-Normal-Mixture-Model">
-<h1>Example: A Normal-Mixture Model<a class="headerlink" href="#Example:-A-Normal-Mixture-Model" title="Permalink to this heading"></a></h1>
+</section>
+<section id="Example:-A-Normal-Mixture-Model">
+<h1>Example: A Normal-Mixture Model<a class="headerlink" href="#Example:-A-Normal-Mixture-Model" title="Link to this heading"></a></h1>
 <p>A classic application of this algorithm is assigning data points to components in a normal mixture model. You can think of this as a generalized form of the k-means clustering algorithm, which you may be familiar with. The core idea is that we assume the data points are generated from a mixture of a known number of Gaussian distributions.</p>
 <p>In this example, we’ll simulate data from three Gaussian distributions, each with distinct location and scale parameters. After defining the full model for these data, we’ll explore how we can use the EM algorithm to identify the mode of the posterior distribution.</p>
 <div class="nbinput docutils container">
@@ -822,7 +823,7 @@ Q(\theta\mid\theta_t) = \sum_{i=1}^{N}\sum_{j=1}^{M}\,\gamma_{ij}\,\ln\pi_jf(\ma
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">responsibility</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">responsibility</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute responsibility of component `y` for the data `x`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -831,7 +832,7 @@ Q(\theta\mid\theta_t) = \sum_{i=1}^{N}\sum_{j=1}^{M}\,\gamma_{ij}\,\ln\pi_jf(\ma
 
     <span class="k">return</span> <span class="n">r0</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">r0</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)[:,</span><span class="kc">None</span><span class="p">]</span>
 
-<span class="k">def</span> <span class="nf">q_function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">params_old</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">q_function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">params_old</span><span class="p">):</span>
 <span class="w">  </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">  Compute the expected value of the complete log-likelihood</span>
 <span class="sd">  &quot;&quot;&quot;</span>
@@ -840,7 +841,7 @@ Q(\theta\mid\theta_t) = \sum_{i=1}^{N}\sum_{j=1}^{M}\,\gamma_{ij}\,\ln\pi_jf(\ma
 
   <span class="k">return</span> <span class="n">resp</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">resp</span> <span class="o">*</span> <span class="n">ll</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">log_complete_likelihood</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">log_complete_likelihood</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute log of the *complete* data likelihood</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -865,7 +866,7 @@ That is,</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">log_prior</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">log_prior</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute the log prior</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -883,14 +884,14 @@ That is,</p>
 
     <span class="k">return</span> <span class="n">lp</span>
 
-<span class="k">def</span> <span class="nf">log_complete_likelihood</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">log_complete_likelihood</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute log of the *complete* data likelihood</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">pi</span> <span class="o">=</span> <span class="n">params</span>
     <span class="k">return</span> <span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span><span class="kc">None</span><span class="p">],</span> <span class="n">mu</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">sigma</span><span class="p">))</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">pi</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">log_likelihood</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">log_likelihood</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
     <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">pi</span> <span class="o">=</span> <span class="n">params</span>
 
     <span class="n">lik</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span><span class="kc">None</span><span class="p">],</span> <span class="n">mu</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">sigma</span><span class="p">))</span> <span class="o">*</span> <span class="n">pi</span>
@@ -898,14 +899,14 @@ That is,</p>
 
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">lik</span><span class="p">))</span>
 
-<span class="k">def</span> <span class="nf">log_posterior</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">log_posterior</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
     <span class="n">lp</span> <span class="o">=</span> <span class="n">log_prior</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">lp</span> <span class="o">==</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">lp</span>
 
     <span class="k">return</span> <span class="n">lp</span> <span class="o">+</span> <span class="n">log_likelihood</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">neg_log_posterior</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">neg_log_posterior</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
     <span class="n">params</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
     <span class="k">return</span> <span class="o">-</span><span class="n">log_posterior</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 </pre></div>
@@ -934,7 +935,7 @@ That is,</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">update_mu</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">hyper_mu</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">hyper_tau</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">update_mu</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">hyper_mu</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">hyper_tau</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
 <span class="w">  </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">  Update rule for mu</span>
 <span class="sd">  &quot;&quot;&quot;</span>
@@ -943,7 +944,7 @@ That is,</p>
 
   <span class="k">return</span> <span class="n">mu_new</span>
 
-<span class="k">def</span> <span class="nf">update_pi</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">hyper_alpha</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">])):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">update_pi</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">hyper_alpha</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">])):</span>
 <span class="w">  </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">  Update mixing probabilites</span>
 <span class="sd">  &quot;&quot;&quot;</span>
@@ -955,7 +956,7 @@ That is,</p>
 
   <span class="k">return</span> <span class="n">pi_new</span>
 
-<span class="k">def</span> <span class="nf">update_sigma</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">hyper_alpha</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">hyper_beta</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">update_sigma</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">hyper_alpha</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">hyper_beta</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
 <span class="w">  </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">  Update rule for sigma</span>
 <span class="sd">  &quot;&quot;&quot;</span>
@@ -971,13 +972,13 @@ That is,</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">e_step</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">e_step</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Expectation step of the EM algorithm</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">q_function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">m_step</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">m_step</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Update step of the EM algorithm</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -995,7 +996,7 @@ That is,</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">em_algorithm</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">params_init</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">em_algorithm</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">params_init</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Run the EM algorithm to fit a Gaussian mixture model.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -1270,7 +1271,7 @@ jupyterlab: 4.2.7
 
 </pre></div></div>
 </div>
-</div>
+</section>
 
 
            </div>
@@ -1281,11 +1282,11 @@ jupyterlab: 4.2.7
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 01, 2025.
+      <span class="lastupdated">Last updated on Feb 14, 2025.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x16dcf8fe0> 
+   <jinja2.runtime.BlockReference object at 0x171930c50> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

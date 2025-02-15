@@ -1,28 +1,28 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>23. Introduction to Gaussian processes &mdash; BE/Bi 103 b  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=22ddcdb3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
 
   
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
-        <script src="../../_static/clipboard.min.js"></script>
-        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=9bcbadda"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=f281be69"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -125,6 +125,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../homework/04/index.html">4. Sampling with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/05/index.html">5. Inference with Stan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/06/index.html">6. MCMC with ion channels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../homework/07/index.html">7. Model comparison</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -182,22 +183,22 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="23.-Introduction-to-Gaussian-processes">
-<h1>23. Introduction to Gaussian processes<a class="headerlink" href="#23.-Introduction-to-Gaussian-processes" title="Permalink to this heading"></a></h1>
+  <section id="23.-Introduction-to-Gaussian-processes">
+<h1>23. Introduction to Gaussian processes<a class="headerlink" href="#23.-Introduction-to-Gaussian-processes" title="Link to this heading"></a></h1>
 <p><a class="reference external" href="https://s3.amazonaws.com/bebi103.caltech.edu/data/wolfenden_arrhenius.csv">Data set download</a></p>
 <hr><div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">polars</span> <span class="k">as</span> <span class="nn">pl</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
 
-<span class="kn">import</span> <span class="nn">cmdstanpy</span>
-<span class="kn">import</span> <span class="nn">arviz</span> <span class="k">as</span> <span class="nn">az</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">cmdstanpy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">arviz</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">az</span>
 
-<span class="kn">import</span> <span class="nn">bebi103</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">bebi103</span>
 
-<span class="kn">import</span> <span class="nn">bokeh.io</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">bokeh.io</span>
 <span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">output_notebook</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -540,17 +541,17 @@ function(Bokeh) {
 }(window));
 </script></div>
 </div>
-<hr><div class="section" id="Predicting-using-posterior-estimates">
-<h2>Predicting using posterior estimates<a class="headerlink" href="#Predicting-using-posterior-estimates" title="Permalink to this heading"></a></h2>
+<hr><section id="Predicting-using-posterior-estimates">
+<h2>Predicting using posterior estimates<a class="headerlink" href="#Predicting-using-posterior-estimates" title="Link to this heading"></a></h2>
 <p>The following happens a lot in science. We vary variables <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> (like time, pH, etc.) and make observations <span class="math notranslate nohighlight">\(\mathbf{y}\)</span>. We perform a regression using some theoretical function <span class="math notranslate nohighlight">\(f(\mathbf{x})\)</span>, which describes how we expect <span class="math notranslate nohighlight">\(y\)</span> to vary with <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>. We then can have a pretty good idea what we would measure for some other value of <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>. By making a few measurements, the regression helps us say things more generally, even for
 <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> values we didn’t explicitly use in an experiment.</p>
 <p>We have seen this in this class. We perform a regression, getting samples from the posterior distribution. We then sample out of the posterior predictive distribution to get what we might expect for performing an experiment, perhaps with a difference <span class="math notranslate nohighlight">\(x\)</span> values. In practice, this is performing a posterior predictive check with some values of <span class="math notranslate nohighlight">\(x\)</span> that we hadn’t used in a measurement.</p>
 <p>This is an example of <strong>parametric inference</strong>, in which we have a specific mathematical model in mind, complete with parameters. But what if we did not have a specific function in mind? Rather, we just would like to be able to <em>predict</em> what value of <span class="math notranslate nohighlight">\(y\)</span> we might get for some untested <span class="math notranslate nohighlight">\(x\)</span> value and we do not really care what the underlying model is. In other words, we just would like to consider a family of functions that do not vary too rapidly or with too large of amplitude. There
 are an infinity of such functions. This is an example of <strong>nonparametric inference</strong>. In a Bayesian context, nonparametric inference involves consideration of an infinite number of models. We will explore nonparametric inference in the context of <strong>Gaussian processes</strong>.</p>
 <p>As we go about this, it will be useful to have a concrete example in mind.</p>
-</div>
-<div class="section" id="An-example-data-set">
-<h2>An example data set<a class="headerlink" href="#An-example-data-set" title="Permalink to this heading"></a></h2>
+</section>
+<section id="An-example-data-set">
+<h2>An example data set<a class="headerlink" href="#An-example-data-set" title="Link to this heading"></a></h2>
 <p>For concreteness, let’s consider a specific example, the breakdown of <span class="math notranslate nohighlight">\(\alpha\)</span>-1-methylglucopyranoside, a key step in the hydrolysis of cellulose. This is featured in a <a class="reference external" href="https://dx.doi.org/10.1021/ar000058i">nice paper by Wolfenden and Snider</a> about the power of enzymes as catalysts. This example shows that glucoside hydrolysis is incredibly slow in the absence of enzymes. Let’s take a quick look at measured rate constants <span class="math notranslate nohighlight">\(k\)</span> as a function of temperature.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
@@ -890,9 +891,9 @@ var element = document.currentScript.previousSibling.previousSibling;
 <p>We see extremely strong correlation between the activation energy and the pre-exponential factor. We can identify both parameters, but they have broad distributions, varying over almost two orders of magnitude in the case of <span class="math notranslate nohighlight">\(A\)</span>.</p>
 <p>In doing this analysis, we got something important: physically meaningful parameter values. We also got the ability to <em>predict</em> what the rate constant would be for a temperature for which we have no measurement. The model affords us that. But what if only this prediction is important to us, and not the physical model? Or maybe we just cannot come up with a physical model because we don’t know enough about chemical reactions kinetics to do so. We would nonetheless like to make predictions about
 rate constants and different temperatures. This is where <strong>Gaussian processes</strong> can be useful, and we will use this example as a data set to explore Gaussian processes.</p>
-</div>
-<div class="section" id="Processes-and-nonparametric-Bayesian-inference">
-<h2>Processes and nonparametric Bayesian inference<a class="headerlink" href="#Processes-and-nonparametric-Bayesian-inference" title="Permalink to this heading"></a></h2>
+</section>
+<section id="Processes-and-nonparametric-Bayesian-inference">
+<h2>Processes and nonparametric Bayesian inference<a class="headerlink" href="#Processes-and-nonparametric-Bayesian-inference" title="Link to this heading"></a></h2>
 <p>Remember that Bayes’s Theorem applies to any logical conjecture. It even applies to <em>functions</em>! So, imagine we have observed data <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{y}\)</span>. I use a capital <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> here to allow for multidimensional dependent variables. For example, we might want to study both temperature and pH dependence of a rate constant. In this case, each row of <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> is a pH, temperature pair. We define row <span class="math notranslate nohighlight">\(i\)</span> of <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> to be
 <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span>.</p>
 <p>We expect that for each observation, <span class="math notranslate nohighlight">\(y_i = f(\mathbf{x}_i) + \epsilon_i\)</span>, where <span class="math notranslate nohighlight">\(\epsilon_i\)</span> is some measurement error and/or inherent stochasticity and <span class="math notranslate nohighlight">\(f(x)\)</span> is an <em>unknown</em> function of <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>. We can still write Bayes’s Theorem.</p>
@@ -906,9 +907,9 @@ rate constants and different temperatures. This is where <strong>Gaussian proces
 \pi(f(\mathbf{x}_*) \mid \mathbf{x}_*, \mathbf{y}, \mathbf{X}) = \int \mathrm{d}f\,\pi(f(\mathbf{x}_*)\mid \mathbf{x}_*, f)\, \pi(f\mid \mathbf{y}, \mathbf{X}).
 \end{align}</span></p>
 <p>This looks exactly the same as the posterior predictive distribution for parametric regression. Instead of writing a probability distribution over infinitely many parameter values in the parametric setting, we are now writing a process over infinitely many functions.</p>
-</div>
-<div class="section" id="Gaussian-processes-with-a-finite-number-of-points">
-<h2>Gaussian processes with a finite number of points<a class="headerlink" href="#Gaussian-processes-with-a-finite-number-of-points" title="Permalink to this heading"></a></h2>
+</section>
+<section id="Gaussian-processes-with-a-finite-number-of-points">
+<h2>Gaussian processes with a finite number of points<a class="headerlink" href="#Gaussian-processes-with-a-finite-number-of-points" title="Link to this heading"></a></h2>
 <p>How can we treat a probability distribution over functions? We can instead define a probability distribution over the function’s <em>values</em> at some arbitrary points. So, imagine we get function values at points <span class="math notranslate nohighlight">\(\mathbf{X}\)</span>, with <span class="math notranslate nohighlight">\(N\)</span> total observations. We can define a <strong>joint distribution</strong>, <span class="math notranslate nohighlight">\(\pi(f(\mathbf{x}_1), \ldots, f(\mathbf{x}_N))\)</span>. We use this probability density as a drop-in replacement for a process.</p>
 <p>What distribution should we choose for this joint distribution? We can choose many distributions for this, but we might choose a joint multivariate Normal (a.k.a. Gaussian) distribution. This defines a <strong>Gaussian process</strong>, or GP. To define the joint distribution, then, we need to define the two parameters of a multivariate Gaussian distribution, its mean and covariance. The mean must be defined for an arbitrary point <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>, and the covariance for an arbitrary <em>pair</em> of points
 <span class="math notranslate nohighlight">\(\mathbf{x}, \mathbf{x}'\)</span>. Thus, the <strong>mean function</strong>, <span class="math notranslate nohighlight">\(m(\mathbf{x})\)</span> and the covariance function, usually referred to as a <strong>kernel function</strong>, <span class="math notranslate nohighlight">\(k(\mathbf{x}, \mathbf{x}')\)</span>, uniquely define a Gaussian process. We can write a Gaussian process as</p>
@@ -925,8 +926,8 @@ f(\mathbf{x}) \mid \theta_m, \theta_k \sim \text{GP}(m(\mathbf{x} ; \theta_m), k
 \pi(f(\mathbf{X}_*)\mid \mathbf{X}_*, \mathbf{y}, \mathbf{X}) = \frac{\pi(\mathbf{y}, \mathbf{X}\mid f(\mathbf{X}_*), \mathbf{X}_*)\,\pi(f(\mathbf{X}_*) \mid \mathbf{X}_*)}{\pi(\mathbf{y}, \mathbf{X})}.
 \end{align}</span></p>
 <p>The values of the nonparametric function, <span class="math notranslate nohighlight">\(f(\mathbf{X}_*)\)</span> are often referred to as <strong>latent variables</strong> because they are variables that are not directly observed.</p>
-<div class="section" id="The-mean-function-and-centering-and-scaling">
-<h3>The mean function and centering and scaling<a class="headerlink" href="#The-mean-function-and-centering-and-scaling" title="Permalink to this heading"></a></h3>
+<section id="The-mean-function-and-centering-and-scaling">
+<h3>The mean function and centering and scaling<a class="headerlink" href="#The-mean-function-and-centering-and-scaling" title="Link to this heading"></a></h3>
 <p>In a purely nonparametric approach, we almost always take the mean function to be zero; <span class="math notranslate nohighlight">\(m(\mathbf{x}) = 0\)</span>. We may, however, wish to do a <strong>semi-parametric regression</strong> and introduce an explicit bias via <span class="math notranslate nohighlight">\(m(\mathbf{x})\)</span>. We often do this when we have, e.g., count data, that we cannot really transform such that the mean is zero.</p>
 <p>In general in machine learning applications, and many nonparametric contexts in general, it is good practice to <strong>center and scale</strong> the observed data to improve performance of your algorithms. I will not get into the details of this here (though see <a class="reference external" href="https://www.datacamp.com/community/tutorials/preprocessing-in-data-science-part-1-centering-scaling-and-knn">this series of blog posts by Hugo Bowne-Anderson on the topic</a>, but rather will encourage you to center and scale your data before
 performing inference with a GP, if you can. Specifically, if <span class="math notranslate nohighlight">\(\bar{\mathbf{y}}\)</span> is the arithmetic mean of observations <span class="math notranslate nohighlight">\(\mathbf{y}\)</span>, and <span class="math notranslate nohighlight">\(s_\mathbf{y}\)</span> is the sample standard deviation of <span class="math notranslate nohighlight">\(\mathbf{y}\)</span>, then you should apply a linear transformation of <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> to get a centered and scaled version.</p>
@@ -938,9 +939,9 @@ performing inference with a GP, if you can. Specifically, if <span class="math n
 \mathbf{y} = s_\mathbf{y} \mathbf{y}_\mathrm{scaled} + \bar{\mathbf{y}}.
 \end{align}</span></p>
 <p>Henceforth, we will assume we are working with centered and scaled data such that the mean functions of Gaussian process priors are zero.</p>
-</div>
-<div class="section" id="The-kernel-and-covariance-matrix">
-<h3>The kernel and covariance matrix<a class="headerlink" href="#The-kernel-and-covariance-matrix" title="Permalink to this heading"></a></h3>
+</section>
+<section id="The-kernel-and-covariance-matrix">
+<h3>The kernel and covariance matrix<a class="headerlink" href="#The-kernel-and-covariance-matrix" title="Link to this heading"></a></h3>
 <p>The covariance function, <span class="math notranslate nohighlight">\(k(\mathbf{x}, \mathbf{x}')\)</span> is called a <strong>kernel</strong>. It must have certain properties. Remember that it defines the entries of a covariance matrix of a multivariate Normal distribution. Specifically, let’s say that <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> has <span class="math notranslate nohighlight">\(n\)</span> rows. Then, we can define an <span class="math notranslate nohighlight">\(n\times n\)</span> matrix, <span class="math notranslate nohighlight">\(\mathsf{K}(\mathbf{X}, \mathbf{X}')\)</span> that has entries</p>
 <p><span class="math">\begin{align}
 K_{ij} = k(\mathbf{x}_i, \mathbf{x}'_j).
@@ -975,10 +976,10 @@ how the possible functions <span class="math notranslate nohighlight">\(f(\mathb
 f \mid \theta_k \sim \text{GP}(0, k(\mathbf{x}, \mathbf{x}'; \theta_k)).
 \end{align}</span></p>
 <p>In summary, the kernel specifies key features of the functions we are using to describe our data. It sets lengths scales for typical variation in the horizontal and vertical directions.</p>
-</div>
-</div>
-<div class="section" id="Sampling-out-of-a-Gaussian-process-prior">
-<h2>Sampling out of a Gaussian process prior<a class="headerlink" href="#Sampling-out-of-a-Gaussian-process-prior" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+<section id="Sampling-out-of-a-Gaussian-process-prior">
+<h2>Sampling out of a Gaussian process prior<a class="headerlink" href="#Sampling-out-of-a-Gaussian-process-prior" title="Link to this heading"></a></h2>
 <p>We would like to draw samples out of a Gaussian process (in this case with an SE kernel). As an example, let’s sample the function <span class="math notranslate nohighlight">\(f\)</span> at discrete points out of the Gaussian process</p>
 <p><span class="math">\begin{align}
 f \mid \alpha, \rho \sim \text{GP}(\mathbf{0}, k_\mathrm{SE}(\mathbf{x}, \mathbf{x}'; \alpha, \rho)).
@@ -988,8 +989,8 @@ f \mid \alpha, \rho \sim \text{GP}(\mathbf{0}, k_\mathrm{SE}(\mathbf{x}, \mathbf
 f(\mathbf{x}_*) \mid \alpha, \rho \sim \text{MultiNorm}(\mathbf{0}, \mathsf{K}(\mathbf{x}_*, \mathbf{x}_*)).
 \end{align}</span></p>
 <p>To sample out of a Gaussian process, we compute the matrix <span class="math notranslate nohighlight">\(\mathsf{K}(\mathbf{x}_*, \mathbf{x}_*)\)</span> for given values of <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\rho\)</span>, and then we sample out of this multivariate Normal distribution. I will demonstrate how this is done in both Numpy and Stan.</p>
-<div class="section" id="Sampling-out-of-a-GP-prior-using-Stan">
-<h3>Sampling out of a GP prior using Stan<a class="headerlink" href="#Sampling-out-of-a-GP-prior-using-Stan" title="Permalink to this heading"></a></h3>
+<section id="Sampling-out-of-a-GP-prior-using-Stan">
+<h3>Sampling out of a GP prior using Stan<a class="headerlink" href="#Sampling-out-of-a-GP-prior-using-Stan" title="Link to this heading"></a></h3>
 <p>Code to generate samples out of a GP prior using Stan is shown below. I will first display the code and then comment on its contents.</p>
 <div class="highlight-stan notranslate"><div class="highlight"><pre><span></span><span class="kn">data</span> <span class="p">{</span>
   <span class="c1">// Data points</span>
@@ -1200,9 +1201,9 @@ var element = document.currentScript.previousSibling.previousSibling;
 </script></div>
 </div>
 <p>So, different hyperparameter values yield different kinds of functions.</p>
-</div>
-<div class="section" id="Sampling-out-of-a-GP-prior-using-Numpy">
-<h3>Sampling out of a GP prior using Numpy<a class="headerlink" href="#Sampling-out-of-a-GP-prior-using-Numpy" title="Permalink to this heading"></a></h3>
+</section>
+<section id="Sampling-out-of-a-GP-prior-using-Numpy">
+<h3>Sampling out of a GP prior using Numpy<a class="headerlink" href="#Sampling-out-of-a-GP-prior-using-Numpy" title="Link to this heading"></a></h3>
 <p>At the heart of being able to sample out of a GP prior (and indeed all sampling with GP-based models) is the ability to compute the covariance matrix from for a given kernel and <span class="math notranslate nohighlight">\(x\)</span>-points. In Stan, only covariance matrices computed using SE kernels are built-in; you can always code up your own function for Stan to use to build covariance matrices for whatever kernel you please. Conveniently, the <code class="docutils literal notranslate"><span class="pre">bebi103.gp</span></code> module has functions to compute the covariance matrices for all of the kernels
 listed above. To demonstrate sampling out of a GP prior with Numpy, let’s use the Matérn kernel with <span class="math notranslate nohighlight">\(\nu = 3/2\)</span>. The resulting functions are only once differentiable and will therefore be much rougher than what we got with the SE kernel.</p>
 <div class="nbinput docutils container">
@@ -1331,16 +1332,16 @@ var element = document.currentScript.previousSibling.previousSibling;
 })(window);
 </script></div>
 </div>
-</div>
-</div>
-<div class="section" id="Composing-kernels">
-<h2>Composing kernels<a class="headerlink" href="#Composing-kernels" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+<section id="Composing-kernels">
+<h2>Composing kernels<a class="headerlink" href="#Composing-kernels" title="Link to this heading"></a></h2>
 <p>We may take any of the above kernels and compose them by multiplying or adding them together. For example, say we think our function is locally periodic, but may nonetheless vary over time. We might compose a kernel that is the product of a periodic and SE kernel.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">mult_kern</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">rho_SE</span><span class="p">,</span> <span class="n">rho_per</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">mult_kern</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">rho_SE</span><span class="p">,</span> <span class="n">rho_per</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Kernel formed from multiplying periodic and SE kernels &quot;&quot;&quot;</span>
     <span class="n">per</span> <span class="o">=</span> <span class="n">bebi103</span><span class="o">.</span><span class="n">gp</span><span class="o">.</span><span class="n">periodic_kernel</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">rho_per</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
     <span class="n">se</span> <span class="o">=</span> <span class="n">bebi103</span><span class="o">.</span><span class="n">gp</span><span class="o">.</span><span class="n">se_kernel</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">rho_SE</span><span class="p">)</span>
@@ -1417,7 +1418,7 @@ var element = document.currentScript.previousSibling.previousSibling;
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">add_kern</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">sigma_b</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">rho</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">add_kern</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">sigma_b</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">rho</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Kernel formed from adding linear and SE kernels &quot;&quot;&quot;</span>
     <span class="n">per</span> <span class="o">=</span> <span class="n">bebi103</span><span class="o">.</span><span class="n">gp</span><span class="o">.</span><span class="n">periodic_kernel</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">rho</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
     <span class="n">linear</span> <span class="o">=</span> <span class="n">bebi103</span><span class="o">.</span><span class="n">gp</span><span class="o">.</span><span class="n">linear_kernel</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">sigma_b</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
@@ -1483,9 +1484,9 @@ var element = document.currentScript.previousSibling.previousSibling;
 })(window);
 </script></div>
 </div>
-</div>
-<div class="section" id="Inference-with-GPs">
-<h2>Inference with GPs<a class="headerlink" href="#Inference-with-GPs" title="Permalink to this heading"></a></h2>
+</section>
+<section id="Inference-with-GPs">
+<h2>Inference with GPs<a class="headerlink" href="#Inference-with-GPs" title="Link to this heading"></a></h2>
 <p>Gaussian processes can be used as priors in many models. For example, imagine we are measuring the number of gene transcripts in cells by RNA FISH. We assume the expression is not bursty and well-described by a Poisson distribution parametrized by rate parameter <span class="math notranslate nohighlight">\(\lambda\)</span>. But we do this experiment for various concentrations <span class="math notranslate nohighlight">\(\mathbf{c} = \{c_1, c_2, \ldots\}\)</span> of IPTG, which can affect gene expression levels. We may not know how it affects those levels, so we can model
 <span class="math notranslate nohighlight">\(\lambda\)</span> using a Gaussian process with a SE kernel. Our statistical model is then</p>
 <p><span class="math">\begin{align}
@@ -1506,9 +1507,9 @@ K_{ij} = k_\mathrm{SE}(c_i, c_j ; \alpha, \rho).
 \end{align}</span></p>
 <p>We will discuss inference with this model in a subsequent lesson on GPs in practice.</p>
 <p>Now, we will consider the special case where we have a Normal likelihood with a GP prior. In this case, we can make significant analytical progress that greatly eases the analysis.</p>
-</div>
-<div class="section" id="Normal-likelihoods-with-Gaussian-process-priors">
-<h2>Normal likelihoods with Gaussian process priors<a class="headerlink" href="#Normal-likelihoods-with-Gaussian-process-priors" title="Permalink to this heading"></a></h2>
+</section>
+<section id="Normal-likelihoods-with-Gaussian-process-priors">
+<h2>Normal likelihoods with Gaussian process priors<a class="headerlink" href="#Normal-likelihoods-with-Gaussian-process-priors" title="Link to this heading"></a></h2>
 <p>While GPs priors can be used for arbitrary likelihoods, such as the Poisson likelihood we used above, Normal likelihoods are widely encountered and have some special (and <em>very</em> convenient) properties. Specifically, we expect our observation <span class="math notranslate nohighlight">\(y\)</span> to follow <span class="math notranslate nohighlight">\(y = f(\mathbf{x})\)</span>, with some Normally distributed, possibly heteroscedastic error <span class="math notranslate nohighlight">\(\boldsymbol{\sigma}\)</span>, i.e.,</p>
 <p><span class="math">\begin{align}
 y_i \sim \text{Norm}(f(\mathbf{x}_i), \sigma_i) \;\;\forall i.
@@ -1547,8 +1548,8 @@ analytical expression for <span class="math notranslate nohighlight">\(m(\mathbf
 \mathsf{K}_\mathbf{y} \equiv \mathsf{K}(\mathbf{X}, \mathbf{X}) + \mathrm{diag}(\boldsymbol{\sigma}^2),
 \end{align}</span></p>
 <p>where <span class="math notranslate nohighlight">\(\mathrm{diag}(\boldsymbol{\sigma})\)</span> is a diagonal covariance matrix constructed from the array of <span class="math notranslate nohighlight">\(\sigma\)</span> values.</p>
-<div class="section" id="The-posterior-predictive-distribution-of-function-values">
-<h3>The posterior predictive distribution of function values<a class="headerlink" href="#The-posterior-predictive-distribution-of-function-values" title="Permalink to this heading"></a></h3>
+<section id="The-posterior-predictive-distribution-of-function-values">
+<h3>The posterior predictive distribution of function values<a class="headerlink" href="#The-posterior-predictive-distribution-of-function-values" title="Link to this heading"></a></h3>
 <p>If we specify priors for the hyperparameters <span class="math notranslate nohighlight">\(\theta_k\)</span> and for <span class="math notranslate nohighlight">\(\sigma\)</span>, we have a fully specified model. Because we can conveniently marginalize out <span class="math notranslate nohighlight">\(f\)</span>, we only need to focus on <span class="math notranslate nohighlight">\(\theta_k\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{\sigma}\)</span> as parameters to infer. In the next lesson, we will learn how to find <span class="math notranslate nohighlight">\(\theta_k\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> by finding the MAP and (better) how to draw samples of them using MCMC with Stan. For now, we will focus on understanding the posterior
 distribution for <em>particular</em> values of <span class="math notranslate nohighlight">\(\theta_k\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{\sigma}\)</span>.</p>
 <p>Going from the posterior samples of the parameters to the posterior predictive distribution is kind of tricky because the values of the function <span class="math notranslate nohighlight">\(f\)</span> at unmeasured positions <span class="math notranslate nohighlight">\(\mathbf{X}_*\)</span>, which we shall denote for notational convenience as <span class="math notranslate nohighlight">\(\mathbf{f}_* = f(\mathbf{X}_*)\)</span>, depend on the observed values <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> and the positions <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> at which <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> were measured. We wish to compute the posterior predictive distribution of function values,
@@ -1582,9 +1583,9 @@ distribution for <em>particular</em> values of <span class="math notranslate noh
 &\mathsf{\Sigma}_* = \mathsf{K}_{**} - \mathsf{K}_*^\mathsf{T} \cdot \mathsf{K}_\mathbf{y}^{-1} \cdot \mathsf{K}_*.
 \end{align}</span></p>
 <p>The vector <span class="math notranslate nohighlight">\(\mathbf{m}_*\)</span> gives the mean value of <span class="math notranslate nohighlight">\(\mathbf{f}_* \equiv f(\mathbf{X}_*)\)</span>. The diagonal entries of <span class="math notranslate nohighlight">\(\mathsf{\Sigma}_*\)</span> give the variance, and therefore the uncertainty, in <span class="math notranslate nohighlight">\(\mathbf{y}_*\)</span>. Computing <span class="math notranslate nohighlight">\(\mathbf{m}_*\)</span> and <span class="math notranslate nohighlight">\(\mathsf{\Sigma}_*\)</span> (or at least its diagonal entries) gives us our predictions for a given set of hyperparameters.</p>
-</div>
-<div class="section" id="Computing-the-parameters-of-the-posterior-predictive-distribution">
-<h3>Computing the parameters of the posterior predictive distribution<a class="headerlink" href="#Computing-the-parameters-of-the-posterior-predictive-distribution" title="Permalink to this heading"></a></h3>
+</section>
+<section id="Computing-the-parameters-of-the-posterior-predictive-distribution">
+<h3>Computing the parameters of the posterior predictive distribution<a class="headerlink" href="#Computing-the-parameters-of-the-posterior-predictive-distribution" title="Link to this heading"></a></h3>
 <p>At the center the calculation of <span class="math notranslate nohighlight">\(\mathbf{m}_*\)</span> is inverting the matrix <span class="math notranslate nohighlight">\(\mathsf{K}_\mathbf{y}\)</span>. More specifically, we need to compute <span class="math notranslate nohighlight">\(\mathsf{K}_\mathbf{y}^{-1}\mathbf{y}\)</span>, which is the solution <span class="math notranslate nohighlight">\(\boldsymbol{\xi}\)</span> to</p>
 <p><span class="math">\begin{align}
 \mathsf{K}_\mathbf{y} \cdot \boldsymbol{\xi} = \mathbf{y}.
@@ -1615,9 +1616,9 @@ distribution for <em>particular</em> values of <span class="math notranslate noh
 & \text{solve } \mathsf{L}\cdot \mathsf{Z} = \mathsf{K}_*, \\[1em]
 & \text{solve } \mathsf{\Xi}^\mathsf{T} \cdot \mathsf{L}  = \mathsf{Z}.
 \end{align}</span></p>
-</div>
-<div class="section" id="Plotting-an-analytical-posterior">
-<h3>Plotting an analytical posterior<a class="headerlink" href="#Plotting-an-analytical-posterior" title="Permalink to this heading"></a></h3>
+</section>
+<section id="Plotting-an-analytical-posterior">
+<h3>Plotting an analytical posterior<a class="headerlink" href="#Plotting-an-analytical-posterior" title="Link to this heading"></a></h3>
 <p>Following the above prescription, we can compute the posterior mean <span class="math notranslate nohighlight">\(\mathbf{m}^*\)</span> and the posterior covariance <span class="math notranslate nohighlight">\(\mathsf{\Sigma}_*\)</span>, from which we can plot our nonparametric function.</p>
 <p>Using the specific example of the rate constant versus temperature data, we can use a GP prior with a SE kernel. Our model, leaving the priors on the homoscedastic error <span class="math notranslate nohighlight">\(\sigma\)</span> and the kernel hyperparameters is</p>
 <p><span class="math">\begin{align}
@@ -1749,10 +1750,10 @@ var element = document.currentScript.previousSibling.previousSibling;
 </div>
 <p>It is important to remember that the line in the plot is the most probable function <em>for the given choice of hyperparameters and</em> <span class="math notranslate nohighlight">\(\sigma\)</span>. The envelope is <em>not</em> posterior predictive of data sets. Rather in encompasses the exent of 95% of the nonparametric functions <span class="math notranslate nohighlight">\(f(T)\)</span>. If you wanted a posterior predictive plot, you would have to sample out of the posterior to generate <em>data</em>.</p>
 <p>Nonetheless, this plot is clear enough to show that this fit does not quite hold muster. It tends to dampen out the variation in the data in favor of a flatter curve. Furthermore, the credible region seems unreasonably wide for these data. Maybe this was not the best choice of hyperparameters. In the next lesson, we will learn how to better choose, or more specifically sample, hyperparameters.</p>
-</div>
-</div>
-<div class="section" id="Conclusions">
-<h2>Conclusions<a class="headerlink" href="#Conclusions" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+<section id="Conclusions">
+<h2>Conclusions<a class="headerlink" href="#Conclusions" title="Link to this heading"></a></h2>
 <p>In this lesson, we have introduced Gaussian processes and demonstrated the useful simplifications when a GP prior is used with a Normal likelihood. Even for these convenient models, we are still left to infer the hyperparameters. Inference for GP priors with non-Normal likelihoods adds extra challenges because we do not have the benefit of conjugacy and cannot marginalize away the function values. We will address these practical issues in the next lesson.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
@@ -1762,9 +1763,9 @@ var element = document.currentScript.previousSibling.previousSibling;
 </pre></div>
 </div>
 </div>
-</div>
-<div class="section" id="Computing-environment">
-<h2>Computing environment<a class="headerlink" href="#Computing-environment" title="Permalink to this heading"></a></h2>
+</section>
+<section id="Computing-environment">
+<h2>Computing environment<a class="headerlink" href="#Computing-environment" title="Link to this heading"></a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
 </pre></div>
@@ -1795,8 +1796,8 @@ jupyterlab: 4.0.13
 cmdstan   : 2.35.0
 </pre></div></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -1810,11 +1811,11 @@ cmdstan   : 2.35.0
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 01, 2025.
+      <span class="lastupdated">Last updated on Feb 14, 2025.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x16f96a270> 
+   <jinja2.runtime.BlockReference object at 0x172240230> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

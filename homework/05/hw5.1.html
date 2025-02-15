@@ -1,27 +1,27 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Homework 5.1: MCMC with Boolean data with Stan (25 pts) &mdash; BE/Bi 103 b  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=22ddcdb3" />
 
   
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
-        <script src="../../_static/clipboard.min.js"></script>
-        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=9bcbadda"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=f281be69"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -103,6 +103,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../06/index.html">6. MCMC with ion channels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07/index.html">7. Model comparison</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -161,8 +162,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="Homework-5.1:-MCMC-with-Boolean-data-with-Stan-(25-pts)">
-<h1>Homework 5.1: MCMC with Boolean data with Stan (25 pts)<a class="headerlink" href="#Homework-5.1:-MCMC-with-Boolean-data-with-Stan-(25-pts)" title="Permalink to this heading"></a></h1>
+  <section id="Homework-5.1:-MCMC-with-Boolean-data-with-Stan-(25-pts)">
+<h1>Homework 5.1: MCMC with Boolean data with Stan (25 pts)<a class="headerlink" href="#Homework-5.1:-MCMC-with-Boolean-data-with-Stan-(25-pts)" title="Link to this heading"></a></h1>
 <hr><p><strong>a)</strong> In <a class="reference internal" href="../04/hw4.1.html"><span class="doc">Problem 4.1</span></a>, you got samples out of a bivariate Normal distribution with mean <span class="math notranslate nohighlight">\(\boldsymbol{\mu} = (10, 20)\)</span> and a covariance matrix of</p>
 <p><span class="math">\begin{align}
 \mathsf{\Sigma} = \begin{pmatrix}
@@ -172,7 +173,7 @@
 \end{align}</span></p>
 <p>using your own sampler. Now, draw 1000 samples out of that distribution using Stan and plot the samples. First do it using Stan’s built-in random number generator. Then, do it using Stan’s MCMC sampler.</p>
 <p><strong>b)</strong> In <a class="reference internal" href="../04/hw4.2.html"><span class="doc">Problem 4.2</span></a> part (c), we asked you to do the problem using Stan for practice. Now it is real! Repeat <a class="reference internal" href="../04/hw4.2.html"><span class="doc">Problem 4.2</span></a>, but use Stan to do it. You do not need to do prior predictive checks nor posterior predictive checks for this problem; you may simply acquire the necessary samples.</p>
-</div>
+</section>
 
 
            </div>
@@ -186,11 +187,11 @@
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 01, 2025.
+      <span class="lastupdated">Last updated on Feb 14, 2025.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x30a4814c0> 
+   <jinja2.runtime.BlockReference object at 0x17ad338c0> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

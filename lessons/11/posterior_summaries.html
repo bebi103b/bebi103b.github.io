@@ -1,28 +1,28 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Reporting summaries of the posterior &mdash; BE/Bi 103 b  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=22ddcdb3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
 
   
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
-        <script src="../../_static/clipboard.min.js"></script>
-        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=9bcbadda"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=f281be69"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -114,6 +114,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../homework/04/index.html">4. Sampling with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/05/index.html">5. Inference with Stan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/06/index.html">6. MCMC with ion channels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../homework/07/index.html">7. Model comparison</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -172,20 +173,20 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="Reporting-summaries-of-the-posterior">
-<h1>Reporting summaries of the posterior<a class="headerlink" href="#Reporting-summaries-of-the-posterior" title="Permalink to this heading"></a></h1>
+  <section id="Reporting-summaries-of-the-posterior">
+<h1>Reporting summaries of the posterior<a class="headerlink" href="#Reporting-summaries-of-the-posterior" title="Link to this heading"></a></h1>
 <hr><div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">polars</span> <span class="k">as</span> <span class="nn">pl</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
 
-<span class="kn">import</span> <span class="nn">arviz</span> <span class="k">as</span> <span class="nn">az</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">arviz</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">az</span>
 
-<span class="kn">import</span> <span class="nn">iqplot</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">iqplot</span>
 
-<span class="kn">import</span> <span class="nn">bokeh.io</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">bokeh.io</span>
 <span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">output_notebook</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -528,8 +529,8 @@ function(Bokeh) {
 }(window));
 </script></div>
 </div>
-<div class="section" id="Reporting-summaries-of-MCMC-samples">
-<h2>Reporting summaries of MCMC samples<a class="headerlink" href="#Reporting-summaries-of-MCMC-samples" title="Permalink to this heading"></a></h2>
+<section id="Reporting-summaries-of-MCMC-samples">
+<h2>Reporting summaries of MCMC samples<a class="headerlink" href="#Reporting-summaries-of-MCMC-samples" title="Link to this heading"></a></h2>
 <p>Performing MCMC calculations gives you full information about the posterior, which you can summarize in beautiful and informative corner plots. But very often, we wish to summarize the posterior in a few simple numbers. In particular, we wish to report a <strong>credible interval</strong> for a single parameter. This is computed from the marginalized posterior. The credible interval is a region in parameter space where we might expect a parameter value to lie. This credible interval is often reported and
 plotted as an error bar.</p>
 <p>We will consider three commonly used ways of plotting a value plus error bar. We will use a 95% credible interval for this demonstration.</p>
@@ -540,9 +541,9 @@ plotted as an error bar.</p>
 <li><p><strong>median with HPD</strong>: We report the HPD, but report the median parameter value from our samples instead of the mode.</p></li>
 </ol>
 <p>To illustrate the relative merits of these reporting schemes, we’ll draw samples samples out of some artificial distributions.</p>
-</div>
-<div class="section" id="Some-distributions-to-sample">
-<h2>Some distributions to sample<a class="headerlink" href="#Some-distributions-to-sample" title="Permalink to this heading"></a></h2>
+</section>
+<section id="Some-distributions-to-sample">
+<h2>Some distributions to sample<a class="headerlink" href="#Some-distributions-to-sample" title="Link to this heading"></a></h2>
 <p>We will generate some distributions to sample. We will consider an exponential distribution, a Normal, the sum of two Normals, and a distribution with a long tail. We choose these to illustrate how various choices of the credible interval will be reported.</p>
 <p>Let’s define the models and draw samples. MCMC is not necessary here for this illustrative exercise, so I will just draw the samples using Numpy.</p>
 <div class="nbinput nblast docutils container">
@@ -657,9 +658,9 @@ var element = document.currentScript.previousSibling.previousSibling;
 })(window);
 </script></div>
 </div>
-</div>
-<div class="section" id="Summarizing-the-%22MCMC%22-results-with-error-bars">
-<h2>Summarizing the “MCMC” results with error bars<a class="headerlink" href="#Summarizing-the-%22MCMC%22-results-with-error-bars" title="Permalink to this heading"></a></h2>
+</section>
+<section id="Summarizing-the-%22MCMC%22-results-with-error-bars">
+<h2>Summarizing the “MCMC” results with error bars<a class="headerlink" href="#Summarizing-the-%22MCMC%22-results-with-error-bars" title="Link to this heading"></a></h2>
 <p>We will compute several summary statistics of our results. The mean, standard deviation, median, and quantiles are easy to compute with NumPy. We could obtain the mode from MCMC samples using the log posterior values, the finding sample for which the log posterior is maximal. But since we quickly generated our samples using Numpy, we do not have log posterior values readily available (though we could calculated them), so I will hand-code the known modes.</p>
 <p>Computation of the HPD is a little trickier. The idea is that we rank-order the MCMC trace. We know that the number of samples that are included in the HPD is 0.95 times the total number of MCMC samples. We then consider all intervals that contain that many samples and find the shortest one. This is accomplished using the ArviZ function <code class="docutils literal notranslate"><span class="pre">az.hdi()</span></code> function.</p>
 <p>Let’s compute all of these summaries and store them in a data frame for convenient reference.</p>
@@ -722,7 +723,7 @@ var element = document.currentScript.previousSibling.previousSibling;
 <span class="n">colors</span> <span class="o">=</span> <span class="n">bokeh</span><span class="o">.</span><span class="n">palettes</span><span class="o">.</span><span class="n">Category10</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span>
 
 
-<span class="k">def</span> <span class="nf">plot_interval</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">barx</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">legend_label</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_interval</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">barx</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">legend_label</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
     <span class="n">p</span><span class="o">.</span><span class="n">scatter</span><span class="p">([</span><span class="n">x</span><span class="p">],</span> <span class="p">[</span><span class="n">y</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">legend_label</span><span class="o">=</span><span class="n">legend_label</span><span class="p">)</span>
     <span class="n">p</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">barx</span><span class="p">,</span> <span class="p">[</span><span class="n">y</span><span class="p">,</span> <span class="n">y</span><span class="p">],</span> <span class="n">line_width</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
 
@@ -805,9 +806,9 @@ var element = document.currentScript.previousSibling.previousSibling;
 })(window);
 </script></div>
 </div>
-</div>
-<div class="section" id="Relative-merits-of-each-method">
-<h2>Relative merits of each method<a class="headerlink" href="#Relative-merits-of-each-method" title="Permalink to this heading"></a></h2>
+</section>
+<section id="Relative-merits-of-each-method">
+<h2>Relative merits of each method<a class="headerlink" href="#Relative-merits-of-each-method" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>The <strong>mean/std</strong> does not respect bounds on the posterior, nor any asymmetry. Unless we are going for speed and using a MAP finder/Normal approximation, there is no need for this method or summarizing the posterior.</p></li>
 <li><p>The primary advantage of the <strong>quantile approach</strong> is that it is very easy to interpret, especially for the researcher uninitiated to Bayesian statistics. It does not suffer from the problems that the mean/std method does. It does not rely on any approximations.</p></li>
@@ -815,13 +816,13 @@ var element = document.currentScript.previousSibling.previousSibling;
 <li><p>The <strong>median/HPD</strong> method is my personal favorite. It gives the HPD (with the advantages I just stated) and also the median, which to me is a more useful statistic than the mode.</p></li>
 </ul>
 <p>In any case, attempting to describe a multi-modal posterior with an error bar is misleading and futile. A distribution with a long tail can also be deceiving. Even if you report a 95% credible interval, there is still a 5% chance the parameter value would be <em>reeeeally</em> big.</p>
-<div class="section" id="How-to-display-the-summary-in-text.">
-<h3>How to display the summary in text.<a class="headerlink" href="#How-to-display-the-summary-in-text." title="Permalink to this heading"></a></h3>
+<section id="How-to-display-the-summary-in-text.">
+<h3>How to display the summary in text.<a class="headerlink" href="#How-to-display-the-summary-in-text." title="Link to this heading"></a></h3>
 <p>One issue that may be worrying you is how to report the asymmetric error bars in text. This is best seen by example. For the example of the Exponential, we may report the median with HPD as <span class="math notranslate nohighlight">\(0.71^{+2.31}_{-0.70}\)</span>.</p>
-</div>
-</div>
-<div class="section" id="Computing-environment">
-<h2>Computing environment<a class="headerlink" href="#Computing-environment" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+<section id="Computing-environment">
+<h2>Computing environment<a class="headerlink" href="#Computing-environment" title="Link to this heading"></a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
@@ -849,8 +850,8 @@ jupyterlab: 4.0.13
 
 </pre></div></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -864,11 +865,11 @@ jupyterlab: 4.0.13
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 01, 2025.
+      <span class="lastupdated">Last updated on Feb 14, 2025.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x300f25490> 
+   <jinja2.runtime.BlockReference object at 0x1522ff020> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

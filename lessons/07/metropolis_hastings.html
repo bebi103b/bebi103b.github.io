@@ -1,27 +1,27 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Generating a transition kernel: The Metropolis-Hastings algorithm &mdash; BE/Bi 103 b  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=22ddcdb3" />
 
   
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
-        <script src="../../_static/clipboard.min.js"></script>
-        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=9bcbadda"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=f281be69"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -112,6 +112,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../homework/04/index.html">4. Sampling with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/05/index.html">5. Inference with Stan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/06/index.html">6. MCMC with ion channels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../homework/07/index.html">7. Model comparison</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -170,14 +171,14 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="generating-a-transition-kernel-the-metropolis-hastings-algorithm">
-<h1>Generating a transition kernel: The Metropolis-Hastings algorithm<a class="headerlink" href="#generating-a-transition-kernel-the-metropolis-hastings-algorithm" title="Permalink to this heading"></a></h1>
+  <section id="generating-a-transition-kernel-the-metropolis-hastings-algorithm">
+<h1>Generating a transition kernel: The Metropolis-Hastings algorithm<a class="headerlink" href="#generating-a-transition-kernel-the-metropolis-hastings-algorithm" title="Link to this heading"></a></h1>
 <p>The <strong>Metropolis-Hastings algorithm</strong> covers a widely used class of
 algorithms for MCMC sampling. I will first state the algorithm here, and
 then will show that it satisfies the necessary conditions for the
 walkers to be sampling out of the target posterior distribution.</p>
-<div class="section" id="the-algorithm-kernel">
-<h2>The algorithm/kernel<a class="headerlink" href="#the-algorithm-kernel" title="Permalink to this heading"></a></h2>
+<section id="the-algorithm-kernel">
+<h2>The algorithm/kernel<a class="headerlink" href="#the-algorithm-kernel" title="Link to this heading"></a></h2>
 <p>Say our walker is at position <span class="math notranslate nohighlight">\(\theta_i\)</span> in parameter space.</p>
 <ol class="arabic">
 <li><p>We randomly choose a candidate position <span class="math notranslate nohighlight">\(\theta'\)</span> to step to
@@ -208,9 +209,9 @@ probability of the proposal step as</p>
 \[\begin{aligned}
 T(\theta_{i+1}\mid \theta_i) = \alpha(\theta_{i+1}\mid \theta_i)\,K(\theta_{i+1}\mid \theta_i).
 \end{aligned}\]</div>
-</div>
-<div class="section" id="detailed-balance">
-<h2>Detailed balance<a class="headerlink" href="#detailed-balance" title="Permalink to this heading"></a></h2>
+</section>
+<section id="detailed-balance">
+<h2>Detailed balance<a class="headerlink" href="#detailed-balance" title="Link to this heading"></a></h2>
 <p>This algorithm seems kind of nuts! How on earth does this work? To
 investigate this, we consider the joint probability,
 <span class="math notranslate nohighlight">\(P(\theta_{i+1}, \theta_i)\)</span>, that the walker is at
@@ -247,15 +248,15 @@ kernel is said to satisfy <strong>detailed balance</strong>.</p>
 &amp;= P(\theta_{i+1}),
 \end{aligned}\end{split}\]</div>
 <p>since the bracketed term is unity because the transition kernel is a
-probability density <a class="footnote-reference brackets" href="#id2" id="id1">1</a>.</p>
+probability density <a class="footnote-reference brackets" href="#id2" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>.</p>
 <p>Note that all transition kernels that satisfy detailed balance have an
 invariant distribution. (If the chain is ergodic, this is a limiting
 distribution.) But not all kernels that have an invariant distribution
 satisfy detailed balance. So, detailed balance is a <em>sufficient</em> condition
 for a transition kernel having an invariant distribution.</p>
-</div>
-<div class="section" id="choosing-the-transition-kernel">
-<h2>Choosing the transition kernel<a class="headerlink" href="#choosing-the-transition-kernel" title="Permalink to this heading"></a></h2>
+</section>
+<section id="choosing-the-transition-kernel">
+<h2>Choosing the transition kernel<a class="headerlink" href="#choosing-the-transition-kernel" title="Link to this heading"></a></h2>
 <p>There is an art to choosing the transition kernel. The original
 Metropolis algorithm (1953), took <span class="math notranslate nohighlight">\(K(\theta_{i+1}\mid \theta_i) = 1\)</span>. As a rule of thumb, you want to choose a proposal distribution such that you get an acceptance rate of about 0.4. If you accept every step, the walker just wanders around
 and it takes a while to get to the limiting distribution. If you reject
@@ -274,13 +275,14 @@ cannot sample discrete variables. Depending on your problem, this could
 be a limitation, but in most applications we are interested in
 estimating continuous parameters. There are also ways around sampling discrete variables, such as explicitly marginalizing over them, such that we rarely need to sample them anyhow.</p>
 <hr class="docutils" />
-<dl class="footnote brackets">
-<dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
-<dd><p>In the event that we are dealing with discrete parameters <span class="math notranslate nohighlight">\(\theta\)</span>, then the integral is replaced with a sum and the transition kernel is a probability, and not a probability density. The same results still hold and <span class="math notranslate nohighlight">\(P(\theta)\)</span> is an invariant distribution.</p>
-</dd>
-</dl>
-</div>
-</div>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id2" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>In the event that we are dealing with discrete parameters <span class="math notranslate nohighlight">\(\theta\)</span>, then the integral is replaced with a sum and the transition kernel is a probability, and not a probability density. The same results still hold and <span class="math notranslate nohighlight">\(P(\theta)\)</span> is an invariant distribution.</p>
+</aside>
+</aside>
+</section>
+</section>
 
 
            </div>
@@ -294,11 +296,11 @@ estimating continuous parameters. There are also ways around sampling discrete v
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 01, 2025.
+      <span class="lastupdated">Last updated on Feb 14, 2025.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x3011514f0> 
+   <jinja2.runtime.BlockReference object at 0x17b234530> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

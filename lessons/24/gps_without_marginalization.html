@@ -1,28 +1,28 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gaussian processes with non-Normal likelihoods &mdash; BE/Bi 103 b  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=22ddcdb3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
 
   
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
-        <script src="../../_static/clipboard.min.js"></script>
-        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=9bcbadda"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=f281be69"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -116,6 +116,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../homework/04/index.html">4. Sampling with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/05/index.html">5. Inference with Stan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/06/index.html">6. MCMC with ion channels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../homework/07/index.html">7. Model comparison</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -174,23 +175,23 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="Gaussian-processes-with-non-Normal-likelihoods">
-<h1>Gaussian processes with non-Normal likelihoods<a class="headerlink" href="#Gaussian-processes-with-non-Normal-likelihoods" title="Permalink to this heading"></a></h1>
+  <section id="Gaussian-processes-with-non-Normal-likelihoods">
+<h1>Gaussian processes with non-Normal likelihoods<a class="headerlink" href="#Gaussian-processes-with-non-Normal-likelihoods" title="Link to this heading"></a></h1>
 <p><a class="reference external" href="https://s3.amazonaws.com/bebi103.caltech.edu/data/wolfenden_arrhenius.csv">Data set download</a></p>
 <hr><div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">polars</span> <span class="k">as</span> <span class="nn">pl</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
 
-<span class="kn">import</span> <span class="nn">cmdstanpy</span>
-<span class="kn">import</span> <span class="nn">arviz</span> <span class="k">as</span> <span class="nn">az</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">cmdstanpy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">arviz</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">az</span>
 
-<span class="kn">import</span> <span class="nn">iqplot</span>
-<span class="kn">import</span> <span class="nn">bebi103</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">iqplot</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">bebi103</span>
 
-<span class="kn">import</span> <span class="nn">bokeh.io</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">bokeh.io</span>
 <span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">output_notebook</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -535,8 +536,8 @@ function(Bokeh) {
 </div>
 <p>Thus far in our studies of Gaussian processes, we have considered models with Normal likelihoods which enables marginalization over the latent variables, the values of the nonparametric function we are fitting. We could then compute the function values (the latent variables) after optimization or sampling of the hyperparameters by drawing samples out of the posterior, for which we have an analytical expression.</p>
 <p>In this lesson, we will explicitly sample the latent variables. We will first do it for a model with a Normal likelihood to as a demonstration. We will then do it for a non-Normal likelihood, where is it necessary.</p>
-<div class="section" id="Generating-samples-of-latent-variables-using-MCMC">
-<h2>Generating samples of latent variables using MCMC<a class="headerlink" href="#Generating-samples-of-latent-variables-using-MCMC" title="Permalink to this heading"></a></h2>
+<section id="Generating-samples-of-latent-variables-using-MCMC">
+<h2>Generating samples of latent variables using MCMC<a class="headerlink" href="#Generating-samples-of-latent-variables-using-MCMC" title="Link to this heading"></a></h2>
 <p>We will again consider the Wolfenden, et al., chemical kinetics data set. We’ll start be loading the data set, centering and scaling, and getting up the points for which we want to evaluate the nonparametric function.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
@@ -608,8 +609,8 @@ var element = document.currentScript.previousSibling.previousSibling;
 })(window);
 </script></div>
 </div>
-<div class="section" id="A-GP-generative-model">
-<h3>A GP generative model<a class="headerlink" href="#A-GP-generative-model" title="Permalink to this heading"></a></h3>
+<section id="A-GP-generative-model">
+<h3>A GP generative model<a class="headerlink" href="#A-GP-generative-model" title="Link to this heading"></a></h3>
 <p>The unmarginalized generative model we have been using is</p>
 <p><span class="math">\begin{align}
 &\alpha \sim \text{HalfNorm}(2)\\[1em]
@@ -627,9 +628,9 @@ var element = document.currentScript.previousSibling.previousSibling;
 &y_i \mid f_i, \sigma \sim \text{Norm}(f_i, \sigma)\;\forall i,
 \end{align}</span></p>
 <p>where <span class="math notranslate nohighlight">\(\mathsf{K}\)</span> is the covariance matrix constructed from the squared exponential kernel with hyperparameters <span class="math notranslate nohighlight">\(\rho\)</span> and <span class="math notranslate nohighlight">\(\alpha\)</span>. Importantly, we are going to <strong>sample</strong> the values of <span class="math notranslate nohighlight">\(f\)</span> at temperature <span class="math notranslate nohighlight">\(T_i\)</span>.</p>
-</div>
-<div class="section" id="Noncentering">
-<h3>Noncentering<a class="headerlink" href="#Noncentering" title="Permalink to this heading"></a></h3>
+</section>
+<section id="Noncentering">
+<h3>Noncentering<a class="headerlink" href="#Noncentering" title="Link to this heading"></a></h3>
 <p>This model has a hierarchical structure, with a layer of latent variables <span class="math notranslate nohighlight">\(\mathbf{f}\)</span> between the hyperparamaters <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\rho\)</span> and the observed data <span class="math notranslate nohighlight">\(\mathbf{y}\)</span>. As such, it is useful for sampling to noncenter the model. We have not yet noncentered a multivariate conditional prior. Say we have a multivariate Normal conditional prior for parameters <span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span> conditioned on hyperparameters <span class="math notranslate nohighlight">\(\boldsymbol{\phi}\)</span> and <span class="math notranslate nohighlight">\(\mathsf{\Sigma}\)</span>,</p>
 <p><span class="math">\begin{align}
 \boldsymbol{\theta} \sim \text{MultiNorm}(\boldsymbol{\phi}, \mathsf{\Sigma}).
@@ -649,10 +650,10 @@ var element = document.currentScript.previousSibling.previousSibling;
 &y_i \mid f_i, \sigma \sim \text{Norm}(f_i, \sigma)\;\forall i,
 \end{align}</span></p>
 <p>where we have used the fact that because of the preprocessing of the data set, the mean of the GP is zero. Here, <span class="math notranslate nohighlight">\(\mathsf{L}\)</span> is the Cholesky decomposition of <span class="math notranslate nohighlight">\(\mathsf{K}\)</span>.</p>
-</div>
-</div>
-<div class="section" id="Sampling-latent-variables-with-Stan">
-<h2>Sampling latent variables with Stan<a class="headerlink" href="#Sampling-latent-variables-with-Stan" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+<section id="Sampling-latent-variables-with-Stan">
+<h2>Sampling latent variables with Stan<a class="headerlink" href="#Sampling-latent-variables-with-Stan" title="Link to this heading"></a></h2>
 <p>Now that we have our model, we can code it up in Stan and draw samples.</p>
 <div class="highlight-stan notranslate"><div class="highlight"><pre><span></span><span class="kn">data</span> <span class="p">{</span>
   <span class="kt">int</span><span class="o">&lt;</span><span class="k">lower</span><span class="p">=</span><span class="mf">1</span><span class="o">&gt;</span> <span class="n">N</span><span class="p">;</span>
@@ -1042,9 +1043,9 @@ var element = document.currentScript.previousSibling.previousSibling;
 })(window);
 </script></div>
 </div>
-</div>
-<div class="section" id="Sampling-with-a-Poisson-likelihood">
-<h2>Sampling with a Poisson likelihood<a class="headerlink" href="#Sampling-with-a-Poisson-likelihood" title="Permalink to this heading"></a></h2>
+</section>
+<section id="Sampling-with-a-Poisson-likelihood">
+<h2>Sampling with a Poisson likelihood<a class="headerlink" href="#Sampling-with-a-Poisson-likelihood" title="Link to this heading"></a></h2>
 <p>In the previous example, we decided to do things the hard way by sampling out of a hierarchical posterior when we could have marginalized out the latent variables because of the convenient properties of a Normal likelihood. Now, we consider a contrived scenario where we really do need to sample the latent variables. While contrived, it could conceivably be encountered in a real analysis.</p>
 <p>Image we measure the copy number of a given mRNA transcript using, say single-molecule FISH, over the some time course. For each time point, we get transcript counts in 50 or so cells. We model the transcript counts as Poisson distributed (as we would for simple non-bursty gene expression). We suspect that the parameter <span class="math notranslate nohighlight">\(\lambda\)</span> of the Poisson distribution varies in time, and we want to get a plot of how we think it may vary. We therefore model <span class="math notranslate nohighlight">\(\lambda\)</span>, or more specifically
 <span class="math notranslate nohighlight">\(\ln \lambda\)</span> as varying according to a GP. Our generative model is</p>
@@ -1058,7 +1059,7 @@ n_i(t) \sim \text{Poisson}(\lambda(t)) \;\forall i.
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">varying_function</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">a0</span><span class="p">,</span> <span class="n">a1</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">varying_function</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">a0</span><span class="p">,</span> <span class="n">a1</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Underlying function defining λ(t).&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">a0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">a1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">t</span><span class="p">))</span>
 
@@ -1464,9 +1465,9 @@ var element = document.currentScript.previousSibling.previousSibling;
 </pre></div>
 </div>
 </div>
-</div>
-<div class="section" id="Computing-environment">
-<h2>Computing environment<a class="headerlink" href="#Computing-environment" title="Permalink to this heading"></a></h2>
+</section>
+<section id="Computing-environment">
+<h2>Computing environment<a class="headerlink" href="#Computing-environment" title="Link to this heading"></a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
 </pre></div>
@@ -1498,8 +1499,8 @@ jupyterlab: 4.2.6
 cmdstan   : 2.36.0
 </pre></div></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -1513,11 +1514,11 @@ cmdstan   : 2.36.0
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 01, 2025.
+      <span class="lastupdated">Last updated on Feb 14, 2025.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x304a27590> 
+   <jinja2.runtime.BlockReference object at 0x172240470> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

@@ -1,28 +1,28 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>4. Marginalization by numerical quadrature &mdash; BE/Bi 103 b  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=22ddcdb3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
 
   
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
-        <script src="../../_static/clipboard.min.js"></script>
-        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=9bcbadda"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=f281be69"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -107,6 +107,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../homework/04/index.html">4. Sampling with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/05/index.html">5. Inference with Stan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/06/index.html">6. MCMC with ion channels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../homework/07/index.html">7. Model comparison</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -164,21 +165,21 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="4.-Marginalization-by-numerical-quadrature">
-<h1>4. Marginalization by numerical quadrature<a class="headerlink" href="#4.-Marginalization-by-numerical-quadrature" title="Permalink to this heading"></a></h1>
+  <section id="4.-Marginalization-by-numerical-quadrature">
+<h1>4. Marginalization by numerical quadrature<a class="headerlink" href="#4.-Marginalization-by-numerical-quadrature" title="Link to this heading"></a></h1>
 <p><a class="reference external" href="https://s3.amazonaws.com/bebi103.caltech.edu/data/good_invitro_droplet_data.csv">Data set download</a></p>
 <hr><div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">polars</span> <span class="k">as</span> <span class="nn">pl</span>
-<span class="kn">import</span> <span class="nn">scipy.integrate</span>
-<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">st</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.integrate</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
 
-<span class="kn">import</span> <span class="nn">bebi103</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">bebi103</span>
 
-<span class="kn">import</span> <span class="nn">bokeh.io</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">bokeh.io</span>
 <span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">output_notebook</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -593,8 +594,8 @@ var element = document.currentScript.previousSibling.previousSibling;
 })(window);
 </script></div>
 </div>
-<div class="section" id="The-tubulin-conservation-model">
-<h2>The tubulin conservation model<a class="headerlink" href="#The-tubulin-conservation-model" title="Permalink to this heading"></a></h2>
+<section id="The-tubulin-conservation-model">
+<h2>The tubulin conservation model<a class="headerlink" href="#The-tubulin-conservation-model" title="Link to this heading"></a></h2>
 <p>In the tubulin conservation model, the spindle length depends on the droplet diameter <span class="math notranslate nohighlight">\(d\)</span> according to</p>
 <p><span class="math">\begin{align}
 l(d;\gamma, \phi) = \frac{\gamma d}{(1 + (\gamma d/\phi)^3)^\frac{1}{3}}.
@@ -607,9 +608,9 @@ l(d;\gamma, \phi) = \frac{\gamma d}{(1 + (\gamma d/\phi)^3)^\frac{1}{3}}.
 &l_i \sim \text{Normal}(l(d_i;\gamma,\phi), \sigma) \;\forall i.
 \end{align}</span></p>
 <p>We have again used an improper Jeffreys prior for <span class="math notranslate nohighlight">\(\sigma\)</span>.</p>
-</div>
-<div class="section" id="Analytical-marginalization">
-<h2>Analytical marginalization<a class="headerlink" href="#Analytical-marginalization" title="Permalink to this heading"></a></h2>
+</section>
+<section id="Analytical-marginalization">
+<h2>Analytical marginalization<a class="headerlink" href="#Analytical-marginalization" title="Link to this heading"></a></h2>
 <p>The posterior distribution is</p>
 <p><span class="math">\begin{align}
 g(\gamma, \phi, \sigma \mid \{d_i, l_i\}) \propto \frac{1}{\sigma^{n+1}}\,\exp\left[-\frac{1}{2\sigma^2}\sum_{i=1}^n\left(l_i-\frac{\gamma d_i}{(1 + (\gamma d_i/\phi)^3)^\frac{1}{3}}\right)^2\right],
@@ -627,12 +628,12 @@ g(\gamma, \phi \mid \{d_i, l_i\}) = \int_0^\infty \mathrm{d}\sigma\,g(\gamma, \p
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">theor_spindle_length</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">theor_spindle_length</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute spindle length using mathematical model&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">d</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">cbrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="n">gamma</span> <span class="o">*</span> <span class="n">d</span> <span class="o">/</span> <span class="n">phi</span><span class="p">)</span> <span class="o">**</span> <span class="mi">3</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">log_marginalized_posterior</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">ell</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">log_marginalized_posterior</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">ell</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Log posterior for independent size model&quot;&quot;&quot;</span>
     <span class="n">gamma</span><span class="p">,</span> <span class="n">phi</span> <span class="o">=</span> <span class="n">params</span>
 
@@ -779,9 +780,9 @@ var element = document.currentScript.previousSibling.previousSibling;
 })(window);
 </script></div>
 </div>
-</div>
-<div class="section" id="Numerical-marginalization">
-<h2>Numerical marginalization<a class="headerlink" href="#Numerical-marginalization" title="Permalink to this heading"></a></h2>
+</section>
+<section id="Numerical-marginalization">
+<h2>Numerical marginalization<a class="headerlink" href="#Numerical-marginalization" title="Link to this heading"></a></h2>
 <p>The marginal distributions <span class="math notranslate nohighlight">\(g(\gamma, \mid \{d_i, l_i\})\)</span> and <span class="math notranslate nohighlight">\(g(\phi \mid \{d_i, l_i\})\)</span> tell us about the individual parameters <span class="math notranslate nohighlight">\(\gamma\)</span> and <span class="math notranslate nohighlight">\(\phi\)</span>. For example to get <span class="math notranslate nohighlight">\(g(\gamma, \mid \{d_i, l_i\})\)</span>, we have to perform an integral</p>
 <p><span class="math">\begin{align}
 \int_0^\infty \mathrm{d}\phi\, g(\gamma, \phi, \mid \{d_i, l_i\}) \propto \int_0^\infty \mathrm{d}\phi\,\left(\sum_{i=1}^n\left(l_i-\frac{\gamma d_i}{(1 + (\gamma d_i/\phi)^3)^\frac{1}{3}}\right)^2\right)^{-n/2}.
@@ -797,7 +798,7 @@ marginalized posterior.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">marginalized_posterior</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">ell</span><span class="p">,</span> <span class="n">log_post_max</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">marginalized_posterior</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">ell</span><span class="p">,</span> <span class="n">log_post_max</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_marginalized_posterior</span><span class="p">((</span><span class="n">gamma</span><span class="p">,</span> <span class="n">phi</span><span class="p">),</span> <span class="n">d</span><span class="p">,</span> <span class="n">ell</span><span class="p">)</span> <span class="o">-</span> <span class="n">log_post_max</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1019,9 +1020,9 @@ var element = document.currentScript.previousSibling.previousSibling;
 })(window);
 </script></div>
 </div>
-</div>
-<div class="section" id="The-curse-of-dimensionality-and-overcoming-it">
-<h2>The curse of dimensionality and overcoming it<a class="headerlink" href="#The-curse-of-dimensionality-and-overcoming-it" title="Permalink to this heading"></a></h2>
+</section>
+<section id="The-curse-of-dimensionality-and-overcoming-it">
+<h2>The curse of dimensionality and overcoming it<a class="headerlink" href="#The-curse-of-dimensionality-and-overcoming-it" title="Link to this heading"></a></h2>
 <p>Having a complete picture of the marginalized posterior PDF is certainly valuable. For this problem where the posterior is trivariate, we were able to analytically integrate out one of the parameter (<span class="math notranslate nohighlight">\(\sigma\)</span>), and then numerically integrate the other (either <span class="math notranslate nohighlight">\(\phi\)</span> or <span class="math notranslate nohighlight">\(\gamma\)</span>). But what if we chose another prior for <span class="math notranslate nohighlight">\(\sigma\)</span> so that we could not do the integral analytically? We would have to do the following to get the marginal PDF for <span class="math notranslate nohighlight">\(\gamma\)</span>.</p>
 <ol class="arabic simple">
 <li><p>For each <em>pair</em> of values <span class="math notranslate nohighlight">\(\phi, \gamma\)</span>, perform numerical quadrature to marginalize out <span class="math notranslate nohighlight">\(\sigma\)</span>.</p></li>
@@ -1036,9 +1037,9 @@ var element = document.currentScript.previousSibling.previousSibling;
 <li><p>Computing integrals by sampling out of the posterior using Markov chain Monte Carlo.</p></li>
 </ol>
 <p>In the next lesson, we will consider conjugacy. After that, we will use optimization methods to find where the posterior is peaked, and then approximate the posterior as Gaussian near the peak. We will then spend the bulk of the class using Markov Chain Monte Carlo methods, before returning to variational inference, a more sophisticated way of approximating posteriors.</p>
-</div>
-<div class="section" id="Computing-environment">
-<h2>Computing environment<a class="headerlink" href="#Computing-environment" title="Permalink to this heading"></a></h2>
+</section>
+<section id="Computing-environment">
+<h2>Computing environment<a class="headerlink" href="#Computing-environment" title="Link to this heading"></a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
@@ -1066,8 +1067,8 @@ jupyterlab: 4.0.13
 
 </pre></div></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -1081,11 +1082,11 @@ jupyterlab: 4.0.13
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 01, 2025.
+      <span class="lastupdated">Last updated on Feb 14, 2025.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x16fd05d00> 
+   <jinja2.runtime.BlockReference object at 0x17b1b6f90> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

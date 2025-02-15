@@ -1,27 +1,27 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Choosing priors &mdash; BE/Bi 103 b  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=22ddcdb3" />
 
   
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
-        <script src="../../_static/clipboard.min.js"></script>
-        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=9bcbadda"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=f281be69"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -114,6 +114,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../homework/04/index.html">4. Sampling with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/05/index.html">5. Inference with Stan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/06/index.html">6. MCMC with ion channels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../homework/07/index.html">7. Model comparison</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -172,12 +173,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="choosing-priors">
-<h1>Choosing priors<a class="headerlink" href="#choosing-priors" title="Permalink to this heading"></a></h1>
+  <section id="choosing-priors">
+<h1>Choosing priors<a class="headerlink" href="#choosing-priors" title="Link to this heading"></a></h1>
 <p>While choosing likelihoods often amounts to story matching, choosing priors can be more subtle and challenging. In our example of model building for measurements of <em>C. elegans</em> egg lengths, we assumed Normal priors for the two parameters <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>. We did that because we felt that it best codified in probabilistic terms our knowledge of those parameters before seeing the data. That is one of many ways we can go about choosing priors. In fact, choice of prior is a major topic of (often heated) discussion about how best to go about Bayesian modeling. Some believe that the fact you have to specify a prior in the Bayesian framework invalidates Bayesian inference entirely because it necessarily introduces a modeler’s bias into the analysis.</p>
 <p>Among the many approaches to choose priors are choices of uniform priors, Jeffreys priors, weakly informative priors, conjugate priors, maximum entropy priors, Bernardo’s reference priors, and others. We will discuss the first four of these, eventually advocating for weakly informative priors.</p>
-<div class="section" id="uniform-priors">
-<h2>Uniform priors<a class="headerlink" href="#uniform-priors" title="Permalink to this heading"></a></h2>
+<section id="uniform-priors">
+<h2>Uniform priors<a class="headerlink" href="#uniform-priors" title="Link to this heading"></a></h2>
 <p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Principle_of_indifference">principle of insufficient reason</a> is an old rule for assigning probability to events or outcomes. It simply says that if we do not know anything about a set of outcomes, then every possible outcome should be assigned equal probability. Thus, we assume that the prior is flat, or uniform.</p>
 <p>This notion is quite widely used. In fact, if we attempt to summarize the posterior by a single point in parameter space, namely where the posterior is maximal, and we chose uniform priors for all parameters, we get estimates for the parameters that are the same as if we performed a maximum likelihood estimate in a frequentist approach.</p>
 <p>However, using uniform priors has a great many problems. I discuss but a few of them here.</p>
@@ -188,9 +189,9 @@
 <li><p>A primary criticism from Fisher and his contemporaries was that the way you choose to parametrize a model can affect how a uniform prior transforms. We illustrate this problem and its resolution when we talk about Jeffreys priors next.</p></li>
 </ol>
 <p>In summary, uniform priors, while widely used, and in fact used in the early homeworks of this course, are a pathologically bad idea. (Note, though, that this is still subject to debate, and many respected researchers do not agree with this assessment.)</p>
-</div>
-<div class="section" id="jeffreys-priors">
-<h2>Jeffreys priors<a class="headerlink" href="#jeffreys-priors" title="Permalink to this heading"></a></h2>
+</section>
+<section id="jeffreys-priors">
+<h2>Jeffreys priors<a class="headerlink" href="#jeffreys-priors" title="Link to this heading"></a></h2>
 <p>Fisher and others complained that application of the principle of insufficient reason to choose uniform priors resulted in different effects based on parametrization of a model. To make this more concrete consider the example of a one-dimensional Normal likelihood. The probability density function is</p>
 <div class="math notranslate nohighlight">
 \[\begin{align}
@@ -274,17 +275,17 @@ g(\phi) \propto \sqrt{\mathrm{det}\,\mathrm{E}\left[\mathsf{J}\cdot \mathsf{B}_\
 g(\phi) \propto \sqrt{\mathrm{det}\,\mathrm{E}\left[\mathsf{B}_\phi\right]} = \sqrt{\mathrm{det}\,\mathcal{I}(\phi)},
 \end{align}\]</div>
 <p>thereby demonstrating that a Jeffreys prior is invariant to change of parametrizations.</p>
-</div>
-<div class="section" id="example-jeffreys-priors">
-<h2>Example Jeffreys priors<a class="headerlink" href="#example-jeffreys-priors" title="Permalink to this heading"></a></h2>
+</section>
+<section id="example-jeffreys-priors">
+<h2>Example Jeffreys priors<a class="headerlink" href="#example-jeffreys-priors" title="Link to this heading"></a></h2>
 <p>Computing a Jeffreys prior can be difficult. It involves computing derivatives of the likelihood and then computing expectations by performing integrals. As models become more complicated, analytical results for Jeffreys priors become intractable, which is one of the arguments against using them. Nonetheless, for two common likelihoods, we can compute the Jeffreys priors. We will not show the calculations (they involve the tedious calculations I just mentioned), but will state the results.</p>
 <ul class="simple">
 <li><p>For a Normal likelihood, the Jeffreys prior is <span class="math notranslate nohighlight">\(g(\sigma) \propto 1/\sigma\)</span>. That means that the priors for parameters <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> are independent and that parameter <span class="math notranslate nohighlight">\(\mu\)</span> should have a uniform prior and that <span class="math notranslate nohighlight">\(\sigma\)</span> has a prior that goes like the inverse of <span class="math notranslate nohighlight">\(\sigma\)</span>. This is an example of a Jeffreys prior that is improper.</p></li>
 <li><p>For a Binomial or Bernoulli likelihood, the Jeffreys prior for the parameter <span class="math notranslate nohighlight">\(\theta\)</span>, which is the probability of success of a Bernoulli trial, is <span class="math notranslate nohighlight">\(g(\theta) = 1/\pi\sqrt{\theta(1-\theta)}\)</span>, defined on the interval [0, 1]. This is a proper prior. Note that it is highly peaked at zero and at one. This suggests that the probability of success for a Bernoulli trial, <em>a priori</em>, is most likely very close to zero or one.</p></li>
 </ul>
-</div>
-<div class="section" id="why-not-use-jeffreys-priors">
-<h2>Why not use Jeffreys priors?<a class="headerlink" href="#why-not-use-jeffreys-priors" title="Permalink to this heading"></a></h2>
+</section>
+<section id="why-not-use-jeffreys-priors">
+<h2>Why not use Jeffreys priors?<a class="headerlink" href="#why-not-use-jeffreys-priors" title="Link to this heading"></a></h2>
 <p>Jeffreys priors are pleasing in that they deal with Fisher’s criticisms. They guarantee that we get the same results, regardless of choice of parametrization of the likelihood. They are also not very <strong>informative</strong>, meaning that the prior has little influence over the posterior, leaving almost all of the influence to the likelihood. This is also pleasing because it gives a sense of a lack of bias. However, there are still several reasons why not to use Jeffreys priors.</p>
 <ol class="arabic simple">
 <li><p>They can be very difficult or impossible to derive for more complicated models.</p></li>
@@ -292,27 +293,27 @@ g(\phi) \propto \sqrt{\mathrm{det}\,\mathrm{E}\left[\mathsf{B}_\phi\right]} = \s
 <li><p>In the case of hierarchical models, which we will get to later in the term, use of Jeffreys priors can nefariously lead to improper <em>posteriors</em>! It is often difficult to discover that this is the case for a particular model without doing a very careful analysis.</p></li>
 <li><p>They still do not really encode prior knowledge anyway. We still have the problem of a kinesin motor traveling at faster than the speed of light.</p></li>
 </ol>
-</div>
-<div class="section" id="weakly-informative-priors">
-<h2>Weakly informative priors<a class="headerlink" href="#weakly-informative-priors" title="Permalink to this heading"></a></h2>
+</section>
+<section id="weakly-informative-priors">
+<h2>Weakly informative priors<a class="headerlink" href="#weakly-informative-priors" title="Link to this heading"></a></h2>
 <p>Remember, the prior probability distribution captures what we know about the parameter before we measure data. When coming up with a prior, I often like to sketch how I think the probability density or mass function of a parameter will
 look. This is directly encoding my prior knowledge using probability, which is what a prior is supposed to do by definition. When sketching the probability density function, though, I make sure that I draw the distribution broad enough that it covers all parameter values that are even somewhat reasonable. I limit its breadth to rule out absurd values, such as kinesin traveling faster than the speed of light. Such a prior is called a <strong>weakly informative prior</strong>.</p>
 <p>To come up with the functional form, or better yet the name, of the prior distribution, I use the <a class="reference external" href="https://distribution-explorer.github.io/">Distribution Explorer</a> to find a distribution and parameter set that matches my sketch. If I have to choose between making the prior more peaked or broader, I opt for being broader. This is well-described in the useful <a class="reference external" href="https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations">Stan wiki on
 priors</a>,
 which says, “the loss in precision by making the prior a bit too weak (compared to the true population distribution of parameters or the current expert state of knowledge) is less serious than the gain in robustness by including parts of parameter space that might be relevant.”</p>
 <p>I generally prefer to use weakly informative priors, mostly because they actually encode prior knowledge, separating the sublime from the ridiculous. In fact, we used weakly informative priors in the example of <em>C. elegans</em> egg lengths in the first part of this lecture. As we will see when we perform MCMC calculations, there are also practical advantages to using weakly informative priors. In general, prior choice can affect the second main task of Bayesian inference: making sense of the posterior. We will discuss these practical considerations when we start summarizing posteriors using Markov chain Monte Carlo.</p>
-</div>
-<div class="section" id="conjugate-priors">
-<h2>Conjugate priors<a class="headerlink" href="#conjugate-priors" title="Permalink to this heading"></a></h2>
+</section>
+<section id="conjugate-priors">
+<h2>Conjugate priors<a class="headerlink" href="#conjugate-priors" title="Link to this heading"></a></h2>
 <p>We have <span class="xref std std-ref">discussed conjugate priors</span> in the context of plotting posteriors. Conjugate priors are useful because we can make sense of the posterior analytically; the posterior and prior are the same distribution, differing by the updated parametrization in the posterior. If it is convenient to use a conjugate prior to encode prior information as we have described in our discussion of weakly informative priors, you can do so. There are two difficulties that make this convenience rare in practice.</p>
 <ol class="arabic simple">
 <li><p>Only a few likelihoods have known conjugate priors. Even in cases where the conjugate is known, its probability density function can be a complicated function.</p></li>
 <li><p>As soon as a model grows in complexity beyond one or two parameters, and certainly into hierarchy, conjugate priors are simply not available.</p></li>
 </ol>
 <p>Thus, conjugate priors, while conceptually pleasing and parametrizable into weakly informative priors, have limited practical use.</p>
-</div>
-<div class="section" id="the-bet-the-farm-method-of-specifying-weakly-informative-priors">
-<h2>The bet-the-farm method of specifying weakly informative priors<a class="headerlink" href="#the-bet-the-farm-method-of-specifying-weakly-informative-priors" title="Permalink to this heading"></a></h2>
+</section>
+<section id="the-bet-the-farm-method-of-specifying-weakly-informative-priors">
+<h2>The bet-the-farm method of specifying weakly informative priors<a class="headerlink" href="#the-bet-the-farm-method-of-specifying-weakly-informative-priors" title="Link to this heading"></a></h2>
 <p>Since we have decided that weakly informative priors are of greatest utility, I will share a technique I like to use for coming up with priors for positive continuous unbounded parameters, a commonly encountered situation. I like to take what I call the <a class="reference external" href="https://en.wiktionary.org/wiki/bet_the_farm">bet-the-farm</a> approach. The idiomatic term “to bet the farm” means to make a giant wager on an outcome. You could think instead about betting a year’s salary. As an example, would you bet the farm that pigs cannot fly? I would be comfortable waging a year’s salary (since I don’t have a farm) that they do not. While I certainly hope the Los Angeles Football Club wins the MLS cup in the next few years, I would not be comfortable betting the farm on it.</p>
 <p>The technique is best described through example. Let’s say someone tells me about a new bacterium and I have to guess how long a single cell of that species is.</p>
 <p>To make my guess, I start absurdly low. Certainly, the cell is bigger than of order nanometer, since that’s the diameter of a strand of DNA. I would bet the farm (or a year’s salary) on it. I would also bet the farm that it would be bigger than 10 nm without flinching. How about 100 nm? Well, I’m pretty sure that bacteria tend not to be smaller than 100 nm, but I don’t think I’d bet the farm. I feel uneasy enough about that that I won’t make that bet. So, I put 100 nm as the lower end of my guess.</p>
@@ -335,8 +336,8 @@ which says, “the loss in precision by making the prior a bit too weak (compare
 </ol>
 <p>The result is a broad distribution that contains all conceivable values of the parameters, as determined by you.</p>
 <p>Earlier in this lesson, I came up with a Normal (not Log-Normal as I would get using the bet-the-farm approach) for the length of a <em>C. elegans</em> egg. This is because I had firm prior knowledge about <em>C. elegans</em> eggs; I have looked at countless of them, and they are about 50 µm long. For most cases where I do not have prior knowledge like that, I use the bet the farm approach.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -350,11 +351,11 @@ which says, “the loss in precision by making the prior a bit too weak (compare
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 01, 2025.
+      <span class="lastupdated">Last updated on Feb 14, 2025.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x30a301f70> 
+   <jinja2.runtime.BlockReference object at 0x17af1c2c0> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

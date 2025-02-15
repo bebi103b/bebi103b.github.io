@@ -1,28 +1,28 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Parameter estimation by optimization case study: Normal likelihood &mdash; BE/Bi 103 b  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=22ddcdb3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
 
   
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
-        <script src="../../_static/clipboard.min.js"></script>
-        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=9bcbadda"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=f281be69"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -116,6 +116,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../homework/04/index.html">4. Sampling with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/05/index.html">5. Inference with Stan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/06/index.html">6. MCMC with ion channels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../homework/07/index.html">7. Model comparison</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -174,24 +175,24 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="Parameter-estimation-by-optimization-case-study:-Normal-likelihood">
-<h1>Parameter estimation by optimization case study: Normal likelihood<a class="headerlink" href="#Parameter-estimation-by-optimization-case-study:-Normal-likelihood" title="Permalink to this heading"></a></h1>
+  <section id="Parameter-estimation-by-optimization-case-study:-Normal-likelihood">
+<h1>Parameter estimation by optimization case study: Normal likelihood<a class="headerlink" href="#Parameter-estimation-by-optimization-case-study:-Normal-likelihood" title="Link to this heading"></a></h1>
 <p><a class="reference external" href="https://s3.amazonaws.com/bebi103.caltech.edu/data/good_invitro_droplet_data.csv">Data set download</a></p>
 <hr><div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">polars</span> <span class="k">as</span> <span class="nn">pl</span>
-<span class="kn">import</span> <span class="nn">scipy.optimize</span>
-<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">st</span>
-<span class="kn">import</span> <span class="nn">statsmodels.tools.numdiff</span> <span class="k">as</span> <span class="nn">smnd</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.optimize</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">statsmodels.tools.numdiff</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">smnd</span>
 
-<span class="kn">import</span> <span class="nn">tqdm</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tqdm</span>
 
-<span class="kn">import</span> <span class="nn">bebi103</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">bebi103</span>
 
-<span class="kn">import</span> <span class="nn">bokeh.io</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">bokeh.io</span>
 <span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">output_notebook</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -535,8 +536,8 @@ function(Bokeh) {
 </script></div>
 </div>
 <hr><p>We will begin our exploration of methods of parameter estimation by optimization again using the data set from <a class="reference external" href="https://doi.org/10.1126/science.1243147">Good, et al., Science, 342, 856-860, 2013</a>. You should <a class="reference external" href="https://bebi103a.github.io/lessons/20/model_building.html">refamiliarize yourself</a> with the data set if you need to.</p>
-<div class="section" id="Exploratory-data-analysis">
-<h2>Exploratory data analysis<a class="headerlink" href="#Exploratory-data-analysis" title="Permalink to this heading"></a></h2>
+<section id="Exploratory-data-analysis">
+<h2>Exploratory data analysis<a class="headerlink" href="#Exploratory-data-analysis" title="Link to this heading"></a></h2>
 <p>To start, let’s make a quick plot of the spindle length versus droplet data, which you can download here: <a class="reference external" href="https://s3.amazonaws.com/bebi103.caltech.edu/data/good_invitro_droplet_data.csv">https://s3.amazonaws.com/bebi103.caltech.edu/data/good_invitro_droplet_data.csv</a>.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
@@ -610,9 +611,9 @@ var element = document.currentScript.previousSibling.previousSibling;
 </script></div>
 </div>
 <p>Our goal is to get parameter estimates for models describing how spindle length varies with droplet size. We will start with the independent size model, in which we assume that spindle length is independent of droplet diameter.</p>
-</div>
-<div class="section" id="Independent-size-model">
-<h2>Independent size model<a class="headerlink" href="#Independent-size-model" title="Permalink to this heading"></a></h2>
+</section>
+<section id="Independent-size-model">
+<h2>Independent size model<a class="headerlink" href="#Independent-size-model" title="Link to this heading"></a></h2>
 <p>We choose a Normal likelihood for the spindle size. We assume all spindles are distributed about the same location parameter <span class="math notranslate nohighlight">\(\phi\)</span>. In our updated model, we will again use a Normal likelihood.</p>
 <p><span class="math">\begin{align}
 l_i \sim \text{Norm}(\phi, \sigma) \;\forall i.
@@ -760,8 +761,8 @@ var element = document.currentScript.previousSibling.previousSibling;
 &\sigma \sim \text{HalfNorm}(20),\\[1em]
 &l_i \sim \text{Norm}(\phi, \sigma) \;\forall i.
 \end{align}</span></p>
-<div class="section" id="Estimation-of-the-MAP-parameters">
-<h3>Estimation of the MAP parameters<a class="headerlink" href="#Estimation-of-the-MAP-parameters" title="Permalink to this heading"></a></h3>
+<section id="Estimation-of-the-MAP-parameters">
+<h3>Estimation of the MAP parameters<a class="headerlink" href="#Estimation-of-the-MAP-parameters" title="Link to this heading"></a></h3>
 <p>We could plot the entire posterior distribution (and in fact we did, albeit with different priors, in a previous lesson) to get a full understanding of the posterior. Instead, we will compute the MAP and approximate the posterior as Normal near the MAP.</p>
 <p>Finding the MAP amounts to an <strong>optimization problem</strong> in which we find the arguments (parameters) for which a function (the posterior distribution) is maximal. It is almost always much easier to find the maximum for the <em>logarithm</em> of the posterior. In fact, in the fast majority of Bayesian inference problems, we work with log posteriors instead of the posteriors themselves. Since the logarithm function is monotonic, a maximum of the log posterior is also a maximum of the posterior. So, our
 first step is code up a function that returns the log posterior.</p>
@@ -787,7 +788,7 @@ f(y\mid \theta) = f(y_1 \mid \theta)\,f(y_2 \mid \theta)\,f(y_3 \mid \theta)\cdo
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">log_prior</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">log_prior</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Log prior for independent size model&quot;&quot;&quot;</span>
     <span class="n">lp</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">lognorm</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="mf">2.3</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mf">2.3</span><span class="p">))</span>
     <span class="n">lp</span> <span class="o">+=</span> <span class="n">st</span><span class="o">.</span><span class="n">halfnorm</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
@@ -795,12 +796,12 @@ f(y\mid \theta) = f(y_1 \mid \theta)\,f(y_2 \mid \theta)\,f(y_3 \mid \theta)\cdo
     <span class="k">return</span> <span class="n">lp</span>
 
 
-<span class="k">def</span> <span class="nf">log_likelihood</span><span class="p">(</span><span class="n">ell</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">log_likelihood</span><span class="p">(</span><span class="n">ell</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Log likelihood for independent size model&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">ell</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">sigma</span><span class="p">))</span>
 
 
-<span class="k">def</span> <span class="nf">log_posterior</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">ell</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">log_posterior</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">ell</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Log posterior of indpendent size model.&quot;&quot;&quot;</span>
     <span class="n">phi</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="n">params</span>
 
@@ -819,7 +820,7 @@ we get in the log posterior for parameter values that are out of bounds. That is
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">neg_log_posterior</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">ell</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">neg_log_posterior</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">ell</span><span class="p">):</span>
     <span class="k">return</span> <span class="o">-</span><span class="n">log_posterior</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">ell</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -881,9 +882,9 @@ Most probable parameters
 </div>
 <p>We have successfully found the MAP which provides just that; the maximally probable parameter values. This tells us only one piece of information about the posterior; where it is maximal. So we know where all of the first derivatives of the posterior are zero. We want to learn more about it, at least near the MAP. To that end, we can compute all of the second derivatives of the log posterior near the MAP. Using the second derivatives (the Hessian), we can start to understand the posterior, at
 least locally, by approximating it as Normal.</p>
-</div>
-<div class="section" id="Normal-approximation-of-the-posterior">
-<h3>Normal approximation of the posterior<a class="headerlink" href="#Normal-approximation-of-the-posterior" title="Permalink to this heading"></a></h3>
+</section>
+<section id="Normal-approximation-of-the-posterior">
+<h3>Normal approximation of the posterior<a class="headerlink" href="#Normal-approximation-of-the-posterior" title="Link to this heading"></a></h3>
 <p>To compute the Normal approximation of the posterior, our task is two-fold. First, find the parameter values that give the maximal posterior probability, which we have already done. Second, compute the Hessian of the log posterior at the MAP and invert it to get your covariance matrix. Note that the covariance matrix is <strong>not</strong> the inverse of every element of the Hessian; it is the inverse of the Hessian <em>matrix</em>. The credible interval for each parameter can then be calculated from the diagonal
 elements of the covariance matrix.</p>
 <p>To compute the covariance matrix, we need to compute the Hessian of the log of the posterior at the MAP. We will do this numerically using the <code class="docutils literal notranslate"><span class="pre">statsmodels.tools.numdiff</span></code> module, which we imported as <code class="docutils literal notranslate"><span class="pre">smnd</span></code>. We use the function <code class="docutils literal notranslate"><span class="pre">smnd.approx_hess()</span></code> to compute the Hessian at the optimal parameter values. Note that since we already have the log posterior coded up and the MAP parameter values, we can just directly shove these into the numerical Hessian calculator.</p>
@@ -919,9 +920,9 @@ array([[ 3.41668904e-02, -9.09388085e-06],
 </pre></div></div>
 </div>
 <p>The diagonal terms give the approximate variance in the parameters in the posterior. The off-diagonal terms give the covariance, which describes how the parameters relate to each other. Nonzero covariance indicates that they are not completely independent.</p>
-</div>
-<div class="section" id="Credible-intervals">
-<h3>Credible intervals<a class="headerlink" href="#Credible-intervals" title="Permalink to this heading"></a></h3>
+</section>
+<section id="Credible-intervals">
+<h3>Credible intervals<a class="headerlink" href="#Credible-intervals" title="Link to this heading"></a></h3>
 <p>We can compute the approximate 95% credible intervals for the parameters by multiplying the diagonal terms of the posterior covariance matrix <span class="math notranslate nohighlight">\(\mathsf{\Sigma}\)</span> by 1.96.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
@@ -950,9 +951,9 @@ Results for conserved tubulin model (≈ 95% of total probability density)
 
 </pre></div></div>
 </div>
-</div>
-<div class="section" id="How-good-is-the-approximation?">
-<h3>How good is the approximation?<a class="headerlink" href="#How-good-is-the-approximation?" title="Permalink to this heading"></a></h3>
+</section>
+<section id="How-good-is-the-approximation?">
+<h3>How good is the approximation?<a class="headerlink" href="#How-good-is-the-approximation?" title="Link to this heading"></a></h3>
 <p>To assess how close the Normal approximation is to the posterior, let’s plot the Normal approximation and the exact marginalized posterior on the same contour plot. We can use <code class="docutils literal notranslate"><span class="pre">scipy.stats.multivariate_normal.pdf()</span></code> function to generate the PDF for the Normal approximation.</p>
 <p>The calculation will take a while, since we have to compute the whole posterior in the neighborhood of the MAP to plot it. The whole reason we used optimization in the first place was to avoid this calculation! But we are doing it here to visualize the Normal approximation.</p>
 <div class="nbinput docutils container">
@@ -1043,10 +1044,10 @@ var element = document.currentScript.previousSibling.previousSibling;
 </script></div>
 </div>
 <p>The Normal approximation, shown in orange, is not that far off from the posterior, especially at the peak. <strong>This is not always the case!</strong> This is one of the main dangers of using optimization, you are using <em>very</em> local information to summarize a posterior that may have relevant features away from the MAP.</p>
-</div>
-</div>
-<div class="section" id="Computing-environment">
-<h2>Computing environment<a class="headerlink" href="#Computing-environment" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+<section id="Computing-environment">
+<h2>Computing environment<a class="headerlink" href="#Computing-environment" title="Link to this heading"></a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
@@ -1076,8 +1077,8 @@ jupyterlab : 4.0.13
 
 </pre></div></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -1091,11 +1092,11 @@ jupyterlab : 4.0.13
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 01, 2025.
+      <span class="lastupdated">Last updated on Feb 14, 2025.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x30a482090> 
+   <jinja2.runtime.BlockReference object at 0x17b25bb90> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

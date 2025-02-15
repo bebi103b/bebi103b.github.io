@@ -1,27 +1,27 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Choosing a hierarchical prior &mdash; BE/Bi 103 b  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=22ddcdb3" />
 
   
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
-        <script src="../../_static/clipboard.min.js"></script>
-        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=9bcbadda"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=f281be69"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -109,6 +109,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../homework/04/index.html">4. Sampling with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/05/index.html">5. Inference with Stan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/06/index.html">6. MCMC with ion channels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../homework/07/index.html">7. Model comparison</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -167,11 +168,11 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="Choosing-a-hierarchical-prior">
-<h1>Choosing a hierarchical prior<a class="headerlink" href="#Choosing-a-hierarchical-prior" title="Permalink to this heading"></a></h1>
+  <section id="Choosing-a-hierarchical-prior">
+<h1>Choosing a hierarchical prior<a class="headerlink" href="#Choosing-a-hierarchical-prior" title="Link to this heading"></a></h1>
 <hr><p>Choice of a hierarchical prior is not always as straightforward as for priors we are used to considering because we have to specify the hyperprior and all conditional priors, <span class="math notranslate nohighlight">\(g(\theta\mid \phi)\)</span>.</p>
-<div class="section" id="Exchangeability">
-<h2>Exchangeability<a class="headerlink" href="#Exchangeability" title="Permalink to this heading"></a></h2>
+<section id="Exchangeability">
+<h2>Exchangeability<a class="headerlink" href="#Exchangeability" title="Link to this heading"></a></h2>
 <p>The conditional probability, <span class="math notranslate nohighlight">\(g(\theta\mid \phi)\)</span>, can take any reasonable form. In the case where we have no reason to believe that we can distinguish any one <span class="math notranslate nohighlight">\(\theta_i\)</span> from another prior to the experiment, then the label “<span class="math notranslate nohighlight">\(i\)</span>” applied to the experiment may be exchanged with the label of any other experiment. I.e., <span class="math notranslate nohighlight">\(g(\theta_1, \theta_2, \ldots, \theta_k \mid \phi)\)</span> is invariant to permutations of the indices. Parameters behaving this way are said to be
 <strong>exchangeable</strong>. A common (simple) exchangeable distribution is</p>
 <p><span class="math">\begin{align}
@@ -180,9 +181,9 @@ g(\theta\mid \phi) = \prod_{i=1}^k g(\theta_i\mid \phi),
 <p>which means that each of the parameters is an independent sample out of a distribution <span class="math notranslate nohighlight">\(g(\theta_i\mid \phi)\)</span>, which we often take to be the same for all <span class="math notranslate nohighlight">\(i\)</span>. This is reasonable to do in the worm reversal example.</p>
 <p>In all of the hierarchical models we will work with, we will assume exchangeability. In situations where the indices of the experiment contain real information, meaning that the prior is no longer invariant to permuations of the indices, we lose exchangeability. An example would be if we did one set of experiments on one instrument and another set of experiments on another instrument. If we suspect these different instrument may have a real effect on the measured data, we need to explicitly
 model the differences. This is an example of a <strong>factor model</strong>, which feature more nuance than the hierarchical models we will consider. We will not go into factor models in this course (but we definitely would if we had more time! Add it to the long list of beautiful advanced topics….). Of course, we may <em>choose</em> to ignore differences between the two instruments in our modeling and recover exchangeability.</p>
-</div>
-<div class="section" id="Choice-of-the-conditional-distribution">
-<h2>Choice of the conditional distribution<a class="headerlink" href="#Choice-of-the-conditional-distribution" title="Permalink to this heading"></a></h2>
+</section>
+<section id="Choice-of-the-conditional-distribution">
+<h2>Choice of the conditional distribution<a class="headerlink" href="#Choice-of-the-conditional-distribution" title="Link to this heading"></a></h2>
 <p>We need to specify our prior, which for this hierarchical model means that we have to specify the conditional distribution, <span class="math notranslate nohighlight">\(g(\theta_i\mid \phi)\)</span>, as well as <span class="math notranslate nohighlight">\(g(\phi)\)</span>. We could assume a Beta prior for <span class="math notranslate nohighlight">\(\phi\)</span>; the one we chose in our original nonhierarchical model would be a good choice.</p>
 <p><span class="math">\begin{align}
 \phi \sim \text{Beta}(1.1, 1.1).
@@ -218,8 +219,8 @@ g(\theta, \phi, \kappa \mid n, N) = \frac{f(n,N\mid \theta)\,\left(
 &n_i \sim \text{Binom}(N_i, \theta_i)\;\;\forall i.
 \end{align}</span></p>
 <p>This is a complete specification of a hierarchical model.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -233,11 +234,11 @@ g(\theta, \phi, \kappa \mid n, N) = \frac{f(n,N\mid \theta)\,\left(
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 01, 2025.
+      <span class="lastupdated">Last updated on Feb 14, 2025.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x30162d9d0> 
+   <jinja2.runtime.BlockReference object at 0x1525a2f60> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 

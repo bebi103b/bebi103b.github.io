@@ -1,28 +1,28 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>3. Plotting posteriors &mdash; BE/Bi 103 b  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=22ddcdb3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
 
   
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
-        <script src="../../_static/clipboard.min.js"></script>
-        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=9bcbadda"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=f281be69"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -118,6 +118,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../homework/04/index.html">4. Sampling with MCMC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/05/index.html">5. Inference with Stan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../homework/06/index.html">6. MCMC with ion channels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../homework/07/index.html">7. Model comparison</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul>
@@ -175,21 +176,21 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="3.-Plotting-posteriors">
-<h1>3. Plotting posteriors<a class="headerlink" href="#3.-Plotting-posteriors" title="Permalink to this heading"></a></h1>
+  <section id="3.-Plotting-posteriors">
+<h1>3. Plotting posteriors<a class="headerlink" href="#3.-Plotting-posteriors" title="Link to this heading"></a></h1>
 <p><a class="reference external" href="https://s3.amazonaws.com/bebi103.caltech.edu/data/good_invitro_droplet_data.csv">Data set download</a></p>
 <hr><div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">polars</span> <span class="k">as</span> <span class="nn">pl</span>
-<span class="kn">import</span> <span class="nn">scipy.integrate</span>
-<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">st</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.integrate</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
 
-<span class="kn">import</span> <span class="nn">bebi103</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">bebi103</span>
 
-<span class="kn">import</span> <span class="nn">bokeh.io</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">bokeh.io</span>
 <span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">output_notebook</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -538,8 +539,8 @@ g(\theta \mid y) = \frac{f(y\mid \theta)\,g(\theta)}{\int \mathrm{d}\theta\,f(y\
 \end{align}</span></p>
 <p>So it’s that simple, right? We’ve got an analytical expression for the posterior! The problem is that we almost never can make any sense of the analytical expression for the posterior. We need to either plot it or compute expectation values from it. This is the whole bread-and-butter of Bayesian inference: figuring out how to plot or compute expectation values of the posterior. We will focus on expectation values for the majority of the course, since plots are usually inaccessible. However, for
 models that have few (like one, two, or three) parameters, we <em>can</em> directly compute and plot the posterior. This is a viable option and gives a complete picture of the posterior.</p>
-<div class="section" id="The-data-set">
-<h2>The data set<a class="headerlink" href="#The-data-set" title="Permalink to this heading"></a></h2>
+<section id="The-data-set">
+<h2>The data set<a class="headerlink" href="#The-data-set" title="Link to this heading"></a></h2>
 <p>We will explore plotting posterior distributions using the data set of mitotic spindle length as a function of the diameter of encapsulating droplets from experiments performed by Matt Good. We visited this data set in the prequel to this course, and you should <a class="reference external" href="https://bebi103a.github.io/lessons/20/model_building.html">refamiliarize yourself with it</a>.</p>
 <p>As a reminder of the data set, let’s make a quick plot of the spindle length versus droplet data, which is available here: <a class="reference external" href="https://s3.amazonaws.com/bebi103.caltech.edu/data/good_invitro_droplet_data.csv">https://s3.amazonaws.com/bebi103.caltech.edu/data/good_invitro_droplet_data.csv</a>. We will pull out the data of interest as Numpy arrays. We do this because we need them for speed later.</p>
 <div class="nbinput docutils container">
@@ -614,9 +615,9 @@ var element = document.currentScript.previousSibling.previousSibling;
 </script></div>
 </div>
 <p>Our objective is to use these data to obtain parameter estimates under two different models for spindle size. Remember, by “parameter estimation,” we mean that we wish to compute a posterior distribution for the parameter set <span class="math notranslate nohighlight">\(\theta\)</span>, given the data. That is, we want to compute <span class="math notranslate nohighlight">\(g(\theta \mid d, l)\)</span>, where <span class="math notranslate nohighlight">\(d\)</span> and <span class="math notranslate nohighlight">\(l\)</span> are respectively the set of droplet diameters and spindle lengths. Beyond computing the posterior, we wish to obtain summaries of it.</p>
-</div>
-<div class="section" id="Models-for-spindle-size">
-<h2>Models for spindle size<a class="headerlink" href="#Models-for-spindle-size" title="Permalink to this heading"></a></h2>
+</section>
+<section id="Models-for-spindle-size">
+<h2>Models for spindle size<a class="headerlink" href="#Models-for-spindle-size" title="Link to this heading"></a></h2>
 <p>The parameter sets are defined by one of two models for spindle size. In this lesson, we will treat the first model, which we shall call the independent size model. It posits that spindle length <span class="math notranslate nohighlight">\(l\)</span> is independent of droplet diameter <span class="math notranslate nohighlight">\(d\)</span>. In this model</p>
 <p><span class="math">\begin{align}
 l = \phi,
@@ -631,12 +632,12 @@ so called because they cannot be normalized, and we will discuss priors in much 
 \end{align}</span></p>
 <p>where implicit in the definitions are that <span class="math notranslate nohighlight">\(\phi\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> are both positive. We have used the notation <span class="math notranslate nohighlight">\(g(\phi) = \text{constant}\)</span> instead of something like <span class="math notranslate nohighlight">\(\phi \sim \text{SomeDistribution}\)</span> because the priors for <span class="math notranslate nohighlight">\(\phi\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> are not proper probability distributions.</p>
 <p>We will use the independent size model in this lesson and turn to the other, less vanilla model, termed the tubulin conservation model, in the next one.</p>
-</div>
-<div class="section" id="Plotting-the-posterior-for-a-single-parameter">
-<h2>Plotting the posterior for a single parameter<a class="headerlink" href="#Plotting-the-posterior-for-a-single-parameter" title="Permalink to this heading"></a></h2>
+</section>
+<section id="Plotting-the-posterior-for-a-single-parameter">
+<h2>Plotting the posterior for a single parameter<a class="headerlink" href="#Plotting-the-posterior-for-a-single-parameter" title="Link to this heading"></a></h2>
 <p>The independent size model has two parameters, <span class="math notranslate nohighlight">\(\phi\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>. In order to plot the posterior for a single parameter, such as <span class="math notranslate nohighlight">\(\phi\)</span>, we need to marginalize out the other parameter <span class="math notranslate nohighlight">\(\sigma\)</span>.</p>
-<div class="section" id="Analytically-marginalizing">
-<h3>Analytically marginalizing<a class="headerlink" href="#Analytically-marginalizing" title="Permalink to this heading"></a></h3>
+<section id="Analytically-marginalizing">
+<h3>Analytically marginalizing<a class="headerlink" href="#Analytically-marginalizing" title="Link to this heading"></a></h3>
 <p>We can analytically compute the marginalized posterior <span class="math notranslate nohighlight">\(g(\phi\mid \{l_i\})\)</span> for the independent size model. The posterior is proportional to the product of the likelihood and prior. The likelihood is</p>
 <p><span class="math">\begin{align}
 f(\{l_i\}\mid \phi, \sigma) = \prod_{i=1}^n \frac{\mathrm{e}^{-(l_i-\phi)^2/2\sigma^2}}{\sqrt{2\pi}\,\sigma} = \frac{1}{(2\pi)^{n/2} \sigma^n}\,\exp\left[-\frac{1}{2\sigma^2}\sum_{i=1}^n(l_i-\phi)^2\right],
@@ -662,9 +663,9 @@ g(\phi\mid \{l_i\}) \propto \int_0^\infty \mathrm{d}\sigma \,\frac{1}{\sigma^{n+
 g(\phi\mid \{l_i\}) \propto \left(\sum_{i=1}^n(l_i-\phi)^2\right)^{-n/2}.
 \end{align}</span></p>
 <p>We can make further analytical progress, but we postpone doing that to show how can use numerical computation to get a picture of the posterior.</p>
-</div>
-<div class="section" id="Computing-and-plotting-the-marginalized-posterior">
-<h3>Computing and plotting the marginalized posterior<a class="headerlink" href="#Computing-and-plotting-the-marginalized-posterior" title="Permalink to this heading"></a></h3>
+</section>
+<section id="Computing-and-plotting-the-marginalized-posterior">
+<h3>Computing and plotting the marginalized posterior<a class="headerlink" href="#Computing-and-plotting-the-marginalized-posterior" title="Link to this heading"></a></h3>
 <p>Even with the above analytical expression, computing the marginalized posterior is a bit tricky. First, we only know the posterior up to a constant. Secondly, if we computed the expression above directly, we would hit underflow errors.</p>
 <p>In almost any circumstance <strong>we do not work with the posterior directly, but with its logarithm.</strong> In this case, the log posterior is</p>
 <p><span class="math">\begin{align}
@@ -676,7 +677,7 @@ g(\phi\mid \{l_i\}) \propto \left(\sum_{i=1}^n(l_i-\phi)^2\right)^{-n/2}.
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">log_marginalized_posterior</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">ell</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">log_marginalized_posterior</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">ell</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;The log of the marginalized posterior (up to</span>
 <span class="sd">    additive constant) evaluated at a single value of</span>
 <span class="sd">    parameter phi for measured data ell.</span>
@@ -834,9 +835,9 @@ var element = document.currentScript.previousSibling.previousSibling;
 })(window);
 </script></div>
 </div>
-</div>
-<div class="section" id="Normalizing-by-numerical-quadrature">
-<h3>Normalizing by numerical quadrature<a class="headerlink" href="#Normalizing-by-numerical-quadrature" title="Permalink to this heading"></a></h3>
+</section>
+<section id="Normalizing-by-numerical-quadrature">
+<h3>Normalizing by numerical quadrature<a class="headerlink" href="#Normalizing-by-numerical-quadrature" title="Link to this heading"></a></h3>
 <p>This plot is sufficient for visualizing the posterior, but if we wish to compare it to other posteriors, we should normalize it so that the the y-axis is actually the probability density function and not just proportional to it. To properly scale the y-axis, we use the fact that we currently have something proportional to the marginal posterior. That is, we computed</p>
 <p><span class="math">\begin{align}
 g_\propto(\phi \mid \{l_i\}) = \left(\sum_{i=1}^n(l_i-\phi)^2\right)^{-n/2},
@@ -859,7 +860,7 @@ a = \int_0^\infty \mathrm{d}\phi\;g_\propto(\phi \mid \{l_i\}).
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">marginalized_posterior</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">log_marg_post_max</span><span class="p">,</span> <span class="n">ell</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">marginalized_posterior</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">log_marg_post_max</span><span class="p">,</span> <span class="n">ell</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Unnormalized marginal posterior.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_marginalized_posterior</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">ell</span><span class="p">)</span> <span class="o">-</span> <span class="n">log_marg_post_max</span><span class="p">)</span>
 </pre></div>
@@ -948,9 +949,9 @@ var element = document.currentScript.previousSibling.previousSibling;
 })(window);
 </script></div>
 </div>
-</div>
-<div class="section" id="A-prescription-for-plotting-1D-posteriors">
-<h3>A prescription for plotting 1D posteriors<a class="headerlink" href="#A-prescription-for-plotting-1D-posteriors" title="Permalink to this heading"></a></h3>
+</section>
+<section id="A-prescription-for-plotting-1D-posteriors">
+<h3>A prescription for plotting 1D posteriors<a class="headerlink" href="#A-prescription-for-plotting-1D-posteriors" title="Link to this heading"></a></h3>
 <p>Let us review the steps we took to generate the plot of the properly normalized marginal posterior. Starting with an expression for a one-dimensional posterior, we take the following steps to plot it.</p>
 <ol class="arabic simple">
 <li><p>Write a function to compute the unnormalized log posterior.</p></li>
@@ -960,9 +961,9 @@ var element = document.currentScript.previousSibling.previousSibling;
 <li><p>Perform numerical quadrature using bounds of integration that capture any peaks, but are not too broad such that the peaks are not easily found.</p></li>
 <li><p>Normalize the posterior you compute in part (4) with the result of part (5) and plot.</p></li>
 </ol>
-</div>
-<div class="section" id="An-analytical-expression-for-the-marginal-posterior">
-<h3>An analytical expression for the marginal posterior<a class="headerlink" href="#An-analytical-expression-for-the-marginal-posterior" title="Permalink to this heading"></a></h3>
+</section>
+<section id="An-analytical-expression-for-the-marginal-posterior">
+<h3>An analytical expression for the marginal posterior<a class="headerlink" href="#An-analytical-expression-for-the-marginal-posterior" title="Link to this heading"></a></h3>
 <p>We paused our analytical analysis of the marginal posterior at the expression</p>
 <p><span class="math">\begin{align}
 g(\phi\mid \{l_i\}) \propto \left(\sum_{i=1}^n(l_i-\phi)^2\right)^{-n/2}.
@@ -1051,10 +1052,10 @@ var element = document.currentScript.previousSibling.previousSibling;
 </div>
 <p>Perfect match!</p>
 <p>While it is useful to get the exact analytical expression, this exercise shows the efficacy of numerical methods when an analytical expression is unavailable.</p>
-</div>
-</div>
-<div class="section" id="Plotting-a-2D-posterior">
-<h2>Plotting a 2D posterior<a class="headerlink" href="#Plotting-a-2D-posterior" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+<section id="Plotting-a-2D-posterior">
+<h2>Plotting a 2D posterior<a class="headerlink" href="#Plotting-a-2D-posterior" title="Link to this heading"></a></h2>
 <p>Plotting a 2D posterior takes a similar approach. Here, tough, the normalization is not important because we do not really compare heights of distributions in 2D. Rather, we present them as images and/or contours.</p>
 <p>As an example of plotting a 2D posterior, we will again use the posterior from the independent size model. We derived that to be</p>
 <p><span class="math">\begin{align}
@@ -1070,7 +1071,7 @@ g(\phi, \sigma \mid \{l_i\}) \propto \frac{1}{\sigma^{n+1}}\,\exp\left[-\frac{1}
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">log_prior_indep_size</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">log_prior_indep_size</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Log prior for independent size model&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">params</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
         <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span>
@@ -1080,14 +1081,14 @@ g(\phi, \sigma \mid \{l_i\}) \propto \frac{1}{\sigma^{n+1}}\,\exp\left[-\frac{1}
     <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">log_likelihood_indep_size</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">ell</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">log_likelihood_indep_size</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">ell</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Log likelihood of independent size model&quot;&quot;&quot;</span>
     <span class="n">phi</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="n">params</span>
 
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">ell</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">phi</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">sigma</span><span class="p">))</span>
 
 
-<span class="k">def</span> <span class="nf">log_posterior_indep_size</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">ell</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">log_posterior_indep_size</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">ell</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Log posterior for independent size model&quot;&quot;&quot;</span>
     <span class="n">lp</span> <span class="o">=</span> <span class="n">log_prior_indep_size</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
 
@@ -1098,14 +1099,14 @@ g(\phi, \sigma \mid \{l_i\}) \propto \frac{1}{\sigma^{n+1}}\,\exp\left[-\frac{1}
 </pre></div>
 </div>
 </div>
-<div class="section" id="Aside:-Speed-of-likelihood-calculation">
-<h3>Aside: Speed of likelihood calculation<a class="headerlink" href="#Aside:-Speed-of-likelihood-calculation" title="Permalink to this heading"></a></h3>
+<section id="Aside:-Speed-of-likelihood-calculation">
+<h3>Aside: Speed of likelihood calculation<a class="headerlink" href="#Aside:-Speed-of-likelihood-calculation" title="Link to this heading"></a></h3>
 <p>Note that we have made use of SciPy’s built-in probability distribution for the log likelihood and used the <code class="docutils literal notranslate"><span class="pre">scipy.stats.norm.logpdf()</span></code> function. This means you have to write less lines of code and therefore prevent bugs. This does come at a speed trade-off, though, since SciPy’s functions have lots of overhead. We can compare the speed of evaluation of the likelihood if we hand-coded in the log of the Normal PDF.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">log_likelihood_indep_size_numpy_only</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">ell</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">log_likelihood_indep_size_numpy_only</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">ell</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Log likelihood of independent size model&quot;&quot;&quot;</span>
     <span class="n">phi</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="n">params</span>
 
@@ -1133,9 +1134,9 @@ Time per likelihood using only NumPy:
 </pre></div></div>
 </div>
 <p>The calculation is nearly 10 times faster with the hand-coded version. This is a consideration if your calculations are slow and you need to speed them up. For now, though, we do not really need the speed.</p>
-</div>
-<div class="section" id="Computing-the-log-of-a-2D-posterior">
-<h3>Computing the log of a 2D posterior<a class="headerlink" href="#Computing-the-log-of-a-2D-posterior" title="Permalink to this heading"></a></h3>
+</section>
+<section id="Computing-the-log-of-a-2D-posterior">
+<h3>Computing the log of a 2D posterior<a class="headerlink" href="#Computing-the-log-of-a-2D-posterior" title="Link to this heading"></a></h3>
 <p>As the dimensionality of the posterior increases, it becomes increasingly more difficult to find peaks and other features. The fraction of the volume of parameter space for which the posterior is nonnegligible shrinks rapidly as dimensionality grows. This is an instance of the <a class="reference external" href="https://en.wikipedia.org/wiki/Curse_of_dimensionality">curse of dimensionality</a>. Just going from one to two dimensions can make things more difficult.</p>
 <p>One issue is that variations in the log posterior are more difficult to visualize in two-dimensions than in one. This can be seen by plotting the log posterior and the posterior as image/contour plots. To construct these plots, we start by setting up the ranges of <span class="math notranslate nohighlight">\(\phi\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> we are interested in. We will choose broad ranges.</p>
 <div class="nbinput nblast docutils container">
@@ -1354,10 +1355,10 @@ var element = document.currentScript.previousSibling.previousSibling;
 </script></div>
 </div>
 <p>We can now clearly identify the most relevant region of the posterior and clearly make out the shape of this distribution.</p>
-</div>
-</div>
-<div class="section" id="Computing-environment">
-<h2>Computing environment<a class="headerlink" href="#Computing-environment" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+<section id="Computing-environment">
+<h2>Computing environment<a class="headerlink" href="#Computing-environment" title="Link to this heading"></a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
 </pre></div>
@@ -1385,8 +1386,8 @@ jupyterlab: 4.0.13
 
 </pre></div></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -1400,11 +1401,11 @@ jupyterlab: 4.0.13
 
   <div role="contentinfo">
     <p>
-      <span class="lastupdated">Last updated on Feb 01, 2025.
+      <span class="lastupdated">Last updated on Feb 14, 2025.
       </span></p>
   </div>
 
-   <jinja2.runtime.BlockReference object at 0x300a68590> 
+   <jinja2.runtime.BlockReference object at 0x17accb680> 
 
 <p>© 2014–2024 Justin Bois and BE/Bi 103 b course staff. With the exception of pasted graphics, where the source is noted, this work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License CC-BY 4.0 license</a>. All code contained herein is licensed under an <a rel="license" href="https://opensource.org/licenses/MIT">MIT license</a>.</p>
 
