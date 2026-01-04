@@ -1,9 +1,0 @@
-******************************************************************
-2. Analytical and graphical methods for analysis of the posterior
-******************************************************************
-
-.. toctree::
-   :maxdepth: 1
-
-   hw2.1.ipynb
-   hw2.2.ipynb

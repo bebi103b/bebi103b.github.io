@@ -1,0 +1,1859 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>30&nbsp; Bayesian approach to parameter estimation by optimization – Statistical Inference in the Biological Sciences</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../lessons/optimization/gamma_optimization.html" rel="next">
+<link href="../../lessons/optimization/optimization.html" rel="prev">
+<link href="../../logo.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-da61f9a05e9cefe097d79e8430a73dd4.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-7c1dcb25931f0f6f86a40129f542609a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../custom.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../lessons/optimization/optimization.html">Summarizing posterior distributions with maxima</a></li><li class="breadcrumb-item"><a href="../../lessons/optimization/optimization_basics.html"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Bayesian approach to parameter estimation by optimization</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../../index.html" class="sidebar-logo-link">
+      <img src="../../logo.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="../../logo.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../"></a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About the course</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Course logistics</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../schedule.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Schedule overview</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../policies.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Course policies</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/what_are_we_doing/what_are_we_doing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">What are we doing?</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../lessons/probability/probability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Probability: The foundation for generative modeling</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/probability/probability_logic_of_science.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probability as the logic of science</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/probability/probability_distributions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Probability distributions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/probability/entropy_and_kullback_leibler.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Entropy and the Kullback-Leibler divergence</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../lessons/sampling/sampling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sampling out of probability distributions</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/sampling/random_number_generation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Random number generation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/sampling/rng_with_numpy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Random number generation using Numpy</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../lessons/sampling/simulation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Simulating generative distributions</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/sampling/luria_delbruck.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Simulating the Luria-Delbrück distribution</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/sampling/lif.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">The noisy leaky integrate-and-fire model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/sampling/nonhomogeneous_poisson.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Modeling nonhomogeneous Poisson spiking</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../lessons/sampling/mcmc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Markov chain Monte Carlo</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/sampling/basics_of_mcmc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">The basics of Markov chain Monte Carlo</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/sampling/stan_hello_world.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">“Hello, world” —Stan</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/sampling/nonhomogeneous_poisson_stan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Nonhomogeneous Poisson process arrival times with Stan</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../lessons/bayesian_modeling/bayesian_modeling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bayesian modeling and inference</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/bayesian_modeling/basics_of_bayes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Basics of Bayesian modeling</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/bayesian_modeling/conjugacy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Conjugacy</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/bayesian_modeling/choice_of_prior.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Choosing priors</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/bayesian_modeling/advice_on_dists.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Advice on using distributions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/bayesian_modeling/stats_ml_ai.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">What about machine learning and artificial intelligence?</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/bayesian_modeling/bayes_model_for_learning_and_cognition.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Bayes's theorem as a model for learning</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/bayesian_modeling/prior_predictive_checks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Model building with prior predictive checks</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../lessons/inference_by_mcmc/inference_by_mcmc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statistical inference with Markov chain Monte Carlo</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/inference_by_mcmc/parameter_estimation_with_mcmc_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Parameter estimation with Markov chain Monte Carlo</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/inference_by_mcmc/display_of_mcmc_samples.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Display of MCMC samples</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/inference_by_mcmc/posterior_summaries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Reporting summaries of the posterior</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/inference_by_mcmc/posterior_predictive_checks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Posterior predictive checks</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../lessons/mixture_models/mixture_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Mixture models</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/mixture_models/mixture_model_stan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Mixture models and label switching with MCMC</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../lessons/model_assessment/model_assessment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Model assessment</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/model_assessment/model_comparison.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Model comparison</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/model_assessment/model_comparison_in_practice.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Model comparison in practice</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../lessons/principled/principled.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Principled inference pipelines</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/principled/mcmc_diagnostics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">MCMC diagnostics via a case study: Artificial funnel of hell</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/principled/sbc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Principled analysis pipelines</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/principled/sbc_in_practice.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Simulation based calibration and related checks in practice</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../lessons/optimization/optimization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Summarizing posterior distributions with maxima</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/optimization/optimization_basics.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Bayesian approach to parameter estimation by optimization</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/optimization/gamma_optimization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Parameter estimation by optimization case study: Gamma likelihood</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/optimization/mm_algorithms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Minorize-maximize algorithms</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/optimization/em_algorithm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">The expectation-maximization (EM) algorithm</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/optimization/em_gmm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">EM applied to a Gaussian mixture model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/optimization/em_gmm_example.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">An example application of the EM algorithm to a Gaussian mixture model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/optimization/kmeans.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">K-means clustering</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../lessons/variate_covariate/intro_variate_covariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Variate-covariate models</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/variate_covariate/model_building.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Model building</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/variate_covariate/variate_covariate_with_stan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Variate-covariate models with MCMC</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../lessons/hierarchical/hierarchical.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hierarchical models</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/hierarchical/modeling_repeated_experiments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">Modeling repeated experiments</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/hierarchical/choosing_a_hierarchical_prior.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">Choosing a hierarchical prior</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/hierarchical/generalization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">41</span>&nbsp; <span class="chapter-title">Generalization of hierarchical models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/hierarchical/hierarchical_implementation_worms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">42</span>&nbsp; <span class="chapter-title">Implementation of a hierarchical model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/hierarchical/hierarchical_implementation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">43</span>&nbsp; <span class="chapter-title">General implementation of hierarchical models</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../lessons/pca_and_related/pca_and_related.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Principal component analysis and related models</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/pca_and_related/heuristic_pca.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">44</span>&nbsp; <span class="chapter-title">Principal component analysis: A heuristic approach</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/pca_and_related/factor_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">45</span>&nbsp; <span class="chapter-title">Factor analysis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/pca_and_related/pca_nmf_as_fa.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">46</span>&nbsp; <span class="chapter-title">Special cases of factor analysis</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../lessons/HMM/hmm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hidden Markov models</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/HMM/hmm_gaussian_emission.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">47</span>&nbsp; <span class="chapter-title">Hidden Markov models</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../lessons/GLM/glm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Generalized linear models</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/GLM/glm_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">48</span>&nbsp; <span class="chapter-title">Generalized linear models: An introduction</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/GLM/glm_in_practice.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">49</span>&nbsp; <span class="chapter-title">GLMs applied to neurons and aggression</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../lessons/gaussian_processes/gp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Gaussian processes</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-17" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/gaussian_processes/intro_to_gps.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">50</span>&nbsp; <span class="chapter-title">Introduction to Gaussian processes</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/gaussian_processes/gp_hyperparams_by_optimization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">51</span>&nbsp; <span class="chapter-title">Gaussian process hyperparameters by optimization</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/gaussian_processes/mcmc_with_gps.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">52</span>&nbsp; <span class="chapter-title">MCMC with GPs with Normal likelihoods</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/gaussian_processes/gps_and_derivatives.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">53</span>&nbsp; <span class="chapter-title">Calculating derivatives from data with GPs</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/gaussian_processes/gps_without_marginalization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">54</span>&nbsp; <span class="chapter-title">Gaussian processes with non-Normal likelihoods</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="false">
+ <span class="menu-text">Homework</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-18" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../homework/intuitive_modeling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">HW 1.1: First attempts at Bayesian generative modeling</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" role="navigation" aria-expanded="false">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-19" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../appendices/notation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Notation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../appendices/setting_up_python_computing_environment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Configuring your computer to use Python for scientific computing</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">In this section</h2>
+   
+  <ul>
+  <li><a href="#summarizing-the-posterior-near-its-maximum" id="toc-summarizing-the-posterior-near-its-maximum" class="nav-link active" data-scroll-target="#summarizing-the-posterior-near-its-maximum"><span class="header-section-number">30.1</span> Summarizing the posterior near its maximum</a>
+  <ul class="collapse">
+  <li><a href="#demonstration-of-the-normal-approximation" id="toc-demonstration-of-the-normal-approximation" class="nav-link" data-scroll-target="#demonstration-of-the-normal-approximation"><span class="header-section-number">30.1.1</span> Demonstration of the Normal approximation</a></li>
+  </ul></li>
+  <li><a href="#credible-intervals" id="toc-credible-intervals" class="nav-link" data-scroll-target="#credible-intervals"><span class="header-section-number">30.2</span> Credible intervals</a>
+  <ul class="collapse">
+  <li><a href="#credible-intervals-may-be-skewed" id="toc-credible-intervals-may-be-skewed" class="nav-link" data-scroll-target="#credible-intervals-may-be-skewed"><span class="header-section-number">30.2.1</span> Credible intervals may be skewed</a></li>
+  </ul></li>
+  <li><a href="#why-use-the-map-for-parameter-estimation" id="toc-why-use-the-map-for-parameter-estimation" class="nav-link" data-scroll-target="#why-use-the-map-for-parameter-estimation"><span class="header-section-number">30.3</span> Why use the MAP for parameter estimation?</a></li>
+  <li><a href="#computing-environment" id="toc-computing-environment" class="nav-link" data-scroll-target="#computing-environment"><span class="header-section-number">30.4</span> Computing environment</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../lessons/optimization/optimization.html">Summarizing posterior distributions with maxima</a></li><li class="breadcrumb-item"><a href="../../lessons/optimization/optimization_basics.html"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Bayesian approach to parameter estimation by optimization</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Bayesian approach to parameter estimation by optimization</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><a href="https://colab.research.google.com/github/bebi103b/bebi103b_notebooks_2026/blob/main/optimization_basics.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open in Google Colab" title="Open in Google Colab"></a> | <a href="https://raw.githubusercontent.com/bebi103b/bebi103b_notebooks_2026/refs/heads/main/optimization_basics.ipynb">Download notebook</a></p>
+<hr>
+<div id="cell-1" class="cell" data-nbsphinx="hidden" data-tags="[]" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Colab setup ------------------</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os, sys, subprocess</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">"google.colab"</span> <span class="kw">in</span> sys.modules:</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    cmd <span class="op">=</span> <span class="st">"pip install --upgrade bebi103 watermark"</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    process <span class="op">=</span> subprocess.Popen(cmd.split(), stdout<span class="op">=</span>subprocess.PIPE, stderr<span class="op">=</span>subprocess.PIPE)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    stdout, stderr <span class="op">=</span> process.communicate()</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    data_path <span class="op">=</span> <span class="st">"https://s3.amazonaws.com/bebi103.caltech.edu/data/"</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    data_path <span class="op">=</span> <span class="st">"../data/"</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------------------</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div id="cell-2" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> warnings.catch_warnings():</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    warnings.simplefilter(<span class="st">'ignore'</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> scipy.stats <span class="im">as</span> st</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> bebi103.viz</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> bokeh.io</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> bokeh.plotting</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>bokeh.io.output_notebook()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+    <style>
+        .bk-notebook-logo {
+            display: block;
+            width: 20px;
+            height: 20px;
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABx0RVh0U29mdHdhcmUAQWRvYmUgRmlyZXdvcmtzIENTNui8sowAAAOkSURBVDiNjZRtaJVlGMd/1/08zzln5zjP1LWcU9N0NkN8m2CYjpgQYQXqSs0I84OLIC0hkEKoPtiH3gmKoiJDU7QpLgoLjLIQCpEsNJ1vqUOdO7ppbuec5+V+rj4ctwzd8IIbbi6u+8f1539dt3A78eXC7QizUF7gyV1fD1Yqg4JWz84yffhm0qkFqBogB9rM8tZdtwVsPUhWhGcFJngGeWrPzHm5oaMmkfEg1usvLFyc8jLRqDOMru7AyC8saQr7GG7f5fvDeH7Ej8CM66nIF+8yngt6HWaKh7k49Soy9nXurCi1o3qUbS3zWfrYeQDTB/Qj6kX6Ybhw4B+bOYoLKCC9H3Nu/leUTZ1JdRWkkn2ldcCamzrcf47KKXdAJllSlxAOkRgyHsGC/zRday5Qld9DyoM4/q/rUoy/CXh3jzOu3bHUVZeU+DEn8FInkPBFlu3+nW3Nw0mk6vCDiWg8CeJaxEwuHS3+z5RgY+YBR6V1Z1nxSOfoaPa4LASWxxdNp+VWTk7+4vzaou8v8PN+xo+KY2xsw6une2frhw05CTYOmQvsEhjhWjn0bmXPjpE1+kplmmkP3suftwTubK9Vq22qKmrBhpY4jvd5afdRA3wGjFAgcnTK2s4hY0/GPNIb0nErGMCRxWOOX64Z8RAC4oCXdklmEvcL8o0BfkNK4lUg9HTl+oPlQxdNo3Mg4Nv175e/1LDGzZen30MEjRUtmXSfiTVu1kK8W4txyV6BMKlbgk3lMwYCiusNy9fVfvvwMxv8Ynl6vxoByANLTWplvuj/nF9m2+PDtt1eiHPBr1oIfhCChQMBw6Aw0UulqTKZdfVvfG7VcfIqLG9bcldL/+pdWTLxLUy8Qq38heUIjh4XlzZxzQm19lLFlr8vdQ97rjZVOLf8nclzckbcD4wxXMidpX30sFd37Fv/GtwwhzhxGVAprjbg0gCAEeIgwCZyTV2Z1REEW8O4py0wsjeloKoMr6iCY6dP92H6Vw/oTyICIthibxjm/DfN9lVz8IqtqKYLUXfoKVMVQVVJOElGjrnnUt9T9wbgp8AyYKaGlqingHZU/uG2NTZSVqwHQTWkx9hxjkpWDaCg6Ckj5qebgBVbT3V3NNXMSiWSDdGV3hrtzla7J+duwPOToIg42ChPQOQjspnSlp1V+Gjdged7+8UN5CRAV7a5EdFNwCjEaBR27b3W890TE7g24NAP/mMDXRWrGoFPQI9ls/MWO2dWFAar/xcOIImbbpA3zgAAAABJRU5ErkJggg==);
+        }
+    </style>
+    <div>
+        <a href="https://bokeh.org" target="_blank" class="bk-notebook-logo"></a>
+        <span id="e4a36ae0-97dd-44b8-ac37-cc8ca357402b">Loading BokehJS ...</span>
+    </div>
+</div>
+<div class="cell-output cell-output-display">
+<script type="application/javascript">
+'use strict';
+(function(root) {
+  function now() {
+    return new Date();
+  }
+
+  const force = true;
+
+  if (typeof root._bokeh_onload_callbacks === "undefined" || force === true) {
+    root._bokeh_onload_callbacks = [];
+    root._bokeh_is_loading = undefined;
+  }
+
+const JS_MIME_TYPE = 'application/javascript';
+  const HTML_MIME_TYPE = 'text/html';
+  const EXEC_MIME_TYPE = 'application/vnd.bokehjs_exec.v0+json';
+  const CLASS_NAME = 'output_bokeh rendered_html';
+
+  /**
+   * Render data to the DOM node
+   */
+  function render(props, node) {
+    const script = document.createElement("script");
+    node.appendChild(script);
+  }
+
+  /**
+   * Handle when an output is cleared or removed
+   */
+  function handleClearOutput(event, handle) {
+    function drop(id) {
+      const view = Bokeh.index.get_by_id(id)
+      if (view != null) {
+        view.model.document.clear()
+        Bokeh.index.delete(view)
+      }
+    }
+
+    const cell = handle.cell;
+
+    const id = cell.output_area._bokeh_element_id;
+    const server_id = cell.output_area._bokeh_server_id;
+
+    // Clean up Bokeh references
+    if (id != null) {
+      drop(id)
+    }
+
+    if (server_id !== undefined) {
+      // Clean up Bokeh references
+      const cmd_clean = "from bokeh.io.state import curstate; print(curstate().uuid_to_server['" + server_id + "'].get_sessions()[0].document.roots[0]._id)";
+      cell.notebook.kernel.execute(cmd_clean, {
+        iopub: {
+          output: function(msg) {
+            const id = msg.content.text.trim()
+            drop(id)
+          }
+        }
+      });
+      // Destroy server and session
+      const cmd_destroy = "import bokeh.io.notebook as ion; ion.destroy_server('" + server_id + "')";
+      cell.notebook.kernel.execute(cmd_destroy);
+    }
+  }
+
+  /**
+   * Handle when a new output is added
+   */
+  function handleAddOutput(event, handle) {
+    const output_area = handle.output_area;
+    const output = handle.output;
+
+    // limit handleAddOutput to display_data with EXEC_MIME_TYPE content only
+    if ((output.output_type != "display_data") || (!Object.prototype.hasOwnProperty.call(output.data, EXEC_MIME_TYPE))) {
+      return
+    }
+
+    const toinsert = output_area.element.find("." + CLASS_NAME.split(' ')[0]);
+
+    if (output.metadata[EXEC_MIME_TYPE]["id"] !== undefined) {
+      toinsert[toinsert.length - 1].firstChild.textContent = output.data[JS_MIME_TYPE];
+      // store reference to embed id on output_area
+      output_area._bokeh_element_id = output.metadata[EXEC_MIME_TYPE]["id"];
+    }
+    if (output.metadata[EXEC_MIME_TYPE]["server_id"] !== undefined) {
+      const bk_div = document.createElement("div");
+      bk_div.innerHTML = output.data[HTML_MIME_TYPE];
+      const script_attrs = bk_div.children[0].attributes;
+      for (let i = 0; i < script_attrs.length; i++) {
+        toinsert[toinsert.length - 1].firstChild.setAttribute(script_attrs[i].name, script_attrs[i].value);
+        toinsert[toinsert.length - 1].firstChild.textContent = bk_div.children[0].textContent
+      }
+      // store reference to server id on output_area
+      output_area._bokeh_server_id = output.metadata[EXEC_MIME_TYPE]["server_id"];
+    }
+  }
+
+  function register_renderer(events, OutputArea) {
+
+    function append_mime(data, metadata, element) {
+      // create a DOM node to render to
+      const toinsert = this.create_output_subarea(
+        metadata,
+        CLASS_NAME,
+        EXEC_MIME_TYPE
+      );
+      this.keyboard_manager.register_events(toinsert);
+      // Render to node
+      const props = {data: data, metadata: metadata[EXEC_MIME_TYPE]};
+      render(props, toinsert[toinsert.length - 1]);
+      element.append(toinsert);
+      return toinsert
+    }
+
+    /* Handle when an output is cleared or removed */
+    events.on('clear_output.CodeCell', handleClearOutput);
+    events.on('delete.Cell', handleClearOutput);
+
+    /* Handle when a new output is added */
+    events.on('output_added.OutputArea', handleAddOutput);
+
+    /**
+     * Register the mime type and append_mime function with output_area
+     */
+    OutputArea.prototype.register_mime_type(EXEC_MIME_TYPE, append_mime, {
+      /* Is output safe? */
+      safe: true,
+      /* Index of renderer in `output_area.display_order` */
+      index: 0
+    });
+  }
+
+  // register the mime type if in Jupyter Notebook environment and previously unregistered
+  if (root.Jupyter !== undefined) {
+    const events = require('base/js/events');
+    const OutputArea = require('notebook/js/outputarea').OutputArea;
+
+    if (OutputArea.prototype.mime_types().indexOf(EXEC_MIME_TYPE) == -1) {
+      register_renderer(events, OutputArea);
+    }
+  }
+  if (typeof (root._bokeh_timeout) === "undefined" || force === true) {
+    root._bokeh_timeout = Date.now() + 5000;
+    root._bokeh_failed_load = false;
+  }
+
+  const NB_LOAD_WARNING = {'data': {'text/html':
+     "<div style='background-color: #fdd'>\n"+
+     "<p>\n"+
+     "BokehJS does not appear to have successfully loaded. If loading BokehJS from CDN, this \n"+
+     "may be due to a slow or bad network connection. Possible fixes:\n"+
+     "</p>\n"+
+     "<ul>\n"+
+     "<li>re-rerun `output_notebook()` to attempt to load from CDN again, or</li>\n"+
+     "<li>use INLINE resources instead, as so:</li>\n"+
+     "</ul>\n"+
+     "<code>\n"+
+     "from bokeh.resources import INLINE\n"+
+     "output_notebook(resources=INLINE)\n"+
+     "</code>\n"+
+     "</div>"}};
+
+  function display_loaded(error = null) {
+    const el = document.getElementById("e4a36ae0-97dd-44b8-ac37-cc8ca357402b");
+    if (el != null) {
+      const html = (() => {
+        if (typeof root.Bokeh === "undefined") {
+          if (error == null) {
+            return "BokehJS is loading ...";
+          } else {
+            return "BokehJS failed to load.";
+          }
+        } else {
+          const prefix = `BokehJS ${root.Bokeh.version}`;
+          if (error == null) {
+            return `${prefix} successfully loaded.`;
+          } else {
+            return `${prefix} <b>encountered errors</b> while loading and may not function as expected.`;
+          }
+        }
+      })();
+      el.innerHTML = html;
+
+      if (error != null) {
+        const wrapper = document.createElement("div");
+        wrapper.style.overflow = "auto";
+        wrapper.style.height = "5em";
+        wrapper.style.resize = "vertical";
+        const content = document.createElement("div");
+        content.style.fontFamily = "monospace";
+        content.style.whiteSpace = "pre-wrap";
+        content.style.backgroundColor = "rgb(255, 221, 221)";
+        content.textContent = error.stack ?? error.toString();
+        wrapper.append(content);
+        el.append(wrapper);
+      }
+    } else if (Date.now() < root._bokeh_timeout) {
+      setTimeout(() => display_loaded(error), 100);
+    }
+  }
+
+  function run_callbacks() {
+    try {
+      root._bokeh_onload_callbacks.forEach(function(callback) {
+        if (callback != null)
+          callback();
+      });
+    } finally {
+      delete root._bokeh_onload_callbacks
+    }
+    console.debug("Bokeh: all callbacks have finished");
+  }
+
+  function load_libs(css_urls, js_urls, callback) {
+    if (css_urls == null) css_urls = [];
+    if (js_urls == null) js_urls = [];
+
+    root._bokeh_onload_callbacks.push(callback);
+    if (root._bokeh_is_loading > 0) {
+      console.debug("Bokeh: BokehJS is being loaded, scheduling callback at", now());
+      return null;
+    }
+    if (js_urls == null || js_urls.length === 0) {
+      run_callbacks();
+      return null;
+    }
+    console.debug("Bokeh: BokehJS not loaded, scheduling load and callback at", now());
+    root._bokeh_is_loading = css_urls.length + js_urls.length;
+
+    function on_load() {
+      root._bokeh_is_loading--;
+      if (root._bokeh_is_loading === 0) {
+        console.debug("Bokeh: all BokehJS libraries/stylesheets loaded");
+        run_callbacks()
+      }
+    }
+
+    function on_error(url) {
+      console.error("failed to load " + url);
+    }
+
+    for (let i = 0; i < css_urls.length; i++) {
+      const url = css_urls[i];
+      const element = document.createElement("link");
+      element.onload = on_load;
+      element.onerror = on_error.bind(null, url);
+      element.rel = "stylesheet";
+      element.type = "text/css";
+      element.href = url;
+      console.debug("Bokeh: injecting link tag for BokehJS stylesheet: ", url);
+      document.body.appendChild(element);
+    }
+
+    for (let i = 0; i < js_urls.length; i++) {
+      const url = js_urls[i];
+      const element = document.createElement('script');
+      element.onload = on_load;
+      element.onerror = on_error.bind(null, url);
+      element.async = false;
+      element.src = url;
+      console.debug("Bokeh: injecting script tag for BokehJS library: ", url);
+      document.head.appendChild(element);
+    }
+  };
+
+  function inject_raw_css(css) {
+    const element = document.createElement("style");
+    element.appendChild(document.createTextNode(css));
+    document.body.appendChild(element);
+  }
+
+  const js_urls = ["https://cdn.bokeh.org/bokeh/release/bokeh-3.7.3.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-gl-3.7.3.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-widgets-3.7.3.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-tables-3.7.3.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-mathjax-3.7.3.min.js"];
+  const css_urls = [];
+
+  const inline_js = [    function(Bokeh) {
+      Bokeh.set_log_level("info");
+    },
+function(Bokeh) {
+    }
+  ];
+
+  function run_inline_js() {
+    if (root.Bokeh !== undefined || force === true) {
+      try {
+            for (let i = 0; i < inline_js.length; i++) {
+      inline_js[i].call(root, root.Bokeh);
+    }
+
+      } catch (error) {display_loaded(error);throw error;
+      }if (force === true) {
+        display_loaded();
+      }} else if (Date.now() < root._bokeh_timeout) {
+      setTimeout(run_inline_js, 100);
+    } else if (!root._bokeh_failed_load) {
+      console.log("Bokeh: BokehJS failed to load within specified timeout.");
+      root._bokeh_failed_load = true;
+    } else if (force !== true) {
+      const cell = $(document.getElementById("e4a36ae0-97dd-44b8-ac37-cc8ca357402b")).parents('.cell').data().cell;
+      cell.output_area.append_execute_result(NB_LOAD_WARNING)
+    }
+  }
+
+  if (root._bokeh_is_loading === 0) {
+    console.debug("Bokeh: BokehJS loaded, going straight to plotting");
+    run_inline_js();
+  } else {
+    load_libs(css_urls, js_urls, function() {
+      console.debug("Bokeh: BokehJS plotting callback run at", now());
+      run_inline_js();
+    });
+  }
+}(window));
+</script>
+</div>
+</div>
+<p>We have learned in previous lessons that the posterior distribution for a set of parameters <span class="math inline">\(\theta\)</span> given a data set <span class="math inline">\(y\)</span> is given by the likelihood <span class="math inline">\(f(y\mid \theta)\)</span> and prior <span class="math inline">\(g(\theta)\)</span> according to</p>
+<p><span id="eq-bayes-optimization"><span class="math display">\[
+\begin{align}
+g(\theta\mid y) \propto f(y\mid \theta)\,g(\theta).
+\end{align}
+\tag{30.1}\]</span></span></p>
+<p>The central goal of Bayesian inference is making sense of this posterior distribution; writing it down is the easy part. We have learned how to make sense of the posterior using sampling. Now, we will consider an alternative, generally far inferior but often nevertheless necessary, approach: optimization.</p>
+<section id="summarizing-the-posterior-near-its-maximum" class="level2" data-number="30.1">
+<h2 data-number="30.1" class="anchored" data-anchor-id="summarizing-the-posterior-near-its-maximum"><span class="header-section-number">30.1</span> Summarizing the posterior near its maximum</h2>
+<p>For many posteriors, there exists a set of parameters for which the posterior is maximal. This set of parameters, denoted <span class="math inline">\(\theta^*\)</span>, is referred to as the <strong>maximal a posteriori</strong> parameter set, abbreviated <strong>MAP</strong>. Given that <span class="math inline">\(\theta^*\)</span> maximizes the posterior, it is of some importance (but certainly not paramount importance), and may be useful in summarizing a posterior.</p>
+<p>Finding the MAP is an optimization problem. In some simple, rare cases, the optimization problem may be solved analytically, though we will mostly focus on numerical methods. Specifically, we will discuss numerical methods for finding <span class="math inline">\(\theta^*\)</span> for continuous <span class="math inline">\(\theta\)</span> as we proceed through this lesson. For now, we will proceed assuming we have found <span class="math inline">\(\theta^*\)</span> and seek to approximate the posterior distribution near the MAP.</p>
+<p>Near the MAP, we can approximately express the log posterior as a Taylor expansion truncated to second order,</p>
+<p><span class="math display">\[\begin{align}
+\ln g(\theta\mid y) \approx \ln g(\theta^*\mid y) + \frac{1}{2}\left(\theta - \theta^*\right)^\mathsf{T} \cdot \mathsf{B} \cdot \left(\theta - \theta^*\right),
+\end{align}
+\]</span></p>
+<p>where <span class="math inline">\(\mathsf{B}\)</span> is the symmetric <strong>Hessian matrix</strong> of second derivatives, with entries</p>
+<p><span class="math display">\[\begin{align}
+B_{ij} = \left.\frac{\partial^2\,\ln g(\theta\mid y)}{\partial \theta_i\,\partial \theta_j}\right|_{\theta = \theta^*}.
+\end{align}
+\]</span></p>
+<p>In one dimension, this is</p>
+<p><span class="math display">\[\begin{align}
+\ln g(\theta\mid y) \approx \ln g(\theta^*\mid y) + \frac{1}{2}\left(\left.\frac{\partial^2\,\ln g(\theta\mid y)}{\partial \theta^2}\right|_{\theta = \theta^*}\right) \left(\theta - \theta^*\right)^2 = \ln g(\theta^*\mid y) - \frac{\left(\theta - \theta^*\right)^2}{2\sigma^2},
+\end{align}
+\]</span></p>
+<p>where we have defined</p>
+<p><span class="math display">\[\begin{align}
+\sigma^2 = -\left(\left.\frac{\partial^2\,\ln g(\theta\mid y)}{\partial \theta^2}\right|_{\theta = \theta^*}\right)^{-1}.
+\end{align}
+\]</span></p>
+<p>We note that the <span class="math inline">\(-(\theta-\theta^*)^2/2\sigma^2\)</span> term is the <span class="math inline">\(\theta\)</span>-dependence of the logarithm of the PDF of a Normal distribution! We can therefore locally approximate the posterior distribution as Normal near the MAP;</p>
+<p><span class="math display">\[\begin{align}
+g(\theta\mid y) \approx \frac{1}{\sqrt{2\pi\sigma^2}}\,\exp\left[-\frac{\left(\theta - \theta^*\right)^2}{2\sigma^2}\right].
+\end{align}
+\]</span></p>
+<p>This generalizes to multiple dimensions, where the covariance matrix <span class="math inline">\(\mathsf{\Sigma}\)</span> of the approximate multivariate Normal distribution is related to the Hessian matrix by</p>
+<p><span class="math display">\[\begin{align}
+\mathsf{\Sigma} = - \mathsf{B}^{-1}.
+\end{align}
+\]</span></p>
+<p>Note that the covariance matrix is <strong>not</strong> the inverse of every element of the Hessian; it is the inverse of the Hessian <em>matrix</em>. Note also that optimization theory tells us that because the Hessian is evaluated at <span class="math inline">\(\theta^*\)</span>, which maximizes the posterior, the Hessian must be negative definite. Therefore, the covariance matrix must be positive definite, which we already know must by the case for a multivariate Normal distribution.</p>
+<section id="demonstration-of-the-normal-approximation" class="level3" data-number="30.1.1">
+<h3 data-number="30.1.1" class="anchored" data-anchor-id="demonstration-of-the-normal-approximation"><span class="header-section-number">30.1.1</span> Demonstration of the Normal approximation</h3>
+<p>Actually, the probability density function of <em>any</em> continuous, peaked distribution can be approximated as Normal near a peak. We can demonstrate this fact by approximating a Gamma distribution locally as Normal. Recall that the PDF for a Gamma distribution is</p>
+<p><span class="math display">\[\begin{align}
+f(x ; \alpha, \beta) = \frac{1}{\Gamma(\alpha)}\,\frac{(\beta x)^\alpha}{x}\,\mathrm{e}^{-\beta x}.
+\end{align}\]</span></p>
+<p>We can analytically find the mode by setting</p>
+<p><span class="math display">\[\begin{align}
+\frac{\mathrm{d}\,\ln f}{\mathrm{d}x} = \frac{\mathrm{d}}{\mathrm{d}x}\left((\alpha-1)\ln x - \beta x\right) = \frac{\alpha-1}{x} - \beta = 0,
+\end{align}\]</span></p>
+<p>and solving to get <span class="math inline">\(x^* = (\alpha - 1) / \beta\)</span>. We can also compute the second derivative as</p>
+<p><span class="math display">\[\begin{align}
+\frac{\mathrm{d}^2\,\ln f}{\mathrm{d}x^2} = -\frac{\alpha - 1}{x^2},
+\end{align}\]</span></p>
+<p>which evaluated at <span class="math inline">\(x^*\)</span> is <span class="math inline">\(-\beta^2 / (\alpha - 1)\)</span>. Therefore, the scale parameter for the approximate Normal distribution is <span class="math inline">\(\sigma = \sqrt{\alpha - 1} / \beta\)</span>. We can plot the distribution and its Normal approximation as a visualization. We do this for <span class="math inline">\(\alpha = 50\)</span> and <span class="math inline">\(\beta = 20\)</span>.</p>
+<div id="cell-6" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">400</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="dv">50</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>beta <span class="op">=</span> <span class="dv">20</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>y_gamma <span class="op">=</span> st.gamma.pdf(x, alpha, loc<span class="op">=</span><span class="dv">0</span>, scale<span class="op">=</span><span class="dv">1</span> <span class="op">/</span> beta)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>y_norm <span class="op">=</span> st.norm.pdf(x, (alpha <span class="op">-</span> <span class="dv">1</span>) <span class="op">/</span> beta, np.sqrt(alpha <span class="op">-</span> <span class="dv">1</span>) <span class="op">/</span> beta)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> bokeh.plotting.figure(</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    frame_width<span class="op">=</span><span class="dv">400</span>,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    frame_height<span class="op">=</span><span class="dv">200</span>,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    x_range<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">5</span>],</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    x_axis_label<span class="op">=</span><span class="st">"x"</span>,</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    y_axis_label<span class="op">=</span><span class="st">"PDF"</span>,</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>p.line(x, y_gamma, line_width<span class="op">=</span><span class="dv">2</span>, legend_label<span class="op">=</span><span class="st">"Gamma"</span>)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>p.line(x, y_norm, line_width<span class="op">=</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">"tomato"</span>, legend_label<span class="op">=</span><span class="st">"Normal"</span>)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+
+  <div id="f050be7f-8727-43f4-baf7-407d65d26cdb" data-root-id="p1003" style="display: contents;"></div>
+</div>
+<div class="cell-output cell-output-display">
+<script type="application/javascript">
+(function(root) {
+  function embed_document(root) {
+  const docs_json = {"b001ff3e-7ab2-4837-afd3-26ce435e37c3":{"version":"3.7.3","title":"Bokeh Application","roots":[{"type":"object","name":"Figure","id":"p1003","attributes":{"x_range":{"type":"object","name":"Range1d","id":"p1012","attributes":{"start":1,"end":5}},"y_range":{"type":"object","name":"DataRange1d","id":"p1005"},"x_scale":{"type":"object","name":"LinearScale","id":"p1013"},"y_scale":{"type":"object","name":"LinearScale","id":"p1014"},"title":{"type":"object","name":"Title","id":"p1010"},"renderers":[{"type":"object","name":"GlyphRenderer","id":"p1044","attributes":{"data_source":{"type":"object","name":"ColumnDataSource","id":"p1038","attributes":{"selected":{"type":"object","name":"Selection","id":"p1039","attributes":{"indices":[],"line_indices":[]}},"selection_policy":{"type":"object","name":"UnionRenderers","id":"p1040"},"data":{"type":"map","entries":[["x",{"type":"ndarray","array":{"type":"bytes","data":"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"},"shape":[400],"dtype":"float64","order":"little"}],["y",{"type":"ndarray","array":{"type":"bytes","data":"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"},"shape":[400],"dtype":"float64","order":"little"}]]}}},"view":{"type":"object","name":"CDSView","id":"p1045","attributes":{"filter":{"type":"object","name":"AllIndices","id":"p1046"}}},"glyph":{"type":"object","name":"Line","id":"p1041","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"line_color":"#1f77b4","line_width":2}},"nonselection_glyph":{"type":"object","name":"Line","id":"p1042","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"line_color":"#1f77b4","line_alpha":0.1,"line_width":2}},"muted_glyph":{"type":"object","name":"Line","id":"p1043","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"line_color":"#1f77b4","line_alpha":0.2,"line_width":2}}}},{"type":"object","name":"GlyphRenderer","id":"p1055","attributes":{"data_source":{"type":"object","name":"ColumnDataSource","id":"p1049","attributes":{"selected":{"type":"object","name":"Selection","id":"p1050","attributes":{"indices":[],"line_indices":[]}},"selection_policy":{"type":"object","name":"UnionRenderers","id":"p1051"},"data":{"type":"map","entries":[["x",{"type":"ndarray","array":{"type":"bytes","data":"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"},"shape":[400],"dtype":"float64","order":"little"}],["y",{"type":"ndarray","array":{"type":"bytes","data":"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"},"shape":[400],"dtype":"float64","order":"little"}]]}}},"view":{"type":"object","name":"CDSView","id":"p1056","attributes":{"filter":{"type":"object","name":"AllIndices","id":"p1057"}}},"glyph":{"type":"object","name":"Line","id":"p1052","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"line_color":"tomato","line_width":2}},"nonselection_glyph":{"type":"object","name":"Line","id":"p1053","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"line_color":"tomato","line_alpha":0.1,"line_width":2}},"muted_glyph":{"type":"object","name":"Line","id":"p1054","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"line_color":"tomato","line_alpha":0.2,"line_width":2}}}}],"toolbar":{"type":"object","name":"Toolbar","id":"p1011","attributes":{"tools":[{"type":"object","name":"PanTool","id":"p1025"},{"type":"object","name":"WheelZoomTool","id":"p1026","attributes":{"renderers":"auto"}},{"type":"object","name":"BoxZoomTool","id":"p1027","attributes":{"dimensions":"both","overlay":{"type":"object","name":"BoxAnnotation","id":"p1028","attributes":{"syncable":false,"line_color":"black","line_alpha":1.0,"line_width":2,"line_dash":[4,4],"fill_color":"lightgrey","fill_alpha":0.5,"level":"overlay","visible":false,"left":{"type":"number","value":"nan"},"right":{"type":"number","value":"nan"},"top":{"type":"number","value":"nan"},"bottom":{"type":"number","value":"nan"},"left_units":"canvas","right_units":"canvas","top_units":"canvas","bottom_units":"canvas","handles":{"type":"object","name":"BoxInteractionHandles","id":"p1034","attributes":{"all":{"type":"object","name":"AreaVisuals","id":"p1033","attributes":{"fill_color":"white","hover_fill_color":"lightgray"}}}}}}}},{"type":"object","name":"SaveTool","id":"p1035"},{"type":"object","name":"ResetTool","id":"p1036"},{"type":"object","name":"HelpTool","id":"p1037"}]}},"left":[{"type":"object","name":"LinearAxis","id":"p1020","attributes":{"ticker":{"type":"object","name":"BasicTicker","id":"p1021","attributes":{"mantissas":[1,2,5]}},"formatter":{"type":"object","name":"BasicTickFormatter","id":"p1022"},"axis_label":"PDF","major_label_policy":{"type":"object","name":"AllLabels","id":"p1023"}}}],"below":[{"type":"object","name":"LinearAxis","id":"p1015","attributes":{"ticker":{"type":"object","name":"BasicTicker","id":"p1016","attributes":{"mantissas":[1,2,5]}},"formatter":{"type":"object","name":"BasicTickFormatter","id":"p1017"},"axis_label":"x","major_label_policy":{"type":"object","name":"AllLabels","id":"p1018"}}}],"center":[{"type":"object","name":"Grid","id":"p1019","attributes":{"axis":{"id":"p1015"}}},{"type":"object","name":"Grid","id":"p1024","attributes":{"dimension":1,"axis":{"id":"p1020"}}},{"type":"object","name":"Legend","id":"p1047","attributes":{"items":[{"type":"object","name":"LegendItem","id":"p1048","attributes":{"label":{"type":"value","value":"Gamma"},"renderers":[{"id":"p1044"}]}},{"type":"object","name":"LegendItem","id":"p1058","attributes":{"label":{"type":"value","value":"Normal"},"renderers":[{"id":"p1055"}]}}]}}],"frame_width":400,"frame_height":200}}]}};
+  const render_items = [{"docid":"b001ff3e-7ab2-4837-afd3-26ce435e37c3","roots":{"p1003":"f050be7f-8727-43f4-baf7-407d65d26cdb"},"root_ids":["p1003"]}];
+  void root.Bokeh.embed.embed_items_notebook(docs_json, render_items);
+  }
+  if (root.Bokeh !== undefined) {
+    embed_document(root);
+  } else {
+    let attempts = 0;
+    const timer = setInterval(function(root) {
+      if (root.Bokeh !== undefined) {
+        clearInterval(timer);
+        embed_document(root);
+      } else {
+        attempts++;
+        if (attempts > 100) {
+          clearInterval(timer);
+          console.log("Bokeh: ERROR: Unable to run BokehJS code because BokehJS library is missing");
+        }
+      }
+    }, 10, root)
+  }
+})(window);
+</script>
+</div>
+</div>
+</section>
+</section>
+<section id="credible-intervals" class="level2" data-number="30.2">
+<h2 data-number="30.2" class="anchored" data-anchor-id="credible-intervals"><span class="header-section-number">30.2</span> Credible intervals</h2>
+<p>A <span class="math inline">\(\alpha\)</span>-percent Bayesian <strong>credible interval</strong> for a parameter is an an interval that contains <span class="math inline">\(\alpha\)</span> percent of the posterior probability density. (This is different form a frequentist confidence interval, though a confidence interval is often erroneously interpreted as a credible interval.) For example, if <span class="math inline">\(g(\theta \mid y)\)</span> is the marginalized posterior probability density function for a single parameter <span class="math inline">\(\theta\)</span> and <span class="math inline">\(G(\theta\mid y)\)</span> is the cumulative distribution function, then a 95% credible interval is <span class="math inline">\([G^{-1}(0.025),\;G^{-1}(0.975)]\)</span>.</p>
+<p>If we approximate the posterior as a multivariate Normal distribution, we have <em>analytical</em> results for credible intervals for each parameter. This is the main benefit of using optimization; it affords us an approximate (Normal) expression for the posterior that has convenient, known analytical results. This enables us to make sense of the posterior.</p>
+<p>Specifically, if <span class="math inline">\(\Sigma_{ii}\)</span> is a diagonal element in the covariance matrix <span class="math inline">\(\mathsf{\Sigma}\)</span>, then, e.g., the 95% credible interval for parameter <span class="math inline">\(\theta_i\)</span> is centered on the MAP estimate, <span class="math inline">\(\theta_i^*\)</span> and is <span class="math inline">\([\theta_i^* - 1.96\sqrt{\Sigma_{ii}},\;\theta_i^* + 1.96\sqrt{\Sigma_{ii}}]\)</span>. Because the credible intervals are symmetric under this approximation, we can report the estimates as the <span class="math inline">\(\theta_i^* \pm 1.96 \sqrt{\Sigma_{ii}}\)</span>.</p>
+<section id="credible-intervals-may-be-skewed" class="level3" data-number="30.2.1">
+<h3 data-number="30.2.1" class="anchored" data-anchor-id="credible-intervals-may-be-skewed"><span class="header-section-number">30.2.1</span> Credible intervals may be skewed</h3>
+<p>We are approximating the <em>PDF</em> of a distribution close to its mode as Normal. However, for an asymmetric distribution, which posterior distributions can certainly be, the mode may not be all that relevant as far as credible regions go. As an extreme example, consider an Exponential distribution. It’s mode is zero, which is also the minimal allowed value. If we were to compute a central 95% credible region for a posterior that happened to be Exponential, the mode would not be included. In cases like these, though the Normal distribution approximately describes the PDF of the posterior near the MAP, the Normal approximation can lead to rather flawed credible regions.</p>
+<p>To demonstrate this, let us again return to the Gamma example, this time with <span class="math inline">\(\alpha = 5\)</span> and <span class="math inline">\(\beta = 2\)</span>. The mode of this Gamma distribution is 2, but the median is about 2.34. If we look graphically, we can see right away that the Normal approximation is not as good as the <span class="math inline">\(\alpha = 50\)</span>, <span class="math inline">\(\beta = 20\)</span> case.</p>
+<div id="cell-9" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">8</span>, <span class="dv">400</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>beta <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>y_gamma <span class="op">=</span> st.gamma.pdf(x, alpha, loc<span class="op">=</span><span class="dv">0</span>, scale<span class="op">=</span><span class="dv">1</span> <span class="op">/</span> beta)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>y_norm <span class="op">=</span> st.norm.pdf(x, (alpha <span class="op">-</span> <span class="dv">1</span>) <span class="op">/</span> beta, np.sqrt(alpha <span class="op">-</span> <span class="dv">1</span>) <span class="op">/</span> beta)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> bokeh.plotting.figure(</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    frame_width<span class="op">=</span><span class="dv">400</span>,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    frame_height<span class="op">=</span><span class="dv">200</span>,</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    x_range<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">8</span>],</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    x_axis_label<span class="op">=</span><span class="st">"x"</span>,</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    y_axis_label<span class="op">=</span><span class="st">"PDF"</span>,</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>p.line(x, y_gamma, line_width<span class="op">=</span><span class="dv">2</span>, legend_label<span class="op">=</span><span class="st">"Gamma"</span>)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>p.line(x, y_norm, line_width<span class="op">=</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">"tomato"</span>, legend_label<span class="op">=</span><span class="st">"Normal"</span>)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+
+  <div id="e0cf369d-5df0-4495-b6d9-3b7544069cb0" data-root-id="p1063" style="display: contents;"></div>
+</div>
+<div class="cell-output cell-output-display">
+<script type="application/javascript">
+(function(root) {
+  function embed_document(root) {
+  const docs_json = {"95c6484d-2a5c-4225-a183-1959cee0f0c0":{"version":"3.7.3","title":"Bokeh Application","roots":[{"type":"object","name":"Figure","id":"p1063","attributes":{"x_range":{"type":"object","name":"Range1d","id":"p1072","attributes":{"end":8}},"y_range":{"type":"object","name":"DataRange1d","id":"p1065"},"x_scale":{"type":"object","name":"LinearScale","id":"p1073"},"y_scale":{"type":"object","name":"LinearScale","id":"p1074"},"title":{"type":"object","name":"Title","id":"p1070"},"renderers":[{"type":"object","name":"GlyphRenderer","id":"p1104","attributes":{"data_source":{"type":"object","name":"ColumnDataSource","id":"p1098","attributes":{"selected":{"type":"object","name":"Selection","id":"p1099","attributes":{"indices":[],"line_indices":[]}},"selection_policy":{"type":"object","name":"UnionRenderers","id":"p1100"},"data":{"type":"map","entries":[["x",{"type":"ndarray","array":{"type":"bytes","data":"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"},"shape":[400],"dtype":"float64","order":"little"}],["y",{"type":"ndarray","array":{"type":"bytes","data":"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"},"shape":[400],"dtype":"float64","order":"little"}]]}}},"view":{"type":"object","name":"CDSView","id":"p1105","attributes":{"filter":{"type":"object","name":"AllIndices","id":"p1106"}}},"glyph":{"type":"object","name":"Line","id":"p1101","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"line_color":"#1f77b4","line_width":2}},"nonselection_glyph":{"type":"object","name":"Line","id":"p1102","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"line_color":"#1f77b4","line_alpha":0.1,"line_width":2}},"muted_glyph":{"type":"object","name":"Line","id":"p1103","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"line_color":"#1f77b4","line_alpha":0.2,"line_width":2}}}},{"type":"object","name":"GlyphRenderer","id":"p1115","attributes":{"data_source":{"type":"object","name":"ColumnDataSource","id":"p1109","attributes":{"selected":{"type":"object","name":"Selection","id":"p1110","attributes":{"indices":[],"line_indices":[]}},"selection_policy":{"type":"object","name":"UnionRenderers","id":"p1111"},"data":{"type":"map","entries":[["x",{"type":"ndarray","array":{"type":"bytes","data":"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"},"shape":[400],"dtype":"float64","order":"little"}],["y",{"type":"ndarray","array":{"type":"bytes","data":"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"},"shape":[400],"dtype":"float64","order":"little"}]]}}},"view":{"type":"object","name":"CDSView","id":"p1116","attributes":{"filter":{"type":"object","name":"AllIndices","id":"p1117"}}},"glyph":{"type":"object","name":"Line","id":"p1112","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"line_color":"tomato","line_width":2}},"nonselection_glyph":{"type":"object","name":"Line","id":"p1113","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"line_color":"tomato","line_alpha":0.1,"line_width":2}},"muted_glyph":{"type":"object","name":"Line","id":"p1114","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"line_color":"tomato","line_alpha":0.2,"line_width":2}}}}],"toolbar":{"type":"object","name":"Toolbar","id":"p1071","attributes":{"tools":[{"type":"object","name":"PanTool","id":"p1085"},{"type":"object","name":"WheelZoomTool","id":"p1086","attributes":{"renderers":"auto"}},{"type":"object","name":"BoxZoomTool","id":"p1087","attributes":{"dimensions":"both","overlay":{"type":"object","name":"BoxAnnotation","id":"p1088","attributes":{"syncable":false,"line_color":"black","line_alpha":1.0,"line_width":2,"line_dash":[4,4],"fill_color":"lightgrey","fill_alpha":0.5,"level":"overlay","visible":false,"left":{"type":"number","value":"nan"},"right":{"type":"number","value":"nan"},"top":{"type":"number","value":"nan"},"bottom":{"type":"number","value":"nan"},"left_units":"canvas","right_units":"canvas","top_units":"canvas","bottom_units":"canvas","handles":{"type":"object","name":"BoxInteractionHandles","id":"p1094","attributes":{"all":{"type":"object","name":"AreaVisuals","id":"p1093","attributes":{"fill_color":"white","hover_fill_color":"lightgray"}}}}}}}},{"type":"object","name":"SaveTool","id":"p1095"},{"type":"object","name":"ResetTool","id":"p1096"},{"type":"object","name":"HelpTool","id":"p1097"}]}},"left":[{"type":"object","name":"LinearAxis","id":"p1080","attributes":{"ticker":{"type":"object","name":"BasicTicker","id":"p1081","attributes":{"mantissas":[1,2,5]}},"formatter":{"type":"object","name":"BasicTickFormatter","id":"p1082"},"axis_label":"PDF","major_label_policy":{"type":"object","name":"AllLabels","id":"p1083"}}}],"below":[{"type":"object","name":"LinearAxis","id":"p1075","attributes":{"ticker":{"type":"object","name":"BasicTicker","id":"p1076","attributes":{"mantissas":[1,2,5]}},"formatter":{"type":"object","name":"BasicTickFormatter","id":"p1077"},"axis_label":"x","major_label_policy":{"type":"object","name":"AllLabels","id":"p1078"}}}],"center":[{"type":"object","name":"Grid","id":"p1079","attributes":{"axis":{"id":"p1075"}}},{"type":"object","name":"Grid","id":"p1084","attributes":{"dimension":1,"axis":{"id":"p1080"}}},{"type":"object","name":"Legend","id":"p1107","attributes":{"items":[{"type":"object","name":"LegendItem","id":"p1108","attributes":{"label":{"type":"value","value":"Gamma"},"renderers":[{"id":"p1104"}]}},{"type":"object","name":"LegendItem","id":"p1118","attributes":{"label":{"type":"value","value":"Normal"},"renderers":[{"id":"p1115"}]}}]}}],"frame_width":400,"frame_height":200}}]}};
+  const render_items = [{"docid":"95c6484d-2a5c-4225-a183-1959cee0f0c0","roots":{"p1063":"e0cf369d-5df0-4495-b6d9-3b7544069cb0"},"root_ids":["p1063"]}];
+  void root.Bokeh.embed.embed_items_notebook(docs_json, render_items);
+  }
+  if (root.Bokeh !== undefined) {
+    embed_document(root);
+  } else {
+    let attempts = 0;
+    const timer = setInterval(function(root) {
+      if (root.Bokeh !== undefined) {
+        clearInterval(timer);
+        embed_document(root);
+      } else {
+        attempts++;
+        if (attempts > 100) {
+          clearInterval(timer);
+          console.log("Bokeh: ERROR: Unable to run BokehJS code because BokehJS library is missing");
+        }
+      }
+    }, 10, root)
+  }
+})(window);
+</script>
+</div>
+</div>
+<p>Let’s look at how this will affect the credible intervals. We will compute the lower and upper bound to a credible interval directly from the Gamma distribution and from its Normal approximation. We can compute credible intervals using the <code>ppf()</code> method of distributions in <code>scipy.stats</code>, which returns the inverse of the CDF. We can then plot the 1%, …, 99% credible intervals for the Gamma distribution and for its Normal approximation.</p>
+<div id="cell-11" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>perc_cred_int <span class="op">=</span> np.linspace(<span class="dv">1</span>, <span class="dv">99</span>, <span class="dv">200</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>mu <span class="op">=</span> (alpha <span class="op">-</span> <span class="dv">1</span>) <span class="op">/</span> beta</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>sigma <span class="op">=</span> np.sqrt(alpha <span class="op">-</span> <span class="dv">1</span>) <span class="op">/</span> beta</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>gamma_low <span class="op">=</span> st.gamma.ppf((<span class="dv">50</span> <span class="op">-</span> perc_cred_int <span class="op">/</span> <span class="dv">2</span>) <span class="op">/</span> <span class="dv">100</span>, alpha, loc<span class="op">=</span><span class="dv">0</span>, scale<span class="op">=</span><span class="dv">1</span> <span class="op">/</span> beta)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>gamma_high <span class="op">=</span> st.gamma.ppf((<span class="dv">50</span> <span class="op">+</span> perc_cred_int <span class="op">/</span> <span class="dv">2</span>) <span class="op">/</span> <span class="dv">100</span>, alpha, loc<span class="op">=</span><span class="dv">0</span>, scale<span class="op">=</span><span class="dv">1</span> <span class="op">/</span> beta)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>norm_low <span class="op">=</span> st.norm.ppf((<span class="dv">50</span> <span class="op">-</span> perc_cred_int <span class="op">/</span> <span class="dv">2</span>) <span class="op">/</span> <span class="dv">100</span>, mu, sigma)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>norm_high <span class="op">=</span> st.norm.ppf((<span class="dv">50</span> <span class="op">+</span> perc_cred_int <span class="op">/</span> <span class="dv">2</span>) <span class="op">/</span> <span class="dv">100</span>, mu, sigma)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> bebi103.viz.fill_between(</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    gamma_low,</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    perc_cred_int,</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    gamma_high,</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    perc_cred_int,</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    patch_kwargs<span class="op">=</span><span class="bu">dict</span>(alpha<span class="op">=</span><span class="fl">0.5</span>),</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    x_axis_label<span class="op">=</span><span class="st">"x"</span>,</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    y_axis_label<span class="op">=</span><span class="st">"percent credible interval"</span>,</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    y_range<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">100</span>],</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> bebi103.viz.fill_between(</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    norm_low,</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    perc_cred_int,</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    norm_high,</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    perc_cred_int,</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>    patch_kwargs<span class="op">=</span><span class="bu">dict</span>(alpha<span class="op">=</span><span class="fl">0.5</span>, color<span class="op">=</span><span class="st">"tomato"</span>),</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>    line_kwargs<span class="op">=</span><span class="bu">dict</span>(color<span class="op">=</span><span class="st">"tomato"</span>),</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>    p<span class="op">=</span>p,</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+
+  <div id="f246a501-d648-43b7-9adf-1e712998eb40" data-root-id="p1123" style="display: contents;"></div>
+</div>
+<div class="cell-output cell-output-display">
+<script type="application/javascript">
+(function(root) {
+  function embed_document(root) {
+  const docs_json = {"2a3a5d90-b38c-4b83-8890-6f708a2d766c":{"version":"3.7.3","title":"Bokeh Application","roots":[{"type":"object","name":"Figure","id":"p1123","attributes":{"x_range":{"type":"object","name":"DataRange1d","id":"p1125"},"y_range":{"type":"object","name":"Range1d","id":"p1132","attributes":{"end":100}},"x_scale":{"type":"object","name":"LinearScale","id":"p1133"},"y_scale":{"type":"object","name":"LinearScale","id":"p1134"},"title":{"type":"object","name":"Title","id":"p1130"},"renderers":[{"type":"object","name":"GlyphRenderer","id":"p1164","attributes":{"data_source":{"type":"object","name":"ColumnDataSource","id":"p1158","attributes":{"selected":{"type":"object","name":"Selection","id":"p1159","attributes":{"indices":[],"line_indices":[]}},"selection_policy":{"type":"object","name":"UnionRenderers","id":"p1160"},"data":{"type":"map","entries":[["x",{"type":"ndarray","array":{"type":"bytes","data":"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"},"shape":[400],"dtype":"float64","order":"little"}],["y",{"type":"ndarray","array":{"type":"bytes","data":"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"},"shape":[400],"dtype":"float64","order":"little"}]]}}},"view":{"type":"object","name":"CDSView","id":"p1165","attributes":{"filter":{"type":"object","name":"AllIndices","id":"p1166"}}},"glyph":{"type":"object","name":"Patch","id":"p1161","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"line_color":"#1f77b4","line_alpha":0,"line_width":0,"fill_color":"#1f77b4","fill_alpha":0.5,"hatch_alpha":0.5}},"nonselection_glyph":{"type":"object","name":"Patch","id":"p1162","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"line_color":"#1f77b4","line_alpha":0.1,"line_width":0,"fill_color":"#1f77b4","fill_alpha":0.1,"hatch_alpha":0.1}},"muted_glyph":{"type":"object","name":"Patch","id":"p1163","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"line_color":"#1f77b4","line_alpha":0.2,"line_width":0,"fill_color":"#1f77b4","fill_alpha":0.2,"hatch_alpha":0.2}}}},{"type":"object","name":"GlyphRenderer","id":"p1173","attributes":{"data_source":{"type":"object","name":"ColumnDataSource","id":"p1167","attributes":{"selected":{"type":"object","name":"Selection","id":"p1168","attributes":{"indices":[],"line_indices":[]}},"selection_policy":{"type":"object","name":"UnionRenderers","id":"p1169"},"data":{"type":"map","entries":[["x",{"type":"ndarray","array":{"type":"bytes","data":"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"},"shape":[200],"dtype":"float64","order":"little"}],["y",{"type":"ndarray","array":{"type":"bytes","data":"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"},"shape":[200],"dtype":"float64","order":"little"}]]}}},"view":{"type":"object","name":"CDSView","id":"p1174","attributes":{"filter":{"type":"object","name":"AllIndices","id":"p1175"}}},"glyph":{"type":"object","name":"Line","id":"p1170","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"line_color":"#1f77b4","line_width":2}},"nonselection_glyph":{"type":"object","name":"Line","id":"p1171","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"line_color":"#1f77b4","line_alpha":0.1,"line_width":2}},"muted_glyph":{"type":"object","name":"Line","id":"p1172","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"line_color":"#1f77b4","line_alpha":0.2,"line_width":2}}}},{"type":"object","name":"GlyphRenderer","id":"p1182","attributes":{"data_source":{"type":"object","name":"ColumnDataSource","id":"p1176","attributes":{"selected":{"type":"object","name":"Selection","id":"p1177","attributes":{"indices":[],"line_indices":[]}},"selection_policy":{"type":"object","name":"UnionRenderers","id":"p1178"},"data":{"type":"map","entries":[["x",{"type":"ndarray","array":{"type":"bytes","data":"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"},"shape":[200],"dtype":"float64","order":"little"}],["y",{"type":"ndarray","array":{"type":"bytes","data":"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"},"shape":[200],"dtype":"float64","order":"little"}]]}}},"view":{"type":"object","name":"CDSView","id":"p1183","attributes":{"filter":{"type":"object","name":"AllIndices","id":"p1184"}}},"glyph":{"type":"object","name":"Line","id":"p1179","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"line_color":"#1f77b4","line_width":2}},"nonselection_glyph":{"type":"object","name":"Line","id":"p1180","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"line_color":"#1f77b4","line_alpha":0.1,"line_width":2}},"muted_glyph":{"type":"object","name":"Line","id":"p1181","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"line_color":"#1f77b4","line_alpha":0.2,"line_width":2}}}},{"type":"object","name":"GlyphRenderer","id":"p1191","attributes":{"data_source":{"type":"object","name":"ColumnDataSource","id":"p1185","attributes":{"selected":{"type":"object","name":"Selection","id":"p1186","attributes":{"indices":[],"line_indices":[]}},"selection_policy":{"type":"object","name":"UnionRenderers","id":"p1187"},"data":{"type":"map","entries":[["x",{"type":"ndarray","array":{"type":"bytes","data":"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"},"shape":[400],"dtype":"float64","order":"little"}],["y",{"type":"ndarray","array":{"type":"bytes","data":"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"},"shape":[400],"dtype":"float64","order":"little"}]]}}},"view":{"type":"object","name":"CDSView","id":"p1192","attributes":{"filter":{"type":"object","name":"AllIndices","id":"p1193"}}},"glyph":{"type":"object","name":"Patch","id":"p1188","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"line_color":"tomato","line_alpha":0,"line_width":0,"fill_color":"tomato","fill_alpha":0.5,"hatch_color":"tomato","hatch_alpha":0.5}},"nonselection_glyph":{"type":"object","name":"Patch","id":"p1189","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"line_color":"tomato","line_alpha":0.1,"line_width":0,"fill_color":"tomato","fill_alpha":0.1,"hatch_color":"tomato","hatch_alpha":0.1}},"muted_glyph":{"type":"object","name":"Patch","id":"p1190","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"line_color":"tomato","line_alpha":0.2,"line_width":0,"fill_color":"tomato","fill_alpha":0.2,"hatch_color":"tomato","hatch_alpha":0.2}}}},{"type":"object","name":"GlyphRenderer","id":"p1200","attributes":{"data_source":{"type":"object","name":"ColumnDataSource","id":"p1194","attributes":{"selected":{"type":"object","name":"Selection","id":"p1195","attributes":{"indices":[],"line_indices":[]}},"selection_policy":{"type":"object","name":"UnionRenderers","id":"p1196"},"data":{"type":"map","entries":[["x",{"type":"ndarray","array":{"type":"bytes","data":"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"},"shape":[200],"dtype":"float64","order":"little"}],["y",{"type":"ndarray","array":{"type":"bytes","data":"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"},"shape":[200],"dtype":"float64","order":"little"}]]}}},"view":{"type":"object","name":"CDSView","id":"p1201","attributes":{"filter":{"type":"object","name":"AllIndices","id":"p1202"}}},"glyph":{"type":"object","name":"Line","id":"p1197","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"line_color":"tomato","line_width":2}},"nonselection_glyph":{"type":"object","name":"Line","id":"p1198","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"line_color":"tomato","line_alpha":0.1,"line_width":2}},"muted_glyph":{"type":"object","name":"Line","id":"p1199","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"line_color":"tomato","line_alpha":0.2,"line_width":2}}}},{"type":"object","name":"GlyphRenderer","id":"p1209","attributes":{"data_source":{"type":"object","name":"ColumnDataSource","id":"p1203","attributes":{"selected":{"type":"object","name":"Selection","id":"p1204","attributes":{"indices":[],"line_indices":[]}},"selection_policy":{"type":"object","name":"UnionRenderers","id":"p1205"},"data":{"type":"map","entries":[["x",{"type":"ndarray","array":{"type":"bytes","data":"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"},"shape":[200],"dtype":"float64","order":"little"}],["y",{"type":"ndarray","array":{"type":"bytes","data":"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"},"shape":[200],"dtype":"float64","order":"little"}]]}}},"view":{"type":"object","name":"CDSView","id":"p1210","attributes":{"filter":{"type":"object","name":"AllIndices","id":"p1211"}}},"glyph":{"type":"object","name":"Line","id":"p1206","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"line_color":"tomato","line_width":2}},"nonselection_glyph":{"type":"object","name":"Line","id":"p1207","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"line_color":"tomato","line_alpha":0.1,"line_width":2}},"muted_glyph":{"type":"object","name":"Line","id":"p1208","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"line_color":"tomato","line_alpha":0.2,"line_width":2}}}}],"toolbar":{"type":"object","name":"Toolbar","id":"p1131","attributes":{"tools":[{"type":"object","name":"PanTool","id":"p1145"},{"type":"object","name":"WheelZoomTool","id":"p1146","attributes":{"renderers":"auto"}},{"type":"object","name":"BoxZoomTool","id":"p1147","attributes":{"dimensions":"both","overlay":{"type":"object","name":"BoxAnnotation","id":"p1148","attributes":{"syncable":false,"line_color":"black","line_alpha":1.0,"line_width":2,"line_dash":[4,4],"fill_color":"lightgrey","fill_alpha":0.5,"level":"overlay","visible":false,"left":{"type":"number","value":"nan"},"right":{"type":"number","value":"nan"},"top":{"type":"number","value":"nan"},"bottom":{"type":"number","value":"nan"},"left_units":"canvas","right_units":"canvas","top_units":"canvas","bottom_units":"canvas","handles":{"type":"object","name":"BoxInteractionHandles","id":"p1154","attributes":{"all":{"type":"object","name":"AreaVisuals","id":"p1153","attributes":{"fill_color":"white","hover_fill_color":"lightgray"}}}}}}}},{"type":"object","name":"SaveTool","id":"p1155"},{"type":"object","name":"ResetTool","id":"p1156"},{"type":"object","name":"HelpTool","id":"p1157"}]}},"left":[{"type":"object","name":"LinearAxis","id":"p1140","attributes":{"ticker":{"type":"object","name":"BasicTicker","id":"p1141","attributes":{"mantissas":[1,2,5]}},"formatter":{"type":"object","name":"BasicTickFormatter","id":"p1142"},"axis_label":"percent credible interval","major_label_policy":{"type":"object","name":"AllLabels","id":"p1143"}}}],"below":[{"type":"object","name":"LinearAxis","id":"p1135","attributes":{"ticker":{"type":"object","name":"BasicTicker","id":"p1136","attributes":{"mantissas":[1,2,5]}},"formatter":{"type":"object","name":"BasicTickFormatter","id":"p1137"},"axis_label":"x","major_label_policy":{"type":"object","name":"AllLabels","id":"p1138"}}}],"center":[{"type":"object","name":"Grid","id":"p1139","attributes":{"axis":{"id":"p1135"}}},{"type":"object","name":"Grid","id":"p1144","attributes":{"dimension":1,"axis":{"id":"p1140"}}}],"frame_width":350,"frame_height":275}}]}};
+  const render_items = [{"docid":"2a3a5d90-b38c-4b83-8890-6f708a2d766c","roots":{"p1123":"f246a501-d648-43b7-9adf-1e712998eb40"},"root_ids":["p1123"]}];
+  void root.Bokeh.embed.embed_items_notebook(docs_json, render_items);
+  }
+  if (root.Bokeh !== undefined) {
+    embed_document(root);
+  } else {
+    let attempts = 0;
+    const timer = setInterval(function(root) {
+      if (root.Bokeh !== undefined) {
+        clearInterval(timer);
+        embed_document(root);
+      } else {
+        attempts++;
+        if (attempts > 100) {
+          clearInterval(timer);
+          console.log("Bokeh: ERROR: Unable to run BokehJS code because BokehJS library is missing");
+        }
+      }
+    }, 10, root)
+  }
+})(window);
+</script>
+</div>
+</div>
+<p>For tiny credible intervals, the shift is clear. The median for a Gamma distribution with these parameters is shifted rightward from its mode, whereas the mode and median for a Normal distribution are equal. As we get broader credible intervals, the Normal approximation notably has the 99% credible interval containing negative values (not allowed for a Gamma distribution) and missing important values at the high end.</p>
+</section>
+</section>
+<section id="why-use-the-map-for-parameter-estimation" class="level2" data-number="30.3">
+<h2 data-number="30.3" class="anchored" data-anchor-id="why-use-the-map-for-parameter-estimation"><span class="header-section-number">30.3</span> Why use the MAP for parameter estimation?</h2>
+<p>Despite these drawbacks, using the MAP/Normal approximation for parameter estimation is still useful in Bayesian inference for two classes of problem. Why? The most important reason is speed.</p>
+<p>The first class of problem for which optimization may be useful is simple, well-behaved problems. For these, optimization is <em>much</em> faster than other methods for characterizing the posterior, such as directly plotting it or using Markov chain Monte Carlo. If you have high-throughput data, you may not have the computational resources to do a full Bayesian treatment with other methods. Provided your model that is tractable by optimization method, finding the MAP and summarizing with an approximate Normal distribution is an attractive method.</p>
+<p>The second class of problem is for models that are specifically designed with a structure amenable for inference using optimization. This seems odd. Why would one design a model for use of a method in place of a model that is the best effort to model the generative process? In practice, we do need to tweak models even when using MCMC to make sense of the full posterior, since some models are very difficult to sample. In very large models, particularly those used in machine learning and AI applications, tractability is a major concern, and optimization methods, typically with specifically designed algorithms which are beyond the scope of what we are covering in this course, are essential to get estimates of the parameters of the models.</p>
+<p>Aside from models with structure that is specifically designed for ease of parameter inference by optimization, optimization methods suffer from the <a href="https://en.wikipedia.org/wiki/Curse_of_dimensionality">curse of dimensionality</a>. In general, high-dimensional optimization problems, which is the case for models with a large number of parameters, are very difficult to solve. However, as mentioned above, a common practice is to choose models for which the optimization problems are more tractable, even with large data sets and/or large numbers of parameters. Note that <em>this is a purely pragmatic approach</em>!</p>
+<p>In many cases, the Normal approximation can also be a good approximation. But this is definitely not guaranteed! In real inference problems, it is very difficult to identify pathologies that would lead to breakdown of the Normal approximation, since comparing to the real posterior would involve computationally intensive methods to compute it.</p>
+</section>
+<section id="computing-environment" class="level2" data-number="30.4">
+<h2 data-number="30.4" class="anchored" data-anchor-id="computing-environment"><span class="header-section-number">30.4</span> Computing environment</h2>
+<div id="cell-15" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>load_ext watermark</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>watermark <span class="op">-</span>v <span class="op">-</span>p numpy,scipy,bokeh,bebi103,jupyterlab</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Python implementation: CPython
+Python version       : 3.13.5
+IPython version      : 9.4.0
+
+numpy     : 2.2.6
+scipy     : 1.16.0
+bokeh     : 3.7.3
+bebi103   : 0.1.28
+jupyterlab: 4.4.5
+</code></pre>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/bebi103b\.github\.io\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../lessons/optimization/optimization.html" class="pagination-link" aria-label="Summarizing posterior distributions with maxima">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Summarizing posterior distributions with maxima</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../lessons/optimization/gamma_optimization.html" class="pagination-link" aria-label="Parameter estimation by optimization case study: Gamma likelihood">
+        <span class="nav-page-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Parameter estimation by optimization case study: Gamma likelihood</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p><em>BE/Bi 103 b</em></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

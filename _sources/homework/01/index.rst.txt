@@ -1,8 +1,0 @@
-********************************
-1. Intuitive generative modeling
-********************************
-
-.. toctree::
-   :maxdepth: 1
-
-   hw1.1.ipynb

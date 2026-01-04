@@ -1,0 +1,2002 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>9&nbsp; Modeling nonhomogeneous Poisson spiking – Statistical Inference in the Biological Sciences</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../lessons/sampling/mcmc.html" rel="next">
+<link href="../../lessons/sampling/lif.html" rel="prev">
+<link href="../../logo.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-da61f9a05e9cefe097d79e8430a73dd4.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-7c1dcb25931f0f6f86a40129f542609a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../custom.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../lessons/sampling/simulation.html">Simulating generative distributions</a></li><li class="breadcrumb-item"><a href="../../lessons/sampling/nonhomogeneous_poisson.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Modeling nonhomogeneous Poisson spiking</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../../index.html" class="sidebar-logo-link">
+      <img src="../../logo.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="../../logo.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../"></a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About the course</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Course logistics</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../schedule.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Schedule overview</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../policies.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Course policies</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/what_are_we_doing/what_are_we_doing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">What are we doing?</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../lessons/probability/probability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Probability: The foundation for generative modeling</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/probability/probability_logic_of_science.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probability as the logic of science</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/probability/probability_distributions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Probability distributions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/probability/entropy_and_kullback_leibler.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Entropy and the Kullback-Leibler divergence</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../lessons/sampling/sampling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sampling out of probability distributions</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/sampling/random_number_generation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Random number generation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/sampling/rng_with_numpy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Random number generation using Numpy</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../lessons/sampling/simulation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Simulating generative distributions</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/sampling/luria_delbruck.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Simulating the Luria-Delbrück distribution</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/sampling/lif.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">The noisy leaky integrate-and-fire model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/sampling/nonhomogeneous_poisson.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Modeling nonhomogeneous Poisson spiking</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../lessons/sampling/mcmc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Markov chain Monte Carlo</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/sampling/basics_of_mcmc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">The basics of Markov chain Monte Carlo</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/sampling/stan_hello_world.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">“Hello, world” —Stan</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/sampling/nonhomogeneous_poisson_stan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Nonhomogeneous Poisson process arrival times with Stan</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../lessons/bayesian_modeling/bayesian_modeling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bayesian modeling and inference</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/bayesian_modeling/basics_of_bayes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Basics of Bayesian modeling</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/bayesian_modeling/conjugacy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Conjugacy</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/bayesian_modeling/choice_of_prior.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Choosing priors</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/bayesian_modeling/advice_on_dists.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Advice on using distributions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/bayesian_modeling/stats_ml_ai.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">What about machine learning and artificial intelligence?</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/bayesian_modeling/bayes_model_for_learning_and_cognition.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Bayes's theorem as a model for learning</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/bayesian_modeling/prior_predictive_checks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Model building with prior predictive checks</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../lessons/inference_by_mcmc/inference_by_mcmc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statistical inference with Markov chain Monte Carlo</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/inference_by_mcmc/parameter_estimation_with_mcmc_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Parameter estimation with Markov chain Monte Carlo</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/inference_by_mcmc/display_of_mcmc_samples.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Display of MCMC samples</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/inference_by_mcmc/posterior_summaries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Reporting summaries of the posterior</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/inference_by_mcmc/posterior_predictive_checks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Posterior predictive checks</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../lessons/mixture_models/mixture_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Mixture models</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/mixture_models/mixture_model_stan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Mixture models and label switching with MCMC</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../lessons/model_assessment/model_assessment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Model assessment</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/model_assessment/model_comparison.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Model comparison</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/model_assessment/model_comparison_in_practice.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Model comparison in practice</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../lessons/principled/principled.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Principled inference pipelines</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/principled/mcmc_diagnostics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">MCMC diagnostics via a case study: Artificial funnel of hell</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/principled/sbc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Principled analysis pipelines</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/principled/sbc_in_practice.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Simulation based calibration and related checks in practice</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../lessons/optimization/optimization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Summarizing posterior distributions with maxima</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/optimization/optimization_basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Bayesian approach to parameter estimation by optimization</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/optimization/gamma_optimization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Parameter estimation by optimization case study: Gamma likelihood</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/optimization/mm_algorithms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Minorize-maximize algorithms</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/optimization/em_algorithm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">The expectation-maximization (EM) algorithm</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/optimization/em_gmm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">EM applied to a Gaussian mixture model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/optimization/em_gmm_example.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">An example application of the EM algorithm to a Gaussian mixture model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/optimization/kmeans.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">K-means clustering</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../lessons/variate_covariate/intro_variate_covariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Variate-covariate models</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/variate_covariate/model_building.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Model building</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/variate_covariate/variate_covariate_with_stan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Variate-covariate models with MCMC</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../lessons/hierarchical/hierarchical.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hierarchical models</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/hierarchical/modeling_repeated_experiments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">Modeling repeated experiments</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/hierarchical/choosing_a_hierarchical_prior.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">Choosing a hierarchical prior</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/hierarchical/generalization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">41</span>&nbsp; <span class="chapter-title">Generalization of hierarchical models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/hierarchical/hierarchical_implementation_worms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">42</span>&nbsp; <span class="chapter-title">Implementation of a hierarchical model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/hierarchical/hierarchical_implementation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">43</span>&nbsp; <span class="chapter-title">General implementation of hierarchical models</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../lessons/pca_and_related/pca_and_related.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Principal component analysis and related models</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/pca_and_related/heuristic_pca.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">44</span>&nbsp; <span class="chapter-title">Principal component analysis: A heuristic approach</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/pca_and_related/factor_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">45</span>&nbsp; <span class="chapter-title">Factor analysis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/pca_and_related/pca_nmf_as_fa.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">46</span>&nbsp; <span class="chapter-title">Special cases of factor analysis</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../lessons/HMM/hmm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hidden Markov models</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/HMM/hmm_gaussian_emission.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">47</span>&nbsp; <span class="chapter-title">Hidden Markov models</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../lessons/GLM/glm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Generalized linear models</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/GLM/glm_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">48</span>&nbsp; <span class="chapter-title">Generalized linear models: An introduction</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/GLM/glm_in_practice.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">49</span>&nbsp; <span class="chapter-title">GLMs applied to neurons and aggression</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../lessons/gaussian_processes/gp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Gaussian processes</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-17" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/gaussian_processes/intro_to_gps.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">50</span>&nbsp; <span class="chapter-title">Introduction to Gaussian processes</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/gaussian_processes/gp_hyperparams_by_optimization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">51</span>&nbsp; <span class="chapter-title">Gaussian process hyperparameters by optimization</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/gaussian_processes/mcmc_with_gps.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">52</span>&nbsp; <span class="chapter-title">MCMC with GPs with Normal likelihoods</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/gaussian_processes/gps_and_derivatives.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">53</span>&nbsp; <span class="chapter-title">Calculating derivatives from data with GPs</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/gaussian_processes/gps_without_marginalization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">54</span>&nbsp; <span class="chapter-title">Gaussian processes with non-Normal likelihoods</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="false">
+ <span class="menu-text">Homework</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-18" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../homework/intuitive_modeling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">HW 1.1: First attempts at Bayesian generative modeling</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" role="navigation" aria-expanded="false">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-19" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../appendices/notation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Notation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../appendices/setting_up_python_computing_environment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Configuring your computer to use Python for scientific computing</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">In this section</h2>
+   
+  <ul>
+  <li><a href="#sec-pdf-nonhomogeneous-poisson" id="toc-sec-pdf-nonhomogeneous-poisson" class="nav-link active" data-scroll-target="#sec-pdf-nonhomogeneous-poisson"><span class="header-section-number">9.1</span> The PDF for arrival times of a nonhomogenous Poisson process</a>
+  <ul class="collapse">
+  <li><a href="#multiple-arrivals" id="toc-multiple-arrivals" class="nav-link" data-scroll-target="#multiple-arrivals"><span class="header-section-number">9.1.1</span> Multiple arrivals</a></li>
+  <li><a href="#a-finite-observation-time" id="toc-a-finite-observation-time" class="nav-link" data-scroll-target="#a-finite-observation-time"><span class="header-section-number">9.1.2</span> A finite observation time</a></li>
+  </ul></li>
+  <li><a href="#sec-nonphomogeneous-poisson-pmf" id="toc-sec-nonphomogeneous-poisson-pmf" class="nav-link" data-scroll-target="#sec-nonphomogeneous-poisson-pmf"><span class="header-section-number">9.2</span> PMF for number of arrivals in time interval</a></li>
+  <li><a href="#sec-nonhomogeneous-poisson-sampling" id="toc-sec-nonhomogeneous-poisson-sampling" class="nav-link" data-scroll-target="#sec-nonhomogeneous-poisson-sampling"><span class="header-section-number">9.3</span> Sampling arrval times of a nonhomogeneous Poisson process</a></li>
+  <li><a href="#computing-environment" id="toc-computing-environment" class="nav-link" data-scroll-target="#computing-environment"><span class="header-section-number">9.4</span> Computing environment</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../lessons/sampling/simulation.html">Simulating generative distributions</a></li><li class="breadcrumb-item"><a href="../../lessons/sampling/nonhomogeneous_poisson.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Modeling nonhomogeneous Poisson spiking</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec:variable-spiking" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Modeling nonhomogeneous Poisson spiking</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><a href="https://colab.research.google.com/github/bebi103b/bebi103b_notebooks_2026/blob/main/nonhomogeneous_poisson.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open in Google Colab" title="Open in Google Colab"></a> | <a href="https://raw.githubusercontent.com/bebi103b/bebi103b_notebooks_2026/refs/heads/main/nonhomogeneous_poisson.ipynb">Download notebook</a></p>
+<div id="631a8658" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Colab setup ------------------</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os, sys, subprocess</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">"google.colab"</span> <span class="kw">in</span> sys.modules:</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    cmd <span class="op">=</span> <span class="st">"pip install --upgrade iqplot watermark"</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    process <span class="op">=</span> subprocess.Popen(cmd.split(), stdout<span class="op">=</span>subprocess.PIPE, stderr<span class="op">=</span>subprocess.PIPE)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    stdout, stderr <span class="op">=</span> process.communicate()</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------------------</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div id="4f944b2e" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> iqplot</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> bokeh.io</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>bokeh.io.output_notebook()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+    <style>
+        .bk-notebook-logo {
+            display: block;
+            width: 20px;
+            height: 20px;
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABx0RVh0U29mdHdhcmUAQWRvYmUgRmlyZXdvcmtzIENTNui8sowAAAOkSURBVDiNjZRtaJVlGMd/1/08zzln5zjP1LWcU9N0NkN8m2CYjpgQYQXqSs0I84OLIC0hkEKoPtiH3gmKoiJDU7QpLgoLjLIQCpEsNJ1vqUOdO7ppbuec5+V+rj4ctwzd8IIbbi6u+8f1539dt3A78eXC7QizUF7gyV1fD1Yqg4JWz84yffhm0qkFqBogB9rM8tZdtwVsPUhWhGcFJngGeWrPzHm5oaMmkfEg1usvLFyc8jLRqDOMru7AyC8saQr7GG7f5fvDeH7Ej8CM66nIF+8yngt6HWaKh7k49Soy9nXurCi1o3qUbS3zWfrYeQDTB/Qj6kX6Ybhw4B+bOYoLKCC9H3Nu/leUTZ1JdRWkkn2ldcCamzrcf47KKXdAJllSlxAOkRgyHsGC/zRday5Qld9DyoM4/q/rUoy/CXh3jzOu3bHUVZeU+DEn8FInkPBFlu3+nW3Nw0mk6vCDiWg8CeJaxEwuHS3+z5RgY+YBR6V1Z1nxSOfoaPa4LASWxxdNp+VWTk7+4vzaou8v8PN+xo+KY2xsw6une2frhw05CTYOmQvsEhjhWjn0bmXPjpE1+kplmmkP3suftwTubK9Vq22qKmrBhpY4jvd5afdRA3wGjFAgcnTK2s4hY0/GPNIb0nErGMCRxWOOX64Z8RAC4oCXdklmEvcL8o0BfkNK4lUg9HTl+oPlQxdNo3Mg4Nv175e/1LDGzZen30MEjRUtmXSfiTVu1kK8W4txyV6BMKlbgk3lMwYCiusNy9fVfvvwMxv8Ynl6vxoByANLTWplvuj/nF9m2+PDtt1eiHPBr1oIfhCChQMBw6Aw0UulqTKZdfVvfG7VcfIqLG9bcldL/+pdWTLxLUy8Qq38heUIjh4XlzZxzQm19lLFlr8vdQ97rjZVOLf8nclzckbcD4wxXMidpX30sFd37Fv/GtwwhzhxGVAprjbg0gCAEeIgwCZyTV2Z1REEW8O4py0wsjeloKoMr6iCY6dP92H6Vw/oTyICIthibxjm/DfN9lVz8IqtqKYLUXfoKVMVQVVJOElGjrnnUt9T9wbgp8AyYKaGlqingHZU/uG2NTZSVqwHQTWkx9hxjkpWDaCg6Ckj5qebgBVbT3V3NNXMSiWSDdGV3hrtzla7J+duwPOToIg42ChPQOQjspnSlp1V+Gjdged7+8UN5CRAV7a5EdFNwCjEaBR27b3W890TE7g24NAP/mMDXRWrGoFPQI9ls/MWO2dWFAar/xcOIImbbpA3zgAAAABJRU5ErkJggg==);
+        }
+    </style>
+    <div>
+        <a href="https://bokeh.org" target="_blank" class="bk-notebook-logo"></a>
+        <span id="b389e7ec-1a47-41c8-8288-25dab2d4b901">Loading BokehJS ...</span>
+    </div>
+</div>
+<div class="cell-output cell-output-display">
+<script type="application/javascript">
+'use strict';
+(function(root) {
+  function now() {
+    return new Date();
+  }
+
+  const force = true;
+
+  if (typeof root._bokeh_onload_callbacks === "undefined" || force === true) {
+    root._bokeh_onload_callbacks = [];
+    root._bokeh_is_loading = undefined;
+  }
+
+const JS_MIME_TYPE = 'application/javascript';
+  const HTML_MIME_TYPE = 'text/html';
+  const EXEC_MIME_TYPE = 'application/vnd.bokehjs_exec.v0+json';
+  const CLASS_NAME = 'output_bokeh rendered_html';
+
+  /**
+   * Render data to the DOM node
+   */
+  function render(props, node) {
+    const script = document.createElement("script");
+    node.appendChild(script);
+  }
+
+  /**
+   * Handle when an output is cleared or removed
+   */
+  function handleClearOutput(event, handle) {
+    function drop(id) {
+      const view = Bokeh.index.get_by_id(id)
+      if (view != null) {
+        view.model.document.clear()
+        Bokeh.index.delete(view)
+      }
+    }
+
+    const cell = handle.cell;
+
+    const id = cell.output_area._bokeh_element_id;
+    const server_id = cell.output_area._bokeh_server_id;
+
+    // Clean up Bokeh references
+    if (id != null) {
+      drop(id)
+    }
+
+    if (server_id !== undefined) {
+      // Clean up Bokeh references
+      const cmd_clean = "from bokeh.io.state import curstate; print(curstate().uuid_to_server['" + server_id + "'].get_sessions()[0].document.roots[0]._id)";
+      cell.notebook.kernel.execute(cmd_clean, {
+        iopub: {
+          output: function(msg) {
+            const id = msg.content.text.trim()
+            drop(id)
+          }
+        }
+      });
+      // Destroy server and session
+      const cmd_destroy = "import bokeh.io.notebook as ion; ion.destroy_server('" + server_id + "')";
+      cell.notebook.kernel.execute(cmd_destroy);
+    }
+  }
+
+  /**
+   * Handle when a new output is added
+   */
+  function handleAddOutput(event, handle) {
+    const output_area = handle.output_area;
+    const output = handle.output;
+
+    // limit handleAddOutput to display_data with EXEC_MIME_TYPE content only
+    if ((output.output_type != "display_data") || (!Object.prototype.hasOwnProperty.call(output.data, EXEC_MIME_TYPE))) {
+      return
+    }
+
+    const toinsert = output_area.element.find("." + CLASS_NAME.split(' ')[0]);
+
+    if (output.metadata[EXEC_MIME_TYPE]["id"] !== undefined) {
+      toinsert[toinsert.length - 1].firstChild.textContent = output.data[JS_MIME_TYPE];
+      // store reference to embed id on output_area
+      output_area._bokeh_element_id = output.metadata[EXEC_MIME_TYPE]["id"];
+    }
+    if (output.metadata[EXEC_MIME_TYPE]["server_id"] !== undefined) {
+      const bk_div = document.createElement("div");
+      bk_div.innerHTML = output.data[HTML_MIME_TYPE];
+      const script_attrs = bk_div.children[0].attributes;
+      for (let i = 0; i < script_attrs.length; i++) {
+        toinsert[toinsert.length - 1].firstChild.setAttribute(script_attrs[i].name, script_attrs[i].value);
+        toinsert[toinsert.length - 1].firstChild.textContent = bk_div.children[0].textContent
+      }
+      // store reference to server id on output_area
+      output_area._bokeh_server_id = output.metadata[EXEC_MIME_TYPE]["server_id"];
+    }
+  }
+
+  function register_renderer(events, OutputArea) {
+
+    function append_mime(data, metadata, element) {
+      // create a DOM node to render to
+      const toinsert = this.create_output_subarea(
+        metadata,
+        CLASS_NAME,
+        EXEC_MIME_TYPE
+      );
+      this.keyboard_manager.register_events(toinsert);
+      // Render to node
+      const props = {data: data, metadata: metadata[EXEC_MIME_TYPE]};
+      render(props, toinsert[toinsert.length - 1]);
+      element.append(toinsert);
+      return toinsert
+    }
+
+    /* Handle when an output is cleared or removed */
+    events.on('clear_output.CodeCell', handleClearOutput);
+    events.on('delete.Cell', handleClearOutput);
+
+    /* Handle when a new output is added */
+    events.on('output_added.OutputArea', handleAddOutput);
+
+    /**
+     * Register the mime type and append_mime function with output_area
+     */
+    OutputArea.prototype.register_mime_type(EXEC_MIME_TYPE, append_mime, {
+      /* Is output safe? */
+      safe: true,
+      /* Index of renderer in `output_area.display_order` */
+      index: 0
+    });
+  }
+
+  // register the mime type if in Jupyter Notebook environment and previously unregistered
+  if (root.Jupyter !== undefined) {
+    const events = require('base/js/events');
+    const OutputArea = require('notebook/js/outputarea').OutputArea;
+
+    if (OutputArea.prototype.mime_types().indexOf(EXEC_MIME_TYPE) == -1) {
+      register_renderer(events, OutputArea);
+    }
+  }
+  if (typeof (root._bokeh_timeout) === "undefined" || force === true) {
+    root._bokeh_timeout = Date.now() + 5000;
+    root._bokeh_failed_load = false;
+  }
+
+  const NB_LOAD_WARNING = {'data': {'text/html':
+     "<div style='background-color: #fdd'>\n"+
+     "<p>\n"+
+     "BokehJS does not appear to have successfully loaded. If loading BokehJS from CDN, this \n"+
+     "may be due to a slow or bad network connection. Possible fixes:\n"+
+     "</p>\n"+
+     "<ul>\n"+
+     "<li>re-rerun `output_notebook()` to attempt to load from CDN again, or</li>\n"+
+     "<li>use INLINE resources instead, as so:</li>\n"+
+     "</ul>\n"+
+     "<code>\n"+
+     "from bokeh.resources import INLINE\n"+
+     "output_notebook(resources=INLINE)\n"+
+     "</code>\n"+
+     "</div>"}};
+
+  function display_loaded(error = null) {
+    const el = document.getElementById("b389e7ec-1a47-41c8-8288-25dab2d4b901");
+    if (el != null) {
+      const html = (() => {
+        if (typeof root.Bokeh === "undefined") {
+          if (error == null) {
+            return "BokehJS is loading ...";
+          } else {
+            return "BokehJS failed to load.";
+          }
+        } else {
+          const prefix = `BokehJS ${root.Bokeh.version}`;
+          if (error == null) {
+            return `${prefix} successfully loaded.`;
+          } else {
+            return `${prefix} <b>encountered errors</b> while loading and may not function as expected.`;
+          }
+        }
+      })();
+      el.innerHTML = html;
+
+      if (error != null) {
+        const wrapper = document.createElement("div");
+        wrapper.style.overflow = "auto";
+        wrapper.style.height = "5em";
+        wrapper.style.resize = "vertical";
+        const content = document.createElement("div");
+        content.style.fontFamily = "monospace";
+        content.style.whiteSpace = "pre-wrap";
+        content.style.backgroundColor = "rgb(255, 221, 221)";
+        content.textContent = error.stack ?? error.toString();
+        wrapper.append(content);
+        el.append(wrapper);
+      }
+    } else if (Date.now() < root._bokeh_timeout) {
+      setTimeout(() => display_loaded(error), 100);
+    }
+  }
+
+  function run_callbacks() {
+    try {
+      root._bokeh_onload_callbacks.forEach(function(callback) {
+        if (callback != null)
+          callback();
+      });
+    } finally {
+      delete root._bokeh_onload_callbacks
+    }
+    console.debug("Bokeh: all callbacks have finished");
+  }
+
+  function load_libs(css_urls, js_urls, callback) {
+    if (css_urls == null) css_urls = [];
+    if (js_urls == null) js_urls = [];
+
+    root._bokeh_onload_callbacks.push(callback);
+    if (root._bokeh_is_loading > 0) {
+      console.debug("Bokeh: BokehJS is being loaded, scheduling callback at", now());
+      return null;
+    }
+    if (js_urls == null || js_urls.length === 0) {
+      run_callbacks();
+      return null;
+    }
+    console.debug("Bokeh: BokehJS not loaded, scheduling load and callback at", now());
+    root._bokeh_is_loading = css_urls.length + js_urls.length;
+
+    function on_load() {
+      root._bokeh_is_loading--;
+      if (root._bokeh_is_loading === 0) {
+        console.debug("Bokeh: all BokehJS libraries/stylesheets loaded");
+        run_callbacks()
+      }
+    }
+
+    function on_error(url) {
+      console.error("failed to load " + url);
+    }
+
+    for (let i = 0; i < css_urls.length; i++) {
+      const url = css_urls[i];
+      const element = document.createElement("link");
+      element.onload = on_load;
+      element.onerror = on_error.bind(null, url);
+      element.rel = "stylesheet";
+      element.type = "text/css";
+      element.href = url;
+      console.debug("Bokeh: injecting link tag for BokehJS stylesheet: ", url);
+      document.body.appendChild(element);
+    }
+
+    for (let i = 0; i < js_urls.length; i++) {
+      const url = js_urls[i];
+      const element = document.createElement('script');
+      element.onload = on_load;
+      element.onerror = on_error.bind(null, url);
+      element.async = false;
+      element.src = url;
+      console.debug("Bokeh: injecting script tag for BokehJS library: ", url);
+      document.head.appendChild(element);
+    }
+  };
+
+  function inject_raw_css(css) {
+    const element = document.createElement("style");
+    element.appendChild(document.createTextNode(css));
+    document.body.appendChild(element);
+  }
+
+  const js_urls = ["https://cdn.bokeh.org/bokeh/release/bokeh-3.6.2.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-gl-3.6.2.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-widgets-3.6.2.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-tables-3.6.2.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-mathjax-3.6.2.min.js"];
+  const css_urls = [];
+
+  const inline_js = [    function(Bokeh) {
+      Bokeh.set_log_level("info");
+    },
+function(Bokeh) {
+    }
+  ];
+
+  function run_inline_js() {
+    if (root.Bokeh !== undefined || force === true) {
+      try {
+            for (let i = 0; i < inline_js.length; i++) {
+      inline_js[i].call(root, root.Bokeh);
+    }
+
+      } catch (error) {display_loaded(error);throw error;
+      }if (force === true) {
+        display_loaded();
+      }} else if (Date.now() < root._bokeh_timeout) {
+      setTimeout(run_inline_js, 100);
+    } else if (!root._bokeh_failed_load) {
+      console.log("Bokeh: BokehJS failed to load within specified timeout.");
+      root._bokeh_failed_load = true;
+    } else if (force !== true) {
+      const cell = $(document.getElementById("b389e7ec-1a47-41c8-8288-25dab2d4b901")).parents('.cell').data().cell;
+      cell.output_area.append_execute_result(NB_LOAD_WARNING)
+    }
+  }
+
+  if (root._bokeh_is_loading === 0) {
+    console.debug("Bokeh: BokehJS loaded, going straight to plotting");
+    run_inline_js();
+  } else {
+    load_libs(css_urls, js_urls, function() {
+      console.debug("Bokeh: BokehJS plotting callback run at", now());
+      run_inline_js();
+    });
+  }
+}(window));
+</script>
+</div>
+</div>
+<hr>
+<p>We have previously modeled spiking using a noisy leaky integrate-and-fire model. We saw that in some limits, the noisy LIF model gives Poissonian spiking such that the interspike intervals are Exponentially distributed and the number of spikes in a given time interval are Poisson distributed. Poisson process-based models of spiking are widely used to good effect.</p>
+<p>However, though well-modelled as Poisson, the rate of spiking can vary over time in what we call a <strong>nonhomogeneous Poisson process</strong>. Here, we derive the PDF for ISIs in this context and show how to sample ISIs.</p>
+<section id="sec-pdf-nonhomogeneous-poisson" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="sec-pdf-nonhomogeneous-poisson"><span class="header-section-number">9.1</span> The PDF for arrival times of a nonhomogenous Poisson process</h2>
+<p>Consider the waiting time for an arrival of a Poisson process that arrives at rate <span class="math inline">\(\beta\)</span>. We know that the waiting time is Exponentially distributed.</p>
+<p><span id="eq-exponential-pdf"><span class="math display">\[\begin{align}
+f(t\mid \beta) = \beta \mathrm{e}^{-\beta t}.
+\end{align}
+\tag{9.1}\]</span></span></p>
+<p>The probability that a Poisson process has <em>not</em> arrived at or before time <span class="math inline">\(t\)</span> is given by the complementary cumulative distribution function (CCDF) of the Exponential distribution.</p>
+<p><span id="eq-prob-not-arrived-nonhomogeneous-poisson-1"><span class="math display">\[\begin{align}
+P(\text{not arrived by time }t) = 1 - P(\text{arrived by time }t) = 1 - \int_0^t\mathrm{d}t'\,f(t\mid\beta) = 1 - (1 - \mathrm{e}^{-\beta t}) = \mathrm{e}^{-\beta t}.
+\end{align}
+\tag{9.2}\]</span></span></p>
+<p>Now, consider the case where the arrival rate varies with time; <span class="math inline">\(\beta = \beta(t)\)</span>. Consider some small interval, <span class="math inline">\([0, \Delta t]\)</span>. The probability that no Poisson process has arrived in time <span class="math inline">\(\Delta t\)</span> is</p>
+<p><span id="eq-prob-not-arrived-nonhomogeneous-poisson-2"><span class="math display">\[\begin{align}
+P(\text{not arrived by time } \Delta t) \approx \mathrm{e}^{-\beta(\Delta t) \Delta t},
+\end{align}
+\tag{9.3}\]</span></span></p>
+<p>where <span class="math inline">\(\Delta t\)</span> is small so that <span class="math inline">\(\beta(t)\)</span> does not change appreciably over the time interval and <span class="math inline">\(\beta(t) \approx \beta(t+\Delta t)\)</span>. We will soon take the <span class="math inline">\(\Delta t\to 0\)</span> limit, so this approximation is justified.</p>
+<p>Now consider another interval of length <span class="math inline">\(\Delta t\)</span> right after the one we just considered. The probability that no process arrives in that interval is</p>
+<p><span id="eq-prob-not-arrived-nonhomogeneous-poisson-3"><span class="math display">\[\begin{align}
+P(\text{not arrived in time window } [\Delta t, 2\Delta t]) \approx \mathrm{e}^{-\beta(2\Delta t) \Delta t}.
+\end{align}
+\tag{9.4}\]</span></span></p>
+<p>Therefore, owing to the memorylessness of Poisson processes, the probability that no processes arrived in the interval <span class="math inline">\([0, 2\Delta t]\)</span> is the product of the probabilities of not arriving in the respective subintervals,</p>
+<p><span id="eq-prob-not-arrived-nonhomogeneous-poisson-4"><span class="math display">\[\begin{align}
+P(\text{not arrived in time } 2\Delta t) \approx \mathrm{e}^{-\beta(\Delta t) \Delta t}\,\mathrm{e}^{-\beta(2\Delta t) \Delta t}.
+\end{align}
+\tag{9.5}\]</span></span></p>
+<p>We can consider <span class="math inline">\(m\)</span> such intervals.</p>
+<p><span id="eq-prob-not-arrived-nonhomogeneous-poisson-5"><span class="math display">\[\begin{align}
+P(\text{not arrived between in time } m\Delta t) \approx \prod_{k=1}^m \mathrm{e}^{-\beta(k\Delta t) \Delta t} = \exp\left[-\sum_{k=1}^m \Delta t \,\beta(k\Delta t)\right].
+\end{align}
+\tag{9.6}\]</span></span></p>
+<p>In the limit of <span class="math inline">\(\Delta t\to 0\)</span>, the Riemann sum becomes an integral. Taking <span class="math inline">\(t = m\Delta t\)</span>, we have</p>
+<p><span id="eq-prob-not-arrived-nonhomogeneous-poisson-6"><span class="math display">\[\begin{align}
+P(\text{not arrived by time } t) = \exp\left[- \int_0^t\mathrm{d}t'\,\beta(t')\right].
+\end{align}
+\tag{9.7}\]</span></span></p>
+<p>This is the CCDF of the distribution desribing the arrival of a Poisson process with variable rate <span class="math inline">\(\beta(t)\)</span>. The CDF is then <span class="math inline">\(1 - \text{CCDF}\)</span>,</p>
+<p><span id="eq-nonhomogeneous-poisson-ccdf"><span class="math display">\[\begin{align}
+F(t\mid \beta(t)) = 1 - \exp\left[- \int_0^t\mathrm{d}t'\,\beta(t')\right].
+\end{align}
+\tag{9.8}\]</span></span></p>
+<p>The probability density function is then</p>
+<p><span id="eq-nonhomogeneous-poisson-pdf-1"><span class="math display">\[\begin{align}
+f(t\mid \beta(t)) &amp;= \frac{\mathrm{d}F}{\mathrm{d}t} = -\frac{\mathrm{d}}{\mathrm{d}t}\,\exp\left[- \int_0^t\mathrm{d}t'\,\beta(t')\right]
+= -\exp\left[- \int_0^t\mathrm{d}t'\,\beta(t')\right]\,\frac{\mathrm{d}}{\mathrm{d}t}\left(- \int_0^t\mathrm{d}t'\,\beta(t')\right) \nonumber \\[1em]
+&amp;= \beta(t)\,\exp\left[- \int_0^t\mathrm{d}t'\,\beta(t')\right].
+\end{align}
+\tag{9.9}\]</span></span></p>
+<section id="multiple-arrivals" class="level3" data-number="9.1.1">
+<h3 data-number="9.1.1" class="anchored" data-anchor-id="multiple-arrivals"><span class="header-section-number">9.1.1</span> Multiple arrivals</h3>
+<p>Say we observe arrivals of a Poisson process one after another. If we have <span class="math inline">\(n\)</span> arrivals of a Poisson process with a variable rate occuring at times <span class="math inline">\(\mathbf{t} = \{t_1, t_2, \ldots, t_n\}\)</span>, where the times are ordered, the PDF is given by the product of the PDFs for each waiting time.</p>
+<p><span id="eq-nonhomogeneous-poisson-multiple-arrivals-pdf-1"><span class="math display">\[\begin{align}
+f(\mathbf{t} \mid \beta(t)) = \prod_{i=1}^n\beta(t_i)\exp\left[- \int_{t_{i-1}}^{t_i}\mathrm{d}t'\,\beta(t')\right]
+= \left(\prod_{i=1}^n\beta(t_i)\right)\exp\left[- \sum_{i=1}^n\int_{t_{i-1}}^{t_i}\mathrm{d}t'\,\beta(t')\right],
+\end{align}
+\tag{9.10}\]</span></span></p>
+<p>where <span class="math inline">\(t_0\)</span> is when we started observing (it is not a time of an arrival of a Poisson process), and we take <span class="math inline">\(t_0 = 0\)</span>. The integrals add together, giving</p>
+<p><span id="eq-nonhomogeneous-poisson-multiple-arrivals-pdf"><span class="math display">\[\begin{align}
+f(\mathbf{t} \mid \beta(t)) = \left(\prod_{i=1}^n\beta(t_i)\right)\exp\left[-\int_0^{t_n}\mathrm{d}t'\,\beta(t')\right].
+\end{align}
+\tag{9.11}\]</span></span></p>
+</section>
+<section id="a-finite-observation-time" class="level3" data-number="9.1.2">
+<h3 data-number="9.1.2" class="anchored" data-anchor-id="a-finite-observation-time"><span class="header-section-number">9.1.2</span> A finite observation time</h3>
+<p>In practice, we start observing at time <span class="math inline">\(t = 0\)</span> and end at time <span class="math inline">\(t = T\)</span>. While <span class="math inline">\(t_n\)</span> is the time of the last Poisson process we saw arrive, we should also take into account that we continued watching for time <span class="math inline">\(T - t_n\)</span> and saw no arrivals during that time. We therefore have</p>
+<p><span id="eq-nonhomogeneous-poisson-pdf"><span class="math display">\[\begin{align}
+f(\mathbf{t}, T;\beta(t)) &amp;= f(\mathbf{t} \mid \beta(t)) \times P(\text{no arrivals between }t_n\text{ and }T) \nonumber \\[1em]
+&amp;= \left(\prod_{i=1}^n\beta(t_i)\right)\exp\left[-\int_0^{t_n}\mathrm{d}t'\,\beta(t')\right]\,\exp\left[\int_{t_n}^T\mathrm{d}t'\,\beta(t')\right] \nonumber  \\[1em]
+&amp;= \left(\prod_{i=1}^n\beta(t_i)\right)\exp\left[-\int_0^{T}\mathrm{d}t'\,\beta(t')\right].
+\end{align}
+\tag{9.12}\]</span></span></p>
+<p>Note that in the special case of a constant rate, <span class="math inline">\(\beta(t) = \beta\)</span>, we get</p>
+<p><span id="eq-homogeneous-poisson-pdf"><span class="math display">\[\begin{align}
+f(\mathbf{t}, T;\beta(t)) &amp;= \beta^n\,\mathrm{e}^{-\beta T},
+\end{align}
+\tag{9.13}\]</span></span></p>
+<p>In this case, the PDF is not dependent on the times, but only on the number of arrivals in the time interval. We could have derived by noting that the interrarrival times are Exponentially distributed.</p>
+<p><span id="eq-homogeneous-poisson-pdf-alt"><span class="math display">\[\begin{align}
+f(\mathbf{t}, T;\beta(t)) &amp;= \beta\,\mathrm{e}^{-\beta t_1}\,\left(\prod_{i=2}^{n-1}\beta\,\mathrm{e}^{-\beta (t_{i+1}-t_i)}\right)\mathrm{e}^{-\beta(T-t_n)} = \beta^n\,\mathrm{e}^{-\beta T}.
+\end{align}
+\tag{9.14}\]</span></span></p>
+</section>
+</section>
+<section id="sec-nonphomogeneous-poisson-pmf" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="sec-nonphomogeneous-poisson-pmf"><span class="header-section-number">9.2</span> PMF for number of arrivals in time interval</h2>
+<p>Consider now a time interval from <span class="math inline">\(0\)</span> to <span class="math inline">\(T\)</span>. We break this time interval into <span class="math inline">\(N\)</span> small intervals, all of which are small enough such that, as before, <span class="math inline">\(\beta(t)\)</span> does not change appreciably across a small interval and furthermore that the probability of more than one spike landing in a given small interval is zero. Let <span class="math inline">\(\Delta t_i = t_{i+1}-t_i\)</span> be the width of small interval <span class="math inline">\(i\)</span>. For reasons that will become clear momentarily, we choose the widths of the small intervals such that the small interval width times the rate is the same for all intervals (which we will define as <span class="math inline">\(\xi\)</span> for convenience), or</p>
+<p><span id="eq-nonhomogenous-poisson-interval-width"><span class="math display">\[\begin{align}
+\beta(t_{i+1}) \,\Delta t_i = \xi \text{ for all }i.
+\end{align}
+\tag{9.15}\]</span></span></p>
+<p>Since every <span class="math inline">\(\beta(t_{i+1}) \,\Delta t_i\)</span> is the same, we can write</p>
+<p><span id="eq-nonhomogenous-poisson-interval-width"><span class="math display">\[\begin{align}
+\xi = \frac{1}{N}\sum_{i=0}^N\,\beta(t_{i+1}) \,\Delta t_i = \frac{1}{N}\int_0^T\mathrm{d}t'\,\beta(t') \equiv \frac{\Lambda(T)}{N},
+\end{align}
+\tag{9.16}\]</span></span></p>
+<p>where we have considered small <span class="math inline">\(\Delta t_i\)</span> and evaluated the Riemann sum, which is valid for unequal intervals provided the intervals are small enough. For convenience, we have defined</p>
+<p><span id="eq-nonhomogenous-poisson-Lambda-1"><span class="math display">\[\begin{align}
+\Lambda(T) = \int_0^T\mathrm{d}t'\,\beta(t').
+\end{align}
+\tag{9.17}\]</span></span></p>
+<p>The probability of a spike not arriving in a small interval spanning from <span class="math inline">\(t_i\)</span> to <span class="math inline">\(t_{i+1}\)</span>, as we have already worked out, is</p>
+<p><span id="eq-prob-not-arrived-interval-nonhomogeneous-poisson"><span class="math display">\[\begin{align}
+P(\text{not arrived between } t_i \text{ and } t_{i+1}) \approx \mathrm{e}^{-\beta(t_{i+1})\,\Delta t_i} = \mathrm{e}^{-\xi},
+\end{align}
+\tag{9.18}\]</span></span></p>
+<p>such that the probability a spike does arrive in that interval is</p>
+<p><span id="eq-prob-arrived-interval-nonhomogeneous-poisson"><span class="math display">\[\begin{align}
+P(\text{arrived between } t_i \text{ and } t_{i+1}) \approx 1 - \mathrm{e}^{-\beta(t_{i+1}) \Delta t_i} = 1-\mathrm{e}^{-\xi}.
+\end{align}
+\tag{9.19}\]</span></span></p>
+<p>Again owing the memorylessness of spiking, the probability of getting a spike in a given small interval constitutes a Bernoulli trial with probability <span class="math inline">\(\theta\)</span> of success. Then, the probability of getting <span class="math inline">\(n\)</span> spikes in the interval <span class="math inline">\([0, T]\)</span> is Binomially distributed,</p>
+<p><span id="eq-nonhomogeneous-poisson-binomial"><span class="math display">\[\begin{align}
+f(n;N,\xi) \approx \frac{N!}{n!(N-n)!}\,(1 - \mathrm{e}^{-\xi})^n\,(\mathrm{e}^{-\xi})^{N-n}.
+\end{align}
+\tag{9.20}\]</span></span></p>
+<p>We now consider the limit of large <span class="math inline">\(N\)</span>. In this limit,</p>
+<p><span id="eq-nonhomogeneous-poisson-small-limit-1"><span class="math display">\[\begin{align}
+\mathrm{e}^{-\xi} \approx 1 - \xi,
+\end{align}
+\tag{9.21}\]</span></span></p>
+<p>such that</p>
+<p><span id="eq-nonhomogeneous-poisson-small-limit-2"><span class="math display">\[\begin{align}
+f(n;N,\xi) \approx \frac{N!}{n!(N-n)!}\,\xi^n\,(1-\xi)^{N-n}.
+\end{align}
+\tag{9.22}\]</span></span></p>
+<p>Now, in the limit of large <span class="math inline">\(N\)</span>, <span class="math inline">\(N \gg n\)</span> such that <span class="math inline">\(N - n \approx N\)</span>. Further, we have that <span class="math inline">\(N = \Lambda(T) / \xi\)</span>, such that</p>
+<p><span id="eq-nonhomogeneous-poisson-small-limit-3"><span class="math display">\[\begin{align}
+(1-\xi)^{N-n} \approx (1-\xi)^{N} = (1-\xi)^{\Lambda(T)/\xi}.
+\end{align}
+\tag{9.23}\]</span></span></p>
+<p>Because</p>
+<p><span id="eq-nonhomogeneous-poisson-exponential-limit"><span class="math display">\[\begin{align}
+\lim_{\xi\to 0}(1-\xi)^{1/\xi} = \mathrm{e}^{-1},
+\end{align}
+\tag{9.24}\]</span></span></p>
+<p>we have</p>
+<p><span id="eq-nonhomogeneous-poisson-small-limit-4"><span class="math display">\[\begin{align}
+(1-\xi)^{N-n} \approx (1-\xi)^{\Lambda(T)/\xi} \approx \mathrm{e}^{-\Lambda(T)}.
+\end{align}
+\tag{9.25}\]</span></span></p>
+<p>Finally, also have that in the limit of large <span class="math inline">\(N\)</span>,</p>
+<p><span id="eq-approximate-factorial-ratio"><span class="math display">\[\begin{align}
+N!/(N-n)! \approx N^n = \left(\frac{\Lambda(T)}{\xi}\right)^n.
+\end{align}
+\tag{9.26}\]</span></span></p>
+<p>Putting everything together, we have</p>
+<p><span id="eq-nonhomogenous-poisson-pmf"><span class="math display">\[\begin{align}
+f(n;\beta(t), T) = \frac{(\Lambda(T))^n}{n!}\,\mathrm{e}^{-\Lambda(T)},
+\end{align}
+\tag{9.27}\]</span></span></p>
+<p>where</p>
+<p><span id="eq-nonhomogenous-poisson-Lambda"><span class="math display">\[\begin{align}
+\Lambda(T) = \int_0^T\mathrm{d}t'\,\beta(t'),
+\end{align}
+\tag{9.28}\]</span></span></p>
+<p>giving the PMF for the number of arrivals of a nonhomogenous Poisson process in an interval of length <span class="math inline">\(T\)</span>.</p>
+</section>
+<section id="sec-nonhomogeneous-poisson-sampling" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="sec-nonhomogeneous-poisson-sampling"><span class="header-section-number">9.3</span> Sampling arrval times of a nonhomogeneous Poisson process</h2>
+<p>We can easily sample arrival times of a homogeneous Poisson process by noting that the interarrival times are Exponentially distributed. We keep drawing interarrival times from an Exponential distribution and cumulatively sum them to get the arrival times.</p>
+<div id="d9dc786d" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng()</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sample_homogeneous_poisson_process(beta, T):</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Draw samples of arrival times of a homogeneous Poisson process."""</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Intialize arrival times</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    arrival_times <span class="op">=</span> []</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Typical arrival time (Numpy likes this)</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    tau <span class="op">=</span> <span class="dv">1</span> <span class="op">/</span> beta</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Draw interarrival times and keep adding</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    t <span class="op">=</span> rng.exponential(tau)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> t <span class="op">&lt;</span> T:</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>        arrival_times.append(t) </span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>        t <span class="op">+=</span> rng.exponential(tau)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.array(arrival_times)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Give it a whirl</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>sample_homogeneous_poisson_process(<span class="dv">1</span>, <span class="dv">20</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<pre><code>array([ 0.30127478,  2.12937407,  3.36913533,  3.42966043,  3.75863601,
+        4.47142917,  4.5084683 ,  4.55892601,  4.83689062,  5.61171643,
+        5.79705461,  5.94193015,  9.54332889,  9.80945717, 10.56075264,
+       12.96824828, 14.4488708 , 15.07726874, 16.50660407, 16.88488701,
+       18.12896431, 18.43671618])</code></pre>
+</div>
+</div>
+<p>However, sampling arrival times of a nonhomogeneous Poisson is more challenging. The arrival time varies, so we cannot directly draw out of an Exponential distribution. To perform the sampling, we can use a <strong>thinning method</strong>. This works as follows. We set a fast rate <span class="math inline">\(\beta_u\)</span> that is greater than <span class="math inline">\(\beta(t)\)</span> everywhere on the interval <span class="math inline">\([0, T]\)</span>. We draw a time <span class="math inline">\(t_1\)</span> out of an Exponential distribution with rate <span class="math inline">\(\beta_u\)</span>. We accept <span class="math inline">\(t_1\)</span> as a sample out of the nonhomogeneous distribution with probability <span class="math inline">\(\beta(t_1)/\beta_u\)</span>. We then draw an interarrival time <span class="math inline">\(\delta t_2\)</span> from an Exponential distribution parametrized with rate <span class="math inline">\(\beta_u\)</span>. We accept <span class="math inline">\(t_1 + \delta t_2\)</span> as a draw from the nonhomogeneous distribution with probability <span class="math inline">\(\beta(t_1 + \delta t_2) / \beta_u\)</span>. We continue in this manner until the total time of the draws meets or exceeds <span class="math inline">\(T\)</span>. This is implemented in the function below.</p>
+<div id="e4c07a60-e7b7-41af-bd79-a826c0cf3b1b" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sample_nhpp(beta, beta_u, T, beta_args<span class="op">=</span>()):</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Draw arrival times of a nonhomogeneous Poisson process.</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">    ----------</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">    beta : function, call signature beta(t, *beta_args)</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">        The function of the rate of arrivals as a function of time.</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">    beta_u : float</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">        A value of beta that is greater than beta(t) for all time.</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">    T : float</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">        The maximum time of observation.</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">    beta_args : tuple, default ()</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co">        Any other arguments passed to the function `beta()`.</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co">    -------</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co">    output : Numpy array</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co">        Times for arrivals of the nonhomogeneous Poisson process.</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="co">    Notes</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="co">    -----</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="co">    .. This is an implementation of the algorithm on page 85 of </span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="co">       Simulation, 5th Ed., by Sheldon Ross, Academic Press, 2013.</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>    samples <span class="op">=</span> []</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>    tau <span class="op">=</span> <span class="dv">1</span> <span class="op">/</span> beta_u</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>    t <span class="op">=</span> rng.exponential(tau)</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> t <span class="op">&lt;</span> T:</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>        r <span class="op">=</span> beta(t, <span class="op">*</span>beta_args) <span class="op">*</span> tau</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> r <span class="op">&gt;</span> <span class="dv">1</span>:</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">RuntimeError</span>(<span class="st">'beta_u is less than beta; sampling invalid.'</span>)</span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> np.random.uniform() <span class="op">&lt;=</span> r:</span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>            samples.append(t)</span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>        t <span class="op">+=</span> rng.exponential(tau)</span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.array(samples)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Let’s take this for a spin. We will have <span class="math inline">\(\beta(t)\)</span> given by a sinusoid.</p>
+<div id="7f4eeff2" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>beta <span class="op">=</span> <span class="kw">lambda</span> t: <span class="fl">1.15</span> <span class="op">+</span> np.sin(t<span class="op">/</span><span class="dv">10</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>arrival_times <span class="op">=</span> sample_nhpp(beta, <span class="fl">2.15</span>, <span class="dv">500</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the arrivals</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> iqplot.strip(arrival_times, marker<span class="op">=</span><span class="st">'dash'</span>, marker_kwargs<span class="op">=</span><span class="bu">dict</span>(alpha<span class="op">=</span><span class="fl">0.3</span>))</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+
+  <div id="df833f06-6b68-40a8-a32d-eafd0ce8c986" data-root-id="p1002" style="display: contents;"></div>
+</div>
+<div class="cell-output cell-output-display">
+<script type="application/javascript">
+(function(root) {
+  function embed_document(root) {
+  const docs_json = {"cb21c39a-3a58-4564-9f7d-9636c3e889f0":{"version":"3.6.2","title":"Bokeh Application","roots":[{"type":"object","name":"Figure","id":"p1002","attributes":{"x_range":{"type":"object","name":"DataRange1d","id":"p1004"},"y_range":{"type":"object","name":"FactorRange","id":"p1001","attributes":{"factors":[" "]}},"x_scale":{"type":"object","name":"LinearScale","id":"p1011"},"y_scale":{"type":"object","name":"CategoricalScale","id":"p1012"},"title":{"type":"object","name":"Title","id":"p1009"},"renderers":[{"type":"object","name":"GlyphRenderer","id":"p1047","attributes":{"name":"hover_glyphs","data_source":{"type":"object","name":"ColumnDataSource","id":"p1038","attributes":{"selected":{"type":"object","name":"Selection","id":"p1039","attributes":{"indices":[],"line_indices":[]}},"selection_policy":{"type":"object","name":"UnionRenderers","id":"p1040"},"data":{"type":"map","entries":[["x",[0.43348730355209997,1.020022968439517,1.4486145933121417,1.5560873962125414,1.6999567522979198,1.8215477644771276,2.2103725698175416,2.350990513300819,3.067354659987503,4.814314034302878,6.318574171873851,6.579402437947184,7.222424953914798,7.942560745494649,8.754048709888593,8.754946273712166,9.839405684399818,10.209614673017477,10.767182888183537,11.52711455427617,11.997558945166414,12.402515371401064,13.566308446872156,13.835333573664261,14.06103454740286,14.84137524718971,14.913338797301085,15.547578578427894,16.535720317820143,17.307540741475552,17.454449108565,18.524132275746794,18.783727844576518,19.30736358707713,20.76584426058035,21.235944963011608,22.474998774239488,25.102960271860542,25.608639892749174,26.405418289469964,28.181792328453465,28.296233544273402,28.4076084540452,28.466381310910318,28.746180385569915,28.782668256600797,28.80884226868342,29.065197286645194,30.56839680938774,31.92541119124079,32.665901048644564,37.86418851347071,45.071411517987684,51.25902739454848,57.749874254759476,58.622799153935304,59.189724350199285,61.23617892310767,63.060426186621115,64.66096242051452,65.20584031742067,65.72392475532668,66.09482911360782,66.23763800341054,68.36177188102792,69.48284746510902,69.49050536081464,70.22122188242912,70.64615120232038,72.08471441222729,73.24858271568166,74.24112084910284,75.64877013189698,75.73225178527417,80.2279577968169,80.52330694989038,81.69691651164307,81.91642957558851,82.36401951545945,82.94586075518573,83.03062558205639,83.0577369623233,83.14685806014131,85.25569099182937,86.06788194653033,86.12890545018982,86.98375998321586,87.15634520007852,88.11314252278233,88.13577840329326,88.45698725115678,88.95617731407408,89.18891262403787,90.93608670333154,91.33408783079685,91.94043522025979,92.04808492838187,92.29852862947945,92.91691154166985,93.14193517925932,95.9782404424489,96.94372090251424,101.71545491672573,102.53344989169736,105.17088503771588,106.2995883338456,106.38041572173107,108.47960978411855,110.10900664064644,110.17972782731226,119.15753557774833,124.06714494216325,126.65079925169668,126.86073007859078,127.89114485118952,128.69018964218503,128.76599433876893,129.3459610205387,129.4307433024083,130.45050636207654,131.5526696352911,131.8638964701547,132.39341562739207,133.58821315522465,133.7564116078935,133.77578743701247,134.10318751067294,134.20319502159734,134.3234079832269,134.69088195518043,135.02381210337026,135.13351988413714,135.3879779392867,136.4319556151832,136.6777026008587,137.23457883387474,138.0798863538993,138.2180863045773,139.21538117536485,139.99197625855507,141.08614192206878,141.1856050879829,141.3309101608946,142.05695660193905,142.0624397903642,142.30510462034098,143.20907580989163,143.45984879815683,143.55203740823748,144.40662738408085,144.54675505019495,145.44925435098952,145.46430563852672,146.08427848362078,146.10443385502623,147.2869845979768,147.54661424506367,148.77111142043918,149.07748772140667,149.784143449754,149.8654475000174,151.33388406221857,152.4134843261774,153.09245140219528,156.01908883372752,156.62563087004682,157.7655142731132,160.3506313041561,160.90705842860973,162.98316388057066,163.92676799908267,166.93017807511595,170.3868461680691,171.56540844437953,181.36819521274148,181.80111849053145,184.33826237356158,185.25970914741373,185.79499563389416,186.8451947656632,187.106409594774,187.64808658305625,188.1006084482192,190.53249988472064,191.1068561021547,192.41079739512176,192.87040314891266,193.38206168947332,194.6775786428782,195.2975768954851,195.94373084423415,197.979770944143,198.14291982779295,199.4172562081756,201.41253356302698,201.8020480584455,201.99981783885,202.53068615378734,202.56741124022318,202.98075257520054,203.3481823766654,203.361604379935,204.68291980868344,204.96907077057088,205.22976520148873,205.24675299143718,205.64472423038265,205.87351525161085,205.97893752614723,206.00910113359788,206.7812460076915,206.9293885921992,207.1368232904111,207.14411223820923,207.8959900559988,207.91874767956452,208.1022257224743,208.18083550337505,208.6335490254542,208.75086601612466,209.68881975014804,210.2937934583255,210.6437781500967,211.1522248715752,211.22831174278937,212.13745431307993,213.68939503192897,213.93636817360638,214.5115422528422,215.56690708397142,215.7654556879544,216.09188646365305,216.5730696747975,216.7223037770032,216.86394222514866,217.37684661138792,218.07806497384067,218.78904103467988,221.86926583598978,223.15440114977727,226.30606991604,226.8643078722171,228.14009212305112,230.10545375897377,232.1359096284597,237.12253209247206,238.80792698678732,241.7960159464189,243.11819601495444,244.91766232208343,245.2931261264572,245.5275318405724,246.0776708128636,246.1631563547306,247.20239064888506,247.7252404677987,247.82114712058674,250.01123244255527,250.6348350368685,252.11792747838783,252.4603258622727,253.80361591316608,253.90173035665765,254.02538071360237,254.20526901486718,254.62938563148236,255.82955977324283,256.474759857216,256.7237540700904,256.78193843106453,257.09999568946864,257.327003901089,257.8850657388703,258.3047079891161,258.3135450408863,258.4311886232356,259.1561894164988,259.2221628412938,259.4852500012693,260.09131343625626,260.0915448013578,260.31687754069435,260.7006900071049,261.7925942817908,261.9726002947012,262.2022444119028,262.28485179445727,262.8729720345592,263.3146458222646,266.09854741017335,266.8071562965696,267.8043858442465,268.61283941508077,268.704057702793,268.76629995586285,269.37626061860624,269.392836064503,269.3933728515582,269.51678656234293,270.57721220915016,271.38499009582665,271.7807888331551,273.456842713199,273.8810691227567,273.8894917222881,275.96681330201045,276.16224106906753,276.4937137984437,277.22617271504186,277.3663082788902,278.7935715082956,279.4402995302093,280.3508908788291,280.5830321449451,281.17360171795326,281.53530952819364,284.1632150624865,284.84874731176023,285.0964950194949,285.3651204393486,285.9079434388548,288.40474081441465,289.0123510007157,289.1397672834361,289.6383969751978,295.3146953861681,305.00206869760365,306.15815179194135,307.64212175548056,307.94015128948195,309.1826562005883,312.6423140485122,314.456390211169,315.3125428635959,315.99870955976917,316.442736995091,317.0248198786499,319.0099653919986,319.22629036580986,319.4520852920668,319.7558342837102,319.99599651359034,320.2220152581898,320.7253862663716,320.99455069998834,322.1550109664916,323.19393455506383,324.35173262346564,324.9447289074548,325.041329972832,325.1623393635105,325.7199617915692,326.4483106288628,327.20152651006805,327.43952633535855,328.62071477316454,328.8989183402467,329.166229399594,329.34284348056997,329.73983390240653,329.9484786550104,330.24239919943346,330.83580910039467,331.58958445653207,331.96529551722233,333.5297055790368,334.07248732163316,334.1299090655457,334.1603947359089,334.52482538066494,335.486334044211,337.3212072108893,337.32616529748753,337.96667910540975,338.2019767312737,338.37947040340856,338.70966876609464,339.2969177808627,339.70839833120624,340.1148326382929,341.6660615224881,341.74721802654364,342.8761523391203,343.3256056273908,343.99669944737497,345.6992189690275,346.3663726535676,347.0769457114124,347.19168396653816,347.650229272251,347.7883540705185,350.9948789136173,351.9284856521489,352.56128889201614,353.3788740364982,355.97063754980127,371.0227437250663,372.4293606557551,374.19333290506574,374.971749263094,375.35488907767984,377.16111136099414,377.1929055908719,377.2667006683954,377.7392950547226,378.2753817974446,379.83567497214233,380.94305754237735,381.4718002862374,382.20270532455834,383.74883833627604,384.38829938071524,384.77834964929076,384.936306330201,386.82354491776294,387.3766039588497,387.7118709745609,387.72216020403266,388.40117272767105,390.02060398911317,390.4879712145096,390.7243970570545,391.35460556658006,392.2968595798365,392.9823203865677,393.4885406383933,394.07217886368244,394.5847012848366,394.748877961789,396.42428623821417,396.5976576272508,396.6328656453799,397.03584438492425,397.40668835360276,397.87109078274256,398.95816195356383,399.2355135485734,399.8720079169583,400.0621790474553,401.27731522636384,401.4249164031407,401.5840311687741,402.48245092396115,403.17855906261855,403.99919631403156,404.55438245640886,407.1015804616998,407.51136655533253,407.9217939651569,408.0071000463723,408.0319834177023,408.0535531813215,408.36130715225715,413.69078015285424,413.9979145435441,415.1774582894793,422.1287980956274,422.33487478227426,429.8365830663819,431.2570955522614,431.7631618371771,435.866293839266,436.94697971814577,437.12523460641506,437.2491607249312,437.53210776603913,438.40996597921935,438.45934173670565,439.12362492462955,439.5716056884266,444.0064277224646,444.389227491881,444.5900060538414,445.4490292181633,446.021055588688,446.3283918068109,446.5679898446221,446.70162895415865,447.41122951911274,447.6404060195616,447.7471118066751,447.80162270667677,448.16371586163683,449.36558816570306,450.01009015212964,450.2880058349035,450.775092634337,451.20979839419635,451.503815850616,453.4307753133725,453.87004642518895,455.0899822989413,455.2147469840774,455.2883501524313,455.31225789179683,455.8025757898682,456.01370473452056,456.7121804018013,456.81376944381935,456.94357206133594,457.2390635774616,458.10155398227596,458.34034157960417,458.359873922517,459.4284260920987,459.74188087701464,460.54158173150563,461.28435241693774,462.6751959193977,463.6820421495,464.4904024514394,464.79173611166743,464.97543261186223,465.86052681626825,465.87542315020727,466.146627636055,467.0150270189673,467.3198903375312,468.0494755291419,469.71649504716555,470.5396629055737,471.6651584797392,472.72238539514944,474.3723142680899,475.0644474832772,476.5478724159839,485.7479325387224,487.34947526499275,498.3310697515958,499.7114837977794]],["__dummy_cat",[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "]],["cat",[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "]],["__label",[" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "]]]}}},"view":{"type":"object","name":"CDSView","id":"p1048","attributes":{"filter":{"type":"object","name":"AllIndices","id":"p1049"}}},"glyph":{"type":"object","name":"Scatter","id":"p1044","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"cat"},"size":{"type":"value","value":68.75},"angle":{"type":"value","value":1.5707963267948966},"line_color":{"type":"field","field":"cat","transform":{"type":"object","name":"CategoricalColorMapper","id":"p1037","attributes":{"palette":["#1f77b3","#ff7e0e","#2ba02b","#d62628","#9367bc","#8c564b","#e277c1","#7e7e7e","#bcbc21","#16bdcf","#3a0182","#004201","#0fffa8","#5d003f","#bcbcff","#d8afa1","#b80080","#004d52","#6b6400","#7c0100","#6026ff","#ffff9a","#564964","#8cb893","#93fbff","#018267","#90ff00","#8200a0","#ac8944","#5b3400","#ffbff2","#ff6e75","#798cff","#dd00ff","#505646","#004489","#ffbf60","#ff018c","#bdc8cf","#af97b5","#b65600","#017000","#cd87ff","#1cd646","#bfebc3","#7997b5","#a56089","#6e8956","#bc7c75","#8a2844","#00acff","#8ed4ff","#4b6d77","#00d4b1","#9300f2","#8a9500","#5d5b9e","#fddfba","#00939e","#ffdb00","#00aa79","#520067","#000091","#0a5d3d","#a5e275","#623b41","#c6c689","#ff9eb5","#cd4f6b","#ff07d6","#8a3a05","#7e3d70","#ff4901","#602ba5","#1c00ff","#e6dfff","#aa3baf","#d89c00","#a3a39e","#3f69ff","#46490c","#7b6985","#6b978c","#ff9a75","#835bff","#7c6b46","#80b654","#bc0049","#fd93ff","#5d0018","#89d1d1","#9c8cd3","#da6d42","#8a5700","#3b5069","#4b6b3b","#edcfd8","#cfedff","#aa1500","#dfff4f","#ff2a56","#d1499e","#707cb8","#598000","#00e4fd","#774b95","#67d48c","#3d3a72","#ac413f","#d6a166","#c169cd","#69595d","#87aced","#a0a569","#d1aae6","#870062","#00fddb","#672818","#b342ff","#0e59c4","#168742","#90d300","#cd7900","#f959ff","#5b7466","#8eaeb3","#9c7c8c","#4600c6","#6b4d2d","#a56d46","#9e8972","#a8afca","#cd8ca7","#00fd64","#917900","#ff62a1","#f4ffd8","#018cf0","#13aca0","#5b2d59","#89859e","#cfccba","#d4afc4","#dbdd6d","#cffff4","#006485","#006962","#a84167","#2d97c4","#a874ff","#26ba5d","#57b600","#caffa7","#a379aa","#ffbc93","#89e2c1","#0fc8ff","#d400c4","#626d89","#69858e","#4b4d52","#aa6067","#79b5d4","#2b5916","#9a0024","#bdd1f2","#896e67","#69a56b","#855467","#aecdba","#87997e","#cadb00","#9a0390","#ebbc1a","#eb9cd1","#70006e","#b1a131","#ca6b93","#4146a3","#e48c89","#d44400","#c68aca","#b69597","#d41f75","#724bcc","#674d00","#672138","#38564f","#6ebaaa","#853a31","#a5d397","#b8af8e","#d8e4df","#aa00df","#cac1db","#ffdf8c","#e2524d","#66696e","#ff001c","#522d72","#4d906b","#a86d11","#ff9e26","#5ea3af","#c88556","#915997","#a3a1ff","#fdbaba","#242a87","#dbe6a8","#97f2a7","#6793d6","#ba5b3f","#3a5d91","#364f2f","#267c95","#89959a","#cfb356","#004664","#5e5d2f","#8e8e41","#ac3f13","#69953b","#a13d85","#bfb6ba","#acc667","#6469cf","#91af00","#2be2da","#016e36","#ff7952","#42807e","#4fe800","#995428","#5d0a00","#a30057","#0c8700","#5982a7","#ffebfb","#4b6901","#8775d4","#e6c6ff","#a5ffda","#d86e77","#df014b","#69675b","#776ba1","#7e8067","#594685","#0000ca","#7c002a","#97ff72","#b5e2e1","#db52c8","#777734","#57bd8e"],"factors":[" "]}}},"line_alpha":{"type":"value","value":0.3},"fill_color":{"type":"field","field":"cat","transform":{"type":"object","name":"CategoricalColorMapper","id":"p1036","attributes":{"palette":["#1f77b3","#ff7e0e","#2ba02b","#d62628","#9367bc","#8c564b","#e277c1","#7e7e7e","#bcbc21","#16bdcf","#3a0182","#004201","#0fffa8","#5d003f","#bcbcff","#d8afa1","#b80080","#004d52","#6b6400","#7c0100","#6026ff","#ffff9a","#564964","#8cb893","#93fbff","#018267","#90ff00","#8200a0","#ac8944","#5b3400","#ffbff2","#ff6e75","#798cff","#dd00ff","#505646","#004489","#ffbf60","#ff018c","#bdc8cf","#af97b5","#b65600","#017000","#cd87ff","#1cd646","#bfebc3","#7997b5","#a56089","#6e8956","#bc7c75","#8a2844","#00acff","#8ed4ff","#4b6d77","#00d4b1","#9300f2","#8a9500","#5d5b9e","#fddfba","#00939e","#ffdb00","#00aa79","#520067","#000091","#0a5d3d","#a5e275","#623b41","#c6c689","#ff9eb5","#cd4f6b","#ff07d6","#8a3a05","#7e3d70","#ff4901","#602ba5","#1c00ff","#e6dfff","#aa3baf","#d89c00","#a3a39e","#3f69ff","#46490c","#7b6985","#6b978c","#ff9a75","#835bff","#7c6b46","#80b654","#bc0049","#fd93ff","#5d0018","#89d1d1","#9c8cd3","#da6d42","#8a5700","#3b5069","#4b6b3b","#edcfd8","#cfedff","#aa1500","#dfff4f","#ff2a56","#d1499e","#707cb8","#598000","#00e4fd","#774b95","#67d48c","#3d3a72","#ac413f","#d6a166","#c169cd","#69595d","#87aced","#a0a569","#d1aae6","#870062","#00fddb","#672818","#b342ff","#0e59c4","#168742","#90d300","#cd7900","#f959ff","#5b7466","#8eaeb3","#9c7c8c","#4600c6","#6b4d2d","#a56d46","#9e8972","#a8afca","#cd8ca7","#00fd64","#917900","#ff62a1","#f4ffd8","#018cf0","#13aca0","#5b2d59","#89859e","#cfccba","#d4afc4","#dbdd6d","#cffff4","#006485","#006962","#a84167","#2d97c4","#a874ff","#26ba5d","#57b600","#caffa7","#a379aa","#ffbc93","#89e2c1","#0fc8ff","#d400c4","#626d89","#69858e","#4b4d52","#aa6067","#79b5d4","#2b5916","#9a0024","#bdd1f2","#896e67","#69a56b","#855467","#aecdba","#87997e","#cadb00","#9a0390","#ebbc1a","#eb9cd1","#70006e","#b1a131","#ca6b93","#4146a3","#e48c89","#d44400","#c68aca","#b69597","#d41f75","#724bcc","#674d00","#672138","#38564f","#6ebaaa","#853a31","#a5d397","#b8af8e","#d8e4df","#aa00df","#cac1db","#ffdf8c","#e2524d","#66696e","#ff001c","#522d72","#4d906b","#a86d11","#ff9e26","#5ea3af","#c88556","#915997","#a3a1ff","#fdbaba","#242a87","#dbe6a8","#97f2a7","#6793d6","#ba5b3f","#3a5d91","#364f2f","#267c95","#89959a","#cfb356","#004664","#5e5d2f","#8e8e41","#ac3f13","#69953b","#a13d85","#bfb6ba","#acc667","#6469cf","#91af00","#2be2da","#016e36","#ff7952","#42807e","#4fe800","#995428","#5d0a00","#a30057","#0c8700","#5982a7","#ffebfb","#4b6901","#8775d4","#e6c6ff","#a5ffda","#d86e77","#df014b","#69675b","#776ba1","#7e8067","#594685","#0000ca","#7c002a","#97ff72","#b5e2e1","#db52c8","#777734","#57bd8e"],"factors":[" "]}}},"fill_alpha":{"type":"value","value":0.3},"hatch_alpha":{"type":"value","value":0.3},"marker":{"type":"value","value":"dash"}}},"nonselection_glyph":{"type":"object","name":"Scatter","id":"p1045","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"cat"},"size":{"type":"value","value":68.75},"angle":{"type":"value","value":1.5707963267948966},"line_color":{"type":"field","field":"cat","transform":{"id":"p1037"}},"line_alpha":{"type":"value","value":0.1},"fill_color":{"type":"field","field":"cat","transform":{"id":"p1036"}},"fill_alpha":{"type":"value","value":0.1},"hatch_alpha":{"type":"value","value":0.1},"marker":{"type":"value","value":"dash"}}},"muted_glyph":{"type":"object","name":"Scatter","id":"p1046","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"cat"},"size":{"type":"value","value":68.75},"angle":{"type":"value","value":1.5707963267948966},"line_color":{"type":"field","field":"cat","transform":{"id":"p1037"}},"line_alpha":{"type":"value","value":0.2},"fill_color":{"type":"field","field":"cat","transform":{"id":"p1036"}},"fill_alpha":{"type":"value","value":0.2},"hatch_alpha":{"type":"value","value":0.2},"marker":{"type":"value","value":"dash"}}}}}],"toolbar":{"type":"object","name":"Toolbar","id":"p1010","attributes":{"tools":[{"type":"object","name":"PanTool","id":"p1023"},{"type":"object","name":"WheelZoomTool","id":"p1024","attributes":{"renderers":"auto"}},{"type":"object","name":"BoxZoomTool","id":"p1025","attributes":{"overlay":{"type":"object","name":"BoxAnnotation","id":"p1026","attributes":{"syncable":false,"line_color":"black","line_alpha":1.0,"line_width":2,"line_dash":[4,4],"fill_color":"lightgrey","fill_alpha":0.5,"level":"overlay","visible":false,"left":{"type":"number","value":"nan"},"right":{"type":"number","value":"nan"},"top":{"type":"number","value":"nan"},"bottom":{"type":"number","value":"nan"},"left_units":"canvas","right_units":"canvas","top_units":"canvas","bottom_units":"canvas","handles":{"type":"object","name":"BoxInteractionHandles","id":"p1032","attributes":{"all":{"type":"object","name":"AreaVisuals","id":"p1031","attributes":{"fill_color":"white","hover_fill_color":"lightgray"}}}}}}}},{"type":"object","name":"SaveTool","id":"p1033"},{"type":"object","name":"ResetTool","id":"p1034"},{"type":"object","name":"HelpTool","id":"p1035"}]}},"toolbar_location":"above","left":[{"type":"object","name":"CategoricalAxis","id":"p1018","attributes":{"ticker":{"type":"object","name":"CategoricalTicker","id":"p1019"},"formatter":{"type":"object","name":"CategoricalTickFormatter","id":"p1020"},"major_label_policy":{"type":"object","name":"AllLabels","id":"p1021"}}}],"below":[{"type":"object","name":"LinearAxis","id":"p1013","attributes":{"ticker":{"type":"object","name":"BasicTicker","id":"p1014","attributes":{"mantissas":[1,2,5]}},"formatter":{"type":"object","name":"BasicTickFormatter","id":"p1015"},"axis_label":"x","major_label_policy":{"type":"object","name":"AllLabels","id":"p1016"}}}],"center":[{"type":"object","name":"Grid","id":"p1017","attributes":{"axis":{"id":"p1013"}}},{"type":"object","name":"Grid","id":"p1022","attributes":{"dimension":1,"axis":{"id":"p1018"},"grid_line_color":null}}],"frame_width":375,"frame_height":275}}]}};
+  const render_items = [{"docid":"cb21c39a-3a58-4564-9f7d-9636c3e889f0","roots":{"p1002":"df833f06-6b68-40a8-a32d-eafd0ce8c986"},"root_ids":["p1002"]}];
+  void root.Bokeh.embed.embed_items_notebook(docs_json, render_items);
+  }
+  if (root.Bokeh !== undefined) {
+    embed_document(root);
+  } else {
+    let attempts = 0;
+    const timer = setInterval(function(root) {
+      if (root.Bokeh !== undefined) {
+        clearInterval(timer);
+        embed_document(root);
+      } else {
+        attempts++;
+        if (attempts > 100) {
+          clearInterval(timer);
+          console.log("Bokeh: ERROR: Unable to run BokehJS code because BokehJS library is missing");
+        }
+      }
+    }, 10, root)
+  }
+})(window);
+</script>
+</div>
+</div>
+<p>Nice!</p>
+<p>If we want to speed things up, we can break the interval up into smaller segments and for each interval we make sure that we choose a <span class="math inline">\(\beta_u\)</span> specific to that interval that is close to the maximum <span class="math inline">\(\beta(t)\)</span> on that interval. The code (which also includes other speed enhancements) to achieve this is below.</p>
+<div id="7ae07d98-28cc-4b92-afe0-03a83e56b2c2" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sample_nhpp(beta, beta_j, t_j, beta_args<span class="op">=</span>()):</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Draw arrival times of a nonhomogeneous Poisson process.</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">    ----------</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">    beta : function, call signature beta(t, *beta_args)</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">        The function of the rate of arrivals as a function of time.</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">    beta_j : scalar or array_like</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">        If scalar, a value of beta that is greater than beta(t)</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">        for all time. If array_like, then beta_j[j] &gt; beta(t) for</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co">        all times between t_j[j-1] and t_j[j].</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co">    t_j : scalar or array_like</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co">        If scalar, the maximum time of observation. If array_like, must</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co">        be the same length of `beta_j`. beta_j[j] is the value </span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co">        of the the upper bound of the rate for the interval between</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="co">        t[j-1] and t[j].</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="co">    beta_args : tuple, default ()</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="co">        Any other arguments passed to beta.</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="co">    -------</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="co">    output : Numpy array</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="co">        Times for arrivals of the nonhomogeneous Poisson process.</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="co">    Notes</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="co">    -----</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="co">    .. This is an implementation of the algorithm on page 86 of </span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="co">       Simulation, 5th Ed., by Sheldon Ross, Academic Press, 2013.</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Convert scalar inputs to arrays</span></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> np.isscalar(beta_j):</span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>        beta_j <span class="op">=</span> np.array([beta_j])</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> np.isscalar(t_j):</span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>        t_j <span class="op">=</span> np.array([t_j])</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Make sure dimensions match</span></span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(beta_j) <span class="op">!=</span> <span class="bu">len</span>(t_j):</span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">RuntimeError</span>(</span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f'`beta_j` is length </span><span class="sc">{</span><span class="bu">len</span>(beta_j)<span class="sc">}</span><span class="ss"> '</span></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f'and `t_j` is length </span><span class="sc">{</span><span class="bu">len</span>(t_j)<span class="sc">}</span><span class="ss">. '</span></span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>            <span class="st">'They must have the same length.'</span></span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> _sample_nhpp(beta, beta_j, t_j, beta_args)</span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>                                                  </span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> _sample_nhpp(beta, beta_j, t_j, beta_args<span class="op">=</span>()):</span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters</span></span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a><span class="co">    ----------</span></span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a><span class="co">    beta : function, call signature beta(t, *beta_args)</span></span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a><span class="co">        The function of the rate of arrivals as a function of time.</span></span>
+<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a><span class="co">    beta_j : Numpy array</span></span>
+<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a><span class="co">        If scalar, a value of beta that is greater than beta(t)</span></span>
+<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a><span class="co">        for all time. If array_like, then beta_j[j] &gt; beta(t) for</span></span>
+<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a><span class="co">        all times between t_j[j-1] and t_j[j].</span></span>
+<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a><span class="co">    t_j : Numpy array</span></span>
+<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a><span class="co">        Must be the same length of `beta_j`. beta_j[j] is the value </span></span>
+<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a><span class="co">        of the the upper bound of the rate for the interval between</span></span>
+<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a><span class="co">        t[j-1] and t[j].</span></span>
+<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a><span class="co">    beta_args : tuple, default ()</span></span>
+<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a><span class="co">        Any other arguments passed to beta.</span></span>
+<span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns</span></span>
+<span id="cb7-68"><a href="#cb7-68" aria-hidden="true" tabindex="-1"></a><span class="co">    -------</span></span>
+<span id="cb7-69"><a href="#cb7-69" aria-hidden="true" tabindex="-1"></a><span class="co">    output : Numpy array</span></span>
+<span id="cb7-70"><a href="#cb7-70" aria-hidden="true" tabindex="-1"></a><span class="co">        Times for arrivals of the nonhomogeneous Poisson process.</span></span>
+<span id="cb7-71"><a href="#cb7-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-72"><a href="#cb7-72" aria-hidden="true" tabindex="-1"></a><span class="co">    Notes</span></span>
+<span id="cb7-73"><a href="#cb7-73" aria-hidden="true" tabindex="-1"></a><span class="co">    -----</span></span>
+<span id="cb7-74"><a href="#cb7-74" aria-hidden="true" tabindex="-1"></a><span class="co">    .. This is an implementation of the algorithm on page 86 of </span></span>
+<span id="cb7-75"><a href="#cb7-75" aria-hidden="true" tabindex="-1"></a><span class="co">       Simulation, 5th Ed., by Sheldon Ross, Academic Press, 2013.</span></span>
+<span id="cb7-76"><a href="#cb7-76" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb7-77"><a href="#cb7-77" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Number of samples to take before concatenating arrays</span></span>
+<span id="cb7-78"><a href="#cb7-78" aria-hidden="true" tabindex="-1"></a>    n_samples <span class="op">=</span> <span class="dv">1000</span></span>
+<span id="cb7-79"><a href="#cb7-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-80"><a href="#cb7-80" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Initializations</span></span>
+<span id="cb7-81"><a href="#cb7-81" aria-hidden="true" tabindex="-1"></a>    t <span class="op">=</span> <span class="fl">0.0</span>  <span class="co"># time</span></span>
+<span id="cb7-82"><a href="#cb7-82" aria-hidden="true" tabindex="-1"></a>    j <span class="op">=</span> <span class="dv">0</span>    <span class="co"># Index in beta_j and t_j arrays</span></span>
+<span id="cb7-83"><a href="#cb7-83" aria-hidden="true" tabindex="-1"></a>    i <span class="op">=</span> <span class="dv">0</span>    <span class="co"># index in sample array</span></span>
+<span id="cb7-84"><a href="#cb7-84" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> <span class="dv">0</span>    <span class="co"># total number of samples drawn</span></span>
+<span id="cb7-85"><a href="#cb7-85" aria-hidden="true" tabindex="-1"></a>    x_from_boundary <span class="op">=</span> <span class="va">False</span>  <span class="co"># If we've hit a boundary of</span></span>
+<span id="cb7-86"><a href="#cb7-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-87"><a href="#cb7-87" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Array for storing subtrajectory</span></span>
+<span id="cb7-88"><a href="#cb7-88" aria-hidden="true" tabindex="-1"></a>    samples <span class="op">=</span> np.empty(n_samples, dtype<span class="op">=</span><span class="bu">float</span>)</span>
+<span id="cb7-89"><a href="#cb7-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-90"><a href="#cb7-90" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Output array for all samples</span></span>
+<span id="cb7-91"><a href="#cb7-91" aria-hidden="true" tabindex="-1"></a>    samples_output <span class="op">=</span> np.array([], dtype<span class="op">=</span><span class="bu">float</span>)</span>
+<span id="cb7-92"><a href="#cb7-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-93"><a href="#cb7-93" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Loop until done (we exceed final time point)</span></span>
+<span id="cb7-94"><a href="#cb7-94" aria-hidden="true" tabindex="-1"></a>    not_done <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb7-95"><a href="#cb7-95" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> not_done:</span>
+<span id="cb7-96"><a href="#cb7-96" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Take samples until we fill array</span></span>
+<span id="cb7-97"><a href="#cb7-97" aria-hidden="true" tabindex="-1"></a>        <span class="co"># We do it this way for speed to avoid list append operations</span></span>
+<span id="cb7-98"><a href="#cb7-98" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> not_done <span class="kw">and</span> i <span class="op">&lt;</span> n_samples:</span>
+<span id="cb7-99"><a href="#cb7-99" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> x_from_boundary:</span>
+<span id="cb7-100"><a href="#cb7-100" aria-hidden="true" tabindex="-1"></a>                x <span class="op">=</span> (x <span class="op">-</span> t_j[j] <span class="op">+</span> t) <span class="op">*</span> beta_j[j] <span class="op">/</span> beta_j[j<span class="op">+</span><span class="dv">1</span>]</span>
+<span id="cb7-101"><a href="#cb7-101" aria-hidden="true" tabindex="-1"></a>                t <span class="op">=</span> t_j[j]</span>
+<span id="cb7-102"><a href="#cb7-102" aria-hidden="true" tabindex="-1"></a>                j <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb7-103"><a href="#cb7-103" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
+<span id="cb7-104"><a href="#cb7-104" aria-hidden="true" tabindex="-1"></a>                x <span class="op">=</span> np.random.exponential(<span class="dv">1</span> <span class="op">/</span> beta_j[j])</span>
+<span id="cb7-105"><a href="#cb7-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-106"><a href="#cb7-106" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> t <span class="op">+</span> x <span class="op">&gt;</span> t_j[j]:</span>
+<span id="cb7-107"><a href="#cb7-107" aria-hidden="true" tabindex="-1"></a>                <span class="co"># If we got here, we went past the edge of this interval</span></span>
+<span id="cb7-108"><a href="#cb7-108" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> j <span class="op">==</span> <span class="bu">len</span>(t_j) <span class="op">-</span> <span class="dv">1</span>:</span>
+<span id="cb7-109"><a href="#cb7-109" aria-hidden="true" tabindex="-1"></a>                    not_done <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb7-110"><a href="#cb7-110" aria-hidden="true" tabindex="-1"></a>                <span class="cf">else</span>:</span>
+<span id="cb7-111"><a href="#cb7-111" aria-hidden="true" tabindex="-1"></a>                    x_from_boundary <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb7-112"><a href="#cb7-112" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
+<span id="cb7-113"><a href="#cb7-113" aria-hidden="true" tabindex="-1"></a>                t <span class="op">+=</span> x</span>
+<span id="cb7-114"><a href="#cb7-114" aria-hidden="true" tabindex="-1"></a>                x_from_bounday <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb7-115"><a href="#cb7-115" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> np.random.uniform() <span class="op">&lt;=</span> beta(t, <span class="op">*</span>beta_args) <span class="op">/</span> beta_j[j]:</span>
+<span id="cb7-116"><a href="#cb7-116" aria-hidden="true" tabindex="-1"></a>                    samples[i] <span class="op">=</span> t</span>
+<span id="cb7-117"><a href="#cb7-117" aria-hidden="true" tabindex="-1"></a>                    i <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb7-118"><a href="#cb7-118" aria-hidden="true" tabindex="-1"></a>                    n <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb7-119"><a href="#cb7-119" aria-hidden="true" tabindex="-1"></a>        samples_output <span class="op">=</span> np.concatenate((samples_output, samples))</span>
+<span id="cb7-120"><a href="#cb7-120" aria-hidden="true" tabindex="-1"></a>        i <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb7-121"><a href="#cb7-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-122"><a href="#cb7-122" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.array(samples_output[:n])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="computing-environment" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="computing-environment"><span class="header-section-number">9.4</span> Computing environment</h2>
+<div id="681b1e7d" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>load_ext watermark</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>watermark <span class="op">-</span>v <span class="op">-</span>p numpy,iqplot,bokeh,jupyterlab</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Python implementation: CPython
+Python version       : 3.12.9
+IPython version      : 9.1.0
+
+numpy     : 2.1.3
+iqplot    : 0.3.7
+bokeh     : 3.6.2
+jupyterlab: 4.4.2
+</code></pre>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/bebi103b\.github\.io\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../lessons/sampling/lif.html" class="pagination-link" aria-label="The noisy leaky integrate-and-fire model">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">The noisy leaky integrate-and-fire model</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../lessons/sampling/mcmc.html" class="pagination-link" aria-label="Markov chain Monte Carlo">
+        <span class="nav-page-text">Markov chain Monte Carlo</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p><em>BE/Bi 103 b</em></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

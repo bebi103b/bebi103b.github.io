@@ -1,0 +1,2227 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>36&nbsp; K-means clustering – Statistical Inference in the Biological Sciences</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../lessons/variate_covariate/intro_variate_covariate.html" rel="next">
+<link href="../../lessons/optimization/em_gmm_example.html" rel="prev">
+<link href="../../logo.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-da61f9a05e9cefe097d79e8430a73dd4.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-7c1dcb25931f0f6f86a40129f542609a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../custom.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../lessons/optimization/optimization.html">Summarizing posterior distributions with maxima</a></li><li class="breadcrumb-item"><a href="../../lessons/optimization/kmeans.html"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">K-means clustering</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../../index.html" class="sidebar-logo-link">
+      <img src="../../logo.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="../../logo.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../"></a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About the course</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Course logistics</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../schedule.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Schedule overview</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../policies.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Course policies</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/what_are_we_doing/what_are_we_doing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">What are we doing?</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../lessons/probability/probability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Probability: The foundation for generative modeling</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/probability/probability_logic_of_science.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probability as the logic of science</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/probability/probability_distributions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Probability distributions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/probability/entropy_and_kullback_leibler.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Entropy and the Kullback-Leibler divergence</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../lessons/sampling/sampling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sampling out of probability distributions</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/sampling/random_number_generation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Random number generation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/sampling/rng_with_numpy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Random number generation using Numpy</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../lessons/sampling/simulation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Simulating generative distributions</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/sampling/luria_delbruck.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Simulating the Luria-Delbrück distribution</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/sampling/lif.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">The noisy leaky integrate-and-fire model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/sampling/nonhomogeneous_poisson.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Modeling nonhomogeneous Poisson spiking</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../lessons/sampling/mcmc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Markov chain Monte Carlo</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/sampling/basics_of_mcmc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">The basics of Markov chain Monte Carlo</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/sampling/stan_hello_world.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">“Hello, world” —Stan</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/sampling/nonhomogeneous_poisson_stan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Nonhomogeneous Poisson process arrival times with Stan</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../lessons/bayesian_modeling/bayesian_modeling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bayesian modeling and inference</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/bayesian_modeling/basics_of_bayes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Basics of Bayesian modeling</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/bayesian_modeling/conjugacy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Conjugacy</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/bayesian_modeling/choice_of_prior.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Choosing priors</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/bayesian_modeling/advice_on_dists.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Advice on using distributions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/bayesian_modeling/stats_ml_ai.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">What about machine learning and artificial intelligence?</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/bayesian_modeling/bayes_model_for_learning_and_cognition.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Bayes's theorem as a model for learning</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/bayesian_modeling/prior_predictive_checks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Model building with prior predictive checks</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../lessons/inference_by_mcmc/inference_by_mcmc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statistical inference with Markov chain Monte Carlo</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/inference_by_mcmc/parameter_estimation_with_mcmc_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Parameter estimation with Markov chain Monte Carlo</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/inference_by_mcmc/display_of_mcmc_samples.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Display of MCMC samples</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/inference_by_mcmc/posterior_summaries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Reporting summaries of the posterior</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/inference_by_mcmc/posterior_predictive_checks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Posterior predictive checks</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../lessons/mixture_models/mixture_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Mixture models</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/mixture_models/mixture_model_stan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Mixture models and label switching with MCMC</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../lessons/model_assessment/model_assessment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Model assessment</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/model_assessment/model_comparison.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Model comparison</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/model_assessment/model_comparison_in_practice.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Model comparison in practice</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../lessons/principled/principled.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Principled inference pipelines</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/principled/mcmc_diagnostics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">MCMC diagnostics via a case study: Artificial funnel of hell</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/principled/sbc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Principled analysis pipelines</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/principled/sbc_in_practice.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Simulation based calibration and related checks in practice</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../lessons/optimization/optimization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Summarizing posterior distributions with maxima</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/optimization/optimization_basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Bayesian approach to parameter estimation by optimization</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/optimization/gamma_optimization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Parameter estimation by optimization case study: Gamma likelihood</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/optimization/mm_algorithms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Minorize-maximize algorithms</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/optimization/em_algorithm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">The expectation-maximization (EM) algorithm</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/optimization/em_gmm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">EM applied to a Gaussian mixture model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/optimization/em_gmm_example.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">An example application of the EM algorithm to a Gaussian mixture model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/optimization/kmeans.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">K-means clustering</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../lessons/variate_covariate/intro_variate_covariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Variate-covariate models</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/variate_covariate/model_building.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Model building</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/variate_covariate/variate_covariate_with_stan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Variate-covariate models with MCMC</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../lessons/hierarchical/hierarchical.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hierarchical models</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/hierarchical/modeling_repeated_experiments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">Modeling repeated experiments</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/hierarchical/choosing_a_hierarchical_prior.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">Choosing a hierarchical prior</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/hierarchical/generalization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">41</span>&nbsp; <span class="chapter-title">Generalization of hierarchical models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/hierarchical/hierarchical_implementation_worms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">42</span>&nbsp; <span class="chapter-title">Implementation of a hierarchical model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/hierarchical/hierarchical_implementation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">43</span>&nbsp; <span class="chapter-title">General implementation of hierarchical models</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../lessons/pca_and_related/pca_and_related.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Principal component analysis and related models</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/pca_and_related/heuristic_pca.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">44</span>&nbsp; <span class="chapter-title">Principal component analysis: A heuristic approach</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/pca_and_related/factor_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">45</span>&nbsp; <span class="chapter-title">Factor analysis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/pca_and_related/pca_nmf_as_fa.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">46</span>&nbsp; <span class="chapter-title">Special cases of factor analysis</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../lessons/HMM/hmm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hidden Markov models</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/HMM/hmm_gaussian_emission.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">47</span>&nbsp; <span class="chapter-title">Hidden Markov models</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../lessons/GLM/glm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Generalized linear models</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/GLM/glm_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">48</span>&nbsp; <span class="chapter-title">Generalized linear models: An introduction</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/GLM/glm_in_practice.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">49</span>&nbsp; <span class="chapter-title">GLMs applied to neurons and aggression</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../lessons/gaussian_processes/gp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Gaussian processes</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-17" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/gaussian_processes/intro_to_gps.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">50</span>&nbsp; <span class="chapter-title">Introduction to Gaussian processes</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/gaussian_processes/gp_hyperparams_by_optimization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">51</span>&nbsp; <span class="chapter-title">Gaussian process hyperparameters by optimization</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/gaussian_processes/mcmc_with_gps.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">52</span>&nbsp; <span class="chapter-title">MCMC with GPs with Normal likelihoods</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/gaussian_processes/gps_and_derivatives.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">53</span>&nbsp; <span class="chapter-title">Calculating derivatives from data with GPs</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lessons/gaussian_processes/gps_without_marginalization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">54</span>&nbsp; <span class="chapter-title">Gaussian processes with non-Normal likelihoods</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="false">
+ <span class="menu-text">Homework</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-18" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../homework/intuitive_modeling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">HW 1.1: First attempts at Bayesian generative modeling</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" role="navigation" aria-expanded="false">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-19" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../appendices/notation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Notation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../appendices/setting_up_python_computing_environment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Configuring your computer to use Python for scientific computing</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">In this section</h2>
+   
+  <ul>
+  <li><a href="#sec-kmeans-sklearn" id="toc-sec-kmeans-sklearn" class="nav-link active" data-scroll-target="#sec-kmeans-sklearn"><span class="header-section-number">36.1</span> K-means with scikit-learn</a></li>
+  <li><a href="#k-means-clustering-as-a-gmm" id="toc-k-means-clustering-as-a-gmm" class="nav-link" data-scroll-target="#k-means-clustering-as-a-gmm"><span class="header-section-number">36.2</span> K-means clustering as a GMM</a></li>
+  <li><a href="#computing-environment" id="toc-computing-environment" class="nav-link" data-scroll-target="#computing-environment"><span class="header-section-number">36.3</span> Computing environment</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../lessons/optimization/optimization.html">Summarizing posterior distributions with maxima</a></li><li class="breadcrumb-item"><a href="../../lessons/optimization/kmeans.html"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">K-means clustering</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-kmeans" class="quarto-section-identifier"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">K-means clustering</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><a href="https://colab.research.google.com/github/bebi103b/bebi103b_notebooks_2026/blob/main/kmeans.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open in Google Colab" title="Open in Google Colab"></a> | <a href="https://raw.githubusercontent.com/bebi103b/bebi103b_notebooks_2026/refs/heads/main/kmeans.ipynb">Download notebook</a></p>
+<div id="08d55ebd-4111-4071-89d9-5c946a485006" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Colab setup ------------------</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os,  sys, subprocess</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">"google.colab"</span> <span class="kw">in</span> sys.modules:</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    cmd <span class="op">=</span> <span class="st">"pip install --upgrade polars watermark"</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    process <span class="op">=</span> subprocess.Popen(cmd.split(), stdout<span class="op">=</span>subprocess.PIPE, stderr<span class="op">=</span>subprocess.PIPE)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    stdout, stderr <span class="op">=</span> process.communicate()</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    data_path <span class="op">=</span> <span class="st">"https://s3.amazonaws.com/bebi103.caltech.edu/data/"</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    data_path <span class="op">=</span> <span class="st">"../data/"</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------------------</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div id="3ded67ae" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sklearn.cluster</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sklearn.preprocessing</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> bokeh.io</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> bokeh.plotting</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>bokeh.io.output_notebook()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+    <style>
+        .bk-notebook-logo {
+            display: block;
+            width: 20px;
+            height: 20px;
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABx0RVh0U29mdHdhcmUAQWRvYmUgRmlyZXdvcmtzIENTNui8sowAAAOkSURBVDiNjZRtaJVlGMd/1/08zzln5zjP1LWcU9N0NkN8m2CYjpgQYQXqSs0I84OLIC0hkEKoPtiH3gmKoiJDU7QpLgoLjLIQCpEsNJ1vqUOdO7ppbuec5+V+rj4ctwzd8IIbbi6u+8f1539dt3A78eXC7QizUF7gyV1fD1Yqg4JWz84yffhm0qkFqBogB9rM8tZdtwVsPUhWhGcFJngGeWrPzHm5oaMmkfEg1usvLFyc8jLRqDOMru7AyC8saQr7GG7f5fvDeH7Ej8CM66nIF+8yngt6HWaKh7k49Soy9nXurCi1o3qUbS3zWfrYeQDTB/Qj6kX6Ybhw4B+bOYoLKCC9H3Nu/leUTZ1JdRWkkn2ldcCamzrcf47KKXdAJllSlxAOkRgyHsGC/zRday5Qld9DyoM4/q/rUoy/CXh3jzOu3bHUVZeU+DEn8FInkPBFlu3+nW3Nw0mk6vCDiWg8CeJaxEwuHS3+z5RgY+YBR6V1Z1nxSOfoaPa4LASWxxdNp+VWTk7+4vzaou8v8PN+xo+KY2xsw6une2frhw05CTYOmQvsEhjhWjn0bmXPjpE1+kplmmkP3suftwTubK9Vq22qKmrBhpY4jvd5afdRA3wGjFAgcnTK2s4hY0/GPNIb0nErGMCRxWOOX64Z8RAC4oCXdklmEvcL8o0BfkNK4lUg9HTl+oPlQxdNo3Mg4Nv175e/1LDGzZen30MEjRUtmXSfiTVu1kK8W4txyV6BMKlbgk3lMwYCiusNy9fVfvvwMxv8Ynl6vxoByANLTWplvuj/nF9m2+PDtt1eiHPBr1oIfhCChQMBw6Aw0UulqTKZdfVvfG7VcfIqLG9bcldL/+pdWTLxLUy8Qq38heUIjh4XlzZxzQm19lLFlr8vdQ97rjZVOLf8nclzckbcD4wxXMidpX30sFd37Fv/GtwwhzhxGVAprjbg0gCAEeIgwCZyTV2Z1REEW8O4py0wsjeloKoMr6iCY6dP92H6Vw/oTyICIthibxjm/DfN9lVz8IqtqKYLUXfoKVMVQVVJOElGjrnnUt9T9wbgp8AyYKaGlqingHZU/uG2NTZSVqwHQTWkx9hxjkpWDaCg6Ckj5qebgBVbT3V3NNXMSiWSDdGV3hrtzla7J+duwPOToIg42ChPQOQjspnSlp1V+Gjdged7+8UN5CRAV7a5EdFNwCjEaBR27b3W890TE7g24NAP/mMDXRWrGoFPQI9ls/MWO2dWFAar/xcOIImbbpA3zgAAAABJRU5ErkJggg==);
+        }
+    </style>
+    <div>
+        <a href="https://bokeh.org" target="_blank" class="bk-notebook-logo"></a>
+        <span id="f4554a44-abe9-457c-aedb-1db980b58c4b">Loading BokehJS ...</span>
+    </div>
+</div>
+<div class="cell-output cell-output-display">
+<script type="application/javascript">
+'use strict';
+(function(root) {
+  function now() {
+    return new Date();
+  }
+
+  const force = true;
+
+  if (typeof root._bokeh_onload_callbacks === "undefined" || force === true) {
+    root._bokeh_onload_callbacks = [];
+    root._bokeh_is_loading = undefined;
+  }
+
+const JS_MIME_TYPE = 'application/javascript';
+  const HTML_MIME_TYPE = 'text/html';
+  const EXEC_MIME_TYPE = 'application/vnd.bokehjs_exec.v0+json';
+  const CLASS_NAME = 'output_bokeh rendered_html';
+
+  /**
+   * Render data to the DOM node
+   */
+  function render(props, node) {
+    const script = document.createElement("script");
+    node.appendChild(script);
+  }
+
+  /**
+   * Handle when an output is cleared or removed
+   */
+  function handleClearOutput(event, handle) {
+    function drop(id) {
+      const view = Bokeh.index.get_by_id(id)
+      if (view != null) {
+        view.model.document.clear()
+        Bokeh.index.delete(view)
+      }
+    }
+
+    const cell = handle.cell;
+
+    const id = cell.output_area._bokeh_element_id;
+    const server_id = cell.output_area._bokeh_server_id;
+
+    // Clean up Bokeh references
+    if (id != null) {
+      drop(id)
+    }
+
+    if (server_id !== undefined) {
+      // Clean up Bokeh references
+      const cmd_clean = "from bokeh.io.state import curstate; print(curstate().uuid_to_server['" + server_id + "'].get_sessions()[0].document.roots[0]._id)";
+      cell.notebook.kernel.execute(cmd_clean, {
+        iopub: {
+          output: function(msg) {
+            const id = msg.content.text.trim()
+            drop(id)
+          }
+        }
+      });
+      // Destroy server and session
+      const cmd_destroy = "import bokeh.io.notebook as ion; ion.destroy_server('" + server_id + "')";
+      cell.notebook.kernel.execute(cmd_destroy);
+    }
+  }
+
+  /**
+   * Handle when a new output is added
+   */
+  function handleAddOutput(event, handle) {
+    const output_area = handle.output_area;
+    const output = handle.output;
+
+    // limit handleAddOutput to display_data with EXEC_MIME_TYPE content only
+    if ((output.output_type != "display_data") || (!Object.prototype.hasOwnProperty.call(output.data, EXEC_MIME_TYPE))) {
+      return
+    }
+
+    const toinsert = output_area.element.find("." + CLASS_NAME.split(' ')[0]);
+
+    if (output.metadata[EXEC_MIME_TYPE]["id"] !== undefined) {
+      toinsert[toinsert.length - 1].firstChild.textContent = output.data[JS_MIME_TYPE];
+      // store reference to embed id on output_area
+      output_area._bokeh_element_id = output.metadata[EXEC_MIME_TYPE]["id"];
+    }
+    if (output.metadata[EXEC_MIME_TYPE]["server_id"] !== undefined) {
+      const bk_div = document.createElement("div");
+      bk_div.innerHTML = output.data[HTML_MIME_TYPE];
+      const script_attrs = bk_div.children[0].attributes;
+      for (let i = 0; i < script_attrs.length; i++) {
+        toinsert[toinsert.length - 1].firstChild.setAttribute(script_attrs[i].name, script_attrs[i].value);
+        toinsert[toinsert.length - 1].firstChild.textContent = bk_div.children[0].textContent
+      }
+      // store reference to server id on output_area
+      output_area._bokeh_server_id = output.metadata[EXEC_MIME_TYPE]["server_id"];
+    }
+  }
+
+  function register_renderer(events, OutputArea) {
+
+    function append_mime(data, metadata, element) {
+      // create a DOM node to render to
+      const toinsert = this.create_output_subarea(
+        metadata,
+        CLASS_NAME,
+        EXEC_MIME_TYPE
+      );
+      this.keyboard_manager.register_events(toinsert);
+      // Render to node
+      const props = {data: data, metadata: metadata[EXEC_MIME_TYPE]};
+      render(props, toinsert[toinsert.length - 1]);
+      element.append(toinsert);
+      return toinsert
+    }
+
+    /* Handle when an output is cleared or removed */
+    events.on('clear_output.CodeCell', handleClearOutput);
+    events.on('delete.Cell', handleClearOutput);
+
+    /* Handle when a new output is added */
+    events.on('output_added.OutputArea', handleAddOutput);
+
+    /**
+     * Register the mime type and append_mime function with output_area
+     */
+    OutputArea.prototype.register_mime_type(EXEC_MIME_TYPE, append_mime, {
+      /* Is output safe? */
+      safe: true,
+      /* Index of renderer in `output_area.display_order` */
+      index: 0
+    });
+  }
+
+  // register the mime type if in Jupyter Notebook environment and previously unregistered
+  if (root.Jupyter !== undefined) {
+    const events = require('base/js/events');
+    const OutputArea = require('notebook/js/outputarea').OutputArea;
+
+    if (OutputArea.prototype.mime_types().indexOf(EXEC_MIME_TYPE) == -1) {
+      register_renderer(events, OutputArea);
+    }
+  }
+  if (typeof (root._bokeh_timeout) === "undefined" || force === true) {
+    root._bokeh_timeout = Date.now() + 5000;
+    root._bokeh_failed_load = false;
+  }
+
+  const NB_LOAD_WARNING = {'data': {'text/html':
+     "<div style='background-color: #fdd'>\n"+
+     "<p>\n"+
+     "BokehJS does not appear to have successfully loaded. If loading BokehJS from CDN, this \n"+
+     "may be due to a slow or bad network connection. Possible fixes:\n"+
+     "</p>\n"+
+     "<ul>\n"+
+     "<li>re-rerun `output_notebook()` to attempt to load from CDN again, or</li>\n"+
+     "<li>use INLINE resources instead, as so:</li>\n"+
+     "</ul>\n"+
+     "<code>\n"+
+     "from bokeh.resources import INLINE\n"+
+     "output_notebook(resources=INLINE)\n"+
+     "</code>\n"+
+     "</div>"}};
+
+  function display_loaded(error = null) {
+    const el = document.getElementById("f4554a44-abe9-457c-aedb-1db980b58c4b");
+    if (el != null) {
+      const html = (() => {
+        if (typeof root.Bokeh === "undefined") {
+          if (error == null) {
+            return "BokehJS is loading ...";
+          } else {
+            return "BokehJS failed to load.";
+          }
+        } else {
+          const prefix = `BokehJS ${root.Bokeh.version}`;
+          if (error == null) {
+            return `${prefix} successfully loaded.`;
+          } else {
+            return `${prefix} <b>encountered errors</b> while loading and may not function as expected.`;
+          }
+        }
+      })();
+      el.innerHTML = html;
+
+      if (error != null) {
+        const wrapper = document.createElement("div");
+        wrapper.style.overflow = "auto";
+        wrapper.style.height = "5em";
+        wrapper.style.resize = "vertical";
+        const content = document.createElement("div");
+        content.style.fontFamily = "monospace";
+        content.style.whiteSpace = "pre-wrap";
+        content.style.backgroundColor = "rgb(255, 221, 221)";
+        content.textContent = error.stack ?? error.toString();
+        wrapper.append(content);
+        el.append(wrapper);
+      }
+    } else if (Date.now() < root._bokeh_timeout) {
+      setTimeout(() => display_loaded(error), 100);
+    }
+  }
+
+  function run_callbacks() {
+    try {
+      root._bokeh_onload_callbacks.forEach(function(callback) {
+        if (callback != null)
+          callback();
+      });
+    } finally {
+      delete root._bokeh_onload_callbacks
+    }
+    console.debug("Bokeh: all callbacks have finished");
+  }
+
+  function load_libs(css_urls, js_urls, callback) {
+    if (css_urls == null) css_urls = [];
+    if (js_urls == null) js_urls = [];
+
+    root._bokeh_onload_callbacks.push(callback);
+    if (root._bokeh_is_loading > 0) {
+      console.debug("Bokeh: BokehJS is being loaded, scheduling callback at", now());
+      return null;
+    }
+    if (js_urls == null || js_urls.length === 0) {
+      run_callbacks();
+      return null;
+    }
+    console.debug("Bokeh: BokehJS not loaded, scheduling load and callback at", now());
+    root._bokeh_is_loading = css_urls.length + js_urls.length;
+
+    function on_load() {
+      root._bokeh_is_loading--;
+      if (root._bokeh_is_loading === 0) {
+        console.debug("Bokeh: all BokehJS libraries/stylesheets loaded");
+        run_callbacks()
+      }
+    }
+
+    function on_error(url) {
+      console.error("failed to load " + url);
+    }
+
+    for (let i = 0; i < css_urls.length; i++) {
+      const url = css_urls[i];
+      const element = document.createElement("link");
+      element.onload = on_load;
+      element.onerror = on_error.bind(null, url);
+      element.rel = "stylesheet";
+      element.type = "text/css";
+      element.href = url;
+      console.debug("Bokeh: injecting link tag for BokehJS stylesheet: ", url);
+      document.body.appendChild(element);
+    }
+
+    for (let i = 0; i < js_urls.length; i++) {
+      const url = js_urls[i];
+      const element = document.createElement('script');
+      element.onload = on_load;
+      element.onerror = on_error.bind(null, url);
+      element.async = false;
+      element.src = url;
+      console.debug("Bokeh: injecting script tag for BokehJS library: ", url);
+      document.head.appendChild(element);
+    }
+  };
+
+  function inject_raw_css(css) {
+    const element = document.createElement("style");
+    element.appendChild(document.createTextNode(css));
+    document.body.appendChild(element);
+  }
+
+  const js_urls = ["https://cdn.bokeh.org/bokeh/release/bokeh-3.6.2.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-gl-3.6.2.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-widgets-3.6.2.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-tables-3.6.2.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-mathjax-3.6.2.min.js"];
+  const css_urls = [];
+
+  const inline_js = [    function(Bokeh) {
+      Bokeh.set_log_level("info");
+    },
+function(Bokeh) {
+    }
+  ];
+
+  function run_inline_js() {
+    if (root.Bokeh !== undefined || force === true) {
+      try {
+            for (let i = 0; i < inline_js.length; i++) {
+      inline_js[i].call(root, root.Bokeh);
+    }
+
+      } catch (error) {display_loaded(error);throw error;
+      }if (force === true) {
+        display_loaded();
+      }} else if (Date.now() < root._bokeh_timeout) {
+      setTimeout(run_inline_js, 100);
+    } else if (!root._bokeh_failed_load) {
+      console.log("Bokeh: BokehJS failed to load within specified timeout.");
+      root._bokeh_failed_load = true;
+    } else if (force !== true) {
+      const cell = $(document.getElementById("f4554a44-abe9-457c-aedb-1db980b58c4b")).parents('.cell').data().cell;
+      cell.output_area.append_execute_result(NB_LOAD_WARNING)
+    }
+  }
+
+  if (root._bokeh_is_loading === 0) {
+    console.debug("Bokeh: BokehJS loaded, going straight to plotting");
+    run_inline_js();
+  } else {
+    load_libs(css_urls, js_urls, function() {
+      console.debug("Bokeh: BokehJS plotting callback run at", now());
+      run_inline_js();
+    });
+  }
+}(window));
+</script>
+</div>
+</div>
+<hr>
+<p>We has seen the EM algorithm applied to a Gaussian mixture model. In computing the responsibilities, we are able to probabilistically assign each data point to one of the components of the mixture model. In this way, inference of the parameters of a GMM may be viewed as a form of <strong>clustering</strong>, in which each data point is assigned to a group, or cluster.</p>
+<p>One of the simplest, and also fairly widely used, methods is <strong>K-means clustering</strong> (usually written with a lowercase k, but we use a capital K here to connect it to GMMs that have <span class="math inline">\(K\)</span> components). This method is typically described in term of its algorithm. The algorithm proceeds as follows for a set of <span class="math inline">\(d\)</span>-dimensional data.</p>
+<ol type="1">
+<li><span class="math inline">\(K\)</span> <span class="math inline">\(d\)</span>-dimensional means are chosen. Call them <span class="math inline">\(\mathbf{m}_1, \mathbf{m}_2,\ldots,\mathbf{m}_K\)</span>.</li>
+<li>For each data point <span class="math inline">\(\mathbf{y}_i\)</span>, assign it to cluster <span class="math inline">\(k\)</span> such that it is closest to <span class="math inline">\(\mathbf{m}_k\)</span> in a least squares sense. That is, assign data point <span class="math inline">\(i\)</span> to the cluster <span class="math inline">\(k\)</span> for which <span class="math inline">\(\lVert \mathbf{y}_i - \mathbf{m}_k \rVert\)</span> is minimal.</li>
+<li>Recalculate the means <span class="math inline">\(m_k\)</span> based on the data points assigned to cluster <span class="math inline">\(k\)</span>. That is, <span class="math display">\[\begin{align}
+m_k = \frac{1}{N_k}\sum_{i \text{ in cluster }k}\mathbf{y}_i,
+\end{align}
+\]</span> where <span class="math inline">\(N_k\)</span> is the number of data points in cluster <span class="math inline">\(k\)</span>.</li>
+<li>In the reassignments are the same as the previous iteration STOP. Otherwise, go to 2.</li>
+</ol>
+<section id="sec-kmeans-sklearn" class="level2" data-number="36.1">
+<h2 data-number="36.1" class="anchored" data-anchor-id="sec-kmeans-sklearn"><span class="header-section-number">36.1</span> K-means with scikit-learn</h2>
+<p>While the K-means algorithm is easy to implement, we do not have to do it, as <a href="https://scikit-learn.org/stable/modules/clustering.html#k-means">it is implemented in scikit-learn</a>. Let us apply it to the Old Faithful data set we used in <span class="quarto-unresolved-ref">?sec-gmm-em-example</span>.</p>
+<div id="f9bd29e2" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load in data</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pl.read_csv(os.path.join(data_path, <span class="st">'old_faithful.csv'</span>))</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Pull data out as a Numpy array</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>y  <span class="op">=</span> df.select(pl.col(<span class="st">'duration-minutes'</span>, <span class="st">'waiting-minutes'</span>)).to_numpy()</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Instantiate KMeans instance with two clusters</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>kmeans <span class="op">=</span> sklearn.cluster.KMeans(<span class="dv">2</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform optimziation to get means and cluster assignments</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>kmeans.fit(y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<style>#sk-container-id-1 {
+  /* Definition of color scheme common for light and dark mode */
+  --sklearn-color-text: #000;
+  --sklearn-color-text-muted: #666;
+  --sklearn-color-line: gray;
+  /* Definition of color scheme for unfitted estimators */
+  --sklearn-color-unfitted-level-0: #fff5e6;
+  --sklearn-color-unfitted-level-1: #f6e4d2;
+  --sklearn-color-unfitted-level-2: #ffe0b3;
+  --sklearn-color-unfitted-level-3: chocolate;
+  /* Definition of color scheme for fitted estimators */
+  --sklearn-color-fitted-level-0: #f0f8ff;
+  --sklearn-color-fitted-level-1: #d4ebff;
+  --sklearn-color-fitted-level-2: #b3dbfd;
+  --sklearn-color-fitted-level-3: cornflowerblue;
+
+  /* Specific color for light theme */
+  --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
+  --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, white)));
+  --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
+  --sklearn-color-icon: #696969;
+
+  @media (prefers-color-scheme: dark) {
+    /* Redefinition of color scheme for dark theme */
+    --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
+    --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, #111)));
+    --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
+    --sklearn-color-icon: #878787;
+  }
+}
+
+#sk-container-id-1 {
+  color: var(--sklearn-color-text);
+}
+
+#sk-container-id-1 pre {
+  padding: 0;
+}
+
+#sk-container-id-1 input.sk-hidden--visually {
+  border: 0;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+#sk-container-id-1 div.sk-dashed-wrapped {
+  border: 1px dashed var(--sklearn-color-line);
+  margin: 0 0.4em 0.5em 0.4em;
+  box-sizing: border-box;
+  padding-bottom: 0.4em;
+  background-color: var(--sklearn-color-background);
+}
+
+#sk-container-id-1 div.sk-container {
+  /* jupyter's `normalize.less` sets `[hidden] { display: none; }`
+     but bootstrap.min.css set `[hidden] { display: none !important; }`
+     so we also need the `!important` here to be able to override the
+     default hidden behavior on the sphinx rendered scikit-learn.org.
+     See: https://github.com/scikit-learn/scikit-learn/issues/21755 */
+  display: inline-block !important;
+  position: relative;
+}
+
+#sk-container-id-1 div.sk-text-repr-fallback {
+  display: none;
+}
+
+div.sk-parallel-item,
+div.sk-serial,
+div.sk-item {
+  /* draw centered vertical line to link estimators */
+  background-image: linear-gradient(var(--sklearn-color-text-on-default-background), var(--sklearn-color-text-on-default-background));
+  background-size: 2px 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+/* Parallel-specific style estimator block */
+
+#sk-container-id-1 div.sk-parallel-item::after {
+  content: "";
+  width: 100%;
+  border-bottom: 2px solid var(--sklearn-color-text-on-default-background);
+  flex-grow: 1;
+}
+
+#sk-container-id-1 div.sk-parallel {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  background-color: var(--sklearn-color-background);
+  position: relative;
+}
+
+#sk-container-id-1 div.sk-parallel-item {
+  display: flex;
+  flex-direction: column;
+}
+
+#sk-container-id-1 div.sk-parallel-item:first-child::after {
+  align-self: flex-end;
+  width: 50%;
+}
+
+#sk-container-id-1 div.sk-parallel-item:last-child::after {
+  align-self: flex-start;
+  width: 50%;
+}
+
+#sk-container-id-1 div.sk-parallel-item:only-child::after {
+  width: 0;
+}
+
+/* Serial-specific style estimator block */
+
+#sk-container-id-1 div.sk-serial {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--sklearn-color-background);
+  padding-right: 1em;
+  padding-left: 1em;
+}
+
+
+/* Toggleable style: style used for estimator/Pipeline/ColumnTransformer box that is
+clickable and can be expanded/collapsed.
+- Pipeline and ColumnTransformer use this feature and define the default style
+- Estimators will overwrite some part of the style using the `sk-estimator` class
+*/
+
+/* Pipeline and ColumnTransformer style (default) */
+
+#sk-container-id-1 div.sk-toggleable {
+  /* Default theme specific background. It is overwritten whether we have a
+  specific estimator or a Pipeline/ColumnTransformer */
+  background-color: var(--sklearn-color-background);
+}
+
+/* Toggleable label */
+#sk-container-id-1 label.sk-toggleable__label {
+  cursor: pointer;
+  display: flex;
+  width: 100%;
+  margin-bottom: 0;
+  padding: 0.5em;
+  box-sizing: border-box;
+  text-align: center;
+  align-items: start;
+  justify-content: space-between;
+  gap: 0.5em;
+}
+
+#sk-container-id-1 label.sk-toggleable__label .caption {
+  font-size: 0.6rem;
+  font-weight: lighter;
+  color: var(--sklearn-color-text-muted);
+}
+
+#sk-container-id-1 label.sk-toggleable__label-arrow:before {
+  /* Arrow on the left of the label */
+  content: "▸";
+  float: left;
+  margin-right: 0.25em;
+  color: var(--sklearn-color-icon);
+}
+
+#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {
+  color: var(--sklearn-color-text);
+}
+
+/* Toggleable content - dropdown */
+
+#sk-container-id-1 div.sk-toggleable__content {
+  max-height: 0;
+  max-width: 0;
+  overflow: hidden;
+  text-align: left;
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-1 div.sk-toggleable__content.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+#sk-container-id-1 div.sk-toggleable__content pre {
+  margin: 0.2em;
+  border-radius: 0.25em;
+  color: var(--sklearn-color-text);
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-1 div.sk-toggleable__content.fitted pre {
+  /* unfitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {
+  /* Expand drop-down */
+  max-height: 200px;
+  max-width: 100%;
+  overflow: auto;
+}
+
+#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
+  content: "▾";
+}
+
+/* Pipeline/ColumnTransformer-specific style */
+
+#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-1 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Estimator-specific style */
+
+/* Colorize estimator box */
+#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-1 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+#sk-container-id-1 div.sk-label label.sk-toggleable__label,
+#sk-container-id-1 div.sk-label label {
+  /* The background is the default theme color */
+  color: var(--sklearn-color-text-on-default-background);
+}
+
+/* On hover, darken the color of the background */
+#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+/* Label box, darken color on hover, fitted */
+#sk-container-id-1 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Estimator label */
+
+#sk-container-id-1 div.sk-label label {
+  font-family: monospace;
+  font-weight: bold;
+  display: inline-block;
+  line-height: 1.2em;
+}
+
+#sk-container-id-1 div.sk-label-container {
+  text-align: center;
+}
+
+/* Estimator-specific */
+#sk-container-id-1 div.sk-estimator {
+  font-family: monospace;
+  border: 1px dotted var(--sklearn-color-border-box);
+  border-radius: 0.25em;
+  box-sizing: border-box;
+  margin-bottom: 0.5em;
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-1 div.sk-estimator.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+/* on hover */
+#sk-container-id-1 div.sk-estimator:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-1 div.sk-estimator.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Specification for estimator info (e.g. "i" and "?") */
+
+/* Common style for "i" and "?" */
+
+.sk-estimator-doc-link,
+a:link.sk-estimator-doc-link,
+a:visited.sk-estimator-doc-link {
+  float: right;
+  font-size: smaller;
+  line-height: 1em;
+  font-family: monospace;
+  background-color: var(--sklearn-color-background);
+  border-radius: 1em;
+  height: 1em;
+  width: 1em;
+  text-decoration: none !important;
+  margin-left: 0.5em;
+  text-align: center;
+  /* unfitted */
+  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
+  color: var(--sklearn-color-unfitted-level-1);
+}
+
+.sk-estimator-doc-link.fitted,
+a:link.sk-estimator-doc-link.fitted,
+a:visited.sk-estimator-doc-link.fitted {
+  /* fitted */
+  border: var(--sklearn-color-fitted-level-1) 1pt solid;
+  color: var(--sklearn-color-fitted-level-1);
+}
+
+/* On hover */
+div.sk-estimator:hover .sk-estimator-doc-link:hover,
+.sk-estimator-doc-link:hover,
+div.sk-label-container:hover .sk-estimator-doc-link:hover,
+.sk-estimator-doc-link:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+div.sk-estimator.fitted:hover .sk-estimator-doc-link.fitted:hover,
+.sk-estimator-doc-link.fitted:hover,
+div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
+.sk-estimator-doc-link.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+/* Span, style for the box shown on hovering the info icon */
+.sk-estimator-doc-link span {
+  display: none;
+  z-index: 9999;
+  position: relative;
+  font-weight: normal;
+  right: .2ex;
+  padding: .5ex;
+  margin: .5ex;
+  width: min-content;
+  min-width: 20ex;
+  max-width: 50ex;
+  color: var(--sklearn-color-text);
+  box-shadow: 2pt 2pt 4pt #999;
+  /* unfitted */
+  background: var(--sklearn-color-unfitted-level-0);
+  border: .5pt solid var(--sklearn-color-unfitted-level-3);
+}
+
+.sk-estimator-doc-link.fitted span {
+  /* fitted */
+  background: var(--sklearn-color-fitted-level-0);
+  border: var(--sklearn-color-fitted-level-3);
+}
+
+.sk-estimator-doc-link:hover span {
+  display: block;
+}
+
+/* "?"-specific style due to the `<a>` HTML tag */
+
+#sk-container-id-1 a.estimator_doc_link {
+  float: right;
+  font-size: 1rem;
+  line-height: 1em;
+  font-family: monospace;
+  background-color: var(--sklearn-color-background);
+  border-radius: 1rem;
+  height: 1rem;
+  width: 1rem;
+  text-decoration: none;
+  /* unfitted */
+  color: var(--sklearn-color-unfitted-level-1);
+  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
+}
+
+#sk-container-id-1 a.estimator_doc_link.fitted {
+  /* fitted */
+  border: var(--sklearn-color-fitted-level-1) 1pt solid;
+  color: var(--sklearn-color-fitted-level-1);
+}
+
+/* On hover */
+#sk-container-id-1 a.estimator_doc_link:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+#sk-container-id-1 a.estimator_doc_link.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-3);
+}
+</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>KMeans(n_clusters=2)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" checked=""><label for="sk-estimator-id-1" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>KMeans</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.cluster.KMeans.html">?<span>Documentation for KMeans</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted"><pre>KMeans(n_clusters=2)</pre></div> </div></div></div></div>
+</div>
+</div>
+<p>We can access the means (cluster centers) using the <code>cluster_centers_</code> attribute and the cluster assignments using the <code>labels_</code> attribute. We will use those to make a plot of the cluster assignments of the data in the Old Faithful data set.</p>
+<div id="4292af17" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Color according to labels</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> [<span class="st">'#00b6ff'</span> <span class="cf">if</span> label<span class="op">==</span><span class="dv">1</span> <span class="cf">else</span> <span class="st">'#f6906c'</span> <span class="cf">for</span> label <span class="kw">in</span> kmeans.labels_]</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot data with label by color</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> bokeh.plotting.figure(</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    frame_width<span class="op">=</span><span class="dv">300</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    frame_height<span class="op">=</span><span class="dv">300</span>,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    x_axis_label<span class="op">=</span><span class="st">'eruption duration (min)'</span>,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    y_axis_label<span class="op">=</span><span class="st">'eruption waiting time (min)'</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>p.scatter(y[:,<span class="dv">0</span>], y[:,<span class="dv">1</span>], color<span class="op">=</span>colors)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Put in means</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>p.scatter(</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    kmeans.cluster_centers_[:, <span class="dv">0</span>], </span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    kmeans.cluster_centers_[:, <span class="dv">1</span>], </span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">'black'</span>, </span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    marker<span class="op">=</span><span class="st">'+'</span>,</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    size<span class="op">=</span><span class="dv">15</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+
+  <div id="ba7c6f0d-6558-4971-a409-3478e72a3018" data-root-id="p1001" style="display: contents;"></div>
+</div>
+<div class="cell-output cell-output-display">
+<script type="application/javascript">
+(function(root) {
+  function embed_document(root) {
+  const docs_json = {"4d4269c0-eb01-44a0-ba34-4bd084fe0fc1":{"version":"3.6.2","title":"Bokeh Application","roots":[{"type":"object","name":"Figure","id":"p1001","attributes":{"x_range":{"type":"object","name":"DataRange1d","id":"p1002"},"y_range":{"type":"object","name":"DataRange1d","id":"p1003"},"x_scale":{"type":"object","name":"LinearScale","id":"p1010"},"y_scale":{"type":"object","name":"LinearScale","id":"p1011"},"title":{"type":"object","name":"Title","id":"p1008"},"renderers":[{"type":"object","name":"GlyphRenderer","id":"p1041","attributes":{"data_source":{"type":"object","name":"ColumnDataSource","id":"p1035","attributes":{"selected":{"type":"object","name":"Selection","id":"p1036","attributes":{"indices":[],"line_indices":[]}},"selection_policy":{"type":"object","name":"UnionRenderers","id":"p1037"},"data":{"type":"map","entries":[["x",{"type":"ndarray","array":{"type":"bytes","data":"zczMzMzMDEDNzMzMzMz8P0SLbOf7qQpA3SQGgZVDAkBvEoPAyiESQKrx0k1iEAdAzczMzMzMEkDNzMzMzMwMQDMzMzMzM/8/ZmZmZmZmEUCHFtnO91P9P7x0kxgEVg9AzczMzMzMEEAAAAAAAAD8P83MzMzMzBJAvHSTGARWAUAAAAAAAAD8PzMzMzMzMxNAmpmZmZmZ+T8AAAAAAAARQM3MzMzMzPw/AAAAAAAA/D+amZmZmZkLQPCnxks3iQhAbxKDwMohEkDNzMzMzMwMQEa28/3UeP8/okW28/1UEEDNzMzMzMwOQAisHFpkuxFAMzMzMzMzEUCR7Xw/Nd4RQFYOLbKd7wpAbxKDwMohEEBEi2zn+6kOQIlBYOXQIgBArBxaZDvf/T+iRbbz/VQTQIcW2c73U/0/bxKDwMohE0BmZmZmZmYRQFTjpZvEIP4/+FPjpZtEEkAAAAAAAAD8P28Sg8DKIRJA8KfGSzeJCkBEi2zn+6kOQM3MzMzMzABA1XjpJjGIEkAAAAAAAAAAQDMzMzMzMxNAd76fGi/dEkCHFtnO91P9P6JFtvP9VBNA7nw/NV66+z/VeOkmMYgTQCPb+X5qvA1AeekmMQis+j/4U+Olm0QSQPhT46WbRBFAd76fGi/dAUAAAAAAAAASQAAAAAAAAPw/MzMzMzMzE0DfT42XbhL9P5qZmZmZmRFAXrpJDAKrEEDNzMzMzMwSQPCnxks3iQBAzczMzMzMEkBvEoPAyiEQQEa28/3UeP8/AAAAAAAAEkAAAAAAAAAQQO58PzVeuv8/+FPjpZtEFECJQWDl0CIAQPhT46WbRBJAqvHSTWIQD0DNzMzMzMwMQNV46SYxiBBAokW28/1UEUBmZmZmZmYQQKrx0k1iEAVA+FPjpZtEEEAIrBxaZLsTQJqZmZmZmQ9AxSCwcmgREkC8dJMYBFYBQAAAAAAAABBAmpmZmZmZAUCiRbbz/VQRQKwcWmQ73/0/+FPjpZtEE0CHFtnO91P9PzMzMzMzMxFAXrpJDAKrEkAAAAAAAAAOQKwcWmQ73/0/mpmZmZmZE0B3vp8aL90DQCuHFtnOdxFAzczMzMzMAEAAAAAAAAASQDMzMzMzMxBArBxaZDvf/T/NzMzMzMwSQLpJDAIrh/w/ZmZmZmZmE0AQWDm0yHYNQDvfT42X7hJAZmZmZmZmAkCamZmZmZkTQF66SQwCqxFAMzMzMzMz+z/VeOkmMYgSQPCnxks3iQJAZmZmZmZmEkDfT42XbhL9P166SQwCqxFAVg4tsp3vBED4U+Olm0QQQAAAAAAAABFARrbz/dR4/z9mZmZmZmYSQIlBYOXQIg5AeekmMQis/j8AAAAAAAASQIlBYOXQIgJAmpmZmZmZEkCsHFpkO9/9P166SQwCqxBAZmZmZmZmBkCiRbbz/VQRQIcW2c73U/0/1XjpJjGIEUBU46WbxCD+PwisHFpkuxNA3SQGgZVDAEB3vp8aL90NQDvfT42X7hBAd76fGi/dAUBvEoPAyiESQPhT46WbRBNAokW28/1UEUDufD81Xrr/P9V46SYxiBJAiUFg5dAiAEBmZmZmZmYUQM3MzMzMzPw/bxKDwMohFEAAAAAAAAAQQDMzMzMzMwNAZmZmZmZmEkDwp8ZLN4kMQAAAAAAAABBAAAAAAAAAEkCiRbbz/VQQQM3MzMzMzPw/I9v5fmq8D0CamZmZmZkBQJqZmZmZmRBAAAAAAAAAAEBEi2zn+6kOQAAAAAAAAAxAokW28/1UEkBWDi2yne8CQAAAAAAAABRAIbByaJHt/j8rhxbZzncSQHnpJjEIrP4/RIts5/upAECiRbbz/VQSQESLbOf7qQpAXrpJDAKrEECiRbbz/VQRQAAAAAAAABJAvHSTGARWA0AAAAAAAAAQQF66SQwCqxBAVOOlm8Qg/j+iRbbz/VQSQAAAAAAAABFAiUFg5dAiDkDdJAaBlUMAQAisHFpkuxFAokW28/1UEECHFtnO91P9P166SQwCqxFAEFg5tMh2AUAzMzMzMzMTQIcW2c73U/0/MzMzMzMzE0BmZmZmZmYQQO58PzVeug9AO99PjZfuEEAAAAAAAAAMQBBYObTIdhFAAAAAAAAAAkBeukkMAqsSQM3MzMzMzABAZmZmZmZmEUDVeOkmMYgQQKwcWmQ73/0/ZmZmZmZmEkC6SQwCK4f8PyuHFtnOdxFAzczMzMzMDkAhsHJoke3+PwAAAAAAABJAqvHSTWIQA0DNzMzMzMwSQKwcWmQ73/0/RIts5/upDkC8dJMYBFYLQDvfT42X7hBAMzMzMzMzA0AzMzMzMzMTQAAAAAAAAABAmpmZmZmZEECsHFpkO9/9P8UgsHJoERFAAAAAAAAA/D8730+Nl+4RQAAAAAAAABBAK4cW2c53EECiRbbz/VQQQMUgsHJoERFAvHSTGARWD0AzMzMzMzMSQKJFtvP9VBBAvHSTGARWA0AIrBxaZLsQQCPb+X5qvAFAzczMzMzMEUBU46WbxCD+P5qZmZmZmf0/bxKDwMohEUCamZmZmZkPQESLbOf7qQJAmpmZmZmZEEDNzMzMzMwCQAisHFpkuxNAMzMzMzMzB0CiRbbz/VQSQESLbOf7qQ5ARIts5/upAEArhxbZzncRQKrx0k1iEAFAZmZmZmZmEUCamZmZmZkBQM3MzMzMzBFA8KfGSzeJDEAAAAAAAAASQJqZmZmZmRBA8KfGSzeJDkC8dJMYBFYPQM3MzMzMzBFAAAAAAAAAAEBvEoPAyiERQMUgsHJoERNAbxKDwMohEkCamZmZmZn9PwAAAAAAABFA7nw/NV66/z8AAAAAAAACQAAAAAAAABNAK4cW2c53EEAzMzMzMzMBQF66SQwCqxFA30+Nl24S/T+R7Xw/Nd4RQA=="},"shape":[272],"dtype":"float64","order":"little"}],["y",{"type":"ndarray","array":{"type":"bytes","data":"AAAAAADAU0AAAAAAAABLQAAAAAAAgFJAAAAAAAAAT0AAAAAAAEBVQAAAAAAAgEtAAAAAAAAAVkAAAAAAAEBVQAAAAAAAgElAAAAAAABAVUAAAAAAAABLQAAAAAAAAFVAAAAAAACAU0AAAAAAAIBHQAAAAAAAwFRAAAAAAAAASkAAAAAAAABPQAAAAAAAAFVAAAAAAAAASkAAAAAAAMBTQAAAAAAAgElAAAAAAACAR0AAAAAAAIBTQAAAAAAAQFFAAAAAAACAUkAAAAAAAMBUQAAAAAAAgEtAAAAAAAAAU0AAAAAAAIBTQAAAAAAAwFNAAAAAAABAUkAAAAAAAEBTQAAAAAAAgFBAAAAAAAAAVEAAAAAAAIBSQAAAAAAAAEpAAAAAAAAASEAAAAAAAABUQAAAAAAAgE1AAAAAAACAVkAAAAAAAABUQAAAAAAAAE1AAAAAAAAAVUAAAAAAAABNQAAAAAAAQFJAAAAAAADAVEAAAAAAAABQQAAAAAAAgEpAAAAAAACAVEAAAAAAAIBNQAAAAAAAwFJAAAAAAACAVkAAAAAAAABLQAAAAAAAAFRAAAAAAAAAS0AAAAAAAMBUQAAAAAAAwFFAAAAAAAAAUEAAAAAAAEBTQAAAAAAAQFRAAAAAAACATUAAAAAAAABVQAAAAAAAAEhAAAAAAACAVEAAAAAAAABOQAAAAAAAAFdAAAAAAACAU0AAAAAAAIBTQAAAAAAAQFBAAAAAAABAUkAAAAAAAIBUQAAAAAAAAExAAAAAAADAU0AAAAAAAMBRQAAAAAAAAE9AAAAAAAAAU0AAAAAAAABOQAAAAAAAgFNAAAAAAAAAU0AAAAAAAMBUQAAAAAAAwFJAAAAAAACAVEAAAAAAAIBRQAAAAAAAQFBAAAAAAABAUkAAAAAAAABWQAAAAAAAAFNAAAAAAAAAVEAAAAAAAABIQAAAAAAAgFVAAAAAAAAATkAAAAAAAIBWQAAAAAAAAElAAAAAAACAU0AAAAAAAIBPQAAAAAAAAFJAAAAAAAAAVUAAAAAAAMBSQAAAAAAAgElAAAAAAACAVEAAAAAAAABPQAAAAAAAAFZAAAAAAACASEAAAAAAAMBUQAAAAAAAQFRAAAAAAACAR0AAAAAAAABVQAAAAAAAAEpAAAAAAACAVUAAAAAAAEBUQAAAAAAAwFJAAAAAAACATUAAAAAAAEBWQAAAAAAAwFNAAAAAAACATUAAAAAAAEBUQAAAAAAAAElAAAAAAABAVUAAAAAAAIBNQAAAAAAAwFVAAAAAAACASkAAAAAAAEBRQAAAAAAAQFNAAAAAAAAATEAAAAAAAABWQAAAAAAAQFRAAAAAAACARkAAAAAAAIBUQAAAAAAAgEtAAAAAAACAVkAAAAAAAIBGQAAAAAAAwFRAAAAAAAAATEAAAAAAAEBWQAAAAAAAAEdAAAAAAACAVEAAAAAAAIBJQAAAAAAAgFVAAAAAAACASkAAAAAAAMBTQAAAAAAAQFRAAAAAAAAATkAAAAAAAIBUQAAAAAAAQFNAAAAAAAAAU0AAAAAAAIBNQAAAAAAAAFRAAAAAAACASEAAAAAAAABYQAAAAAAAgEpAAAAAAABAU0AAAAAAAEBTQAAAAAAAQFBAAAAAAABAVEAAAAAAAMBRQAAAAAAAgFFAAAAAAABAVEAAAAAAAEBXQAAAAAAAgEpAAAAAAABAVkAAAAAAAIBGQAAAAAAAgFVAAAAAAAAATUAAAAAAAIBTQAAAAAAAgFBAAAAAAAAAU0AAAAAAAIBPQAAAAAAAAFZAAAAAAAAASkAAAAAAAEBXQAAAAAAAgEhAAAAAAACATEAAAAAAAEBTQAAAAAAAAFFAAAAAAABAVEAAAAAAAEBUQAAAAAAAQFJAAAAAAAAASUAAAAAAAEBVQAAAAAAAgFJAAAAAAACAS0AAAAAAAEBTQAAAAAAAwFRAAAAAAADAVEAAAAAAAIBJQAAAAAAAgFNAAAAAAAAAVUAAAAAAAABHQAAAAAAAwFRAAAAAAACAS0AAAAAAAEBUQAAAAAAAgExAAAAAAAAAU0AAAAAAAABVQAAAAAAAQFNAAAAAAABAVEAAAAAAAMBVQAAAAAAAQFNAAAAAAACASUAAAAAAAIBTQAAAAAAAAE5AAAAAAACAVEAAAAAAAMBWQAAAAAAAgEpAAAAAAACAU0AAAAAAAABHQAAAAAAAQFNAAAAAAAAAVUAAAAAAAIBIQAAAAAAAwFRAAAAAAADAUUAAAAAAAABUQAAAAAAAgEhAAAAAAADAUkAAAAAAAABQQAAAAAAAAFNAAAAAAACASkAAAAAAAIBXQAAAAAAAgEtAAAAAAAAAU0AAAAAAAABJQAAAAAAAgFRAAAAAAAAAS0AAAAAAAMBSQAAAAAAAgFNAAAAAAADAU0AAAAAAAIBTQAAAAAAAgFNAAAAAAACAUUAAAAAAAMBTQAAAAAAAgFFAAAAAAAAAS0AAAAAAAIBVQAAAAAAAAElAAAAAAACAVkAAAAAAAABLQAAAAAAAAEtAAAAAAABAU0AAAAAAAMBTQAAAAAAAAFBAAAAAAADAUkAAAAAAAIBHQAAAAAAAgFVAAAAAAACAT0AAAAAAAEBVQAAAAAAAgFRAAAAAAACATEAAAAAAAIBUQAAAAAAAwFBAAAAAAACAUkAAAAAAAABLQAAAAAAAwFRAAAAAAABAUkAAAAAAAEBSQAAAAAAAAFZAAAAAAAAAVEAAAAAAAMBRQAAAAAAAwFRAAAAAAAAATEAAAAAAAMBTQAAAAAAAgFNAAAAAAAAAVUAAAAAAAABNQAAAAAAAwFRAAAAAAACARUAAAAAAAABOQAAAAAAAwFJAAAAAAABAVEAAAAAAAABHQAAAAAAAgFZAAAAAAAAAR0AAAAAAAIBSQA=="},"shape":[272],"dtype":"float64","order":"little"}],["line_color",["#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c"]],["fill_color",["#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c"]],["hatch_color",["#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c"]]]}}},"view":{"type":"object","name":"CDSView","id":"p1042","attributes":{"filter":{"type":"object","name":"AllIndices","id":"p1043"}}},"glyph":{"type":"object","name":"Scatter","id":"p1038","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"line_color":{"type":"field","field":"line_color"},"fill_color":{"type":"field","field":"fill_color"},"hatch_color":{"type":"field","field":"hatch_color"}}},"nonselection_glyph":{"type":"object","name":"Scatter","id":"p1039","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"line_color":{"type":"field","field":"line_color"},"line_alpha":{"type":"value","value":0.1},"fill_color":{"type":"field","field":"fill_color"},"fill_alpha":{"type":"value","value":0.1},"hatch_color":{"type":"field","field":"hatch_color"},"hatch_alpha":{"type":"value","value":0.1}}},"muted_glyph":{"type":"object","name":"Scatter","id":"p1040","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"line_color":{"type":"field","field":"line_color"},"line_alpha":{"type":"value","value":0.2},"fill_color":{"type":"field","field":"fill_color"},"fill_alpha":{"type":"value","value":0.2},"hatch_color":{"type":"field","field":"hatch_color"},"hatch_alpha":{"type":"value","value":0.2}}}}},{"type":"object","name":"GlyphRenderer","id":"p1050","attributes":{"data_source":{"type":"object","name":"ColumnDataSource","id":"p1044","attributes":{"selected":{"type":"object","name":"Selection","id":"p1045","attributes":{"indices":[],"line_indices":[]}},"selection_policy":{"type":"object","name":"UnionRenderers","id":"p1046"},"data":{"type":"map","entries":[["x",{"type":"ndarray","array":{"type":"bytes","data":"u051nxQxEUDiQEgWMMEAQA=="},"shape":[2],"dtype":"float64","order":"little"}],["y",{"type":"ndarray","array":{"type":"bytes","data":"tyPuiDsSVED9/////19LQA=="},"shape":[2],"dtype":"float64","order":"little"}]]}}},"view":{"type":"object","name":"CDSView","id":"p1051","attributes":{"filter":{"type":"object","name":"AllIndices","id":"p1052"}}},"glyph":{"type":"object","name":"Scatter","id":"p1047","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"size":{"type":"value","value":15},"fill_color":{"type":"value","value":"black"},"marker":{"type":"value","value":"cross"}}},"nonselection_glyph":{"type":"object","name":"Scatter","id":"p1048","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"size":{"type":"value","value":15},"line_alpha":{"type":"value","value":0.1},"fill_color":{"type":"value","value":"black"},"fill_alpha":{"type":"value","value":0.1},"hatch_alpha":{"type":"value","value":0.1},"marker":{"type":"value","value":"cross"}}},"muted_glyph":{"type":"object","name":"Scatter","id":"p1049","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"size":{"type":"value","value":15},"line_alpha":{"type":"value","value":0.2},"fill_color":{"type":"value","value":"black"},"fill_alpha":{"type":"value","value":0.2},"hatch_alpha":{"type":"value","value":0.2},"marker":{"type":"value","value":"cross"}}}}}],"toolbar":{"type":"object","name":"Toolbar","id":"p1009","attributes":{"tools":[{"type":"object","name":"PanTool","id":"p1022"},{"type":"object","name":"WheelZoomTool","id":"p1023","attributes":{"renderers":"auto"}},{"type":"object","name":"BoxZoomTool","id":"p1024","attributes":{"overlay":{"type":"object","name":"BoxAnnotation","id":"p1025","attributes":{"syncable":false,"line_color":"black","line_alpha":1.0,"line_width":2,"line_dash":[4,4],"fill_color":"lightgrey","fill_alpha":0.5,"level":"overlay","visible":false,"left":{"type":"number","value":"nan"},"right":{"type":"number","value":"nan"},"top":{"type":"number","value":"nan"},"bottom":{"type":"number","value":"nan"},"left_units":"canvas","right_units":"canvas","top_units":"canvas","bottom_units":"canvas","handles":{"type":"object","name":"BoxInteractionHandles","id":"p1031","attributes":{"all":{"type":"object","name":"AreaVisuals","id":"p1030","attributes":{"fill_color":"white","hover_fill_color":"lightgray"}}}}}}}},{"type":"object","name":"SaveTool","id":"p1032"},{"type":"object","name":"ResetTool","id":"p1033"},{"type":"object","name":"HelpTool","id":"p1034"}]}},"left":[{"type":"object","name":"LinearAxis","id":"p1017","attributes":{"ticker":{"type":"object","name":"BasicTicker","id":"p1018","attributes":{"mantissas":[1,2,5]}},"formatter":{"type":"object","name":"BasicTickFormatter","id":"p1019"},"axis_label":"eruption waiting time (min)","major_label_policy":{"type":"object","name":"AllLabels","id":"p1020"}}}],"below":[{"type":"object","name":"LinearAxis","id":"p1012","attributes":{"ticker":{"type":"object","name":"BasicTicker","id":"p1013","attributes":{"mantissas":[1,2,5]}},"formatter":{"type":"object","name":"BasicTickFormatter","id":"p1014"},"axis_label":"eruption duration (min)","major_label_policy":{"type":"object","name":"AllLabels","id":"p1015"}}}],"center":[{"type":"object","name":"Grid","id":"p1016","attributes":{"axis":{"id":"p1012"}}},{"type":"object","name":"Grid","id":"p1021","attributes":{"dimension":1,"axis":{"id":"p1017"}}}],"frame_width":300,"frame_height":300}}]}};
+  const render_items = [{"docid":"4d4269c0-eb01-44a0-ba34-4bd084fe0fc1","roots":{"p1001":"ba7c6f0d-6558-4971-a409-3478e72a3018"},"root_ids":["p1001"]}];
+  void root.Bokeh.embed.embed_items_notebook(docs_json, render_items);
+  }
+  if (root.Bokeh !== undefined) {
+    embed_document(root);
+  } else {
+    let attempts = 0;
+    const timer = setInterval(function(root) {
+      if (root.Bokeh !== undefined) {
+        clearInterval(timer);
+        embed_document(root);
+      } else {
+        attempts++;
+        if (attempts > 100) {
+          clearInterval(timer);
+          console.log("Bokeh: ERROR: Unable to run BokehJS code because BokehJS library is missing");
+        }
+      }
+    }, 10, root)
+  }
+})(window);
+</script>
+</div>
+</div>
+<p>The result is similar to what we say in using EM (see <a href="em_gmm_example.html" class="quarto-xref"><span>Chapter 35</span></a>), but the data points that apparently lie between the two clusters differ in their assignment.</p>
+<p>For K-means clustering, it is wise to first center-and-scale the data. That is, perform a linear transformation on the observations such that the data points have a mean of zero and a variance of one.</p>
+<div id="d5e57f9d" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Center and scale y</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>scaler <span class="op">=</span> sklearn.preprocessing.StandardScaler().fit(y)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>y_scaled <span class="op">=</span> scaler.transform(y)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Do K-means on centered-and-scaled</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>kmeans <span class="op">=</span> sklearn.cluster.KMeans(<span class="dv">2</span>).fit(y_scaled)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Rescale the cluster centers</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>cluster_centers <span class="op">=</span> scaler.inverse_transform(kmeans.cluster_centers_)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot data</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> [<span class="st">'#00b6ff'</span> <span class="cf">if</span> label<span class="op">==</span><span class="dv">1</span> <span class="cf">else</span> <span class="st">'#f6906c'</span> <span class="cf">for</span> label <span class="kw">in</span> kmeans.labels_]</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot data with label by color</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> bokeh.plotting.figure(</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    frame_width<span class="op">=</span><span class="dv">300</span>,</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    frame_height<span class="op">=</span><span class="dv">300</span>,</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    x_axis_label<span class="op">=</span><span class="st">'eruption duration (min)'</span>,</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    y_axis_label<span class="op">=</span><span class="st">'eruption waiting time (min)'</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>p.scatter(y[:,<span class="dv">0</span>], y[:,<span class="dv">1</span>], color<span class="op">=</span>colors)</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Put in means</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>p.scatter(</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>    cluster_centers[:, <span class="dv">0</span>], </span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>    cluster_centers[:, <span class="dv">1</span>], </span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">'black'</span>, </span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>    marker<span class="op">=</span><span class="st">'+'</span>,</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>    size<span class="op">=</span><span class="dv">15</span></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+
+  <div id="c388a694-79c9-450a-9329-3b141170e0ba" data-root-id="p1057" style="display: contents;"></div>
+</div>
+<div class="cell-output cell-output-display">
+<script type="application/javascript">
+(function(root) {
+  function embed_document(root) {
+  const docs_json = {"21fd3012-66a7-4a65-a535-8936e7770516":{"version":"3.6.2","title":"Bokeh Application","roots":[{"type":"object","name":"Figure","id":"p1057","attributes":{"x_range":{"type":"object","name":"DataRange1d","id":"p1058"},"y_range":{"type":"object","name":"DataRange1d","id":"p1059"},"x_scale":{"type":"object","name":"LinearScale","id":"p1066"},"y_scale":{"type":"object","name":"LinearScale","id":"p1067"},"title":{"type":"object","name":"Title","id":"p1064"},"renderers":[{"type":"object","name":"GlyphRenderer","id":"p1097","attributes":{"data_source":{"type":"object","name":"ColumnDataSource","id":"p1091","attributes":{"selected":{"type":"object","name":"Selection","id":"p1092","attributes":{"indices":[],"line_indices":[]}},"selection_policy":{"type":"object","name":"UnionRenderers","id":"p1093"},"data":{"type":"map","entries":[["x",{"type":"ndarray","array":{"type":"bytes","data":"zczMzMzMDEDNzMzMzMz8P0SLbOf7qQpA3SQGgZVDAkBvEoPAyiESQKrx0k1iEAdAzczMzMzMEkDNzMzMzMwMQDMzMzMzM/8/ZmZmZmZmEUCHFtnO91P9P7x0kxgEVg9AzczMzMzMEEAAAAAAAAD8P83MzMzMzBJAvHSTGARWAUAAAAAAAAD8PzMzMzMzMxNAmpmZmZmZ+T8AAAAAAAARQM3MzMzMzPw/AAAAAAAA/D+amZmZmZkLQPCnxks3iQhAbxKDwMohEkDNzMzMzMwMQEa28/3UeP8/okW28/1UEEDNzMzMzMwOQAisHFpkuxFAMzMzMzMzEUCR7Xw/Nd4RQFYOLbKd7wpAbxKDwMohEEBEi2zn+6kOQIlBYOXQIgBArBxaZDvf/T+iRbbz/VQTQIcW2c73U/0/bxKDwMohE0BmZmZmZmYRQFTjpZvEIP4/+FPjpZtEEkAAAAAAAAD8P28Sg8DKIRJA8KfGSzeJCkBEi2zn+6kOQM3MzMzMzABA1XjpJjGIEkAAAAAAAAAAQDMzMzMzMxNAd76fGi/dEkCHFtnO91P9P6JFtvP9VBNA7nw/NV66+z/VeOkmMYgTQCPb+X5qvA1AeekmMQis+j/4U+Olm0QSQPhT46WbRBFAd76fGi/dAUAAAAAAAAASQAAAAAAAAPw/MzMzMzMzE0DfT42XbhL9P5qZmZmZmRFAXrpJDAKrEEDNzMzMzMwSQPCnxks3iQBAzczMzMzMEkBvEoPAyiEQQEa28/3UeP8/AAAAAAAAEkAAAAAAAAAQQO58PzVeuv8/+FPjpZtEFECJQWDl0CIAQPhT46WbRBJAqvHSTWIQD0DNzMzMzMwMQNV46SYxiBBAokW28/1UEUBmZmZmZmYQQKrx0k1iEAVA+FPjpZtEEEAIrBxaZLsTQJqZmZmZmQ9AxSCwcmgREkC8dJMYBFYBQAAAAAAAABBAmpmZmZmZAUCiRbbz/VQRQKwcWmQ73/0/+FPjpZtEE0CHFtnO91P9PzMzMzMzMxFAXrpJDAKrEkAAAAAAAAAOQKwcWmQ73/0/mpmZmZmZE0B3vp8aL90DQCuHFtnOdxFAzczMzMzMAEAAAAAAAAASQDMzMzMzMxBArBxaZDvf/T/NzMzMzMwSQLpJDAIrh/w/ZmZmZmZmE0AQWDm0yHYNQDvfT42X7hJAZmZmZmZmAkCamZmZmZkTQF66SQwCqxFAMzMzMzMz+z/VeOkmMYgSQPCnxks3iQJAZmZmZmZmEkDfT42XbhL9P166SQwCqxFAVg4tsp3vBED4U+Olm0QQQAAAAAAAABFARrbz/dR4/z9mZmZmZmYSQIlBYOXQIg5AeekmMQis/j8AAAAAAAASQIlBYOXQIgJAmpmZmZmZEkCsHFpkO9/9P166SQwCqxBAZmZmZmZmBkCiRbbz/VQRQIcW2c73U/0/1XjpJjGIEUBU46WbxCD+PwisHFpkuxNA3SQGgZVDAEB3vp8aL90NQDvfT42X7hBAd76fGi/dAUBvEoPAyiESQPhT46WbRBNAokW28/1UEUDufD81Xrr/P9V46SYxiBJAiUFg5dAiAEBmZmZmZmYUQM3MzMzMzPw/bxKDwMohFEAAAAAAAAAQQDMzMzMzMwNAZmZmZmZmEkDwp8ZLN4kMQAAAAAAAABBAAAAAAAAAEkCiRbbz/VQQQM3MzMzMzPw/I9v5fmq8D0CamZmZmZkBQJqZmZmZmRBAAAAAAAAAAEBEi2zn+6kOQAAAAAAAAAxAokW28/1UEkBWDi2yne8CQAAAAAAAABRAIbByaJHt/j8rhxbZzncSQHnpJjEIrP4/RIts5/upAECiRbbz/VQSQESLbOf7qQpAXrpJDAKrEECiRbbz/VQRQAAAAAAAABJAvHSTGARWA0AAAAAAAAAQQF66SQwCqxBAVOOlm8Qg/j+iRbbz/VQSQAAAAAAAABFAiUFg5dAiDkDdJAaBlUMAQAisHFpkuxFAokW28/1UEECHFtnO91P9P166SQwCqxFAEFg5tMh2AUAzMzMzMzMTQIcW2c73U/0/MzMzMzMzE0BmZmZmZmYQQO58PzVeug9AO99PjZfuEEAAAAAAAAAMQBBYObTIdhFAAAAAAAAAAkBeukkMAqsSQM3MzMzMzABAZmZmZmZmEUDVeOkmMYgQQKwcWmQ73/0/ZmZmZmZmEkC6SQwCK4f8PyuHFtnOdxFAzczMzMzMDkAhsHJoke3+PwAAAAAAABJAqvHSTWIQA0DNzMzMzMwSQKwcWmQ73/0/RIts5/upDkC8dJMYBFYLQDvfT42X7hBAMzMzMzMzA0AzMzMzMzMTQAAAAAAAAABAmpmZmZmZEECsHFpkO9/9P8UgsHJoERFAAAAAAAAA/D8730+Nl+4RQAAAAAAAABBAK4cW2c53EECiRbbz/VQQQMUgsHJoERFAvHSTGARWD0AzMzMzMzMSQKJFtvP9VBBAvHSTGARWA0AIrBxaZLsQQCPb+X5qvAFAzczMzMzMEUBU46WbxCD+P5qZmZmZmf0/bxKDwMohEUCamZmZmZkPQESLbOf7qQJAmpmZmZmZEEDNzMzMzMwCQAisHFpkuxNAMzMzMzMzB0CiRbbz/VQSQESLbOf7qQ5ARIts5/upAEArhxbZzncRQKrx0k1iEAFAZmZmZmZmEUCamZmZmZkBQM3MzMzMzBFA8KfGSzeJDEAAAAAAAAASQJqZmZmZmRBA8KfGSzeJDkC8dJMYBFYPQM3MzMzMzBFAAAAAAAAAAEBvEoPAyiERQMUgsHJoERNAbxKDwMohEkCamZmZmZn9PwAAAAAAABFA7nw/NV66/z8AAAAAAAACQAAAAAAAABNAK4cW2c53EEAzMzMzMzMBQF66SQwCqxFA30+Nl24S/T+R7Xw/Nd4RQA=="},"shape":[272],"dtype":"float64","order":"little"}],["y",{"type":"ndarray","array":{"type":"bytes","data":"AAAAAADAU0AAAAAAAABLQAAAAAAAgFJAAAAAAAAAT0AAAAAAAEBVQAAAAAAAgEtAAAAAAAAAVkAAAAAAAEBVQAAAAAAAgElAAAAAAABAVUAAAAAAAABLQAAAAAAAAFVAAAAAAACAU0AAAAAAAIBHQAAAAAAAwFRAAAAAAAAASkAAAAAAAABPQAAAAAAAAFVAAAAAAAAASkAAAAAAAMBTQAAAAAAAgElAAAAAAACAR0AAAAAAAIBTQAAAAAAAQFFAAAAAAACAUkAAAAAAAMBUQAAAAAAAgEtAAAAAAAAAU0AAAAAAAIBTQAAAAAAAwFNAAAAAAABAUkAAAAAAAEBTQAAAAAAAgFBAAAAAAAAAVEAAAAAAAIBSQAAAAAAAAEpAAAAAAAAASEAAAAAAAABUQAAAAAAAgE1AAAAAAACAVkAAAAAAAABUQAAAAAAAAE1AAAAAAAAAVUAAAAAAAABNQAAAAAAAQFJAAAAAAADAVEAAAAAAAABQQAAAAAAAgEpAAAAAAACAVEAAAAAAAIBNQAAAAAAAwFJAAAAAAACAVkAAAAAAAABLQAAAAAAAAFRAAAAAAAAAS0AAAAAAAMBUQAAAAAAAwFFAAAAAAAAAUEAAAAAAAEBTQAAAAAAAQFRAAAAAAACATUAAAAAAAABVQAAAAAAAAEhAAAAAAACAVEAAAAAAAABOQAAAAAAAAFdAAAAAAACAU0AAAAAAAIBTQAAAAAAAQFBAAAAAAABAUkAAAAAAAIBUQAAAAAAAAExAAAAAAADAU0AAAAAAAMBRQAAAAAAAAE9AAAAAAAAAU0AAAAAAAABOQAAAAAAAgFNAAAAAAAAAU0AAAAAAAMBUQAAAAAAAwFJAAAAAAACAVEAAAAAAAIBRQAAAAAAAQFBAAAAAAABAUkAAAAAAAABWQAAAAAAAAFNAAAAAAAAAVEAAAAAAAABIQAAAAAAAgFVAAAAAAAAATkAAAAAAAIBWQAAAAAAAAElAAAAAAACAU0AAAAAAAIBPQAAAAAAAAFJAAAAAAAAAVUAAAAAAAMBSQAAAAAAAgElAAAAAAACAVEAAAAAAAABPQAAAAAAAAFZAAAAAAACASEAAAAAAAMBUQAAAAAAAQFRAAAAAAACAR0AAAAAAAABVQAAAAAAAAEpAAAAAAACAVUAAAAAAAEBUQAAAAAAAwFJAAAAAAACATUAAAAAAAEBWQAAAAAAAwFNAAAAAAACATUAAAAAAAEBUQAAAAAAAAElAAAAAAABAVUAAAAAAAIBNQAAAAAAAwFVAAAAAAACASkAAAAAAAEBRQAAAAAAAQFNAAAAAAAAATEAAAAAAAABWQAAAAAAAQFRAAAAAAACARkAAAAAAAIBUQAAAAAAAgEtAAAAAAACAVkAAAAAAAIBGQAAAAAAAwFRAAAAAAAAATEAAAAAAAEBWQAAAAAAAAEdAAAAAAACAVEAAAAAAAIBJQAAAAAAAgFVAAAAAAACASkAAAAAAAMBTQAAAAAAAQFRAAAAAAAAATkAAAAAAAIBUQAAAAAAAQFNAAAAAAAAAU0AAAAAAAIBNQAAAAAAAAFRAAAAAAACASEAAAAAAAABYQAAAAAAAgEpAAAAAAABAU0AAAAAAAEBTQAAAAAAAQFBAAAAAAABAVEAAAAAAAMBRQAAAAAAAgFFAAAAAAABAVEAAAAAAAEBXQAAAAAAAgEpAAAAAAABAVkAAAAAAAIBGQAAAAAAAgFVAAAAAAAAATUAAAAAAAIBTQAAAAAAAgFBAAAAAAAAAU0AAAAAAAIBPQAAAAAAAAFZAAAAAAAAASkAAAAAAAEBXQAAAAAAAgEhAAAAAAACATEAAAAAAAEBTQAAAAAAAAFFAAAAAAABAVEAAAAAAAEBUQAAAAAAAQFJAAAAAAAAASUAAAAAAAEBVQAAAAAAAgFJAAAAAAACAS0AAAAAAAEBTQAAAAAAAwFRAAAAAAADAVEAAAAAAAIBJQAAAAAAAgFNAAAAAAAAAVUAAAAAAAABHQAAAAAAAwFRAAAAAAACAS0AAAAAAAEBUQAAAAAAAgExAAAAAAAAAU0AAAAAAAABVQAAAAAAAQFNAAAAAAABAVEAAAAAAAMBVQAAAAAAAQFNAAAAAAACASUAAAAAAAIBTQAAAAAAAAE5AAAAAAACAVEAAAAAAAMBWQAAAAAAAgEpAAAAAAACAU0AAAAAAAABHQAAAAAAAQFNAAAAAAAAAVUAAAAAAAIBIQAAAAAAAwFRAAAAAAADAUUAAAAAAAABUQAAAAAAAgEhAAAAAAADAUkAAAAAAAABQQAAAAAAAAFNAAAAAAACASkAAAAAAAIBXQAAAAAAAgEtAAAAAAAAAU0AAAAAAAABJQAAAAAAAgFRAAAAAAAAAS0AAAAAAAMBSQAAAAAAAgFNAAAAAAADAU0AAAAAAAIBTQAAAAAAAgFNAAAAAAACAUUAAAAAAAMBTQAAAAAAAgFFAAAAAAAAAS0AAAAAAAIBVQAAAAAAAAElAAAAAAACAVkAAAAAAAABLQAAAAAAAAEtAAAAAAABAU0AAAAAAAMBTQAAAAAAAAFBAAAAAAADAUkAAAAAAAIBHQAAAAAAAgFVAAAAAAACAT0AAAAAAAEBVQAAAAAAAgFRAAAAAAACATEAAAAAAAIBUQAAAAAAAwFBAAAAAAACAUkAAAAAAAABLQAAAAAAAwFRAAAAAAABAUkAAAAAAAEBSQAAAAAAAAFZAAAAAAAAAVEAAAAAAAMBRQAAAAAAAwFRAAAAAAAAATEAAAAAAAMBTQAAAAAAAgFNAAAAAAAAAVUAAAAAAAABNQAAAAAAAwFRAAAAAAACARUAAAAAAAABOQAAAAAAAwFJAAAAAAABAVEAAAAAAAABHQAAAAAAAgFZAAAAAAAAAR0AAAAAAAIBSQA=="},"shape":[272],"dtype":"float64","order":"little"}],["line_color",["#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c"]],["fill_color",["#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c"]],["hatch_color",["#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#00b6ff","#f6906c","#f6906c","#00b6ff","#f6906c","#00b6ff","#f6906c"]]]}}},"view":{"type":"object","name":"CDSView","id":"p1098","attributes":{"filter":{"type":"object","name":"AllIndices","id":"p1099"}}},"glyph":{"type":"object","name":"Scatter","id":"p1094","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"line_color":{"type":"field","field":"line_color"},"fill_color":{"type":"field","field":"fill_color"},"hatch_color":{"type":"field","field":"hatch_color"}}},"nonselection_glyph":{"type":"object","name":"Scatter","id":"p1095","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"line_color":{"type":"field","field":"line_color"},"line_alpha":{"type":"value","value":0.1},"fill_color":{"type":"field","field":"fill_color"},"fill_alpha":{"type":"value","value":0.1},"hatch_color":{"type":"field","field":"hatch_color"},"hatch_alpha":{"type":"value","value":0.1}}},"muted_glyph":{"type":"object","name":"Scatter","id":"p1096","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"line_color":{"type":"field","field":"line_color"},"line_alpha":{"type":"value","value":0.2},"fill_color":{"type":"field","field":"fill_color"},"fill_alpha":{"type":"value","value":0.2},"hatch_color":{"type":"field","field":"hatch_color"},"hatch_alpha":{"type":"value","value":0.2}}}}},{"type":"object","name":"GlyphRenderer","id":"p1106","attributes":{"data_source":{"type":"object","name":"ColumnDataSource","id":"p1100","attributes":{"selected":{"type":"object","name":"Selection","id":"p1101","attributes":{"indices":[],"line_indices":[]}},"selection_policy":{"type":"object","name":"UnionRenderers","id":"p1102"},"data":{"type":"map","entries":[["x",{"type":"ndarray","array":{"type":"bytes","data":"HKWuf3AvEUDCozr56WoAQA=="},"shape":[2],"dtype":"float64","order":"little"}],["y",{"type":"ndarray","array":{"type":"bytes","data":"ZFK8QCYFVEByCl5OwUtLQA=="},"shape":[2],"dtype":"float64","order":"little"}]]}}},"view":{"type":"object","name":"CDSView","id":"p1107","attributes":{"filter":{"type":"object","name":"AllIndices","id":"p1108"}}},"glyph":{"type":"object","name":"Scatter","id":"p1103","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"size":{"type":"value","value":15},"fill_color":{"type":"value","value":"black"},"marker":{"type":"value","value":"cross"}}},"nonselection_glyph":{"type":"object","name":"Scatter","id":"p1104","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"size":{"type":"value","value":15},"line_alpha":{"type":"value","value":0.1},"fill_color":{"type":"value","value":"black"},"fill_alpha":{"type":"value","value":0.1},"hatch_alpha":{"type":"value","value":0.1},"marker":{"type":"value","value":"cross"}}},"muted_glyph":{"type":"object","name":"Scatter","id":"p1105","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"size":{"type":"value","value":15},"line_alpha":{"type":"value","value":0.2},"fill_color":{"type":"value","value":"black"},"fill_alpha":{"type":"value","value":0.2},"hatch_alpha":{"type":"value","value":0.2},"marker":{"type":"value","value":"cross"}}}}}],"toolbar":{"type":"object","name":"Toolbar","id":"p1065","attributes":{"tools":[{"type":"object","name":"PanTool","id":"p1078"},{"type":"object","name":"WheelZoomTool","id":"p1079","attributes":{"renderers":"auto"}},{"type":"object","name":"BoxZoomTool","id":"p1080","attributes":{"overlay":{"type":"object","name":"BoxAnnotation","id":"p1081","attributes":{"syncable":false,"line_color":"black","line_alpha":1.0,"line_width":2,"line_dash":[4,4],"fill_color":"lightgrey","fill_alpha":0.5,"level":"overlay","visible":false,"left":{"type":"number","value":"nan"},"right":{"type":"number","value":"nan"},"top":{"type":"number","value":"nan"},"bottom":{"type":"number","value":"nan"},"left_units":"canvas","right_units":"canvas","top_units":"canvas","bottom_units":"canvas","handles":{"type":"object","name":"BoxInteractionHandles","id":"p1087","attributes":{"all":{"type":"object","name":"AreaVisuals","id":"p1086","attributes":{"fill_color":"white","hover_fill_color":"lightgray"}}}}}}}},{"type":"object","name":"SaveTool","id":"p1088"},{"type":"object","name":"ResetTool","id":"p1089"},{"type":"object","name":"HelpTool","id":"p1090"}]}},"left":[{"type":"object","name":"LinearAxis","id":"p1073","attributes":{"ticker":{"type":"object","name":"BasicTicker","id":"p1074","attributes":{"mantissas":[1,2,5]}},"formatter":{"type":"object","name":"BasicTickFormatter","id":"p1075"},"axis_label":"eruption waiting time (min)","major_label_policy":{"type":"object","name":"AllLabels","id":"p1076"}}}],"below":[{"type":"object","name":"LinearAxis","id":"p1068","attributes":{"ticker":{"type":"object","name":"BasicTicker","id":"p1069","attributes":{"mantissas":[1,2,5]}},"formatter":{"type":"object","name":"BasicTickFormatter","id":"p1070"},"axis_label":"eruption duration (min)","major_label_policy":{"type":"object","name":"AllLabels","id":"p1071"}}}],"center":[{"type":"object","name":"Grid","id":"p1072","attributes":{"axis":{"id":"p1068"}}},{"type":"object","name":"Grid","id":"p1077","attributes":{"dimension":1,"axis":{"id":"p1073"}}}],"frame_width":300,"frame_height":300}}]}};
+  const render_items = [{"docid":"21fd3012-66a7-4a65-a535-8936e7770516","roots":{"p1057":"c388a694-79c9-450a-9329-3b141170e0ba"},"root_ids":["p1057"]}];
+  void root.Bokeh.embed.embed_items_notebook(docs_json, render_items);
+  }
+  if (root.Bokeh !== undefined) {
+    embed_document(root);
+  } else {
+    let attempts = 0;
+    const timer = setInterval(function(root) {
+      if (root.Bokeh !== undefined) {
+        clearInterval(timer);
+        embed_document(root);
+      } else {
+        attempts++;
+        if (attempts > 100) {
+          clearInterval(timer);
+          console.log("Bokeh: ERROR: Unable to run BokehJS code because BokehJS library is missing");
+        }
+      }
+    }, 10, root)
+  }
+})(window);
+</script>
+</div>
+</div>
+<p>These results are closer to what we got with a GMM.</p>
+</section>
+<section id="k-means-clustering-as-a-gmm" class="level2" data-number="36.2">
+<h2 data-number="36.2" class="anchored" data-anchor-id="k-means-clustering-as-a-gmm"><span class="header-section-number">36.2</span> K-means clustering as a GMM</h2>
+<p>As if often the case, heuristic/algorithmic methods have a Bayesian generative model underlying them. Indeed, the above algorithm for K-means clustering screams EM!</p>
+<p>Recall from <a href="#eq-gmm-model-no-priors" class="quarto-xref">Equation&nbsp;<span>36.1</span></a> that the generative model for a GMM is</p>
+<p><span id="eq-gmm-model-no-priors"><span class="math display">\[\begin{align}
+&amp;\boldsymbol{\pi} \sim \text{prior for mixing coefficients}, \\[1em]
+&amp;\boldsymbol{\mu} \sim \text{prior for location parameters}, \\[1em]
+&amp;\mathsf{\Sigma} \sim \text{prior for scale parameters}, \\[1em]
+&amp;\mathbf{z}_i \mid \boldsymbol{\pi} \sim \text{Categorical}(\boldsymbol{\pi}) \;\forall i, \\[1em]
+&amp;\mathbf{y}_i \mid \mathbf{z}_i, \boldsymbol{\mu}, \mathsf{\Sigma} \sim \prod_{k=1}^K (\mathrm{Norm}(\boldsymbol{\mu}_k,\mathsf{\Sigma}_k))^{z_{ik}} \;\forall i.
+\end{align}
+\tag{36.1}\]</span></span></p>
+<p>When doing K-means, the priors are all uniform and all covariance matrices are diagonal with the same fixed very small entry <span class="math inline">\(\sigma^2\)</span> on the diagonal. The model is thus</p>
+<p><span id="eq-gmm-kmeans"><span class="math display">\[\begin{align}
+&amp;\boldsymbol{\pi} \sim \text{Dirichlet}(1/K, 1/K, \ldots, 1/K), \\[1em]
+&amp;\mathbf{z}_i \mid \boldsymbol{\pi} \sim \text{Categorical}(\boldsymbol{\pi}) \;\forall i, \\[1em]
+&amp;\mathbf{y}_i \mid \mathbf{z}_i, \boldsymbol{\mu}, \sigma \sim \prod_{k=1}^K (\mathrm{Norm}(\boldsymbol{\mu}_k, \sigma))^{z_{ik}} \;\forall i.
+\end{align}
+\tag{36.2}\]</span></span></p>
+<p>Approaching this model with an EM algorithm (see <a href="em_gmm.html#sec-em-algorithm-for-gmm" class="quarto-xref"><span>Section 34.2</span></a>), the E step involves evaluating <span class="math inline">\(g(z\mid y, \phi)\)</span>, which in this case is</p>
+<p><span class="math display">\[\begin{align}
+g(z \mid y, \phi) = \prod_{i=1}^N\prod_{k=1}^K \left[\pi_k\,\mathcal{N}(\mathbf{y}_i \mid \boldsymbol{\mu}_k, \sigma)\right]^{z_{ik}},
+\end{align}
+\]</span></p>
+<p>resulting in a parameter-dependent part of the surrogate function of</p>
+<p><span class="math display">\[\begin{align}
+\mathcal{Q}(\theta, \phi) = \sum_{i=1}^N\sum_{k=1}^k \gamma(z_{ik}) \left(\ln \pi_k + \ln \mathcal{N}(\mathbf{y}_i \mid \boldsymbol{\mu}_k, \sigma)\right),
+\end{align}
+\]</span></p>
+<p>where the responsibilities are</p>
+<p><span class="math display">\[\begin{align}
+\gamma(z_{ik}) = \displaystyle{\frac{\pi_k \,\mathcal{N}(\mathbf{y}_i \mid \boldsymbol{\mu}_k, \sigma)}{\sum_{j=1}^K\pi_j\,\mathcal{N}(\mathbf{y}_i \mid \boldsymbol{\mu}_j, \sigma)}}
+= \frac{\pi_k\,\mathrm{e}^{-\lVert \mathbf{y}_i - \boldsymbol{\mu}_k \rVert^2/2\sigma^2}}{\sum_{j=1}^K\pi_j\,\mathrm{e}^{-\lVert \mathbf{y}_i - \boldsymbol{\mu}_j\rVert^2/2\sigma^2}}.
+\end{align}
+\]</span></p>
+<p>As <span class="math inline">\(\sigma\)</span> gets really small, <span class="math inline">\(\mathrm{exp}[-\lVert \mathbf{y}_i - \mathbf{\mu}_k \rVert^2/2\sigma^2]\)</span> is largest for the <span class="math inline">\(\boldsymbol{\mu}_k\)</span> that is closest to <span class="math inline">\(\mathbf{y}_i\)</span> and relatively tiny for every other term. Therefore, the responsibility is approximately one for the component <span class="math inline">\(k\)</span> whose mean is closest to <span class="math inline">\(\mathbf{y}_i\)</span> and zero for the other components. Since the responsibilities are all one or zero, each data point is <em>assigned</em> to the cluster whose mean is closest.</p>
+<p>Therefore, the parameter-dependent part of the surrogate function is</p>
+<p><span class="math display">\[\begin{align}
+\mathcal{Q}(\theta, \phi) = \sum_{i=1}^N \ln \mathcal{N}(\mathbf{y}_i \mid \boldsymbol{\mu}_{ik}, \sigma)
+= -\frac{1}{2\sigma}\sum_{i=1}^N \lVert \mathbf{y}_i - \boldsymbol{\mu}_{ik} \rVert^2,
+\end{align}
+\]</span></p>
+<p>where we have define <span class="math inline">\(\mu_{ik}\)</span> to be the mean of the cluster to which data point <span class="math inline">\(i\)</span> is assigned. So, the goal in the M step is to find the value of <span class="math inline">\(\boldsymbol{\mu}_{ik}\)</span> that maximizes the surrogate function. We differentiate with respect to <span class="math inline">\(\boldsymbol{\mu}_k\)</span>. The terms of the sum that survive are only those assigned to cluster <span class="math inline">\(k\)</span>, such that</p>
+<p><span class="math display">\[\begin{align}
+\frac{\partial \mathcal{Q}}{\partial \boldsymbol{\mu}_k} = -\frac{1}{\sigma}\sum_{i\text{ in cluster }k} (\mathbf{y}_i - \boldsymbol{\mu}_{k}).
+\end{align}
+\]</span></p>
+<p>Setting the derivative to zero gives</p>
+<p><span class="math display">\[\begin{align}
+\boldsymbol{\mu}_k = \frac{1}{N_k}\sum_{i\text{ in cluster }k} \mathbf{y}_i,
+\end{align}
+\]</span></p>
+<p>which says that <span class="math inline">\(\mu_k\)</span> is updated to be the mean of all of the data points assigned to it. So, the EM algorithm applied to the mixture model described by <a href="#eq-gmm-kmeans" class="quarto-xref">Equation&nbsp;<span>36.2</span></a> is indeed the algorithm for K-means clustering, thereby making clear what the generative model underlying it is. It’s a rather restrictive model with all uniform priors and a very rigid ascribed covariance matrix for the likelihood.</p>
+</section>
+<section id="computing-environment" class="level2" data-number="36.3">
+<h2 data-number="36.3" class="anchored" data-anchor-id="computing-environment"><span class="header-section-number">36.3</span> Computing environment</h2>
+<div id="192965e7" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>load_ext watermark</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>watermark <span class="op">-</span>v <span class="op">-</span>p polars,sklearn,bokeh,jupyterlab</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Python implementation: CPython
+Python version       : 3.12.9
+IPython version      : 9.1.0
+
+polars    : 1.27.1
+sklearn   : 1.6.1
+bokeh     : 3.6.2
+jupyterlab: 4.4.2
+</code></pre>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/bebi103b\.github\.io\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../lessons/optimization/em_gmm_example.html" class="pagination-link" aria-label="An example application of the EM algorithm to a Gaussian mixture model">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">An example application of the EM algorithm to a Gaussian mixture model</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../lessons/variate_covariate/intro_variate_covariate.html" class="pagination-link" aria-label="Variate-covariate models">
+        <span class="nav-page-text">Variate-covariate models</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p><em>BE/Bi 103 b</em></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
