@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.24">
+<meta name="generator" content="quarto-1.7.32">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -58,7 +58,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -70,15 +70,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../logo.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-da61f9a05e9cefe097d79e8430a73dd4.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-236d90495073fb2ac8939117e3e83141.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-7c1dcb25931f0f6f86a40129f542609a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-8b050a7f4e1f1dd4af2b4d23fb288ab7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -106,10 +105,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
 
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
-<script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@*/dist/embed-amd.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@jupyter-widgets/html-manager@*/dist/embed-amd.js" crossorigin="anonymous"></script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -125,7 +124,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+      if (mathElements[i].tagName == "SPAN") {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -168,8 +167,7 @@ window.Quarto = {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../../index.html" class="sidebar-logo-link">
-      <img src="../../logo.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
-      <img src="../../logo.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      <img src="../../logo.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
       </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../../"></a> 
@@ -816,7 +814,7 @@ window.Quarto = {
 <div id="cell-1" class="cell" data-nbsphinx="hidden" data-tags="[]">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Colab setup ------------------</span></span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Colab setup ------------------</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os, shutil, sys, subprocess, urllib.request</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">"google.colab"</span> <span class="kw">in</span> sys.modules:</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    cmd <span class="op">=</span> <span class="st">"pip install --upgrade iqplot colorcet bebi103 arviz cmdstanpy watermark"</span></span>
@@ -832,11 +830,11 @@ window.Quarto = {
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    data_path <span class="op">=</span> <span class="st">"https://s3.amazonaws.com/bebi103.caltech.edu/data/"</span></span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    data_path <span class="op">=</span> <span class="st">"../data/"</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------------------</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------------------</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div id="cell-2" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> cmdstanpy</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> arviz <span class="im">as</span> az</span>
@@ -844,7 +842,7 @@ window.Quarto = {
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> bebi103</span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> bokeh.io</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>bokeh.io.output_notebook()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>bokeh.io.output_notebook()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
     <style>
         .bk-notebook-logo {
@@ -1197,14 +1195,14 @@ P(\theta, v) = P(\theta\mid v) \,P(v) = \frac{\mathrm{e}^{-v/2}}{6\pi}\,\exp\lef
 \end{align}\]</span></p>
 <p>We can compute this analytically, so let’s make a plot of it so we know what we’re sampling out of.</p>
 <div id="cell-5" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>theta <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">400</span>)</span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>theta <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">400</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">15</span>, <span class="dv">5</span>, <span class="dv">400</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>THETA, V <span class="op">=</span> np.meshgrid(theta, v)</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>P <span class="op">=</span> np.exp(<span class="op">-</span>V<span class="op">/</span><span class="dv">2</span>) <span class="op">/</span> <span class="dv">6</span> <span class="op">/</span> np.pi <span class="op">*</span> np.exp(<span class="op">-</span>(V<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> <span class="dv">9</span> <span class="op">+</span> THETA<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> np.exp(V))<span class="op">/</span><span class="dv">2</span>)</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Show it hacking contour to show image, but no contours</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(bebi103.viz.contour(THETA, V, P, overlaid<span class="op">=</span><span class="va">True</span>, line_kwargs<span class="op">=</span><span class="bu">dict</span>(alpha<span class="op">=</span><span class="dv">0</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(bebi103.viz.contour(THETA, V, P, overlaid<span class="op">=</span><span class="va">True</span>, line_kwargs<span class="op">=</span><span class="bu">dict</span>(alpha<span class="op">=</span><span class="dv">0</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 
   <div id="ff65b492-afcf-45f4-b004-b989f711656c" data-root-id="p1003" style="display: contents;"></div>
@@ -1243,7 +1241,7 @@ P(\theta, v) = P(\theta\mid v) \,P(v) = \frac{\mathrm{e}^{-v/2}}{6\pi}\,\exp\lef
 <section id="sampling-out-of-the-funnel" class="level3" data-number="27.1.1">
 <h3 data-number="27.1.1" class="anchored" data-anchor-id="sampling-out-of-the-funnel"><span class="header-section-number">27.1.1</span> Sampling out of the funnel</h3>
 <p>Now, we’ll code up a Stan model for the funnel and draw some samples using MCMC. The Stan code is short and simple.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode stan code-with-copy"><code class="sourceCode stan"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">parameters</span> {</span>
+<div class="sourceCode" id="cb4"><pre class="sourceCode stan code-with-copy"><code class="sourceCode stan"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">parameters</span> {</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> theta;</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> v; </span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>}</span>
@@ -1252,14 +1250,14 @@ P(\theta, v) = P(\theta\mid v) \,P(v) = \frac{\mathrm{e}^{-v/2}}{6\pi}\,\exp\lef
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="kw">model</span> {</span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>v ~ normal(<span class="dv">0</span>, <span class="dv">3</span>);</span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>theta ~ normal(<span class="dv">0</span>, exp(v/<span class="dv">2</span>));</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Let’s compile and sample!</p>
 <div id="cell-8" class="cell" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> bebi103.stan.disable_logging():</span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> bebi103.stan.disable_logging():</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    sm <span class="op">=</span> cmdstanpy.CmdStanModel(stan_file<span class="op">=</span><span class="st">'funnel.stan'</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    samples <span class="op">=</span> sm.sample(seed<span class="op">=</span><span class="dv">3252</span>)</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>samples <span class="op">=</span> az.from_cmdstanpy(samples)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>samples <span class="op">=</span> az.from_cmdstanpy(samples)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <script type="application/vnd.jupyter.widget-view+json">
 {"model_id":"e6894c287a7f4d689c1d17d853cf5f13","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
@@ -1299,7 +1297,7 @@ P(\theta, v) = P(\theta\mid v) \,P(v) = \frac{\mathrm{e}^{-v/2}}{6\pi}\,\exp\lef
 <p>The value of <span class="math inline">\(\hat{R}\)</span> approaches unity if the chains are properly sampling the target distribution because the chains should be identical in their sampling of the posterior if they have all reached the limiting distribution. As a rule of thumb, recommended by <a href="https://doi.org/10.1214/20-BA1221">Vehtari, et al., 2021</a>, the value of <span class="math inline">\(\hat{R}\)</span> should be less than 1.01. There are more details involved in calculation of <span class="math inline">\(\hat{R}\)</span>, and you may read about them in the Vehtari, et al.&nbsp;paper.</p>
 <p>ArviZ automatically computes <span class="math inline">\(\hat{R}\)</span> using state-of-the-art rank normalization techniques (published in Vehtari, et al.).</p>
 <div id="cell-12" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>az.rhat(samples)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>az.rhat(samples)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
 <defs>
@@ -1675,12 +1673,12 @@ Data variables:
 <p>We see that <code>Rhat</code> for each of the two parameters is above 1.01, violating the rule of thumb.</p>
 <p>If we want to see a quick summary of the results of MCMC, including mean parameter values, we can use <code>az.summary()</code>. This gives a Pandas data frame (which has an index, in this case the names of the parameters), which is convenient for display.</p>
 <div id="cell-14" class="cell" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>az.summary(samples)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>az.summary(samples)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <div>
 
 
-<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -1697,7 +1695,7 @@ Data variables:
 </thead>
 <tbody>
 <tr class="odd">
-<th data-quarto-table-cell-role="th">theta</th>
+<td data-quarto-table-cell-role="th">theta</td>
 <td>0.060</td>
 <td>7.233</td>
 <td>-9.078</td>
@@ -1709,7 +1707,7 @@ Data variables:
 <td>1.05</td>
 </tr>
 <tr class="even">
-<th data-quarto-table-cell-role="th">v</th>
+<td data-quarto-table-cell-role="th">v</td>
 <td>0.667</td>
 <td>2.627</td>
 <td>-4.464</td>
@@ -1729,13 +1727,13 @@ Data variables:
 <p>We will discuss what some of these other statistics aside from <span class="math inline">\(\hat{R}\)</span> mean momentarily.</p>
 <p>We can take more samples to boost <span class="math inline">\(\hat{R}\)</span>, so let’s do that.</p>
 <div id="cell-16" class="cell" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> bebi103.stan.disable_logging():</span>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> bebi103.stan.disable_logging():</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    samples <span class="op">=</span> sm.sample(iter_sampling<span class="op">=</span><span class="dv">100_000</span>, seed<span class="op">=</span><span class="dv">3252</span>)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>samples <span class="op">=</span> az.from_cmdstanpy(samples)</span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Check R-hat</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>az.rhat(samples)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>az.rhat(samples)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <script type="application/vnd.jupyter.widget-view+json">
 {"model_id":"9f3021a4eca54137a3f07c5e6a65da10","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
@@ -2133,10 +2131,10 @@ Data variables:
 </div>
 <p>We are now in compliance with the rule of thumb. However, taking so many samples to achieve a good <span class="math inline">\(\hat{R}\)</span> is indicative of other problems with the sampler. We will therefore continue out tour of diagnostics with the standard 1000 samples per chain.</p>
 <div id="cell-18" class="cell" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> bebi103.stan.disable_logging():</span>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> bebi103.stan.disable_logging():</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    samples <span class="op">=</span> sm.sample(seed<span class="op">=</span><span class="dv">3252</span>, show_progress<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>samples <span class="op">=</span> az.from_cmdstanpy(samples)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>samples <span class="op">=</span> az.from_cmdstanpy(samples)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="effective-samples-size" class="level3" data-number="27.2.2">
@@ -2144,12 +2142,12 @@ Data variables:
 <p>Recall that MCMC samplers do not draw independent samples from the target distribution. Rather, the samples are correlated. Ideally, though, we <em>would</em> draw independent samples. We would like to get an estimate for the number of <em>effectively independent</em> samples we draw. This is referred to either as <strong>effective samples size</strong> (ESS) or number of effective samples (<span class="math inline">\(n_\mathrm{eff}\)</span>).</p>
 <p>ArviZ computes ESS according to the prescription laid out in the Vehtari, et al.&nbsp;paper using <code>az.ess()</code>. In the summary, this is given in the <code>ess_bulk</code> column.</p>
 <div id="cell-20" class="cell" data-execution_count="9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>az.summary(samples)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>az.summary(samples)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <div>
 
 
-<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -2166,7 +2164,7 @@ Data variables:
 </thead>
 <tbody>
 <tr class="odd">
-<th data-quarto-table-cell-role="th">theta</th>
+<td data-quarto-table-cell-role="th">theta</td>
 <td>0.060</td>
 <td>7.233</td>
 <td>-9.078</td>
@@ -2178,7 +2176,7 @@ Data variables:
 <td>1.05</td>
 </tr>
 <tr class="even">
-<th data-quarto-table-cell-role="th">v</th>
+<td data-quarto-table-cell-role="th">v</td>
 <td>0.667</td>
 <td>2.627</td>
 <td>-4.464</td>
@@ -2213,7 +2211,7 @@ Data variables:
 <p>Hamiltonian Monte Carlo enables large step sizes by taking into account the shape of the target distribution and tracing trajectories along it. (This is of course a <em>very</em> loose description. You should read <a href="https://arxiv.org/abs/1701.02434">Michael Betancourt’s wonderful introduction to HMC</a> to get a more complete picture.) When a trajectory encounters a region of parameter space where the posterior (target) distribution has high curvature, the trajectory can veer sharply. These events can be detected and are registered as <strong>divergences</strong>. A given Monte Carlo step ends in a divergence if this happens. This does not <em>necessarily</em> mean that there is a problem with the sample, but there is a good chance that there is.</p>
 <p>Stan keeps track of divergences and reports them. In ArviZ <code>InferenceData</code> objects, they are stored in the <code>sample_stats</code> attribute. Let’s look first at our good samples where we properly warmed up the sampler.</p>
 <div id="cell-25" class="cell" data-execution_count="10">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>samples.sample_stats.diverging</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>samples.sample_stats.diverging</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
 <div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
 <defs>
@@ -2597,7 +2595,7 @@ Coordinates:
 </div>
 <p>We can check how many divergences we had by summing them.</p>
 <div id="cell-27" class="cell" data-execution_count="11">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">int</span>(np.<span class="bu">sum</span>(samples.sample_stats.diverging))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">int</span>(np.<span class="bu">sum</span>(samples.sample_stats.diverging))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
 <pre><code>222</code></pre>
 </div>
@@ -2609,7 +2607,7 @@ Coordinates:
 <p>The explanation of this diagnostic is a little computer-sciencey, so you can skip to the last sentence of this section if the CS terms are unfamiliar to you.</p>
 <p>The HMC algorithm used by Stan uses [recursion](https://en.wikipedia.org/wiki/Recursion_(computer_science). In practice when doing recursive calculations, you need to put a bound on how deep the recursion can go, i.e., you need to cap the <strong>tree depth</strong>, lest you get <a href="https://en.wikipedia.org/wiki/Stack_buffer_overflow">stack overflow</a>. Stan therefore has to have a limit on tree depth, the default of which is 10. If this tree depth is hit while trying to take a sample, the sampling is not wrong, but less efficient. Stan therefore reports the tree depth information for each sample. These are also included in the <code>sample_stats</code>.</p>
 <div id="cell-30" class="cell" data-execution_count="12">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>samples.sample_stats.tree_depth</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>samples.sample_stats.tree_depth</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="12">
 <div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
 <defs>
@@ -2993,7 +2991,7 @@ Coordinates:
 </div>
 <p>We can look how many hit a tree depth of 10.</p>
 <div id="cell-32" class="cell" data-execution_count="13">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="bu">int</span>(np.<span class="bu">sum</span>(samples.sample_stats.tree_depth <span class="op">==</span> <span class="dv">10</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="bu">int</span>(np.<span class="bu">sum</span>(samples.sample_stats.tree_depth <span class="op">==</span> <span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
 <pre><code>0</code></pre>
 </div>
@@ -3005,7 +3003,7 @@ Coordinates:
 <p>The <strong>energy-Bayes fraction of missing information</strong>, or E-BFMI is another metric that is specific to HMC samplers. Loosely speaking (again), it is a measure of how effective the sampler is at taking long steps. Some details are given in the <a href="https://arxiv.org/abs/1701.02434">Betancourt paper on HMC</a>, and we will not go into them here, but say that as a rule of thumb, values below 0.2 can be indicative of inefficient sampling.</p>
 <p>Stan also automatically computes the E-BFMI.</p>
 <div id="cell-35" class="cell" data-execution_count="14">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>samples.sample_stats.energy</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>samples.sample_stats.energy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="14">
 <div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
 <defs>
@@ -3397,7 +3395,7 @@ Coordinates:
 </div>
 <p>We see some problematic energies; let’s do a quick check to see how many small ones we have.</p>
 <div id="cell-37" class="cell" data-execution_count="15">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="bu">int</span>(np.<span class="bu">sum</span>(samples.sample_stats.energy <span class="op">&lt;</span> <span class="fl">0.2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="bu">int</span>(np.<span class="bu">sum</span>(samples.sample_stats.energy <span class="op">&lt;</span> <span class="fl">0.2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="15">
 <pre><code>566</code></pre>
 </div>
@@ -3409,7 +3407,7 @@ Coordinates:
 <h2 data-number="27.4" class="anchored" data-anchor-id="quickly-checking-the-diagnostics"><span class="header-section-number">27.4</span> Quickly checking the diagnostics</h2>
 <p>I wrote a function, based on <a href="https://github.com/betanalpha/mcmc_diagnostics">work by Michael Betancourt</a>, to quickly check these diagnostics for a set of samples. It is available in the <code>bebi103.stan</code> submodule.</p>
 <div id="cell-40" class="cell" data-execution_count="16">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>bebi103.stan.check_all_diagnostics(samples)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>bebi103.stan.check_all_diagnostics(samples)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>tail-ESS for parameter theta is 297.52415027291516.
 ESS for parameter v is 40.841114456860105.
@@ -3441,7 +3439,7 @@ E-BFMI indicated no pathological behavior.</code></pre>
 <p>The diagnostics indicated several divergences, which, as I mentioned before, tend to happen in regions where the target distribution has high curvature. We also have poor effective sample sizes for the parameter <span class="math inline">\(v\)</span>, and the R-hats are large.</p>
 <p>Let’s look at a plot of the samples, overlaid with the samples we trust that we can compute by sampling directly with Numpy as we did in <span class="quarto-unresolved-ref">?exr-funnel-of-hell</span>. (You can click on the legend to display or hide respective samples.)</p>
 <div id="cell-43" class="cell" data-execution_count="17">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample out of distribution using Numpy</span></span>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample out of distribution using Numpy</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">3252</span>)</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> np.random.normal(<span class="dv">0</span>, <span class="dv">3</span>, size<span class="op">=</span><span class="dv">4000</span>)</span>
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>theta <span class="op">=</span> np.random.normal(<span class="dv">0</span>, np.exp(v <span class="op">/</span> <span class="dv">2</span>))</span>
@@ -3462,7 +3460,7 @@ E-BFMI indicated no pathological behavior.</code></pre>
 <span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>p.legend.click_policy <span class="op">=</span> <span class="st">"hide"</span></span>
 <span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 
   <div id="bf0a7eb7-ae99-4530-9a08-8ce70f6d18b1" data-root-id="p1069" style="display: contents;"></div>
@@ -3499,7 +3497,7 @@ E-BFMI indicated no pathological behavior.</code></pre>
 <p>Stan’s sampler is clearly not penetrating to the lower regions of the funnel. If we did not have the correctly generated independent samples to compare to, we might not ever discover that this is an issue. So how can we be aware of sampling issues like this?</p>
 <p>First off, the divergences clue us in that there is a problem. We can start to investigate what the chains are doing by taking a graphical approach. We can start with the trace plot.</p>
 <div id="cell-45" class="cell" data-execution_count="18">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(bebi103.viz.trace(samples, parameters<span class="op">=</span>[<span class="st">'theta'</span>, <span class="st">'v'</span>]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(bebi103.viz.trace(samples, parameters<span class="op">=</span>[<span class="st">'theta'</span>, <span class="st">'v'</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 
   <div id="a78e3836-567e-4aa2-bfe2-2562a3d6c02c" data-root-id="p1279" style="display: contents;"></div>
@@ -3536,13 +3534,13 @@ E-BFMI indicated no pathological behavior.</code></pre>
 <p>We immediately see a pathology in the trace plot for <span class="math inline">\(v\)</span>. When <span class="math inline">\(v\)</span> is small, the chains get stuck and keep rejecting steps. They cannot move. This is because the proposal steps keep ending in divergences and the steps cannot be taken.</p>
 <p>We can look at this another way using a parallel coordinate plot. To allow for easy comparison, we will apply a transformation to <span class="math inline">\(\theta\)</span> such that we show its logarithm (of the absolute value). The function <code>bebi103.viz.parcoord()</code> displays divergent samples in orange.</p>
 <div id="cell-47" class="cell" data-execution_count="19">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(</span>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    bebi103.viz.parcoord(</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>        samples,</span>
 <span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>        transformation<span class="op">=</span>{<span class="st">'theta'</span>: <span class="kw">lambda</span> x: np.log10(np.<span class="bu">abs</span>(x))},</span>
 <span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>        divergence_kwargs<span class="op">=</span>{<span class="st">"line_width"</span>: <span class="dv">1</span>, <span class="st">"line_alpha"</span>: <span class="fl">0.15</span>},</span>
 <span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 
   <div id="ab1b6277-2b8d-4c88-bc13-eda0405526ce" data-root-id="p1297" style="display: contents;"></div>
@@ -3579,7 +3577,7 @@ E-BFMI indicated no pathological behavior.</code></pre>
 <p>From the parallel coordinate plot, most divergences come when <span class="math inline">\(v\)</span> is small and <span class="math inline">\(\theta\)</span> is close to zero, which is the bottom of the funnel. The log posterior is also high for these divergences. There is substantial probability mass in the funnel, so we do really need to sample it.</p>
 <p>As an alternative plot, we can plot the divergent samples in a different color in a scatter plot of our samples. The <code>bebi103.viz.corner()</code> function automatically does this.</p>
 <div id="cell-49" class="cell" data-execution_count="20">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(bebi103.viz.corner(samples, parameters<span class="op">=</span>[<span class="st">"theta"</span>, <span class="st">"v"</span>]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(bebi103.viz.corner(samples, parameters<span class="op">=</span>[<span class="st">"theta"</span>, <span class="st">"v"</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 
   <div id="c705c129-3bdb-4797-9500-4ad284a508fe" data-root-id="p5537" style="display: contents;"></div>
@@ -3622,7 +3620,7 @@ E-BFMI indicated no pathological behavior.</code></pre>
 <h3 data-number="27.6.1" class="anchored" data-anchor-id="adjusting-adapt_delta"><span class="header-section-number">27.6.1</span> Adjusting <code>adapt_delta</code></h3>
 <p>We could try to take the advice of Stan’s warning messages and decrease the <code>adapt_delta</code> parameter to take smaller steps. The default value is <code>0.8</code>, so let’s crank it up to <code>0.99</code> and see if that works.</p>
 <div id="cell-53" class="cell" data-execution_count="21">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> bebi103.stan.disable_logging():</span>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> bebi103.stan.disable_logging():</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    samples <span class="op">=</span> sm.sample(seed<span class="op">=</span><span class="dv">3252</span>, adapt_delta<span class="op">=</span><span class="fl">0.99</span>)</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>samples <span class="op">=</span> az.from_cmdstanpy(samples)</span>
 <span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -3637,7 +3635,7 @@ E-BFMI indicated no pathological behavior.</code></pre>
 <span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="fl">0.3</span>,</span>
 <span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>    legend_label<span class="op">=</span><span class="st">"small adapt_delta"</span>,</span>
 <span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <script type="application/vnd.jupyter.widget-view+json">
 {"model_id":"08d212acca984a27a264fc1545d30332","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
@@ -3755,7 +3753,7 @@ E-BFMI indicated no pathological behavior.</code></pre>
 \end{align}\]</span></p>
 <p>This process is called <strong>uncentering</strong>. A <strong>non-centered parametrization</strong> has the sampler exploring away from the mean of the target distribution (hence, it is non-centered), and then a transformation ensures that the samples come from the target.</p>
 <p>Let’s implement the non-centered parametrization of this pathological distribution in Stan. The Stan code is</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode stan code-with-copy"><code class="sourceCode stan"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="kw">parameters</span> {</span>
+<div class="sourceCode" id="cb31"><pre class="sourceCode stan code-with-copy"><code class="sourceCode stan"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="kw">parameters</span> {</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> theta_tilde;</span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> v; </span>
 <span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>}</span>
@@ -3769,16 +3767,16 @@ E-BFMI indicated no pathological behavior.</code></pre>
 <span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a><span class="kw">model</span> {</span>
 <span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>  v ~ normal(<span class="dv">0</span>, <span class="dv">3</span>);</span>
 <span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>  theta_tilde ~ normal(<span class="dv">0</span>, <span class="dv">1</span>);</span>
-<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Let’s compile and sample. We won’t bother adjusting <code>adapt_delta</code>; we’ll just see what we get.</p>
 <div id="cell-56" class="cell" data-execution_count="22">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> bebi103.stan.disable_logging():</span>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> bebi103.stan.disable_logging():</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    sm <span class="op">=</span> cmdstanpy.CmdStanModel(stan_file<span class="op">=</span><span class="st">'funnel_noncentered.stan'</span>)</span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    samples <span class="op">=</span> sm.sample(seed<span class="op">=</span><span class="dv">3252</span>)</span>
 <span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>samples <span class="op">=</span> az.from_cmdstanpy(samples)</span>
 <span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>bebi103.stan.check_all_diagnostics(samples)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>bebi103.stan.check_all_diagnostics(samples)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <script type="application/vnd.jupyter.widget-view+json">
 {"model_id":"1513a568189940e2bbc9321f3ced187c","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
@@ -3817,14 +3815,14 @@ E-BFMI indicated no pathological behavior.</code></pre>
 </div>
 <p>Excellent! No divergences and all diagnostics check out. Let’s overlay a plot of the samples to see if we got the whole funnel.</p>
 <div id="cell-58" class="cell" data-execution_count="23">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>p.scatter(</span>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>p.scatter(</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>    samples.posterior.theta.values.flatten(),</span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>    samples.posterior.v.values.flatten(),</span>
 <span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"#e78ac3"</span>,</span>
 <span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="fl">0.3</span>,</span>
 <span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>    legend_label<span class="op">=</span><span class="st">"non-centered"</span>,</span>
 <span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 
   <div id="f5ce85ef-b812-407b-8d9d-08b8ba9079a3" data-root-id="p1069" style="display: contents;"></div>
@@ -3864,16 +3862,16 @@ E-BFMI indicated no pathological behavior.</code></pre>
 <h3 data-number="27.6.3" class="anchored" data-anchor-id="hierarchical-models-feature-a-funnel-of-hell"><span class="header-section-number">27.6.3</span> Hierarchical models feature a Funnel of Hell</h3>
 <p>It turns out that many hierarchical models feature a Funnel of Hell, so uncentering is often crucial. We will explore this in the future lessons.</p>
 <div id="cell-61" class="cell" data-execution_count="24">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>bebi103.stan.clean_cmdstan()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>bebi103.stan.clean_cmdstan()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
 <section id="computing-environment" class="level2" data-number="27.7">
 <h2 data-number="27.7" class="anchored" data-anchor-id="computing-environment"><span class="header-section-number">27.7</span> Computing environment</h2>
 <div id="cell-63" class="cell" data-execution_count="25">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>load_ext watermark</span>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>load_ext watermark</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>watermark <span class="op">-</span>v <span class="op">-</span>p numpy,cmdstanpy,bokeh,bebi103,jupyterlab</span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"cmdstan   :"</span>, bebi103.stan.cmdstan_version())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"cmdstan   :"</span>, bebi103.stan.cmdstan_version())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Python implementation: CPython
 Python version       : 3.12.11
@@ -3944,14 +3942,13 @@ cmdstan   : 2.36.0</code></pre>
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-      const outerScaffold = trigger.parentElement.cloneNode(true);
-      const codeEl = outerScaffold.querySelector('code');
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
         }
-      }
-      return codeEl.innerText;
+        return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

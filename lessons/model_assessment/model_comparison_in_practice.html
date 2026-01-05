@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.24">
+<meta name="generator" content="quarto-1.7.32">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -58,7 +58,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -70,15 +70,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../logo.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-da61f9a05e9cefe097d79e8430a73dd4.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-236d90495073fb2ac8939117e3e83141.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-7c1dcb25931f0f6f86a40129f542609a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-8b050a7f4e1f1dd4af2b4d23fb288ab7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -106,10 +105,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
 
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
-<script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@*/dist/embed-amd.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@jupyter-widgets/html-manager@*/dist/embed-amd.js" crossorigin="anonymous"></script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -125,7 +124,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+      if (mathElements[i].tagName == "SPAN") {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -168,8 +167,7 @@ window.Quarto = {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../../index.html" class="sidebar-logo-link">
-      <img src="../../logo.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
-      <img src="../../logo.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      <img src="../../logo.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
       </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../../"></a> 
@@ -800,7 +798,7 @@ window.Quarto = {
 <div id="cell-1" class="cell" data-nbsphinx="hidden" data-tags="[]">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Colab setup ------------------</span></span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Colab setup ------------------</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os, shutil, sys, subprocess, urllib.request</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">"google.colab"</span> <span class="kw">in</span> sys.modules:</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    cmd <span class="op">=</span> <span class="st">"pip install --upgrade polars iqplot colorcet bebi103 arviz cmdstanpy watermark"</span></span>
@@ -816,11 +814,11 @@ window.Quarto = {
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    data_path <span class="op">=</span> <span class="st">"https://s3.amazonaws.com/bebi103.caltech.edu/data/"</span></span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    data_path <span class="op">=</span> <span class="st">"../data/"</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------------------</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------------------</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div id="cell-2" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> cmdstanpy</span>
@@ -830,7 +828,7 @@ window.Quarto = {
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> bokeh.io</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> bokeh.plotting</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>bokeh.io.output_notebook()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>bokeh.io.output_notebook()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
     <style>
         .bk-notebook-logo {
@@ -1181,7 +1179,7 @@ function(Bokeh) {
 \text{elpd} = \sum_{i=1}^N\int\mathrm{d}\tilde{y}_i\,\,f_t(\tilde{y}_i)\,\ln f(\tilde{y}_i\mid y).
 \end{align}\]</span></p>
 <p>When generating our samples, we therefore also need to compute samples of the value of the log likelihood. To do this, for each set of parameters <span class="math inline">\(\theta\)</span> that we sample out of the posterior, we compute the <em>pointwise</em> log likelihood of the data set, using the parameters <span class="math inline">\(\theta\)</span>. The Stan code below includes these log likelihood samples as well as posterior predictive checks for a univariate Gaussian mixture model. Be sure to read the code carefully.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode stan code-with-copy"><code class="sourceCode stan"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> {</span>
+<div class="sourceCode" id="cb3"><pre class="sourceCode stan code-with-copy"><code class="sourceCode stan"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> {</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">1</span>&gt; N;</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">array</span>[N] <span class="dt">real</span> y;</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -1244,11 +1242,11 @@ function(Bokeh) {
 <span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>        log_lik[i] = log_sum_exp(log_pdf_components_log_lik);</span>
 <span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a>    }</span>
 <span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>In the array <code>log_lik</code>, I store the pointwise log likelihood. That is, for each measurement (in this case for each <span class="math inline">\(y_i\)</span>), I compute the log likelihood for that data point using the parameters that I sampled out of the posterior. Conveniently, Stan’s distributions all have a function that ends in <code>_lpdf</code> that compute the log probability density function for the distribution (with <code>_lpmf</code> for discrete distributions that computes the log probability mass function for the distribution).</p>
 <p>Let’s sample out of this generative model, keeping samples of posterior predictive data sets and pointwise log likelihoods.</p>
 <div id="cell-6" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data and make data dictionary</span></span>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data and make data dictionary</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pl.read_csv(os.path.join(data_path, <span class="st">"possibly_bimodal.csv"</span>), comment_prefix<span class="op">=</span><span class="st">"#"</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> <span class="bu">dict</span>(N<span class="op">=</span><span class="bu">len</span>(df), y<span class="op">=</span>df[<span class="st">"y"</span>].to_numpy(), K<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -1257,7 +1255,7 @@ function(Bokeh) {
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    sm <span class="op">=</span> cmdstanpy.CmdStanModel(stan_file<span class="op">=</span><span class="st">"normal_mixture.stan"</span>)</span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Perform sampling</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    samples_single <span class="op">=</span> sm.sample(data<span class="op">=</span>data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    samples_single <span class="op">=</span> sm.sample(data<span class="op">=</span>data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <script type="application/vnd.jupyter.widget-view+json">
 {"model_id":"bc8b7c4bbd344cad97fe544bb2335976","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
@@ -1284,18 +1282,18 @@ function(Bokeh) {
 </div>
 <p>When we convert the samples to an ArviZ object, we need to specify the posterior predictive <em>and</em> log likelihood.</p>
 <div id="cell-8" class="cell" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to ArviZ object</span></span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to ArviZ object</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>samples_single <span class="op">=</span> az.from_cmdstanpy(</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    posterior<span class="op">=</span>samples_single, posterior_predictive<span class="op">=</span><span class="st">"y_ppc"</span>, log_likelihood<span class="op">=</span><span class="st">"log_lik"</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now, we will check the diagnostics (as we always should) and make a corner plot.</p>
 <div id="cell-10" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check diagnostics</span></span>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check diagnostics</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>bebi103.stan.check_all_diagnostics(samples_single)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a corner plot</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(bebi103.viz.corner(samples_single, parameters<span class="op">=</span>[<span class="st">'mu[0]'</span>, <span class="st">'sigma[0]'</span>]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(bebi103.viz.corner(samples_single, parameters<span class="op">=</span>[<span class="st">'mu[0]'</span>, <span class="st">'sigma[0]'</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Effective sample size looks reasonable for all parameters.
 
@@ -1342,7 +1340,7 @@ E-BFMI indicated no pathological behavior.</code></pre>
 </div>
 <p>Everything looks good. Actually, it doesn’t. The <em>sampling</em> looks good, but we should do posterior predictive checks.</p>
 <div id="cell-12" class="cell" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>y_ppc <span class="op">=</span> samples_single.posterior_predictive.y_ppc.stack(</span>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>y_ppc <span class="op">=</span> samples_single.posterior_predictive.y_ppc.stack(</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"sample"</span>: (<span class="st">"chain"</span>, <span class="st">"draw"</span>)}</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>).transpose(<span class="st">"sample"</span>, <span class="st">"y_ppc_dim_0"</span>)</span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -1353,7 +1351,7 @@ E-BFMI indicated no pathological behavior.</code></pre>
 <span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>        data<span class="op">=</span>df[<span class="st">"y"</span>].to_numpy(),</span>
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>        x_axis_label<span class="op">=</span><span class="st">"y"</span>,</span>
 <span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 
   <div id="cbddbfee-5ade-4016-b57b-82312f0e44d5" data-root-id="p1207" style="display: contents;"></div>
@@ -1389,7 +1387,7 @@ E-BFMI indicated no pathological behavior.</code></pre>
 </div>
 <p>We have clearly failed the posterior predictive checks. We can stop here, but we will continue to compute the WAIC and LOO for illustrative purposes. As we do that, let’s take a quick look at the output so we can see how the log likelihood samples are organized. The log likelihood is stored in ArviZ <code>InferenceData</code> objects in the <code>log_likelihood</code> attribute.</p>
 <div id="cell-14" class="cell" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>samples_single.log_likelihood</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>samples_single.log_likelihood</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
 <div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
 <defs>
@@ -1823,7 +1821,7 @@ Attributes:
 <h3 data-number="26.1.2" class="anchored" data-anchor-id="computing-the-waic-and-loo"><span class="header-section-number">26.1.2</span> Computing the WAIC and LOO</h3>
 <p>We will start with the WAIC. We use the <code>scale="deviance"</code> kwarg to get the WAIC. By default, <code>az.waic()</code> will return the estimate for the elpd and not the traditionally used <span class="math inline">\(-2\mathrm{elpd}_\mathrm{WAIC}\)</span>, which is why we use the <code>scale="deviance"</code> kwarg.</p>
 <div id="cell-17" class="cell" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>az.waic(samples_single, scale<span class="op">=</span><span class="st">"deviance"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>az.waic(samples_single, scale<span class="op">=</span><span class="st">"deviance"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <pre><code>Computed from 4000 posterior samples and 394 observations log-likelihood matrix.
 
@@ -1835,9 +1833,9 @@ p_waic            2.18        -</code></pre>
 <p>The output gives an estimate for the WAIC, and also the contribution of <span class="math inline">\(p_\mathrm{waic}\)</span>. It also gives an estimate of the standard error in the WAIC.</p>
 <p>Let’s now compute the LOO.</p>
 <div id="cell-19" class="cell" data-execution_count="9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>single_loo <span class="op">=</span> az.loo(samples_single, scale<span class="op">=</span><span class="st">"deviance"</span>)</span>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>single_loo <span class="op">=</span> az.loo(samples_single, scale<span class="op">=</span><span class="st">"deviance"</span>)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>single_loo</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>single_loo</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <pre><code>Computed from 4000 posterior samples and 394 observations log-likelihood matrix.
 
@@ -1859,12 +1857,12 @@ Pareto k diagnostic values:
 <h3 data-number="26.1.3" class="anchored" data-anchor-id="calculations-with-the-mixture-model"><span class="header-section-number">26.1.3</span> Calculations with the mixture model</h3>
 <p>Now, let’s do the same calculation for the mixture model. Since we wrote Stan code for a general univariate Gaussian mixture model, we can just change out inputted <span class="math inline">\(K\)</span> value (the number of components in the mixture) to 2 and sample.</p>
 <div id="cell-22" class="cell" data-execution_count="10">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>data[<span class="st">'K'</span>] <span class="op">=</span> <span class="dv">2</span></span>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>data[<span class="st">'K'</span>] <span class="op">=</span> <span class="dv">2</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> bebi103.stan.disable_logging():</span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    samples_mix <span class="op">=</span> sm.sample(data<span class="op">=</span>data)</span>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>samples_mix <span class="op">=</span> az.from_cmdstanpy(samples_mix, posterior_predictive<span class="op">=</span><span class="st">'y_ppc'</span>, log_likelihood<span class="op">=</span><span class="st">'log_lik'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>samples_mix <span class="op">=</span> az.from_cmdstanpy(samples_mix, posterior_predictive<span class="op">=</span><span class="st">'y_ppc'</span>, log_likelihood<span class="op">=</span><span class="st">'log_lik'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <script type="application/vnd.jupyter.widget-view+json">
 {"model_id":"419b40e3cfa94f4484b1898e11f4aec6","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
@@ -1891,7 +1889,7 @@ Pareto k diagnostic values:
 </div>
 <p>We’ll do our usual diagnostic checks and make a corner plot.</p>
 <div id="cell-24" class="cell" data-execution_count="11">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check diagnostics</span></span>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check diagnostics</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>bebi103.stan.check_all_diagnostics(samples_mix)</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Make corner plot</span></span>
@@ -1901,7 +1899,7 @@ Pareto k diagnostic values:
 <span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>        parameters<span class="op">=</span>[<span class="st">"mu[0]"</span>, <span class="st">"mu[1]"</span>, <span class="st">"sigma[0]"</span>, <span class="st">"sigma[1]"</span>, <span class="st">"pi_[0]"</span>],</span>
 <span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>        xtick_label_orientation<span class="op">=</span>np.pi <span class="op">/</span> <span class="dv">4</span>,</span>
 <span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Effective sample size looks reasonable for all parameters.
 
@@ -1948,7 +1946,7 @@ E-BFMI indicated no pathological behavior.</code></pre>
 </div>
 <p>Everything looks good! We do see a clear separation in <span class="math inline">\(\mu\)</span> values in the two components of the mixture. It also appears as though the smaller-<span class="math inline">\(\mu\)</span> component of the mixture has a mixing coefficient of about 0.45. We can do a quick posterior predictive check.</p>
 <div id="cell-26" class="cell" data-execution_count="12">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>y_ppc <span class="op">=</span> samples_mix.posterior_predictive.y_ppc.stack(</span>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>y_ppc <span class="op">=</span> samples_mix.posterior_predictive.y_ppc.stack(</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"sample"</span>: (<span class="st">"chain"</span>, <span class="st">"draw"</span>)}</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>).transpose(<span class="st">"sample"</span>, <span class="st">"y_ppc_dim_0"</span>)</span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -1959,7 +1957,7 @@ E-BFMI indicated no pathological behavior.</code></pre>
 <span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>        data<span class="op">=</span>df[<span class="st">"y"</span>].to_numpy(),</span>
 <span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>        x_axis_label<span class="op">=</span><span class="st">"y"</span>,</span>
 <span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 
   <div id="e82e7e50-913c-488b-8817-0a1aaeaf4c1b" data-root-id="p2270" style="display: contents;"></div>
@@ -1995,7 +1993,7 @@ E-BFMI indicated no pathological behavior.</code></pre>
 </div>
 <p>Much nicer! The model allows for plenty of flexibility to allow for the observed bimodal behavior. Let’s proceed to compute the LOO and WAIC, starting with the WAIC.</p>
 <div id="cell-28" class="cell" data-execution_count="13">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>az.waic(samples_mix, scale<span class="op">=</span><span class="st">"deviance"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>az.waic(samples_mix, scale<span class="op">=</span><span class="st">"deviance"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>/Users/bois/miniconda3/envs/datasai/lib/python3.12/site-packages/arviz/stats/stats.py:1655: UserWarning: For one or more samples the posterior variance of the log predictive densities exceeds 0.4. This could be indication of WAIC starting to fail. 
 See http://arxiv.org/abs/1507.04544 for details
@@ -2013,9 +2011,9 @@ There has been a warning during the calculation. Please check the results.</code
 </div>
 <p>And the LOO.</p>
 <div id="cell-30" class="cell" data-execution_count="14">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>mix_loo <span class="op">=</span> az.loo(samples_mix, scale<span class="op">=</span><span class="st">"deviance"</span>)</span>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>mix_loo <span class="op">=</span> az.loo(samples_mix, scale<span class="op">=</span><span class="st">"deviance"</span>)</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>mix_loo</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>mix_loo</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="14">
 <pre><code>Computed from 4000 posterior samples and 394 observations log-likelihood matrix.
 
@@ -2033,7 +2031,7 @@ Pareto k diagnostic values:
 </div>
 <p>As expected, we get almost the same value for the two information criteria. Let’s take a quick look at the difference of the LOO’s between the mixture model and the single Negative Binomial model.</p>
 <div id="cell-32" class="cell" data-execution_count="15">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>mix_loo.elpd_loo <span class="op">-</span> single_loo.elpd_loo</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>mix_loo.elpd_loo <span class="op">-</span> single_loo.elpd_loo</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="15">
 <pre><code>np.float64(-112.25895344885703)</code></pre>
 </div>
@@ -2052,12 +2050,12 @@ Pareto k diagnostic values:
 w_i = \frac{\exp\left[-(\text{LOO}_i-\text{LOO}_j)/2\right]}{1 + \exp\left[-(\text{LOO}_i-\text{LOO}_j)/2\right]}.
 \end{align}\]</span></p>
 <div id="cell-35" class="cell" data-execution_count="16">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>d_loo <span class="op">=</span> mix_loo.elpd_loo <span class="op">-</span> single_loo.elpd_loo</span>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>d_loo <span class="op">=</span> mix_loo.elpd_loo <span class="op">-</span> single_loo.elpd_loo</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>w_single <span class="op">=</span> np.exp(d_loo<span class="op">/</span><span class="dv">2</span>) <span class="op">/</span> (<span class="dv">1</span> <span class="op">+</span> np.exp(d_loo<span class="op">/</span><span class="dv">2</span>))</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>w_mix <span class="op">=</span> <span class="dv">1</span> <span class="op">-</span> w_single</span>
 <span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'      Mixture model weight:'</span>, w_mix)</span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Single Normal model weight:'</span>, w_single)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Single Normal model weight:'</span>, w_single)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      Mixture model weight: 1.0
 Single Normal model weight: 4.200277524728524e-25</code></pre>
@@ -2066,12 +2064,12 @@ Single Normal model weight: 4.200277524728524e-25</code></pre>
 <p>In agreement with our posterior predictive checks, the mixture model is far more predictive than the single negative binomial model.</p>
 <p>As I mentioned above, ArviZ offers more a sophisticated means of computing the weights using stacking. The results tend to be less extreme (and therefore more conservative) that directly computing the Akaike weights. We can use the <code>az.compare()</code> function to do the calculation. We will do it using the LOO (WAIC is default, so we use the <code>ic</code> kwarg). The first input is a dictionary containing the MCMC samples, where the keys of the dictionary are the names of the models.</p>
 <div id="cell-37" class="cell" data-execution_count="17">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>az.compare({<span class="st">"single"</span>: samples_single, <span class="st">"mix"</span>: samples_mix}, ic<span class="op">=</span><span class="st">"loo"</span>, scale<span class="op">=</span><span class="st">"deviance"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>az.compare({<span class="st">"single"</span>: samples_single, <span class="st">"mix"</span>: samples_mix}, ic<span class="op">=</span><span class="st">"loo"</span>, scale<span class="op">=</span><span class="st">"deviance"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="17">
 <div>
 
 
-<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -2088,7 +2086,7 @@ Single Normal model weight: 4.200277524728524e-25</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
-<th data-quarto-table-cell-role="th">mix</th>
+<td data-quarto-table-cell-role="th">mix</td>
 <td>0</td>
 <td>2795.946936</td>
 <td>5.138599</td>
@@ -2100,7 +2098,7 @@ Single Normal model weight: 4.200277524728524e-25</code></pre>
 <td>deviance</td>
 </tr>
 <tr class="even">
-<th data-quarto-table-cell-role="th">single</th>
+<td data-quarto-table-cell-role="th">single</td>
 <td>1</td>
 <td>2908.205890</td>
 <td>2.188323</td>
@@ -2119,16 +2117,16 @@ Single Normal model weight: 4.200277524728524e-25</code></pre>
 </div>
 <p>The mixture model is still dominant. (Again, we are not going into the details of the stacking calculation, but you can read about it in <a href="https://doi.org/10.1214/17-BA1091">this paper by Yao and coworkers</a>.)</p>
 <div id="cell-39" class="cell" data-execution_count="18">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>bebi103.stan.clean_cmdstan()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>bebi103.stan.clean_cmdstan()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
 <section id="computing-environment" class="level2" data-number="26.2">
 <h2 data-number="26.2" class="anchored" data-anchor-id="computing-environment"><span class="header-section-number">26.2</span> Computing environment</h2>
 <div id="cell-41" class="cell" data-execution_count="19">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>load_ext watermark</span>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>load_ext watermark</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>watermark <span class="op">-</span>v <span class="op">-</span>p numpy,polars,cmdstanpy,arviz,bokeh,bebi103,jupyterlab</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"cmdstan   :"</span>, bebi103.stan.cmdstan_version())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"cmdstan   :"</span>, bebi103.stan.cmdstan_version())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Python implementation: CPython
 Python version       : 3.12.11
@@ -2201,14 +2199,13 @@ cmdstan   : 2.36.0</code></pre>
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-      const outerScaffold = trigger.parentElement.cloneNode(true);
-      const codeEl = outerScaffold.querySelector('code');
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
         }
-      }
-      return codeEl.innerText;
+        return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
