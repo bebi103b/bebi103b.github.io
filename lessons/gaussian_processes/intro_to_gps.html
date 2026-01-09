@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.8.24">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -58,7 +58,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -70,14 +70,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../logo.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-236d90495073fb2ac8939117e3e83141.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-da61f9a05e9cefe097d79e8430a73dd4.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-8b050a7f4e1f1dd4af2b4d23fb288ab7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-7c1dcb25931f0f6f86a40129f542609a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -105,10 +106,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
 
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
-<script src="https://unpkg.com/@jupyter-widgets/html-manager@*/dist/embed-amd.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@*/dist/embed-amd.js" crossorigin="anonymous"></script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -124,7 +125,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -167,7 +168,8 @@ window.Quarto = {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../../index.html" class="sidebar-logo-link">
-      <img src="../../logo.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      <img src="../../logo.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="../../logo.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
       </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../../"></a> 
@@ -724,6 +726,18 @@ window.Quarto = {
  <span class="menu-text">HW 1.1: First attempts at Bayesian generative modeling</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../homework/marginalization_by_sampling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">HW 2.1: Marginalization by sampling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../homework/writing_your_own_mcmc_sampler.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">HW 2.2: Writing your own MCMC sampler</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -812,7 +826,7 @@ window.Quarto = {
 <div id="cell-1" class="cell" data-nbsphinx="hidden" data-tags="[]" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Colab setup ------------------</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Colab setup ------------------</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os, shutil, sys, subprocess, urllib.request</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">"google.colab"</span> <span class="kw">in</span> sys.modules:</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    cmd <span class="op">=</span> <span class="st">"pip install --upgrade polars iqplot colorcet bebi103 arviz cmdstanpy watermark"</span></span>
@@ -828,11 +842,11 @@ window.Quarto = {
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    data_path <span class="op">=</span> <span class="st">"https://s3.amazonaws.com/bebi103.caltech.edu/data/"</span></span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    data_path <span class="op">=</span> <span class="st">"../data/"</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------------------</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------------------</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <div id="cell-2" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> cmdstanpy</span>
@@ -841,7 +855,7 @@ window.Quarto = {
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> bebi103</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> bokeh.io</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>bokeh.io.output_notebook()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>bokeh.io.output_notebook()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
     <style>
         .bk-notebook-logo {
@@ -1179,7 +1193,7 @@ function(Bokeh) {
 <h2 data-number="50.1" class="anchored" data-anchor-id="an-example-data-set"><span class="header-section-number">50.1</span> An example data set</h2>
 <p>For concreteness, let’s consider a specific example, the breakdown of <span class="math inline">\(\alpha\)</span>-1-methylglucopyranoside, a key step in the hydrolysis of cellulose. This is featured in a <a href="https://dx.doi.org/10.1021/ar000058i">nice paper by Wolfenden and Snider</a> about the power of enzymes as catalysts. This example shows that glucoside hydrolysis is incredibly slow in the absence of enzymes. Let’s take a quick look at measured rate constants <span class="math inline">\(k\)</span> as a function of temperature.</p>
 <div id="cell-5" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pl.read_csv(os.path.join(data_path, <span class="st">'wolfenden_arrhenius.csv'</span>))</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pl.read_csv(os.path.join(data_path, <span class="st">'wolfenden_arrhenius.csv'</span>))</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.with_columns(</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">1000</span> <span class="op">/</span> pl.col(<span class="st">'1000/T (1/K)'</span>)).alias(<span class="st">'T (K)'</span>),</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    (pl.col(<span class="st">'ln k (1/s)'</span>).exp()).alias(<span class="st">'k (1/s)'</span>)</span>
@@ -1193,7 +1207,7 @@ function(Bokeh) {
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>p.scatter(source<span class="op">=</span>df.to_dict(), x<span class="op">=</span><span class="st">'T (K)'</span>, y<span class="op">=</span><span class="st">'k (1/s)'</span>)</span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 
   <div id="a46c0563-b5f3-463a-938d-f84d45923f70" data-root-id="p1002" style="display: contents;"></div>
@@ -1246,7 +1260,7 @@ k = A \mathrm{e}^{-E_a/T}.
 &amp;k_i \sim \text{Norm}(\mu_i, \sigma)\;\forall i.
 \end{align}\]</span></p>
 <p>Just for fun, we can perform parameter estimation for this model. The Stan code is</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode stan code-with-copy"><code class="sourceCode stan"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> {</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode stan code-with-copy"><code class="sourceCode stan"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> {</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">1</span>&gt; N;</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">array</span>[N] <span class="dt">real</span> T;</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">array</span>[N] <span class="dt">real</span> k;</span>
@@ -1288,10 +1302,10 @@ k = A \mathrm{e}^{-E_a/T}.
 <span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span>:N_ppc) {</span>
 <span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>    k_ppc[i] = normal_rng(A * exp(-Ea / T_ppc[i]), sigma);</span>
 <span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Note that we have chosen a prior on the activation energy to allow for very large values, which is what we might expect for uncatalyzed reactions. Let’s perform the inference.</p>
 <div id="cell-7" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate data dictionary</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate data dictionary</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>T <span class="op">=</span> df[<span class="st">"T (K)"</span>].to_numpy()</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>k <span class="op">=</span> df[<span class="st">"k (1/s)"</span>].to_numpy()</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="bu">len</span>(T)</span>
@@ -1312,7 +1326,7 @@ k = A \mathrm{e}^{-E_a/T}.
 <span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>        iter_sampling<span class="op">=</span><span class="dv">4000</span>,</span>
 <span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>samples <span class="op">=</span> az.from_cmdstanpy(posterior<span class="op">=</span>samples, posterior_predictive<span class="op">=</span><span class="st">"k_ppc"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>samples <span class="op">=</span> az.from_cmdstanpy(posterior<span class="op">=</span>samples, posterior_predictive<span class="op">=</span><span class="st">"k_ppc"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <script type="application/vnd.jupyter.widget-view+json">
 {"model_id":"0ebb7f83ae62419d8c3375c883bee8b1","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
@@ -1339,7 +1353,7 @@ k = A \mathrm{e}^{-E_a/T}.
 </div>
 <p>As usual, we should check the diagnostics. (I actually did this with the default sampling settings, and found that I needed to take more samples and increase <code>adapt_delta</code> and the maximum tree depth.)</p>
 <div id="cell-9" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>bebi103.stan.check_all_diagnostics(samples, max_treedepth<span class="op">=</span><span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>bebi103.stan.check_all_diagnostics(samples, max_treedepth<span class="op">=</span><span class="dv">15</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Effective sample size looks reasonable for all parameters.
 
@@ -1357,7 +1371,7 @@ E-BFMI indicated no pathological behavior.</code></pre>
 </div>
 <p>We’re ok on the diagnostics. Let’s take a look at posterior predictive checks to see how the model performed.</p>
 <div id="cell-11" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>k_ppc <span class="op">=</span> samples.posterior_predictive[<span class="st">'k_ppc'</span>].stack(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>k_ppc <span class="op">=</span> samples.posterior_predictive[<span class="st">'k_ppc'</span>].stack(</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"sample"</span>: (<span class="st">"chain"</span>, <span class="st">"draw"</span>)}</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>).transpose(<span class="st">"sample"</span>, <span class="st">"k_ppc_dim_0"</span>)</span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -1370,7 +1384,7 @@ E-BFMI indicated no pathological behavior.</code></pre>
 <span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>        y_axis_label<span class="op">=</span><span class="st">'k (1/sec)'</span>,</span>
 <span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>        x_range<span class="op">=</span>[T_ppc.<span class="bu">min</span>(), T_ppc.<span class="bu">max</span>()],</span>
 <span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 
   <div id="e0a39d93-be4a-4aec-b417-95cf9070423a" data-root-id="p1052" style="display: contents;"></div>
@@ -1406,12 +1420,12 @@ E-BFMI indicated no pathological behavior.</code></pre>
 </div>
 <p>These look good; the model can generate the data set. Now, let’s look at the parameter values. It is better to look at <span class="math inline">\(A\)</span> on a logarithmic scale.</p>
 <div id="cell-13" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    bebi103.viz.corner(</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>        samples,</span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>        parameters<span class="op">=</span>[<span class="st">"Ea"</span>, <span class="st">"log10_A"</span>, <span class="st">"sigma"</span>],</span>
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 
   <div id="b5a6cb8d-d9b8-43a1-a409-a90efc0d669e" data-root-id="p1500" style="display: contents;"></div>
@@ -1541,7 +1555,7 @@ f(\mathbf{x}_*) \mid \alpha, \rho \sim \text{MultiNorm}(\mathbf{0}, \mathsf{K}(\
 <section id="sampling-out-of-a-gp-prior-using-stan" class="level3" data-number="50.4.1">
 <h3 data-number="50.4.1" class="anchored" data-anchor-id="sampling-out-of-a-gp-prior-using-stan"><span class="header-section-number">50.4.1</span> Sampling out of a GP prior using Stan</h3>
 <p>Code to generate samples out of a GP prior using Stan is shown below. I will first display the code and then comment on its contents.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode stan code-with-copy"><code class="sourceCode stan"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> {</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode stan code-with-copy"><code class="sourceCode stan"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> {</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Data points</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">1</span>&gt; Nstar;</span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">array</span>[Nstar] <span class="dt">real</span> xstar;</span>
@@ -1565,12 +1579,12 @@ f(\mathbf{x}_*) \mid \alpha, \rho \sim \text{MultiNorm}(\mathbf{0}, \mathsf{K}(\
 <span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="kw">generated quantities</span> {</span>
 <span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Draw from multivariate normal parametrized with Cholesky decomposition</span></span>
 <span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span>[Nstar] f = multi_normal_cholesky_rng(rep_vector(<span class="fl">0.0</span>, Nstar), L);</span>
-<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>For this Stan code, we are fixing <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\rho\)</span>. In a prior predictive check for a GP model, we would draw <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\rho\)</span> from their respective hyperpriors, but for this demonstration of sampling out of a GP prior, we will fix them.</p>
 <p>In setting up the covariance matrix based on the SE (exponentiated quadratic in Stan-speak) kernel, we can use Stan’s built-in <code>gp_cov_exp_quad()</code> function. When we build the matrix, we add a small number to the diagonal purely for numerical stability. (Note that in Stan, <code>rep_vector()</code> makes a vector with repeated values, in this case <code>1e-8</code>.) Next, because it is generally more stable to work with Cholesky decompositions, we compute the Cholesky decomposition <code>L</code> of the covariance matrix. Finally, in the <code>generated quantities</code> block, we make our draws out of a multivariate Normal centered on zero (remember, we are considering centered and scaled data).</p>
 <p>Let’s take a couple samples out of the prior and plot the results.</p>
 <div id="cell-21" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameters for GP prior</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameters for GP prior</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>Nstar <span class="op">=</span> <span class="dv">250</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>xstar <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>, Nstar)</span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="fl">1.0</span></span>
@@ -1588,7 +1602,7 @@ f(\mathbf{x}_*) \mid \alpha, \rho \sim \text{MultiNorm}(\mathbf{0}, \mathsf{K}(\
 <span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>        chains<span class="op">=</span><span class="dv">1</span>,</span>
 <span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>samples <span class="op">=</span> az.from_cmdstanpy(posterior<span class="op">=</span>samples, prior<span class="op">=</span>samples, prior_predictive<span class="op">=</span><span class="st">"f"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>samples <span class="op">=</span> az.from_cmdstanpy(posterior<span class="op">=</span>samples, prior<span class="op">=</span>samples, prior_predictive<span class="op">=</span><span class="st">"f"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <script type="application/vnd.jupyter.widget-view+json">
 {"model_id":"1f026d45c5c14c84ba7081031fe1bc3d","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
@@ -1600,7 +1614,7 @@ f(\mathbf{x}_*) \mid \alpha, \rho \sim \text{MultiNorm}(\mathbf{0}, \mathsf{K}(\
 </div>
 <p>Let’s plot the result of our sample.</p>
 <div id="cell-23" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the result</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the result</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> bokeh.plotting.figure(</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    frame_height<span class="op">=</span><span class="dv">250</span>,</span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    frame_width<span class="op">=</span><span class="dv">450</span>,</span>
@@ -1613,7 +1627,7 @@ f(\mathbf{x}_*) \mid \alpha, \rho \sim \text{MultiNorm}(\mathbf{0}, \mathsf{K}(\
 <span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    xstar, samples.prior_predictive[<span class="st">"f"</span>].values.flatten(), legend_label<span class="op">=</span><span class="st">"α = 1, ρ = 1"</span></span>
 <span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 
   <div id="f50a2b86-21a6-422e-b820-222ba978c255" data-root-id="p1521" style="display: contents;"></div>
@@ -1649,7 +1663,7 @@ f(\mathbf{x}_*) \mid \alpha, \rho \sim \text{MultiNorm}(\mathbf{0}, \mathsf{K}(\
 </div>
 <p>I have plotted the function as points to emphasize that we are evaluating the function <span class="math inline">\(f(x)\)</span> at discrete points. Note that the function varies over a length scale of approximately 1 and the amplitude is also approximately 1. We can make the function vary more rapidly by tuning <span class="math inline">\(\rho\)</span> down.</p>
 <div id="cell-25" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>data[<span class="st">"rho"</span>] <span class="op">=</span> <span class="fl">0.5</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>data[<span class="st">"rho"</span>] <span class="op">=</span> <span class="fl">0.5</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> bebi103.stan.disable_logging():</span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    samples <span class="op">=</span> sm_prior.sample(data<span class="op">=</span>data, iter_sampling<span class="op">=</span><span class="dv">1</span>, fixed_param<span class="op">=</span><span class="va">True</span>, chains<span class="op">=</span><span class="dv">1</span>)</span>
@@ -1663,7 +1677,7 @@ f(\mathbf{x}_*) \mid \alpha, \rho \sim \text{MultiNorm}(\mathbf{0}, \mathsf{K}(\
 <span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    legend_label<span class="op">=</span><span class="st">"α = 1, ρ = 0.5"</span>,</span>
 <span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <script type="application/vnd.jupyter.widget-view+json">
 {"model_id":"dab34d16c0504231af7163f59f7dff3f","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
@@ -1711,7 +1725,7 @@ f(\mathbf{x}_*) \mid \alpha, \rho \sim \text{MultiNorm}(\mathbf{0}, \mathsf{K}(\
 <h3 data-number="50.4.2" class="anchored" data-anchor-id="sampling-out-of-a-gp-prior-using-numpy"><span class="header-section-number">50.4.2</span> Sampling out of a GP prior using Numpy</h3>
 <p>At the heart of being able to sample out of a GP prior (and indeed all sampling with GP-based models) is the ability to compute the covariance matrix from for a given kernel and <span class="math inline">\(x\)</span>-points. In Stan, only covariance matrices computed using SE kernels are built-in; you can always code up your own function for Stan to use to build covariance matrices for whatever kernel you please. Conveniently, the <code>bebi103.gp</code> module has functions to compute the covariance matrices for all of the kernels listed above. To demonstrate sampling out of a GP prior with Numpy, let’s use the Matérn kernel with <span class="math inline">\(\nu = 3/2\)</span>. The resulting functions are only once differentiable and will therefore be much rougher than what we got with the SE kernel.</p>
 <div id="cell-28" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Again use rho = 1</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Again use rho = 1</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>rho <span class="op">=</span> <span class="fl">1.0</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Make covariance matrix</span></span>
@@ -1726,7 +1740,7 @@ f(\mathbf{x}_*) \mid \alpha, \rho \sim \text{MultiNorm}(\mathbf{0}, \mathsf{K}(\
 <span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>    xstar, f, color<span class="op">=</span><span class="st">"tomato"</span>, legend_label<span class="op">=</span><span class="st">"α = 1, ρ = 1, Matérn"</span>,</span>
 <span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 
   <div id="b7a106ea-092b-4888-b42f-8dbe31d4e062" data-root-id="p1521" style="display: contents;"></div>
@@ -1762,7 +1776,7 @@ f(\mathbf{x}_*) \mid \alpha, \rho \sim \text{MultiNorm}(\mathbf{0}, \mathsf{K}(\
 </div>
 <p>Since it is convenient to sample using Numpy, let’s make a <strong>spaghetti plot</strong>, which is a good way to visualize the kind of functions you will get by sampling out of a GP prior. We will again use an SE kernel with <span class="math inline">\(\alpha = \rho = 1\)</span>.</p>
 <div id="cell-30" class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make covariance matrix</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make covariance matrix</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>K <span class="op">=</span> bebi103.gp.cov_exp_quad(xstar, alpha<span class="op">=</span><span class="fl">1.0</span>, rho<span class="op">=</span><span class="fl">1.0</span>)</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample out of multivariate normal</span></span>
@@ -1778,7 +1792,7 @@ f(\mathbf{x}_*) \mid \alpha, \rho \sim \text{MultiNorm}(\mathbf{0}, \mathsf{K}(\
 <span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>p.multi_line([xstar <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>)], f, line_width<span class="op">=</span><span class="fl">0.5</span>)</span>
 <span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 
   <div id="ec75bd47-f4bc-40fc-915c-417f3f82d66c" data-root-id="p1599" style="display: contents;"></div>
@@ -1818,16 +1832,16 @@ f(\mathbf{x}_*) \mid \alpha, \rho \sim \text{MultiNorm}(\mathbf{0}, \mathsf{K}(\
 <h2 data-number="50.5" class="anchored" data-anchor-id="composing-kernels"><span class="header-section-number">50.5</span> Composing kernels</h2>
 <p>We may take any of the above kernels and compose them by multiplying or adding them together. For example, say we think our function is locally periodic, but may nonetheless vary over time. We might compose a kernel that is the product of a periodic and SE kernel.</p>
 <div id="cell-32" class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mult_kern(x1, x2, alpha, rho_SE, rho_per, T):</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mult_kern(x1, x2, alpha, rho_SE, rho_per, T):</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Kernel formed from multiplying periodic and SE kernels """</span></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    per <span class="op">=</span> bebi103.gp.periodic_kernel(x1, x2, <span class="fl">1.0</span>, rho_per, T)</span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    se <span class="op">=</span> bebi103.gp.se_kernel(x1, x2, alpha, rho_SE)</span>
 <span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> se <span class="op">*</span> per</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> se <span class="op">*</span> per</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We can use this kernel to build a covariance matrix and draw a sample.</p>
 <div id="cell-34" class="cell" data-execution_count="15">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>params <span class="op">=</span> <span class="bu">dict</span>(alpha<span class="op">=</span><span class="dv">1</span>, rho_SE<span class="op">=</span><span class="dv">3</span>, rho_per<span class="op">=</span><span class="dv">1</span>, T<span class="op">=</span><span class="dv">2</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>params <span class="op">=</span> <span class="bu">dict</span>(alpha<span class="op">=</span><span class="dv">1</span>, rho_SE<span class="op">=</span><span class="dv">3</span>, rho_per<span class="op">=</span><span class="dv">1</span>, T<span class="op">=</span><span class="dv">2</span>)</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>K <span class="op">=</span> bebi103.gp.cov_from_kernel(xstar, xstar, mult_kern, <span class="op">**</span>params)</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> rg.multivariate_normal(np.zeros_like(xstar), K)</span>
@@ -1842,7 +1856,7 @@ f(\mathbf{x}_*) \mid \alpha, \rho \sim \text{MultiNorm}(\mathbf{0}, \mathsf{K}(\
 <span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>p.line(xstar, f, line_width<span class="op">=</span><span class="dv">2</span>)</span>
 <span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 
   <div id="cca3c5fe-ea9a-4927-8ab0-5059397fae87" data-root-id="p1843" style="display: contents;"></div>
@@ -1878,7 +1892,7 @@ f(\mathbf{x}_*) \mid \alpha, \rho \sim \text{MultiNorm}(\mathbf{0}, \mathsf{K}(\
 </div>
 <p>Similarly, we can add kernels together. Say we have a periodic function, but it may increase over time. We can get a kernel that captures this behavior by adding a linear and a periodic kernel.</p>
 <div id="cell-36" class="cell" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add_kern(x1, x2, sigma_b, sigma, alpha, rho, T):</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add_kern(x1, x2, sigma_b, sigma, alpha, rho, T):</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Kernel formed from adding linear and SE kernels """</span></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    per <span class="op">=</span> bebi103.gp.periodic_kernel(x1, x2, alpha, rho, T)</span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    linear <span class="op">=</span> bebi103.gp.linear_kernel(x1, x2, sigma_b, sigma)</span>
@@ -1901,7 +1915,7 @@ f(\mathbf{x}_*) \mid \alpha, \rho \sim \text{MultiNorm}(\mathbf{0}, \mathsf{K}(\
 <span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>p.line(xstar, f, line_width<span class="op">=</span><span class="dv">2</span>)</span>
 <span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 
   <div id="d4406499-a658-4aec-9263-c46a676f9305" data-root-id="p1889" style="display: contents;"></div>
@@ -2078,36 +2092,36 @@ f(\mathbf{x}) \mid \mathbf{y}, \mathbf{X} \sim \text{GP}(m(\mathbf{x}), k(\mathb
 <p>We typically plot it as the mean function with a shaded region containing 95% of the probability mass. To get this 95% credible region, we directly use the diagonal terms of <span class="math inline">\(\mathsf{\Sigma}\)</span>.</p>
 <p>To start, we center and scale the temperature and rate constants.</p>
 <div id="cell-42" class="cell" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Center and scale</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Center and scale</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>k_scaled <span class="op">=</span> (k <span class="op">-</span> k.mean()) <span class="op">/</span> k.std()</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>T_scaled <span class="op">=</span> (T <span class="op">-</span> T.mean()) <span class="op">/</span> T.std()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>T_scaled <span class="op">=</span> (T <span class="op">-</span> T.mean()) <span class="op">/</span> T.std()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Next, we need to determine for which values of the temperature we want to evaluate our nonparametric function. This will be the <span class="math inline">\(\mathbf{x}_*\)</span>.</p>
 <div id="cell-44" class="cell" data-execution_count="18">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample at 250 points</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample at 250 points</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>Nstar <span class="op">=</span> <span class="dv">250</span></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up xstar</span></span>
 <span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>T_range <span class="op">=</span> T_scaled.<span class="bu">max</span>() <span class="op">-</span> T_scaled.<span class="bu">min</span>()</span>
 <span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>xstar <span class="op">=</span> np.linspace(</span>
 <span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    T_scaled.<span class="bu">min</span>() <span class="op">-</span> <span class="fl">0.05</span> <span class="op">*</span> T_range, T_scaled.<span class="bu">max</span>() <span class="op">+</span> <span class="fl">0.05</span> <span class="op">*</span> T_range, Nstar</span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Now comes the involved part of the calculation. For a given set of hyperparameters and <span class="math inline">\(\sigma\)</span>, we compute the posterior mean function <span class="math inline">\(\mathbf{m}_*\)</span> and covariance matrix <span class="math inline">\(\mathsf{\Sigma}_*\)</span> using the linear algebra manipulations above. This is conveniently included in the <code>bebi103.gp.posterior_mean_cov()</code> function. It takes as parameters the (centered and scaled) x- and y- values of the measured data, the data points <span class="math inline">\(\mathbf{X}_*\)</span> that we want the values of the nonparametric function, <span class="math inline">\(\sigma\)</span>, a kernel (default is the SE kernel) and the hyperparameters of the kernel.</p>
 <div id="cell-46" class="cell" data-execution_count="19">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>mstar, Sigmastar <span class="op">=</span> bebi103.gp.posterior_mean_cov(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>mstar, Sigmastar <span class="op">=</span> bebi103.gp.posterior_mean_cov(</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    T_scaled, k_scaled, xstar, sigma<span class="op">=</span><span class="fl">1.0</span>, rho<span class="op">=</span><span class="fl">1.0</span>, alpha<span class="op">=</span><span class="fl">1.0</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Now that we have <span class="math inline">\(\mathbf{m}_*\)</span> and <span class="math inline">\(\mathsf{\Sigma}_*\)</span>, we can compute the upper and lower bounds of the credible interval. Because the posterior is a Gaussian process, we know that we can compute the 95% credible region from the diagonal terms of the covariance matrix <span class="math inline">\(\mathsf{\Sigma}_*\)</span>.</p>
 <div id="cell-48" class="cell" data-execution_count="20">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Bound of credible interval</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Bound of credible interval</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>high <span class="op">=</span> mstar <span class="op">+</span> <span class="fl">1.96</span> <span class="op">*</span> np.sqrt(np.diag(Sigmastar))</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>low <span class="op">=</span> mstar <span class="op">-</span> <span class="fl">1.96</span> <span class="op">*</span> np.sqrt(np.diag(Sigmastar))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>low <span class="op">=</span> mstar <span class="op">-</span> <span class="fl">1.96</span> <span class="op">*</span> np.sqrt(np.diag(Sigmastar))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Now, we just have to uncenter and unscale everything and we can make a plot!</p>
 <div id="cell-50" class="cell" data-execution_count="21">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Uncenter/scale</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Uncenter/scale</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>Tstar <span class="op">=</span> T.std() <span class="op">*</span> xstar <span class="op">+</span> T.mean()</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>kstar <span class="op">=</span> k.std() <span class="op">*</span> mstar <span class="op">+</span> k.mean()</span>
 <span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>low <span class="op">=</span> k.std() <span class="op">*</span> low <span class="op">+</span> k.mean()</span>
@@ -2128,7 +2142,7 @@ f(\mathbf{x}) \mid \mathbf{y}, \mathbf{X} \sim \text{GP}(m(\mathbf{x}), k(\mathb
 <span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>p.scatter(source<span class="op">=</span>df.to_dict(), x<span class="op">=</span><span class="st">"T (K)"</span>, y<span class="op">=</span><span class="st">"k (1/s)"</span>)</span>
 <span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 
   <div id="a49fc24b-f863-47a9-9c2e-1373a92fecda" data-root-id="p1935" style="display: contents;"></div>
@@ -2170,15 +2184,15 @@ f(\mathbf{x}) \mid \mathbf{y}, \mathbf{X} \sim \text{GP}(m(\mathbf{x}), k(\mathb
 <h2 data-number="50.8" class="anchored" data-anchor-id="conclusions"><span class="header-section-number">50.8</span> Conclusions</h2>
 <p>In this lesson, we have introduced Gaussian processes and demonstrated the useful simplifications when a GP prior is used with a Normal likelihood. Even for these convenient models, we are still left to infer the hyperparameters. Inference for GP priors with non-Normal likelihoods adds extra challenges because we do not have the benefit of conjugacy and cannot marginalize away the function values. We will address these practical issues in the next lesson.</p>
 <div id="cell-53" class="cell" data-execution_count="22">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>bebi103.stan.clean_cmdstan()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>bebi103.stan.clean_cmdstan()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="computing-environment" class="level2" data-number="50.9">
 <h2 data-number="50.9" class="anchored" data-anchor-id="computing-environment"><span class="header-section-number">50.9</span> Computing environment</h2>
 <div id="cell-55" class="cell" data-execution_count="22">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>load_ext watermark</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>load_ext watermark</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>watermark <span class="op">-</span>v <span class="op">-</span>p numpy,polars,cmdstanpy,arviz,bokeh,bebi103,jupyterlab</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"cmdstan   :"</span>, bebi103.stan.cmdstan_version())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"cmdstan   :"</span>, bebi103.stan.cmdstan_version())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Python implementation: CPython
 Python version       : 3.12.4
@@ -2251,13 +2265,14 @@ cmdstan   : 2.35.0</code></pre>
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
