@@ -699,6 +699,24 @@ window.Quarto = {
  <span class="menu-text">HW 2.2: Writing your own MCMC sampler</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../homework/overwhelming_a_prior.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">HW 3.1: Overwhelming a prior</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../homework/mcmc_with_boolean_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">HW 3.2: MCMC with Boolean data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../homework/first_mcmc_steps_with_stan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">HW 3.3: First steps in MCMC with Stan</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -891,7 +909,7 @@ P(\theta_i)\,T(\theta_{i+1}\mid \theta_i) = P(\theta_{i+1})\, T(\theta_i\mid \th
 </section>
 <section id="sec-choosing-a-kerel" class="level3" data-number="10.4.3">
 <h3 data-number="10.4.3" class="anchored" data-anchor-id="sec-choosing-a-kerel"><span class="header-section-number">10.4.3</span> Choosing the transition kernel</h3>
-<p>There is an art to choosing the transition kernel. The original Metropolis algorithm (1953), took <span class="math inline">\(K(\theta_{i+1}\mid \theta_i) = 1\)</span>. As a rule of thumb, you want to choose a proposal distribution such that you get an acceptance rate of about 0.4. If you accept every step, the walker just wanders around and it takes a while to get to the limiting distribution. If you reject too many steps, the walkers never move, and it again takes a long time to get to the limiting distribution. There are tricks to “tune” the walkers to achieve the target acceptance rate.</p>
+<p>There is an art to choosing the transition kernel. The original Metropolis algorithm (1953), used a proposal distribution that is uniform on a ball with a set radius (that is, each step of the walk is the same length in a uniformly distributed direction). As a rule of thumb, you want to choose a proposal distribution such that you get an acceptance rate of about 0.4. If you accept every step, the walker just wanders around and it takes a while to get to the limiting distribution. If you reject too many steps, the walkers never move, and it again takes a long time to get to the limiting distribution. There are tricks to “tune” the walkers to achieve the target acceptance rate.</p>
 <p>Gibbs sampling is a more modern approach to defining transition kernels. It was very popular for many years, though we will not go into the details. It is a special case of a Metropolis-Hastings sampler. These days, most samplers use <strong>Hamiltonian Monte Carlo</strong> (HMC). Stan uses a highly optimized HMC sampler which gives significant performance improvements for important subclasses of problems. To my knowledge and in my opinion, Stan is the current state-of-the-art in MCMC sampling software. (I cannot overemphasize how much of a performance improvement Stan’s sampler offers; it allows sampling of posteriors that are impossible with a more naive implementation of Metropolis-Hastings.)</p>
 <p>Importantly, the HMC sampler can only handle continuous variables; it cannot sample discrete variables. Depending on your problem, this could be a limitation, but in most applications we are interested in estimating continuous parameters. There are also ways around sampling discrete variables, such as explicitly marginalizing over them, such that we rarely need to sample them anyhow.</p>
 <hr>
