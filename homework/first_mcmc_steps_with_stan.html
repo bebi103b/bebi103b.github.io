@@ -30,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../appendices/notation.html" rel="next">
+<link href="../homework/mt_catastrophe_four_models.html" rel="next">
 <link href="../homework/mcmc_with_boolean_data.html" rel="prev">
 <link href="../logo.png" rel="icon" type="image/png">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
@@ -717,6 +717,12 @@ window.Quarto = {
  <span class="menu-text">HW 3.3: First steps in MCMC with Stan</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../homework/mt_catastrophe_four_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">HW 4.2: Microtubule catastrophe</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -863,7 +869,7 @@ window.Quarto = {
 </table>
 <p>For the purposes of this problem, assume that we can pool the results from the three years to have 13/126 reversals for wild type, 39/124 reversals for ASH, and 91/124 reversals for AVA.</p>
 <p>Our goal is to estimate <span class="math inline">\(\theta\)</span>, the probability of reversal upon exposure to blue light for each strain. That is to say, we want to compute <span class="math inline">\(g(\theta\mid n, N)\)</span>, where <span class="math inline">\(n\)</span> is the number of reversals in <span class="math inline">\(N\)</span> trials.</p>
-<p>Propose a generative model to get an expression for the posterior distribution <span class="math inline">\(g(\theta\mid n,N)\)</span>. Either write a Metropolis-Hastings sampler to get posterior samples of <span class="math inline">\(\theta\)</span> for each of the three strains. Plot either histograms or ECDFs of your samples.</p>
+<p>Propose a generative model to get an expression for the posterior distribution <span class="math inline">\(g(\theta\mid n,N)\)</span>. Obtain posterior samples of <span class="math inline">\(\theta\)</span> for each of the three strains using Stan. Plot either histograms or ECDFs of your samples.</p>
 <p>The posterior distributions of the respective <span class="math inline">\(\theta\)</span> values are illuminating, but suppose we want to quantify <em>the difference</em> in reversal probability between the two strains, say strain 1 and strain 2. That is, we want to compute <span class="math inline">\(g(\delta_{12}\mid n_1, N_1, n_2, N_2)\)</span>, where <span class="math inline">\(\delta_{12} \equiv \theta_2 - \theta_1\)</span>. Note that computing this distribution by hand is possible, but quite difficult.</p>
 
 
@@ -1276,8 +1282,8 @@ window.Quarto = {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../appendices/notation.html" class="pagination-link" aria-label="Notation">
-        <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Notation</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../homework/mt_catastrophe_four_models.html" class="pagination-link" aria-label="HW 4.2: Microtubule catastrophe">
+        <span class="nav-page-text">HW 4.2: Microtubule catastrophe</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
