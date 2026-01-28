@@ -2,330 +2,334 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://bebi103b.github.io/index.html</loc>
-    <lastmod>2026-01-26T21:48:58.853Z</lastmod>
+    <lastmod>2026-01-28T07:31:32.451Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/schedule.html</loc>
-    <lastmod>2026-01-26T21:48:58.855Z</lastmod>
+    <lastmod>2026-01-28T07:31:32.453Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/policies.html</loc>
-    <lastmod>2026-01-26T21:48:58.854Z</lastmod>
+    <lastmod>2026-01-28T07:31:32.451Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/what_are_we_doing/what_are_we_doing.html</loc>
-    <lastmod>2026-01-26T21:48:59.105Z</lastmod>
+    <lastmod>2026-01-28T07:31:32.694Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/probability/probability.html</loc>
-    <lastmod>2026-01-26T21:48:58.949Z</lastmod>
+    <lastmod>2026-01-28T07:31:32.548Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/probability/probability_logic_of_science.html</loc>
-    <lastmod>2026-01-26T21:48:58.948Z</lastmod>
+    <lastmod>2026-01-28T07:31:32.547Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/probability/probability_distributions.html</loc>
-    <lastmod>2026-01-26T21:48:58.951Z</lastmod>
+    <lastmod>2026-01-28T07:31:32.549Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/probability/entropy_and_kullback_leibler.html</loc>
-    <lastmod>2026-01-26T21:48:58.950Z</lastmod>
+    <lastmod>2026-01-28T07:31:32.549Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/sampling/sampling.html</loc>
-    <lastmod>2026-01-26T21:48:59.093Z</lastmod>
+    <lastmod>2026-01-28T07:31:32.685Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/sampling/random_number_generation.html</loc>
-    <lastmod>2026-01-26T21:49:08.503Z</lastmod>
+    <lastmod>2026-01-28T07:31:42.341Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/sampling/rng_with_numpy.html</loc>
-    <lastmod>2026-01-26T21:49:08.497Z</lastmod>
+    <lastmod>2026-01-28T07:31:42.330Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/sampling/simulation.html</loc>
-    <lastmod>2026-01-26T21:48:59.093Z</lastmod>
+    <lastmod>2026-01-28T07:31:32.684Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/sampling/luria_delbruck.html</loc>
-    <lastmod>2026-01-26T21:49:08.501Z</lastmod>
+    <lastmod>2026-01-28T07:31:42.338Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/sampling/lif.html</loc>
-    <lastmod>2026-01-26T21:49:08.520Z</lastmod>
+    <lastmod>2026-01-28T07:31:42.359Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/sampling/nonhomogeneous_poisson.html</loc>
-    <lastmod>2026-01-26T21:49:08.501Z</lastmod>
+    <lastmod>2026-01-28T07:31:42.337Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/sampling/mcmc.html</loc>
-    <lastmod>2026-01-26T21:48:59.085Z</lastmod>
+    <lastmod>2026-01-28T07:31:32.676Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/sampling/basics_of_mcmc.html</loc>
-    <lastmod>2026-01-26T21:48:59.092Z</lastmod>
+    <lastmod>2026-01-28T07:31:32.684Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/sampling/stan_hello_world.html</loc>
-    <lastmod>2026-01-26T21:49:08.500Z</lastmod>
+    <lastmod>2026-01-28T07:31:42.335Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/sampling/nonhomogeneous_poisson_stan.html</loc>
-    <lastmod>2026-01-26T21:49:08.503Z</lastmod>
+    <lastmod>2026-01-28T07:31:42.340Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/bayesian_modeling/bayesian_modeling.html</loc>
-    <lastmod>2026-01-26T21:49:02.062Z</lastmod>
+    <lastmod>2026-01-28T07:31:35.626Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/bayesian_modeling/basics_of_bayes.html</loc>
-    <lastmod>2026-01-26T21:49:02.064Z</lastmod>
+    <lastmod>2026-01-28T07:31:35.628Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/bayesian_modeling/conjugacy.html</loc>
-    <lastmod>2026-01-26T21:49:09.002Z</lastmod>
+    <lastmod>2026-01-28T07:31:42.841Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/bayesian_modeling/choice_of_prior.html</loc>
-    <lastmod>2026-01-26T21:49:02.059Z</lastmod>
+    <lastmod>2026-01-28T07:31:35.624Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/bayesian_modeling/advice_on_dists.html</loc>
-    <lastmod>2026-01-26T21:49:02.064Z</lastmod>
+    <lastmod>2026-01-28T07:31:35.628Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/bayesian_modeling/stats_ml_ai.html</loc>
-    <lastmod>2026-01-26T21:49:02.061Z</lastmod>
+    <lastmod>2026-01-28T07:31:35.625Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/bayesian_modeling/bayes_model_for_learning_and_cognition.html</loc>
-    <lastmod>2026-01-26T21:49:02.057Z</lastmod>
+    <lastmod>2026-01-28T07:31:35.623Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/bayesian_modeling/prior_predictive_checks.html</loc>
-    <lastmod>2026-01-26T21:49:08.999Z</lastmod>
+    <lastmod>2026-01-28T07:31:42.838Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/inference_by_mcmc/inference_by_mcmc.html</loc>
-    <lastmod>2026-01-26T21:48:59.111Z</lastmod>
+    <lastmod>2026-01-28T07:31:32.701Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/inference_by_mcmc/parameter_estimation_with_mcmc_1.html</loc>
-    <lastmod>2026-01-26T21:49:08.546Z</lastmod>
+    <lastmod>2026-01-28T07:31:42.390Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/inference_by_mcmc/display_of_mcmc_samples.html</loc>
-    <lastmod>2026-01-26T21:49:08.538Z</lastmod>
+    <lastmod>2026-01-28T07:31:42.382Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/inference_by_mcmc/posterior_summaries.html</loc>
-    <lastmod>2026-01-26T21:49:08.521Z</lastmod>
+    <lastmod>2026-01-28T07:31:42.363Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/inference_by_mcmc/posterior_predictive_checks.html</loc>
-    <lastmod>2026-01-26T21:49:08.540Z</lastmod>
+    <lastmod>2026-01-28T07:31:42.386Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/mixture_models/mixture_models.html</loc>
-    <lastmod>2026-01-26T21:48:59.082Z</lastmod>
+    <lastmod>2026-01-28T07:31:32.670Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/mixture_models/mixture_model_stan.html</loc>
-    <lastmod>2026-01-26T21:49:08.481Z</lastmod>
+    <lastmod>2026-01-28T07:31:42.311Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/model_assessment/model_assessment.html</loc>
-    <lastmod>2026-01-26T21:49:02.049Z</lastmod>
+    <lastmod>2026-01-28T07:31:35.614Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/model_assessment/model_comparison.html</loc>
-    <lastmod>2026-01-26T21:49:02.049Z</lastmod>
+    <lastmod>2026-01-28T07:31:35.615Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/model_assessment/model_comparison_in_practice.html</loc>
-    <lastmod>2026-01-26T21:49:08.947Z</lastmod>
+    <lastmod>2026-01-28T07:31:42.787Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/principled/principled.html</loc>
-    <lastmod>2026-01-26T21:48:58.962Z</lastmod>
+    <lastmod>2026-01-28T07:31:32.563Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/principled/mcmc_diagnostics.html</loc>
-    <lastmod>2026-01-26T21:49:08.444Z</lastmod>
+    <lastmod>2026-01-28T07:31:42.271Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/principled/sbc.html</loc>
-    <lastmod>2026-01-26T21:49:08.446Z</lastmod>
+    <lastmod>2026-01-28T07:31:42.272Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/principled/sbc_in_practice.html</loc>
-    <lastmod>2026-01-26T21:49:08.470Z</lastmod>
+    <lastmod>2026-01-28T07:31:42.298Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/optimization/optimization.html</loc>
-    <lastmod>2026-01-26T21:48:58.955Z</lastmod>
+    <lastmod>2026-01-28T07:31:32.553Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/optimization/optimization_basics.html</loc>
-    <lastmod>2026-01-26T21:49:08.417Z</lastmod>
+    <lastmod>2026-01-28T07:31:42.245Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/optimization/gamma_optimization.html</loc>
-    <lastmod>2026-01-26T21:49:08.420Z</lastmod>
+    <lastmod>2026-01-28T07:31:42.248Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/optimization/mm_algorithms.html</loc>
-    <lastmod>2026-01-26T21:48:58.951Z</lastmod>
+    <lastmod>2026-01-28T07:31:32.550Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/optimization/em_algorithm.html</loc>
-    <lastmod>2026-01-26T21:48:58.957Z</lastmod>
+    <lastmod>2026-01-28T07:31:32.555Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/optimization/em_gmm.html</loc>
-    <lastmod>2026-01-26T21:48:58.957Z</lastmod>
+    <lastmod>2026-01-28T07:31:32.556Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/optimization/em_gmm_example.html</loc>
-    <lastmod>2026-01-26T21:49:08.423Z</lastmod>
+    <lastmod>2026-01-28T07:31:42.252Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/optimization/kmeans.html</loc>
-    <lastmod>2026-01-26T21:49:08.428Z</lastmod>
+    <lastmod>2026-01-28T07:31:42.255Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/variate_covariate/intro_variate_covariate.html</loc>
-    <lastmod>2026-01-26T21:48:59.115Z</lastmod>
+    <lastmod>2026-01-28T07:31:32.704Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/variate_covariate/model_building.html</loc>
-    <lastmod>2026-01-26T21:48:59.113Z</lastmod>
+    <lastmod>2026-01-28T07:31:32.703Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/variate_covariate/variate_covariate_with_stan.html</loc>
-    <lastmod>2026-01-26T21:49:08.548Z</lastmod>
+    <lastmod>2026-01-28T07:31:42.393Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/hierarchical/hierarchical.html</loc>
-    <lastmod>2026-01-26T21:48:58.904Z</lastmod>
+    <lastmod>2026-01-28T07:31:32.500Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/hierarchical/modeling_repeated_experiments.html</loc>
-    <lastmod>2026-01-26T21:49:08.355Z</lastmod>
+    <lastmod>2026-01-28T07:31:42.170Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/hierarchical/choosing_a_hierarchical_prior.html</loc>
-    <lastmod>2026-01-26T21:49:08.356Z</lastmod>
+    <lastmod>2026-01-28T07:31:42.172Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/hierarchical/generalization.html</loc>
-    <lastmod>2026-01-26T21:49:08.395Z</lastmod>
+    <lastmod>2026-01-28T07:31:42.220Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/hierarchical/hierarchical_implementation_worms.html</loc>
-    <lastmod>2026-01-26T21:49:08.354Z</lastmod>
+    <lastmod>2026-01-28T07:31:42.168Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/hierarchical/hierarchical_implementation.html</loc>
-    <lastmod>2026-01-26T21:49:08.392Z</lastmod>
+    <lastmod>2026-01-28T07:31:42.217Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/pca_and_related/pca_and_related.html</loc>
-    <lastmod>2026-01-26T21:48:58.871Z</lastmod>
+    <lastmod>2026-01-28T07:31:32.469Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/pca_and_related/heuristic_pca.html</loc>
-    <lastmod>2026-01-26T21:49:08.166Z</lastmod>
+    <lastmod>2026-01-28T07:31:41.984Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/pca_and_related/factor_analysis.html</loc>
-    <lastmod>2026-01-26T21:49:08.346Z</lastmod>
+    <lastmod>2026-01-28T07:31:42.158Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/pca_and_related/pca_nmf_as_fa.html</loc>
-    <lastmod>2026-01-26T21:48:58.873Z</lastmod>
+    <lastmod>2026-01-28T07:31:32.471Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/HMM/hmm.html</loc>
-    <lastmod>2026-01-26T21:48:59.119Z</lastmod>
+    <lastmod>2026-01-28T07:31:32.708Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/HMM/hmm_gaussian_emission.html</loc>
-    <lastmod>2026-01-26T21:49:08.567Z</lastmod>
+    <lastmod>2026-01-28T07:31:42.411Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/GLM/glm.html</loc>
-    <lastmod>2026-01-26T21:49:01.975Z</lastmod>
+    <lastmod>2026-01-28T07:31:35.533Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/GLM/glm_intro.html</loc>
-    <lastmod>2026-01-26T21:49:01.975Z</lastmod>
+    <lastmod>2026-01-28T07:31:35.533Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/GLM/glm_in_practice.html</loc>
-    <lastmod>2026-01-26T21:49:08.761Z</lastmod>
+    <lastmod>2026-01-28T07:31:42.612Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/gaussian_processes/gp.html</loc>
-    <lastmod>2026-01-26T21:48:58.942Z</lastmod>
+    <lastmod>2026-01-28T07:31:32.541Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/gaussian_processes/intro_to_gps.html</loc>
-    <lastmod>2026-01-26T21:49:08.415Z</lastmod>
+    <lastmod>2026-01-28T07:31:42.242Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/gaussian_processes/gp_hyperparams_by_optimization.html</loc>
-    <lastmod>2026-01-26T21:49:08.402Z</lastmod>
+    <lastmod>2026-01-28T07:31:42.228Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/gaussian_processes/mcmc_with_gps.html</loc>
-    <lastmod>2026-01-26T21:49:08.408Z</lastmod>
+    <lastmod>2026-01-28T07:31:42.234Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/gaussian_processes/gps_and_derivatives.html</loc>
-    <lastmod>2026-01-26T21:49:08.406Z</lastmod>
+    <lastmod>2026-01-28T07:31:42.231Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/lessons/gaussian_processes/gps_without_marginalization.html</loc>
-    <lastmod>2026-01-26T21:49:08.400Z</lastmod>
+    <lastmod>2026-01-28T07:31:42.225Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/homework/intuitive_modeling.html</loc>
-    <lastmod>2026-01-26T21:49:07.035Z</lastmod>
+    <lastmod>2026-01-28T07:31:40.869Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/homework/marginalization_by_sampling.html</loc>
-    <lastmod>2026-01-26T21:49:06.442Z</lastmod>
+    <lastmod>2026-01-28T07:31:40.269Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/homework/writing_your_own_mcmc_sampler.html</loc>
-    <lastmod>2026-01-26T21:49:06.738Z</lastmod>
+    <lastmod>2026-01-28T07:31:40.576Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/homework/overwhelming_a_prior.html</loc>
-    <lastmod>2026-01-26T21:49:07.336Z</lastmod>
+    <lastmod>2026-01-28T07:31:41.192Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/homework/mcmc_with_boolean_data.html</loc>
-    <lastmod>2026-01-26T21:49:07.930Z</lastmod>
+    <lastmod>2026-01-28T07:31:41.798Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/homework/first_mcmc_steps_with_stan.html</loc>
-    <lastmod>2026-01-26T21:49:07.633Z</lastmod>
+    <lastmod>2026-01-28T07:31:41.500Z</lastmod>
+  </url>
+  <url>
+    <loc>https://bebi103b.github.io/homework/inverse_gaussian_isi.html</loc>
+    <lastmod>2026-01-28T07:31:39.970Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/homework/mt_catastrophe_four_models.html</loc>
-    <lastmod>2026-01-26T21:49:06.138Z</lastmod>
+    <lastmod>2026-01-28T07:31:39.656Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/appendices/notation.html</loc>
-    <lastmod>2026-01-26T21:49:05.011Z</lastmod>
+    <lastmod>2026-01-28T07:31:38.750Z</lastmod>
   </url>
   <url>
     <loc>https://bebi103b.github.io/appendices/setting_up_python_computing_environment.html</loc>
-    <lastmod>2026-01-26T21:49:07.988Z</lastmod>
+    <lastmod>2026-01-28T07:31:41.805Z</lastmod>
   </url>
 </urlset>
