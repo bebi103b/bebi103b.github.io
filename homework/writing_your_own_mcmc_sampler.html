@@ -833,7 +833,7 @@ window.Quarto = {
 
 <p><em>This problem is worth 70 points.</em></p>
 <hr>
-<div id="89cd64b1" class="cell" data-execution_count="1">
+<div id="dfddd5df" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numba</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -842,7 +842,7 @@ window.Quarto = {
 <ul>
 <li>Write a function that takes a Metropolis-Hastings step. It should look something like the below (obviously where it does something instead of <code>pass</code>ing).</li>
 </ul>
-<div id="5276e4db" class="cell" data-execution_count="2">
+<div id="8398bf15" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mh_step(x, logtarget, logtarget_current, sigma, args<span class="op">=</span>()):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters</span></span>
@@ -875,7 +875,7 @@ window.Quarto = {
 <ul>
 <li>Write another function that calls that function over and over again to do the sampling. It should look something like the below. (Note that I am using <code>n_burn</code> as opposed to <code>n_warmup</code>, because you are just going to step as you normally would, and then “burn” the samples. This is in contrast to Stan, which tunes the stepping procedure during the warm-up phase.)</li>
 </ul>
-<div id="a2436a3f" class="cell" data-execution_count="3">
+<div id="9e542a5d" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mh_sample(</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    logtarget, x0, sigma, args<span class="op">=</span>(), n_burn<span class="op">=</span><span class="dv">1000</span>, n_steps<span class="op">=</span><span class="dv">1000</span>, variable_names<span class="op">=</span><span class="va">None</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>):</span>
@@ -918,7 +918,7 @@ window.Quarto = {
 \end{align}\]</span></p>
 <p>I have written the log-PDF function to be unnormalized and JITted with <a href="https://numba.pydata.org">numba</a> for optimal speed.</p>
 <p><em>Do not be confused</em>: In this test function we are sampling <span class="math inline">\(\mathbf{x}\)</span> out of <span class="math inline">\(\pi(\mathbf{x}\mid \boldsymbol{\mu},\mathsf{\Sigma})\)</span>. This is not sampling a posterior; it is just a test for your code. (Remember, MCMC samplers can sample out of arbitrary distributions, not just posteriors. In general, the distribution we sample out of is called a target distribution.) Furthermore, though both Normal, this test function is not the proposal distribution. You will pass <code>log_test_distribution</code> as the <code>logtarget</code> argument in the above functions.</p>
-<div id="7dce4ac7" class="cell" data-execution_count="4">
+<div id="d9cde3bc" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>mu <span class="op">=</span> np.array([<span class="fl">10.0</span>, <span class="dv">20</span>])</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>cov <span class="op">=</span> np.array([[<span class="dv">4</span>, <span class="op">-</span><span class="dv">2</span>],[<span class="op">-</span><span class="dv">2</span>, <span class="dv">6</span>]])</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>inv_cov <span class="op">=</span> np.linalg.inv(cov)</span>
