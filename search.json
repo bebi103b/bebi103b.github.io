@@ -3255,6 +3255,17 @@
     ]
   },
   {
+    "objectID": "homework/finches_heredity.html",
+    "href": "homework/finches_heredity.html",
+    "title": "HW 6.1: Analysis of heritability in finch beak geometry",
+    "section": "",
+    "text": "This problem is worth 100 points.\nData set download\n\nPeter and Rosemary Grant have been working on the Galápagos island of Daphne for over forty years. During this time, they have collected lots and lots of data about physiological features of finches. They published a book with a summary of some of their major results (Grant P. R., Grant B. R., Data from: 40 years of evolution. Darwin’s finches on Daphne Major Island, Princeton University Press, 2014). They made their data from the book publicly available via the Dryad Digital Repository.\nIn this problem, we will investigate their data on the heritability of beak depth (the distance, top to bottom, of a closed beak) in the ground finch Geospiza fortis. The data set consists of the maternal beak depth, the paternal beak depth, and the mean beak depth of their offspring. You can download the data set, which I got from Dryad and tidied up into a CSV file, here.\na) The narrow sense heritability, denoted \\(h^2\\), of a trait is defined as the ratio of the additive genetic variance in offspring to the total phenotypic variance in the parent. The additive genetic variance of a population describes the variability in a trait resulting from the sum of all effects of the alleles. In other words, \\(h^2\\) is the ratio of the parent-offspring covariance in the trait value to the variance in the parents.\n\\[\\begin{align}\nh^2 = \\frac{\\sigma_{po}}{\\sigma_p^2},\n\\end{align}\\]\nwhere the subscripts \\(o\\) and \\(p\\) indicate offspring and parents, respectively.\nIn practice, \\(h^2\\) is often computed by plotting the average beak depth of the offspring against the average beak depth of the two parents, and then preforming a linear least squares regression, with \\(h^2\\) being given by the slope. Show that this gives a maximum likelihood estimate of \\(h^2\\) as we have defined it. Equivalently, you can show that this gives an MAP estimate with uniform priors on all parameters. (This is in some ways an exercise in trying to understand what people mean when the describe their methods with inadequate detail to reproduce it without guesswork, which happens all too often.)\nNote: in this analysis, we are neglecting confounding issues and just assuming the environment is unchanging and that the mean trait values we are using for the parents and the offspring is indicative of the differences.\nb) In choosing to do a linear regression, we tacitly assume a statistical model where there is no error at all in the measurement of parental beak depth (the x-axis), and homoscedastic errors in the offspring beak depth (the y-axis). Since both are measured in a similar way, this is not really a good generative statistical model. Instead propose a generative model and perform a parameter estimate for the heritability using that model. You should go through a complete principled pipeline. This includes prior predictive checks, simulation-based calibration with checks for shrinkage and z-scores, and posterior predictive checks.",
+    "crumbs": [
+      "Homework",
+      "HW 6.1: Analysis of heritability in finch beak geometry"
+    ]
+  },
+  {
     "objectID": "appendices/notation.html",
     "href": "appendices/notation.html",
     "title": "Appendix A — Notation",

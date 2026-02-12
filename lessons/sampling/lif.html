@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.24">
+<meta name="generator" content="quarto-1.7.32">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -58,7 +58,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -70,15 +70,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../logo.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-da61f9a05e9cefe097d79e8430a73dd4.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-236d90495073fb2ac8939117e3e83141.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-7c1dcb25931f0f6f86a40129f542609a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-8b050a7f4e1f1dd4af2b4d23fb288ab7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -106,7 +105,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
 
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
@@ -124,7 +123,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+      if (mathElements[i].tagName == "SPAN") {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -167,8 +166,7 @@ window.Quarto = {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../../index.html" class="sidebar-logo-link">
-      <img src="../../logo.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
-      <img src="../../logo.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      <img src="../../logo.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
       </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../../"></a> 
@@ -779,6 +777,12 @@ window.Quarto = {
  <span class="menu-text">HW 5.2: Diagnosing nonidentifiability with MCMC</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../homework/finches_heredity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">HW 6.1: Analysis of heritability in finch beak geometry</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -849,17 +853,17 @@ window.Quarto = {
 <div id="cell-1" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Colab setup ------------------</span></span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Colab setup ------------------</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os, sys, subprocess</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">"google.colab"</span> <span class="kw">in</span> sys.modules:</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    cmd <span class="op">=</span> <span class="st">"pip install --upgrade iqplot watermark"</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    process <span class="op">=</span> subprocess.Popen(cmd.split(), stdout<span class="op">=</span>subprocess.PIPE, stderr<span class="op">=</span>subprocess.PIPE)</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    stdout, stderr <span class="op">=</span> process.communicate()</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------------------</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------------------</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div id="cell-2" class="cell" data-tags="[]" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> types</span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> types</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -868,7 +872,7 @@ window.Quarto = {
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> bokeh.io</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> bokeh.plotting</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>bokeh.io.output_notebook()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>bokeh.io.output_notebook()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
     <style>
         .bk-notebook-logo {
@@ -1246,7 +1250,7 @@ v(t) = \frac{V(t) - V_\mathrm{reset}}{V_\mathrm{thresh} - V_\mathrm{reset}}
 <h2 data-number="8.2" class="anchored" data-anchor-id="sec-euler-maruyama"><span class="header-section-number">8.2</span> Euler-Maruyama integration</h2>
 <p>We will solve the above stochastic LIF Langevin equation using <a href="https://en.wikipedia.org/wiki/Euler–Maruyama_method">Euler-Maruyama integration</a>. The idea is that we integrate exactly like Euler’s method with time step size <span class="math inline">\(dt\)</span>, but we add a random number drawn from <span class="math inline">\(\text{Norm}(0, dt)\)</span> (which is then multiplied by <span class="math inline">\(\sigma\)</span>, the scale of the noise) at every step. Note that this is equivalent to drawing out of a standard normal (with mean zero and variance of one) and multiplying the result by <span class="math inline">\(\sigma\,dt\)</span>. In this case, every time the dimensionless voltage reaches the spike threshold (<span class="math inline">\(v = 1\)</span>), we record a spike and then immediately send the voltage back down to the reset voltage (<span class="math inline">\(v = 0\)</span>). This is implemented in the function below.</p>
 <div id="cell-6" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Instantiate random number generator</span></span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Instantiate random number generator</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng()</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -1338,15 +1342,15 @@ v(t) = \frac{V(t) - V_\mathrm{reset}}{V_\mathrm{thresh} - V_\mathrm{reset}}
 <span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> return_traj:</span>
 <span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> np.array(spikes), (t, v)</span>
 <span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> np.array(spikes)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> np.array(spikes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s give this function a while to sample some spike times!</p>
 <div id="cell-8" class="cell" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>spikes, (t, v) <span class="op">=</span> integrate_noisy_lif(return_traj<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>spikes, (t, v) <span class="op">=</span> integrate_noisy_lif(return_traj<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can plot the trajectory.</p>
 <div id="cell-10" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> bokeh.plotting.figure(</span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> bokeh.plotting.figure(</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    frame_width<span class="op">=</span><span class="dv">500</span>,</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    frame_height<span class="op">=</span><span class="dv">200</span>,</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    x_axis_label<span class="op">=</span><span class="st">'t (ms)'</span>,</span>
@@ -1356,7 +1360,7 @@ v(t) = \frac{V(t) - V_\mathrm{reset}}{V_\mathrm{thresh} - V_\mathrm{reset}}
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Thin the trajectory a bit when plotting</span></span>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>p.line(t[::<span class="dv">10</span>], v[::<span class="dv">10</span>])</span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 
   <div id="ad3c367a-501c-47f2-b43f-ff5c61a274dc" data-root-id="p1001" style="display: contents;"></div>
@@ -1392,7 +1396,7 @@ v(t) = \frac{V(t) - V_\mathrm{reset}}{V_\mathrm{thresh} - V_\mathrm{reset}}
 </div>
 <p>We can see what happens if we increase the leakage, making the two time scales <span class="math inline">\(\tau_m\)</span> and <span class="math inline">\(\tau\)</span> comparable. We will try <span class="math inline">\(\tau_m = 70\)</span> ms and <span class="math inline">\(\tau = 30\)</span> ms.</p>
 <div id="cell-12" class="cell" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>spikes, (t, v) <span class="op">=</span> integrate_noisy_lif(tau_m<span class="op">=</span><span class="fl">70.0</span>, return_traj<span class="op">=</span><span class="va">True</span>)</span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>spikes, (t, v) <span class="op">=</span> integrate_noisy_lif(tau_m<span class="op">=</span><span class="fl">70.0</span>, return_traj<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> bokeh.plotting.figure(</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    frame_width<span class="op">=</span><span class="dv">500</span>,</span>
@@ -1404,7 +1408,7 @@ v(t) = \frac{V(t) - V_\mathrm{reset}}{V_\mathrm{thresh} - V_\mathrm{reset}}
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Thin the trajectory a bit when plotting</span></span>
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>p.line(t[::<span class="dv">10</span>], v[::<span class="dv">10</span>])</span>
 <span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 
   <div id="f0979bc2-f383-493b-9c05-1231462abd43" data-root-id="p1046" style="display: contents;"></div>
@@ -1441,7 +1445,7 @@ v(t) = \frac{V(t) - V_\mathrm{reset}}{V_\mathrm{thresh} - V_\mathrm{reset}}
 <p>We get far less frequent spikes. This is because the leakage is causing the potential to drop as it gets large.</p>
 <p>Ultimately our goal is to sample spike times (actually, interspike intervals, or ISIs), so we can run a longer trajectory to get plenty of samples.</p>
 <div id="cell-14" class="cell" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>spikes <span class="op">=</span> integrate_noisy_lif(T<span class="op">=</span><span class="dv">10_000</span>)</span>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>spikes <span class="op">=</span> integrate_noisy_lif(T<span class="op">=</span><span class="dv">10_000</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Look as a strip plot</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(</span>
@@ -1453,7 +1457,7 @@ v(t) = \frac{V(t) - V_\mathrm{reset}}{V_\mathrm{thresh} - V_\mathrm{reset}}
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>        frame_height<span class="op">=</span><span class="dv">100</span>,</span>
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>        frame_width<span class="op">=</span><span class="dv">700</span>,</span>
 <span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 
   <div id="b2f0cc53-361b-4670-87ab-02cf29c5e69d" data-root-id="p1092" style="display: contents;"></div>
@@ -1489,9 +1493,9 @@ v(t) = \frac{V(t) - V_\mathrm{reset}}{V_\mathrm{thresh} - V_\mathrm{reset}}
 </div>
 <p>We can compute interspike intervals by computing the difference between successive spike times and can plot the ECDF.</p>
 <div id="cell-16" class="cell" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(</span>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    iqplot.ecdf(np.diff(spikes), x_axis_label<span class="op">=</span><span class="st">'ISI (ms)'</span>)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 
   <div id="c2f92984-44ed-43f1-8bb0-0e8e6f2a9c5e" data-root-id="p1140" style="display: contents;"></div>
@@ -1531,14 +1535,14 @@ v(t) = \frac{V(t) - V_\mathrm{reset}}{V_\mathrm{thresh} - V_\mathrm{reset}}
 <p>As we will see in the exercises, with the above choice of parameters, the ISI for the noisy leaky integrate-and-fire model is approximately <a href="https://distribution-explorer.github.io/continuous/inverse_gaussian.html">Inverse Gaussian</a> distributed. However, ISIs are often Exponentially distributed, which means that the spiking is a Poisson process. As described by <a href="https://proceedings.neurips.cc/paper_files/paper/1995/file/d8700cbd38cc9f30cecb34f0c195b137-Paper.pdf">Stevens and Zador</a>, the noise leaky integrate-and-fire model can give approximately Exponentially distributed interspike intervals when the input current itself is also given by Gaussian white noise with a positive mean. They further showed that this works when spiking is slow, such that the characteristic interspike interval is much greater than <span class="math inline">\(\tau_m\)</span>.</p>
 <p>As an example, consider the case where <span class="math inline">\(\tau_m = 70\)</span> ms and <span class="math inline">\(\tau = 40\)</span> ms and the current function has a mean of one (in dimensionless units) and a standard deviation of 0.3. We can code this up below.</p>
 <div id="cell-18" class="cell" data-execution_count="9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> ifun(t, sigma_I<span class="op">=</span><span class="fl">0.3</span>):</span>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> ifun(t, sigma_I<span class="op">=</span><span class="fl">0.3</span>):</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> rng.normal(<span class="fl">1.0</span>, sigma_I)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>spikes <span class="op">=</span> integrate_noisy_lif(tau_m<span class="op">=</span><span class="dv">70</span>, tau<span class="op">=</span><span class="dv">40</span>, ifun<span class="op">=</span>ifun, T<span class="op">=</span><span class="dv">100_000</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>spikes <span class="op">=</span> integrate_noisy_lif(tau_m<span class="op">=</span><span class="dv">70</span>, tau<span class="op">=</span><span class="dv">40</span>, ifun<span class="op">=</span>ifun, T<span class="op">=</span><span class="dv">100_000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>To demonstrate that the ISIs are approximately Exponentially distributed, we plot the <strong>empirical complementary cumulative distribution function</strong> (ECCDF), which is <span class="math inline">\(1 - \hat{F}(t_\mathrm{ISI})\)</span>, where <span class="math inline">\(\hat{F}(t_\mathrm{ISI})\)</span> is the ECDF. Importantly, a linear tail on a semilog plot of the ECCDF indicates an Exponential distribution, since the CDF for the Exponential distribution is <span class="math inline">\(F(t_\mathrm{ISI}) = 1 - \mathrm{e}^{-\beta t_\mathrm{ISI}}\)</span> such that the ECCDF is <span class="math inline">\(\mathrm{e}^{-\beta t_\mathrm{ISI}}\)</span>.</p>
 <div id="cell-20" class="cell" data-execution_count="10">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot ECCDF</span></span>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot ECCDF</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> iqplot.ecdf(np.diff(spikes), x_axis_label<span class="op">=</span><span class="st">'ISI (ms)'</span>, complementary<span class="op">=</span><span class="va">True</span>, y_axis_type<span class="op">=</span><span class="st">'log'</span>)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Annotate with a slope 1 line</span></span>
@@ -1548,7 +1552,7 @@ v(t) = \frac{V(t) - V_\mathrm{reset}}{V_\mathrm{thresh} - V_\mathrm{reset}}
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.exp(<span class="op">-</span>beta <span class="op">*</span> (x <span class="op">-</span> t_shift))</span>
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>p.line(x, y, color<span class="op">=</span><span class="st">'tomato'</span>, line_width<span class="op">=</span><span class="dv">2</span>)</span>
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 
   <div id="aa6d62de-6d66-4bac-8e32-6f7803463964" data-root-id="p1203" style="display: contents;"></div>
@@ -1589,23 +1593,23 @@ v(t) = \frac{V(t) - V_\mathrm{reset}}{V_\mathrm{thresh} - V_\mathrm{reset}}
 <p>Spiking may also appear Poissonian if the stimuli (the input current) arrive in a Poissonian manner and the LIF circuit responds quickly (<span class="math inline">\(\tau\)</span> is small). This is kind of obvious; a circuit that responds close to instantaneously to a Poissionian stimulus will itself behave in a Poissonian manner.</p>
 <p>To demonstrate this, we can put in current as Poissonian-distributed spikes with a Gaussian shape.</p>
 <div id="cell-23" class="cell" data-execution_count="11">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Arrival of stimulating current as a Poisson process</span></span>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Arrival of stimulating current as a Poisson process</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>stimulus_times <span class="op">=</span> np.cumsum(rng.exponential(<span class="dv">30</span>, size<span class="op">=</span><span class="dv">1000</span>))</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> ifun(t, stim_times, I_peak<span class="op">=</span><span class="fl">1.0</span>, stim_width<span class="op">=</span><span class="fl">1.0</span>):</span>
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Stimuli come as Gaussian-like peaks"""</span></span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.<span class="bu">sum</span>(I_peak <span class="op">*</span> np.exp(<span class="op">-</span>(t<span class="op">-</span>stimulus_times)<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> <span class="dv">2</span> <span class="op">/</span> stim_width<span class="op">**</span><span class="dv">2</span>))</span>
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>spikes <span class="op">=</span> integrate_noisy_lif(tau<span class="op">=</span><span class="dv">3</span>, ifun<span class="op">=</span>ifun, ifun_args<span class="op">=</span>(stimulus_times,), T<span class="op">=</span><span class="dv">30_000</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>spikes <span class="op">=</span> integrate_noisy_lif(tau<span class="op">=</span><span class="dv">3</span>, ifun<span class="op">=</span>ifun, ifun_args<span class="op">=</span>(stimulus_times,), T<span class="op">=</span><span class="dv">30_000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can compare the ISIs to what we would expect from a Poisson process (exponentially distributed ISI).</p>
 <div id="cell-25" class="cell" data-execution_count="12">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> iqplot.ecdf(np.diff(spikes), x_axis_label<span class="op">=</span><span class="st">'ISI (ms)'</span>)</span>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> iqplot.ecdf(np.diff(spikes), x_axis_label<span class="op">=</span><span class="st">'ISI (ms)'</span>)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">275</span>, <span class="dv">300</span>)</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="dv">1</span> <span class="op">-</span> np.exp(<span class="op">-</span>x <span class="op">/</span> np.mean(np.diff(spikes)))</span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>p.line(x, y, line_width<span class="op">=</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">'tomato'</span>)</span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 
   <div id="e9463255-5edf-43b4-85eb-335dd04ba480" data-root-id="p1277" style="display: contents;"></div>
@@ -1644,8 +1648,8 @@ v(t) = \frac{V(t) - V_\mathrm{reset}}{V_\mathrm{thresh} - V_\mathrm{reset}}
 <section id="computing-environment" class="level2" data-number="8.5">
 <h2 data-number="8.5" class="anchored" data-anchor-id="computing-environment"><span class="header-section-number">8.5</span> Computing environment</h2>
 <div id="cell-28" class="cell" data-execution_count="13">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>load_ext watermark</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>watermark <span class="op">-</span>v <span class="op">-</span>p numpy,iqplot,bokeh,jupyterlab</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>load_ext watermark</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>watermark <span class="op">-</span>v <span class="op">-</span>p numpy,iqplot,bokeh,jupyterlab</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Python implementation: CPython
 Python version       : 3.12.9
@@ -1714,14 +1718,13 @@ jupyterlab: 4.4.2
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-      const outerScaffold = trigger.parentElement.cloneNode(true);
-      const codeEl = outerScaffold.querySelector('code');
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
         }
-      }
-      return codeEl.innerText;
+        return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
