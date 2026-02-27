@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.23">
+<meta name="generator" content="quarto-1.8.24">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -58,7 +58,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -70,14 +70,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../logo.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ce48a3f02a1a94fca2583af14ebdcdba.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-da61f9a05e9cefe097d79e8430a73dd4.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-7169de792ddd8a904faef6c72a318f4f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-7c1dcb25931f0f6f86a40129f542609a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -105,10 +106,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
 
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
-<script src="https://unpkg.com/@jupyter-widgets/html-manager@*/dist/embed-amd.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@*/dist/embed-amd.js" crossorigin="anonymous"></script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -124,7 +125,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -167,7 +168,8 @@ window.Quarto = {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../../index.html" class="sidebar-logo-link">
-      <img src="../../logo.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      <img src="../../logo.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="../../logo.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
       </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../../"></a> 
@@ -796,6 +798,24 @@ window.Quarto = {
  <span class="menu-text">HW 7.2: Models for microtubule catastrophe</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../homework/hierarchical_in_plain_sight.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">HW 8.1: Hierarchical models are hiding in plain sight</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../homework/noise_in_gene_expression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">HW 8.2: Noise in gene expression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../homework/hierarchical_zebrafish_somite_shape.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">HW 8.3: Hierarchical modeling of repeated experiments</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -874,7 +894,7 @@ window.Quarto = {
 <div id="8d7ff4fd" class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Colab setup ------------------</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Colab setup ------------------</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os, shutil, sys, subprocess, urllib.request</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">"google.colab"</span> <span class="kw">in</span> sys.modules:</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    cmd <span class="op">=</span> <span class="st">"pip install --upgrade polars hmmlearn iqplot colorcet bebi103 arviz cmdstanpy watermark"</span></span>
@@ -891,11 +911,11 @@ window.Quarto = {
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    data_path <span class="op">=</span> <span class="st">"../data/"</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------------------</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------------------</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <div id="8c42bf01-fe87-4ec7-ac8a-f5b7dda97855" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> st</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -914,7 +934,7 @@ window.Quarto = {
 <span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> bokeh.models</span>
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> bokeh.palettes</span>
 <span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> bokeh.plotting</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>bokeh.io.output_notebook()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>bokeh.io.output_notebook()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
     <style>
         .bk-notebook-logo {
@@ -1248,7 +1268,7 @@ function(Bokeh) {
 </div>
 <p>Consider the following experiment. A mouse’s movement is tracked over time. At each time point, we measure the mouse’s velocity. We plot of the mouse’s velocity over time is shown below.</p>
 <div id="c36d1a18" class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pl.read_csv(os.path.join(data_path, <span class="st">'mouse_speed.csv'</span>), comment_prefix<span class="op">=</span><span class="st">'#'</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pl.read_csv(os.path.join(data_path, <span class="st">'mouse_speed.csv'</span>), comment_prefix<span class="op">=</span><span class="st">'#'</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> bokeh.plotting.figure(</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    frame_height<span class="op">=</span><span class="dv">200</span>, </span>
@@ -1258,7 +1278,7 @@ function(Bokeh) {
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>p.line(source<span class="op">=</span>df.to_dict(), x<span class="op">=</span><span class="st">'time (s)'</span>, y<span class="op">=</span><span class="st">'speed (cm/s)'</span>)</span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 
   <div id="fd86e40e-7de4-4dc1-8a75-320aed5acf86" data-root-id="p1002" style="display: contents;"></div>
@@ -1296,7 +1316,7 @@ function(Bokeh) {
 <div id="d6d70f42" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the PGM</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the PGM</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>pgm <span class="op">=</span> daft.PGM([<span class="dv">8</span>, <span class="dv">3</span>], origin<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">0</span>], node_unit<span class="op">=</span><span class="fl">1.5</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Add hidden state nodes (z0, z1, z2,...)</span></span>
@@ -1321,7 +1341,7 @@ function(Bokeh) {
 <span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    pgm.add_edge(<span class="ss">f"z</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">"</span>, <span class="ss">f"y</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Render the PGM</span></span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>pgm.render()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>pgm.render()<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -1398,7 +1418,7 @@ g(\boldsymbol{\rho}, \mathsf{\Gamma}, \{\phi_z\} \mid y) = \frac{f(y\mid \boldsy
 \]</span></p>
 <p>The probability distribution of the latent variables for each time point (a Categorical distribution) may be calculated according to <a href="#eq-latent-dist-hmm" class="quarto-xref">Equation&nbsp;<span>47.2</span></a>. This is also implemented in Stan with the <code>hmm_hidden_state_prob()</code> function, though there is <a href="https://github.com/stan-dev/math/issues/2677">a known bug with that function</a> as of June 2025. We can also <em>sample</em> the latent variable using the <code>hmm_latent_rng()</code> function.</p>
 <p>Let’s now implement our model in Stan and get some samples! The Stan code is stored in <code>mouse_speed_hmm_2_states.stan</code> and is shown below. We right the Stan code to be generically used for HMMs with univariate Gaussian emission distributions with parts of the code necessary to modify for our specific problem labeled as such.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode stan code-with-copy"><code class="sourceCode stan"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> {</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode stan code-with-copy"><code class="sourceCode stan"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> {</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">2</span>&gt; N; <span class="co">// Number of observations (number of time points)</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">array</span>[N] <span class="dt">real</span> y;</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>}</span>
@@ -1475,11 +1495,11 @@ g(\boldsymbol{\rho}, \mathsf{\Gamma}, \{\phi_z\} \mid y) = \frac{f(y\mid \boldsy
 <span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Posterior predictive</span></span>
 <span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a>    <span class="dt">array</span>[N] <span class="dt">real</span> y_ppc = normal_rng(mu[z], sigma[z]);</span>
-<span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Note that we have specified that the location parameters of the Normal emission distribution are ordered in an attempt to break a label-switching nonidentifiability. Note also that we need to specify that each row of the transition matrix <span class="math inline">\(\mathsf{\Gamma}\)</span> is a <code>simplex</code> such that all entries add to one. We then specify a prior for each <em>row</em> of <span class="math inline">\(\mathsf{\Gamma}\)</span>. Naturally, <span class="math inline">\(\mathbf{\rho}\)</span> must also be a <code>simplex</code> data type.</p>
 <p>Let’s compile!</p>
 <div id="96151c5c" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sm2 <span class="op">=</span> cmdstanpy.CmdStanModel(stan_file<span class="op">=</span><span class="st">'mouse_speed_hmm_2_states.stan'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sm2 <span class="op">=</span> cmdstanpy.CmdStanModel(stan_file<span class="op">=</span><span class="st">'mouse_speed_hmm_2_states.stan'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>01:07:04 - cmdstanpy - INFO - compiling stan file /Users/bois/Dropbox/git/datasai/2025/content/content/lessons/HMM/mouse_speed_hmm_2_states.stan to exe file /Users/bois/Dropbox/git/datasai/2025/content/content/lessons/HMM/mouse_speed_hmm_2_states
 01:07:11 - cmdstanpy - INFO - compiled model executable: /Users/bois/Dropbox/git/datasai/2025/content/content/lessons/HMM/mouse_speed_hmm_2_states</code></pre>
@@ -1487,7 +1507,7 @@ g(\boldsymbol{\rho}, \mathsf{\Gamma}, \{\phi_z\} \mid y) = \frac{f(y\mid \boldsy
 </div>
 <p>In general, HMM models can be massively multimodal and nonidentifiable. We have already attempted to address the label-switching nonidentifiability by ordering the location parameters of the emission distribution. We nonetheless need to give the chains of the sampler a chance of sampling the same mode by starting then in a similar place. As a trick to initialize the chains, we can ignore the latent variables and time dependence and treat the measurements as a Gaussian mixture model of <span class="math inline">\(K\)</span> mixtures and infer the MAP ( actually and MLE, since we will use scikit-learn, which does not take into account priors) means and covariances. We can then start the chains at the MAP <span class="math inline">\(\boldsymbol{\mu}\)</span> and <span class="math inline">\(\boldsymbol{\sigma}\)</span> values from the GMM.</p>
 <div id="f715eb12" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Measured data</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Measured data</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> df[<span class="st">'time (s)'</span>].to_numpy()</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[<span class="st">'speed (cm/s)'</span>].to_numpy()</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -1530,7 +1550,7 @@ g(\boldsymbol{\rho}, \mathsf{\Gamma}, \{\phi_z\} \mid y) = \frac{f(y\mid \boldsy
 <span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> mu[inds], np.sqrt(sigma2[inds])</span>
 <span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute inits for our two-latent state case</span></span>
-<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>mu_init, sigma_init <span class="op">=</span> hmm_univariate_gauss_emission_inits(y, K)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>mu_init, sigma_init <span class="op">=</span> hmm_univariate_gauss_emission_inits(y, K)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>/Users/bois/miniconda3/envs/datasai/lib/python3.12/site-packages/sklearn/cluster/_kmeans.py:237: RuntimeWarning: divide by zero encountered in matmul
   current_pot = closest_dist_sq @ sample_weight
@@ -1542,12 +1562,12 @@ g(\boldsymbol{\rho}, \mathsf{\Gamma}, \{\phi_z\} \mid y) = \frac{f(y\mid \boldsy
 </div>
 <p>Now that we have our initial chain positions, we can do the sampling!</p>
 <div id="3062ab1e" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> <span class="bu">dict</span>(N<span class="op">=</span><span class="bu">len</span>(y), y<span class="op">=</span>y)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> <span class="bu">dict</span>(N<span class="op">=</span><span class="bu">len</span>(y), y<span class="op">=</span>y)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Acquire samples and store as ArviZ instance</span></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> bebi103.stan.disable_logging():</span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    samples <span class="op">=</span> sm2.sample(data<span class="op">=</span>data, inits<span class="op">=</span><span class="bu">dict</span>(mu<span class="op">=</span>mu_init, sigma<span class="op">=</span>sigma_init))</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    samples <span class="op">=</span> az.from_cmdstanpy(samples, posterior_predictive<span class="op">=</span><span class="st">'y_ppc'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    samples <span class="op">=</span> az.from_cmdstanpy(samples, posterior_predictive<span class="op">=</span><span class="st">'y_ppc'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <script type="application/vnd.jupyter.widget-view+json">
 {"model_id":"6e1161baf89747a694cb4c9596af578a","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
@@ -1574,7 +1594,7 @@ g(\boldsymbol{\rho}, \mathsf{\Gamma}, \{\phi_z\} \mid y) = \frac{f(y\mid \boldsy
 </div>
 <p>We can start by looking at the corner plot of the emission distribution parameters.</p>
 <div id="3e3ef2a0" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    bebi103.viz.corner(</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>        samples,</span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>        parameters<span class="op">=</span>[</span>
@@ -1585,7 +1605,7 @@ g(\boldsymbol{\rho}, \mathsf{\Gamma}, \{\phi_z\} \mid y) = \frac{f(y\mid \boldsy
 <span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>        ],</span>
 <span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>        xtick_label_orientation<span class="op">=</span>np.pi <span class="op">/</span> <span class="dv">4</span>,</span>
 <span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 
   <div id="fe3109cf-52e3-4d81-8233-6b1995137cdd" data-root-id="p1663" style="display: contents;"></div>
@@ -1621,7 +1641,7 @@ g(\boldsymbol{\rho}, \mathsf{\Gamma}, \{\phi_z\} \mid y) = \frac{f(y\mid \boldsy
 </div>
 <p>Something appears fishy here. In looking at the exploratory plot of the data above, the resting velocity is less than 1 cm/s and the walking velocity is about 5 cm/s. So are getting a larger resting velocity and a much larger moving velocity than we might guess from looking at the plot. Let us now do a posterior predictive check to investigate.</p>
 <div id="0a9f618b" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract posterior predictive samples</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract posterior predictive samples</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>y_ppc <span class="op">=</span> samples.posterior_predictive.y_ppc.stack(</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"sample"</span>: (<span class="st">"chain"</span>, <span class="st">"draw"</span>)}</span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>).transpose(<span class="st">"sample"</span>, <span class="st">"y_ppc_dim_0"</span>)</span>
@@ -1637,7 +1657,7 @@ g(\boldsymbol{\rho}, \mathsf{\Gamma}, \{\phi_z\} \mid y) = \frac{f(y\mid \boldsy
 <span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>        x_axis_label<span class="op">=</span><span class="st">'time (s)'</span>,</span>
 <span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>        y_axis_label<span class="op">=</span><span class="st">'speed (cm/s)'</span></span>
 <span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 
   <div id="dfcb00ba-975f-4f62-a11b-5282681eaa8a" data-root-id="p1688" style="display: contents;"></div>
@@ -1689,9 +1709,9 @@ g(\boldsymbol{\rho}, \mathsf{\Gamma}, \{\phi_z\} \mid y) = \frac{f(y\mid \boldsy
 \end{align}
 \]</span></p>
 <p>The updated Stan code is below.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode stan code-with-copy"><code class="sourceCode stan"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode stan code-with-copy"><code class="sourceCode stan"></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div id="a391cb72" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compile!</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compile!</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>sm3 <span class="op">=</span> cmdstanpy.CmdStanModel(stan_file<span class="op">=</span><span class="st">'mouse_speed_hmm_3_states.stan'</span>)</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Initial positions of chains</span></span>
@@ -1701,7 +1721,7 @@ g(\boldsymbol{\rho}, \mathsf{\Gamma}, \{\phi_z\} \mid y) = \frac{f(y\mid \boldsy
 <span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample!</span></span>
 <span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> bebi103.stan.disable_logging():</span>
 <span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    samples <span class="op">=</span> sm3.sample(data<span class="op">=</span>data, inits<span class="op">=</span><span class="bu">dict</span>(mu<span class="op">=</span>mu_init, sigma<span class="op">=</span>sigma_init))</span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    samples <span class="op">=</span> az.from_cmdstanpy(samples, posterior_predictive<span class="op">=</span><span class="st">'y_ppc'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    samples <span class="op">=</span> az.from_cmdstanpy(samples, posterior_predictive<span class="op">=</span><span class="st">'y_ppc'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>01:08:49 - cmdstanpy - INFO - compiling stan file /Users/bois/Dropbox/git/datasai/2025/content/content/lessons/HMM/mouse_speed_hmm_3_states.stan to exe file /Users/bois/Dropbox/git/datasai/2025/content/content/lessons/HMM/mouse_speed_hmm_3_states
 01:08:55 - cmdstanpy - INFO - compiled model executable: /Users/bois/Dropbox/git/datasai/2025/content/content/lessons/HMM/mouse_speed_hmm_3_states
@@ -1738,7 +1758,7 @@ g(\boldsymbol{\rho}, \mathsf{\Gamma}, \{\phi_z\} \mid y) = \frac{f(y\mid \boldsy
 </div>
 <p>It’s a bit more work for the sampler with more states, but we can still sample the posterior in a few minutes. Let’s now look at the corner plot of the emission distribution parameters.</p>
 <div id="87ee6276" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    bebi103.viz.corner(</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>        samples,</span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>        parameters<span class="op">=</span>[</span>
@@ -1751,7 +1771,7 @@ g(\boldsymbol{\rho}, \mathsf{\Gamma}, \{\phi_z\} \mid y) = \frac{f(y\mid \boldsy
 <span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>        ],</span>
 <span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>        xtick_label_orientation<span class="op">=</span>np.pi <span class="op">/</span> <span class="dv">4</span>,</span>
 <span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 
   <div id="a74ec84d-0d1a-4c05-8fe1-c8d83a0c71d5" data-root-id="p3056" style="display: contents;"></div>
@@ -1788,7 +1808,7 @@ g(\boldsymbol{\rho}, \mathsf{\Gamma}, \{\phi_z\} \mid y) = \frac{f(y\mid \boldsy
 <p>This already looks more reasonable , with a resting, walking, and running speed. The running speed has a much higher variance.</p>
 <p>We can perform a posterior predictive check.</p>
 <div id="0358bd55" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract posterior predictive samples</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract posterior predictive samples</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>y_ppc <span class="op">=</span> samples.posterior_predictive.y_ppc.stack(</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"sample"</span>: (<span class="st">"chain"</span>, <span class="st">"draw"</span>)}</span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>).transpose(<span class="st">"sample"</span>, <span class="st">"y_ppc_dim_0"</span>)</span>
@@ -1804,7 +1824,7 @@ g(\boldsymbol{\rho}, \mathsf{\Gamma}, \{\phi_z\} \mid y) = \frac{f(y\mid \boldsy
 <span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>        x_axis_label<span class="op">=</span><span class="st">'time (s)'</span>,</span>
 <span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>        y_axis_label<span class="op">=</span><span class="st">'speed (cm/s)'</span></span>
 <span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 
   <div id="d6832a21-5000-4fb5-8a73-b9e7dcb3b5c4" data-root-id="p3089" style="display: contents;"></div>
@@ -1841,13 +1861,13 @@ g(\boldsymbol{\rho}, \mathsf{\Gamma}, \{\phi_z\} \mid y) = \frac{f(y\mid \boldsy
 <p>This looks very good as well.</p>
 <p>The transition matrix is of interest, so let’s make a corner plot of the samples of its entries. We will only consider the self looping probabilities and the transitions out of the walking state for concision in the notebook, but we could include more if we wish.</p>
 <div id="61f3441e-ffcd-48cb-9596-202e0d53d23b" class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    bebi103.viz.corner(</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>        samples,</span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>        parameters <span class="op">=</span> [<span class="st">'Gamma[0,0]'</span>, <span class="st">'Gamma[1,0]'</span>, <span class="st">'Gamma[1,1]'</span>, <span class="st">'Gamma[1,2]'</span>, <span class="st">'Gamma[2,2]'</span>],</span>
 <span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>        xtick_label_orientation<span class="op">=</span>np.pi<span class="op">/</span><span class="dv">4</span>,</span>
 <span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 
   <div id="babe6f2a-87b1-4252-8a10-4d06c5b11a3d" data-root-id="p4087" style="display: contents;"></div>
@@ -1884,7 +1904,7 @@ g(\boldsymbol{\rho}, \mathsf{\Gamma}, \{\phi_z\} \mid y) = \frac{f(y\mid \boldsy
 <p>The results indicate that a walking mouse tends to stay walking, and if it transitions, it tends to transition to resting as opposed to running. A running mouse is less likely to stay running that a resting mouse is to stay resting or a walking mouse is to stay walking.</p>
 <p>Finally, we can predict the most likely state based on the samples of the latent variables <span class="math inline">\(z\)</span>. To make this annotation, I write a function to make a plot with annotation of discrete categorical latent variables.</p>
 <div id="9820ccef-5696-43ff-9ab0-7e40f0453a81" class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_trace(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_trace(</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    t,</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    y,</span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    z,</span>
@@ -1926,15 +1946,15 @@ g(\boldsymbol{\rho}, \mathsf{\Gamma}, \{\phi_z\} \mid y) = \frac{f(y\mid \boldsy
 <span id="cb21-40"><a href="#cb21-40" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add trace in black</span></span>
 <span id="cb21-41"><a href="#cb21-41" aria-hidden="true" tabindex="-1"></a>    p.line(t, y, line_color<span class="op">=</span><span class="st">"black"</span>)</span>
 <span id="cb21-42"><a href="#cb21-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-43"><a href="#cb21-43" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb21-43"><a href="#cb21-43" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> p</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We will use the MAP estimate of the latent variables for each time point to color the plot.</p>
 <div id="15d9b1d7-c8cb-43b6-86e1-0c0ca86d3cda" class="cell" data-execution_count="15">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute most probable latent variable values from samples</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute most probable latent variable values from samples</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>z_map, _ <span class="op">=</span> st.mode(samples.posterior.z.stack(<span class="bu">dict</span>(sample<span class="op">=</span>[<span class="st">'chain'</span>, <span class="st">'draw'</span>])), axis<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Make the plot!</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(plot_trace(t, y, z_map, palette<span class="op">=</span>[<span class="st">'#7fc97f'</span>, <span class="st">'#beaed4'</span>, <span class="st">'#fdc086'</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>bokeh.io.show(plot_trace(t, y, z_map, palette<span class="op">=</span>[<span class="st">'#7fc97f'</span>, <span class="st">'#beaed4'</span>, <span class="st">'#fdc086'</span>]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 
   <div id="f8f4a53d-9e7b-4023-98cc-ca9058576242" data-root-id="p4116" style="display: contents;"></div>
@@ -1977,10 +1997,10 @@ g(\boldsymbol{\rho}, \mathsf{\Gamma}, \{\phi_z\} \mid y) = \frac{f(y\mid \boldsy
 <h3 data-number="47.3.1" class="anchored" data-anchor-id="map-parameters-with-stans-optimizer"><span class="header-section-number">47.3.1</span> MAP parameters with Stan’s optimizer</h3>
 <p>We could directly acquire those estimates using Stan’s built-in optimizer.</p>
 <div id="1322bf19-ba15-4a4b-b8ef-9b51e50cf4cc" class="cell" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform the optimization</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform the optimization</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>map_params <span class="op">=</span> sm3.optimize(</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>data, inits<span class="op">=</span><span class="bu">dict</span>(mu<span class="op">=</span>mu_init, sigma<span class="op">=</span>sigma_init)</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>).optimized_params_dict</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>).optimized_params_dict</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>01:12:10 - cmdstanpy - INFO - Chain [1] start processing
 01:12:12 - cmdstanpy - INFO - Chain [1] done processing</code></pre>
@@ -1988,9 +2008,9 @@ g(\boldsymbol{\rho}, \mathsf{\Gamma}, \{\phi_z\} \mid y) = \frac{f(y\mid \boldsy
 </div>
 <p>Indeed, this works, as we see when we pull out the MAP values it computed.</p>
 <div id="67119f55-4f16-4a1e-8d6e-6fa218402197" class="cell" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> key, val <span class="kw">in</span> map_params.items():</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> key, val <span class="kw">in</span> map_params.items():</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">'mu'</span> <span class="kw">in</span> key <span class="kw">or</span> <span class="st">'sigma'</span> <span class="kw">in</span> key <span class="kw">or</span> <span class="st">'Gamma['</span> <span class="kw">in</span> key:</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(key <span class="op">+</span> <span class="st">': '</span> <span class="op">+</span> <span class="bu">str</span>(val))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(key <span class="op">+</span> <span class="st">': '</span> <span class="op">+</span> <span class="bu">str</span>(val))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>mu[1]: 1.00618
 mu[2]: 5.01065
@@ -2015,11 +2035,11 @@ Gamma[3,3]: 0.945119</code></pre>
 <p>The <a href="https://hmmlearn.readthedocs.io/">hmmlearn package</a> provides a convenient scikit-learn-like interface for working with HMMs. It computes MAP estimates of HMMs with Categorial, multi- or univariate Gaussian, multi- or univariate Gaussian mixture model, Multinomial, or Poisson emission distributions. It uses clever marginalization and EM-based techniques to do so. hmmlearn does <em>not</em> properly handle priors despite confusing use of the word “prior” in the documentation (see, e.g., <a href="https://github.com/hmmlearn/hmmlearn/issues/58">this issue</a>). It only find maximizing parameters in the maximum likelihood sense, i.e., with uniform uninformative priors.</p>
 <p>Let use now attempt to get MAP (MAP-ish, since it is really a MLE) parameters.</p>
 <div id="de6bdc14-f56b-4b55-8bca-30a9b268c43a" class="cell" data-execution_count="18">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Instantiate model</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Instantiate model</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> hmm.GaussianHMM(n_components<span class="op">=</span><span class="dv">3</span>, covariance_type<span class="op">=</span><span class="st">'full'</span>, n_iter<span class="op">=</span><span class="dv">100</span>)</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Get optimal parameters</span></span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>model.fit(y[:, np.newaxis])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>model.fit(y[:, np.newaxis])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>/Users/bois/miniconda3/envs/datasai/lib/python3.12/site-packages/sklearn/cluster/_kmeans.py:237: RuntimeWarning: divide by zero encountered in matmul
   current_pot = closest_dist_sq @ sample_weight
@@ -2456,7 +2476,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </ul>
 <p>For comparison with our MCMC result, let’s look at the location parameters.</p>
 <div id="7e5d4aed-6435-465a-9b00-241c3a6a1ff4" class="cell" data-execution_count="19">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>model.means_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>model.means_</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="19">
 <pre><code>array([[ 3.89365152],
        [29.97672674],
@@ -2465,16 +2485,16 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 <p>Not the same order, but essentially the same values. This is because we have lots of data so the priors are overwhelmed and the maximum likelihood estimate is close to the MAP.</p>
 <div id="92938968-2eb9-4c4a-b5a7-6636adbf4b66" class="cell" data-execution_count="20">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>bebi103.stan.clean_cmdstan()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>bebi103.stan.clean_cmdstan()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 </section>
 <section id="computing-environment" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="computing-environment">Computing environment</h2>
 <div id="2522f569-e173-40d4-b97c-f379b269ad16" class="cell" data-execution_count="21">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>load_ext watermark</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>load_ext watermark</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>watermark <span class="op">-</span>v <span class="op">-</span>p numpy,scipy,polars,cmdstanpy,arviz,sklearn,hmmlearn,daft,bebi103,bokeh,jupyterlab</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"cmdstan   :"</span>, bebi103.stan.cmdstan_version())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"cmdstan   :"</span>, bebi103.stan.cmdstan_version())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Python implementation: CPython
 Python version       : 3.12.9
@@ -2551,13 +2571,14 @@ cmdstan   : 2.36.0</code></pre>
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
